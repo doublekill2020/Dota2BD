@@ -1,0 +1,51 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="shadow_width">10dp</dimen>
+    <dimen name="slidingmenu_offset">100dp</dimen>
+    <dimen name="slidingmenu_offset_above">10dp</dimen>
+    <dimen name="car_title_dimen">20sp</dimen>
+    <dimen name="car_servicename_dimen">15dp</dimen>
+
+    <!-- Common Title Bar Dimen  15dp -->
+    <dimen name="commontitle_marginleft_dimen">10dp</dimen>
+    <dimen name="commontitle_switcher_textsize">15sp</dimen>
+
+    <!-- 首页 -->
+    <dimen name="paddingLeftRight">10dp</dimen>
+    <dimen name="paddingLeftBottom">5dp</dimen>
+    <dimen name="tab_text_size">12sp</dimen>
+    <dimen name="track_image_gv_item_Size">90dp</dimen>
+    <dimen name="service_image_gv_item_Size">70dp</dimen>
+    <!-- xmpp chat -->
+    <dimen name="dimen_chatactivity_text_date_textsize">12sp</dimen>
+    <dimen name="dimen_chatactivity_text_content_textsize">18sp</dimen>
+    <dimen name="dimen_chatactivity_text_bottom_menu_textsize">15sp</dimen>
+    <dimen name="dimen_chatactivity_receipt_marginright">10dp</dimen>
+    <dimen name="dimen_chatactivity_moremodel_itemwidht">60dp</dimen>
+
+    <!-- 公共大小 -->
+    <dimen name="common_normaltoast_marginbottom">50dp</dimen>
+    <dimen name="margins_layout">4dp</dimen>
+    <dimen name="margins_base">6dp</dimen>
+    <dimen name="margins_text">2dp</dimen>
+    <dimen name="margins_text4">4dp</dimen>
+    <dimen name="activity_margin">8dp</dimen>
+    <dimen name="herodata_grid_column_width">100dp</dimen>
+    <dimen name="herodata_grid_image_width">96dp</dimen>
+    <dimen name="herodata_grid_image_height">54dp</dimen>
+    <dimen name="herodetail_image_width">144dp</dimen>
+    <dimen name="herodetail_image_height">81dp</dimen>
+    <dimen name="herodetail_image_icon_width">24dp</dimen>
+    <dimen name="herodetail_image_icon_height">24dp</dimen>
+    <dimen name="itemsdata_grid_column_width">75dp</dimen>
+    <dimen name="itemsdata_grid_image_width">68dp</dimen>
+    <dimen name="itemsdata_grid_image_height">51dp</dimen>
+    <dimen name="itemsdetail_image_width">85dp</dimen>
+    <dimen name="itemsdetail_image_height">64dp</dimen>
+    <dimen name="itemsdata_hero_grid_image_width">96dp</dimen>
+    <dimen name="itemsdata_hero_grid_image_height">54dp</dimen>
+
+</resources>

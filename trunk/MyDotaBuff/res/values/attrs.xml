@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="swipelistviewstyle">
+        <attr name="right_width" format="dimension"></attr>
+    </declare-styleable>
+    <declare-styleable name="CircleImageView">
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
+    </declare-styleable>
+
+    <!-- BasicLoading -->
+    <declare-styleable name="BasicLoading">
+        <attr name="duration" format="integer" />
+        <attr name="loadtitle" format="string" />
+    </declare-styleable>
+
+    <!-- CycleLoading -->
+    <declare-styleable name="CycleLoading">
+        <attr name="startBg" format="reference" />
+        <attr name="endBg" format="reference" />
+    </declare-styleable>
+
+    <!-- FlowLayout -->
+    <declare-styleable name="FlowLayout">
+        <attr name="horizontalSpacing" format="dimension" />
+        <attr name="verticalSpacing" format="dimension" />
+        <attr name="orientation" format="enum">
+            <enum name="horizontal" value="0" />
+            <enum name="vertical" value="1" />
+        </attr>
+        <attr name="debugDraw" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="FlowLayout_LayoutParams">
+        <attr name="layout_newLine" format="boolean" />
+        <attr name="layout_horizontalSpacing" format="dimension" />
+        <attr name="layout_verticalSpacing" format="dimension" />
+    </declare-styleable>
+
+    <!-- <attr name="dividerHorizontal" format="reference" /> -->
+    <declare-styleable name="Divider">
+        <attr name="android:orientation" />
+        <attr name="marginTop" format="dimension" />
+        <attr name="marginBottom" format="dimension" />
+    </declare-styleable>
+
+</resources>
