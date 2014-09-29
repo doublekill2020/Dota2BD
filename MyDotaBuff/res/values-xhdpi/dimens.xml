@@ -1,0 +1,15 @@
+<resources>
+
+    <!-- 公共色彩 -->
+    <color name="bg_red_color">#E43B3E</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black_">#333333</color>
+    <color name="yellow_">#009f07</color>
+
+    <dimen name="shadow_width">10dp</dimen>
+    <dimen name="slidingmenu_offset">100dp</dimen>
+    <dimen name="slidingmenu_offset_above">10dp</dimen>
+    <dimen name="common_title_width">200dp</dimen>
+
+</resources>

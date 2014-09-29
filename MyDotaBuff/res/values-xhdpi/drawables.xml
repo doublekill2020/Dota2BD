@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <item name="transparent" type="drawable">#00000000</item>
+	<item name="pressed" type="drawable">#D2D2D2</item>
+	<item name="normal" type="drawable">#F1F1F1</item>
+	<item name="white" type="drawable">#FFFFFF</item>
+	<item name="personalcenter_normal" type="drawable">#FFFFFB</item>
+	
+	<item name="popwindow_pressed_default" type="drawable">#D2D2D2</item>
+	<item name="popwindow_normal_default" type="drawable">#ffffff</item>
+	
+	<!-- list item pressed color -->
+</resources>

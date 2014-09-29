@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dota2数据通</string>
+
+    <!-- 主界面 -->
+    <string name="tab1">关注</string>
+    <string name="tab2">首页</string>
+    <string name="tab3">个人中心</string>
+    <!-- 优惠券 -->
+    <string name="ljf_coupon_title">汽车服务</string>
+    <string name="ljf_coupon__detailed_title">汽车服务详情</string>
+    <string name="ljf_coupon_tab1">钣金修复</string>
+    <string name="ljf_coupon_tab2">喷漆</string>
+    <string name="ljf_coupon_tab3">镀金镀膜</string>
+    <string name="ljf_coupon_tab4">玻璃贴膜</string>
+    <string name="ljf_coupon_price_msg1">¥</string>
+    <string name="ljf_coupon_price_msg2">元</string>
+    <string name="ljf_coupon_price_msg3">免费</string>
+    
+    <string name="ljf_coupon_type_unlimited">不限类别</string>
+    <string name="ljf_coupon_type1">钣金快修</string>
+    <string name="ljf_coupon_type2">汽车美容</string>
+    <string name="ljf_coupon_type3">汽车保养</string>
+    <string name="ljf_coupon_type4">镀晶镀膜</string>
+    <string name="ljf_coupon_type5">代金券</string>
+
+    <string name="ljf_coupon_sort_default">默认排序</string>
+    <string name="ljf_coupon_sort1">按距离排序</string>
+    <string name="ljf_coupon_sort2">按价格排序</string>
+    <string name="ljf_coupon_sort3">按销量排序</string>
+    
+    <!-- 关注 -->
+    <string name="attention_hasattentioned">已关注</string>
+    <string name="attention_addattention">+ 添加</string>
+    <string name="attention_recommend_no">您还没有关注任何车型</string>
+    <string name="attention_recommend_listitem_found1">发现</string>
+    <string name="attention_recommend_listitem_found2">个车源</string>
+    <string name="attention_recommend_listitem_guanzhu">关注</string>
+    <string name="attention_normal_listitem_found3">新发现</string>
+    <string name="attention_normal_listitem_history">历史最低价</string>
+    <string name="attention_normal_listitem_contian">(包括过户费)</string>
+    <string name="attention_add_carbrand">*品牌 :</string>
+    <string name="attention_add_cars">*车系 :</string>
+    <string name="attention_add_carmodel">车型 :</string>
+    <string name="attention_add_carlocation">所在地 :</string>
+    <string name="attention_add_hint">不限车型</string>
+    <string name="attention_add_receivetime">接收时间 :</string>
+    <string name="attention_add_title">添加关注</string>
+    <string name="attention_hasattention_title">已关注的车型</string>
+    <string name="attention_add_carbrand_choice">品牌选择</string>
+    <string name="attention_add_cars_choice">车系选择</string>
+    <string name="attention_add_carmodel_choice">车型选择</string>
+    <string name="attention_add_carlocation_choice">城市选择</string>
+    <string name="attention_add_carbrand_tip">您还没有选车品牌!</string>
+    <string name="attention_add_cars_tip">您还没有选车系!</string>
+    <string name="attention_add_carbrand_committip">您必须选择一款品牌!</string>
+    <string name="attention_request_failed">请求失败!</string>
+    <string name="attention_has_nosource">暂无来源!</string>
+    <string name="attention_has_dialogtitle">确定要删除吗?</string>
+    <string name="attention_has_ok">确定</string>
+    <string name="attention_has_cancel">取消</string>
+    
+   
+    <!-- 二手车配套服务 -->
+    <string name="ljf_second_hand_service">检测过户</string>
+    <!-- 发布二手车 -->
+    <string name="ljf_publish_second_hand_title">发布二手车</string>
+    <string name="ljf_publish_second_hand2_bar_title1">品牌:</string>
+    <string name="ljf_publish_second_hand2_bar_title2">车系:</string>
+    <string name="ljf_publish_second_hand2_bar_title3">车型:</string>
+    <string name="ljf_publish_second_hand2_bar_title4">预售价格:</string>
+    <string name="ljf_publish_second_hand2_bar_title5">上牌时间:</string>
+    <string name="ljf_publish_second_hand2_bar_title6">行驶里程:</string>
+    <string name="ljf_publish_second_hand2_bar_title7">所在地:</string>
+    <string name="ljf_publish_second_hand2_bar_title8">车身颜色:</string>
+    <string name="ljf_publish_second_hand2_bar_title9">过户费:</string>
+    <string name="ljf_publish_second_hand2_bar_title10">保险到期:</string>
+    <string name="ljf_publish_second_hand2_bar_title11">年检到期:</string>
+    <string name="ljf_publish_second_hand2_bar_title12">车辆用处:</string>
+    <string name="ljf_publish_second_hand2_bar_title13">定期保养:</string>
+    <string name="ljf_publish_second_hand2_bar_title14">联系人:</string>
+    <string name="ljf_publish_second_hand2_bar_title15">联系方式:</string>
+    
+    <string name="ljf_publish_second_hand2_bar_value">选填</string>
+    <string name="ljf_publish_second_hand_bottom_tips">按提示录入信息，平台会为你提供参考价格，请尽量提供车辆详细信息</string>
+    
+    <!-- 个人中心 -->
+    <string name="personalcenter_title">个人中心</string>
+    <string name="personalcenter_account_status">账户状态 : </string>
+    <string name="personalcenter_info">个人信息</string>
+    <string name="personalcenter_orderdetails">我的订单</string>
+    <string name="personalcenter_appointment">我的预约</string>
+    <string name="personalcenter_mypoints">我的积分</string>
+    <string name="personalcenter_myfavorites">我收藏的车源</string>
+    <string name="personalcenter_qualificationsauction">我的拍卖</string>
+    <string name="personalcenter_publish">我发布的</string>
+    <string name="personalcenter_mymsg">我的消息</string>
+    <string name="personalcenter_integration">积分</string>
+    <string name="personalcenter_mobile_ver">手机已认证</string>
+    <string name="personalcenter_email_ver">邮箱已认证</string>
+    <string name="personalcenter_mobile_not_ver">未认证</string>
+    <string name="personalcenter_email_not_ver">未认证</string>
+    <string name="personalcenter_email_notactivited">邮箱未激活</string>
+    
+    <!-- 个人中心设置 -->
+    <string name="personalcenter_setting_title">设置</string>
+    <string name="personalcenter_browse_text">2G/3G下浏览小图</string>
+    <string name="personalcenter_clear_text">清除图片缓存</string>
+    <string name="personalcenter_receive_text">推送接收时间</string>
+    <string name="personalcenter_receive_allday">全天</string>
+    <string name="personalcenter_receive_eight">8:00am-8:00pm</string>
+    <string name="personalcenter_recommend_text">推荐至好友</string>
+    <string name="personalcenter_score_text">给应用评分</string>
+    <string name="personalcenter_feedback_text">意见反馈</string>
+    <string name="personalcenter_newversion_text">检查新版本</string>
+    <string name="personalcenter_newversion_update">立刻更新</string>
+    <string name="personalcenter_about_text">关于</string>
+    <string name="personalcenter_setting_exit_title">退出登陆</string>
+    <string name="personalcenter_setting_exit">退出登陆</string>
+    <string name="personalcenter_setting_failed">设置失败嘞</string>
+    
+    <!-- 个人中心收藏的车源 -->
+    <string name="personalcenter_myfavorites_title">我收藏的车源</string>
+
+    <!-- 个人中心我的预约 -->
+    <string name="personalcenter_myappointment_title">我的预约</string>
+    
+    <!-- 个人中心我的订单 -->
+    <string name="personalcenter_myorder_title">订单详情</string>
+    <string name="personalcenter_myorder_count">数量 :</string>
+    <string name="personalcenter_myorder_heji">合计 :</string>
+    <string name="personalcenter_myorder_sendcode">发送服务码</string>
+    <string name="personalcenter_myorder_refund">退款</string>
+    <string name="personalcenter_myorder_righttitle_text">全部</string>
+    <string name="personalcenter_setting_popwindow_cleartitle">是否清空图片缓存</string>
+    <string name="personalcenter_setting_popwindow_clear">清空</string>
+    <string name="personalcenter_setting_popwindow_cancel">取消</string>
+    <string name="personalcenter_setting_popwindow_recommedtitle">推荐到</string>
+    
+    <!--  个人中心个人信息-->
+    <string name="personalcenter_personalinfo_title">个人信息</string>
+    <string name="personalcenter_personalinfo_log">头像 :</string>
+    <string name="personalcenter_personalinfo_nick">昵称 :</string>
+    <string name="personalcenter_personalinfo_sex">性别 :</string>
+    <string name="personalcenter_personalinfo_sexb">男</string>
+    <string name="personalcenter_personalinfo_sexg">女</string>
+    <string name="personalcenter_personalinfo_mobile">手机 :</string>
+    <string name="personalcenter_personalinfo_email">邮箱 :</string>
+    <string name="personalcenter_personalinfo_location">地区 :</string>
+    <string name="personalcenter_personalinfo_notcertified">(未认证)</string>
+    <string name="personalcenter_personalinfo_certified">(已认证)</string>
+    <string name="personalcenter_personalinfo_notactivating">(未激活)</string>
+    <string name="personalcenter_personalinfo_qqunbound">腾讯QQ未绑定</string>
+    <string name="personalcenter_personalinfo_qqbound">腾讯QQ已绑定</string>
+    <string name="personalcenter_personalinfo_sinaunbound">新浪微博未绑定</string>
+    <string name="personalcenter_personalinfo_sinabound">新浪微博已绑定</string>
+    <string name="personalcenter_personalinfo_qqbindtitle">解绑腾讯QQ</string>
+    <string name="personalcenter_personalinfo_sinabindtitle">解绑新浪微博</string>
+    <string name="personalcenter_personalinfo_bind">去绑定</string>
+    <string name="personalcenter_personalinfo_unbind">解除绑定</string>
+    <string name="personalcenter_personalinfo_editsumbit">修改</string>
+    <string name="personalcenter_personalinfo_takephoto">拍照</string>
+    <string name="personalcenter_personalinfo_fromlocal">从本地相册</string>
+    <string name="personalcenter_personalinfo_cancel">取消</string>
+    <string name="personalcenter_personalinfo_changed_notused">修改内容无效!</string>
+    <string name="personalcenter_personalinfo_username_change">修改昵称</string>
+    <string name="personalcenter_personalinfo_changed_succ">保存成功</string>
+    <string name="personalcenter_personalinfo_changed_failed">保存失败,请稍后重试!</string> 
+    <string name="personalcenter_personalinfo_uploadding">正在上传...</string>
+    <string name="personalcenter_personalinfo_upload_failed">上传失败!</string>
+    <string name="personalcenter_personalinfo_upload_image_failed">上传图片失败!</string>
+    <string name="personalcenter_personalinfo_save_title">个人信息</string>
+    <string name="personalcenter_personalinfo_save_content">您的信息已更改，是否保存？</string>
+    <string name="personalcenter_personalinfo_save_ok">保存</string>
+    <string name="personalcenter_personalinfo_save_cancel">取消</string>
+    
+    <!--  个人中心意见反馈-->
+    <string name="personalcenter_feedback_title">意见反馈</string>
+    <string name="personalcenter_feedback_edithit">请输入您的意见</string>
+    <string name="personalcenter_feedback_ok">确定发送</string>
+    
+    <!-- 个人中心我的消息 -->
+    <string name="personalcenter_mynews_title">我的消息</string>
+    <string name="personalcenter_mynews_norecord">您还没有任何消息记录</string>
+    
+    <!--  个人中心我的积分-->
+    <string name="personalcenter_mypoints_title">我的积分</string>
+    
+    
+    <!--  个人中心我发布的-->
+    <string name="personalcenter_mypublish_title">我发布的</string>
+    
+    <string name="personalcenter_mypublish_success">发布成功</string>
+    <string name="personalcenter_mypublish_failed">发布失败</string>
+    <string name="personalcenter_mypublish_publishing">发布中</string>
+    <string name="personalcenter_mypublish_unverified">审核未通过</string>
+    
+    <!-- 认证 -->
+    <string name="auth_emailauth_title">修改认证邮箱</string>
+    <string name="auth_emailauth_tip1">无法识别的邮箱状态</string>
+    <string name="auth_emailauth_tip2">验证邮件已发送至您的邮箱,请及时激活!</string>
+    <string name="auth_emailauth_tip3">当前邮箱无需重新认证</string>
+    <string name="auth_mobileauth_title">手机认证</string>
+    <string name="auth_commit_failed">无法提交验证!</string>
+    <string name="auth_mobileauth_tip1">验证码必须是6位数字!</string>
+    <string name="auth_mobileauth_tip2">验证码输入错误!</string>
+    <string name="auth_mobileauth_tip3">当前号码无需重新认证</string>
+    
+    <!-- 登录 -->
+    <string name="login_shenma">神马登录</string>
+    <string name="login_qq">QQ账号登录</string>
+    <string name="login_sina">新浪账号登录</string>
+    <string name="login_register">注册新账号</string>
+    <string name="login_account_input_hint">手机/用户名/邮箱</string>
+    <string name="login_password_input_hint">请输入密码</string>
+    <string name="login_forgotpassword">忘记密码 ?</string>
+    <string name="login_login_title">登录</string>
+    <string name="login_account_null">用户名不能为空!</string>
+    <string name="login_password_null">密码不能为空!</string>
+    <string name="login_login_text">登陆</string>
+    <string name="login_reg_text">注册</string>
+    <string name="login_thirdlog_tips">使用合作伙伴账号登陆 :</string>
+    <string name="login_thirdlog_sina">新浪微博</string>
+    <string name="login_thirdlog_qq">腾讯QQ</string>
+    <string name="login_thirdlog_authsucc">授权成功, 正在跳转...</string>
+    <string name="login_thirdlog_authcancel1">您取消了</string>
+    <string name="login_thirdlog_authcancel2">授权登录...</string>
+    <string name="login_thirdlog_auth">正在授权...</string>
+    <string name="login_thirdlog_authfailed">获取授权信息失败...</string>
+    <string name="login_thirdlog_authfinish">完成</string>
+    <string name="login_thirdlog_authtitle">用户绑定</string>
+    <string name="login_thirdlog_userauth">正在验证账号...</string>
+    <string name="login_thirdlog_userauthfailed">验证账号失败...</string>
+    
+    
+    <!-- 第三方登录 -->
+    <string name="weibo_oauth_regiseter">应用授权</string>
+    <string name="website">http://www.shareSDK.cn</string>
+    <string name="weibo_upload_content">分享图片</string>
+    <string name="wechat_client_inavailable">目前您的微信版本过低或未安装微信，需要安装微信才能使用</string>
+    <string name="google_plus_client_inavailable">Google+ 版本过低或者没有安装，需要升级或安装Google+才能使用！</string>
+    <string name="qq_client_inavailable">QQ 版本过低或者没有安装，需要升级或安装QQ才能使用！</string>
+    <string name="pinterest_client_inavailable">Pinterest版本过低或者没有安装，需要升级或安装Pinterest才能使用！</string>
+    <string name="instagram_client_inavailable">Instagram版本过低或者没有安装，需要升级或安装Instagram才能使用！</string>
+    
+	<string name="sinaweibo">新浪微博</string>
+	<string name="tencentweibo">腾讯微博</string>
+	<string name="qzone">QQ空间</string>
+	<string name="wechat">微信好友</string>
+	<string name="wechatmoments">微信朋友圈</string>
+	<string name="facebook">Facebook</string>
+	<string name="twitter">Twitter</string>
+	<string name="renren">人人网</string>
+	<string name="kaixin">开心网</string>
+	<string name="email">邮件</string>
+	<string name="shortmessage">信息</string>
+	<string name="sohumicroblog">搜狐微博</string>
+	<string name="sohusuishenkan">搜狐随身看</string>
+	<string name="neteasemicroblog">网易微博</string>
+	<string name="douban">豆瓣</string>
+	<string name="youdao">有道云笔记</string>
+	<string name="evernote">印象笔记</string>
+	<string name="linkedin">Linked In</string>
+	<string name="googleplus">Google+</string>
+	<string name="foursquare">FourSquare</string>
+	<string name="qq">QQ</string>
+	<string name="pinterest">Pinterest</string>
+	<string name="flickr">Flickr</string>
+	<string name="tumblr">Tumblr</string>
+	<string name="dropbox">Dropbox</string>
+	<string name="vkontakte">VK</string>
+	<string name="instagram">Instagram</string>
+    
+    <!-- 注册 -->
+    <string name="register_title">注册</string>
+    <string name="register_mobile">手机注册</string>
+    <string name="register_email">邮箱注册</string>
+    <string name="register_mobile_input_hint">请输入手机号</string>
+    <string name="register_verification_input_hint">请输入验证码</string>
+    <string name="register_getverification_text">获取手机验证码</string>
+    <string name="register_getemailverification_text">获取邮箱验证码</string>
+    <string name="register_username_input_hint">请输入用户名</string>
+    <string name="register_email_input_hint">请输入邮箱</string>
+    <string name="register_password_input_hint">请输入密码</string>
+    <string name="register_aginpassword_input_hint">请再次输入密码</string>
+    <string name="register_vercode_input_hint">请输入手机收到的6位验证码</string>
+    <string name="register_registe_text">注册</string>
+    <string name="register_commit_text">提交</string>
+    <string name="register_succ">注册成功</string>
+    <string name="register_forgetpassword_succ">修改密码成功</string>
+    <string name="register_forgetpassword_title">忘记密码</string>
+    <string name="register_mobilefound">手机号码找回</string>
+    <string name="register_emailfound">邮箱号码找回</string>
+    <string name="register_vertips1">手机验证码已发送到手机,收到请勿关闭页面</string>
+    <string name="register_vertips2">1分钟未收到,请重新获取验证码</string>
+    <string name="register_resend_text">重新获取</string>
+    <string name="register_register_setpassword">设置密码</string>
+    <string name="register_forgetpassword_setpassword">重设密码</string>
+    
+    <!-- 城市 -->
+    <string name="citylist_title">城市选择</string>
+    <string name="citylist_home_title">定位城市</string>
+     <!-- IM -->
+    <string name="tabmessage_center_tips1">无法删除</string>
+    <string name="tabmessage_center_tips2">无法删除</string>
+    <string name="chatactivity_tips1">正在尝试重新连接...</string>
+    <string name="imservice_connerror">连接异常</string>
+    <string name="imservice_connsucc">连接成功</string>
+    
+    <!-- 聊天 -->
+    <!-- 聊天界面 汽车详细参数 -->
+    <string name="im_cardetails_ykj">(一口价)</string>
+    <string name="im_default_loadtips">载入中</string>
+    <string name="im_send">发送</string>
+
+    <!-- 下拉刷新 -->
+    <string name="string_listview_pullrefresh">下拉可以刷新</string>
+    <string name="string_listview_lastupdate">上次更新</string>
+    <string name="string_listview_loadmore">加载更多</string>
+    <string name="xlistview_header_hint_normal">下拉刷新</string>
+    <string name="xlistview_header_hint_ready">松开刷新数据</string>
+    <string name="xlistview_header_hint_loading">正在加载...</string>
+    <string name="xlistview_header_last_time">上次更新时间：</string>
+    <string name="xlistview_footer_hint_normal">查看更多</string>
+    <string name="xlistview_footer_hint_ready">松开载入更多</string>
+
+    <!-- 公共提示 -->
+    <string name="no_data">暂无相关数据</string>
+    <string name="no_publish">您还没有发布二手车!</string>
+    <string name="loading">正在加载数据</string>
+    <string name="timeout">请求超时,请检查网络</string>
+    <string name="uploading">正在上传...</string>
+    <string name="no_network">没有网络</string>
+    <string name="request_failed">请求失败</string>
+    <string name="delete_succ">删除成功</string>
+    <string name="delete_failuer">删除失败</string>
+    <string name="insufficient">库存不足</string>
+    <string name="continued">敬请期待</string>
+    <string name="payment_not_support">暂不支持退款功能</string>
+    <string name="requesting">正在请求</string>
+    
+    <!-- App分享 -->
+    <string name="app_share_title">神马车城</string>
+    <string name="app_share_text">神马车城移动版将满足二手车消费者在购车前期、中期、后期整个过程的找车、议价、交易、汽车后服务的需求，快来看看吧！----http://www.cenmall.com</string>
+	<string name="app_share_url">http://www.cenmall.com</string>    
+	<string name="wechat_not_exist">请先安装微信客户端!</string>
+	
+	
+	<!-- 分享提示 -->
+	<string name="share_sucess">分享成功</string>
+	<string name="share_failuer">分享出错</string>
+	<string name="share_cacel">您取消了分享</string>
+	<string name="share_wx_error">分享失败,您可能未安装微信客户端</string>
+	<string name="share_to">分享到</string>
+	<string name="share_qq">QQ空间</string>
+	<string name="share_wechat_share">微信朋友圈</string>
+	<string name="share_wechat_friend_share">微信好友</string>
+	<string name="share_sina">新浪微博</string>
+	<string name="share_with_no_image">图片无效，无法分享</string>
+	<!-- 支付宝 -->
+	 <string name="confirm_title">提示</string>
+    <string name="ensure">确定</string>
+    <string name="cancel">取消</string>
+    <string name="content_description_icon">icon</string>
+    <string name="refresh">刷新</string>
+    <string name="processing">加载中</string>
+    <string name="download">下载</string>
+    <string name="download_fail">下载安装包失败</string>
+    <string name="cancel_install_msp">你已取消安装移动快捷支付服务</string>
+    <string name="cancel_install_alipay">你已取消安装支付宝钱包</string>
+    <string name="redo">重试</string>
+    <string name="install_msp">你尚未安装支付宝移动快捷支付服务，请立即安装</string>
+    <string name="install_alipay">你尚未安装支付宝钱包，请立即安装</string>	
+    
+    <!-- 我的二手车提示 -->
+    <string name="no_data_mypublish">您还没有发布二手车信息！</string>
+    <string name="no_data_order">您还没有相关订单记录！</string>
+</resources>
