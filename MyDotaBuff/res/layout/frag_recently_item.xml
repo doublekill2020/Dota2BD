@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/act_bg"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/viewSpace_smallest"
+    android:paddingLeft="@dimen/viewSpace_medium"
+    android:paddingRight="@dimen/viewSpace_medium"
+    android:paddingTop="@dimen/viewSpace_smallest" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:background="@drawable/pay_bg2"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="32dp"
+                android:text="天辉" />
+
+            <ImageView
+                android:id="@+id/hero_1"
+                android:layout_width="36dp"
+                android:layout_height="26dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:scaleType="fitXY" />
+
+            <ImageView
+                android:id="@+id/hero_2"
+                android:layout_width="36dp"
+                android:layout_height="26dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:scaleType="fitXY" />
+
+            <ImageView
+                android:id="@+id/hero_3"
+                android:layout_width="36dp"
+                android:layout_height="26dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:scaleType="fitXY" />
+
+            <ImageView
+                android:id="@+id/hero_4"
+                android:layout_width="36dp"
+                android:layout_height="26dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:scaleType="fitXY" />
+
+            <ImageView
+                android:id="@+id/hero_5"
+                android:layout_width="36dp"
+                android:layout_height="26dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:scaleType="fitXY" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="32dp"
+                android:text="夜魇" />
+
+            <ImageView
+                android:id="@+id/hero_6"
+                android:layout_width="36dp"
+                android:layout_height="26dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:scaleType="fitXY" />
+
+            <ImageView
+                android:id="@+id/hero_7"
+                android:layout_width="36dp"
+                android:layout_height="26dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:scaleType="fitXY" />
+
+            <ImageView
+                android:id="@+id/hero_8"
+                android:layout_width="36dp"
+                android:layout_height="26dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:scaleType="fitXY" />
+
+            <ImageView
+                android:id="@+id/hero_9"
+                android:layout_width="36dp"
+                android:layout_height="26dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:scaleType="fitXY" />
+
+            <ImageView
+                android:id="@+id/hero_10"
+                android:layout_width="36dp"
+                android:layout_height="26dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:scaleType="fitXY" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:id="@+id/game_mode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="0.6" />
+
+            <TextView
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:id="@+id/game_num"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:id="@+id/game_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f6f2f0" >
+
+ 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/pay_bg2"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <cn.edu.mydotabuff.view.CircleImageView
+                android:id="@+id/myinfrom_up_img"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/myinfro_up_img_btn" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="#333333"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/myinfro_divi_long_icon" />
+
+        <RelativeLayout
+            android:id="@+id/myinfor_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" >
+
+            <TextView
+                android:id="@+id/businessname"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center_vertical"
+                android:text="steam状态"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/myinfor_change_right_icon" />
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@id/icon"
+                android:layout_toRightOf="@id/businessname"
+                android:background="@null"
+                android:gravity="right|center_vertical"
+                android:textColor="#b3b3b3"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/myinfro_divi_short_icon" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp" >
+
+            <TextView
+                android:id="@+id/businessaddr"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center_vertical"
+                android:text="最后在线"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/icon2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/myinfor_change_right_icon" />
+
+            <TextView
+                android:id="@+id/last_login"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@id/icon2"
+                android:layout_toRightOf="@id/businessaddr"
+                android:background="@null"
+                android:gravity="right|center_vertical"
+                android:singleLine="true"
+                android:textColor="#b3b3b3"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/myinfro_divi_short_icon" />
+
+        <RelativeLayout
+            android:id="@+id/myinfor_time"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" >
+
+            <TextView
+                android:id="@+id/businesscom"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:gravity="center_vertical"
+                android:text="注册时间"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/icon3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/myinfor_change_right_icon" />
+
+            <TextView
+                android:id="@+id/regist_time"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_toLeftOf="@id/icon3"
+                android:layout_toRightOf="@id/businesscom"
+                android:background="@null"
+                android:gravity="right|center_vertical"
+                android:textColor="#b3b3b3"
+                android:textSize="14sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>
