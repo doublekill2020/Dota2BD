@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/titlebar_switch_group">
+
+        	<!-- 圈子 -->
+            <RadioButton
+                android:id="@+id/titlebar_switch_left"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:minWidth="120dp"
+                android:paddingLeft="@dimen/paddingLeftRight"
+                android:paddingRight="@dimen/paddingLeftRight"
+                android:paddingTop="@dimen/paddingLeftBottom"
+                android:paddingBottom="@dimen/paddingLeftBottom"
+                android:button="@null"
+                android:background="@drawable/selector_titlebar_switchitem_leftbg"
+                android:gravity="center" 
+                android:textColor="@color/selector_titlebar_item_textcolor"
+                android:textSize="@dimen/commontitle_switcher_textsize"/>
+            
+            <!-- 车友 -->
+            <RadioButton
+                android:id="@+id/titlebar_switch_right"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:minWidth="120dp"
+                android:paddingLeft="@dimen/paddingLeftRight"
+                android:paddingRight="@dimen/paddingLeftRight"
+                android:paddingTop="@dimen/paddingLeftBottom"
+                android:paddingBottom="@dimen/paddingLeftBottom"
+                android:button="@null"
+                android:background="@drawable/selector_titlebar_switchitem_rightbg"
+                android:gravity="center" 
+                android:textColor="@color/selector_titlebar_item_textcolor"
+                android:textSize="@dimen/commontitle_switcher_textsize"/>
+     </RadioGroup>
+
+</LinearLayout>

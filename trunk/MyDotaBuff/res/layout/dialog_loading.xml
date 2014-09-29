@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/flDialogLoadin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/ivDialogLoading"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
+        android:layout_gravity="center"
+        android:src="@drawable/loading_01" />
+
+    <ImageView
+        android:layout_width="71dp"
+        android:layout_height="71dp"
+        android:layout_gravity="center"
+        android:src="@drawable/hall_icon_icon_06" />
+
+    <TextView
+        android:id="@+id/tvDialogLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:ellipsize="end"
+        android:maxWidth="109dp"
+        android:singleLine="true"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+</FrameLayout>
