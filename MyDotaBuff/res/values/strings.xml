@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MyDotaBuff</string>
+    <string name="action_settings">Settings</string>
+    <string name="dlg_content">使用此app，必须在游戏中共享比赛历史。\n第一次使用，请输入数字id：</string>
+    <string name="home_didi">嘀嘀</string>
+    <string name="home_news">消息</string>
+    <string name="app_name_didi">神马嘀嘀商户端</string>
+    <string name="version">2.0</string>
+
+    <!-- home_popuwindow -->
+    <string name="service_attitude">服务态度 :</string>
+    <string name="sincerity_attitude">诚信指数 :</string>
+    <string name="b_c_introduce">简介 </string>
+    <!-- 设置主页界面 -->
+    <string name="setting_out_login">退出登录</string>
+    <string name="setting_advice">意见反馈</string>
+    <string name="setting_newversion">检测新版本</string>
+    <string name="setting_about">关于神马嘀嘀商户端</string>
+    <string name="setting_recommend_toFriend">推荐给好友</string>
+
+    <!-- 设置里的消息界面 -->
+    <string name="xiaoxi_backstage">"后台运行是否接受需求"</string>
+    <string name="xiaoxi_backstage_new">开启后后台运行不在需求接收页面也可以接收到最新的</string>
+    <string name="xiaoxi_user_requirement">用户需求</string>
+    <string name="xiaoxi_mian_darao">功能消息免打扰</string>
+    <string name="xiaoxi_set_sound_vibrate">设置系统功能消息提示声音和振动时段</string>
+    <string name="xiaoxi_sound">声音</string>
+    <string name="xiaoxi_vibrate">振动</string>
+    <string name="xiaoxi_yuyin">语音播报</string>
+
+    <!-- 设置里的消息里的免打扰界面 -->
+    <string name="open">开启</string>
+    <string name="close">关闭</string>
+    <string name="just_8to12">只在夜间开启 22:00-08:00</string>
+    <string name="miandarao_long">开启后,消息中心收到消息后,手机不会振动与发出提示音,如果设置为只在夜间开启,则只在22:00到8:00间生效</string>
+
+    <!-- 设置里的消息里的语音播报界面 -->
+    <string name="yuyin_man_broadcast">男声播报</string>
+    <string name="yuyin_woman_broadcast">女声播报</string>
+
+    <!-- 设置里的关于神马嘀嘀商户端 -->
+    <string name="app_version">神马嘀嘀商户端V1.0</string>
+    <string name="to_grade">去评分</string>
+    <string name="wellcome">欢迎页</string>
+    <string name="function_introduce">功能介绍</string>
+    <string name="logout_information">注销商户信息</string>
+
+    <!-- 账号设置 -->
+    <string name="account_setting">账号设置</string>
+    <string name="didi_setting_accout_oldpwd">原密码：</string>
+    <string name="didi_setting_accout_oldpwd_notice">请填写原密码</string>
+    <string name="didi_setting_accout_newpwd">新密码：</string>
+    <string name="didi_setting_accout_newpwd_notice">请填写新密码</string>
+    <string name="didi_setting_accout_confirmpwd">确认密码：</string>
+    <string name="didi_setting_accout_confirmpwd_notice">请再次填写新密码</string>
+    <string name="didi_setting_accout_infomation">请填写内容</string>
+    <string name="didi_setting_accout_confirm">确定</string>
+
+    <!-- 登录界面 -->
+    <string name="main_password">密码</string>
+    <string name="main_phone_numer">手机号</string>
+    <string name="main_login">登录</string>
+    <string name="main_register">注册</string>
+
+    <!-- 注册界面 -->
+    <string name="register_phone_test">手机验证码</string>
+    <string name="register_phone_18">请输入8-16位字母加数字的组合</string>
+    <string name="register_again">再次输入密码</string>
+    <string name="register_get">获取</string>
+    <string name="register_60_second">60s之后再次发送</string>
+    <string name="register_register">注册</string>
+
+    <!-- 摇一摇界面 -->
+    <string name="yao_yiyao">摇一摇</string>
+
+    <!-- didi主页的popuwindow里的客户界面 -->
+    <string name="kehu_list">客户列表</string>
+    <string name="chech">搜索</string>
+
+    <!-- didi主页的popuwindow里的订单界面 -->
+    <string name="servcing">服务中</string>
+    <string name="overed">已完成</string>
+
+    <!-- 需求详情界面 -->
+    <string name="requirement_more">需求详情</string>
+    <string name="confirm_server">确定服务</string>
+    <string name="momo">MOMO</string>
+    <string name="fast_get">立即接单</string>
+    <string name="lookout">忽略</string>
+
+    <!-- 注销界面 -->
+    <string name="zhuxiao_1">1、注销后，原账户信息将被清除，不可恢复。</string>
+    <string name="zhuxiao_2">2、注销后可重新选择身份，重新选择可接收的需求类型。</string>
+    <string name="zhuxiao_confirm">确认注销</string>
+    <string name="zhuxiao_3">3、七天内只能注销一次。</string>
+    <!-- 选择身份界面 -->
+    <string name="select_status">选择身份</string>
+    <string name="plase_select_status">请选择您的身份</string>
+    <string name="gongxi_success">恭喜你注册成功,请继续完善资料！</string>
+    <string name="will_show_user">(您的身份将会显示在用户端)</string>
+    <string name="if_belong_compeny">如果您从属某个企业</string>
+    <string name="if_want_todo_something">如果您个人想做点什么</string>
+    <string name="if_dont_confirm">如果不清楚可以选择进去看看，再返回选择</string>
+
+    <!-- 企业选择类型 -->
+    <string name="select_compeny">选择企业类型</string>
+    <string name="select_requriement_type">选择需求类型</string>
+    <string name="select_compeny_foryou">选择您所在的企业类型</string>
+    <string name="next_step">下一步</string>
+
+    <!-- 非企业选择类型 -->
+    <string name="over">完成</string>
+    <string name="select_you_wantto_get_requriement">选择您想获得的需求类型</string>
+    <string name="youhuo">有货</string>
+    <string name="youche">有车</string>
+    <string name="luntai">轮胎救援</string>
+    <string name="dadian">搭电</string>
+    <string name="daiban">汽车代办</string>
+    <string name="maiche1">卖车</string>
+    <string name="jingdianmenpiao">景点门票-特惠</string>
+    <string name="dianyingpiao">电影票-特惠</string>
+    <string name="yanchanghui">演唱会-特惠</string>
+    <string name="jipiao">机票-特惠</string>
+    <string name="jiudian">酒店-特惠</string>
+    <string name="qichefuwu">汽车服务-特惠</string>
+
+    <!-- 完善资料界面 -->
+    <string name="wanshanziliao">完善资料</string>
+    <string name="plase_wanshanziliao">请完善资料</string>
+    <string name="name">名称</string>
+    <string name="address">地址</string>
+    <string name="belong_compeny">所属企业</string>
+
+    <!-- 注册的最后一步上传图片 -->
+    <string name="rencheng">认证</string>
+    <string name="tiaoguo">跳过</string>
+    <string name="qingrenzheng_requriement">请认证您可以提供的服务类型</string>
+    <string name="beizhu_zhaopian">备注：照片中以下信息必须真实有效且清晰可见</string>
+    <string name="zhaopian_1">1、手持证人的五官</string>
+    <string name="zhaopian_2">2、身份证上的所有信息</string>
+    <string name="jiuyuan">救援</string>
+    <string name="beizhu_zhaopian_1">备注：1、用户端可以看到你的认证信息</string>
+    <string name="beizhu_zhaopian_2">2、认证后可进行更改，重新认证</string>
+    <string name="tijiao_renzheng">提交认证</string>
+    <!-- didiadapter -->
+    <string name="img_desc">11</string>
+    <string name="img_juli">距离:</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="starttime">开始营业时间</string>
+    <string name="endtime">开始营业时间</string>
+    <string name="fist">上传图片中..</string>
+    <string name="three">上传图片中..</string>
+    <!-- adapter -->
+    <string name="contact_invite">邀请</string>
+    <string name="contact_already_regist">已注册</string>
+    <string name="didi_not_deal">未处理</string>
+    <string name="didi_dealing">处理中</string>
+    <string name="didi_wait_for_confirm">待确认</string>
+    <string name="didi_already_failure">单被抢</string>
+    <string name="didi_already_finish">已完成</string>
+    <string name="didi_already_shuangyue">已爽约</string>
+
+    <!-- didi主页的popuwindow -->
+    <string name="service_quality">服务质量 :</string>
+    <string name="MyRobbill_description">描述：</string>
+    <string name="MyRobbill_demand">需求：</string>
+    <string name="MyRobbill_no">无</string>
+    <!-- common -->
+    <string name="didishow_kuaidi">快递</string>
+    <string name="didishow_youhuo">我有货</string>
+    <string name="didishow_youche">我有车</string>
+    <string name="didishow_luntai">轮胎救援</string>
+    <string name="didishow_dadian">搭电救援</string>
+    <string name="didishow_baoche">包车</string>
+    <string name="didishow_maiche">买车</string>
+    <string name="didishow_mai_che">卖车</string>
+    <string name="didishow_chexian">代办车险</string>
+    <string name="didishow_qichedaiban">汽车代办</string>
+    <string name="didishow_jingdianmenpiao">景点门票</string>
+    <string name="didishow_dianyingpiao">电影票</string>
+    <string name="didishow_yanchanghui">演唱会</string>
+    <string name="didishow_jipiao">机票</string>
+    <string name="didishow_jiudian">酒店</string>
+    <string name="didishow_qichefuwu">汽车服务</string>
+    <string name="didishow_lahuo">拉货</string>
+    <string name="http_share_title">根本停不过来！一款吊炸天的App</string>
+    <string name="http_share_text">自从用了神马嘀嘀客户端，根本停不过来。没空解释！你也来试试</string>
+    <string name="location_obtain">位置获取</string>
+    <string name="location_confirm_btn">确定</string>
+    <string name="location_cancel_btn">取消</string>
+    <string name="location_toast">暂且获取不到位置信息，请再次尝试</string>
+    <!-- database -->
+    <string name="title_sys_msg">系统消息</string>
+    <string name="content_sys_no_msg">暂无系统消息</string>
+    <!-- imageBrowse -->
+    <string name="imageBrowse_loading">加载中...</string>
+    <!-- msgcenter -->
+    <string name="msg_voice">语音信息</string>
+    <string name="msg_image">图片信息</string>
+    <string name="msg_no_record">暂无聊天记录</string>
+    <string name="system_msg">系统消息</string>
+    <string name="edit">编辑</string>
+    <string name="remove">删除</string>
+    <!-- register -->
+    <string name="change_info">更改资料</string>
+    <string name="select_time">请选择时间</string>
+    <string name="select_hour">时</string>
+    <string name="select_min">分</string>
+    <string name="choose_from_gallary">从相册中选择</string>
+    <string name="take_picture">拍照</string>
+    <string name="click_error">点错了</string>
+    <string name="obtain_error">请求超时,请检查网络</string>
+    <string name="regist">注册</string>
+    <string name="cant_be_empty">商家名称和地址不能为空！</string>
+    <string name="please_upload_pic">请上传完相关证件</string>
+    <string name="continue_upload">接着上传</string>
+    <string name="net_time_out">网络超时，请检查网络</string>
+    <string name="pic_uploading">正在上传</string>
+    <string name="net_exception">异常了，请重试操作</string>
+    <string name="regist_success">注册成功</string>
+    <string name="input_error">手机号输入有误</string>
+    <string name="no_code">验证码为空</string>
+    <string name="code_error">验证码不正确</string>
+    <string name="password_error">密码输入有误</string>
+    <string name="re_password_error">重复密码有误</string>
+    <string name="only_num_and_letter">密码只能为数字和字母</string>
+    <string name="not_only_num">密码不能是纯数字</string>
+    <string name="not_only_letter">密码不能是纯字母</string>
+    <string name="password_different">两次密码不一样</string>
+    <string name="code_send">验证码已发送,请注意查收</string>
+    <string name="send_again">s之后再次发送</string>
+    <string name="obtaining">获取中...</string>
+    <string name="no_choose_company">您还未选择任何企业</string>
+    <string name="no_choose_demand">您还未选择需求类型..</string>
+    <string name="no_choose_any_demand">您还未选中任何需求类型</string>
+    <string name="save_and_next">保存,下一步</string>
+    <string name="please_input_addr">地址还未选择..请选择</string>
+    <string name="please_input_name">名称还未填写..请填写</string>
+    <string name="please_input_company">所属企业还未填写..请填写</string>
+    <string name="please_choose_identity">请选择您的身份！</string>
+    <string name="please_choose">请进行选择</string>
+    <!-- sip -->
+    <string name="no_conversation">无会话</string>
+    <string name="call">通话</string>
+    <string name="call_end">通话结束</string>
+    <string name="accept">接受</string>
+    <string name="hang_up">挂断</string>
+    <string name="connect_server">正在连接服务器</string>
+    <string name="connect_other">正在连接对方</string>
+    <string name="ringing">正在响铃</string>
+    <string name="other_ringing">对方正在响铃</string>
+    <string name="calling">正在通话...</string>
+    <string name="aoto_close">无人应答，自动关闭</string>
+    <string name="qudian">去电</string>
+    <string name="laidian">来电</string>
+    <!-- util -->
+    <string name="update">更新</string>
+    <string name="download_error">下载更新文件失败</string>
+    <string name="already_download">已下载</string>
+    <string name="edit_time_out">修改超时，请检查网络</string>
+    <string name="img_upload_success">身份证上传图片成功</string>
+    <string name="authing">递交成功正在认证</string>
+    <string name="img_uploading">正在上传图片</string>
+    <string name="zhang">张</string>
+    <string name="lingchen">凌晨</string>
+    <string name="shangwu">上午</string>
+    <string name="zhongwu">中午</string>
+    <string name="xiawu">下午</string>
+    <string name="wanshang">晚上</string>
+    <string name="ganggang">刚刚</string>
+    <string name="fenzhongqian"> 分钟前</string>
+    <string name="xiaoshiqian"> 小时前</string>
+    <string name="jintian">今天</string>
+    <string name="zuotian">昨天</string>
+    <string name="qiantian">前天</string>
+    <string name="upload_jingweidu">上传经纬度成功..</string>
+    <!-- view -->
+    <string name="discuss">活动讨论</string>
+    <string name="publish">发表</string>
+    <string name="publish_info">发表信息</string>
+    <string name="obtaining_location">定位中...</string>
+    <string name="share_ing">分享中...</string>
+    <string name="error">出错了，请稍后尝试</string>
+    <string name="no_hot_location">此处周围暂无热门地名，请移动到别处获取</string>
+    <string name="no_result">抱歉，未找到结果</string>
+    <string name="dan">单</string>
+    <string name="send_info">加载中..</string>
+    <string name="send_info1">提交中..</string>
+    <string name="no_input">输入不符合要求，请重新输入！</string>
+    <string name="reply_comment">回复评论</string>
+    <string name="comment">评论</string>
+    <string name="no_customer">您暂时没有任何客户</string>
+    <string name="fen">分</string>
+    <string name="dingdan">订单（</string>
+    <string name="pinglun">评论（</string>
+    <string name="kehu">客户（</string>
+    <string name="kuohao">）</string>
+    <string name="finish">完成</string>
+    <string name="upload_img_success">上传成功</string>
+    <string name="reply_success">回复成功</string>
+    <string name="change_intro">更改简介</string>
+    <string name="input_limit">最多只能输入10个字</string>
+    <string name="input_limit20">最多只能输入20个字</string>
+    <string name="input_limit70">最多只能输入70个字</string>
+    <string name="no_content">你输入的内容为空</string>
+    <string name="upload_success">上传成功！</string>
+    <string name="phone_num">手机号码：</string>
+    <string name="no_regist">还未注册神马嘀嘀</string>
+    <string name="invite_success">邀请成功..</string>
+    <string name="ci">次</string>
+    <string name="add_progress">添加服务进度</string>
+    <string name="only_four_pic">一次只能上传四张图片！</string>
+    <string name="add_progress_success">添加服务进度成功！</string>
+    <string name="add_progress_error">添加服务进度失败！</string>
+    <string name="order_detail">订单详情</string>
+    <string name="shuangyue">爽约</string>
+    <string name="tips">提示</string>
+    <string name="mark_shuangyue">是否将其标记为爽约？</string>
+    <string name="wait_for_customer">等待客户确认</string>
+    <string name="change_info_success">更改资料成功!</string>
+    <string name="order">订单</string>
+    <string name="yaoyiyao">摇一摇</string>
+    <string name="not_confirm">待确认</string>
+    <string name="line_communicate">在线沟通</string>
+    <string name="phone_communicate">电话沟通</string>
+    <string name="not_choosed">未被选中</string>
+    <string name="delete_demand_success">删除需求成功..</string>
+    <string name="dijiaochenggong">递交成功，等用户确认..</string>
+    <string name="diyige">恭喜您，您是第一个抢到单</string>
+    <string name="xuqiuwancheng">需求完成..</string>
+    <string name="baoche1">包车</string>
+    <string name="maiche2">买车</string>
+    <string name="miaosu">描述:</string>
+    <string name="qujian">取件位置:</string>
+    <string name="songda">送达位置:</string>
+    <string name="quhuo">取货时间:</string>
+    <string name="quhuodizhi">取货地址:</string>
+    <string name="shouhuo">收货地址:</string>
+    <string name="huocheleixing">货车类型:</string>
+    <string name="shangmentihuo">是否需要上门提货:</string>
+    <string name="xiezhuang">是否需要卸妆/搬运:</string>
+    <string name="kaishiriqi">开始日期:</string>
+    <string name="jiesuriqi">结束日期:</string>
+    <string name="tihuo">提货地点:</string>
+    <string name="mudidi">目的地:</string>
+    <string name="qicheleixing">汽车类型:</string>
+    <string name="baoche">包车时间:</string>
+    <string name="baoche2">包车</string>
+    <string name="chufadi">出发地:</string>
+    <string name="maiche">买车:</string>
+    <string name="maiche5">买车</string>
+    <string name="goumai">购买预算:</string>
+    <string name="yixiang">意向车型:</string>
+    <string name="gouche">购车用途:</string>
+    <string name="fukuan">付款方式:</string>
+    <string name="chexing">车型:</string>
+    <string name="shangpai">上牌时间:</string>
+    <string name="licheng">里程数:</string>
+    <string name="guishu">归属地:</string>
+    <string name="chuxiancishu">去年出现的次数:</string>
+    <string name="xianzhong">险种:</string>
+    <string name="baoxian">保险公司:</string>
+    <string name="biaoqian">标签:</string>
+    <string name="cheliang">车辆归属地:</string>
+    <string name="didian">地点:</string>
+    <string name="remen">热门景区:</string>
+    <string name="jinqi">近期上映:</string>
+    <string name="qidian">起点城市:</string>
+    <string name="zhongdian">终点城市:</string>
+    <string name="wang">往-日期</string>
+    <string name="fan">返-日期</string>
+    <string name="dancheng">单程</string>
+    <string name="wangfan">往返</string>
+    <string name="yanchanghuipaiqi">演唱会排期:</string>
+    <string name="ruzhu">入住时间:</string>
+    <string name="tuifang">退房时间:</string>
+    <string name="fuwu">服务时间:</string>
+    <string name="juli">距离</string>
+    <string name="xiugaitijiao">修改提交中...</string>
+    <string name="fabuyouhui">发布优惠</string>
+    <string name="zaiyaoyici">没有合适的需求，再摇一次</string>
+    <string name="danbeiqiang">单已被抢</string>
+    <string name="qiangdanzhong">抢单中...</string>
+    <string name="zhaohuimima">找回密码</string>
+    <string name="input_phone_num">请输入手机号码！</string>
+    <string name="no_num">手机号码不存在！</string>
+    <string name="num_error">手机号码错误</string>
+    <string name="mimadayu8">密码长度不能小于8！</string>
+    <string name="change_success">修改成功！</string>
+    <string name="xuqiuhexiaoxi">需求&#038;消息</string>
+    <string name="setting">设置</string>
+    <string name="edition_update">版本更新</string>
+    <string name="update_now">现在升级</string>
+    <string name="start_download">就此开始下载了</string>
+    <string name="xiacizaishuo">下次再说</string>
+    <string name="downloading_wait">最新版本正在下载中，请等候...</string>
+    <string name="i_know">我知道了</string>
+    <string name="already_new">当前已经是最新版本了</string>
+    <string name="a_qq">请先安装QQ客户端</string>
+    <string name="weixin">请先安装微信客户端</string>
+    <string name="fenxiang">分享成功</string>
+    <string name="pingtaixia">平台下分享失败</string>
+    <string name="quxiao">取消了</string>
+    <string name="xiadefenxiang">下的分享</string>
+    <string name="about">关于神马嘀嘀商户端</string>
+
+    <!-- 我的界面 -->
+    <string name="b_c_address">地址：</string>
+    <string name="b_c_me">我</string>
+    <string name="b_c_attestation">官方认证</string>
+    <string name="b_c_service_quality">服务质量 </string>
+    <string name="b_c_service_manner">服务态度 </string>
+    <string name="b_c_honest_manner">诚信指数 </string>
+    <string name="gongnengxinxi">功能信息免打扰</string>
+    <string name="yuyinbobao">语音播报</string>
+    <string name="xuqiuxiaoxi">语音播报</string>
+    <string name="suoshuqiye">所属企业</string>
+    <string name="qingtian_qiyeming">请填写您所在企业的名称！</string>
+    <string name="qingtian_dianpuming">请填写您所在店铺的名称！</string>
+    <string name="dianpuming">店铺名称</string>
+    <string name="yijian">意见反馈</string>
+    <string name="genggaijianjie">更改简介</string>
+    <string name="genggaiqueren">更改确定</string>
+    <string name="woxiangshuo">我想说</string>
+    <string name="dianpubuweikong">输入不正确</string>
+    <string name="qiyebuweikong">输入不正确</string>
+    <string name="qingtiyijian">输入不正确</string>
+    <string name="fankuidijiao">反馈递交成功</string>
+    <string name="tijiaochenggong">提交成功</string>
+    <!-- xmpp -->
+    <string name="other_login">您的账号已在别处登录，已被迫下线!</string>
+    <string name="logout">退出登录</string>
+    <string name="re_login">重新登录</string>
+    <string name="haomahuoqushibai">号码获取失败!</string>
+    <string name="songkaifasong">松开发送</string>
+    <string name="weizhi">未知</string>
+    <string name="fuwuzhong">服务中</string>
+    <string name="anzhushuohua">按住说话</string>
+    <string name="songkaishouzhi">松开手指 取消发送</string>
+    <string name="shouzhishanghua">手指上滑 取消录音</string>
+    <string name="lunyintaiduan">录音时间太短!</string>
+    <string name="lianjieyichang">连接异常!</string>
+    <string name="chongxinshuru">账号密码不正确，请重新输入</string>
+    <string name="logining">登录中...</string>
+    <string name="xmpp_chat_item_sendfailuer">发送失败, 点击</string>
+    <string name="xmpp_chat_item_sendfailuer_retry">重试</string>
+    <string name="xmpp_chat_order_isunavaiable">单已被抢，无法回复对方!</string>
+    <string name="xmpp_imservice_confilct_tips">提醒您</string>
+
+    <!-- 公共提示 -->
+    <string name="time_out">请求超时，请检查网络</string>
+    <string name="exception">异常了，请重试操作</string>
+    <string name="time_get_out">获取超时，请检查网络</string>
+    <string name="get_ing">获取中...</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="network_error">网络异常!</string>
+    <string name="network_timeout">连接超时，请检查网络!</string>
+    <string name="network_xmpperror">网络异常!</string>
+
+    <!-- Share SDK -->
+    <string name="weibo_oauth_regiseter">应用授权</string>
+    <string name="website">http://www.shareSDK.cn</string>
+    <string name="weibo_upload_content">分享图片</string>
+    <string name="wechat_client_inavailable">目前您的微信版本过低或未安装微信，需要安装微信才能使用</string>
+    <string name="google_plus_client_inavailable">Google+ 版本过低或者没有安装，需要升级或安装Google+才能使用！</string>
+    <string name="qq_client_inavailable">QQ 版本过低或者没有安装，需要升级或安装QQ才能使用！</string>
+    <string name="pinterest_client_inavailable">Pinterest版本过低或者没有安装，需要升级或安装Pinterest才能使用！</string>
+    <string name="instagram_client_inavailable">Instagram版本过低或者没有安装，需要升级或安装Instagram才能使用！</string>
+    <string name="yixin_client_inavailable">目前您的易信版本过低或未安装易信，需要安装易信才能使用</string>
+    <string name="sinaweibo">新浪微博</string>
+    <string name="tencentweibo">腾讯微博</string>
+    <string name="qzone">QQ空间</string>
+    <string name="wechat">微信好友</string>
+    <string name="wechatmoments">微信朋友圈</string>
+    <string name="wechatfavorite">微信收藏</string>
+    <string name="facebook">Facebook</string>
+    <string name="twitter">Twitter</string>
+    <string name="renren">人人网</string>
+    <string name="kaixin">开心网</string>
+    <string name="email">邮件</string>
+    <string name="shortmessage">信息</string>
+    <string name="sohumicroblog">搜狐微博</string>
+    <string name="sohusuishenkan">搜狐随身看</string>
+    <string name="neteasemicroblog">网易微博</string>
+    <string name="douban">豆瓣</string>
+    <string name="youdao">有道云笔记</string>
+    <string name="evernote">印象笔记</string>
+    <string name="linkedin">Linked In</string>
+    <string name="googleplus">Google+</string>
+    <string name="foursquare">FourSquare</string>
+    <string name="qq">QQ</string>
+    <string name="pinterest">Pinterest</string>
+    <string name="flickr">Flickr</string>
+    <string name="tumblr">Tumblr</string>
+    <string name="dropbox">Dropbox</string>
+    <string name="vkontakte">VK</string>
+    <string name="instagram">Instagram</string>
+    <string name="yixin">易信</string>
+    <string name="yixinmoments">易信朋友圈</string>
+    <string name="mingdao">明道</string>
+    <string name="share_to_qzone">分享到QQ空间</string>
+    <string name="incentive_title">分享有奖</string>
+    <string name="failed_to_start_incentive_page">无法打开“分享有奖页面”</string>
+    <string name="download_faield">下载失败</string>
+    <string name="app_downloading">应用正在后台下载</string>
+    <string name="mingdao_share_content">网页分享</string>
+    <string name="share_to_mingdao">分享到明道</string>
+    <string name="scan_text">将二维码放入框内, 即可自动扫描</string>
+    <string name="menu_settings">设置</string>
+    <string name="menu_about">关于</string>
+    <string name="action_bar_search">搜索</string>
+    <string name="assets_about_dataVersion">6.81b|20140909</string>
+    <!-- Activity title -->
+    <string name="title_activity_items_detail">物品详细</string>
+    <string name="title_activity_hero_detail">英雄详细</string>
+    <string name="title_activity_about">关于</string>
+
+    <!-- Main Activity ActionBar Tab -->
+    <string name="main_actionBar_tab_hero">英雄</string>
+    <string name="main_actionBar_tab_item">物品</string>
+    <string name="main_actionBar_tab_skill">技巧</string>
+    <string name="main_actionBar_tab_favorite">收藏</string>
+
+    <!-- menu -->
+    <string name="menu_hero_role">按定位</string>
+    <string name="menu_hero_attack">按攻击</string>
+    <string name="menu_hero_factions">按阵营</string>
+    <string name="menu_hero_type">按类型</string>
+    <string name="menu_hero_statsall">排序</string>
+    <string name="menu_items_qual">按品质</string>
+    <string name="menu_items_itemcat">按分类</string>
+    <string name="menu_addfavorite">添加到收藏</string>
+    <string name="menu_removefavorite">从收藏中删除</string>
+
+    <!-- view txt -->
+    <string name="text_items_repice_name">合成卷轴</string>
+    <string name="text_items_mana_label">魔法消耗:</string>
+    <string name="text_items_cd_label">冷却时间:</string>
+    <string name="text_items_components_label">合成所需物品:</string>
+    <string name="text_items_tocomponents_label">可合成物品:</string>
+    <string name="text_items_toheros_label">推荐英雄使用:</string>
+    <string name="text_hero_abilities_label">技能:</string>
+    <string name="text_hero_itembuilds_starting_label">出门装备:</string>
+    <string name="text_hero_itembuilds_early_label">前期装备:</string>
+    <string name="text_hero_itembuilds_core_label">核心装备:</string>
+    <string name="text_hero_itembuilds_luxury_label">可选装备:</string>
+    <string name="text_hero_skillup_label">技能加点:</string>
+    <string name="text_hero_stats_demo_label">智力</string>
+    <string name="text_hero_stats_demo_value">21 + 2.80</string>
+    <string name="text_division_label">/</string>
+    <string name="text_favorite_emptylist">暂无收藏…</string>
+
+    <string-array name="array_hero_stats">
+        <item>智力</item>
+        <item>敏捷</item>
+        <item>力量</item>
+        <item>伤害</item>
+        <item>移速</item>
+        <item>护甲</item>
+    </string-array>
+    <string-array name="array_hero_detailstats">
+        <item>等级</item>
+        <item>生命值</item>
+        <item>魔法值</item>
+        <item>攻击力</item>
+        <item>护甲</item>
+        <item>视野范围</item>
+        <item>攻击范围</item>
+        <item>弹道速度</item>
+    </string-array>
+</resources>
