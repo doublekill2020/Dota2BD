@@ -227,7 +227,7 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 				holder.icon);
 		if (position == 0) {
 			holder.tipView.setVisibility(View.VISIBLE);
-			holder.label.setBackground(_caller.getResources().getDrawable(
+			holder.label.setBackgroundDrawable(_caller.getResources().getDrawable(
 					R.drawable.battle_win_lable));
 			holder.label.setText("胜利方");
 			Drawable drawable = _caller.getResources().getDrawable(
