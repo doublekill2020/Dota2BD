@@ -141,13 +141,15 @@ public class FragMyDetail extends Fragment {
 			switch (msg.arg1) {
 			case FETCH_DETAIL:
 				PlayerInfoBean bean = (PlayerInfoBean) msg.obj;
-				nameView.setText(bean.getName());
-				statusView.setText(Common.getPersonState(bean.getState()));
-				timeView.setText(TimeHelper.TimeStamp2Date(
-						bean.getTimecreated(), "yyyy-MM-dd HH:mm"));
-				loginView.setText(TimeHelper.TimeStamp2Date(
-						bean.getLastlogooff(), "yyyy-MM-dd HH:mm"));
-				loader.displayImage(bean.getMediumIcon(), iconView);
+				if (bean != null) {
+					nameView.setText(bean.getName());
+					statusView.setText(Common.getPersonState(bean.getState()));
+					timeView.setText(TimeHelper.TimeStamp2Date(
+							bean.getTimecreated(), "yyyy-MM-dd HH:mm"));
+					loginView.setText(TimeHelper.TimeStamp2Date(
+							bean.getLastlogooff(), "yyyy-MM-dd HH:mm"));
+					loader.displayImage(bean.getMediumIcon(), iconView);
+				}
 				break;
 			default:
 				break;
