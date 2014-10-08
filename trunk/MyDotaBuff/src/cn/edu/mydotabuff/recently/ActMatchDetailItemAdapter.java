@@ -96,7 +96,7 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 				+ bean.getPlayerInfoBeans().getName());
 		holder.kill.setText(" " + bean.getKills());
 		holder.death.setText(" " + bean.getDeaths());
-		holder.assist.setText(" " + bean.getKills());
+		holder.assist.setText(" " + bean.getAssists());
 		Common.setItemIcon(convertView.getContext(), bean.getItem_0(),
 				holder.h[1]);
 		Common.setItemIcon(convertView.getContext(), bean.getItem_1(),
