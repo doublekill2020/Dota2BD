@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.edu.mydotabuff"
-    android:versionCode="3"
-    android:versionName="1.3" >
+    android:versionCode="4"
+    android:versionName="1.4" >
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -68,7 +68,7 @@
             android:value="52d4a57b56240b3518080289" />
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="xiaomi" />
+            android:value="_xiaomi" />
     </application>
 
 </manifest>
