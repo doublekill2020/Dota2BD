@@ -35,6 +35,7 @@ import cn.edu.mydotabuff.util.TimeHelper;
 public class FragBoard extends Fragment {
 
 	private static final int FETCH_BOARD = 1;
+	private static final int FETCH_FAILED = 2;
 	private ArrayList<BoardBean> beans;
 	private ListView lv;
 	private CommAdapter<BoardBean> adapter;
@@ -109,8 +110,7 @@ public class FragBoard extends Fragment {
 							} catch (JSONException e) {
 								e.printStackTrace();
 								Message msg = myHandler.obtainMessage();
-								msg.arg1 = type;
-								msg.obj = "";
+								msg.arg1 = FETCH_FAILED;
 								myHandler.sendMessage(msg);
 							}
 							break;
@@ -153,10 +153,15 @@ public class FragBoard extends Fragment {
 						}
 					});
 					if (beans.size() > 0) {
-						tx.setText("上次更新时间："+TimeHelper.TimeStamp2Date(beans.get(0)
-								.getUpdateTime(), "MM-dd HH:mm"));
+						tx.setText("上次更新时间："
+								+ TimeHelper.TimeStamp2Date(beans.get(0)
+										.getUpdateTime(), "MM-dd HH:mm"));
 					}
 				}
+				break;
+			case FETCH_FAILED:
+				TipsToast.showToast(activity, "steam被墙了，你懂得",
+						Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
 				break;
 			default:
 				break;
