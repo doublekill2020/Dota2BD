@@ -87,9 +87,20 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 					.findViewById(R.id.total_assist);
 			holder.total_money = (TextView) convertView
 					.findViewById(R.id.total_money);
+			holder.itemView = convertView.findViewById(R.id.item_view);
+			holder.moreView = convertView.findViewById(R.id.more_view);
+			holder.arrowView = (ImageView) convertView.findViewById(R.id.arrow);
+			holder.txView[0] = (TextView) convertView.findViewById(R.id.tag1);
+			holder.txView[1] = (TextView) convertView.findViewById(R.id.tag2);
+			holder.txView[2] = (TextView) convertView.findViewById(R.id.tag3);
+			holder.txView[3] = (TextView) convertView.findViewById(R.id.tag4);
+			holder.txView[4] = (TextView) convertView.findViewById(R.id.tag5);
+			holder.txView[5] = (TextView) convertView.findViewById(R.id.tag6);
+			holder.heroIcon = (CircleImageView) convertView
+					.findViewById(R.id.hero_icon);
 			convertView.setTag(holder);
 		}
-		ViewHolder holder = (ViewHolder) convertView.getTag();
+		final ViewHolder holder = (ViewHolder) convertView.getTag();
 		final PlayerDetailBean bean = getItem(position);
 
 		holder.level.setText("Lv" + bean.getLevel() + " "
@@ -227,8 +238,8 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 				holder.icon);
 		if (position == 0) {
 			holder.tipView.setVisibility(View.VISIBLE);
-			holder.label.setBackgroundDrawable(_caller.getResources().getDrawable(
-					R.drawable.battle_win_lable));
+			holder.label.setBackgroundDrawable(_caller.getResources()
+					.getDrawable(R.drawable.battle_win_lable));
 			holder.label.setText("胜利方");
 			Drawable drawable = _caller.getResources().getDrawable(
 					R.drawable.battle_kill_icon_win);
@@ -288,14 +299,41 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 		} else {
 			holder.tipView.setVisibility(View.GONE);
 		}
+		holder.itemView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if (holder.moreView.getVisibility() == View.GONE) {
+					holder.arrowView.setImageResource(R.drawable.arrow_up);
+					holder.moreView.setVisibility(View.VISIBLE);
+					holder.txView[0].setText("总经济:"
+							+ (bean.getGold() + bean.getGold_spent()));
+					holder.txView[2].setText("gold/min:"
+							+ bean.getGold_per_min());
+					holder.txView[1].setText("英雄伤害:" + bean.getHero_damage());
+					holder.txView[3].setText("英雄治疗:" + bean.getHero_healing());
+					holder.txView[4].setText("对建筑伤害:" + bean.getTower_damage());
+					holder.txView[5].setText("xp/min:" + bean.getXp_per_min());
+					holder.heroIcon.setImageResource(Common
+							.getHeroDrawableId(bean.getHero_id()));
+				} else if (holder.moreView.getVisibility() == View.VISIBLE) {
+					holder.arrowView.setImageResource(R.drawable.arrow_down);
+					holder.moreView.setVisibility(View.GONE);
+				}
+			}
+		});
 		return convertView;
 	}
 
 	class ViewHolder {
 		private ImageView h[] = new ImageView[7];
-		private CircleImageView icon;
+		private CircleImageView icon, heroIcon;
 		private TextView level, kill, death, assist, total_money, total_kill,
 				total_death, total_assist, label;
 		private View tipView;
+		private View itemView, moreView;
+		private TextView txView[] = new TextView[6];
+		private ImageView arrowView;
 	}
 }
