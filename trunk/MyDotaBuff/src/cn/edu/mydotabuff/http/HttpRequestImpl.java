@@ -32,12 +32,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
-/**
- * 
- 版权�?��：版权所�?C)2013，固派软�? 文件名称：com.goopai.selfdrive.http.HttpConnHelper.java
- * 系统编号�? 系统名称：SelfDrive 模块编号�? 模块名称�? 设计文档�? 创建日期�?013-11-14 上午12:53:52
- * �?者：陆键�? 内容摘要：http请求基础�? 类中的代码包括三个区段：类变量区、类属�?区�?类方法区�? 文件调用:
- */
 public class HttpRequestImpl {
 
 	/**

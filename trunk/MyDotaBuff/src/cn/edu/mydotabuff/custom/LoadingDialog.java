@@ -10,10 +10,6 @@ import android.widget.TextView;
 
 import cn.edu.mydotabuff.R;
 
-/**
- * 
- * @author xm
- */
 public class LoadingDialog extends AlertDialog {
 	private Context mContext;
 	private TextView tvDialogLoading;
@@ -27,7 +23,7 @@ public class LoadingDialog extends AlertDialog {
 		this.setCancelable(true);
 		this.setCanceledOnTouchOutside(false);
 	}
-	 
+
 	public LoadingDialog(Context context, String message) {
 		super(context);
 		this.message = message;
@@ -49,7 +45,7 @@ public class LoadingDialog extends AlertDialog {
 		super.onCreate(savedInstanceState);
 		this.setContentView(R.layout.dialog_loading);
 		tvDialogLoading = (TextView) findViewById(R.id.tvDialogLoading);
-	 	tvDialogLoading.setText(this.message);
+		tvDialogLoading.setText(this.message);
 		ivDialogLoading = (ImageView) findViewById(R.id.ivDialogLoading);
 		startAnimation();
 	}
@@ -64,7 +60,7 @@ public class LoadingDialog extends AlertDialog {
 		if (ivDialogLoading != null) {
 			startAnimation();
 		}
-		
+
 	}
 
 	public void startAnimation() {
@@ -76,7 +72,7 @@ public class LoadingDialog extends AlertDialog {
 	}
 
 	public void setText(String message) {
-	 
+
 		tvDialogLoading.setText(message);
 	}
 
