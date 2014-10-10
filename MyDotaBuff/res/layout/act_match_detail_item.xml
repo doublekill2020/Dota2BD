@@ -156,6 +156,7 @@
             </LinearLayout>
 
             <ImageView
+                android:id="@+id/arrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
@@ -192,6 +193,11 @@
                 android:drawableLeft="@drawable/battle_assist_icon_gray"
                 android:textColor="@color/black" />
         </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
     </LinearLayout>
 
 </LinearLayout>
