@@ -1,21 +1,7 @@
 package cn.edu.mydotabuff.http;
 
-/**
- * 
- ��Ȩ���У���Ȩ����(C)2013���������?
- * �ļ���ƣ�com.goopai.selfdrive.http.IInfoReceive.java ϵͳ��ţ�?ϵͳ��ƣ�SelfDrive
- * ģ���ţ� ģ����ƣ�?����ĵ���?�������ڣ�2013-11-14 ����12:26:31 �� �ߣ�½����
- * ����ժҪ�����պ�̨��ݽӿ�?���еĴ�����������Σ�����������������෽���� �ļ�����:
- */
 public interface IInfoReceive {
-	/**
-	 * �������?
-	 * 
-	 * @param msgType
-	 *            ��Ϣ���?
-	 * @param jsonStr
-	 *            json�ִ�
-	 */
+
 	void onMsgReceiver(ResponseObj receiveInfo);
 
 	public class ResponseObj {
