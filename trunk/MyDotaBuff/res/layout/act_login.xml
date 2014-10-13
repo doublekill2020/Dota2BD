@@ -33,9 +33,12 @@
             android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="请输入要查询的数字ID："
+           
             android:numeric="integer"
-            android:singleLine="true" />
+            android:singleLine="true" 
+            android:text="188929113"
+            />
+             <!-- android:hint="请输入要查询的数字ID：" -->
 
     </LinearLayout>
 
