@@ -1,57 +1,25 @@
 package cn.edu.mydotabuff;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import u.aly.ch;
-
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import cn.edu.mydotabuff.bean.AbilityBean;
-import cn.edu.mydotabuff.bean.MatchBean;
-import cn.edu.mydotabuff.bean.PlayerBean;
-import cn.edu.mydotabuff.bean.PlayerDetailBean;
 import cn.edu.mydotabuff.common.CommonTitleBar;
-import cn.edu.mydotabuff.custom.LoadingDialog;
-import cn.edu.mydotabuff.custom.TipsToast;
-import cn.edu.mydotabuff.custom.TipsToast.DialogType;
-import cn.edu.mydotabuff.http.IInfoReceive;
 import cn.edu.mydotabuff.mydetail.FragMyDetail;
 import cn.edu.mydotabuff.recently.FragRecently;
-import cn.edu.mydotabuff.util.PersonalRequestImpl;
-
-import cn.edu.mydotabuff.R;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.CanvasTransformer;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.fb.FeedbackAgent;
 import com.umeng.update.UmengUpdateAgent;
 
 public class MainActivity extends Activity implements OnClickListener {
@@ -253,7 +221,9 @@ public class MainActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.share:
 			menu.toggle();
-			Toast.makeText(this, "正在开发~~~", 1000).show();
+//			Toast.makeText(this, "正在开发~~~", 1000).show();
+			FeedbackAgent agent = new FeedbackAgent(this);
+		    agent.startFeedbackActivity();
 			break;
 		case R.id.feedback:
 			menu.toggle();
