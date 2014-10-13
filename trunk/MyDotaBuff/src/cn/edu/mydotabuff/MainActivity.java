@@ -221,13 +221,13 @@ public class MainActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.share:
 			menu.toggle();
-//			Toast.makeText(this, "正在开发~~~", 1000).show();
-			FeedbackAgent agent = new FeedbackAgent(this);
-		    agent.startFeedbackActivity();
+			Toast.makeText(this, "正在开发~~~", 1000).show();
 			break;
 		case R.id.feedback:
 			menu.toggle();
-			Toast.makeText(this, "正在开发~~~", 1000).show();
+//			Toast.makeText(this, "正在开发~~~", 1000).show();
+			FeedbackAgent agent = new FeedbackAgent(this);
+			agent.startFeedbackActivity();
 			break;
 		default:
 			break;
