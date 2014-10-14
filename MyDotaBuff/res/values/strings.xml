@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">MyDotaBuff</string>
+    <string name="app_name">Dota2数据通</string>
     <string name="action_settings">Settings</string>
     <string name="dlg_content">使用此app，必须在游戏中共享比赛历史。\n第一次使用，请输入数字id：</string>
     <string name="home_didi">嘀嘀</string>
