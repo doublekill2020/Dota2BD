@@ -154,6 +154,7 @@ public class FragRecently extends Fragment {
 						switch (type) {
 						case FETCH_MATCH:
 							ArrayList<MatchBean> matches = new ArrayList<MatchBean>();
+							String num1="";
 							try {
 								JSONObject jsonObj = new JSONObject(receiveInfo
 										.getJsonStr());
@@ -167,6 +168,7 @@ public class FragRecently extends Fragment {
 												.getJSONObject(i);
 										String matchId = matchObj
 												.getString("match_id");
+										num1 = matchId;
 										if (i == matchesArr.length() - 1) {
 											FragRecently.this.lastId = matchId;
 											break;
@@ -186,8 +188,14 @@ public class FragRecently extends Fragment {
 										for (int j = 0; j < players.length(); j++) {
 											JSONObject player = players
 													.getJSONObject(j);
-											String accountId = player
-													.getString("account_id");
+											String accountId = "";
+											if (player.has("account_id")) {
+												accountId = player
+														.getString("account_id");
+											} else {
+												//没有accountid时 为电脑
+												accountId = "000000000";
+											}
 											int playerSlot = player
 													.getInt("player_slot");
 											int heroId = player

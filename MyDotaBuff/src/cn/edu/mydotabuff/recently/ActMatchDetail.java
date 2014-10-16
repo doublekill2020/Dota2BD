@@ -132,9 +132,20 @@ public class ActMatchDetail extends Activity {
 												.getString("first_blood_time");
 										lobby_type = resultObj
 												.getInt("lobby_type");
+										String accountId = "";
+										if (detailObj.has("account_id")) {
+											accountId = detailObj
+													.getString("account_id");
+										} else {
+											accountId = "4294967295";
+										}
+										int leaver_status = 0;
+										if (detailObj.has("leaver_status")) {
+											leaver_status = detailObj
+													.getInt("leaver_status");
+										}
 										playerDetailBeans.add(new PlayerDetailBean(
-												detailObj
-														.getString("account_id"),
+												accountId,
 												detailObj.getInt("hero_id"),
 												detailObj.getInt("item_0"),
 												detailObj.getInt("item_1"),
@@ -145,8 +156,7 @@ public class ActMatchDetail extends Activity {
 												detailObj.getInt("kills"),
 												detailObj.getInt("deaths"),
 												detailObj.getInt("assists"),
-												detailObj
-														.getInt("leaver_status"),
+												leaver_status,
 												detailObj.getInt("gold"),
 												detailObj.getInt("last_hits"),
 												detailObj.getInt("denies"),
@@ -200,6 +210,11 @@ public class ActMatchDetail extends Activity {
 												.getString("avatarmedium"));
 										bean.setName(obj
 												.getString("personaname"));
+										//如果是电脑
+										if(bean.getSteamid().equals("76561197960265728")){
+											bean.setMediumIcon("http://media.steampowered.com/steamcommunity/public/images/avatars/fe/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_medium.jpg");
+											bean.setName("电脑");
+										}
 										infoBeans.add(bean);
 									}
 									for (int j = 0; j < 10 - array.length(); j++) {
