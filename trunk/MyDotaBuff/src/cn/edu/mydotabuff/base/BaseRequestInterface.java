@@ -112,7 +112,7 @@ public class BaseRequestInterface {
 			// activity = (Activity) receive;
 			weakActivity = new WeakReference<Activity>((Activity) receive);
 		}
-		this.timeout = 5000;
+		this.timeout = 10000;
 	}
 
 	protected void request(String url, Map<String, String> params,
