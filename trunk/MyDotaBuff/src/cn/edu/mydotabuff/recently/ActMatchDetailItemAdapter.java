@@ -271,7 +271,7 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 			holder.total_money.setCompoundDrawables(drawable, null, null, null);
 		} else if (position == 5) {
 			holder.tipView.setVisibility(View.VISIBLE);
-			holder.label.setBackground(_caller.getResources().getDrawable(
+			holder.label.setBackgroundDrawable(_caller.getResources().getDrawable(
 					R.drawable.battle_lose_lable));
 			holder.label.setText("失败方");
 			Drawable drawable = _caller.getResources().getDrawable(
