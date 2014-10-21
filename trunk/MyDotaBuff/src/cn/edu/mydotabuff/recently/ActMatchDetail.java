@@ -6,6 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.umeng.analytics.MobclickAgent;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
@@ -330,5 +332,14 @@ public class ActMatchDetail extends Activity {
 			list.setAdapter(new ActMatchDetailItemAdapter(this,
 					playerDetailBeans, num));
 		}
+	}
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 }
