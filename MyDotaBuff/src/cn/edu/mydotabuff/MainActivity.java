@@ -1,5 +1,14 @@
 package cn.edu.mydotabuff;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
+import u.aly.be;
+
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -13,6 +22,7 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import cn.edu.mydotabuff.bean.HerosSatistics;
 import cn.edu.mydotabuff.common.CommonTitleBar;
 import cn.edu.mydotabuff.game.ActInvokerGame;
 import cn.edu.mydotabuff.mydetail.FragMyDetail;
@@ -25,7 +35,15 @@ import com.umeng.fb.FeedbackAgent;
 import com.umeng.update.UmengUpdateAgent;
 
 public class MainActivity extends Activity implements OnClickListener {
+	
+	
+	
+	/*
+	 * jsoup 测试 
+	 * */
+	private List<HerosSatistics> heroSatisticsList = new ArrayList<HerosSatistics>();
 
+	private HerosSatistics heroSatisticsBeans;
 	private FragRecently recentlyFragment;
 
 	private ContactsFragment contactsFragment;
@@ -80,8 +98,98 @@ public class MainActivity extends Activity implements OnClickListener {
 
 		initViews();
 		initEvents();
+		
+		
+		
 	}
 
+	private void printDate(){
+		for (HerosSatistics beans : heroSatisticsList) {
+			System.out.println(beans.toString());
+		}
+	}
+	
+	private void test(){
+		
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+
+				try {
+					// TODO Auto-generated method stub
+					
+					Document doc = Jsoup
+							.connect(
+									"http://dotamax.com/player/hero/188929113/")
+							.timeout(5000).get();
+					Elements trs = doc.select("tbody").select("tr");
+					for (int i = 0; i < trs.size(); i++) {
+						heroSatisticsBeans = new HerosSatistics();
+						Elements tds = trs.get(i).select("td");
+						for (int j = 0; j < tds.size(); j++) {
+							String text = tds.get(j).text();
+							switch (j) {
+							case 0:
+								heroSatisticsBeans.setHeroName(text);
+								break;
+							case 1:
+								heroSatisticsBeans.setUseTimes(Integer
+										.valueOf(text));
+								break;
+							case 2:
+								heroSatisticsBeans.setWinning(Double
+										.valueOf((text.split("%"))[0]));
+								break;
+							case 3:
+								
+								/*原始数据 2.71 (10.9 / 9.4 / 14.4)
+								 *  替换所有空格, ( , ) 为 /
+								 *   以"/"分割
+								 *  得到 kad 以及 K, A  , D
+								 */
+								
+								String replaceString = text.replace(" ","").replaceAll("[\\s()]","/");
+								String[] replaceStrings = replaceString.split("/");
+									heroSatisticsBeans.setKDA(Double.valueOf(replaceStrings[0]));
+									heroSatisticsBeans.setKill(Double.valueOf(replaceStrings[1]));
+									heroSatisticsBeans.setDeath(Double.valueOf(replaceStrings[2]));
+									heroSatisticsBeans.setAssists(Double.valueOf(replaceStrings[3]));
+								break;
+							case 4:
+								heroSatisticsBeans.setAllKAD(Double
+										.valueOf(text));
+								break;
+							case 5:
+								heroSatisticsBeans.setGold_PerMin(Double
+										.valueOf(text));
+								break;
+							case 6:
+								heroSatisticsBeans.setXp_PerMin(Double
+										.valueOf(text));
+								break;
+
+							default:
+								break;
+							}
+
+						}
+						heroSatisticsList.add(heroSatisticsBeans);
+
+					}
+					
+					System.err.println(heroSatisticsList.size());
+
+				} catch (Exception e) {
+					e.printStackTrace();
+
+				}
+			}
+		}).start();
+		
+	}
+	
+	
 	private void initViews() {
 
 		recentlyLayout = findViewById(R.id.message_layout);
@@ -156,6 +264,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		case R.id.contacts_layout:
 			// 当点击了联系人tab时，选中第2个tab
 			setTabSelection(1);
+			test();
 			titleView.setText("职业联赛");
 			break;
 		case R.id.board_layout:
@@ -166,6 +275,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		case R.id.setting_layout:
 			// 当点击了设置tab时，选中第4个tab
 			setTabSelection(3);
+			printDate();
 			titleView.setText("个人资料");
 			break;
 		case R.id.check_update:
