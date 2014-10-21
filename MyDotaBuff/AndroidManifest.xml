@@ -35,6 +35,8 @@
         </activity>
         <activity android:name="cn.edu.mydotabuff.recently.ActMatchDetail" >
         </activity>
+        <activity android:name="cn.edu.mydotabuff.game.ActInvokerGame" >
+        </activity>
         <activity
             android:name="cn.edu.mydotabuff.hero.HeroDetailActivity"
             android:label="@string/title_activity_hero_detail"
@@ -75,7 +77,7 @@
             android:value="52d4a57b56240b3518080289" />
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="mumayi" />
+            android:value="360" />
     </application>
 
 </manifest>
