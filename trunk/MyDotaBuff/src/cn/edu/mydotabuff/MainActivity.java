@@ -24,7 +24,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cn.edu.mydotabuff.bean.HerosSatistics;
 import cn.edu.mydotabuff.common.CommonTitleBar;
+import cn.edu.mydotabuff.custom.LoadingDialog;
 import cn.edu.mydotabuff.game.ActInvokerGame;
+import cn.edu.mydotabuff.http.OnWebDataGetListener;
+import cn.edu.mydotabuff.http.WebDataHelper;
+import cn.edu.mydotabuff.http.WebDataHelper.DataType;
 import cn.edu.mydotabuff.mydetail.FragMyDetail;
 import cn.edu.mydotabuff.recently.FragRecently;
 
@@ -34,16 +38,14 @@ import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.FeedbackAgent;
 import com.umeng.update.UmengUpdateAgent;
 
-public class MainActivity extends Activity implements OnClickListener {
-	
-	
-	
+public class MainActivity extends Activity implements OnClickListener,
+		OnWebDataGetListener {
+
 	/*
-	 * jsoup 测试 
-	 * */
+	 * jsoup 测试
+	 */
 	private List<HerosSatistics> heroSatisticsList = new ArrayList<HerosSatistics>();
 
-	private HerosSatistics heroSatisticsBeans;
 	private FragRecently recentlyFragment;
 
 	private ContactsFragment contactsFragment;
@@ -81,6 +83,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	private View openMenuView;
 	private SlidingMenu menu;
 	private TextView checkUpdateBtn, feedBackBtn, shareBtn;
+	private LoadingDialog dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -95,101 +98,11 @@ public class MainActivity extends Activity implements OnClickListener {
 				R.drawable.biz_main_back_normal, "", null, "最近比赛", null, "");
 		titleView = (TextView) findViewById(CommonTitleBar.titleId);
 		openMenuView = findViewById(R.id.layout_left);
-
+		dialog = new LoadingDialog(this);
 		initViews();
 		initEvents();
-		
-		
-		
 	}
 
-	private void printDate(){
-		for (HerosSatistics beans : heroSatisticsList) {
-			System.out.println(beans.toString());
-		}
-	}
-	
-	private void test(){
-		
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-
-				try {
-					// TODO Auto-generated method stub
-					
-					Document doc = Jsoup
-							.connect(
-									"http://dotamax.com/player/hero/188929113/")
-							.timeout(5000).get();
-					Elements trs = doc.select("tbody").select("tr");
-					for (int i = 0; i < trs.size(); i++) {
-						heroSatisticsBeans = new HerosSatistics();
-						Elements tds = trs.get(i).select("td");
-						for (int j = 0; j < tds.size(); j++) {
-							String text = tds.get(j).text();
-							switch (j) {
-							case 0:
-								heroSatisticsBeans.setHeroName(text);
-								break;
-							case 1:
-								heroSatisticsBeans.setUseTimes(Integer
-										.valueOf(text));
-								break;
-							case 2:
-								heroSatisticsBeans.setWinning(Double
-										.valueOf((text.split("%"))[0]));
-								break;
-							case 3:
-								
-								/*原始数据 2.71 (10.9 / 9.4 / 14.4)
-								 *  替换所有空格, ( , ) 为 /
-								 *   以"/"分割
-								 *  得到 kad 以及 K, A  , D
-								 */
-								
-								String replaceString = text.replace(" ","").replaceAll("[\\s()]","/");
-								String[] replaceStrings = replaceString.split("/");
-									heroSatisticsBeans.setKDA(Double.valueOf(replaceStrings[0]));
-									heroSatisticsBeans.setKill(Double.valueOf(replaceStrings[1]));
-									heroSatisticsBeans.setDeath(Double.valueOf(replaceStrings[2]));
-									heroSatisticsBeans.setAssists(Double.valueOf(replaceStrings[3]));
-								break;
-							case 4:
-								heroSatisticsBeans.setAllKAD(Double
-										.valueOf(text));
-								break;
-							case 5:
-								heroSatisticsBeans.setGold_PerMin(Double
-										.valueOf(text));
-								break;
-							case 6:
-								heroSatisticsBeans.setXp_PerMin(Double
-										.valueOf(text));
-								break;
-
-							default:
-								break;
-							}
-
-						}
-						heroSatisticsList.add(heroSatisticsBeans);
-
-					}
-					
-					System.err.println(heroSatisticsList.size());
-
-				} catch (Exception e) {
-					e.printStackTrace();
-
-				}
-			}
-		}).start();
-		
-	}
-	
-	
 	private void initViews() {
 
 		recentlyLayout = findViewById(R.id.message_layout);
@@ -264,7 +177,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		case R.id.contacts_layout:
 			// 当点击了联系人tab时，选中第2个tab
 			setTabSelection(1);
-			test();
+			WebDataHelper helper = new WebDataHelper(this);
+			helper.setDataGetListener(this);
+			helper.getWebData(DataType.HERO, "188929113");
 			titleView.setText("职业联赛");
 			break;
 		case R.id.board_layout:
@@ -275,7 +190,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		case R.id.setting_layout:
 			// 当点击了设置tab时，选中第4个tab
 			setTabSelection(3);
-			printDate();
+			// printDate();
 			titleView.setText("个人资料");
 			break;
 		case R.id.check_update:
@@ -285,8 +200,8 @@ public class MainActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.share:
 			menu.toggle();
-			//Toast.makeText(this, "正在开发~~~", 1000).show();
-			startActivity(new Intent(this,ActInvokerGame.class));
+			// Toast.makeText(this, "正在开发~~~", 1000).show();
+			startActivity(new Intent(this, ActInvokerGame.class));
 			break;
 		case R.id.feedback:
 			menu.toggle();
@@ -413,5 +328,30 @@ public class MainActivity extends Activity implements OnClickListener {
 	public void onPause() {
 		super.onPause();
 		MobclickAgent.onPause(this);
+	}
+
+	@Override
+	public void onStartGetData() {
+		// TODO Auto-generated method stub
+		dialog.show();
+		System.out.println("开始加载数据");
+	}
+
+	@Override
+	public <T> void onGetFinished(List<T> data) {
+		// TODO Auto-generated method stub
+		dialog.dismiss();
+		System.out.println("加载数据成功");
+		heroSatisticsList = (List<HerosSatistics>) data;
+		for (HerosSatistics beans : heroSatisticsList) {
+			System.out.println(beans.toString());
+		}
+	}
+
+	@Override
+	public void onGetFailed() {
+		// TODO Auto-generated method stub
+		dialog.dismiss();
+		System.out.println("加载数据失败！");
 	}
 }
