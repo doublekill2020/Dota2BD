@@ -12,7 +12,7 @@ import android.app.Activity;
 import cn.edu.mydotabuff.bean.HerosSatistics;
 
 /**
- * JSONUP数据获取类（需实现OnWebDataGetListener）
+ * JSONUP数据获取类（使用需实现OnWebDataGetListener）
  * 
  * @author hao
  * 
@@ -21,6 +21,8 @@ public class WebDataHelper {
 
 	private OnWebDataGetListener listener = null;
 	private Activity activity;
+	private static final int DEFAULT_TIMEOUT = 5000; // 默认连接超时 5s
+	private int timeout = DEFAULT_TIMEOUT;
 
 	public WebDataHelper(Activity activity) {
 		// TODO Auto-generated constructor stub
@@ -43,6 +45,10 @@ public class WebDataHelper {
 
 	public void setDataGetListener(OnWebDataGetListener listener) {
 		this.listener = listener;
+	}
+
+	public void setTimeOut(int timeout) {
+		this.timeout = timeout;
 	}
 
 	/**
@@ -77,7 +83,8 @@ public class WebDataHelper {
 					try {
 						// TODO Auto-generated method stub
 
-						Document doc = Jsoup.connect(url).timeout(5000).get();
+						Document doc = Jsoup.connect(url).timeout(timeout)
+								.get();
 						Elements trs = doc.select("tbody").select("tr");
 						for (int i = 0; i < trs.size(); i++) {
 							HerosSatistics heroSatisticsBeans = new HerosSatistics();
