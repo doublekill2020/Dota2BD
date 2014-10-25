@@ -26,9 +26,7 @@ import cn.edu.mydotabuff.bean.HerosSatistics;
 import cn.edu.mydotabuff.common.CommonTitleBar;
 import cn.edu.mydotabuff.custom.LoadingDialog;
 import cn.edu.mydotabuff.game.ActInvokerGame;
-import cn.edu.mydotabuff.http.OnWebDataGetListener;
-import cn.edu.mydotabuff.http.WebDataHelper;
-import cn.edu.mydotabuff.http.WebDataHelper.DataType;
+import cn.edu.mydotabuff.hero.FragHeroList;
 import cn.edu.mydotabuff.mydetail.FragMyDetail;
 import cn.edu.mydotabuff.recently.FragRecently;
 
@@ -38,17 +36,15 @@ import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.FeedbackAgent;
 import com.umeng.update.UmengUpdateAgent;
 
-public class MainActivity extends Activity implements OnClickListener,
-		OnWebDataGetListener {
+public class MainActivity extends Activity implements OnClickListener{
 
 	/*
 	 * jsoup 测试
 	 */
-	private List<HerosSatistics> heroSatisticsList = new ArrayList<HerosSatistics>();
 
 	private FragRecently recentlyFragment;
 
-	private ContactsFragment contactsFragment;
+	private FragHeroList contactsFragment;
 
 	private FragBoard newsFragment;
 
@@ -83,7 +79,6 @@ public class MainActivity extends Activity implements OnClickListener,
 	private View openMenuView;
 	private SlidingMenu menu;
 	private TextView checkUpdateBtn, feedBackBtn, shareBtn;
-	private LoadingDialog dialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +93,6 @@ public class MainActivity extends Activity implements OnClickListener,
 				R.drawable.biz_main_back_normal, "", null, "最近比赛", null, "");
 		titleView = (TextView) findViewById(CommonTitleBar.titleId);
 		openMenuView = findViewById(R.id.layout_left);
-		dialog = new LoadingDialog(this);
 		initViews();
 		initEvents();
 	}
@@ -177,10 +171,7 @@ public class MainActivity extends Activity implements OnClickListener,
 		case R.id.contacts_layout:
 			// 当点击了联系人tab时，选中第2个tab
 			setTabSelection(1);
-			WebDataHelper helper = new WebDataHelper(this);
-			helper.setDataGetListener(this);
-			helper.getWebData(DataType.HERO, "188929113");
-			titleView.setText("职业联赛");
+			titleView.setText("英雄使用");
 			break;
 		case R.id.board_layout:
 			// 当点击了动态tab时，选中第3个tab
@@ -247,7 +238,7 @@ public class MainActivity extends Activity implements OnClickListener,
 			contactsText.setTextColor(Color.WHITE);
 			if (contactsFragment == null) {
 				// 如果ContactsFragment为空，则创建一个并添加到界面上
-				contactsFragment = new ContactsFragment();
+				contactsFragment = new FragHeroList();
 				transaction.add(R.id.content, contactsFragment);
 			} else {
 				// 如果ContactsFragment不为空，则直接将它显示出来
@@ -328,30 +319,5 @@ public class MainActivity extends Activity implements OnClickListener,
 	public void onPause() {
 		super.onPause();
 		MobclickAgent.onPause(this);
-	}
-
-	@Override
-	public void onStartGetData() {
-		// TODO Auto-generated method stub
-		dialog.show();
-		System.out.println("开始加载数据");
-	}
-
-	@Override
-	public <T> void onGetFinished(List<T> data) {
-		// TODO Auto-generated method stub
-		dialog.dismiss();
-		System.out.println("加载数据成功");
-		heroSatisticsList = (List<HerosSatistics>) data;
-		for (HerosSatistics beans : heroSatisticsList) {
-			System.out.println(beans.toString());
-		}
-	}
-
-	@Override
-	public void onGetFailed() {
-		// TODO Auto-generated method stub
-		dialog.dismiss();
-		System.out.println("加载数据失败！");
 	}
 }
