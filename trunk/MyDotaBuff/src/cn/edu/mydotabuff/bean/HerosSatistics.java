@@ -1,7 +1,7 @@
 package cn.edu.mydotabuff.bean;
 
 public class HerosSatistics {
-	private String thisHeroData;//英雄数据合集
+	private String thisHeroDataUri;//英雄数据合集
 	private String heroName; //英雄名字
 	private int useTimes; // 使用次数
 	private Double Winning; // 胜率
@@ -12,11 +12,11 @@ public class HerosSatistics {
 	private Double allKAD; //所有人KDA
 	private Double gold_PerMin; // 金钱每分钟
 	private Double xp_PerMin; //经验每分钟
-	public String getThisHeroData() {
-		return thisHeroData;
+	public String getThisHeroDataUri() {
+		return thisHeroDataUri;
 	}
-	public void setThisHeroData(String thisHeroData) {
-		this.thisHeroData = thisHeroData;
+	public void setThisHeroDataUri(String thisHeroDataUri) {
+		this.thisHeroDataUri = thisHeroDataUri;
 	}
 	public String getHeroName() {
 		return heroName;
@@ -80,18 +80,19 @@ public class HerosSatistics {
 	}
 	@Override
 	public String toString() {
-		return "HerosSatistics [thisHeroData=" + thisHeroData + ", heroName="
-				+ heroName + ", useTimes=" + useTimes + ", Winning=" + Winning
-				+ ", KDA=" + KDA + ", Kill=" + Kill + ", Death=" + Death
-				+ ", Assists=" + Assists + ", allKAD=" + allKAD
-				+ ", gold_PerMin=" + gold_PerMin + ", xp_PerMin=" + xp_PerMin
-				+ "]";
+		return "HerosSatistics [thisHeroDataUri=" + thisHeroDataUri
+				+ ", heroName=" + heroName + ", useTimes=" + useTimes
+				+ ", Winning=" + Winning + ", KDA=" + KDA + ", Kill=" + Kill
+				+ ", Death=" + Death + ", Assists=" + Assists + ", allKAD="
+				+ allKAD + ", gold_PerMin=" + gold_PerMin + ", xp_PerMin="
+				+ xp_PerMin + "]";
 	}
-	public HerosSatistics(String thisHeroData, String heroName, int useTimes,
-			Double winning, Double kDA, Double kill, Double death,
-			Double assists, Double allKAD, Double gold_PerMin, Double xp_PerMin) {
+	public HerosSatistics(String thisHeroDataUri, String heroName,
+			int useTimes, Double winning, Double kDA, Double kill,
+			Double death, Double assists, Double allKAD, Double gold_PerMin,
+			Double xp_PerMin) {
 		super();
-		this.thisHeroData = thisHeroData;
+		this.thisHeroDataUri = thisHeroDataUri;
 		this.heroName = heroName;
 		this.useTimes = useTimes;
 		Winning = winning;
@@ -107,6 +108,7 @@ public class HerosSatistics {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	
 	
 	

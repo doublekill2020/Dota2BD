@@ -2,9 +2,7 @@ package cn.edu.mydotabuff.dotaMax;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,6 +10,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import cn.edu.mydotabuff.bean.BestRecord;
+import cn.edu.mydotabuff.bean.HeroMatchStatistics;
 import cn.edu.mydotabuff.bean.HerosSatistics;
 import cn.edu.mydotabuff.bean.MacthStatistics;
 
@@ -44,7 +43,7 @@ public class dotaMaxTool {
 			for (int i = 0; i < trs.size(); i++) {
 				heroSatisticsBeans = new HerosSatistics();
 				Elements tds = trs.get(i).select("td");
-				heroSatisticsBeans.setThisHeroData(tds.get(0)
+				heroSatisticsBeans.setThisHeroDataUri(tds.get(0)
 						.getElementsByTag("a").first().attr("href").toString());
 				for (int j = 0; j < tds.size(); j++) {
 					String text = tds.get(j).text();
@@ -103,7 +102,7 @@ public class dotaMaxTool {
 			e.printStackTrace();
 		}
 
-		return new ArrayList<HerosSatistics>();
+		return null;
 	}
 
 	/**
@@ -144,12 +143,11 @@ public class dotaMaxTool {
 					default:
 						break;
 					}
-					bestRecodList.add(bestRecordBeans);
 
 				}
-				return bestRecodList;
+				bestRecodList.add(bestRecordBeans);
 			}
-
+			return bestRecodList;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -176,10 +174,10 @@ public class dotaMaxTool {
 				resString = resString.replace(" ", "").trim()
 						.substring(resString.length() - 2);
 				switch (i) {
-				case 1:
+				case 0:
 					WINING_STREAK = resString;
 					break;
-				case 2:
+				case 1:
 					FILING_STREAK = resString;
 					break;
 
@@ -200,7 +198,8 @@ public class dotaMaxTool {
 	 * 
 	 * @param Pid
 	 * @param timeOut
-	 * @param type 0 比赛统计 1 天梯
+	 * @param type
+	 *            0 全部统计 1 天梯
 	 * @return
 	 */
 	public static List<MacthStatistics> getMacthStatistics(String Pid,
@@ -251,18 +250,108 @@ public class dotaMaxTool {
 								.text().trim().replace(" ", ""));
 
 					}
-					macthStatisticsList.add(macthStatisticsBeans);
 				}
-
+				macthStatisticsList.add(macthStatisticsBeans);
 			}
-			if(type==0){
-				
-			}else if (type==1) {
-				
-			} 
-			
+
 			return macthStatisticsList;
 
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
+	/**
+	 * 获取英雄数据合集
+	 * 
+	 * @param heroDataUri
+	 *            heroSatisticsBeans.getThisHeroDataUri();
+	 * @param timeOut
+	 *            延迟 单位ms
+	 * @return
+	 */
+	public static List<HeroMatchStatistics> getHeroMatchStatistics(
+			String heroDataUri, int timeOut) {
+		try {
+			Document doc = Jsoup.connect(MAIN_URI + heroDataUri).timeout(timeOut)
+					.get();
+			Elements trs = doc
+					.select("table.table.table-hover.table-striped.sortable.table-list.table-thead-left")
+					.select("tbody").select("tr");
+			HeroMatchStatistics heroMatchStatisticsBeans;
+			List<HeroMatchStatistics> heroMatchStatisticsList = new ArrayList<HeroMatchStatistics>();
+			for (int i = 0; i < trs.size(); i++) {
+				heroMatchStatisticsBeans = new HeroMatchStatistics();
+				Elements tds = trs.get(i).select("td");
+				for (int j = 0; j < tds.size(); j++) {
+					if (j == 6) {
+						Elements imgs = tds.get(j).select("img");
+						List<String> tmpList = new ArrayList<String>();
+						for (int k = 0; k < imgs.size(); k++) {
+							tmpList.add(imgs.get(k).attr("src"));
+						}
+						heroMatchStatisticsBeans.setItemsImgURI(tmpList);
+					} else {
+						switch (j) {
+						case 0:
+							heroMatchStatisticsBeans.setHeroName(tds.get(j)
+									.text());
+							break;
+						case 1:
+							String newString = tds.get(j).text()
+									.replace(" ", "");
+							String tmp = newString;
+							newString = newString.substring(0,
+									newString.length() - 4);
+							tmp = tmp.substring(tmp.length() - 4);
+							heroMatchStatisticsBeans.setMatchID(newString);
+							heroMatchStatisticsBeans.setMatchType(tmp);
+							break;
+						case 2:
+							heroMatchStatisticsBeans.setWhatTime(tds.get(j)
+									.text());
+							break;
+						case 3:
+
+							heroMatchStatisticsBeans.setResult(tds.get(j)
+									.text());
+							break;
+						case 4:
+							/*
+							 * 原始数据 2.71 (10.9 / 9.4 / 14.4) 替换所有空格, ( , ) 为 /
+							 * 以"/"分割 得到 KDA 以及 K, D , A
+							 */
+
+							String replaceString = tds.get(j).text()
+									.replace(" ", "")
+									.replaceAll("[\\s()]", "/");
+							String[] replaceStrings = replaceString.split("/");
+							heroMatchStatisticsBeans.setKDA(Double
+									.valueOf(replaceStrings[0]));
+							heroMatchStatisticsBeans.setKill(Double
+									.valueOf(replaceStrings[1]));
+							heroMatchStatisticsBeans.setDeath(Double
+									.valueOf(replaceStrings[2]));
+							heroMatchStatisticsBeans.setAssists(Double
+									.valueOf(replaceStrings[3]));
+							break;
+						case 5:
+							heroMatchStatisticsBeans
+									.setLevel(tds.get(j).text());
+							break;
+
+						default:
+							break;
+						}
+					}
+
+				}
+				heroMatchStatisticsList.add(heroMatchStatisticsBeans);
+			}
+			return heroMatchStatisticsList;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
