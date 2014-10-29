@@ -19,15 +19,16 @@
             android:orientation="vertical" >
 
             <cn.edu.mydotabuff.view.CircleImageView
+                android:id="@+id/user_icon"
                 android:layout_width="96dp"
-                android:layout_height="96dp"
-                android:src="@drawable/default_pic" />
+                android:layout_height="96dp" />
 
             <TextView
+                android:singleLine="true"
+                android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="小学生" />
+                android:layout_marginTop="5dp" />
         </LinearLayout>
 
         <LinearLayout

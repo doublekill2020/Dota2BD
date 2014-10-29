@@ -1,42 +1,41 @@
 package cn.edu.mydotabuff;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
-
-import u.aly.be;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import cn.edu.mydotabuff.bean.HerosSatistics;
+import cn.edu.mydotabuff.bean.PlayerInfoBean;
+import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.common.CommonTitleBar;
-import cn.edu.mydotabuff.custom.LoadingDialog;
-import cn.edu.mydotabuff.game.ActInvokerGame;
 import cn.edu.mydotabuff.hero.FragHeroList;
+import cn.edu.mydotabuff.http.IInfoReceive;
 import cn.edu.mydotabuff.mydetail.FragMyDetail;
 import cn.edu.mydotabuff.recently.FragRecently;
+import cn.edu.mydotabuff.util.PersonalRequestImpl;
+import cn.edu.mydotabuff.view.CircleImageView;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.CanvasTransformer;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.FeedbackAgent;
 import com.umeng.update.UmengUpdateAgent;
 
-public class MainActivity extends Activity implements OnClickListener{
+public class MainActivity extends Activity implements OnClickListener {
 
 	/*
 	 * jsoup 测试
@@ -75,10 +74,17 @@ public class MainActivity extends Activity implements OnClickListener{
 	private TextView settingText;
 
 	private FragmentManager fragmentManager;
-	private TextView titleView;
+	private TextView titleView,rightView;
 	private View openMenuView;
 	private SlidingMenu menu;
 	private TextView checkUpdateBtn, feedBackBtn, shareBtn;
+
+	private String steamID;
+	private static final int FETCH_DETAIL = 1, FETCH_FAILED = 2;
+	private MyHandler myHandler = new MyHandler();
+	private CircleImageView userIcon;
+	private TextView userName;
+	private ImageLoader loader;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -92,9 +98,112 @@ public class MainActivity extends Activity implements OnClickListener{
 		CommonTitleBar.addCurrencyTitleBar(this, null,
 				R.drawable.biz_main_back_normal, "", null, "最近比赛", null, "");
 		titleView = (TextView) findViewById(CommonTitleBar.titleId);
+		rightView = (TextView) findViewById(CommonTitleBar.rightId);
 		openMenuView = findViewById(R.id.layout_left);
+		loader = ImageLoader.getInstance();
+
 		initViews();
 		initEvents();
+		PlayerInfoBean bean = DotaApplication.getApplication().getPlayerInfo();
+		if (getIntent().getStringExtra("userID") != null) {
+			steamID = Common.getSteamID(getIntent().getStringExtra("userID"));
+			if (bean == null) {
+				fetchData(FETCH_DETAIL);
+			} else {
+				if (!bean.getSteamid().equals(steamID)) {
+					DotaApplication.getApplication().destoryPlayerInfo();
+					fetchData(FETCH_DETAIL);
+				} else {
+					loader.displayImage(bean.getMediumIcon(), userIcon);
+					userName.setText(bean.getName());
+				}
+			}
+		}
+	}
+
+	void fetchData(final int type) {
+		PersonalRequestImpl request = new PersonalRequestImpl(
+				new IInfoReceive() {
+
+					@Override
+					public void onMsgReceiver(ResponseObj receiveInfo) {
+						// TODO Auto-generated method stub
+						switch (type) {
+						case FETCH_DETAIL:
+							PlayerInfoBean bean = new PlayerInfoBean();
+							try {
+								if (new JSONObject(receiveInfo.getJsonStr())
+										.has("response")) {
+									JSONArray array = new JSONObject(
+											receiveInfo.getJsonStr())
+											.getJSONObject("response")
+											.getJSONArray("players");
+									if (array.length() > 0) {
+										JSONObject obj = array.getJSONObject(0);
+										bean.setCommunityState(obj
+												.getInt("communityvisibilitystate"));
+										bean.setLastlogooff(obj
+												.getString("lastlogoff"));
+										bean.setMediumIcon(obj
+												.getString("avatarmedium"));
+										bean.setName(obj
+												.getString("personaname"));
+										bean.setState(obj
+												.getInt("personastate"));
+										bean.setTimecreated(obj
+												.getString("timecreated"));
+										bean.setSteamid(obj.getString("steamid"));
+									}
+									Message msg = myHandler.obtainMessage();
+									msg.arg1 = type;
+									msg.obj = bean;
+									myHandler.sendMessage(msg);
+								} else {
+									Message msg = myHandler.obtainMessage();
+									msg.arg1 = FETCH_FAILED;
+									myHandler.sendMessage(msg);
+								}
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+
+							break;
+						default:
+							break;
+						}
+					}
+
+				});
+		request.setActivity(this);
+		request.setDialogTitle("获取中");
+		switch (type) {
+		case FETCH_DETAIL:
+			request.getPlayerDetail(steamID);
+			break;
+		default:
+			break;
+		}
+	}
+
+	class MyHandler extends Handler {
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			switch (msg.arg1) {
+			case FETCH_DETAIL:
+				PlayerInfoBean bean = (PlayerInfoBean) msg.obj;
+				if (bean != null) {
+					DotaApplication.getApplication().setPlayerInfo(bean);
+					loader.displayImage(bean.getMediumIcon(), userIcon);
+					userName.setText(bean.getName());
+				}
+				break;
+			case FETCH_FAILED:
+
+				break;
+			default:
+				break;
+			}
+		}
 	}
 
 	private void initViews() {
@@ -130,6 +239,8 @@ public class MainActivity extends Activity implements OnClickListener{
 		checkUpdateBtn = (TextView) findViewById(R.id.check_update);
 		feedBackBtn = (TextView) findViewById(R.id.feedback);
 		shareBtn = (TextView) findViewById(R.id.share);
+		userIcon = (CircleImageView) findViewById(R.id.user_icon);
+		userName = (TextView) findViewById(R.id.user_name);
 	}
 
 	private void initEvents() {
@@ -164,25 +275,25 @@ public class MainActivity extends Activity implements OnClickListener{
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.message_layout:
-			// 当点击了消息tab时，选中第1个tab
 			setTabSelection(0);
 			titleView.setText("最近比赛");
+			rightView.setVisibility(View.GONE);
 			break;
 		case R.id.contacts_layout:
-			// 当点击了联系人tab时，选中第2个tab
 			setTabSelection(1);
 			titleView.setText("英雄使用");
+			rightView.setVisibility(View.GONE);
 			break;
 		case R.id.board_layout:
-			// 当点击了动态tab时，选中第3个tab
 			setTabSelection(2);
 			titleView.setText("天梯排行榜");
+			rightView.setVisibility(View.GONE);
 			break;
 		case R.id.setting_layout:
-			// 当点击了设置tab时，选中第4个tab
 			setTabSelection(3);
-			// printDate();
 			titleView.setText("个人资料");
+			rightView.setText("统计");
+			rightView.setVisibility(View.VISIBLE);
 			break;
 		case R.id.check_update:
 			menu.toggle();
@@ -191,12 +302,10 @@ public class MainActivity extends Activity implements OnClickListener{
 			break;
 		case R.id.share:
 			menu.toggle();
-			// Toast.makeText(this, "正在开发~~~", 1000).show();
-			startActivity(new Intent(this, ActInvokerGame.class));
+			// startActivity(new Intent(this, ActInvokerGame.class));
 			break;
 		case R.id.feedback:
 			menu.toggle();
-			// Toast.makeText(this, "正在开发~~~", 1000).show();
 			FeedbackAgent agent = new FeedbackAgent(this);
 			agent.startFeedbackActivity();
 			break;

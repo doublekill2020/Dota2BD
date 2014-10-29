@@ -1,15 +1,20 @@
 package cn.edu.mydotabuff.http;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import android.app.Activity;
 
+import cn.edu.mydotabuff.DotaApplication;
+import cn.edu.mydotabuff.bean.BestRecord;
 import cn.edu.mydotabuff.bean.HerosSatistics;
+import cn.edu.mydotabuff.bean.PlayerInfoBean;
 
 /**
  * JSONUP数据获取类（使用需实现OnWebDataGetListener）
@@ -60,16 +65,9 @@ public class WebDataHelper {
 	 *            用户id
 	 */
 	public <T> void getWebData(final DataType type, final String userId) {
-		activity.runOnUiThread(new Runnable() {
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				if (listener != null) {
-					listener.onStartGetData();
-				}
-			}
-		});
+		if (listener != null) {
+			listener.onStartGetData();
+		}
 		new Thread(new Runnable() {
 
 			@Override
@@ -167,7 +165,91 @@ public class WebDataHelper {
 					}
 					break;
 				case DETAIL:
+					url = "http://dotamax.com/player/detail/" + userId;
+					PlayerInfoBean bean = DotaApplication.getApplication().getPlayerInfo();
+					try {
+						Document doc = Jsoup.connect(url).timeout(timeout).get();
+						
+						//获取连胜连败
+						Elements trs = doc
+								.select("div.container.xuning-box")
+								.select("table.table.table-hover.table-striped.table-sfield")
+								.get(2).select("tr");
+						for (int i = 0; i < trs.size(); i++) {
+							String resString = trs.get(i).select("td").text();
+							resString = resString.replace(" ", "").trim()
+									.substring(resString.length() - 2);
+							switch (i) {
+							case 0:
+								bean.setWinStreak(resString);
+								break;
+							case 1:
+								bean.setLoseStreak(resString);
+								break;
+							default:
+								break;
+							}
+						}
+						
+						//获取最高记录
+						ArrayList<BestRecord> beans = new ArrayList<BestRecord>();
+						Element bestRecordDiv = doc.select("div.flat-grey-box").get(2);
+						Elements trs2 = bestRecordDiv.select("tbody").select("tr");
+						for (int i = 0; i < trs2.size(); i++) {
+							BestRecord bestRecordBeans = new BestRecord();
+							Elements tds = trs2.get(i).select("td");
+							for (int j = 0; j < tds.size(); j++) {
+								switch (j) {
+								case 0:
+									bestRecordBeans.setRecordType(tds.get(j).text());
+									break;
+								case 1:
+									bestRecordBeans.setMmatchID(tds.get(j).text());
+									break;
+								case 2:
+									bestRecordBeans.setResult(tds.get(j).text());
+									break;
+								case 3:
+									bestRecordBeans.setHeroName(tds.get(j).text());
+									break;
+								case 4:
+									bestRecordBeans.setRecordNum(tds.get(j).text());
+									break;
+								default:
+									break;
+								}
 
+							}
+							beans.add(bestRecordBeans);
+						}
+						bean.setBeans(beans);
+						bean.setLoadWebData(true);
+						DotaApplication.getApplication().setPlayerInfo(bean);
+						activity.runOnUiThread(new Runnable() {
+
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								if (listener != null) {
+									//详细资料获取成功 存本地sharepreference了 无须回调
+									listener.onGetFinished(null);
+								}
+							}
+						});
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						activity.runOnUiThread(new Runnable() {
+
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								if (listener != null) {
+									listener.onGetFailed();
+								}
+							}
+						});
+						e.printStackTrace();
+					}
 					break;
 				case MATCH:
 

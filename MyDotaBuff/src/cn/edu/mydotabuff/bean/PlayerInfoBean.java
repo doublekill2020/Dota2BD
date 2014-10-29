@@ -1,14 +1,59 @@
 package cn.edu.mydotabuff.bean;
 
-public class PlayerInfoBean {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class PlayerInfoBean implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1029L;
 	private String steamid;
-	private int communityState;//社交关系
+	private int communityState;// 社交关系
 	private String name;
-	private String lastlogooff;//最后登录
+	private String lastlogooff;// 最后登录
 	private String mediumIcon;
-	private int state;//在线状态 
+	private int state;// 在线状态
 	private String timecreated;
-	
+
+	private boolean isLoadWebData = false;//代表是否获取过jsonup数据
+
+	private String winStreak;
+	private String loseStreak;
+	private ArrayList<BestRecord> beans;
+
+	public boolean isLoadWebData() {
+		return isLoadWebData;
+	}
+
+	public void setLoadWebData(boolean isLoadWebData) {
+		this.isLoadWebData = isLoadWebData;
+	}
+
+	public String getWinStreak() {
+		return winStreak;
+	}
+
+	public void setWinStreak(String winStreak) {
+		this.winStreak = winStreak;
+	}
+
+	public String getLoseStreak() {
+		return loseStreak;
+	}
+
+	public void setLoseStreak(String loseStreak) {
+		this.loseStreak = loseStreak;
+	}
+
+	public ArrayList<BestRecord> getBeans() {
+		return beans;
+	}
+
+	public void setBeans(ArrayList<BestRecord> beans) {
+		this.beans = beans;
+	}
+
 	public PlayerInfoBean(String steamid, int communityState, String name,
 			String lastlogooff, String mediumIcon, int state, String timecreated) {
 		super();
@@ -91,5 +136,15 @@ public class PlayerInfoBean {
 	public PlayerInfoBean() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
+	@Override
+	public String toString() {
+		return "PlayerInfoBean [steamid=" + steamid + ", communityState="
+				+ communityState + ", name=" + name + ", lastlogooff="
+				+ lastlogooff + ", mediumIcon=" + mediumIcon + ", state="
+				+ state + ", timecreated=" + timecreated + ", winStreak="
+				+ winStreak + ", loseStreak=" + loseStreak + ", beans=" + beans
+				+ "]";
+	}
+
 }
