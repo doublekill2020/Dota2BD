@@ -3,11 +3,15 @@ package cn.edu.mydotabuff.dotaMax;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import u.aly.m;
 
 import cn.edu.mydotabuff.bean.BestRecord;
 import cn.edu.mydotabuff.bean.HeroMatchStatistics;
@@ -35,6 +39,8 @@ public class dotaMaxTool {
 	public static List<HerosSatistics> getHerosSatistics(String Pid, int timeOut) {
 
 		try {
+			Pattern p = null ;
+			Matcher m1 = null;
 			HerosSatistics heroSatisticsBeans;
 			List<HerosSatistics> heroSatisticsList = new ArrayList<HerosSatistics>();
 			Document doc = Jsoup.connect(HERO_SATISTICS_Uri + Pid)
@@ -43,8 +49,15 @@ public class dotaMaxTool {
 			for (int i = 0; i < trs.size(); i++) {
 				heroSatisticsBeans = new HerosSatistics();
 				Elements tds = trs.get(i).select("td");
-				heroSatisticsBeans.setThisHeroDataUri(tds.get(0)
-						.getElementsByTag("a").first().attr("href").toString());
+				String uri	= tds.get(0) .getElementsByTag("a").first().attr("href").toString();
+				heroSatisticsBeans.setThisHeroDataUri(uri);
+			    p = Pattern.compile("hero=(.*)" );
+			    m1 = p.matcher(uri); 
+			    m1.find();
+			    String result =   m1.group().substring("hero=".length());
+			    heroSatisticsBeans.setHeroID(Integer.valueOf(result));
+				
+				
 				for (int j = 0; j < tds.size(); j++) {
 					String text = tds.get(j).text();
 					switch (j) {
@@ -135,6 +148,7 @@ public class dotaMaxTool {
 						bestRecordBeans.setResult(tds.get(j).text());
 						break;
 					case 3:
+						bestRecordBeans.setImageUri(tds.get(j).getElementsByTag("img").first().attr("src"));
 						bestRecordBeans.setHeroName(tds.get(j).text());
 						break;
 					case 4:

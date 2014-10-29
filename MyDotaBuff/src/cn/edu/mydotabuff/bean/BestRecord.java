@@ -8,11 +8,18 @@ public class BestRecord implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 10291603L;
+	private String ImageUri;
 	private String RecordType;
 	private String MmatchID;
 	private String Result;
 	private String HeroName;
 	private String RecordNum;
+	public String getImageUri() {
+		return ImageUri;
+	}
+	public void setImageUri(String imageUri) {
+		ImageUri = imageUri;
+	}
 	public String getRecordType() {
 		return RecordType;
 	}
@@ -43,15 +50,19 @@ public class BestRecord implements Serializable{
 	public void setRecordNum(String recordNum) {
 		RecordNum = recordNum;
 	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	@Override
 	public String toString() {
-		return "BestRecord [RecordType=" + RecordType + ", MmatchID="
-				+ MmatchID + ", Result=" + Result + ", HeroName=" + HeroName
-				+ ", RecordNum=" + RecordNum + "]";
+		return "BestRecord [ImageUri=" + ImageUri + ", RecordType="
+				+ RecordType + ", MmatchID=" + MmatchID + ", Result=" + Result
+				+ ", HeroName=" + HeroName + ", RecordNum=" + RecordNum + "]";
 	}
-	public BestRecord(String recordType, String mmatchID, String result,
-			String heroName, String recordNum) {
+	public BestRecord(String imageUri, String recordType, String mmatchID,
+			String result, String heroName, String recordNum) {
 		super();
+		ImageUri = imageUri;
 		RecordType = recordType;
 		MmatchID = mmatchID;
 		Result = result;
@@ -62,9 +73,8 @@ public class BestRecord implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
+
+
 	
 	
 
