@@ -301,6 +301,8 @@
     <color name="ccc">#cccccc </color>
     <color name="bbb">#bbbbbb </color>
     <color name="my_blue">#657DBF </color>
+    <color name="my_orange">#F87B41 </color>
+    <color name="my_green">#0CA98C </color>
     <!--
  Copyright (C) 2008 ZXing authors
 

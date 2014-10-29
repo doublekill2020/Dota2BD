@@ -1,9 +1,7 @@
 package cn.edu.mydotabuff.common;
 
-import cn.edu.mydotabuff.R;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +9,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import cn.edu.mydotabuff.view.RoundAngleImageView;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 public class CommViewHolder {
 	private final SparseArray<View> mViews;
 	private int mPosition;
 	private View mConvertView;
+	private ImageLoader loader;
+
 	private CommViewHolder(Context context, ViewGroup parent, int layoutId,
 			int position) {
+		loader = ImageLoader.getInstance();
 		this.mPosition = position;
 		this.mViews = new SparseArray<View>();
 		mConvertView = LayoutInflater.from(context).inflate(layoutId, parent,
@@ -119,4 +124,17 @@ public class CommViewHolder {
 		return this;
 	}
 
+	public CommViewHolder setBackgroundColor(int viewId, int color) {
+		// TODO Auto-generated method stub
+		TextView view = getView(viewId);
+		view.setBackgroundColor(color);
+		return this;
+	}
+
+	//  for RoundAngleImageView
+	public CommViewHolder setImageFromWeb(int viewId, String url) {
+		RoundAngleImageView view = getView(viewId);
+		loader.displayImage(url, view);
+		return this;
+	}
 }
