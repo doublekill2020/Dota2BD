@@ -7,13 +7,21 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.TextView;
+import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.R;
+import cn.edu.mydotabuff.bean.BestRecord;
+import cn.edu.mydotabuff.bean.PlayerInfoBean;
+import cn.edu.mydotabuff.common.CommAdapter;
+import cn.edu.mydotabuff.common.CommViewHolder;
 import cn.edu.mydotabuff.common.CommonTitleBar;
+import cn.edu.mydotabuff.view.XListView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
 
 public class ActUserStatistics extends Activity implements OnClickListener {
@@ -22,13 +30,22 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 	private TextView leftBtn, rightBtn;
 	private ViewPager pager;
 	private ViewpagerAdapter adapter;
+	private CommAdapter<BestRecord> commAdapter;
+	private PlayerInfoBean bean;
+	private ArrayList<BestRecord> beans;
+	private XListView leftList;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO 自动生成的方法存根
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
-		initView();
-		initEvents();
+		bean = DotaApplication.getApplication().getPlayerInfo();
+		beans = bean.getBeans();
+		if (beans != null) {
+			initView();
+			initEvents();
+		}
 	}
 
 	private void initView() {
@@ -49,6 +66,33 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 		pager = (ViewPager) findViewById(R.id.viewPager);
 		View view1 = View
 				.inflate(this, R.layout.act_user_statistics_left, null);
+		leftList = (XListView) view1.findViewById(R.id.left_list);
+		leftList.setPullLoadEnable(false);
+		leftList.setPullRefreshEnable(false);
+		leftList.setVerticalScrollBarEnabled(false);
+		leftList.setAdapter(commAdapter = new CommAdapter<BestRecord>(this,
+				beans, R.layout.act_user_statistics_left_item) {
+
+			@Override
+			public void convert(CommViewHolder helper, BestRecord item) {
+				// TODO Auto-generated method stub
+				helper.setImageFromWeb(R.id.icon, item.getImageUri());
+				helper.setText(R.id.name, item.getHeroName());
+				helper.setText(R.id.tag1,
+						item.getRecordType() + ":" + item.getRecordNum());
+				helper.setText(R.id.tag2, "比赛编号：" + item.getMmatchID());
+				helper.setText(R.id.status, item.getResult());
+				String result = item.getResult();
+				helper.setText(R.id.status, result);
+				if (result.equals("胜利")) {
+					helper.setBackgroundColor(R.id.status, getResources()
+							.getColor(R.color.my_green));
+				} else {
+					helper.setBackgroundColor(R.id.status, getResources()
+							.getColor(R.color.my_orange));
+				}
+			}
+		});
 		views.add(view1);
 		View view2 = View.inflate(this, R.layout.act_user_statistics_right,
 				null);

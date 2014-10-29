@@ -166,11 +166,13 @@ public class WebDataHelper {
 					break;
 				case DETAIL:
 					url = "http://dotamax.com/player/detail/" + userId;
-					PlayerInfoBean bean = DotaApplication.getApplication().getPlayerInfo();
+					PlayerInfoBean bean = DotaApplication.getApplication()
+							.getPlayerInfo();
 					try {
-						Document doc = Jsoup.connect(url).timeout(timeout).get();
-						
-						//获取连胜连败
+						Document doc = Jsoup.connect(url).timeout(timeout)
+								.get();
+
+						// 获取连胜连败
 						Elements trs = doc
 								.select("div.container.xuning-box")
 								.select("table.table.table-hover.table-striped.table-sfield")
@@ -190,30 +192,40 @@ public class WebDataHelper {
 								break;
 							}
 						}
-						
-						//获取最高记录
+
+						// 获取最高记录
 						ArrayList<BestRecord> beans = new ArrayList<BestRecord>();
-						Element bestRecordDiv = doc.select("div.flat-grey-box").get(2);
-						Elements trs2 = bestRecordDiv.select("tbody").select("tr");
+						Element bestRecordDiv = doc.select("div.flat-grey-box")
+								.get(2);
+						Elements trs2 = bestRecordDiv.select("tbody").select(
+								"tr");
 						for (int i = 0; i < trs2.size(); i++) {
 							BestRecord bestRecordBeans = new BestRecord();
 							Elements tds = trs2.get(i).select("td");
 							for (int j = 0; j < tds.size(); j++) {
 								switch (j) {
 								case 0:
-									bestRecordBeans.setRecordType(tds.get(j).text());
+									bestRecordBeans.setRecordType(tds.get(j)
+											.text());
 									break;
 								case 1:
-									bestRecordBeans.setMmatchID(tds.get(j).text());
+									bestRecordBeans.setMmatchID(tds.get(j)
+											.text());
 									break;
 								case 2:
-									bestRecordBeans.setResult(tds.get(j).text());
+									bestRecordBeans
+											.setResult(tds.get(j).text());
 									break;
 								case 3:
-									bestRecordBeans.setHeroName(tds.get(j).text());
+									bestRecordBeans.setImageUri(tds.get(j)
+											.getElementsByTag("img").first()
+											.attr("src"));
+									bestRecordBeans.setHeroName(tds.get(j)
+											.text());
 									break;
 								case 4:
-									bestRecordBeans.setRecordNum(tds.get(j).text());
+									bestRecordBeans.setRecordNum(tds.get(j)
+											.text());
 									break;
 								default:
 									break;
@@ -231,7 +243,7 @@ public class WebDataHelper {
 							public void run() {
 								// TODO Auto-generated method stub
 								if (listener != null) {
-									//详细资料获取成功 存本地sharepreference了 无须回调
+									// 详细资料获取成功 存本地sharepreference了 无须回调
 									listener.onGetFinished(null);
 								}
 							}
