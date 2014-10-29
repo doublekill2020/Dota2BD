@@ -1,7 +1,13 @@
 package cn.edu.mydotabuff.bean;
 
-public class BestRecord {
+import java.io.Serializable;
+
+public class BestRecord implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 10291603L;
 	private String RecordType;
 	private String MmatchID;
 	private String Result;

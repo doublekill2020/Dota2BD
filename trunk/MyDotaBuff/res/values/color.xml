@@ -299,7 +299,8 @@
     <!-- wdx -->
     <color name="new1">#b9bfc1</color>
     <color name="ccc">#cccccc </color>
-      <color name="bbb">#bbbbbb </color>
+    <color name="bbb">#bbbbbb </color>
+    <color name="my_blue">#657DBF </color>
     <!--
  Copyright (C) 2008 ZXing authors
 
@@ -313,7 +314,7 @@
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  See the License for the specific language governing permissions and
- limitations under the License.
+ limitations under the License.
     -->
     <color name="contents_text">#ff000000</color>
     <color name="encode_view">#ffffffff</color>

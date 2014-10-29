@@ -21,6 +21,7 @@ import android.net.NetworkInfo;
 import cn.edu.mydotabuff.bean.BoardBean;
 import cn.edu.mydotabuff.bean.MatchBean;
 import cn.edu.mydotabuff.bean.PlayerDetailBean;
+import cn.edu.mydotabuff.bean.PlayerInfoBean;
 
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -276,6 +277,48 @@ public class DotaApplication extends Application {
 				Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = mSharedPreferences.edit();
 		editor.putString("boards", "");
+		editor.commit();
+	}
+	
+	public void setPlayerInfo(PlayerInfoBean info) {
+		// TODO Auto-generated method stub
+		SharedPreferences mSharedPreferences = getSharedPreferences("base64",
+				Context.MODE_PRIVATE);
+		try {
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ObjectOutputStream oos = new ObjectOutputStream(baos);
+			oos.writeObject(info);
+			String personBase64 = new String(Base64.encodeBase64(baos
+					.toByteArray()));
+			SharedPreferences.Editor editor = mSharedPreferences.edit();
+			editor.putString("player_info", personBase64);
+			editor.commit();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public PlayerInfoBean getPlayerInfo() {
+		PlayerInfoBean info = null;
+		try {
+			SharedPreferences mSharedPreferences = getSharedPreferences(
+					"base64", Context.MODE_PRIVATE);
+			String personBase64 = mSharedPreferences.getString("player_info", "");
+			byte[] base64Bytes = Base64.decodeBase64(personBase64.getBytes());
+			ByteArrayInputStream bais = new ByteArrayInputStream(base64Bytes);
+			ObjectInputStream ois = new ObjectInputStream(bais);
+			info = (PlayerInfoBean) ois.readObject();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return info;
+	}
+
+	public void destoryPlayerInfo() {
+		SharedPreferences mSharedPreferences = getSharedPreferences("base64",
+				Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = mSharedPreferences.edit();
+		editor.putString("player_info", "");
 		editor.commit();
 	}
 }
