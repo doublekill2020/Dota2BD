@@ -1,5 +1,6 @@
 package cn.edu.mydotabuff.mydetail;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.bean.BestRecord;
+import cn.edu.mydotabuff.bean.MacthStatistics;
 import cn.edu.mydotabuff.bean.PlayerBean;
 import cn.edu.mydotabuff.bean.PlayerInfoBean;
 import cn.edu.mydotabuff.common.CommAdapter;
@@ -42,9 +44,8 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 	private PlayerInfoBean bean;
 	private ArrayList<BestRecord> beans;
 	private XListView leftList;
-	private HashMap<String, String> allDataMap, rankDataMap;
 	private View view1, view2;
-
+	private ArrayList<MacthStatistics> list;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO 自动生成的方法存根
@@ -52,10 +53,8 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		bean = DotaApplication.getApplication().getPlayerInfo();
 		beans = bean.getBeans();
-		allDataMap = bean.getMaps().get(0);
-		Log.i("hao", allDataMap.toString());
-		rankDataMap = bean.getMaps().get(1);
-		Log.i("hao", rankDataMap.toString());
+		list = bean.getList();
+		Log.i("hao",list.toString());
 		if (beans != null) {
 			initView();
 			initEvents();

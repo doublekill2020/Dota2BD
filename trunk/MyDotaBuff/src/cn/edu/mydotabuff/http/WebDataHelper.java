@@ -238,19 +238,18 @@ public class WebDataHelper {
 						}
 						bean.setBeans(beans);
 						bean.setLoadWebData(true);
-						
-						ArrayList<HashMap<String, String>> maps = new ArrayList<HashMap<String, String>>();
+
+						ArrayList<MacthStatistics> list = new ArrayList<MacthStatistics>();
 						for (int type = 0; type <= 1; type++) {
 							Element table = doc
 									.select("div.container.xuning-box")
 									.select("table.table.table-hover.table-striped.table-sfield")
 									.get(type);
-
 							String test = table.toString().replaceAll(
 									"<span(.*)span>", "");
 							Elements _trs = Jsoup.parse(test).select("tr");
-							HashMap<String, String> map = new HashMap<String, String>();
 							for (int k = 1; k < _trs.size() + 1; k = k + 2) {
+								MacthStatistics macthStatisticsBeans = new MacthStatistics();
 								for (int i = k - 1; i < k + 1; i++) {
 									int m = i + 1;
 									if (m % 2 == 0) {
@@ -259,8 +258,9 @@ public class WebDataHelper {
 										for (int j = 0; j < divs.size(); j++) {
 											switch (j) {
 											case 0:
-												map.put("num"+i,
-														divs.get(j)
+												macthStatisticsBeans
+														.setPlayTimes(divs
+																.get(j)
 																.text()
 																.trim()
 																.replace(" ",
@@ -268,8 +268,9 @@ public class WebDataHelper {
 																.substring(3));
 												break;
 											case 1:
-												map.put("rate"+i,
-														divs.get(j)
+												macthStatisticsBeans
+														.setWinning(divs
+																.get(j)
 																.text()
 																.trim()
 																.replace(" ",
@@ -277,8 +278,9 @@ public class WebDataHelper {
 																.substring(3, 8));
 												break;
 											case 2:
-												map.put("KDA"+i,
-														divs.get(j)
+												macthStatisticsBeans
+														.setKAD(divs
+																.get(j)
 																.text()
 																.trim()
 																.replace(" ",
@@ -291,15 +293,16 @@ public class WebDataHelper {
 											}
 										}
 									} else {
-										map.put("type"+i, _trs.get(i)
+										macthStatisticsBeans.setType(trs.get(i)
 												.select("td").text().trim()
 												.replace(" ", ""));
+
 									}
 								}
+								list.add(macthStatisticsBeans);
 							}
-							maps.add(map);
 						}
-						bean.setMaps(maps);
+						bean.setList(list);
 						bean.setLoadMap(true);
 						DotaApplication.getApplication().setPlayerInfo(bean);
 						activity.runOnUiThread(new Runnable() {
