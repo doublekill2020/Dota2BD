@@ -16,6 +16,7 @@ import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.common.CommonTitleBar;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.umeng.analytics.MobclickAgent;
 
 public class ActInvokerGame extends Activity implements OnClickListener {
 
@@ -129,5 +130,14 @@ public class ActInvokerGame extends Activity implements OnClickListener {
 		default:
 			break;
 		}
+	}
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
 	}
 }

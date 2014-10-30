@@ -49,6 +49,7 @@ import cn.edu.mydotabuff.base.SwipeBackAppCompatFragmentActivity;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * 英雄详细 Activity
@@ -747,4 +748,13 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
             }
         };
     }
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
 }

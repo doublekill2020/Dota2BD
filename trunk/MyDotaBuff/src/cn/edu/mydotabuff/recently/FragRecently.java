@@ -133,10 +133,16 @@ public class FragRecently extends Fragment {
 				// TODO Auto-generated method stub
 				if (allMatchBeans.size() > 0) {
 					Intent intent = new Intent(activity, ActMatchDetail.class);
-					Bundle mBundle = new Bundle();
-					mBundle.putSerializable("MatchBean",
-							allMatchBeans.get(position - 1));
-					intent.putExtras(mBundle);
+//					Bundle mBundle = new Bundle();
+					ArrayList<String> ids = new ArrayList<String>();
+					for(PlayerBean bean: allMatchBeans.get(position - 1).getPlayers()){
+						ids.add(bean.getAccountId());
+					}
+//					mBundle.putSerializable("MatchBean",
+//							allMatchBeans.get(position - 1).getPlayers());
+//					intent.putExtras(mBundle);
+					intent.putExtra("matchId", allMatchBeans.get(position - 1).getMatchId());
+					intent.putStringArrayListExtra("ids", ids);
 					startActivity(intent);
 				}
 			}

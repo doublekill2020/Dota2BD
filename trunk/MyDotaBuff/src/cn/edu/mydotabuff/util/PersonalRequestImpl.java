@@ -57,7 +57,7 @@ public class PersonalRequestImpl extends BaseRequestInterface {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("key", APIConstants.API_KEY);
 		params.put("match_id", matchID);
-		request(APIConstants.GET_MATCH_DETAILS, params, true);
+		request(APIConstants.GET_MATCH_DETAILS, params, false);
 	}
 
 	public void getPlayerDetail(String steamID) {
@@ -65,7 +65,7 @@ public class PersonalRequestImpl extends BaseRequestInterface {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("key", APIConstants.API_KEY);
 		params.put("steamids", steamID);
-		request(APIConstants.GET_PLAYER_SUMMARIES, params, true);
+		request(APIConstants.GET_PLAYER_SUMMARIES, params, false);
 	}
 
 	public void getBoard(String division) {

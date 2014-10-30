@@ -18,7 +18,7 @@ public class LoadingDialog extends AlertDialog {
 
 	public LoadingDialog(Context context) {
 		super(context);
-		message = "loading...";
+		message = "获取中...";
 		this.mContext = context;
 		this.setCancelable(true);
 		this.setCanceledOnTouchOutside(false);
@@ -60,63 +60,20 @@ public class LoadingDialog extends AlertDialog {
 		if (ivDialogLoading != null) {
 			startAnimation();
 		}
-
 	}
 
 	public void startAnimation() {
-		// 鍔犺浇鍔ㄧ敾
 		Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(
 				mContext, R.anim.dialog_loading_animation);
-		// 浣跨敤ImageView鏄剧ず鍔ㄧ敾
 		ivDialogLoading.startAnimation(hyperspaceJumpAnimation);
 	}
 
 	public void setText(String message) {
-
 		tvDialogLoading.setText(message);
 	}
 
 	public void setText(int resId) {
 		setText(getContext().getResources().getString(resId));
 	}
-
-	// private TextView tips_loading_msg;
-	//
-	// private String message = null;
-	//
-	// public LoadingDialog(Context context) {
-	// super(context);
-	// message = "鍔犺浇涓�..";
-	// this.setCancelable(false);
-	// }
-	//
-	// public LoadingDialog(Context context, String message) {
-	// super(context);
-	// this.message = message;
-	// this.setCancelable(false);
-	// }
-	//
-	// public LoadingDialog(Context context, int theme, String message) {
-	// super(context, theme);
-	// this.message = message;
-	// this.setCancelable(false);
-	// }
-	//
-	// @Override
-	// protected void onCreate(Bundle savedInstanceState) {
-	// super.onCreate(savedInstanceState);
-	// this.setContentView(R.layout.view_tips_loading);
-	// tips_loading_msg = (TextView) findViewById(R.id.tips_loading_msg);
-	// tips_loading_msg.setText(this.message);
-	// }
-	//
-	// public void setText(String message) {
-	// this.message = message;
-	// tips_loading_msg.setText(this.message);
-	// }
-	//
-	// public void setText(int resId) {
-	// setText(getContext().getResources().getString(resId));
-	// }
 
 }
