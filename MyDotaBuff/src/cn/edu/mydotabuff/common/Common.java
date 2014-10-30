@@ -2226,4 +2226,21 @@ public class Common {
 			return "null";
 		}
 	}
+
+	/**
+	 * 获取英雄英文名（获取keyName）
+	 * 
+	 * @param s
+	 *            英雄中文名
+	 * @return
+	 */
+	public static String getHeroName(String s) {
+		if (s.equals("敌法师")) {
+			return "antimage";
+		} else if (s.equals("")) {
+			return "antimage";
+		} else {
+			return "";
+		}
+	}
 }

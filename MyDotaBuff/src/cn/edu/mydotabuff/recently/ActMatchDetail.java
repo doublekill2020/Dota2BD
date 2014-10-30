@@ -26,6 +26,7 @@ import cn.edu.mydotabuff.bean.PlayerDetailBean;
 import cn.edu.mydotabuff.bean.PlayerInfoBean;
 import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.common.CommonTitleBar;
+import cn.edu.mydotabuff.custom.LoadingDialog;
 import cn.edu.mydotabuff.custom.TipsToast;
 import cn.edu.mydotabuff.custom.TipsToast.DialogType;
 import cn.edu.mydotabuff.http.IInfoReceive;
@@ -33,10 +34,10 @@ import cn.edu.mydotabuff.util.PersonalRequestImpl;
 import cn.edu.mydotabuff.util.TimeHelper;
 
 public class ActMatchDetail extends Activity {
-	private MatchBean bean;
 	private String matchId;
 	private static final int FETCH_DETAIL = 1;
 	private static final int FETCH_PLAYER_DETAIL = 2;
+	private static final int FETCH_FAILED = 3;
 	private MyHandler myHandler;
 	private TextView startTimeView, durationView, matchTypeView,
 			win_total_kill, win_total_death, win_total_assist, win_total_money,
@@ -50,24 +51,20 @@ public class ActMatchDetail extends Activity {
 	private boolean loadPlayerDetailSuccess = false;
 	private String radiant_win, duration, start_time, first_blood_time;
 	private int lobby_type;
-
+	private ArrayList<String> ids, idsFromWeb;
+	private LoadingDialog dialog;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO 自动生成的方法存根
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		myHandler = new MyHandler();
-		bean = (MatchBean) getIntent().getSerializableExtra("MatchBean");
-		matchId = bean.getMatchId();
-		ArrayList<PlayerBean> playerBeans = bean.getPlayers();
-		for (int i = 0; i < playerBeans.size(); i++) {
-			steamIDs = steamIDs
-					+ Common.getSteamID(playerBeans.get(i).getAccountId())
-					+ ",";
-			if (playerBeans.get(i).getAccountId().equals("4294967295")) {
-			}
-		}
-		fetchData(FETCH_PLAYER_DETAIL);
+		matchId = getIntent().getStringExtra("matchId");
+		ids = getIntent().getStringArrayListExtra("ids");
+		idsFromWeb = new ArrayList<String>();
+		dialog = new LoadingDialog(this);
+		
+		dialog.show();
 		fetchData(FETCH_DETAIL);
 		initView();
 	}
@@ -141,6 +138,7 @@ public class ActMatchDetail extends Activity {
 										} else {
 											accountId = "4294967295";
 										}
+										idsFromWeb.add(accountId);
 										int leaver_status = 0;
 										if (detailObj.has("leaver_status")) {
 											leaver_status = detailObj
@@ -176,24 +174,14 @@ public class ActMatchDetail extends Activity {
 									}
 									msg.arg1 = type;
 									msg.obj = playerDetailBeans;
-									myHandler.sendMessage(msg);
 								} else {
-									runOnUiThread(new Runnable() {
-
-										@Override
-										public void run() {
-											// TODO Auto-generated method stub
-											TipsToast.showToast(
-													ActMatchDetail.this,
-													"steam被墙了，你懂得",
-													Toast.LENGTH_SHORT,
-													DialogType.LOAD_FAILURE);
-										}
-									});
+									msg.arg1 = FETCH_FAILED;
 								}
 							} catch (JSONException e) {
 								e.printStackTrace();
+								msg.arg1 = FETCH_FAILED;
 							}
+							myHandler.sendMessage(msg);
 							break;
 						case FETCH_PLAYER_DETAIL:
 							ArrayList<PlayerInfoBean> infoBeans = new ArrayList<PlayerInfoBean>();
@@ -212,8 +200,9 @@ public class ActMatchDetail extends Activity {
 												.getString("avatarmedium"));
 										bean.setName(obj
 												.getString("personaname"));
-										//如果是电脑
-										if(bean.getSteamid().equals("76561197960265728")){
+										// 如果是电脑
+										if (bean.getSteamid().equals(
+												"76561197960265728")) {
 											bean.setMediumIcon("http://media.steampowered.com/steamcommunity/public/images/avatars/fe/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_medium.jpg");
 											bean.setName("电脑");
 										}
@@ -229,10 +218,11 @@ public class ActMatchDetail extends Activity {
 								}
 								msg.arg1 = type;
 								msg.obj = infoBeans;
-								myHandler.sendMessage(msg);
 							} catch (JSONException e) {
 								e.printStackTrace();
+								msg.arg1 = FETCH_FAILED;
 							}
+							myHandler.sendMessage(msg);
 							break;
 						default:
 							break;
@@ -247,6 +237,14 @@ public class ActMatchDetail extends Activity {
 			request.getMatchDetails(matchId);
 			break;
 		case FETCH_PLAYER_DETAIL:
+			if (ids.size() == 0) {
+				ids = idsFromWeb;
+			}
+			for (int i = 0; i < ids.size(); i++) {
+				steamIDs = steamIDs + Common.getSteamID(ids.get(i)) + ",";
+				if (ids.get(i).equals("4294967295")) {
+				}
+			}
 			request.getPlayerDetail(steamIDs);
 		default:
 			break;
@@ -261,11 +259,18 @@ public class ActMatchDetail extends Activity {
 				loadPlayerDetailSuccess = true;
 				playerDetailBeans = (ArrayList<PlayerDetailBean>) msg.obj;
 				refreshView();
+				fetchData(FETCH_PLAYER_DETAIL);
 				break;
 			case FETCH_PLAYER_DETAIL:
 				loadPlayerInfoSuccess = true;
 				playerInfoBeans = (ArrayList<PlayerInfoBean>) msg.obj;
 				refreshView();
+				dialog.dismiss();
+				break;
+			case FETCH_FAILED:
+				dialog.dismiss();
+				TipsToast.showToast(ActMatchDetail.this, "steam被墙了，你懂得",
+						Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
 				break;
 			default:
 				break;
@@ -333,6 +338,7 @@ public class ActMatchDetail extends Activity {
 					playerDetailBeans, num));
 		}
 	}
+
 	public void onResume() {
 		super.onResume();
 		MobclickAgent.onResume(this);
