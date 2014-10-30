@@ -74,7 +74,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	private TextView settingText;
 
 	private FragmentManager fragmentManager;
-	private TextView titleView,rightView;
+	private TextView titleView, rightView;
 	private View openMenuView;
 	private SlidingMenu menu;
 	private TextView checkUpdateBtn, feedBackBtn, shareBtn;
@@ -110,12 +110,14 @@ public class MainActivity extends Activity implements OnClickListener {
 			if (bean == null) {
 				fetchData(FETCH_DETAIL);
 			} else {
-				if (!bean.getSteamid().equals(steamID)) {
-					DotaApplication.getApplication().destoryPlayerInfo();
-					fetchData(FETCH_DETAIL);
-				} else {
-					loader.displayImage(bean.getMediumIcon(), userIcon);
-					userName.setText(bean.getName());
+				if (bean.getSteamid() != null) {
+					if (!bean.getSteamid().equals(steamID)) {
+						DotaApplication.getApplication().destoryPlayerInfo();
+						fetchData(FETCH_DETAIL);
+					} else {
+						loader.displayImage(bean.getMediumIcon(), userIcon);
+						userName.setText(bean.getName());
+					}
 				}
 			}
 		}
@@ -152,7 +154,8 @@ public class MainActivity extends Activity implements OnClickListener {
 												.getInt("personastate"));
 										bean.setTimecreated(obj
 												.getString("timecreated"));
-										bean.setSteamid(obj.getString("steamid"));
+										bean.setSteamid(obj
+												.getString("steamid"));
 									}
 									Message msg = myHandler.obtainMessage();
 									msg.arg1 = type;
