@@ -18,6 +18,7 @@
 -->
 
 <resources>
+
     <style name="Theme.Tupdota2" parent="@style/Theme.AppCompat">
         <item name="actionBarItemBackground">@drawable/selectable_background_tupdota2</item>
         <item name="popupMenuStyle">@style/PopupMenu.Tupdota2</item>
@@ -77,6 +78,10 @@
 
     <style name="ProgressBar.Tupdota2" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/progress_horizontal_tupdota2</item>
+    </style>
+
+    <style name="ProgressBar.MyProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_green</item>
     </style>
 
     <style name="ActionButton.CloseMode.Tupdota2" parent="@style/Widget.AppCompat.ActionButton.CloseMode">

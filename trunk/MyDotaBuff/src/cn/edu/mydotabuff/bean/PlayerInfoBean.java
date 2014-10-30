@@ -2,6 +2,7 @@ package cn.edu.mydotabuff.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PlayerInfoBean implements Serializable {
 	/**
@@ -17,10 +18,30 @@ public class PlayerInfoBean implements Serializable {
 	private String timecreated;
 
 	private boolean isLoadWebData = false;//代表是否获取过jsonup数据
-
 	private String winStreak;
 	private String loseStreak;
 	private ArrayList<BestRecord> beans;
+
+	private ArrayList<HashMap<String, String>> maps;
+	private boolean isLoadMap = false;//代表是否获取过全部比赛统计数据
+	
+	
+	
+	public ArrayList<HashMap<String, String>> getMaps() {
+		return maps;
+	}
+
+	public void setMaps(ArrayList<HashMap<String, String>> maps) {
+		this.maps = maps;
+	}
+
+	public boolean isLoadMap() {
+		return isLoadMap;
+	}
+
+	public void setLoadMap(boolean isLoadMap) {
+		this.isLoadMap = isLoadMap;
+	}
 
 	public boolean isLoadWebData() {
 		return isLoadWebData;

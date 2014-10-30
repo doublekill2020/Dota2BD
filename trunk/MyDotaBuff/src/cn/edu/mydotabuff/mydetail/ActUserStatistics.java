@@ -1,6 +1,7 @@
 package cn.edu.mydotabuff.mydetail;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
@@ -34,7 +35,7 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 	private PlayerInfoBean bean;
 	private ArrayList<BestRecord> beans;
 	private XListView leftList;
-
+	private HashMap<String, String> allDataMap,rankDataMap;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO 自动生成的方法存根
@@ -42,6 +43,10 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		bean = DotaApplication.getApplication().getPlayerInfo();
 		beans = bean.getBeans();
+		allDataMap = bean.getMaps().get(0);
+		Log.i("hao",allDataMap.toString());
+		rankDataMap = bean.getMaps().get(1);
+		Log.i("hao",rankDataMap.toString());
 		if (beans != null) {
 			initView();
 			initEvents();
@@ -50,7 +55,7 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 
 	private void initView() {
 		// TODO Auto-generated method stub
-		setContentView(R.layout.act_user_statistics);
+		setContentView(R.layout.act_user_statistics_left_layout);
 		CommonTitleBar.addLeftBackAndMidTitle(this, new OnClickListener() {
 
 			@Override

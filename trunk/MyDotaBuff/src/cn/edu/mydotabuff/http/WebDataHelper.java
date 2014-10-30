@@ -2,6 +2,7 @@ package cn.edu.mydotabuff.http;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -14,6 +15,7 @@ import android.app.Activity;
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.bean.BestRecord;
 import cn.edu.mydotabuff.bean.HerosSatistics;
+import cn.edu.mydotabuff.bean.MacthStatistics;
 import cn.edu.mydotabuff.bean.PlayerInfoBean;
 
 /**
@@ -236,6 +238,69 @@ public class WebDataHelper {
 						}
 						bean.setBeans(beans);
 						bean.setLoadWebData(true);
+						
+						ArrayList<HashMap<String, String>> maps = new ArrayList<HashMap<String, String>>();
+						for (int type = 0; type <= 1; type++) {
+							Element table = doc
+									.select("div.container.xuning-box")
+									.select("table.table.table-hover.table-striped.table-sfield")
+									.get(type);
+
+							String test = table.toString().replaceAll(
+									"<span(.*)span>", "");
+							Elements _trs = Jsoup.parse(test).select("tr");
+							HashMap<String, String> map = new HashMap<String, String>();
+							for (int k = 1; k < _trs.size() + 1; k = k + 2) {
+								for (int i = k - 1; i < k + 1; i++) {
+									int m = i + 1;
+									if (m % 2 == 0) {
+										Elements divs = _trs.get(i)
+												.select("td").select("div");
+										for (int j = 0; j < divs.size(); j++) {
+											switch (j) {
+											case 0:
+												map.put("num"+i,
+														divs.get(j)
+																.text()
+																.trim()
+																.replace(" ",
+																		"")
+																.substring(3));
+												break;
+											case 1:
+												map.put("rate"+i,
+														divs.get(j)
+																.text()
+																.trim()
+																.replace(" ",
+																		"")
+																.substring(3, 8));
+												break;
+											case 2:
+												map.put("KDA"+i,
+														divs.get(j)
+																.text()
+																.trim()
+																.replace(" ",
+																		"")
+																.substring(4));
+												break;
+
+											default:
+												break;
+											}
+										}
+									} else {
+										map.put("type"+i, _trs.get(i)
+												.select("td").text().trim()
+												.replace(" ", ""));
+									}
+								}
+							}
+							maps.add(map);
+						}
+						bean.setMaps(maps);
+						bean.setLoadMap(true);
 						DotaApplication.getApplication().setPlayerInfo(bean);
 						activity.runOnUiThread(new Runnable() {
 
