@@ -2382,7 +2382,7 @@ public class Common {
 			return "alchemist";
 		if (chineseName.equals("74"))
 			return "invoker";
-		if (chineseName.equals("75士"))
+		if (chineseName.equals("75"))
 			return "silencer";
 		if (chineseName.equals("76"))
 			return "obsidian_destroyer";
