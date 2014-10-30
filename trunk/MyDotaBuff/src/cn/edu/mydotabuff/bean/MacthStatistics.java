@@ -1,7 +1,10 @@
 package cn.edu.mydotabuff.bean;
 
-public class MacthStatistics {
+import java.io.Serializable;
 
+public class MacthStatistics implements Serializable{
+
+	private static final long serialVersionUID = 10302051L;
 	//全部比赛比赛: 231胜率: 48.48%KDA: 2.4
 
 	private String Type;
