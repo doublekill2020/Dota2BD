@@ -293,7 +293,7 @@ public class WebDataHelper {
 											}
 										}
 									} else {
-										macthStatisticsBeans.setType(trs.get(i)
+										macthStatisticsBeans.setType(_trs.get(i)
 												.select("td").text().trim()
 												.replace(" ", ""));
 
