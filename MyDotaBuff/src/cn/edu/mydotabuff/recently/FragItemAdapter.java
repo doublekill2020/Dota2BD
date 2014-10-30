@@ -1,6 +1,9 @@
 package cn.edu.mydotabuff.recently;
 
 import java.util.ArrayList;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +14,17 @@ import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.bean.MatchBean;
 import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.util.TimeHelper;
+import cn.edu.mydotabuff.util.Utils;
 
 public class FragItemAdapter extends BaseAdapter {
 	private Activity _caller;
 	private final ArrayList<MatchBean> _beans;
+	private ImageLoader loader;
 
 	public FragItemAdapter(Activity caller, ArrayList<MatchBean> beans) {
 		_caller = caller;
 		_beans = beans;
+		loader = ImageLoader.getInstance();
 	}
 
 	public int getCount() {
@@ -82,8 +88,11 @@ public class FragItemAdapter extends BaseAdapter {
 		holder.game_time.setText(TimeHelper.TimeStamp2Date(bean.getStartTime(),
 				"MM-dd HH:mm"));
 		for (int i = 1; i <= bean.getPlayers().size(); i++) {
-			Common.setHeroIcon(convertView.getContext(),
-					bean.getPlayers().get(i - 1).getHeroId(), holder.h[i]);
+			// Common.setHeroIcon(convertView.getContext(),
+			// bean.getPlayers().get(i - 1).getHeroId(), holder.h[i]);
+			loader.displayImage(
+					Utils.getHeroImageUri(Common.getHeroName(bean.getPlayers()
+							.get(i - 1).getHeroId())), holder.h[i]);
 		}
 		return convertView;
 	}

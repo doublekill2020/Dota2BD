@@ -34,6 +34,7 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 	private ImageLoader loader;
 	private int num[] = new int[8];
 	private WeakHashMap<Integer, View> map;
+
 	public ActMatchDetailItemAdapter(Activity caller,
 			ArrayList<PlayerDetailBean> beans, int num[]) {
 		_caller = caller;
@@ -111,24 +112,36 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 		holder.kill.setText(" " + bean.getKills());
 		holder.death.setText(" " + bean.getDeaths());
 		holder.assist.setText(" " + bean.getAssists());
-		loader.displayImage(Utils.getItemsImageUri(Common.getItemName(bean.getItem_0())), holder.h[1]);
-		loader.displayImage(Utils.getItemsImageUri(Common.getItemName(bean.getItem_1())), holder.h[2]);
-		loader.displayImage(Utils.getItemsImageUri(Common.getItemName(bean.getItem_2())), holder.h[3]);
-		loader.displayImage(Utils.getItemsImageUri(Common.getItemName(bean.getItem_3())), holder.h[4]);
-		loader.displayImage(Utils.getItemsImageUri(Common.getItemName(bean.getItem_4())), holder.h[5]);
-		loader.displayImage(Utils.getItemsImageUri(Common.getItemName(bean.getItem_5())), holder.h[6]);
-//		Common.setItemIcon(convertView.getContext(), bean.getItem_0(),
-//				holder.h[1]);
-//		Common.setItemIcon(convertView.getContext(), bean.getItem_1(),
-//				holder.h[2]);
-//		Common.setItemIcon(convertView.getContext(), bean.getItem_2(),
-//				holder.h[3]);
-//		Common.setItemIcon(convertView.getContext(), bean.getItem_3(),
-//				holder.h[4]);
-//		Common.setItemIcon(convertView.getContext(), bean.getItem_4(),
-//				holder.h[5]);
-//		Common.setItemIcon(convertView.getContext(), bean.getItem_5(),
-//				holder.h[6]);
+		loader.displayImage(
+				Utils.getItemsImageUri(Common.getItemName(bean.getItem_0())),
+				holder.h[1]);
+		loader.displayImage(
+				Utils.getItemsImageUri(Common.getItemName(bean.getItem_1())),
+				holder.h[2]);
+		loader.displayImage(
+				Utils.getItemsImageUri(Common.getItemName(bean.getItem_2())),
+				holder.h[3]);
+		loader.displayImage(
+				Utils.getItemsImageUri(Common.getItemName(bean.getItem_3())),
+				holder.h[4]);
+		loader.displayImage(
+				Utils.getItemsImageUri(Common.getItemName(bean.getItem_4())),
+				holder.h[5]);
+		loader.displayImage(
+				Utils.getItemsImageUri(Common.getItemName(bean.getItem_5())),
+				holder.h[6]);
+		// Common.setItemIcon(convertView.getContext(), bean.getItem_0(),
+		// holder.h[1]);
+		// Common.setItemIcon(convertView.getContext(), bean.getItem_1(),
+		// holder.h[2]);
+		// Common.setItemIcon(convertView.getContext(), bean.getItem_2(),
+		// holder.h[3]);
+		// Common.setItemIcon(convertView.getContext(), bean.getItem_3(),
+		// holder.h[4]);
+		// Common.setItemIcon(convertView.getContext(), bean.getItem_4(),
+		// holder.h[5]);
+		// Common.setItemIcon(convertView.getContext(), bean.getItem_5(),
+		// holder.h[6]);
 		holder.h[1].setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -277,8 +290,8 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 			holder.total_money.setCompoundDrawables(drawable, null, null, null);
 		} else if (position == 5) {
 			holder.tipView.setVisibility(View.VISIBLE);
-			holder.label.setBackgroundDrawable(_caller.getResources().getDrawable(
-					R.drawable.battle_lose_lable));
+			holder.label.setBackgroundDrawable(_caller.getResources()
+					.getDrawable(R.drawable.battle_lose_lable));
 			holder.label.setText("失败方");
 			Drawable drawable = _caller.getResources().getDrawable(
 					R.drawable.battle_kill_icon_not_win);
@@ -324,8 +337,10 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 					holder.txView[3].setText("英雄治疗:" + bean.getHero_healing());
 					holder.txView[4].setText("对建筑伤害:" + bean.getTower_damage());
 					holder.txView[5].setText("xp/min:" + bean.getXp_per_min());
-					holder.heroIcon.setImageResource(Common
-							.getHeroDrawableId(bean.getHero_id()));
+					// holder.heroIcon.setImageResource(Common
+					// .getHeroDrawableId(bean.getHero_id()));
+					loader.displayImage(Utils.getHeroImageUri(Common
+							.getHeroName(bean.getHero_id())), holder.heroIcon);
 				} else if (holder.moreView.getVisibility() == View.VISIBLE) {
 					holder.arrowView.setImageResource(R.drawable.arrow_down);
 					holder.moreView.setVisibility(View.GONE);
