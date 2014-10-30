@@ -23,8 +23,10 @@ import cn.edu.mydotabuff.bean.PlayerBean;
 import cn.edu.mydotabuff.bean.PlayerInfoBean;
 import cn.edu.mydotabuff.common.CommAdapter;
 import cn.edu.mydotabuff.common.CommViewHolder;
+import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.common.CommonTitleBar;
 import cn.edu.mydotabuff.recently.ActMatchDetail;
+import cn.edu.mydotabuff.util.Utils;
 import cn.edu.mydotabuff.view.XListView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -87,7 +89,8 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 			@Override
 			public void convert(CommViewHolder helper, BestRecord item) {
 				// TODO Auto-generated method stub
-				helper.setImageFromWeb(R.id.icon, item.getImageUri());
+				helper.setImageFromWeb(R.id.icon, Utils.getHeroImageUri(Common
+						.getHeroName(item.getHeroName())));
 				helper.setText(R.id.name, item.getHeroName());
 				helper.setText(R.id.tag1,
 						item.getRecordType() + ":" + item.getRecordNum());

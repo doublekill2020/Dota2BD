@@ -221,7 +221,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center"
-                android:src="@drawable/hero_1" />
+                 />
         </LinearLayout>
 
         <LinearLayout
