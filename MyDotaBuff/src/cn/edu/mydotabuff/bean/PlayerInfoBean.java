@@ -22,25 +22,24 @@ public class PlayerInfoBean implements Serializable {
 	private String loseStreak;
 	private ArrayList<BestRecord> beans;
 
-	private ArrayList<HashMap<String, String>> maps;
-	private boolean isLoadMap = false;//代表是否获取过全部比赛统计数据
+	private ArrayList<MacthStatistics> list;
+	private boolean isLoadStatistics = false;//代表是否获取过全部比赛统计数据
 	
 	
-	
-	public ArrayList<HashMap<String, String>> getMaps() {
-		return maps;
+	public ArrayList<MacthStatistics> getList() {
+		return list;
 	}
 
-	public void setMaps(ArrayList<HashMap<String, String>> maps) {
-		this.maps = maps;
+	public void setList(ArrayList<MacthStatistics> list) {
+		this.list = list;
 	}
 
 	public boolean isLoadMap() {
-		return isLoadMap;
+		return isLoadStatistics;
 	}
 
-	public void setLoadMap(boolean isLoadMap) {
-		this.isLoadMap = isLoadMap;
+	public void setLoadMap(boolean isLoadStatistics) {
+		this.isLoadStatistics = isLoadStatistics;
 	}
 
 	public boolean isLoadWebData() {
