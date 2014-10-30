@@ -66,7 +66,7 @@ public class DotaApplication extends Application {
 				.build();// 构建完成
 		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
 				context)
-				.memoryCacheExtraOptions(480, 800)
+				.memoryCacheExtraOptions(320, 480)
 				// max width, max height，即保存的每个缓存文件的最大长宽
 				.threadPoolSize(3)
 				// 线程池内加载的数量
