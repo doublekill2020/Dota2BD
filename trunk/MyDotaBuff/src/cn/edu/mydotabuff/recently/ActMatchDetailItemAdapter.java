@@ -111,18 +111,24 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 		holder.kill.setText(" " + bean.getKills());
 		holder.death.setText(" " + bean.getDeaths());
 		holder.assist.setText(" " + bean.getAssists());
-		Common.setItemIcon(convertView.getContext(), bean.getItem_0(),
-				holder.h[1]);
-		Common.setItemIcon(convertView.getContext(), bean.getItem_1(),
-				holder.h[2]);
-		Common.setItemIcon(convertView.getContext(), bean.getItem_2(),
-				holder.h[3]);
-		Common.setItemIcon(convertView.getContext(), bean.getItem_3(),
-				holder.h[4]);
-		Common.setItemIcon(convertView.getContext(), bean.getItem_4(),
-				holder.h[5]);
-		Common.setItemIcon(convertView.getContext(), bean.getItem_5(),
-				holder.h[6]);
+		loader.displayImage(Utils.getItemsImageUri(Common.getItemName(bean.getItem_0())), holder.h[1]);
+		loader.displayImage(Utils.getItemsImageUri(Common.getItemName(bean.getItem_1())), holder.h[2]);
+		loader.displayImage(Utils.getItemsImageUri(Common.getItemName(bean.getItem_2())), holder.h[3]);
+		loader.displayImage(Utils.getItemsImageUri(Common.getItemName(bean.getItem_3())), holder.h[4]);
+		loader.displayImage(Utils.getItemsImageUri(Common.getItemName(bean.getItem_4())), holder.h[5]);
+		loader.displayImage(Utils.getItemsImageUri(Common.getItemName(bean.getItem_5())), holder.h[6]);
+//		Common.setItemIcon(convertView.getContext(), bean.getItem_0(),
+//				holder.h[1]);
+//		Common.setItemIcon(convertView.getContext(), bean.getItem_1(),
+//				holder.h[2]);
+//		Common.setItemIcon(convertView.getContext(), bean.getItem_2(),
+//				holder.h[3]);
+//		Common.setItemIcon(convertView.getContext(), bean.getItem_3(),
+//				holder.h[4]);
+//		Common.setItemIcon(convertView.getContext(), bean.getItem_4(),
+//				holder.h[5]);
+//		Common.setItemIcon(convertView.getContext(), bean.getItem_5(),
+//				holder.h[6]);
 		holder.h[1].setOnClickListener(new OnClickListener() {
 
 			@Override
