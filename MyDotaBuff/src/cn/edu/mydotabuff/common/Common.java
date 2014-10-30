@@ -2442,7 +2442,7 @@ public class Common {
 			return "elder_titan";
 		if (chineseName.equals("104"))
 			return "legion_commander";
-		if (chineseName.equals("105"))
+		if (chineseName.equals("106"))
 			return "ember_spirit";
 		if (chineseName.equals("107"))
 			return "earth_spirit";
