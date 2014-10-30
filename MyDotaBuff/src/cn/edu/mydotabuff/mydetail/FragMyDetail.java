@@ -85,7 +85,7 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 
 	private void initView() {
 		// TODO Auto-generated method stub
-		if (bean != null) {
+		if (bean != null &&bean.getTimecreated() != null) {
 			nameView.setText(bean.getName());
 			statusView.setText(Common.getPersonState(bean.getState()));
 			timeView.setText(TimeHelper.TimeStamp2Date(bean.getTimecreated(),
