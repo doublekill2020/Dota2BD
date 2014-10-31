@@ -341,6 +341,14 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 					// .getHeroDrawableId(bean.getHero_id()));
 					loader.displayImage(Utils.getHeroImageUri(Common
 							.getHeroName(bean.getHero_id())), holder.heroIcon);
+					holder.heroIcon.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							Utils.startHeroDetailActivity(_caller, Common.getHeroName(bean.getHero_id()));
+						}
+					});
 				} else if (holder.moreView.getVisibility() == View.VISIBLE) {
 					holder.arrowView.setImageResource(R.drawable.arrow_down);
 					holder.moreView.setVisibility(View.GONE);

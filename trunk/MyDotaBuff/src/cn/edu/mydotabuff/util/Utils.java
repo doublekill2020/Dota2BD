@@ -131,7 +131,7 @@ public final class Utils {
      * @param packageContext
      * @param cItem
      */
-    private static void startHeroDetailActivity(Context packageContext, String cItemKeyName) {
+    public static void startHeroDetailActivity(Context packageContext, String cItemKeyName) {
         if (packageContext == null || cItemKeyName == null) {
             return;
         }
