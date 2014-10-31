@@ -2,7 +2,6 @@ package cn.edu.mydotabuff.http;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.jsoup.Jsoup;
@@ -11,7 +10,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import android.app.Activity;
-
+import android.util.Log;
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.bean.BestRecord;
 import cn.edu.mydotabuff.bean.HerosSatistics;
@@ -268,14 +267,15 @@ public class WebDataHelper {
 																.substring(3));
 												break;
 											case 1:
+												String rate = divs.get(j)
+														.text().trim()
+														.replace(" ", "")
+														.substring(3, 8);
+												if (rate.contains("%")) {
+													rate=rate.substring(0,rate.length()-1);
+												}
 												macthStatisticsBeans
-														.setWinning(divs
-																.get(j)
-																.text()
-																.trim()
-																.replace(" ",
-																		"")
-																.substring(3, 8));
+														.setWinning(rate);
 												break;
 											case 2:
 												macthStatisticsBeans
@@ -293,9 +293,9 @@ public class WebDataHelper {
 											}
 										}
 									} else {
-										macthStatisticsBeans.setType(_trs.get(i)
-												.select("td").text().trim()
-												.replace(" ", ""));
+										macthStatisticsBeans.setType(_trs
+												.get(i).select("td").text()
+												.trim().replace(" ", ""));
 
 									}
 								}

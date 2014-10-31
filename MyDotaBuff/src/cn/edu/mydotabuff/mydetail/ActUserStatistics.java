@@ -78,8 +78,8 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 			}
 		}, "统计");
 		views = new ArrayList<View>();
-		leftBtn = (TextView) findViewById(R.id.tvMRBServing);
-		rightBtn = (TextView) findViewById(R.id.tvMRBFinished);
+		leftBtn = (TextView) findViewById(R.id.leftBtn);
+		rightBtn = (TextView) findViewById(R.id.rightBtn);
 		setTabChange(0);
 		pager = (ViewPager) findViewById(R.id.viewPager);
 		view1 = View.inflate(this, R.layout.act_user_statistics_left, null);
@@ -233,9 +233,9 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		int viewId = v.getId();
-		if (viewId == R.id.tvMRBServing) {
+		if (viewId == R.id.leftBtn) {
 			pager.setCurrentItem(0);
-		} else if (viewId == R.id.tvMRBFinished) {
+		} else if (viewId == R.id.rightBtn) {
 			pager.setCurrentItem(1);
 		}
 	}

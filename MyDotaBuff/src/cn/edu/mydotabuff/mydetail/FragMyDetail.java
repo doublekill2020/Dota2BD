@@ -77,15 +77,21 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent intent = new Intent(activity, ActUserStatistics.class);
-				startActivity(intent);
+				if (bean.isLoadMap() && bean.isLoadWebData()) {
+					Intent intent = new Intent(activity,
+							ActUserStatistics.class);
+					startActivity(intent);
+				} else {
+					TipsToast.showToast(activity, "暂无数据", Toast.LENGTH_SHORT,
+							DialogType.LOAD_FAILURE);
+				}
 			}
 		});
 	}
 
 	private void initView() {
 		// TODO Auto-generated method stub
-		if (bean != null &&bean.getTimecreated() != null) {
+		if (bean != null && bean.getTimecreated() != null) {
 			nameView.setText(bean.getName());
 			statusView.setText(Common.getPersonState(bean.getState()));
 			timeView.setText(TimeHelper.TimeStamp2Date(bean.getTimecreated(),
@@ -106,8 +112,8 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 
 	private void bindDataFromWeb() {
 		// TODO Auto-generated method stub
-		winNum.setText(bean.getWinStreak()+"场");
-		loseNum.setText(bean.getLoseStreak()+"场");
+		winNum.setText(bean.getWinStreak() + "场");
+		loseNum.setText(bean.getLoseStreak() + "场");
 	}
 
 	@Override
