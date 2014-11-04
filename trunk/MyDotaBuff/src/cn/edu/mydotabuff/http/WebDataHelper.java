@@ -174,9 +174,8 @@ public class WebDataHelper {
 							.getPlayerInfo();
 					Document doc = null;
 					try {
+						doc = Jsoup.connect(url).timeout(timeout).get();
 						if (doc != null) {
-
-							doc = Jsoup.connect(url).timeout(timeout).get();
 
 							// 获取连胜连败
 							Elements trs = doc
