@@ -3,6 +3,10 @@ package cn.edu.mydotabuff.hero;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.umeng.analytics.b;
+
+import u.aly.be;
+
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.R.layout;
 import cn.edu.mydotabuff.bean.HerosSatistics;
@@ -13,11 +17,13 @@ import cn.edu.mydotabuff.http.WebDataHelper;
 import cn.edu.mydotabuff.http.WebDataHelper.DataType;
 import cn.edu.mydotabuff.view.XListView;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 public class FragHeroList extends Fragment implements OnWebDataGetListener {
 
@@ -26,12 +32,14 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 	private String userID = "";
 	private XListView listView;
 	private HeroListAdapter adapter;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.frag_hero_used_list,
-				container, false);
+		View view = inflater.inflate(R.layout.frag_hero_used_list, container,
+				false);
 		listView = (XListView) view.findViewById(R.id.hero_used_list);
+
 		listView.setPullLoadEnable(false);
 		listView.setPullRefreshEnable(false);
 		userID = getActivity().getIntent().getStringExtra("userID");
@@ -53,41 +61,87 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 		// TODO Auto-generated method stub
 		dialog.dismiss();
 		heroSatisticsList = (List<HerosSatistics>) data;
+		System.out.println(heroSatisticsList.size());
 		for (HerosSatistics beans : heroSatisticsList) {
 			System.out.println(beans.toString());
 		}
+		adapter = new HeroListAdapter(this, heroSatisticsList, R.layout.frag_hero_used_list_item);
+		listView.setAdapter(adapter);
 	}
 
 	@Override
 	public void onGetFailed() {
-		// TODO Auto-generated method stub
+		System.out.println();
 		dialog.dismiss();
 	}
-	class HeroListAdapter extends BaseAdapter{
+
+	class HeroListAdapter extends BaseAdapter {
+
+		private List<HerosSatistics> beans; // 数据
+		private int resource; // item的布局
+		private FragHeroList context;
+		private TextView tv_numbers;
+		private TextView tv_heroName;
+		private TextView tv_usesTimes;
+		private TextView tv_KDA;
+		private TextView tv_perCoin;
+		private TextView findViewById;
+		private TextView tv_perXp;
+
+		public HeroListAdapter(FragHeroList context, List<HerosSatistics> beans,
+				int resource) {
+			this.context = context;
+			this.beans = beans;
+			this.resource = resource;
+		}
 
 		@Override
 		public int getCount() {
 			// TODO Auto-generated method stub
-			return 0;
+			return beans.size();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			// TODO Auto-generated method stub
-			return null;
+			return beans.get(position);
 		}
 
 		@Override
 		public long getItemId(int position) {
-			// TODO Auto-generated method stub
-			return 0;
+			return position;
 		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			// TODO Auto-generated method stub
-			return null;
+			if(convertView==null){  
+	            LayoutInflater inflator = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);  
+	            convertView = inflator.inflate(resource, null); 
+				tv_numbers = (TextView) convertView
+						.findViewById(R.id.tv_numbers);
+				tv_heroName = (TextView) convertView
+						.findViewById(R.id.tv_heroName);
+				tv_usesTimes = (TextView) convertView
+						.findViewById(R.id.usesTimes);
+				tv_KDA = (TextView) convertView.findViewById(R.id.tv_KDA);
+				tv_perCoin = (TextView) convertView
+						.findViewById(R.id.tv_perCoin);
+				tv_perXp=	findViewById = (TextView) convertView
+						.findViewById(R.id.tv_perXP);
+	        }  
+	        HerosSatistics  bean = beans.get(position);  
+	        tv_numbers.setText(bean.getHeroID());
+	        tv_heroName.setText(bean.getHeroName());
+	        tv_usesTimes.setText(bean.getUseTimes());
+	        tv_KDA.setText(bean.getKDA()+"");
+	        tv_perCoin.setText(bean.getGold_PerMin()+"");
+	        tv_perXp.setText(bean.getXp_PerMin()+"");
+	        return convertView;  
 		}
-		
+
+	}
+
+	public LayoutInflater getSystemService(String layoutInflaterService) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
