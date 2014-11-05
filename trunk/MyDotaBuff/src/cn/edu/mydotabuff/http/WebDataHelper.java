@@ -254,13 +254,13 @@ public class WebDataHelper {
 								Elements _trs = Jsoup.parse(test).select("tr");
 								for (int k = 1; k < _trs.size() + 1; k = k + 2) {
 									MacthStatistics macthStatisticsBeans = new MacthStatistics();
-									int n = 0;
-									if (type == 0) {
-										n = 1;
-									} else {
-										n = -3;
-									}
-									for (int i = k - 1; i < k + n; i++) {
+//									int n = 0;
+//									if (type == 0) {
+//										n = 1;
+//									} else {
+//										n = -3;
+//									}
+									for (int i = k - 1; i < k + 1; i++) {
 										int m = i + 1;
 										if (m % 2 == 0) {
 											Elements divs = _trs.get(i)

@@ -47,7 +47,7 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 	private ProgressBar all_nBar, all_hBar, all_vhBar, rank_nBar, rank_hBar,
 			rank_vhBar;
 	private TextView all_n_data, all_h_data, all_vh_data, rank_n_data,
-			rank_h_data, rank_vh_data;
+			rank_h_data, rank_vh_data,all_tag,rank_tag;
 	private TextView all_n_rating, all_h_rating, all_vh_rating, rank_n_rating,
 			rank_h_rating, rank_vh_rating;
 
@@ -131,11 +131,15 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 		rank_nBar = (ProgressBar) view2.findViewById(R.id.rank_n_rate);
 		rank_hBar = (ProgressBar) view2.findViewById(R.id.rank_h_rate);
 		rank_vhBar = (ProgressBar) view2.findViewById(R.id.rank_vh_rate);
+		all_tag = (TextView) view2.findViewById(R.id.all_tag);
+		rank_tag = (TextView) view2.findViewById(R.id.rank_tag);
 		ArrayList<MacthStatistics> statisticsList = bean.getList();
 		MacthStatistics bean = statisticsList.get(1);
 		all_n_data.setText(bean.getPlayTimes()+"场 KDA:"+bean.getKAD());
 		all_n_rating.setText((int)Float.parseFloat(bean.getWinning())+"%");
 		all_nBar.setProgress((int)Float.parseFloat(bean.getWinning()));
+		bean = statisticsList.get(0);
+		all_tag.setText("("+bean.getPlayTimes()+"场 平均KDA:"+bean.getKAD()+" 胜率:"+bean.getWinning()+"%)");
 		bean = statisticsList.get(2);
 		all_h_data.setText(bean.getPlayTimes()+"场 KDA:"+bean.getKAD());
 		all_h_rating.setText((int)Float.parseFloat(bean.getWinning())+"%");
@@ -144,6 +148,8 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 		all_vh_data.setText(bean.getPlayTimes()+"场 KDA:"+bean.getKAD());
 		all_vh_rating.setText((int)Float.parseFloat(bean.getWinning())+"%");
 		all_vhBar.setProgress((int)Float.parseFloat(bean.getWinning()));
+		bean = statisticsList.get(6);
+		rank_tag.setText("("+bean.getPlayTimes()+"场 平均KDA:"+bean.getKAD()+" 胜率:"+bean.getWinning()+"%)");
 		bean = statisticsList.get(7);
 		rank_n_data.setText(bean.getPlayTimes()+"场 KDA:"+bean.getKAD());
 		rank_n_rating.setText((int)Float.parseFloat(bean.getWinning())+"%");

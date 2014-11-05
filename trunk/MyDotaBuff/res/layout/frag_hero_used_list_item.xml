@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -16,12 +17,14 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:text="比赛编号:" />
 
             <TextView
+                android:textColor="@color/black"
                 android:id="@+id/tv_numbers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -35,11 +38,13 @@
             android:orientation="horizontal" >
 
             <TextView
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="使用英雄:" />
 
             <TextView
+                android:textColor="@color/black"
                 android:id="@+id/tv_heroName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,7 +92,7 @@
                         android:layout_height="20dp"
                         android:gravity="center"
                         android:text="使用次数:"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="10sp" />
 
                     <TextView
@@ -97,7 +102,7 @@
                         android:layout_height="20dp"
                         android:gravity="center"
                         android:text="2345"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="10sp" />
                 </LinearLayout>
 
@@ -113,7 +118,7 @@
                         android:layout_marginLeft="10dp"
                         android:gravity="center"
                         android:text="KDA:"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="10sp" />
 
                     <TextView
@@ -123,7 +128,7 @@
                         android:layout_height="20dp"
                         android:gravity="center"
                         android:text="9.12"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="10sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -145,8 +150,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:gravity="center"
-                        android:text="每分钟金钱:"
-                        android:textColor="@color/white"
+                        android:text="gold/min:"
+                        android:textColor="@color/black"
                         android:textSize="10sp" />
 
                     <TextView
@@ -156,7 +161,7 @@
                         android:layout_height="20dp"
                         android:gravity="center"
                         android:text="120"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="10sp" />
                 </LinearLayout>
 
@@ -171,8 +176,8 @@
                         android:layout_height="20dp"
                         android:layout_marginLeft="10dp"
                         android:gravity="center"
-                        android:text="每分钟经验:"
-                        android:textColor="@color/white"
+                        android:text="xp/min:"
+                        android:textColor="@color/black"
                         android:textSize="10sp" />
 
                     <TextView
@@ -182,7 +187,7 @@
                         android:layout_height="20dp"
                         android:gravity="center"
                         android:text="302"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:textSize="10sp" />
                 </LinearLayout>
             </LinearLayout>
