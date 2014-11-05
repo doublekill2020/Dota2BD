@@ -336,6 +336,17 @@ public class WebDataHelper {
 								}
 							});
 
+						}else{
+							activity.runOnUiThread(new Runnable() {
+
+								@Override
+								public void run() {
+									// TODO Auto-generated method stub
+									if (listener != null) {
+										listener.onGetFailed();
+									}
+								}
+							});
 						}
 
 					} catch (IOException e) {
