@@ -19,7 +19,14 @@
             android:text="全部比赛"
             android:textColor="@color/black"
             android:textSize="24sp" />
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/all_tag"
+            android:textColor="@color/black"
+             />
+        
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -202,7 +209,14 @@
             android:text="天梯比赛"
             android:textColor="@color/black"
             android:textSize="24sp" />
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/rank_tag"
+            android:textColor="@color/black"
+             />
+        
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
