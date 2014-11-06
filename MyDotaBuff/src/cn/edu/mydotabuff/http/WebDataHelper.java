@@ -3,6 +3,8 @@ package cn.edu.mydotabuff.http;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -83,13 +85,21 @@ public class WebDataHelper {
 					url = "http://dotamax.com/player/hero/" + userId;
 					try {
 						// TODO Auto-generated method stub
-
+						Pattern p = null;
+						Matcher m1 = null;
 						Document doc = Jsoup.connect(url).timeout(timeout)
 								.get();
 						Elements trs = doc.select("tbody").select("tr");
 						for (int i = 0; i < trs.size(); i++) {
 							HerosSatistics heroSatisticsBeans = new HerosSatistics();
 							Elements tds = trs.get(i).select("td");
+							String uri	= tds.get(0) .getElementsByTag("a").first().attr("href").toString();
+							heroSatisticsBeans.setThisHeroDataUri(uri);
+						    p = Pattern.compile("hero=(.*)" );
+						    m1 = p.matcher(uri); 
+						    m1.find();
+						    String result =   m1.group().substring("hero=".length());
+						    heroSatisticsBeans.setHeroID(Integer.valueOf(result));
 							for (int j = 0; j < tds.size(); j++) {
 								String text = tds.get(j).text();
 								switch (j) {
