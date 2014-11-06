@@ -85,7 +85,10 @@ public class WebDataHelper {
 			public void run() {
 				// TODO Auto-generated method stub
 				String url = "";
+				// 1 成功 0 JSON解析出错 -1无匹配结果 -2 DOC == null,连接失败
+				int status = 1;
 				final List<T> data = new ArrayList<T>();
+				final ArrayList<UserInfo> infos = new ArrayList<UserInfo>();
 				switch (type) {
 				case HERO:
 					url = "http://dotamax.com/player/hero/" + userId;
@@ -162,6 +165,12 @@ public class WebDataHelper {
 							}
 							data.add((T) heroSatisticsBeans);
 						}
+						status = 1;
+					} catch (Exception e) {
+						status = 0;
+						e.printStackTrace();
+					}
+					if (status == 1) {
 						activity.runOnUiThread(new Runnable() {
 
 							@Override
@@ -172,18 +181,17 @@ public class WebDataHelper {
 								}
 							}
 						});
-					} catch (Exception e) {
+					} else if (status == 0) {
 						activity.runOnUiThread(new Runnable() {
 
 							@Override
 							public void run() {
 								// TODO Auto-generated method stub
 								if (listener != null) {
-									listener.onGetFailed();
+									listener.onGetFailed("JSON解析出错");
 								}
 							}
 						});
-						e.printStackTrace();
 					}
 					break;
 
@@ -195,7 +203,6 @@ public class WebDataHelper {
 					try {
 						doc = Jsoup.connect(url).timeout(timeout).get();
 						if (doc != null) {
-
 							// 获取连胜连败
 							Elements trs = doc
 									.select("div.container.xuning-box")
@@ -218,7 +225,6 @@ public class WebDataHelper {
 									break;
 								}
 							}
-
 							// 获取最高记录
 							ArrayList<BestRecord> beans = new ArrayList<BestRecord>();
 							Element bestRecordDiv = doc.select(
@@ -324,7 +330,6 @@ public class WebDataHelper {
 																	.substring(
 																			4));
 													break;
-
 												default:
 													break;
 												}
@@ -333,7 +338,6 @@ public class WebDataHelper {
 											macthStatisticsBeans.setType(_trs
 													.get(i).select("td").text()
 													.trim().replace(" ", ""));
-
 										}
 
 									}
@@ -344,44 +348,49 @@ public class WebDataHelper {
 							bean.setLoadMap(true);
 							DotaApplication.getApplication()
 									.setPlayerInfo(bean);
-							activity.runOnUiThread(new Runnable() {
-
-								@Override
-								public void run() {
-									// TODO Auto-generated method stub
-									if (listener != null) {
-										// 详细资料获取成功 存本地sharepreference了 无须回调
-										listener.onGetFinished(null);
-									}
-								}
-							});
-
+							status = 1;
 						} else {
-							activity.runOnUiThread(new Runnable() {
-
-								@Override
-								public void run() {
-									// TODO Auto-generated method stub
-									if (listener != null) {
-										listener.onGetFailed();
-									}
-								}
-							});
+							status = -2;
 						}
-
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
+						status = 0;
+						e.printStackTrace();
+					}
+					if (status == 1) {
 						activity.runOnUiThread(new Runnable() {
 
 							@Override
 							public void run() {
 								// TODO Auto-generated method stub
 								if (listener != null) {
-									listener.onGetFailed();
+									// 详细资料获取成功 存本地sharepreference了 无须回调
+									listener.onGetFinished(null);
 								}
 							}
 						});
-						e.printStackTrace();
+					} else if (status == 0) {
+						activity.runOnUiThread(new Runnable() {
+
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								if (listener != null) {
+									listener.onGetFailed("JSON解析出错");
+								}
+							}
+						});
+					} else if (status == -2) {
+						activity.runOnUiThread(new Runnable() {
+
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								if (listener != null) {
+									listener.onGetFailed("DOC == null,连接失败");
+								}
+							}
+						});
 					}
 					break;
 				case MATCH:
@@ -389,63 +398,52 @@ public class WebDataHelper {
 					break;
 
 				case USER:
-
 					try {
-						boolean saveFlag=false;
-						final ArrayList<UserInfo> infos = new ArrayList<UserInfo>();
+						boolean saveFlag = false;
 						String newUserId = URLEncoder.encode(userId, "UTF-8");
-
 						url = "http://dotamax.com/search/?q=" + newUserId;
-
 						doc = Jsoup.connect(url).timeout(timeout).get();
 						if (doc != null) {
 
 							String flag = doc.toString();
-							//查询结果为多个
-							if(flag.indexOf("主页  Dotamax -") >=0){
+							// 查询结果为多个
+							if (flag.indexOf("主页  Dotamax -") >= 0) {
 								Elements trs = doc
 										.select("table.table.table-hover.table-striped.table-list.table-search-result")
 										.select("tbody").select("tr");
 								for (int i = 1; i < trs.size(); i++) {
 									UserInfo caijj = new UserInfo();
-								
-									
-									
-									
 									String imgUrl = trs.get(i)
 											.getElementsByTag("img").first()
 											.attr("src").toString();
 									caijj.setImgUrl(imgUrl);
-									String tmp = trs.get(i).select("td").first()
-											.text().replace(" ", "");
+									String tmp = trs.get(i).select("td")
+											.first().text().replace(" ", "");
 									int num = tmp.indexOf("ID:");
 									caijj.setUserName(tmp.substring(0, num));
 									caijj.setUserID(tmp.substring(num,
 											tmp.length()));
 									infos.add(caijj);
-									saveFlag = true;
 								}
-								//查询结果为空
-							}else if(flag.indexOf("公开比赛数据") >= 0){
-								listener.onGetFailed();
+								saveFlag = true;
+							}
+							// 查询结果为空
+							else if (flag.indexOf("公开比赛数据") >= 0) {
 								saveFlag = false;
-								//查询结果唯一
-							}else{
+							}
+							// 查询结果唯一
+							else {
 								UserInfo haojj = new UserInfo();
-
 								String result = doc.getElementById(
 										"ibackground").toString();
 								result = result.trim().replace(" ", "");
-
 								String imgUrl = (result.substring(
 										result.indexOf("pic:\"") + 5,
 										result.indexOf("});"))).trim().replace(
 										"\"", "");
-
 								String name = (result.substring(
 										result.indexOf("title:\"") + 7,
 										result.indexOf("-DOTA2个人主页\""))).trim();
-
 								String Id = result.substring(
 										result.indexOf("ID:") + 3,
 										result.indexOf("ID:") + 3 + 9);
@@ -456,45 +454,61 @@ public class WebDataHelper {
 								infos.add(haojj);
 								saveFlag = true;
 							}
-							
-							
-							if(saveFlag){
-								activity.runOnUiThread(new Runnable() {
-
-									@Override
-									public void run() {
-										// TODO Auto-generated method stub
-										if (listener != null) {
-											// 详细资料获取成功 存本地sharepreference了 无须回调
-											listener.onGetFinished(infos);
-										}
-									}
-								});
+							if (saveFlag) {
+								status = 1;
+							} else {
+								status = -1;
 							}
-							
-						
-						}else{
-							activity.runOnUiThread(new Runnable() {
 
-								@Override
-								public void run() {
-									// TODO Auto-generated method stub
-									if (listener != null) {
-										listener.onGetFailed();
-									}
-								}
-							});
+						} else {
+							status = -2;
 						}
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
+						status = 0;
+					}
+					if (status == 1) {
 						activity.runOnUiThread(new Runnable() {
 
 							@Override
 							public void run() {
 								// TODO Auto-generated method stub
 								if (listener != null) {
-									listener.onGetFailed();
+									listener.onGetFinished(infos);
+								}
+							}
+						});
+					} else if (status == 0) {
+						activity.runOnUiThread(new Runnable() {
+
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								if (listener != null) {
+									listener.onGetFailed("JSON解析出错");
+								}
+							}
+						});
+					} else if (status == -2) {
+						activity.runOnUiThread(new Runnable() {
+
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								if (listener != null) {
+									listener.onGetFailed("DOC == null,连接失败");
+								}
+							}
+						});
+					} else if (status == -1) {
+						activity.runOnUiThread(new Runnable() {
+
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								if (listener != null) {
+									listener.onGetFailed("无匹配结果");
 								}
 							}
 						});

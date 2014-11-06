@@ -131,7 +131,7 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 	}
 
 	@Override
-	public void onGetFailed() {
+	public void onGetFailed(String failMsg) {
 		// TODO Auto-generated method stub
 		dialog.dismiss();
 		TipsToast.showToast(activity, "获取超时", Toast.LENGTH_SHORT,

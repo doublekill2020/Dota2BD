@@ -67,11 +67,14 @@ public class FragRecently extends Fragment {
 	private static final int FETCH_MATCH = 1;
 	private static final int FETCH_ONLINE_NUM = 2;
 	private static final int FETCH_HERO_LIST = 3;
+	private static final int FETCH_FAILED = 4;
+	private static final int NO_DATA = 5;// 玩家没有开启比赛数据共享
 	private String lastId = "";
 	private MyHandler myHandler;
 	private View convertView;
 	private ImageView h[] = new ImageView[11];
 	private TextView onlineNum;
+
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		recentLayout = inflater.inflate(R.layout.frag_recently, container,
@@ -133,15 +136,17 @@ public class FragRecently extends Fragment {
 				// TODO Auto-generated method stub
 				if (allMatchBeans.size() > 0) {
 					Intent intent = new Intent(activity, ActMatchDetail.class);
-//					Bundle mBundle = new Bundle();
+					// Bundle mBundle = new Bundle();
 					ArrayList<String> ids = new ArrayList<String>();
-					for(PlayerBean bean: allMatchBeans.get(position - 1).getPlayers()){
+					for (PlayerBean bean : allMatchBeans.get(position - 1)
+							.getPlayers()) {
 						ids.add(bean.getAccountId());
 					}
-//					mBundle.putSerializable("MatchBean",
-//							allMatchBeans.get(position - 1).getPlayers());
-//					intent.putExtras(mBundle);
-					intent.putExtra("matchId", allMatchBeans.get(position - 1).getMatchId());
+					// mBundle.putSerializable("MatchBean",
+					// allMatchBeans.get(position - 1).getPlayers());
+					// intent.putExtras(mBundle);
+					intent.putExtra("matchId", allMatchBeans.get(position - 1)
+							.getMatchId());
 					intent.putStringArrayListExtra("ids", ids);
 					startActivity(intent);
 				}
@@ -157,10 +162,11 @@ public class FragRecently extends Fragment {
 					@Override
 					public void onMsgReceiver(ResponseObj receiveInfo) {
 						// TODO Auto-generated method stub
+						Message msg = myHandler.obtainMessage();
 						switch (type) {
 						case FETCH_MATCH:
 							ArrayList<MatchBean> matches = new ArrayList<MatchBean>();
-							String num1="";
+							String num1 = "";
 							try {
 								JSONObject jsonObj = new JSONObject(receiveInfo
 										.getJsonStr());
@@ -199,7 +205,7 @@ public class FragRecently extends Fragment {
 												accountId = player
 														.getString("account_id");
 											} else {
-												//没有accountid时 为电脑
+												// 没有accountid时 为电脑
 												accountId = "000000000";
 											}
 											int playerSlot = player
@@ -214,30 +220,18 @@ public class FragRecently extends Fragment {
 												startTime, lobbyType,
 												radiantId, direId, playerList));
 									}
-									Message msg = myHandler.obtainMessage();
-									msg.arg1 = type;
-									msg.obj = matches;
-									myHandler.sendMessage(msg);
+									if (matches.size() > 0) {
+										msg.arg1 = type;
+										msg.obj = matches;
+									} else {
+										msg.arg1 = NO_DATA;
+									}
 								} else {
-									dialog.cancel();
-									activity.runOnUiThread(new Runnable() {
-
-										@Override
-										public void run() {
-											// TODO Auto-generated method stub
-											TipsToast.showToast(activity,
-													"steam被墙了，你懂得",
-													Toast.LENGTH_SHORT,
-													DialogType.LOAD_FAILURE);
-											listView.setPullLoadEnable(false);
-											listView.setPullRefreshEnable(true);
-											listView.stopLoadMore();
-											listView.stopRefresh();
-										}
-									});
+									msg.arg1 = FETCH_FAILED;
 								}
 							} catch (JSONException e) {
 								e.printStackTrace();
+								msg.arg1 = FETCH_FAILED;
 							}
 							break;
 						case FETCH_HERO_LIST:
@@ -263,24 +257,23 @@ public class FragRecently extends Fragment {
 							}
 							break;
 						case FETCH_ONLINE_NUM:
-							String num="";
+							String num = "";
 							try {
 								JSONObject jsonObj = new JSONObject(receiveInfo
 										.getJsonStr());
 								JSONObject resultObj = jsonObj
 										.getJSONObject("response");
 								num = resultObj.getString("player_count");
+								msg.arg1 = type;
+								msg.obj = num;
 							} catch (JSONException e) {
 								e.printStackTrace();
 							}
-							Message msg = myHandler.obtainMessage();
-							msg.arg1 = type;
-							msg.obj = num;
-							myHandler.sendMessage(msg);
 							break;
 						default:
 							break;
 						}
+						myHandler.sendMessage(msg);
 					}
 
 				});
@@ -319,8 +312,25 @@ public class FragRecently extends Fragment {
 				break;
 			case FETCH_ONLINE_NUM:
 				String num = (String) msg.obj;
-				onlineNum.setText("当前在线人数："+num);
+				onlineNum.setText("当前在线人数：" + num);
 				break;
+			case FETCH_FAILED:
+				dialog.cancel();
+				TipsToast.showToast(activity, "steam被墙了，你懂得",
+						Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
+				listView.setPullLoadEnable(false);
+				listView.setPullRefreshEnable(true);
+				listView.stopLoadMore();
+				listView.stopRefresh();
+				break;
+			case NO_DATA:
+				dialog.cancel();
+				TipsToast.showToast(activity, "未开启比赛数据共享", Toast.LENGTH_SHORT,
+						DialogType.LOAD_FAILURE);
+				listView.setPullLoadEnable(false);
+				listView.setPullRefreshEnable(true);
+				listView.stopLoadMore();
+				listView.stopRefresh();
 			default:
 				break;
 			}
