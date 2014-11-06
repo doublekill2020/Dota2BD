@@ -1,6 +1,9 @@
 package cn.edu.mydotabuff.http;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -20,6 +23,7 @@ import cn.edu.mydotabuff.bean.BestRecord;
 import cn.edu.mydotabuff.bean.HerosSatistics;
 import cn.edu.mydotabuff.bean.MacthStatistics;
 import cn.edu.mydotabuff.bean.PlayerInfoBean;
+import cn.edu.mydotabuff.bean.UserInfo;
 
 /**
  * JSONUP数据获取类（使用需实现OnWebDataGetListener）
@@ -40,7 +44,7 @@ public class WebDataHelper {
 	}
 
 	public enum DataType {
-		HERO("hero"), DETAIL("detail"), MATCH("match");
+		HERO("hero"), DETAIL("detail"), MATCH("match"),USER("user"),;
 		private String dataType;
 
 		private DataType(String dataType) {
@@ -380,6 +384,42 @@ public class WebDataHelper {
 					break;
 				case MATCH:
 
+					break;
+					
+				case USER:
+					
+					 UserInfo haojiba  = new UserInfo();
+					try {
+						String newUserId = URLEncoder.encode(userId, "UTF-8");
+						
+						url = "http://dotamax.com/search/?q=" + newUserId;
+
+						doc = Jsoup.connect(url).timeout(timeout).get();
+						if(doc!=null){
+							
+							Elements trs = doc.select(
+									"table.table.table-hover.table-striped.table-list.table-search-result")
+									.select("tbody").select("tr");
+							for (int i = 1; i < trs.size(); i++) {
+								String imgUrl = trs.get(i).getElementsByTag("img").first().attr("src").toString();
+								haojiba.setImgUrl(imgUrl);
+								
+								String tmp =  trs.get(i).select("td").first().text().replace(" ", "");
+								int num =tmp.indexOf("ID:");
+								haojiba.setUserName(tmp.substring(0, num));
+								haojiba.setUserID(tmp.substring(num,tmp.length()));
+								
+								
+							}
+
+						}
+						
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					
 					break;
 				default:
 					break;
