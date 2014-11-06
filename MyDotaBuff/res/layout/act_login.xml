@@ -14,14 +14,13 @@
         android:orientation="vertical" >
 
         <ImageView
-            android:visibility="gone"
             android:id="@+id/image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/linearLayout1"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="24dp"
-             />
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tx1"
@@ -29,17 +28,26 @@
             android:layout_height="wrap_content"
             android:text="使用此app，必须在游戏中开启共享比赛历史。" />
 
-        <EditText
-            android:id="@+id/editText"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-           
-            android:numeric="integer"
-            android:singleLine="true" 
-            android:text="188929113"
-            />
-             <!-- android:hint="请输入要查询的数字ID：" -->
+            android:orientation="horizontal" >
 
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="请输入要查询的数字ID："
+                android:inputType="number"
+                android:singleLine="true" />
+
+            <Button
+                android:layout_gravity="center"
+                android:id="@+id/btn"
+                android:text="按ID"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
     </LinearLayout>
 
     <Button

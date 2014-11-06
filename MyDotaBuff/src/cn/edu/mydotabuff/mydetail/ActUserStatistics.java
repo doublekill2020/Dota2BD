@@ -94,7 +94,7 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 			public void convert(CommViewHolder helper, BestRecord item) {
 				// TODO Auto-generated method stub
 				helper.setImageFromWeb(R.id.icon, Utils.getHeroImageUri(Common
-						.getHeroName(item.getHeroName())));
+						.getHeroName(item.getHeroName())),1);
 				helper.setText(R.id.name, item.getHeroName());
 				helper.setText(R.id.tag1,
 						item.getRecordType() + ":" + item.getRecordNum());

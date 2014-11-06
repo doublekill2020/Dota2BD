@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import cn.edu.mydotabuff.view.CircleImageView;
 import cn.edu.mydotabuff.view.RoundAngleImageView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -131,10 +132,20 @@ public class CommViewHolder {
 		return this;
 	}
 
-	//  for RoundAngleImageView
-	public CommViewHolder setImageFromWeb(int viewId, String url) {
-		RoundAngleImageView view = getView(viewId);
-		loader.displayImage(url, view);
+	/**
+	 * 为ImageView设置网络图片
+	 * 
+	 * @param type
+	 *            1为RoundAngleImageView 2为CircleImageView
+	 */
+	public CommViewHolder setImageFromWeb(int viewId, String url, int type) {
+		if (type == 1) {
+			RoundAngleImageView view = getView(viewId);
+			loader.displayImage(url, view);
+		} else if (type == 2) {
+			CircleImageView view = getView(viewId);
+			loader.displayImage(url, view);
+		}
 		return this;
 	}
 }

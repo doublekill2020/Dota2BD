@@ -44,7 +44,7 @@ public class WebDataHelper {
 	}
 
 	public enum DataType {
-		HERO("hero"), DETAIL("detail"), MATCH("match"),USER("user"),;
+		HERO("hero"), DETAIL("detail"), MATCH("match"), USER("user"), ;
 		private String dataType;
 
 		private DataType(String dataType) {
@@ -385,41 +385,72 @@ public class WebDataHelper {
 				case MATCH:
 
 					break;
-					
+
 				case USER:
-					
-					 UserInfo haojiba  = new UserInfo();
+
 					try {
+						final ArrayList<UserInfo> infos = new ArrayList<UserInfo>();
 						String newUserId = URLEncoder.encode(userId, "UTF-8");
-						
+
 						url = "http://dotamax.com/search/?q=" + newUserId;
 
 						doc = Jsoup.connect(url).timeout(timeout).get();
-						if(doc!=null){
-							
-							Elements trs = doc.select(
-									"table.table.table-hover.table-striped.table-list.table-search-result")
+						if (doc != null) {
+
+							Elements trs = doc
+									.select("table.table.table-hover.table-striped.table-list.table-search-result")
 									.select("tbody").select("tr");
 							for (int i = 1; i < trs.size(); i++) {
-								String imgUrl = trs.get(i).getElementsByTag("img").first().attr("src").toString();
-								haojiba.setImgUrl(imgUrl);
-								
-								String tmp =  trs.get(i).select("td").first().text().replace(" ", "");
-								int num =tmp.indexOf("ID:");
-								haojiba.setUserName(tmp.substring(0, num));
-								haojiba.setUserID(tmp.substring(num,tmp.length()));
-								
-								
+								UserInfo caijj = new UserInfo();
+								String imgUrl = trs.get(i)
+										.getElementsByTag("img").first()
+										.attr("src").toString();
+								caijj.setImgUrl(imgUrl);
+								String tmp = trs.get(i).select("td").first()
+										.text().replace(" ", "");
+								int num = tmp.indexOf("ID:");
+								caijj.setUserName(tmp.substring(0, num));
+								caijj.setUserID(tmp.substring(num,
+										tmp.length()));
+								infos.add(caijj);
 							}
+							activity.runOnUiThread(new Runnable() {
 
+								@Override
+								public void run() {
+									// TODO Auto-generated method stub
+									if (listener != null) {
+										// 详细资料获取成功 存本地sharepreference了 无须回调
+										listener.onGetFinished(infos);
+									}
+								}
+							});
+						}else{
+							activity.runOnUiThread(new Runnable() {
+
+								@Override
+								public void run() {
+									// TODO Auto-generated method stub
+									if (listener != null) {
+										listener.onGetFailed();
+									}
+								}
+							});
 						}
-						
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
+						activity.runOnUiThread(new Runnable() {
+
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								if (listener != null) {
+									listener.onGetFailed();
+								}
+							}
+						});
 					}
-					
-					
 					break;
 				default:
 					break;
