@@ -198,8 +198,9 @@ public class WebDataHelper {
 							for (int i = 0; i < trs.size(); i++) {
 								String resString = trs.get(i).select("td")
 										.text();
-								resString = resString.replace(" ", "").trim()
-										.substring(resString.length() - 2);
+								resString = resString.replace(" ", "");
+								resString = resString.trim().substring(7,
+										resString.length());
 								switch (i) {
 								case 0:
 									bean.setWinStreak(resString);
