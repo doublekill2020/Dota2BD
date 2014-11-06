@@ -14,6 +14,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import u.aly.n;
+
 import com.umeng.update.net.i;
 
 import android.app.Activity;
@@ -22,6 +24,7 @@ import android.util.Log;
 
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.bean.BestRecord;
+import cn.edu.mydotabuff.bean.HeroMatchStatistics;
 import cn.edu.mydotabuff.bean.HerosSatistics;
 import cn.edu.mydotabuff.bean.MacthStatistics;
 import cn.edu.mydotabuff.bean.PlayerInfoBean;
@@ -88,6 +91,7 @@ public class WebDataHelper {
 				// 1 成功 0 JSON解析出错 -1无匹配结果 -2 DOC == null,连接失败
 				int status = 1;
 				final List<T> data = new ArrayList<T>();
+				final ArrayList<HeroMatchStatistics> HMSBeans = new ArrayList<HeroMatchStatistics>();
 				final ArrayList<UserInfo> infos = new ArrayList<UserInfo>();
 				switch (type) {
 				case HERO:
@@ -394,7 +398,128 @@ public class WebDataHelper {
 					}
 					break;
 				case MATCH:
+					try {
+						url = "http://www.dotamax.com" + userId;
+						doc = Jsoup .connect(url).timeout(timeout).get();
+						if(doc!=null){
+							Elements trs = doc
+									.select("table.table.table-hover.table-striped.sortable.table-list.table-thead-left")
+									.select("tbody").select("tr");
+							HeroMatchStatistics heroMatchStatisticsBeans;
+							List<HeroMatchStatistics> heroMatchStatisticsList = new ArrayList<HeroMatchStatistics>();
+							for (int i = 0; i < trs.size(); i++) {
+								heroMatchStatisticsBeans = new HeroMatchStatistics();
+								Elements tds = trs.get(i).select("td");
+								for (int j = 0; j < tds.size(); j++) {
+									if (j == 6) {
+										Elements imgs = tds.get(j).select("img");
+										List<String> tmpList = new ArrayList<String>();
+										for (int k = 0; k < imgs.size(); k++) {
+											tmpList.add(imgs.get(k).attr("src"));
+										}
+										heroMatchStatisticsBeans.setItemsImgURI(tmpList);
+									} else {
+										switch (j) {
+										case 0:
+											heroMatchStatisticsBeans.setHeroName(tds.get(j)
+													.text());
+											break;
+										case 1:
+											String newString = tds.get(j).text()
+													.replace(" ", "");
+											String tmp = newString;
+											newString = newString.substring(0,
+													newString.length() - 4);
+											tmp = tmp.substring(tmp.length() - 4);
+											heroMatchStatisticsBeans.setMatchID(newString);
+											heroMatchStatisticsBeans.setMatchType(tmp);
+											break;
+										case 2:
+											heroMatchStatisticsBeans.setWhatTime(tds.get(j)
+													.text());
+											break;
+										case 3:
 
+											heroMatchStatisticsBeans.setResult(tds.get(j)
+													.text());
+											break;
+										case 4:
+											/*
+											 * 原始数据 2.71 (10.9 / 9.4 / 14.4) 替换所有空格, ( , ) 为 /
+											 * 以"/"分割 得到 KDA 以及 K, D , A
+											 */
+
+											String replaceString = tds.get(j).text()
+													.replace(" ", "")
+													.replaceAll("[\\s()]", "/");
+											String[] replaceStrings = replaceString.split("/");
+											heroMatchStatisticsBeans.setKDA(Double
+													.valueOf(replaceStrings[0]));
+											heroMatchStatisticsBeans.setKill(Double
+													.valueOf(replaceStrings[1]));
+											heroMatchStatisticsBeans.setDeath(Double
+													.valueOf(replaceStrings[2]));
+											heroMatchStatisticsBeans.setAssists(Double
+													.valueOf(replaceStrings[3]));
+											break;
+										case 5:
+											heroMatchStatisticsBeans
+													.setLevel(tds.get(j).text());
+											break;
+
+										default:
+											break;
+										}
+									}
+
+								}
+								HMSBeans.add(heroMatchStatisticsBeans);
+							}
+						status = 1;
+						}else{
+							status= -2;
+						}
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+						status= 0;
+					}
+					
+					if(status==1){
+						
+						activity.runOnUiThread(new Runnable() {
+							
+							@Override
+							public void run() {
+								if (listener!=null) {
+									listener.onGetFinished(HMSBeans);
+								}
+							}
+						});
+						
+					} else if (status == 0) {
+						activity.runOnUiThread(new Runnable() {
+
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								if (listener != null) {
+									listener.onGetFailed("JSON解析出错");
+								}
+							}
+						});
+					} else if (status == -2) {
+						activity.runOnUiThread(new Runnable() {
+
+							@Override
+							public void run() {
+								// TODO Auto-generated method stub
+								if (listener != null) {
+									listener.onGetFailed("DOC == null,连接失败");
+								}
+							}
+						});
+					}
 					break;
 
 				case USER:
