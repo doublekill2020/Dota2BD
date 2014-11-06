@@ -2,6 +2,7 @@ package cn.edu.mydotabuff.hero;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.WeakHashMap;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.b;
@@ -58,7 +59,7 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 		helper.setDataGetListener(this);
 		helper.getWebData(DataType.HERO, userID);
 		initEvents();
-		
+
 		return view;
 	}
 
@@ -73,13 +74,8 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 		// TODO Auto-generated method stub
 		dialog.dismiss();
 		heroSatisticsList = (List<HerosSatistics>) data;
-		System.out.println(heroSatisticsList.size());
-		for (HerosSatistics beans : heroSatisticsList) {
-			System.out.println(beans.toString());
-		}
 		adapter = new HeroListAdapter(this.getActivity(), heroSatisticsList);
 		listView.setAdapter(adapter);
-		
 	}
 
 	@Override
@@ -91,21 +87,14 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 
 		private List<HerosSatistics> beans; // 数据
 		private Activity context;
-		private TextView tv_allKAD;
-		private TextView tv_heroName;
-		private TextView tv_usesTimes;
-		private TextView tv_KDA;
-		private TextView tv_perCoin;
-		private TextView tv_perXp;
-		private RoundAngleImageView icon;
+		private WeakHashMap<Integer, View> map;
 		private ImageLoader loader;
-		private TextView tv_wining;
-		private ProgressBar pb_winRate;
 
 		public HeroListAdapter(Activity context, List<HerosSatistics> beans) {
 			this.context = context;
 			this.beans = beans;
 			loader = ImageLoader.getInstance();
+			map = new WeakHashMap<Integer, View>();
 		}
 
 		@Override
@@ -115,7 +104,7 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 		}
 
 		@Override
-		public Object getItem(int position) {
+		public HerosSatistics getItem(int position) {
 			return beans.get(position);
 		}
 
@@ -126,49 +115,78 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			convertView = context.getLayoutInflater().inflate(
-					R.layout.frag_hero_used_list_item, null);
-			tv_allKAD = (TextView) convertView.findViewById(R.id.tv_allKAD);
-			tv_heroName = (TextView) convertView.findViewById(R.id.tv_heroName);
-			tv_usesTimes = (TextView) convertView.findViewById(R.id.usesTimes);
-			tv_KDA = (TextView) convertView.findViewById(R.id.tv_KDA);
-			tv_perCoin = (TextView) convertView.findViewById(R.id.tv_perCoin);
-			tv_perXp = (TextView) convertView.findViewById(R.id.tv_perXP);
-			icon = (RoundAngleImageView) convertView.findViewById(R.id.icon);
-			tv_wining =(TextView) convertView.findViewById(R.id.pb_winRatesText);
-			pb_winRate = (ProgressBar) convertView.findViewById(R.id.pb_winRate);
+			convertView = map.get(position);
+			if (convertView == null) {
+				convertView = context.getLayoutInflater().inflate(
+						R.layout.frag_hero_used_list_item, null);
+				ViewHolder holder = new ViewHolder();
+				holder.tv_allKAD = (TextView) convertView
+						.findViewById(R.id.tv_allKAD);
+				holder.tv_heroName = (TextView) convertView
+						.findViewById(R.id.tv_heroName);
+				holder.tv_usesTimes = (TextView) convertView
+						.findViewById(R.id.usesTimes);
+				holder.tv_KDA = (TextView) convertView
+						.findViewById(R.id.tv_KDA);
+				holder.tv_perCoin = (TextView) convertView
+						.findViewById(R.id.tv_perCoin);
+				holder.tv_perXp = (TextView) convertView
+						.findViewById(R.id.tv_perXP);
+				holder.icon = (RoundAngleImageView) convertView
+						.findViewById(R.id.icon);
+				holder.tv_wining = (TextView) convertView
+						.findViewById(R.id.pb_winRatesText);
+				holder.pb_winRate = (ProgressBar) convertView
+						.findViewById(R.id.pb_winRate);
+				convertView.setTag(holder);
+			}
+			ViewHolder holder = (ViewHolder) convertView.getTag();
 			HerosSatistics bean = beans.get(position);
-			tv_allKAD.setText(bean.getAllKAD() + "");
-			tv_heroName.setText(bean.getHeroName());
-			tv_usesTimes.setText(bean.getUseTimes() + "");
-			tv_KDA.setText(bean.getKDA() + "");
-			tv_perCoin.setText(bean.getGold_PerMin() + "");
-			tv_perXp.setText(bean.getXp_PerMin() + "");
-			pb_winRate.setProgress( (int)bean.getWinning());
-			tv_wining.setText(bean.getWinning()+"%");
-			loader.displayImage(Utils.getHeroImageUri(Common.getHeroName(bean
-					.getHeroID())), icon);
+			holder.tv_allKAD.setText(bean.getAllKAD() + "");
+			holder.tv_heroName.setText(bean.getHeroName());
+			holder.tv_usesTimes.setText(bean.getUseTimes() + "");
+			holder.tv_KDA.setText(bean.getKDA() + "");
+			holder.tv_perCoin.setText(bean.getGold_PerMin() + "");
+			holder.tv_perXp.setText(bean.getXp_PerMin() + "");
+			holder.pb_winRate.setProgress((int) bean.getWinning());
+			holder.tv_wining.setText(bean.getWinning() + "%");
+			loader.displayImage(
+					Utils.getHeroImageUri(Common.getHeroName(bean.getHeroID())),
+					holder.icon);
+			map.put(position, convertView);
 			return convertView;
 		}
 
 	}
-	
-	private void initEvents(){
+
+	private static class ViewHolder {
+		private TextView tv_allKAD;
+		private TextView tv_heroName;
+		private TextView tv_usesTimes;
+		private TextView tv_KDA;
+		private TextView tv_perCoin;
+		private TextView tv_perXp;
+		private RoundAngleImageView icon;
+		private TextView tv_wining;
+		private ProgressBar pb_winRate;
+	}
+
+	private void initEvents() {
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				if (heroSatisticsList.size()>0) {
-					System.out.println(heroSatisticsList.get(position-1).getThisHeroDataUri());
+				if (heroSatisticsList.size() > 0) {
+					System.out.println(heroSatisticsList.get(position - 1)
+							.getThisHeroDataUri());
 				}
-				
+
 			}
-			
-			
+
 		});
-		
-	} 
+
+	}
 
 }

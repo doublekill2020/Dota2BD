@@ -93,13 +93,16 @@ public class WebDataHelper {
 						for (int i = 0; i < trs.size(); i++) {
 							HerosSatistics heroSatisticsBeans = new HerosSatistics();
 							Elements tds = trs.get(i).select("td");
-							String uri	= tds.get(0) .getElementsByTag("a").first().attr("href").toString();
+							String uri = tds.get(0).getElementsByTag("a")
+									.first().attr("href").toString();
 							heroSatisticsBeans.setThisHeroDataUri(uri);
-						    p = Pattern.compile("hero=(.*)" );
-						    m1 = p.matcher(uri); 
-						    m1.find();
-						    String result =   m1.group().substring("hero=".length());
-						    heroSatisticsBeans.setHeroID(Integer.valueOf(result));
+							p = Pattern.compile("hero=(.*)");
+							m1 = p.matcher(uri);
+							m1.find();
+							String result = m1.group().substring(
+									"hero=".length());
+							heroSatisticsBeans.setHeroID(Integer
+									.valueOf(result));
 							for (int j = 0; j < tds.size(); j++) {
 								String text = tds.get(j).text();
 								switch (j) {
@@ -264,12 +267,12 @@ public class WebDataHelper {
 								Elements _trs = Jsoup.parse(test).select("tr");
 								for (int k = 1; k < _trs.size() + 1; k = k + 2) {
 									MacthStatistics macthStatisticsBeans = new MacthStatistics();
-//									int n = 0;
-//									if (type == 0) {
-//										n = 1;
-//									} else {
-//										n = -3;
-//									}
+									// int n = 0;
+									// if (type == 0) {
+									// n = 1;
+									// } else {
+									// n = -3;
+									// }
 									for (int i = k - 1; i < k + 1; i++) {
 										int m = i + 1;
 										if (m % 2 == 0) {
@@ -290,17 +293,17 @@ public class WebDataHelper {
 																			3));
 													break;
 												case 1:
+													String rate = divs.get(j)
+															.text().trim()
+															.replace(" ", "")
+															.substring(3, 8);
+													if (rate.contains("%")) {
+														rate = rate.substring(
+																0,
+																rate.length() - 1);
+													}
 													macthStatisticsBeans
-															.setWinning(divs
-																	.get(j)
-																	.text()
-																	.trim()
-																	.replace(
-																			" ",
-																			"")
-																	.substring(
-																			3,
-																			8));
+															.setWinning(rate);
 													break;
 												case 2:
 													macthStatisticsBeans
@@ -346,7 +349,7 @@ public class WebDataHelper {
 								}
 							});
 
-						}else{
+						} else {
 							activity.runOnUiThread(new Runnable() {
 
 								@Override
