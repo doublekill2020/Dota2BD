@@ -23,11 +23,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import cn.edu.mydotabuff.bean.UserInfo;
 import cn.edu.mydotabuff.common.CommAdapter;
 import cn.edu.mydotabuff.common.CommViewHolder;
 import cn.edu.mydotabuff.custom.LoadingDialog;
+import cn.edu.mydotabuff.custom.TipsToast;
+import cn.edu.mydotabuff.custom.TipsToast.DialogType;
 import cn.edu.mydotabuff.http.OnWebDataGetListener;
 import cn.edu.mydotabuff.http.WebDataHelper;
 import cn.edu.mydotabuff.http.WebDataHelper.DataType;
@@ -54,7 +57,6 @@ public class ActLogin extends Activity implements OnClickListener,
 	}
 
 	public void initView() {
-
 		setContentView(R.layout.act_login);
 
 		editText = (EditText) findViewById(R.id.editText);
@@ -161,52 +163,70 @@ public class ActLogin extends Activity implements OnClickListener,
 	public <T> void onGetFinished(List<T> data) {
 		// TODO Auto-generated method stub
 		dialog.dismiss();
-		View dlgView = getLayoutInflater()
-				.inflate(R.layout.dlg_user_list, null);
-		list = (ListView) dlgView.findViewById(R.id.list);
-		AlertDialog dialog = new AlertDialog.Builder(this).setTitle("搜索结果:")
-				.setView(dlgView)
-				.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
-						dialog.cancel();
-					}
-				}).create();
-		dialog.setCanceledOnTouchOutside(false);
-		dialog.show();
-		final ArrayList<UserInfo> beans = (ArrayList<UserInfo>) data;
-		list.setAdapter(new CommAdapter<UserInfo>(this, beans,
-				R.layout.dlg_user_list_item) {
+		// size=1 只有一条数据 直接跳转
+		if (data.size() == 1) {
+			System.out.println((ArrayList<UserInfo>) data);
+			UserInfo info = (UserInfo) data.get(0);
+			String ID = info.getUserID().trim();
+			Intent intent = new Intent();
+			intent.setClass(ActLogin.this, MainActivity.class);
+			intent.putExtra("userID", ID);
+			startActivity(intent);
+		} else {
+			View dlgView = getLayoutInflater().inflate(R.layout.dlg_user_list,
+					null);
+			list = (ListView) dlgView.findViewById(R.id.list);
+			AlertDialog dialog = new AlertDialog.Builder(this)
+					.setTitle("搜索结果:")
+					.setView(dlgView)
+					.setNegativeButton("取消",
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// TODO Auto-generated method stub
+									dialog.cancel();
+								}
+							}).create();
+			dialog.setCanceledOnTouchOutside(false);
+			dialog.show();
+			final ArrayList<UserInfo> beans = (ArrayList<UserInfo>) data;
+			list.setAdapter(new CommAdapter<UserInfo>(this, beans,
+					R.layout.dlg_user_list_item) {
 
-			@Override
-			public void convert(CommViewHolder helper, UserInfo item) {
-				// TODO Auto-generated method stub
-				helper.setText(R.id.name, item.getUserName());
-				helper.setText(R.id.id, item.getUserID());
-				helper.setImageFromWeb(R.id.icon, item.getImgUrl(), 2);
-			}
-		});
-		list.setOnItemClickListener(new OnItemClickListener() {
+				@Override
+				public void convert(CommViewHolder helper, UserInfo item) {
+					// TODO Auto-generated method stub
+					helper.setText(R.id.name, item.getUserName());
+					helper.setText(R.id.id, item.getUserID());
+					helper.setImageFromWeb(R.id.icon, item.getImgUrl(), 2);
+				}
+			});
+			list.setOnItemClickListener(new OnItemClickListener() {
 
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// TODO Auto-generated method stub
-				String ID = beans.get(position).getUserID();
-				// 出去ID：
-				ID = ID.substring(3, ID.length());
-				Intent intent = new Intent();
-				intent.setClass(ActLogin.this, MainActivity.class);
-				intent.putExtra("userID", ID);
-				startActivity(intent);
-			}
-		});
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					// TODO Auto-generated method stub
+					String ID = beans.get(position).getUserID();
+					// 除去ID：
+					ID = ID.substring(3, ID.length());
+					Intent intent = new Intent();
+					intent.setClass(ActLogin.this, MainActivity.class);
+					intent.putExtra("userID", ID);
+					startActivity(intent);
+				}
+			});
+		}
 	}
 
 	@Override
-	public void onGetFailed() {
+	public void onGetFailed(String failMsg) {
 		// TODO Auto-generated method stub
+		if (failMsg.equals("无匹配结果")) {
+			TipsToast.showToast(this, failMsg, Toast.LENGTH_SHORT,
+					DialogType.LOAD_FAILURE);
+		}
 		dialog.dismiss();
 	}
 }

@@ -8,5 +8,5 @@ public interface OnWebDataGetListener {
 
 	<T> void onGetFinished(List<T> data);
 
-	void onGetFailed();
+	void onGetFailed(String failMsg);
 }

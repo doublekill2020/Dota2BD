@@ -79,7 +79,7 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 	}
 
 	@Override
-	public void onGetFailed() {
+	public void onGetFailed(String failMsg) {
 		dialog.dismiss();
 	}
 
