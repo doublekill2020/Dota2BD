@@ -391,6 +391,7 @@ public class WebDataHelper {
 				case USER:
 
 					try {
+						boolean saveFlag=false;
 						final ArrayList<UserInfo> infos = new ArrayList<UserInfo>();
 						String newUserId = URLEncoder.encode(userId, "UTF-8");
 
@@ -422,10 +423,12 @@ public class WebDataHelper {
 									caijj.setUserID(tmp.substring(num,
 											tmp.length()));
 									infos.add(caijj);
+									saveFlag = true;
 								}
 								//查询结果为空
 							}else if(flag.indexOf("公开比赛数据") >= 0){
 								listener.onGetFailed();
+								saveFlag = false;
 								//查询结果唯一
 							}else{
 								UserInfo haojj = new UserInfo();
@@ -449,25 +452,27 @@ public class WebDataHelper {
 
 								haojj.setImgUrl(imgUrl);
 								haojj.setUserName(name);
-								haojj.getUserID(Id);
-								
-								
+								haojj.setUserID(Id);
+								infos.add(haojj);
+								saveFlag = true;
 							}
 							
 							
-							
-							
-							activity.runOnUiThread(new Runnable() {
+							if(saveFlag){
+								activity.runOnUiThread(new Runnable() {
 
-								@Override
-								public void run() {
-									// TODO Auto-generated method stub
-									if (listener != null) {
-										// 详细资料获取成功 存本地sharepreference了 无须回调
-										listener.onGetFinished(infos);
+									@Override
+									public void run() {
+										// TODO Auto-generated method stub
+										if (listener != null) {
+											// 详细资料获取成功 存本地sharepreference了 无须回调
+											listener.onGetFinished(infos);
+										}
 									}
-								}
-							});
+								});
+							}
+							
+						
 						}else{
 							activity.runOnUiThread(new Runnable() {
 
