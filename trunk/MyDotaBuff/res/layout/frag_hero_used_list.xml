@@ -6,6 +6,7 @@
     android:orientation="vertical" >
 
     <cn.edu.mydotabuff.view.XListView
+        android:divider="@drawable/myinfro_divi_short_icon"
         android:id="@+id/hero_used_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >

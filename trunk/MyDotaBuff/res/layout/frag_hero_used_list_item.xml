@@ -12,43 +12,47 @@
         android:orientation="horizontal" >
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="horizontal" >
-
-            <TextView
-                android:textColor="@color/black"
+            
+             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:text="比赛编号:" />
+                android:text="使用英雄:"
+                android:textColor="@color/black" />
 
             <TextView
-                android:textColor="@color/black"
-                android:id="@+id/tv_numbers"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="895968271" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:textColor="@color/black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="使用英雄:" />
-
-            <TextView
-                android:textColor="@color/black"
                 android:id="@+id/tv_heroName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="幽鬼" />
+                android:text="幽鬼"
+                android:textColor="@color/black" />
+
+           
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="所有玩家KDA:"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_allKAD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6.60"
+                android:textColor="@color/black" />
         </LinearLayout>
     </LinearLayout>
 
@@ -98,8 +102,8 @@
                     <TextView
                         android:id="@+id/usesTimes"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="20dp"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:text="2345"
                         android:textColor="@color/black"
@@ -124,8 +128,8 @@
                     <TextView
                         android:id="@+id/tv_KDA"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="20dp"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:text="9.12"
                         android:textColor="@color/black"
@@ -157,8 +161,8 @@
                     <TextView
                         android:id="@+id/tv_perCoin"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="20dp"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:text="120"
                         android:textColor="@color/black"
@@ -183,8 +187,8 @@
                     <TextView
                         android:id="@+id/tv_perXP"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="20dp"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:text="302"
                         android:textColor="@color/black"
@@ -211,10 +215,9 @@
                     android:layout_width="fill_parent"
                     android:layout_height="15dp"
                     android:layout_marginBottom="2dp"
-                    android:layout_marginRight="8dp"
                     android:layout_marginLeft="30dp"
-                    android:layout_marginTop="2dp"
-                     >
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="2dp" >
 
                     <ProgressBar
                         android:id="@+id/pb_winRate"
@@ -226,11 +229,11 @@
 
                     <TextView
                         android:id="@+id/pb_winRatesText"
-                        android:text="40%"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="8dp"
+                        android:text="40%"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
                 </FrameLayout>
