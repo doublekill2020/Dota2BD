@@ -14,6 +14,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import com.umeng.update.net.i;
+
 import android.app.Activity;
 
 import android.util.Log;
@@ -397,23 +399,64 @@ public class WebDataHelper {
 						doc = Jsoup.connect(url).timeout(timeout).get();
 						if (doc != null) {
 
-							Elements trs = doc
-									.select("table.table.table-hover.table-striped.table-list.table-search-result")
-									.select("tbody").select("tr");
-							for (int i = 1; i < trs.size(); i++) {
-								UserInfo caijj = new UserInfo();
-								String imgUrl = trs.get(i)
-										.getElementsByTag("img").first()
-										.attr("src").toString();
-								caijj.setImgUrl(imgUrl);
-								String tmp = trs.get(i).select("td").first()
-										.text().replace(" ", "");
-								int num = tmp.indexOf("ID:");
-								caijj.setUserName(tmp.substring(0, num));
-								caijj.setUserID(tmp.substring(num,
-										tmp.length()));
-								infos.add(caijj);
+							String flag = doc.toString();
+							//查询结果为多个
+							if(flag.indexOf("主页  Dotamax -") >=0){
+								Elements trs = doc
+										.select("table.table.table-hover.table-striped.table-list.table-search-result")
+										.select("tbody").select("tr");
+								for (int i = 1; i < trs.size(); i++) {
+									UserInfo caijj = new UserInfo();
+								
+									
+									
+									
+									String imgUrl = trs.get(i)
+											.getElementsByTag("img").first()
+											.attr("src").toString();
+									caijj.setImgUrl(imgUrl);
+									String tmp = trs.get(i).select("td").first()
+											.text().replace(" ", "");
+									int num = tmp.indexOf("ID:");
+									caijj.setUserName(tmp.substring(0, num));
+									caijj.setUserID(tmp.substring(num,
+											tmp.length()));
+									infos.add(caijj);
+								}
+								//查询结果为空
+							}else if(flag.indexOf("公开比赛数据") >= 0){
+								listener.onGetFailed();
+								//查询结果唯一
+							}else{
+								UserInfo haojj = new UserInfo();
+
+								String result = doc.getElementById(
+										"ibackground").toString();
+								result = result.trim().replace(" ", "");
+
+								String imgUrl = (result.substring(
+										result.indexOf("pic:\"") + 5,
+										result.indexOf("});"))).trim().replace(
+										"\"", "");
+
+								String name = (result.substring(
+										result.indexOf("title:\"") + 7,
+										result.indexOf("-DOTA2个人主页\""))).trim();
+
+								String Id = result.substring(
+										result.indexOf("ID:") + 3,
+										result.indexOf("ID:") + 3 + 9);
+
+								haojj.setImgUrl(imgUrl);
+								haojj.setUserName(name);
+								haojj.getUserID(Id);
+								
+								
 							}
+							
+							
+							
+							
 							activity.runOnUiThread(new Runnable() {
 
 								@Override
