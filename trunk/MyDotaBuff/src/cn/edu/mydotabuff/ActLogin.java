@@ -65,7 +65,7 @@ public class ActLogin extends Activity implements OnClickListener {
 		// TODO 自动生成的方法存根
 		if (v == submitBtn) {
 			String ID = editText.getText().toString();
-			if (ID != null && ID.length() == 9) {
+			if (ID != null && (ID.length() == 9 || ID.length() == 8)) {
 				Intent intent = new Intent();
 				intent.setClass(ActLogin.this, MainActivity.class);
 				intent.putExtra("userID", ID);

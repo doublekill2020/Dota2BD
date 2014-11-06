@@ -24,9 +24,9 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginLeft="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
         android:orientation="horizontal" >
 
         <TextView
@@ -86,19 +86,18 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/win_kill" />
+                        android:src="@drawable/battle_kill_icon_win" />
 
                     <TextView
                         android:id="@+id/tv_kill"
-                        android:layout_marginLeft="2dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
                         android:text="19"
                         android:textColor="#11AE91" />
                 </LinearLayout>
-                
-                
-                 <LinearLayout
+
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -107,19 +106,18 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/win_death" />
+                        android:src="@drawable/battle_death_icon_win" />
 
                     <TextView
-                        android:layout_marginLeft="2dp"
                         android:id="@+id/tv_death"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
                         android:text="1"
                         android:textColor="#11AE91" />
                 </LinearLayout>
-                
-                 
-                  <LinearLayout
+
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -128,21 +126,18 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/win_assist" />
+                        android:src="@drawable/battle_assist_icon_win" />
 
                     <TextView
-                        android:layout_marginLeft="2dp"
                         android:id="@+id/tv_assist"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
                         android:text="19"
                         android:textColor="#11AE91" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-        
-        
-        
     </LinearLayout>
 
 </LinearLayout>

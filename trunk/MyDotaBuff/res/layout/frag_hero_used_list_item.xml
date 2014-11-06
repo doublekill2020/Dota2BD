@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:text="所有玩家KDA:"
+                android:text="所有玩家平均KDA:"
                 android:textColor="@color/black" />
 
             <TextView
@@ -97,7 +97,7 @@
                         android:gravity="center"
                         android:text="使用次数:"
                         android:textColor="@color/black"
-                        android:textSize="10sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/usesTimes"
@@ -107,7 +107,7 @@
                         android:gravity="center"
                         android:text="2345"
                         android:textColor="@color/black"
-                        android:textSize="10sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -123,7 +123,7 @@
                         android:gravity="center"
                         android:text="KDA:"
                         android:textColor="@color/black"
-                        android:textSize="10sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/tv_KDA"
@@ -133,7 +133,7 @@
                         android:gravity="center"
                         android:text="9.12"
                         android:textColor="@color/black"
-                        android:textSize="10sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -156,7 +156,7 @@
                         android:gravity="center"
                         android:text="gold/min:"
                         android:textColor="@color/black"
-                        android:textSize="10sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/tv_perCoin"
@@ -166,7 +166,7 @@
                         android:gravity="center"
                         android:text="120"
                         android:textColor="@color/black"
-                        android:textSize="10sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -182,7 +182,7 @@
                         android:gravity="center"
                         android:text="xp/min:"
                         android:textColor="@color/black"
-                        android:textSize="10sp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/tv_perXP"
@@ -192,7 +192,7 @@
                         android:gravity="center"
                         android:text="302"
                         android:textColor="@color/black"
-                        android:textSize="10sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
 
