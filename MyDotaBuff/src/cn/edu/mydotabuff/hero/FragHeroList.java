@@ -4,15 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.WeakHashMap;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.umeng.analytics.b;
-
-import u.aly.be;
-
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Fragment;
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import cn.edu.mydotabuff.R;
-import cn.edu.mydotabuff.R.layout;
+import cn.edu.mydotabuff.bean.HeroMatchStatistics;
 import cn.edu.mydotabuff.bean.HerosSatistics;
 import cn.edu.mydotabuff.common.CommAdapter;
+import cn.edu.mydotabuff.common.CommViewHolder;
 import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.custom.LoadingDialog;
 import cn.edu.mydotabuff.http.OnWebDataGetListener;
@@ -21,20 +31,8 @@ import cn.edu.mydotabuff.http.WebDataHelper.DataType;
 import cn.edu.mydotabuff.util.Utils;
 import cn.edu.mydotabuff.view.RoundAngleImageView;
 import cn.edu.mydotabuff.view.XListView;
-import android.app.Activity;
-import android.app.Fragment;
-import android.content.Context;
-import android.os.Bundle;
-import android.os.Process;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.BaseAdapter;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class FragHeroList extends Fragment implements OnWebDataGetListener {
 
@@ -179,8 +177,90 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 					int position, long id) {
 				// TODO Auto-generated method stub
 				if (heroSatisticsList.size() > 0) {
-					System.out.println(heroSatisticsList.get(position - 1)
-							.getThisHeroDataUri());
+
+					String userId = heroSatisticsList.get(position - 1)
+							.getThisHeroDataUri();
+					WebDataHelper helper = new WebDataHelper(getActivity());
+					helper.setDataGetListener(new OnWebDataGetListener() {
+
+						@Override
+						public void onStartGetData() {
+							// TODO Auto-generated method stub
+							dialog.show();
+						}
+
+						@Override
+						public <T> void onGetFinished(List<T> data) {
+							// TODO Auto-generated method stub
+							dialog.dismiss();
+							final ArrayList<HeroMatchStatistics> beans = (ArrayList<HeroMatchStatistics>) data;
+							
+							for (HeroMatchStatistics heroMatchStatistics : beans) {
+								System.out.println(heroMatchStatistics.toString());
+							}
+							
+						/*	View dlgView = getActivity().getLayoutInflater()
+									.inflate(R.layout.dlg_user_list, null);
+
+							ListView list = (ListView) dlgView.findViewById(R.id.list_hms);
+							 list.setAdapter(new CommAdapter<HeroMatchStatistics>(getActivity(),beans ,R.layout.act_hero_match_list_item) {
+
+									@Override
+									public void convert(CommViewHolder helper,
+											HeroMatchStatistics item) {
+										helper.setText(R.id.tv_whatTime, item.getWhatTime());
+										helper.setText(R.id.tv_level, item.getLevel());
+										helper.setText(R.id.tv_kill, item.getKill()+"");
+										helper.setText(R.id.tv_death,item.getDeath()+"");
+										helper.setText(R.id.tv_death, item.getDeath()+"");
+										String result = item.getResult();
+										helper.setText(R.id.tv_status	, result);
+										if (result.equals("胜利")) {
+											helper.setBackgroundColor(R.id.tv_status, getResources().getColor(R.color.my_green));
+										}else {
+											helper.setBackgroundColor(R.id.tv_status, getResources().getColor(R.color.my_orange));
+										}
+										
+									}
+									 
+									 
+								});
+								 
+								 list.setOnItemClickListener(new OnItemClickListener(){
+
+									@Override
+									public void onItemClick(AdapterView<?> parent,
+											View view, int position, long id) {
+										String matchID = beans.get(position-1).getMatchID();
+										System.out.println(matchID);
+									}
+									 
+								 });
+							 AlertDialog mDialog = new AlertDialog.Builder(
+									getActivity()).setTitle("英雄比赛统计")
+									.setView(dlgView)
+									.setNegativeButton("关闭", new DialogInterface.OnClickListener() {
+										
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											// TODO Auto-generated method stub
+											dialog.cancel();
+										}
+									})
+									.create();
+							 mDialog.setCanceledOnTouchOutside(false);
+							 mDialog.show();*/
+							
+						}
+
+						@Override
+						public void onGetFailed(String failMsg) {
+							// TODO Auto-generated method stub
+
+						}
+					});
+					helper.getWebData(DataType.MATCH, userId);
+
 				}
 
 			}
