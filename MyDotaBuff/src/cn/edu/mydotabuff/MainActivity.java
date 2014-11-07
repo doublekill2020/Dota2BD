@@ -85,6 +85,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	private TextView userName;
 	private ImageLoader loader;
 	private String userID;
+	private SharedPreferences myPreferences;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -105,8 +106,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		initViews();
 		initEvents();
 		PlayerInfoBean bean = DotaApplication.getApplication().getPlayerInfo();
-		SharedPreferences myPreferences = getSharedPreferences("user_info",
-				Activity.MODE_PRIVATE);
+		myPreferences = getSharedPreferences("user_info", Activity.MODE_PRIVATE);
 		userID = myPreferences.getString("userID", "");
 		if (!userID.equals("")) {
 			steamID = Common.getSteamID(userID);
@@ -201,6 +201,19 @@ public class MainActivity extends Activity implements OnClickListener {
 					DotaApplication.getApplication().setPlayerInfo(bean);
 					loader.displayImage(bean.getMediumIcon(), userIcon);
 					userName.setText(bean.getName());
+
+					long time = Long.parseLong(bean.getLastlogooff());
+					long lastUpdateTime = myPreferences.getLong(
+							"lastUpdateTime", 0);
+					Editor editor = myPreferences.edit();
+					if (time > lastUpdateTime) {
+						editor.putLong("lastUpdateTime", time);
+						editor.putString("isNeedUpdate", "true");
+						editor.commit();
+					} else {
+						editor.putString("isNeedUpdate", "false");
+						editor.commit();
+					}
 				}
 				break;
 			case FETCH_FAILED:
