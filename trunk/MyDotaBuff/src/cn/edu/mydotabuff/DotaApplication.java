@@ -114,7 +114,7 @@ public class DotaApplication extends Application {
 	}
 
 	public void setMatches(ArrayList<MatchBean> info) {
-		SharedPreferences mSharedPreferences = getSharedPreferences("base64",
+		SharedPreferences mSharedPreferences = getSharedPreferences("matches",
 				Context.MODE_PRIVATE);
 		try {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -134,7 +134,7 @@ public class DotaApplication extends Application {
 		ArrayList<MatchBean> info = null;
 		try {
 			SharedPreferences mSharedPreferences = getSharedPreferences(
-					"base64", Context.MODE_PRIVATE);
+					"matches", Context.MODE_PRIVATE);
 			String personBase64 = mSharedPreferences.getString("matches", "");
 			byte[] base64Bytes = Base64.decodeBase64(personBase64.getBytes());
 			ByteArrayInputStream bais = new ByteArrayInputStream(base64Bytes);
@@ -147,10 +147,10 @@ public class DotaApplication extends Application {
 	}
 
 	public void destoryMatches() {
-		SharedPreferences mSharedPreferences = getSharedPreferences("base64",
+		SharedPreferences mSharedPreferences = getSharedPreferences("matches",
 				Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = mSharedPreferences.edit();
-		editor.putString("matches", "");
+		editor.remove("matches");
 		editor.commit();
 	}
 

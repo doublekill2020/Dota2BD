@@ -60,12 +60,12 @@ public class PersonalRequestImpl extends BaseRequestInterface {
 		request(APIConstants.GET_MATCH_DETAILS, params, false);
 	}
 
-	public void getPlayerDetail(String steamID) {
+	public void getPlayerDetail(String steamID,boolean isShowDlg) {
 		// TODO Auto-generated method stub
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("key", APIConstants.API_KEY);
 		params.put("steamids", steamID);
-		request(APIConstants.GET_PLAYER_SUMMARIES, params, false);
+		request(APIConstants.GET_PLAYER_SUMMARIES, params, isShowDlg);
 	}
 
 	public void getBoard(String division) {
