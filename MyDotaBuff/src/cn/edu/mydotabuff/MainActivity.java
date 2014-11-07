@@ -337,6 +337,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			editor.putString("userID", "");
 			editor.putString("isLogin", "false");
 			editor.commit();
+			DotaApplication.getApplication().destoryPlayerInfo();
 
 			startActivity(new Intent(this, ActLogin.class));
 			finish();

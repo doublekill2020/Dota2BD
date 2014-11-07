@@ -282,7 +282,7 @@ public class DotaApplication extends Application {
 	
 	public void setPlayerInfo(PlayerInfoBean info) {
 		// TODO Auto-generated method stub
-		SharedPreferences mSharedPreferences = getSharedPreferences("base64",
+		SharedPreferences mSharedPreferences = getSharedPreferences("player_info",
 				Context.MODE_PRIVATE);
 		try {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -302,7 +302,7 @@ public class DotaApplication extends Application {
 		PlayerInfoBean info = null;
 		try {
 			SharedPreferences mSharedPreferences = getSharedPreferences(
-					"base64", Context.MODE_PRIVATE);
+					"player_info", Context.MODE_PRIVATE);
 			String personBase64 = mSharedPreferences.getString("player_info", "");
 			byte[] base64Bytes = Base64.decodeBase64(personBase64.getBytes());
 			ByteArrayInputStream bais = new ByteArrayInputStream(base64Bytes);
@@ -315,10 +315,11 @@ public class DotaApplication extends Application {
 	}
 
 	public void destoryPlayerInfo() {
-		SharedPreferences mSharedPreferences = getSharedPreferences("base64",
+		SharedPreferences mSharedPreferences = getSharedPreferences("player_info",
 				Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = mSharedPreferences.edit();
 		editor.putString("player_info", "");
 		editor.commit();
 	}
+	
 }
