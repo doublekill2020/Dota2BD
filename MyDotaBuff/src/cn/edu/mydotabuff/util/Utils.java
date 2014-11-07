@@ -89,7 +89,16 @@ public final class Utils {
 			if (is==null) {
 				return null;
 			}else{
-				return d;
+				try {
+					is.close();
+					return d;
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return null;
+				}
+				
 			}
 		}
 
