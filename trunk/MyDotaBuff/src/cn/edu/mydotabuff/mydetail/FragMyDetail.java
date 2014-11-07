@@ -50,6 +50,7 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 	private Activity activity;
 	private LoadingDialog dialog;
 	private TextView rightView, winNum, loseNum;
+	private SharedPreferences myPreferences;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,8 +65,17 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 		iconView = (CircleImageView) view.findViewById(R.id.myinfrom_up_img);
 		loader = ImageLoader.getInstance();
 		activity = getActivity();
-		rightView = (TextView) activity.findViewById(CommonTitleBar.rightId);
 		dialog = new LoadingDialog(activity);
+		myPreferences = activity.getSharedPreferences("user_info",
+				Activity.MODE_PRIVATE);
+		String isNeedUpdate = myPreferences.getString("isNeedUpdate", "");
+		if (isNeedUpdate.equals("true")) {
+			helper = new WebDataHelper(activity);
+			helper.setDataGetListener(this);
+			helper.getWebData(DataType.DETAIL,
+					myPreferences.getString("userID", ""));
+		}
+		rightView = (TextView) activity.findViewById(CommonTitleBar.rightId);
 		initView();
 		initEvent();
 		return view;
@@ -105,9 +115,6 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 			} else {
 				helper = new WebDataHelper(activity);
 				helper.setDataGetListener(this);
-				SharedPreferences myPreferences = activity
-						.getSharedPreferences("user_info",
-								Activity.MODE_PRIVATE);
 				helper.getWebData(DataType.DETAIL,
 						myPreferences.getString("userID", ""));
 			}

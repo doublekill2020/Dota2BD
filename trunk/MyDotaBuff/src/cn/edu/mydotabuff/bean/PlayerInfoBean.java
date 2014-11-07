@@ -4,10 +4,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * 
+ * @ClassName: PlayerInfoBean
+ * @Description: TODO(玩家信息-包括steam资料以及比赛总数据统计)
+ * @author hao
+ * @date 2014-11-7 下午3:33:35
+ * 
+ */
 public class PlayerInfoBean implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1029L;
 	private String steamid;
 	private int communityState;// 社交关系
@@ -17,15 +22,14 @@ public class PlayerInfoBean implements Serializable {
 	private int state;// 在线状态
 	private String timecreated;
 
-	private boolean isLoadWebData = false;//代表是否获取过jsonup数据
+	private boolean isLoadWebData = false;// 代表是否获取过jsonup数据
 	private String winStreak;
 	private String loseStreak;
 	private ArrayList<BestRecord> beans;
 
 	private ArrayList<MacthStatistics> list;
-	private boolean isLoadStatistics = false;//代表是否获取过全部比赛统计数据
-	
-	
+	private boolean isLoadStatistics = false;// 代表是否获取过全部比赛统计数据
+
 	public ArrayList<MacthStatistics> getList() {
 		return list;
 	}
