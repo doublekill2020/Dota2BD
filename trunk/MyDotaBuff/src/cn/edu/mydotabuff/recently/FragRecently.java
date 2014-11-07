@@ -331,9 +331,9 @@ public class FragRecently extends Fragment implements OnMainEventListener {
 	}
 
 	@Override
-	public void onPause() {
+	public void onDestroy() {
 		// TODO Auto-generated method stub
-		super.onPause();
+		super.onDestroy();
 		DotaApplication.getApplication().destoryMatches();
 		DotaApplication.getApplication().setMatches(allMatchBeans);
 	}
@@ -346,6 +346,9 @@ public class FragRecently extends Fragment implements OnMainEventListener {
 			fetchData(FETCH_MATCH, lastId);
 		} else {
 			flag = true;
+			if(DotaApplication.getApplication().getMatches() == null){
+				return ;
+			}
 			allMatchBeans.addAll(DotaApplication.getApplication().getMatches());
 			if (mAdapter == null) {
 				mAdapter = new FragItemAdapter(activity, allMatchBeans);

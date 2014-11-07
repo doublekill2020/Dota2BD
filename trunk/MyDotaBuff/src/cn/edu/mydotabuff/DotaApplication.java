@@ -150,7 +150,7 @@ public class DotaApplication extends Application {
 		SharedPreferences mSharedPreferences = getSharedPreferences("matches",
 				Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = mSharedPreferences.edit();
-		editor.remove("matches");
+		editor.putString("matches", "");
 		editor.commit();
 	}
 
