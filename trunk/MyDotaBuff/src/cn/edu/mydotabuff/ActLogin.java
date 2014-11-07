@@ -9,6 +9,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -45,15 +46,24 @@ public class ActLogin extends Activity implements OnClickListener,
 	private String type = "ID";
 	private LoadingDialog dialog;
 	private ListView list;
+	private SharedPreferences myPreferences;
+	private String userID;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO 自动生成的方法存根
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
-		dialog = new LoadingDialog(this);
-		initView();
-		Occultation.getInstance(this).oponeData();
+		myPreferences = getSharedPreferences("user_info", Activity.MODE_PRIVATE);
+		userID = myPreferences.getString("userID", "");
+		if (myPreferences.getString("isLogin", "").equals("true")) {
+			startActivity(new Intent(this, MainActivity.class));
+			finish();
+		} else {
+			requestWindowFeature(Window.FEATURE_NO_TITLE);
+			dialog = new LoadingDialog(this);
+			initView();
+			Occultation.getInstance(this).oponeData();
+		}
 	}
 
 	public void initView() {
@@ -64,9 +74,6 @@ public class ActLogin extends Activity implements OnClickListener,
 		typeBtn = (Button) findViewById(R.id.btn);
 		submitBtn.setOnClickListener(this);
 		typeBtn.setOnClickListener(this);
-		SharedPreferences myPreferences = getSharedPreferences("userID",
-				Activity.MODE_PRIVATE);
-		String userID = myPreferences.getString("userID", "");
 		if (userID != null) {
 			editText.setText(userID);
 		}
@@ -89,10 +96,9 @@ public class ActLogin extends Activity implements OnClickListener,
 			if (type.equals("ID")) {
 				String ID = editText.getText().toString();
 				if (ID != null && (ID.length() == 9 || ID.length() == 8)) {
-					Intent intent = new Intent();
-					intent.setClass(ActLogin.this, MainActivity.class);
-					intent.putExtra("userID", ID);
-					startActivity(intent);
+					saveUserInfo(ID);
+					startActivity(new Intent(this, MainActivity.class));
+					finish();
 				} else {
 					new AlertDialog.Builder(this)
 							.setTitle("提示:")
@@ -168,10 +174,9 @@ public class ActLogin extends Activity implements OnClickListener,
 			System.out.println((ArrayList<UserInfo>) data);
 			UserInfo info = (UserInfo) data.get(0);
 			String ID = info.getUserID().trim();
-			Intent intent = new Intent();
-			intent.setClass(ActLogin.this, MainActivity.class);
-			intent.putExtra("userID", ID);
-			startActivity(intent);
+			saveUserInfo(ID);
+			startActivity(new Intent(this, MainActivity.class));
+			finish();
 		} else {
 			View dlgView = getLayoutInflater().inflate(R.layout.dlg_user_list,
 					null);
@@ -211,13 +216,20 @@ public class ActLogin extends Activity implements OnClickListener,
 					String ID = beans.get(position).getUserID();
 					// 除去ID：
 					ID = ID.substring(3, ID.length());
-					Intent intent = new Intent();
-					intent.setClass(ActLogin.this, MainActivity.class);
-					intent.putExtra("userID", ID);
-					startActivity(intent);
+					saveUserInfo(ID);
+					startActivity(new Intent(ActLogin.this, MainActivity.class));
+					finish();
 				}
 			});
 		}
+	}
+
+	private void saveUserInfo(String id) {
+		// TODO Auto-generated method stub
+		Editor editor = myPreferences.edit();
+		editor.putString("userID", id);
+		editor.putString("isLogin", "true");
+		editor.commit();
 	}
 
 	@Override
