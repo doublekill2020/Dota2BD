@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import cn.edu.mydotabuff.custom.LoadingDialog;
 import cn.edu.mydotabuff.http.OnWebDataGetListener;
 import cn.edu.mydotabuff.http.WebDataHelper;
 import cn.edu.mydotabuff.http.WebDataHelper.DataType;
+import cn.edu.mydotabuff.recently.ActMatchDetail;
 import cn.edu.mydotabuff.util.Utils;
 import cn.edu.mydotabuff.view.RoundAngleImageView;
 import cn.edu.mydotabuff.view.XListView;
@@ -187,7 +189,8 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 
 					final int heroId = heroSatisticsList.get(position - 1)
 							.getHeroID();
-
+					final String heroName = heroSatisticsList.get(position - 1)
+							.getHeroName();
 					WebDataHelper helper = new WebDataHelper(getActivity());
 					helper.setDataGetListener(new OnWebDataGetListener() {
 
@@ -202,11 +205,6 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 							// TODO Auto-generated method stub
 							dialog.dismiss();
 							final ArrayList<HeroMatchStatistics> beans = (ArrayList<HeroMatchStatistics>) data;
-
-							for (HeroMatchStatistics heroMatchStatistics : beans) {
-								System.out.println(heroMatchStatistics
-										.toString());
-							}
 
 							View dlgView = getActivity().getLayoutInflater()
 									.inflate(R.layout.dlg_hms_list, null);
@@ -312,7 +310,11 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 
 									String matchID = beans.get(position - 1)
 											.getMatchID();
-									System.out.println(matchID);
+									Intent intent = new Intent();
+									intent.setClass(FragHeroList.this.getActivity(), ActMatchDetail.class);
+									intent.putExtra("matchId", matchID);
+									
+									startActivity(intent);
 								}
 
 							});
@@ -320,7 +322,7 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 									Common.getHeroName(heroId));
 							AlertDialog mDialog = new AlertDialog.Builder(
 									getActivity())
-									.setTitle("英雄比赛统计")
+									.setTitle(heroName)
 									.setIcon(icon)
 									.setView(dlgView)
 									.setNegativeButton(

@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:background="@color/white" >
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -30,10 +31,10 @@
             android:orientation="vertical" >
 
             <LinearLayout
-                android:gravity="center_vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:orientation="horizontal" >
 
                 <LinearLayout
@@ -43,11 +44,13 @@
                     android:orientation="horizontal" >
 
                     <TextView
+                        android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="比赛ID:" />
 
                     <TextView
+                        android:textColor="@color/black"
                         android:id="@+id/tv_matchID"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -61,6 +64,7 @@
                     android:orientation="horizontal" >
 
                     <TextView
+                        android:textColor="@color/black"
                         android:id="@+id/tv_whatTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -72,10 +76,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:gravity="center_vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:orientation="horizontal" >
 
                 <LinearLayout
@@ -85,11 +89,11 @@
                     android:orientation="horizontal" >
 
                     <TextView
+                        android:textColor="@color/black"
                         android:id="@+id/tv_matchType"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:text="天梯匹配"
-                         />
+                        android:text="天梯匹配" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -99,6 +103,7 @@
                     android:orientation="horizontal" >
 
                     <TextView
+                        android:textColor="@color/black"
                         android:id="@+id/tv_level"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
@@ -106,13 +111,13 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-        
-         <LinearLayout
-             android:layout_marginLeft="5dp"
+
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="fill_parent"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="8dp"
+            android:layout_weight="1"
             android:orientation="vertical" >
 
             <LinearLayout
@@ -164,7 +169,7 @@
                 android:orientation="horizontal" >
 
                 <ImageView
-                     android:id="@+id/img_assists"
+                    android:id="@+id/img_assists"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/battle_assist_icon_win" />

@@ -237,7 +237,7 @@ public class ActMatchDetail extends Activity {
 			request.getMatchDetails(matchId);
 			break;
 		case FETCH_PLAYER_DETAIL:
-			if (ids.size() == 0) {
+			if (ids == null) {
 				ids = idsFromWeb;
 			}
 			for (int i = 0; i < ids.size(); i++) {
