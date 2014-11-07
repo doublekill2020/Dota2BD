@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,7 +52,9 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 
 		listView.setPullLoadEnable(false);
 		listView.setPullRefreshEnable(false);
-		userID = getActivity().getIntent().getStringExtra("userID");
+		SharedPreferences myPreferences = getActivity().getSharedPreferences("user_info",
+				Activity.MODE_PRIVATE);
+		userID = myPreferences.getString("userID", "");
 		dialog = new LoadingDialog(getActivity());
 		WebDataHelper helper = new WebDataHelper(getActivity());
 		helper.setDataGetListener(this);

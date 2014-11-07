@@ -12,6 +12,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -104,8 +105,11 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 			} else {
 				helper = new WebDataHelper(activity);
 				helper.setDataGetListener(this);
-				helper.getWebData(DataType.DETAIL, activity.getIntent()
-						.getStringExtra("userID"));
+				SharedPreferences myPreferences = activity
+						.getSharedPreferences("user_info",
+								Activity.MODE_PRIVATE);
+				helper.getWebData(DataType.DETAIL,
+						myPreferences.getString("userID", ""));
 			}
 		}
 	}

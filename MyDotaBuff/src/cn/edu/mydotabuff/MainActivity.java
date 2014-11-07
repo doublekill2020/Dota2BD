@@ -7,6 +7,9 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -36,10 +39,6 @@ import com.umeng.fb.FeedbackAgent;
 import com.umeng.update.UmengUpdateAgent;
 
 public class MainActivity extends Activity implements OnClickListener {
-
-	/*
-	 * jsoup 测试
-	 */
 
 	private FragRecently recentlyFragment;
 
@@ -77,7 +76,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	private TextView titleView, rightView;
 	private View openMenuView;
 	private SlidingMenu menu;
-	private TextView checkUpdateBtn, feedBackBtn, shareBtn;
+	private TextView checkUpdateBtn, feedBackBtn, shareBtn, logoutBtn;
 
 	private String steamID;
 	private static final int FETCH_DETAIL = 1, FETCH_FAILED = 2;
@@ -85,6 +84,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	private CircleImageView userIcon;
 	private TextView userName;
 	private ImageLoader loader;
+	private String userID;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -105,8 +105,11 @@ public class MainActivity extends Activity implements OnClickListener {
 		initViews();
 		initEvents();
 		PlayerInfoBean bean = DotaApplication.getApplication().getPlayerInfo();
-		if (getIntent().getStringExtra("userID") != null) {
-			steamID = Common.getSteamID(getIntent().getStringExtra("userID"));
+		SharedPreferences myPreferences = getSharedPreferences("user_info",
+				Activity.MODE_PRIVATE);
+		userID = myPreferences.getString("userID", "");
+		if (!userID.equals("")) {
+			steamID = Common.getSteamID(userID);
 			if (bean == null) {
 				fetchData(FETCH_DETAIL);
 			} else {
@@ -244,6 +247,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		shareBtn = (TextView) findViewById(R.id.share);
 		userIcon = (CircleImageView) findViewById(R.id.user_icon);
 		userName = (TextView) findViewById(R.id.user_name);
+		logoutBtn = (TextView) findViewById(R.id.logout);
 	}
 
 	private void initEvents() {
@@ -256,6 +260,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		checkUpdateBtn.setOnClickListener(this);
 		feedBackBtn.setOnClickListener(this);
 		shareBtn.setOnClickListener(this);
+		logoutBtn.setOnClickListener(this);
 		menu.setBehindCanvasTransformer(new CanvasTransformer() {
 			@Override
 			public void transformCanvas(Canvas canvas, float percentOpen) {
@@ -311,6 +316,17 @@ public class MainActivity extends Activity implements OnClickListener {
 			menu.toggle();
 			FeedbackAgent agent = new FeedbackAgent(this);
 			agent.startFeedbackActivity();
+			break;
+		case R.id.logout:
+			SharedPreferences mySharedPreferences = getSharedPreferences(
+					"user_info", Activity.MODE_PRIVATE);
+			Editor editor = mySharedPreferences.edit();
+			editor.putString("userID", "");
+			editor.putString("isLogin", "false");
+			editor.commit();
+
+			startActivity(new Intent(this, ActLogin.class));
+			finish();
 			break;
 		default:
 			break;

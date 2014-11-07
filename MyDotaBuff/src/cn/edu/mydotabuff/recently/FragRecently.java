@@ -94,8 +94,9 @@ public class FragRecently extends Fragment {
 		activity = getActivity();
 		dialog = new LoadingDialog(activity, getString(R.string.send_info));
 		// 获得用户ID
-		Intent intent = activity.getIntent();
-		userID = intent.getStringExtra("userID");
+		SharedPreferences myPreferences = activity.getSharedPreferences("user_info",
+				Activity.MODE_PRIVATE);
+		userID = myPreferences.getString("userID", "");
 		// initView();
 		myHandler = new MyHandler();
 		matchIds = new ArrayList<String>();
@@ -340,11 +341,6 @@ public class FragRecently extends Fragment {
 	@Override
 	public void onStop() {
 		// TODO 自动生成的方法存根
-		SharedPreferences mySharedPreferences = activity.getSharedPreferences(
-				"userID", Activity.MODE_PRIVATE);
-		Editor editor = mySharedPreferences.edit();
-		editor.putString("userID", userID);
-		editor.commit();
 		super.onStop();
 	}
 }
