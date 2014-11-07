@@ -71,31 +71,17 @@ public class FragRecently extends Fragment {
 	private static final int NO_DATA = 5;// 玩家没有开启比赛数据共享
 	private String lastId = "";
 	private MyHandler myHandler;
-	private View convertView;
-	private ImageView h[] = new ImageView[11];
 	private TextView onlineNum;
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		recentLayout = inflater.inflate(R.layout.frag_recently, container,
 				false);
-		convertView = inflater.inflate(R.layout.frag_recently_item, container,
-				false);
-		h[1] = (ImageView) convertView.findViewById(R.id.hero_1);
-		h[2] = (ImageView) convertView.findViewById(R.id.hero_2);
-		h[3] = (ImageView) convertView.findViewById(R.id.hero_3);
-		h[4] = (ImageView) convertView.findViewById(R.id.hero_4);
-		h[5] = (ImageView) convertView.findViewById(R.id.hero_5);
-		h[6] = (ImageView) convertView.findViewById(R.id.hero_6);
-		h[7] = (ImageView) convertView.findViewById(R.id.hero_7);
-		h[8] = (ImageView) convertView.findViewById(R.id.hero_8);
-		h[9] = (ImageView) convertView.findViewById(R.id.hero_9);
-		h[10] = (ImageView) convertView.findViewById(R.id.hero_10);
 		activity = getActivity();
 		dialog = new LoadingDialog(activity, getString(R.string.send_info));
 		// 获得用户ID
-		SharedPreferences myPreferences = activity.getSharedPreferences("user_info",
-				Activity.MODE_PRIVATE);
+		SharedPreferences myPreferences = activity.getSharedPreferences(
+				"user_info", Activity.MODE_PRIVATE);
 		userID = myPreferences.getString("userID", "");
 		// initView();
 		myHandler = new MyHandler();
