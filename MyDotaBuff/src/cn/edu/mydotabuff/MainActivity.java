@@ -332,6 +332,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			editor.putString("userID", "");
 			editor.putString("isLogin", "false");
 			editor.putString("isNeedUpdate", "true");
+			editor.putLong("lastUpdateTime", 0);
 			editor.commit();
 			DotaApplication.getApplication().destoryPlayerInfo();
 			DotaApplication.getApplication().destoryMatches();
