@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -86,6 +87,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	private ImageLoader loader;
 	private String userID;
 	private SharedPreferences myPreferences;
+	private OnMainEventListener listener;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -105,24 +107,11 @@ public class MainActivity extends Activity implements OnClickListener {
 
 		initViews();
 		initEvents();
-		PlayerInfoBean bean = DotaApplication.getApplication().getPlayerInfo();
 		myPreferences = getSharedPreferences("user_info", Activity.MODE_PRIVATE);
 		userID = myPreferences.getString("userID", "");
 		if (!userID.equals("")) {
 			steamID = Common.getSteamID(userID);
-			if (bean == null) {
-				fetchData(FETCH_DETAIL);
-			} else {
-				if (bean.getSteamid() != null) {
-					if (!bean.getSteamid().equals(steamID)) {
-						DotaApplication.getApplication().destoryPlayerInfo();
-						fetchData(FETCH_DETAIL);
-					} else {
-						loader.displayImage(bean.getMediumIcon(), userIcon);
-						userName.setText(bean.getName());
-					}
-				}
-			}
+			fetchData(FETCH_DETAIL);
 		}
 	}
 
@@ -184,7 +173,11 @@ public class MainActivity extends Activity implements OnClickListener {
 		request.setDialogTitle("获取中");
 		switch (type) {
 		case FETCH_DETAIL:
-			request.getPlayerDetail(steamID);
+			if (myPreferences.getString("isNeedUpdate", "").equals("")) {
+				request.getPlayerDetail(steamID, false);
+			} else {
+				request.getPlayerDetail(steamID, true);
+			}
 			break;
 		default:
 			break;
@@ -214,6 +207,8 @@ public class MainActivity extends Activity implements OnClickListener {
 						editor.putString("isNeedUpdate", "false");
 						editor.commit();
 					}
+					if (listener != null)
+						listener.onFinishGetPlayerInfo();
 				}
 				break;
 			case FETCH_FAILED:
@@ -336,9 +331,10 @@ public class MainActivity extends Activity implements OnClickListener {
 			Editor editor = mySharedPreferences.edit();
 			editor.putString("userID", "");
 			editor.putString("isLogin", "false");
+			editor.putString("isNeedUpdate", "true");
 			editor.commit();
 			DotaApplication.getApplication().destoryPlayerInfo();
-
+			DotaApplication.getApplication().destoryMatches();
 			startActivity(new Intent(this, ActLogin.class));
 			finish();
 			break;
@@ -461,5 +457,15 @@ public class MainActivity extends Activity implements OnClickListener {
 	public void onPause() {
 		super.onPause();
 		MobclickAgent.onPause(this);
+	}
+
+	@Override
+	public void onAttachFragment(Fragment fragment) {
+		// TODO Auto-generated method stub
+		super.onAttachFragment(fragment);
+		try {
+			listener = (OnMainEventListener) fragment;
+		} catch (Exception e) {
+		}
 	}
 }

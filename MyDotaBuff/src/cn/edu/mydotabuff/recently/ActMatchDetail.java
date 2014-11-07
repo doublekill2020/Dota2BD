@@ -245,7 +245,7 @@ public class ActMatchDetail extends Activity {
 				if (ids.get(i).equals("4294967295")) {
 				}
 			}
-			request.getPlayerDetail(steamIDs);
+			request.getPlayerDetail(steamIDs,false);
 		default:
 			break;
 		}

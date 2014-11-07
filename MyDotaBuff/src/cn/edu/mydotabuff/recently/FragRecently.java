@@ -37,6 +37,7 @@ import android.widget.Toast;
 import cn.edu.mydotabuff.APIConstants;
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.MainActivity;
+import cn.edu.mydotabuff.OnMainEventListener;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.bean.AbilityBean;
 import cn.edu.mydotabuff.bean.MatchBean;
@@ -55,7 +56,7 @@ import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.view.XListView;
 import cn.edu.mydotabuff.view.XListView.IXListViewListener;
 
-public class FragRecently extends Fragment {
+public class FragRecently extends Fragment implements OnMainEventListener {
 	private XListView listView;
 	private View recentLayout;
 	private String userID;
@@ -72,6 +73,8 @@ public class FragRecently extends Fragment {
 	private String lastId = "";
 	private MyHandler myHandler;
 	private TextView onlineNum;
+	private SharedPreferences myPreferences;
+	private boolean flag = false;// 当拿本地数据时 会导致加载更多的第一天与本地最后一条重复，此变量用来标识
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -80,8 +83,8 @@ public class FragRecently extends Fragment {
 		activity = getActivity();
 		dialog = new LoadingDialog(activity, getString(R.string.send_info));
 		// 获得用户ID
-		SharedPreferences myPreferences = activity.getSharedPreferences(
-				"user_info", Activity.MODE_PRIVATE);
+		myPreferences = activity.getSharedPreferences("user_info",
+				Activity.MODE_PRIVATE);
 		userID = myPreferences.getString("userID", "");
 		// initView();
 		myHandler = new MyHandler();
@@ -89,7 +92,6 @@ public class FragRecently extends Fragment {
 		allMatchBeans = new ArrayList<MatchBean>();
 		initView();
 		fetchData(FETCH_ONLINE_NUM, "");
-		fetchData(FETCH_MATCH, lastId);
 		return recentLayout;
 	}
 
@@ -209,6 +211,10 @@ public class FragRecently extends Fragment {
 									}
 									if (matches.size() > 0) {
 										msg.arg1 = type;
+										// 去除重复数据
+										if (flag) {
+											matches.remove(matches.size() - 1);
+										}
 										msg.obj = matches;
 									} else {
 										msg.arg1 = NO_DATA;
@@ -289,10 +295,10 @@ public class FragRecently extends Fragment {
 				listView.stopLoadMore();
 				listView.stopRefresh();
 				ArrayList<MatchBean> beans = (ArrayList<MatchBean>) msg.obj;
-				allMatchBeans.addAll(beans);
 				if (mAdapter == null) {
 					mAdapter = new FragItemAdapter(activity, beans);
 					listView.setAdapter(mAdapter);
+					allMatchBeans.addAll(beans);
 				} else {
 					mAdapter.addMoreData(beans);
 				}
@@ -325,8 +331,30 @@ public class FragRecently extends Fragment {
 	}
 
 	@Override
-	public void onStop() {
-		// TODO 自动生成的方法存根
-		super.onStop();
+	public void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		DotaApplication.getApplication().destoryMatches();
+		DotaApplication.getApplication().setMatches(allMatchBeans);
+	}
+	@Override
+	public void onFinishGetPlayerInfo() {
+		// TODO Auto-generated method stub
+		String isNeedUpdate = myPreferences.getString("isNeedUpdate", "");
+		if (isNeedUpdate.equals("true") || isNeedUpdate.equals("")) {
+			DotaApplication.getApplication().destoryMatches();
+			fetchData(FETCH_MATCH, lastId);
+		} else {
+			flag = true;
+			allMatchBeans.addAll(DotaApplication.getApplication().getMatches());
+			if (mAdapter == null) {
+				mAdapter = new FragItemAdapter(activity, allMatchBeans);
+				listView.setAdapter(mAdapter);
+				if (allMatchBeans.size() > 0) {
+					lastId = allMatchBeans.get(allMatchBeans.size() - 1)
+							.getMatchId();
+				}
+			}
+		}
 	}
 }
