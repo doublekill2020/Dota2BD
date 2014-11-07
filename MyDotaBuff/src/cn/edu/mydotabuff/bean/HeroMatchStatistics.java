@@ -3,17 +3,17 @@ package cn.edu.mydotabuff.bean;
 import java.util.List;
 
 public class HeroMatchStatistics {
-	private String heroName; //Ӣ������
-	private String matchID; //����Id
-	private String matchType; //��������
-	private String whatTime; //����ʱ��
-	private String result; // �������
-	private Double KDA; // KDA
-	private Double Kill; // ����ɱ����
-	private Double Death;//��������
-	private Double Assists; //��������
-	private String level; //��������
-	private  List<String> itemsImgURI; //��ƷͼƬ��ַ;
+	private String heroName; //英雄名称
+	private String matchID; //比赛Id
+	private String matchType; //比赛类型
+	private String whatTime; // 比赛时间
+	private String result; // 比赛结果
+	private double KDA; // KDA
+	private double Kill; // kill
+	private double Death;// death
+	private double Assists; //assists
+	private String level; // level
+	private  List<String> itemsImgURI; // 物品图片地址
 	public String getHeroName() {
 		return heroName;
 	}
@@ -44,28 +44,28 @@ public class HeroMatchStatistics {
 	public void setResult(String result) {
 		this.result = result;
 	}
-	public Double getKDA() {
+	public double getKDA() {
 		return KDA;
 	}
-	public void setKDA(Double kDA) {
+	public void setKDA(double kDA) {
 		KDA = kDA;
 	}
-	public Double getKill() {
+	public double getKill() {
 		return Kill;
 	}
-	public void setKill(Double kill) {
+	public void setKill(double kill) {
 		Kill = kill;
 	}
-	public Double getDeath() {
+	public double getDeath() {
 		return Death;
 	}
-	public void setDeath(Double death) {
+	public void setDeath(double death) {
 		Death = death;
 	}
-	public Double getAssists() {
+	public double getAssists() {
 		return Assists;
 	}
-	public void setAssists(Double assists) {
+	public void setAssists(double assists) {
 		Assists = assists;
 	}
 	public String getLevel() {
@@ -89,8 +89,8 @@ public class HeroMatchStatistics {
 				+ ", level=" + level + ", itemsImgURI=" + itemsImgURI + "]";
 	}
 	public HeroMatchStatistics(String heroName, String matchID,
-			String matchType, String whatTime, String result, Double kDA,
-			Double kill, Double death, Double assists, String level,
+			String matchType, String whatTime, String result, double kDA,
+			double kill, double death, double assists, String level,
 			List<String> itemsImgURI) {
 		super();
 		this.heroName = heroName;
@@ -109,6 +109,9 @@ public class HeroMatchStatistics {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	
 	
 	
 

@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -52,8 +53,8 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 
 		listView.setPullLoadEnable(false);
 		listView.setPullRefreshEnable(false);
-		SharedPreferences myPreferences = getActivity().getSharedPreferences("user_info",
-				Activity.MODE_PRIVATE);
+		SharedPreferences myPreferences = getActivity().getSharedPreferences(
+				"user_info", Activity.MODE_PRIVATE);
 		userID = myPreferences.getString("userID", "");
 		dialog = new LoadingDialog(getActivity());
 		WebDataHelper helper = new WebDataHelper(getActivity());
@@ -183,6 +184,10 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 
 					String userId = heroSatisticsList.get(position - 1)
 							.getThisHeroDataUri();
+
+					final int heroId = heroSatisticsList.get(position - 1)
+							.getHeroID();
+
 					WebDataHelper helper = new WebDataHelper(getActivity());
 					helper.setDataGetListener(new OnWebDataGetListener() {
 
@@ -197,63 +202,143 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 							// TODO Auto-generated method stub
 							dialog.dismiss();
 							final ArrayList<HeroMatchStatistics> beans = (ArrayList<HeroMatchStatistics>) data;
-							
+
 							for (HeroMatchStatistics heroMatchStatistics : beans) {
-								System.out.println(heroMatchStatistics.toString());
+								System.out.println(heroMatchStatistics
+										.toString());
 							}
-							
-						/*	View dlgView = getActivity().getLayoutInflater()
-									.inflate(R.layout.dlg_user_list, null);
 
-							ListView list = (ListView) dlgView.findViewById(R.id.list_hms);
-							 list.setAdapter(new CommAdapter<HeroMatchStatistics>(getActivity(),beans ,R.layout.act_hero_match_list_item) {
+							View dlgView = getActivity().getLayoutInflater()
+									.inflate(R.layout.dlg_hms_list, null);
 
-									@Override
-									public void convert(CommViewHolder helper,
-											HeroMatchStatistics item) {
-										helper.setText(R.id.tv_whatTime, item.getWhatTime());
-										helper.setText(R.id.tv_level, item.getLevel());
-										helper.setText(R.id.tv_kill, item.getKill()+"");
-										helper.setText(R.id.tv_death,item.getDeath()+"");
-										helper.setText(R.id.tv_death, item.getDeath()+"");
-										String result = item.getResult();
-										helper.setText(R.id.tv_status	, result);
-										if (result.equals("胜利")) {
-											helper.setBackgroundColor(R.id.tv_status, getResources().getColor(R.color.my_green));
-										}else {
-											helper.setBackgroundColor(R.id.tv_status, getResources().getColor(R.color.my_orange));
-										}
-										
+							ListView list = (ListView) dlgView
+									.findViewById(R.id.list_hms);
+							list.setAdapter(new CommAdapter<HeroMatchStatistics>(
+									getActivity(), beans,
+									R.layout.act_hero_match_list_item) {
+
+								@Override
+								public void convert(CommViewHolder helper,
+										HeroMatchStatistics item) {
+
+									// 设置 K D A textView内容
+									helper.setText(R.id.tv_kill,
+											(int) item.getKill() + "");
+									helper.setText(R.id.tv_death,
+											(int) item.getDeath() + "");
+									helper.setText(R.id.tv_death,
+											(int) item.getDeath() + "");
+									// 根据结果改变textColor backgroundColor
+									String result = item.getResult();
+									helper.setText(R.id.tv_status, result);
+									if (result.equals("胜利")) {
+
+										// 胜利 绿色
+										helper.setBackgroundColor(
+												R.id.tv_status,
+												getResources().getColor(
+														R.color.my_green));
+										helper.setTextColor(
+												R.id.tv_kill,
+												getResources().getColor(
+														R.color.my_green));
+										helper.setTextColor(
+												R.id.tv_death,
+												getResources().getColor(
+														R.color.my_green));
+										helper.setTextColor(
+												R.id.tv_assist,
+												getResources().getColor(
+														R.color.my_green));
+
+										helper.setImageResource(R.id.img_kill,
+												R.drawable.battle_kill_icon_win);
+										helper.setImageResource(
+												R.id.img_death,
+												R.drawable.battle_death_icon_win);
+										helper.setImageResource(
+												R.id.img_assists,
+												R.drawable.battle_assist_icon_win);
+
+									} else {
+										// 失败 橘色
+										helper.setBackgroundColor(
+												R.id.tv_status,
+												getResources().getColor(
+														R.color.my_orange));
+
+										helper.setTextColor(
+												R.id.tv_kill,
+												getResources().getColor(
+														R.color.my_orange));
+										helper.setTextColor(
+												R.id.tv_death,
+												getResources().getColor(
+														R.color.my_orange));
+										helper.setTextColor(
+												R.id.tv_assist,
+												getResources().getColor(
+														R.color.my_orange));
+
+										helper.setImageResource(
+												R.id.img_kill,
+												R.drawable.battle_kill_icon_not_win);
+										helper.setImageResource(
+												R.id.img_death,
+												R.drawable.battle_death_icon_not_win);
+										helper.setImageResource(
+												R.id.img_assists,
+												R.drawable.battle_assist_icon_not_win);
 									}
-									 
-									 
-								});
-								 
-								 list.setOnItemClickListener(new OnItemClickListener(){
 
-									@Override
-									public void onItemClick(AdapterView<?> parent,
-											View view, int position, long id) {
-										String matchID = beans.get(position-1).getMatchID();
-										System.out.println(matchID);
-									}
-									 
-								 });
-							 AlertDialog mDialog = new AlertDialog.Builder(
-									getActivity()).setTitle("英雄比赛统计")
+									helper.setText(R.id.tv_whatTime,
+											item.getWhatTime());
+									helper.setText(R.id.tv_level,
+											item.getLevel());
+									helper.setText(R.id.tv_matchID,
+											item.getMatchID());
+									helper.setText(R.id.tv_matchType,
+											item.getMatchType());
+
+								}
+
+							});
+
+							list.setOnItemClickListener(new OnItemClickListener() {
+
+								@Override
+								public void onItemClick(AdapterView<?> parent,
+										View view, int position, long id) {
+
+									String matchID = beans.get(position - 1)
+											.getMatchID();
+									System.out.println(matchID);
+								}
+
+							});
+							Drawable icon = Utils.getHeroImage(getActivity(),
+									Common.getHeroName(heroId));
+							AlertDialog mDialog = new AlertDialog.Builder(
+									getActivity())
+									.setTitle("英雄比赛统计")
+									.setIcon(icon)
 									.setView(dlgView)
-									.setNegativeButton("关闭", new DialogInterface.OnClickListener() {
-										
-										@Override
-										public void onClick(DialogInterface dialog, int which) {
-											// TODO Auto-generated method stub
-											dialog.cancel();
-										}
-									})
-									.create();
-							 mDialog.setCanceledOnTouchOutside(false);
-							 mDialog.show();*/
-							
+									.setNegativeButton(
+											"关闭",
+											new DialogInterface.OnClickListener() {
+
+												@Override
+												public void onClick(
+														DialogInterface dialog,
+														int which) {
+													// TODO Auto-generated
+													// method stub
+													dialog.cancel();
+												}
+											}).create();
+							mDialog.setCanceledOnTouchOutside(false);
+
+							mDialog.show();
 						}
 
 						@Override

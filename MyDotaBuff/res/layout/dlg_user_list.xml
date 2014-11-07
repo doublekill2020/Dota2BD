@@ -4,7 +4,11 @@
     android:layout_height="match_parent"
     android:background="@color/act_bg"
     android:orientation="vertical" >
-    <ListView
+
+    
+    
+    
+        <ListView
         android:divider="@drawable/comm_divider"
         android:id="@+id/list"
         android:layout_width="match_parent"
