@@ -57,7 +57,7 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 		// TODO 自动生成的方法存根
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
-		bean = DotaApplication.getApplication().getData(LocalDataType.PLAYER_INFO);
+		bean = DotaApplication.getApplication().getData(LocalDataType.PLAYER_DETAIL_INFO);
 		beans = bean.getBeans();
 		list = bean.getList();
 		Log.i("hao", list.toString());

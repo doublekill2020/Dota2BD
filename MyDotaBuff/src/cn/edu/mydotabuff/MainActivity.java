@@ -336,6 +336,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			editor.putLong("lastUpdateTime", 0);
 			editor.commit();
 			DotaApplication.getApplication().destoryData(LocalDataType.PLAYER_INFO);
+			DotaApplication.getApplication().destoryData(LocalDataType.PLAYER_DETAIL_INFO);
 			DotaApplication.getApplication().destoryData(LocalDataType.MATCHES);
 			DotaApplication.getApplication().destoryData(LocalDataType.HERO_USED_LIST);
 			startActivity(new Intent(this, ActLogin.class));

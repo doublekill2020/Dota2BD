@@ -335,7 +335,6 @@ public class FragRecently extends Fragment implements OnMainEventListener {
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		DotaApplication.getApplication().destoryData(LocalDataType.MATCHES);
 		DotaApplication.getApplication().saveData(allMatchBeans, LocalDataType.MATCHES);
 	}
 	@Override
@@ -343,7 +342,6 @@ public class FragRecently extends Fragment implements OnMainEventListener {
 		// TODO Auto-generated method stub
 		String isNeedUpdate = myPreferences.getString("isNeedUpdate", "");
 		if (isNeedUpdate.equals("true") || isNeedUpdate.equals("")) {
-			DotaApplication.getApplication().destoryData(LocalDataType.MATCHES);
 			fetchData(FETCH_MATCH, lastId);
 		} else {
 			flag = true;

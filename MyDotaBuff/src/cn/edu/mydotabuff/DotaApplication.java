@@ -115,23 +115,32 @@ public class DotaApplication extends Application {
 
 	public <T> void saveData(T data, LocalDataType type) {
 		String key = "";
+		String name = "";
 		switch (type) {
 		case MATCHES:
+			name = "matches";
 			key = "matches";
 			break;
 		case HERO_USED_LIST:
+			name = "hero_used_list";
 			key = "hero_used_list";
 			break;
 		case PLAYER_INFO:
+			name = "player_info";
 			key = "player_info";
 			break;
+		case PLAYER_DETAIL_INFO:
+			name = "player_detail_info";
+			key = "player_detail_info";
+			break;
 		case BOARDS:
+			name = "boards";
 			key = "boards";
 			break;
 		default:
 			break;
 		}
-		SharedPreferences mSharedPreferences = getSharedPreferences(key,
+		SharedPreferences mSharedPreferences = getSharedPreferences(name,
 				Context.MODE_PRIVATE);
 		try {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -150,17 +159,26 @@ public class DotaApplication extends Application {
 	@SuppressWarnings("unchecked")
 	public <T> T getData(LocalDataType type) {
 		String key = "";
+		String name = "";
 		switch (type) {
 		case MATCHES:
+			name = "matches";
 			key = "matches";
 			break;
 		case HERO_USED_LIST:
+			name = "hero_used_list";
 			key = "hero_used_list";
 			break;
 		case PLAYER_INFO:
+			name = "player_info";
 			key = "player_info";
 			break;
+		case PLAYER_DETAIL_INFO:
+			name = "player_detail_info";
+			key = "player_detail_info";
+			break;
 		case BOARDS:
+			name = "boards";
 			key = "boards";
 			break;
 		default:
@@ -168,7 +186,7 @@ public class DotaApplication extends Application {
 		}
 		T data = null;
 		try {
-			SharedPreferences mSharedPreferences = getSharedPreferences(key,
+			SharedPreferences mSharedPreferences = getSharedPreferences(name,
 					Context.MODE_PRIVATE);
 			String personBase64 = mSharedPreferences.getString(key, "");
 			byte[] base64Bytes = Base64.decodeBase64(personBase64.getBytes());
@@ -183,23 +201,32 @@ public class DotaApplication extends Application {
 
 	public void destoryData(LocalDataType type) {
 		String key = "";
+		String name = "";
 		switch (type) {
 		case MATCHES:
+			name = "matches";
 			key = "matches";
 			break;
 		case HERO_USED_LIST:
+			name = "hero_used_list";
 			key = "hero_used_list";
 			break;
 		case PLAYER_INFO:
+			name = "player_info";
 			key = "player_info";
 			break;
+		case PLAYER_DETAIL_INFO:
+			name = "player_detail_info";
+			key = "player_detail_info";
+			break;
 		case BOARDS:
+			name = "boards";
 			key = "boards";
 			break;
 		default:
 			break;
 		}
-		SharedPreferences mSharedPreferences = getSharedPreferences(key,
+		SharedPreferences mSharedPreferences = getSharedPreferences(name,
 				Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = mSharedPreferences.edit();
 		editor.putString(key, "");
@@ -207,6 +234,6 @@ public class DotaApplication extends Application {
 	}
 
 	public enum LocalDataType {
-		MATCHES, HERO_USED_LIST, PLAYER_INFO, BOARDS;
+		MATCHES, HERO_USED_LIST, PLAYER_INFO, BOARDS, PLAYER_DETAIL_INFO;
 	}
 }
