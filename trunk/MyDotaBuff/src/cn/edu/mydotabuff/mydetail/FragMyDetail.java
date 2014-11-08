@@ -135,7 +135,7 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 	}
 
 	@Override
-	public <T> void onGetFinished(List<T> data) {
+	public <T> void onGetFinished(T data) {
 		// TODO Auto-generated method stub
 		bean = DotaApplication.getApplication().getData(LocalDataType.PLAYER_INFO);
 		bindDataFromWeb();

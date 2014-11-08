@@ -6,7 +6,7 @@ public interface OnWebDataGetListener {
 
 	void onStartGetData();
 
-	<T> void onGetFinished(List<T> data);
+	<T> void onGetFinished(T data);
 
 	void onGetFailed(String failMsg);
 }

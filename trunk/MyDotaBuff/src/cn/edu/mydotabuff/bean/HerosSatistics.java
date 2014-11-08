@@ -1,7 +1,10 @@
 package cn.edu.mydotabuff.bean;
 
-public class HerosSatistics {
+import java.io.Serializable;
 
+public class HerosSatistics implements Serializable{
+
+	private static final long serialVersionUID = 11081115L;
 	private int heroID;
 	private String thisHeroDataUri;// 英雄数据合集
 	private String heroName; // 英雄名字

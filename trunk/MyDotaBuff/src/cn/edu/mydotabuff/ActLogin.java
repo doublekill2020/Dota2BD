@@ -166,13 +166,13 @@ public class ActLogin extends Activity implements OnClickListener,
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> void onGetFinished(List<T> data) {
+	public <T> void onGetFinished(T data) {
 		// TODO Auto-generated method stub
 		dialog.dismiss();
 		// size=1 只有一条数据 直接跳转
-		if (data.size() == 1) {
-			System.out.println((ArrayList<UserInfo>) data);
-			UserInfo info = (UserInfo) data.get(0);
+		final ArrayList<UserInfo> beans = (ArrayList<UserInfo>) data;
+		if (beans.size() == 1) {
+			UserInfo info = (UserInfo) beans.get(0);
 			String ID = info.getUserID().trim();
 			saveUserInfo(ID);
 			startActivity(new Intent(this, MainActivity.class));
@@ -195,7 +195,6 @@ public class ActLogin extends Activity implements OnClickListener,
 							}).create();
 			dialog.setCanceledOnTouchOutside(false);
 			dialog.show();
-			final ArrayList<UserInfo> beans = (ArrayList<UserInfo>) data;
 			list.setAdapter(new CommAdapter<UserInfo>(this, beans,
 					R.layout.dlg_user_list_item) {
 
