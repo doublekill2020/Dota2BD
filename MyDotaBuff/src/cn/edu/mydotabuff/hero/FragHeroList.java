@@ -21,7 +21,9 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.R;
+import cn.edu.mydotabuff.DotaApplication.LocalDataType;
 import cn.edu.mydotabuff.bean.HeroMatchStatistics;
 import cn.edu.mydotabuff.bean.HerosSatistics;
 import cn.edu.mydotabuff.common.CommAdapter;
@@ -64,7 +66,7 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 			helper.setDataGetListener(this);
 			helper.getWebData(DataType.HERO, userID);
 		}else{
-			//heroSatisticsList = (List<HerosSatistics>) data;
+			heroSatisticsList = (List<HerosSatistics>) DotaApplication.getApplication().getData(LocalDataType.HERO_USED_LIST);
 			adapter = new HeroListAdapter(this.getActivity(), heroSatisticsList);
 			listView.setAdapter(adapter);
 		}
@@ -81,10 +83,11 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 	}
 
 	@Override
-	public <T> void onGetFinished(List<T> data) {
+	public <T> void onGetFinished(T data) {
 		// TODO Auto-generated method stub
 		dialog.dismiss();
 		heroSatisticsList = (List<HerosSatistics>) data;
+		DotaApplication.getApplication().saveData(data,LocalDataType.HERO_USED_LIST);
 		adapter = new HeroListAdapter(this.getActivity(), heroSatisticsList);
 		listView.setAdapter(adapter);
 	}
@@ -208,7 +211,7 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 						}
 
 						@Override
-						public <T> void onGetFinished(List<T> data) {
+						public <T> void onGetFinished(T data) {
 							// TODO Auto-generated method stub
 							dialog.dismiss();
 							final ArrayList<HeroMatchStatistics> beans = (ArrayList<HeroMatchStatistics>) data;
