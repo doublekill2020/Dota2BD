@@ -61,7 +61,7 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.frag_hero_used_list, container,
 				false);
-		activity= getActivity();
+		activity = getActivity();
 		listView = (XListView) view.findViewById(R.id.hero_used_list);
 
 		listView.setPullLoadEnable(false);
@@ -70,12 +70,13 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 				"user_info", Activity.MODE_PRIVATE);
 		userID = myPreferences.getString("userID", "");
 		dialog = new LoadingDialog(activity);
-		if(myPreferences.getString("isNeedUpdate", "").equals("true")){
+		if (myPreferences.getString("isNeedUpdate", "").equals("true")) {
 			WebDataHelper helper = new WebDataHelper(activity);
 			helper.setDataGetListener(this);
 			helper.getWebData(DataType.HERO, userID);
-		}else{
-			heroSatisticsList = (List<HerosSatistics>) DotaApplication.getApplication().getData(LocalDataType.HERO_USED_LIST);
+		} else {
+			heroSatisticsList = (List<HerosSatistics>) DotaApplication
+					.getApplication().getData(LocalDataType.HERO_USED_LIST);
 			adapter = new HeroListAdapter(this.activity, heroSatisticsList);
 			listView.setAdapter(adapter);
 		}
@@ -96,7 +97,8 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 		// TODO Auto-generated method stub
 		dialog.dismiss();
 		heroSatisticsList = (List<HerosSatistics>) data;
-		DotaApplication.getApplication().saveData(data,LocalDataType.HERO_USED_LIST);
+		DotaApplication.getApplication().saveData(data,
+				LocalDataType.HERO_USED_LIST);
 		adapter = new HeroListAdapter(this.activity, heroSatisticsList);
 		listView.setAdapter(adapter);
 	}
@@ -169,10 +171,11 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 			HerosSatistics bean = beans.get(position);
 			holder.tv_allKAD.setText(bean.getAllKAD() + "");
 			holder.tv_heroName.setText(bean.getHeroName());
-			holder.tv_usesTimes.setText("使用次数: "+bean.getUseTimes() + "");
-			holder.tv_KDA.setText("KDA:       "+bean.getKDA() + "");
-			holder.tv_perCoin.setText("gold/min: "+bean.getGold_PerMin() + "");
-			holder.tv_perXp.setText("xp/min:  "+bean.getXp_PerMin() + "");
+			holder.tv_usesTimes.setText("使用次数: " + bean.getUseTimes() + "");
+			holder.tv_KDA.setText("KDA:       " + bean.getKDA() + "");
+			holder.tv_perCoin
+					.setText("gold/min: " + bean.getGold_PerMin() + "");
+			holder.tv_perXp.setText("xp/min:  " + bean.getXp_PerMin() + "");
 			holder.pb_winRate.setProgress((int) bean.getWinning());
 			holder.tv_wining.setText(bean.getWinning() + "%");
 			loader.displayImage(
@@ -324,8 +327,8 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 												getResources().getColor(
 														R.color.black));
 									}
-									helper.setText(R.id.tv_matchID,
-											"比赛ID: "+item.getMatchID());
+									helper.setText(R.id.tv_matchID, "比赛ID: "
+											+ item.getMatchID());
 									helper.setText(R.id.tv_matchType,
 											item.getMatchType());
 
@@ -342,8 +345,7 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 									String matchID = beans.get(position)
 											.getMatchID();
 									Intent intent = new Intent();
-									intent.setClass(
-											FragHeroList.this.activity,
+									intent.setClass(FragHeroList.this.activity,
 											ActMatchDetail.class);
 									intent.putExtra("matchId", matchID);
 
@@ -351,7 +353,7 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 								}
 
 							});
-							 icon = Utils.getHeroImage(activity,
+							icon = Utils.getHeroImage(activity,
 									Common.getHeroName(heroId));
 							AlertDialog mDialog = new AlertDialog.Builder(
 									activity)
@@ -368,23 +370,25 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 														int which) {
 													// TODO Auto-generated
 													// method stub
-													
+
 													dialog.cancel();
-													
+
 												}
 											}).create();
 							mDialog.setCanceledOnTouchOutside(false);
 
 							mDialog.show();
-							
+
 						}
 
 						@Override
 						public void onGetFailed(String failMsg) {
 							dialog.dismiss();
-							TipsToast.showToast(activity, "不如去看个片放松下再来重新尝试~~ ", Toast.LENGTH_SHORT,
-									DialogType.LOAD_FAILURE);
-							
+							TipsToast
+									.showToast(activity, "不如去看个片放松下再来重新尝试~~ ",
+											Toast.LENGTH_SHORT,
+											DialogType.LOAD_FAILURE);
+
 						}
 					});
 					helper.getWebData(DataType.MATCH, userId);
@@ -401,16 +405,13 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		//释放Drawable  先转成bitmap 然后释放
-		if(icon!=null){
+		// 释放Drawable 先转成bitmap 然后释放
+		if (icon != null) {
 			BitmapDrawable bd = (BitmapDrawable) icon;
-			if(bd!=null){
+			if (bd != null) {
 				bd.getBitmap().recycle();
-				
 			}
 		}
 	}
-	
-	
 
 }
