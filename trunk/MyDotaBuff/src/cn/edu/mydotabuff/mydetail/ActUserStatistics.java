@@ -60,7 +60,6 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 		bean = DotaApplication.getApplication().getData(LocalDataType.PLAYER_DETAIL_INFO);
 		beans = bean.getBeans();
 		list = bean.getList();
-		Log.i("hao", list.toString());
 		if (beans != null) {
 			initView();
 			initEvents();
@@ -204,8 +203,6 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 							ActMatchDetail.class);
 					intent.putExtra("matchId", beans.get(position - 1)
 							.getMmatchID());
-					intent.putStringArrayListExtra("ids",
-							new ArrayList<String>());
 					startActivity(intent);
 				}
 			}

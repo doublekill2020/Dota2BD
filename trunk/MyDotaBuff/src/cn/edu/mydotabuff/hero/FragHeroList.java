@@ -77,8 +77,14 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 		} else {
 			heroSatisticsList = (List<HerosSatistics>) DotaApplication
 					.getApplication().getData(LocalDataType.HERO_USED_LIST);
-			adapter = new HeroListAdapter(this.activity, heroSatisticsList);
-			listView.setAdapter(adapter);
+			if (heroSatisticsList == null) {
+				WebDataHelper helper = new WebDataHelper(activity);
+				helper.setDataGetListener(this);
+				helper.getWebData(DataType.HERO, userID);
+			} else {
+				adapter = new HeroListAdapter(this.activity, heroSatisticsList);
+				listView.setAdapter(adapter);
+			}
 		}
 
 		initEvents();

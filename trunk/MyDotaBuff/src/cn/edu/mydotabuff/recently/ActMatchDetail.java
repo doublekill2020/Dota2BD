@@ -246,6 +246,7 @@ public class ActMatchDetail extends Activity {
 				}
 			}
 			request.getPlayerDetail(steamIDs,false);
+			break;
 		default:
 			break;
 		}
