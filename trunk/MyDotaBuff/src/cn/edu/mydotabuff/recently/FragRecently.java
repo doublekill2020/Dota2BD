@@ -16,6 +16,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.select.Evaluator.Matches;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -246,9 +247,9 @@ public class FragRecently extends Fragment implements OnMainEventListener {
 							} catch (JSONException e) {
 								e.printStackTrace();
 							}
-//							if (map.size() > 0) {
-//								DotaApplication.getApplication().setHeroes(map);
-//							}
+							// if (map.size() > 0) {
+							// DotaApplication.getApplication().setHeroes(map);
+							// }
 							break;
 						case FETCH_ONLINE_NUM:
 							String num = "";
@@ -335,8 +336,10 @@ public class FragRecently extends Fragment implements OnMainEventListener {
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		DotaApplication.getApplication().saveData(allMatchBeans, LocalDataType.MATCHES);
+		DotaApplication.getApplication().saveData(allMatchBeans,
+				LocalDataType.MATCHES);
 	}
+
 	@Override
 	public void onFinishGetPlayerInfo() {
 		// TODO Auto-generated method stub
@@ -345,16 +348,19 @@ public class FragRecently extends Fragment implements OnMainEventListener {
 			fetchData(FETCH_MATCH, lastId);
 		} else {
 			flag = true;
-			if(DotaApplication.getApplication().getData(LocalDataType.MATCHES) == null){
-				return ;
-			}
-			allMatchBeans.addAll((ArrayList<MatchBean>)DotaApplication.getApplication().getData(LocalDataType.MATCHES));
-			if (mAdapter == null) {
-				mAdapter = new FragItemAdapter(activity, allMatchBeans);
-				listView.setAdapter(mAdapter);
-				if (allMatchBeans.size() > 0) {
-					lastId = allMatchBeans.get(allMatchBeans.size() - 1)
-							.getMatchId();
+			ArrayList<MatchBean> beans = DotaApplication.getApplication()
+					.getData(LocalDataType.MATCHES);
+			if (beans == null) {
+				fetchData(FETCH_MATCH, lastId);
+			} else {
+				allMatchBeans.addAll(beans);
+				if (mAdapter == null) {
+					mAdapter = new FragItemAdapter(activity, allMatchBeans);
+					listView.setAdapter(mAdapter);
+					if (allMatchBeans.size() > 0) {
+						lastId = allMatchBeans.get(allMatchBeans.size() - 1)
+								.getMatchId();
+					}
 				}
 			}
 		}
