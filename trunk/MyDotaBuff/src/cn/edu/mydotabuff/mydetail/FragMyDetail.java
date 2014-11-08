@@ -45,8 +45,7 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 	private CircleImageView iconView;
 	private TextView nameView, statusView, timeView, loginView;
 	private ImageLoader loader;
-	private PlayerInfoBean bean = DotaApplication.getApplication()
-			.getData(LocalDataType.PLAYER_INFO);
+	private PlayerInfoBean bean;
 	private WebDataHelper helper;
 	private Activity activity;
 	private LoadingDialog dialog;
@@ -75,9 +74,12 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 			helper.setDataGetListener(this);
 			helper.getWebData(DataType.DETAIL,
 					myPreferences.getString("userID", ""));
+		}else{
+			bean = DotaApplication.getApplication().getData(LocalDataType.PLAYER_DETAIL_INFO);
+			initView();
+			bindDataFromWeb();
 		}
 		rightView = (TextView) activity.findViewById(CommonTitleBar.rightId);
-		initView();
 		initEvent();
 		return view;
 	}
@@ -137,7 +139,8 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 	@Override
 	public <T> void onGetFinished(T data) {
 		// TODO Auto-generated method stub
-		bean = DotaApplication.getApplication().getData(LocalDataType.PLAYER_INFO);
+		bean = DotaApplication.getApplication().getData(LocalDataType.PLAYER_DETAIL_INFO);
+		initView();
 		bindDataFromWeb();
 		dialog.dismiss();
 	}

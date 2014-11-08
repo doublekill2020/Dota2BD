@@ -351,8 +351,8 @@ public class WebDataHelper {
 							}
 							bean.setList(list);
 							bean.setLoadMap(true);
-							DotaApplication.getApplication()
-									.saveData(bean, LocalDataType.PLAYER_INFO);
+							DotaApplication.getApplication().saveData(bean,
+									LocalDataType.PLAYER_DETAIL_INFO);
 							status = 1;
 						} else {
 							status = -2;
@@ -401,8 +401,8 @@ public class WebDataHelper {
 				case MATCH:
 					try {
 						url = "http://www.dotamax.com" + userId;
-						doc = Jsoup .connect(url).timeout(timeout).get();
-						if(doc!=null){
+						doc = Jsoup.connect(url).timeout(timeout).get();
+						if (doc != null) {
 							Elements trs = doc
 									.select("table.table.table-hover.table-striped.sortable.table-list.table-thead-left")
 									.select("tbody").select("tr");
@@ -413,47 +413,56 @@ public class WebDataHelper {
 								Elements tds = trs.get(i).select("td");
 								for (int j = 0; j < tds.size(); j++) {
 									if (j == 6) {
-										Elements imgs = tds.get(j).select("img");
+										Elements imgs = tds.get(j)
+												.select("img");
 										List<String> tmpList = new ArrayList<String>();
 										for (int k = 0; k < imgs.size(); k++) {
 											tmpList.add(imgs.get(k).attr("src"));
 										}
-										heroMatchStatisticsBeans.setItemsImgURI(tmpList);
+										heroMatchStatisticsBeans
+												.setItemsImgURI(tmpList);
 									} else {
 										switch (j) {
 										case 0:
-											heroMatchStatisticsBeans.setHeroName(tds.get(j)
-													.text());
+											heroMatchStatisticsBeans
+													.setHeroName(tds.get(j)
+															.text());
 											break;
 										case 1:
-											String newString = tds.get(j).text()
-													.replace(" ", "");
+											String newString = tds.get(j)
+													.text().replace(" ", "");
 											String tmp = newString;
 											newString = newString.substring(0,
 													newString.length() - 4);
 											tmp = tmp.substring(tmp.length() - 4);
-											heroMatchStatisticsBeans.setMatchID(newString);
-											heroMatchStatisticsBeans.setMatchType(tmp);
+											heroMatchStatisticsBeans
+													.setMatchID(newString);
+											heroMatchStatisticsBeans
+													.setMatchType(tmp);
 											break;
 										case 2:
-											heroMatchStatisticsBeans.setWhatTime(tds.get(j)
-													.text());
+											heroMatchStatisticsBeans
+													.setWhatTime(tds.get(j)
+															.text());
 											break;
 										case 3:
 
-											heroMatchStatisticsBeans.setResult(tds.get(j)
-													.text());
+											heroMatchStatisticsBeans
+													.setResult(tds.get(j)
+															.text());
 											break;
 										case 4:
 											/*
-											 * 原始数据 2.71 (10.9 / 9.4 / 14.4) 替换所有空格, ( , ) 为 /
-											 * 以"/"分割 得到 KDA 以及 K, D , A
+											 * 原始数据 2.71 (10.9 / 9.4 / 14.4)
+											 * 替换所有空格, ( , ) 为 / 以"/"分割 得到 KDA
+											 * 以及 K, D , A
 											 */
 
-											String replaceString = tds.get(j).text()
-													.replace(" ", "")
+											String replaceString = tds.get(j)
+													.text().replace(" ", "")
 													.replaceAll("[\\s()]", "/");
-											String[] replaceStrings = replaceString.split("/");
+											String[] replaceStrings = replaceString
+													.split("/");
 											heroMatchStatisticsBeans.setKDA(Double
 													.valueOf(replaceStrings[0]));
 											heroMatchStatisticsBeans.setKill(Double
@@ -476,28 +485,28 @@ public class WebDataHelper {
 								}
 								HMSBeans.add(heroMatchStatisticsBeans);
 							}
-						status = 1;
-						}else{
-							status= -2;
+							status = 1;
+						} else {
+							status = -2;
 						}
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
-						status= 0;
+						status = 0;
 					}
-					
-					if(status==1){
-						
+
+					if (status == 1) {
+
 						activity.runOnUiThread(new Runnable() {
-							
+
 							@Override
 							public void run() {
-								if (listener!=null) {
+								if (listener != null) {
 									listener.onGetFinished(HMSBeans);
 								}
 							}
 						});
-						
+
 					} else if (status == 0) {
 						activity.runOnUiThread(new Runnable() {
 
