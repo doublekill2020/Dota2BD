@@ -69,8 +69,9 @@ public class FragBoard extends Fragment {
 				}
 			});
 			if (beans.size() > 0) {
-				tx.setText(TimeHelper.TimeStamp2Date(beans.get(0)
-						.getUpdateTime(), "MM-dd HH:mm"));
+				tx.setText("上次更新时间："
+						+ TimeHelper.TimeStamp2Date(beans.get(0)
+								.getUpdateTime(), "MM-dd HH:mm"));
 			}
 		}
 		return newsLayout;
@@ -139,7 +140,8 @@ public class FragBoard extends Fragment {
 			case FETCH_BOARD:
 				ArrayList<BoardBean> beans = (ArrayList<BoardBean>) msg.obj;
 				if (beans != null) {
-					DotaApplication.getApplication().saveData(beans, LocalDataType.BOARDS);
+					DotaApplication.getApplication().saveData(beans,
+							LocalDataType.BOARDS);
 					lv.setAdapter(adapter = new CommAdapter<BoardBean>(
 							activity, beans, R.layout.frag_board_item) {
 
