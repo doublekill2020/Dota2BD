@@ -19,6 +19,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.R;
+import cn.edu.mydotabuff.DotaApplication.LocalDataType;
 import cn.edu.mydotabuff.bean.BestRecord;
 import cn.edu.mydotabuff.bean.MacthStatistics;
 import cn.edu.mydotabuff.bean.PlayerInfoBean;
@@ -56,7 +57,7 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 		// TODO 自动生成的方法存根
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
-		bean = DotaApplication.getApplication().getPlayerInfo();
+		bean = DotaApplication.getApplication().getData(LocalDataType.PLAYER_INFO);
 		beans = bean.getBeans();
 		list = bean.getList();
 		Log.i("hao", list.toString());

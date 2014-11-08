@@ -22,6 +22,7 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import cn.edu.mydotabuff.DotaApplication.LocalDataType;
 import cn.edu.mydotabuff.bean.PlayerInfoBean;
 import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.common.CommonTitleBar;
@@ -191,7 +192,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			case FETCH_DETAIL:
 				PlayerInfoBean bean = (PlayerInfoBean) msg.obj;
 				if (bean != null) {
-					DotaApplication.getApplication().setPlayerInfo(bean);
+					DotaApplication.getApplication().saveData(bean,LocalDataType.PLAYER_INFO);
 					loader.displayImage(bean.getMediumIcon(), userIcon);
 					userName.setText(bean.getName());
 
@@ -334,8 +335,10 @@ public class MainActivity extends Activity implements OnClickListener {
 			editor.putString("isNeedUpdate", "true");
 			editor.putLong("lastUpdateTime", 0);
 			editor.commit();
-			DotaApplication.getApplication().destoryPlayerInfo();
-			DotaApplication.getApplication().destoryMatches();
+//			DotaApplication.getApplication().destoryPlayerInfo();
+//			DotaApplication.getApplication().destoryMatches();
+			DotaApplication.getApplication().destoryData(LocalDataType.PLAYER_INFO);
+			DotaApplication.getApplication().destoryData(LocalDataType.MATCHES);
 			startActivity(new Intent(this, ActLogin.class));
 			finish();
 			break;

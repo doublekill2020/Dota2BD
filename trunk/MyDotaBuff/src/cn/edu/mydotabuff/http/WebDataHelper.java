@@ -23,6 +23,7 @@ import android.app.Activity;
 import android.util.Log;
 
 import cn.edu.mydotabuff.DotaApplication;
+import cn.edu.mydotabuff.DotaApplication.LocalDataType;
 import cn.edu.mydotabuff.bean.BestRecord;
 import cn.edu.mydotabuff.bean.HeroMatchStatistics;
 import cn.edu.mydotabuff.bean.HerosSatistics;
@@ -202,7 +203,7 @@ public class WebDataHelper {
 				case DETAIL:
 					url = "http://dotamax.com/player/detail/" + userId;
 					PlayerInfoBean bean = DotaApplication.getApplication()
-							.getPlayerInfo();
+							.getData(LocalDataType.PLAYER_INFO);
 					Document doc = null;
 					try {
 						doc = Jsoup.connect(url).timeout(timeout).get();
@@ -351,7 +352,7 @@ public class WebDataHelper {
 							bean.setList(list);
 							bean.setLoadMap(true);
 							DotaApplication.getApplication()
-									.setPlayerInfo(bean);
+									.saveData(bean, LocalDataType.PLAYER_INFO);
 							status = 1;
 						} else {
 							status = -2;
