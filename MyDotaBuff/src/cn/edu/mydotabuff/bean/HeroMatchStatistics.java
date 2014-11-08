@@ -1,8 +1,10 @@
 package cn.edu.mydotabuff.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class HeroMatchStatistics {
+public class HeroMatchStatistics implements Serializable{
+	private static final long serialVersionUID = 11081535L;
 	private String heroName; //英雄名称
 	private String matchID; //比赛Id
 	private String matchType; //比赛类型
