@@ -505,7 +505,7 @@ public class WebDataHelper {
 							public void run() {
 								// TODO Auto-generated method stub
 								if (listener != null) {
-									listener.onGetFailed("JSON解析出错");
+									listener.onGetFailed("解析出错,请重新尝试");
 								}
 							}
 						});
@@ -516,7 +516,7 @@ public class WebDataHelper {
 							public void run() {
 								// TODO Auto-generated method stub
 								if (listener != null) {
-									listener.onGetFailed("DOC == null,连接失败");
+									listener.onGetFailed("请改善你的网络环境,并重新尝试");
 								}
 							}
 						});

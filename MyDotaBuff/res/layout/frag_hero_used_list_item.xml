@@ -91,21 +91,12 @@
                     android:layout_weight="1"
                     android:orientation="horizontal" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:gravity="center"
-                        android:text="使用次数:"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/usesTimes"
-                        android:layout_width="0dp"
+                        android:layout_width="fill_parent"
                         android:layout_height="20dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="2345"
+                        android:text="使用次数: 2345"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -116,22 +107,13 @@
                     android:layout_weight="1"
                     android:orientation="horizontal" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:layout_marginLeft="10dp"
-                        android:gravity="center"
-                        android:text="KDA:"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/tv_KDA"
                         android:layout_width="0dp"
                         android:layout_height="20dp"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="9.12"
+                        android:text="KDA:       9.12"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -151,20 +133,10 @@
                     android:orientation="horizontal" >
 
                     <TextView
+                        android:id="@+id/tv_perCoin"
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
-                        android:gravity="center"
-                        android:text="gold/min:"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/tv_perCoin"
-                        android:layout_width="0dp"
-                        android:layout_height="20dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="120"
+                        android:text="gold/min: 120"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -176,21 +148,10 @@
                     android:orientation="horizontal" >
 
                     <TextView
+                        android:id="@+id/tv_perXP"
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
-                        android:layout_marginLeft="10dp"
-                        android:gravity="center"
-                        android:text="xp/min:"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/tv_perXP"
-                        android:layout_width="0dp"
-                        android:layout_height="20dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="302"
+                        android:text="xp/min:  302"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
                 </LinearLayout>

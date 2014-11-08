@@ -58,50 +58,56 @@ public final class Utils {
 		return String.format(s_HeroImage_Format, keyName);
 	}
 
-	/** 得到英雄头像
-	 *  sh1tge
+	/**
+	 * 得到英雄头像 sh1tge
+	 * 
 	 * @param context
 	 * @param keyName
-	 * @return
-	 * 2014-11-7 下午3:52:26
+	 * @return 2014-11-7 下午3:52:26
 	 */
 	public static Drawable getHeroImage(Context context, String keyName) {
-		
-		//AssetManager.open的路径只能是 xxxxxx/xxxxxx  
+
+		// AssetManager.open的路径只能是 xxxxxx/xxxxxx
 		String result = getHeroImageUri(keyName).substring(9);
 		InputStream is = null;
-		Drawable d  = null;
+		Drawable d = null;
+		Bitmap bitmap = null;
+		BitmapDrawable bd = null;
 		AssetManager am = context.getResources().getAssets();
 
 		try {
-			
-			 is = am.open(result);
+
+			is = am.open(result);
 			if (is != null) {
-				 d = InputStream2Drawable(is);
-				
+
+				bitmap = BitmapFactory.decodeStream(is);
+
+				bd = new BitmapDrawable(bitmap);
+
+				d = (Drawable) bd;
+
 			}
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
-		}finally{
-			if (is==null) {
+
+		} finally {
+			if (is == null) {
 				return null;
-			}else{
+			} else {
 				try {
 					is.close();
 					return d;
-					
+
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 					return null;
 				}
-				
+
 			}
 		}
-
 
 	}
 
@@ -505,17 +511,16 @@ public final class Utils {
 		return is;
 	}
 
-	/** 将InputStream转换成Bitmap  
-	 *  sh1tge
+	/**
+	 * 将InputStream转换成Bitmap sh1tge
+	 * 
 	 * @param is
-	 * @return
-	 * 2014-11-7 下午3:51:21
+	 * @return 2014-11-7 下午3:51:21
 	 */
 	public static Bitmap InputStream2Bitmap(InputStream is) {
 		return BitmapFactory.decodeStream(is);
 	}
 
-	
 	/**
 	 * InputStream转换成Drawable sh1tge
 	 * 
@@ -527,11 +532,11 @@ public final class Utils {
 		return bitmap2Drawable(bitmap);
 	}
 
-	/** Bitmap转换成Drawable
-	 *  sh1tge
+	/**
+	 * Bitmap转换成Drawable sh1tge
+	 * 
 	 * @param bitmap
-	 * @return
-	 * 2014-11-7 下午3:51:43
+	 * @return 2014-11-7 下午3:51:43
 	 */
 	public static Drawable bitmap2Drawable(Bitmap bitmap) {
 		BitmapDrawable bd = new BitmapDrawable(bitmap);

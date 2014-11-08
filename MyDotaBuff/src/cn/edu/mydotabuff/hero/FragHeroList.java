@@ -9,6 +9,8 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.DotaApplication.LocalDataType;
@@ -30,6 +33,8 @@ import cn.edu.mydotabuff.common.CommAdapter;
 import cn.edu.mydotabuff.common.CommViewHolder;
 import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.custom.LoadingDialog;
+import cn.edu.mydotabuff.custom.TipsToast;
+import cn.edu.mydotabuff.custom.TipsToast.DialogType;
 import cn.edu.mydotabuff.http.OnWebDataGetListener;
 import cn.edu.mydotabuff.http.WebDataHelper;
 import cn.edu.mydotabuff.http.WebDataHelper.DataType;
@@ -39,6 +44,7 @@ import cn.edu.mydotabuff.view.RoundAngleImageView;
 import cn.edu.mydotabuff.view.XListView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.umeng.update.net.i;
 
 public class FragHeroList extends Fragment implements OnWebDataGetListener {
 
@@ -47,27 +53,30 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 	private String userID = "";
 	private XListView listView;
 	private HeroListAdapter adapter;
+	private Activity activity;
+	private Drawable icon;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.frag_hero_used_list, container,
 				false);
+		activity= getActivity();
 		listView = (XListView) view.findViewById(R.id.hero_used_list);
 
 		listView.setPullLoadEnable(false);
 		listView.setPullRefreshEnable(false);
-		SharedPreferences myPreferences = getActivity().getSharedPreferences(
+		SharedPreferences myPreferences = activity.getSharedPreferences(
 				"user_info", Activity.MODE_PRIVATE);
 		userID = myPreferences.getString("userID", "");
-		dialog = new LoadingDialog(getActivity());
+		dialog = new LoadingDialog(activity);
 		if(myPreferences.getString("isNeedUpdate", "").equals("true")){
-			WebDataHelper helper = new WebDataHelper(getActivity());
+			WebDataHelper helper = new WebDataHelper(activity);
 			helper.setDataGetListener(this);
 			helper.getWebData(DataType.HERO, userID);
 		}else{
 			heroSatisticsList = (List<HerosSatistics>) DotaApplication.getApplication().getData(LocalDataType.HERO_USED_LIST);
-			adapter = new HeroListAdapter(this.getActivity(), heroSatisticsList);
+			adapter = new HeroListAdapter(this.activity, heroSatisticsList);
 			listView.setAdapter(adapter);
 		}
 
@@ -88,13 +97,15 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 		dialog.dismiss();
 		heroSatisticsList = (List<HerosSatistics>) data;
 		DotaApplication.getApplication().saveData(data,LocalDataType.HERO_USED_LIST);
-		adapter = new HeroListAdapter(this.getActivity(), heroSatisticsList);
+		adapter = new HeroListAdapter(this.activity, heroSatisticsList);
 		listView.setAdapter(adapter);
 	}
 
 	@Override
 	public void onGetFailed(String failMsg) {
 		dialog.dismiss();
+		TipsToast.showToast(activity, "不如去看个片放松下再来重新尝试~~ ", Toast.LENGTH_SHORT,
+				DialogType.LOAD_FAILURE);
 	}
 
 	class HeroListAdapter extends BaseAdapter {
@@ -158,10 +169,10 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 			HerosSatistics bean = beans.get(position);
 			holder.tv_allKAD.setText(bean.getAllKAD() + "");
 			holder.tv_heroName.setText(bean.getHeroName());
-			holder.tv_usesTimes.setText(bean.getUseTimes() + "");
-			holder.tv_KDA.setText(bean.getKDA() + "");
-			holder.tv_perCoin.setText(bean.getGold_PerMin() + "");
-			holder.tv_perXp.setText(bean.getXp_PerMin() + "");
+			holder.tv_usesTimes.setText("使用次数: "+bean.getUseTimes() + "");
+			holder.tv_KDA.setText("KDA:       "+bean.getKDA() + "");
+			holder.tv_perCoin.setText("gold/min: "+bean.getGold_PerMin() + "");
+			holder.tv_perXp.setText("xp/min:  "+bean.getXp_PerMin() + "");
 			holder.pb_winRate.setProgress((int) bean.getWinning());
 			holder.tv_wining.setText(bean.getWinning() + "%");
 			loader.displayImage(
@@ -201,7 +212,7 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 							.getHeroID();
 					final String heroName = heroSatisticsList.get(position - 1)
 							.getHeroName();
-					WebDataHelper helper = new WebDataHelper(getActivity());
+					WebDataHelper helper = new WebDataHelper(activity);
 					helper.setDataGetListener(new OnWebDataGetListener() {
 
 						@Override
@@ -216,13 +227,13 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 							dialog.dismiss();
 							final ArrayList<HeroMatchStatistics> beans = (ArrayList<HeroMatchStatistics>) data;
 
-							View dlgView = getActivity().getLayoutInflater()
+							View dlgView = activity.getLayoutInflater()
 									.inflate(R.layout.dlg_hms_list, null);
 
 							ListView list = (ListView) dlgView
 									.findViewById(R.id.list_hms);
 							list.setAdapter(new CommAdapter<HeroMatchStatistics>(
-									getActivity(), beans,
+									activity, beans,
 									R.layout.act_hero_match_list_item) {
 
 								@Override
@@ -314,7 +325,7 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 														R.color.black));
 									}
 									helper.setText(R.id.tv_matchID,
-											item.getMatchID());
+											"比赛ID: "+item.getMatchID());
 									helper.setText(R.id.tv_matchType,
 											item.getMatchType());
 
@@ -332,7 +343,7 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 											.getMatchID();
 									Intent intent = new Intent();
 									intent.setClass(
-											FragHeroList.this.getActivity(),
+											FragHeroList.this.activity,
 											ActMatchDetail.class);
 									intent.putExtra("matchId", matchID);
 
@@ -340,10 +351,10 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 								}
 
 							});
-							Drawable icon = Utils.getHeroImage(getActivity(),
+							 icon = Utils.getHeroImage(activity,
 									Common.getHeroName(heroId));
 							AlertDialog mDialog = new AlertDialog.Builder(
-									getActivity())
+									activity)
 									.setTitle(heroName)
 									.setIcon(icon)
 									.setView(dlgView)
@@ -357,18 +368,23 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 														int which) {
 													// TODO Auto-generated
 													// method stub
+													
 													dialog.cancel();
+													
 												}
 											}).create();
 							mDialog.setCanceledOnTouchOutside(false);
 
 							mDialog.show();
+							
 						}
 
 						@Override
 						public void onGetFailed(String failMsg) {
-							// TODO Auto-generated method stub
-
+							dialog.dismiss();
+							TipsToast.showToast(activity, "不如去看个片放松下再来重新尝试~~ ", Toast.LENGTH_SHORT,
+									DialogType.LOAD_FAILURE);
+							
 						}
 					});
 					helper.getWebData(DataType.MATCH, userId);
@@ -380,5 +396,21 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 		});
 
 	}
+
+	@Override
+	public void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		//释放Drawable  先转成bitmap 然后释放
+		if(icon!=null){
+			BitmapDrawable bd = (BitmapDrawable) icon;
+			if(bd!=null){
+				bd.getBitmap().recycle();
+				
+			}
+		}
+	}
+	
+	
 
 }
