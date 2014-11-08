@@ -38,6 +38,14 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.CanvasTransformer;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.FeedbackAgent;
+import com.umeng.socialize.controller.UMServiceFactory;
+import com.umeng.socialize.controller.UMSocialService;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.sso.QZoneSsoHandler;
+import com.umeng.socialize.sso.SinaSsoHandler;
+import com.umeng.socialize.sso.TencentWBSsoHandler;
+import com.umeng.socialize.sso.UMQQSsoHandler;
+import com.umeng.socialize.weixin.controller.UMWXHandler;
 import com.umeng.update.UmengUpdateAgent;
 
 public class MainActivity extends Activity implements OnClickListener {
@@ -89,6 +97,9 @@ public class MainActivity extends Activity implements OnClickListener {
 	private String userID;
 	private SharedPreferences myPreferences;
 	private OnMainEventListener listener;
+	// 首先在您的Activity中添加如下成员变量
+	final UMSocialService mController = UMServiceFactory
+			.getUMSocialService("com.umeng.share");
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -192,7 +203,8 @@ public class MainActivity extends Activity implements OnClickListener {
 			case FETCH_DETAIL:
 				PlayerInfoBean bean = (PlayerInfoBean) msg.obj;
 				if (bean != null) {
-					DotaApplication.getApplication().saveData(bean,LocalDataType.PLAYER_INFO);
+					DotaApplication.getApplication().saveData(bean,
+							LocalDataType.PLAYER_INFO);
 					loader.displayImage(bean.getMediumIcon(), userIcon);
 					userName.setText(bean.getName());
 
@@ -320,6 +332,32 @@ public class MainActivity extends Activity implements OnClickListener {
 		case R.id.share:
 			menu.toggle();
 			// startActivity(new Intent(this, ActInvokerGame.class));
+			// 设置分享内容
+			mController.setShareContent("分享测试：http://iapk.aliapp.com/");
+			// 设置分享图片, 参数2为图片的url地址
+			mController
+					.setShareMedia(new UMImage(this, R.drawable.ic_launcher));
+			String appID = "wx967daebe835fbeac";
+			String appSecret = "5fa9e68ca3970e87a1f83e563c8dcbce";
+			// 添加微信平台
+			UMWXHandler wxHandler = new UMWXHandler(this, appID, appSecret);
+			wxHandler.addToSocialSDK();
+
+			// 添加微信朋友圈
+			UMWXHandler wxCircleHandler = new UMWXHandler(this, appID,
+					appSecret);
+			wxCircleHandler.setToCircle(true);
+			wxCircleHandler.addToSocialSDK();
+			UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler(this, "100424468",
+					"c7394704798a158208a74ab60104f0ba");
+			qqSsoHandler.addToSocialSDK();
+			QZoneSsoHandler qZoneSsoHandler = new QZoneSsoHandler(this, appID,
+					appSecret);
+			qZoneSsoHandler.addToSocialSDK();
+			mController.getConfig().setSsoHandler(new SinaSsoHandler());
+			mController.getConfig().setSsoHandler(new TencentWBSsoHandler());
+
+			mController.openShare(this, false);
 			break;
 		case R.id.feedback:
 			menu.toggle();
@@ -335,10 +373,13 @@ public class MainActivity extends Activity implements OnClickListener {
 			editor.putString("isNeedUpdate", "true");
 			editor.putLong("lastUpdateTime", 0);
 			editor.commit();
-			DotaApplication.getApplication().destoryData(LocalDataType.PLAYER_INFO);
-			DotaApplication.getApplication().destoryData(LocalDataType.PLAYER_DETAIL_INFO);
+			DotaApplication.getApplication().destoryData(
+					LocalDataType.PLAYER_INFO);
+			DotaApplication.getApplication().destoryData(
+					LocalDataType.PLAYER_DETAIL_INFO);
 			DotaApplication.getApplication().destoryData(LocalDataType.MATCHES);
-			DotaApplication.getApplication().destoryData(LocalDataType.HERO_USED_LIST);
+			DotaApplication.getApplication().destoryData(
+					LocalDataType.HERO_USED_LIST);
 			startActivity(new Intent(this, ActLogin.class));
 			finish();
 			break;

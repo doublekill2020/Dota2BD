@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/act_bg"
+    android:background="@drawable/umeng_socialize_shareboard_item_background"
     android:orientation="horizontal"
     android:paddingBottom="@dimen/viewSpace_smallest"
     android:paddingLeft="@dimen/viewSpace_medium"
     android:paddingRight="@dimen/viewSpace_medium"
-    android:paddingTop="@dimen/viewSpace_smallest" >
+    android:paddingTop="@dimen/viewSpace_smallest"
+     >
 
     <LinearLayout
         android:layout_width="match_parent"
