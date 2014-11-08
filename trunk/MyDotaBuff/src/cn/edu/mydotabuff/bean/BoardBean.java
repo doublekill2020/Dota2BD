@@ -1,6 +1,9 @@
 package cn.edu.mydotabuff.bean;
 
-public class BoardBean {
+import java.io.Serializable;
+
+public class BoardBean implements Serializable{
+	private static final long serialVersionUID = 11081335L;
 	private String updateTime;
 	private int rank;
 	private String name;
