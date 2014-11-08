@@ -59,9 +59,16 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 				"user_info", Activity.MODE_PRIVATE);
 		userID = myPreferences.getString("userID", "");
 		dialog = new LoadingDialog(getActivity());
-		WebDataHelper helper = new WebDataHelper(getActivity());
-		helper.setDataGetListener(this);
-		helper.getWebData(DataType.HERO, userID);
+		if(myPreferences.getString("isNeedUpdate", "").equals("true")){
+			WebDataHelper helper = new WebDataHelper(getActivity());
+			helper.setDataGetListener(this);
+			helper.getWebData(DataType.HERO, userID);
+		}else{
+			//heroSatisticsList = (List<HerosSatistics>) data;
+			adapter = new HeroListAdapter(this.getActivity(), heroSatisticsList);
+			listView.setAdapter(adapter);
+		}
+
 		initEvents();
 
 		return view;
@@ -224,13 +231,12 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 											(int) item.getKill() + "");
 									helper.setText(R.id.tv_death,
 											(int) item.getDeath() + "");
-									helper.setText(R.id.tv_death,
-											(int) item.getDeath() + "");
+									helper.setText(R.id.tv_assist,
+											(int) item.getAssists() + "");
 									// 根据结果改变textColor backgroundColor
 									String result = item.getResult();
 									helper.setText(R.id.tv_status, result);
 									if (result.equals("胜利")) {
-
 										// 胜利 绿色
 										helper.setBackgroundColor(
 												R.id.tv_status,
@@ -293,6 +299,17 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 											item.getWhatTime());
 									helper.setText(R.id.tv_level,
 											item.getLevel());
+									if (item.getLevel().equals("Very High")) {
+										helper.setTextColor(
+												R.id.tv_level,
+												getResources().getColor(
+														R.color.my_orange));
+									} else {
+										helper.setTextColor(
+												R.id.tv_level,
+												getResources().getColor(
+														R.color.black));
+									}
 									helper.setText(R.id.tv_matchID,
 											item.getMatchID());
 									helper.setText(R.id.tv_matchType,
@@ -308,12 +325,14 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 								public void onItemClick(AdapterView<?> parent,
 										View view, int position, long id) {
 
-									String matchID = beans.get(position - 1)
+									String matchID = beans.get(position)
 											.getMatchID();
 									Intent intent = new Intent();
-									intent.setClass(FragHeroList.this.getActivity(), ActMatchDetail.class);
+									intent.setClass(
+											FragHeroList.this.getActivity(),
+											ActMatchDetail.class);
 									intent.putExtra("matchId", matchID);
-									
+
 									startActivity(intent);
 								}
 

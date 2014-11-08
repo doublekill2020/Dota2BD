@@ -36,6 +36,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cn.edu.mydotabuff.APIConstants;
 import cn.edu.mydotabuff.DotaApplication;
+import cn.edu.mydotabuff.DotaApplication.LocalDataType;
 import cn.edu.mydotabuff.MainActivity;
 import cn.edu.mydotabuff.OnMainEventListener;
 import cn.edu.mydotabuff.R;
@@ -245,9 +246,9 @@ public class FragRecently extends Fragment implements OnMainEventListener {
 							} catch (JSONException e) {
 								e.printStackTrace();
 							}
-							if (map.size() > 0) {
-								DotaApplication.getApplication().setHeroes(map);
-							}
+//							if (map.size() > 0) {
+//								DotaApplication.getApplication().setHeroes(map);
+//							}
 							break;
 						case FETCH_ONLINE_NUM:
 							String num = "";
@@ -334,22 +335,22 @@ public class FragRecently extends Fragment implements OnMainEventListener {
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		DotaApplication.getApplication().destoryMatches();
-		DotaApplication.getApplication().setMatches(allMatchBeans);
+		DotaApplication.getApplication().destoryData(LocalDataType.MATCHES);
+		DotaApplication.getApplication().saveData(allMatchBeans, LocalDataType.MATCHES);
 	}
 	@Override
 	public void onFinishGetPlayerInfo() {
 		// TODO Auto-generated method stub
 		String isNeedUpdate = myPreferences.getString("isNeedUpdate", "");
 		if (isNeedUpdate.equals("true") || isNeedUpdate.equals("")) {
-			DotaApplication.getApplication().destoryMatches();
+			DotaApplication.getApplication().destoryData(LocalDataType.MATCHES);
 			fetchData(FETCH_MATCH, lastId);
 		} else {
 			flag = true;
-			if(DotaApplication.getApplication().getMatches() == null){
+			if(DotaApplication.getApplication().getData(LocalDataType.MATCHES) == null){
 				return ;
 			}
-			allMatchBeans.addAll(DotaApplication.getApplication().getMatches());
+			allMatchBeans.addAll((ArrayList<MatchBean>)DotaApplication.getApplication().getData(LocalDataType.MATCHES));
 			if (mAdapter == null) {
 				mAdapter = new FragItemAdapter(activity, allMatchBeans);
 				listView.setAdapter(mAdapter);

@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.R;
+import cn.edu.mydotabuff.DotaApplication.LocalDataType;
 import cn.edu.mydotabuff.bean.MatchBean;
 import cn.edu.mydotabuff.bean.PlayerBean;
 import cn.edu.mydotabuff.bean.PlayerInfoBean;
@@ -45,7 +46,7 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 	private TextView nameView, statusView, timeView, loginView;
 	private ImageLoader loader;
 	private PlayerInfoBean bean = DotaApplication.getApplication()
-			.getPlayerInfo();
+			.getData(LocalDataType.PLAYER_INFO);
 	private WebDataHelper helper;
 	private Activity activity;
 	private LoadingDialog dialog;
@@ -136,7 +137,7 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 	@Override
 	public <T> void onGetFinished(List<T> data) {
 		// TODO Auto-generated method stub
-		bean = DotaApplication.getApplication().getPlayerInfo();
+		bean = DotaApplication.getApplication().getData(LocalDataType.PLAYER_INFO);
 		bindDataFromWeb();
 		dialog.dismiss();
 	}

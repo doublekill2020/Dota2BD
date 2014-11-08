@@ -113,213 +113,100 @@ public class DotaApplication extends Application {
 		return false;
 	}
 
-	public void setMatches(ArrayList<MatchBean> info) {
-		SharedPreferences mSharedPreferences = getSharedPreferences("matches",
+	public <T> void saveData(T data, LocalDataType type) {
+		String key = "";
+		switch (type) {
+		case MATCHES:
+			key = "matches";
+			break;
+		case HERO_USED_LIST:
+			key = "hero_used_list";
+			break;
+		case PLAYER_INFO:
+			key = "player_info";
+			break;
+		case BOARDS:
+			key = "boards";
+			break;
+		default:
+			break;
+		}
+		SharedPreferences mSharedPreferences = getSharedPreferences(key,
 				Context.MODE_PRIVATE);
 		try {
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			ObjectOutputStream oos = new ObjectOutputStream(baos);
-			oos.writeObject(info);
+			oos.writeObject(data);
 			String personBase64 = new String(Base64.encodeBase64(baos
 					.toByteArray()));
 			SharedPreferences.Editor editor = mSharedPreferences.edit();
-			editor.putString("matches", personBase64);
+			editor.putString(key, personBase64);
 			editor.commit();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public ArrayList<MatchBean> getMatches() {
-		ArrayList<MatchBean> info = null;
+	@SuppressWarnings("unchecked")
+	public <T> T getData(LocalDataType type) {
+		String key = "";
+		switch (type) {
+		case MATCHES:
+			key = "matches";
+			break;
+		case HERO_USED_LIST:
+			key = "hero_used_list";
+			break;
+		case PLAYER_INFO:
+			key = "player_info";
+			break;
+		case BOARDS:
+			key = "boards";
+			break;
+		default:
+			break;
+		}
+		T data = null;
 		try {
-			SharedPreferences mSharedPreferences = getSharedPreferences(
-					"matches", Context.MODE_PRIVATE);
-			String personBase64 = mSharedPreferences.getString("matches", "");
+			SharedPreferences mSharedPreferences = getSharedPreferences(key,
+					Context.MODE_PRIVATE);
+			String personBase64 = mSharedPreferences.getString(key, "");
 			byte[] base64Bytes = Base64.decodeBase64(personBase64.getBytes());
 			ByteArrayInputStream bais = new ByteArrayInputStream(base64Bytes);
 			ObjectInputStream ois = new ObjectInputStream(bais);
-			info = (ArrayList<MatchBean>) ois.readObject();
+			data = (T) ois.readObject();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return info;
+		return data;
 	}
 
-	public void destoryMatches() {
-		SharedPreferences mSharedPreferences = getSharedPreferences("matches",
+	public void destoryData(LocalDataType type) {
+		String key = "";
+		switch (type) {
+		case MATCHES:
+			key = "matches";
+			break;
+		case HERO_USED_LIST:
+			key = "hero_used_list";
+			break;
+		case PLAYER_INFO:
+			key = "player_info";
+			break;
+		case BOARDS:
+			key = "boards";
+			break;
+		default:
+			break;
+		}
+		SharedPreferences mSharedPreferences = getSharedPreferences(key,
 				Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = mSharedPreferences.edit();
-		editor.putString("matches", "");
+		editor.putString(key, "");
 		editor.commit();
 	}
 
-	public void setHeroes(HashMap<Integer, String> info) {
-		// TODO Auto-generated method stub
-		SharedPreferences mSharedPreferences = getSharedPreferences("base64",
-				Context.MODE_PRIVATE);
-		try {
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			ObjectOutputStream oos = new ObjectOutputStream(baos);
-			oos.writeObject(info);
-			String personBase64 = new String(Base64.encodeBase64(baos
-					.toByteArray()));
-			SharedPreferences.Editor editor = mSharedPreferences.edit();
-			editor.putString("heroes", personBase64);
-			editor.commit();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public enum LocalDataType {
+		MATCHES, HERO_USED_LIST, PLAYER_INFO, BOARDS;
 	}
-
-	public HashMap<Integer, String> getHeroes() {
-		HashMap<Integer, String> info = null;
-		try {
-			SharedPreferences mSharedPreferences = getSharedPreferences(
-					"base64", Context.MODE_PRIVATE);
-			String personBase64 = mSharedPreferences.getString("heroes", "");
-			byte[] base64Bytes = Base64.decodeBase64(personBase64.getBytes());
-			ByteArrayInputStream bais = new ByteArrayInputStream(base64Bytes);
-			ObjectInputStream ois = new ObjectInputStream(bais);
-			info = (HashMap<Integer, String>) ois.readObject();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return info;
-	}
-
-	public void destoryHeroes() {
-		SharedPreferences mSharedPreferences = getSharedPreferences("base64",
-				Context.MODE_PRIVATE);
-		SharedPreferences.Editor editor = mSharedPreferences.edit();
-		editor.putString("heroes", "");
-		editor.commit();
-	}
-
-	public void setMatchDetails(ArrayList<PlayerDetailBean> info) {
-		// TODO Auto-generated method stub
-		SharedPreferences mSharedPreferences = getSharedPreferences("base64",
-				Context.MODE_PRIVATE);
-		try {
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			ObjectOutputStream oos = new ObjectOutputStream(baos);
-			oos.writeObject(info);
-			String personBase64 = new String(Base64.encodeBase64(baos
-					.toByteArray()));
-			SharedPreferences.Editor editor = mSharedPreferences.edit();
-			editor.putString("details", personBase64);
-			editor.commit();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public ArrayList<PlayerDetailBean> getMatchDetails() {
-		ArrayList<PlayerDetailBean> info = null;
-		try {
-			SharedPreferences mSharedPreferences = getSharedPreferences(
-					"base64", Context.MODE_PRIVATE);
-			String personBase64 = mSharedPreferences.getString("details", "");
-			byte[] base64Bytes = Base64.decodeBase64(personBase64.getBytes());
-			ByteArrayInputStream bais = new ByteArrayInputStream(base64Bytes);
-			ObjectInputStream ois = new ObjectInputStream(bais);
-			info = (ArrayList<PlayerDetailBean>) ois.readObject();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return info;
-	}
-
-	public void destoryMatchDetails() {
-		SharedPreferences mSharedPreferences = getSharedPreferences("base64",
-				Context.MODE_PRIVATE);
-		SharedPreferences.Editor editor = mSharedPreferences.edit();
-		editor.putString("details", "");
-		editor.commit();
-	}
-
-	public void setBoards(ArrayList<BoardBean> info) {
-		// TODO Auto-generated method stub
-		SharedPreferences mSharedPreferences = getSharedPreferences("base64",
-				Context.MODE_PRIVATE);
-		try {
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			ObjectOutputStream oos = new ObjectOutputStream(baos);
-			oos.writeObject(info);
-			String personBase64 = new String(Base64.encodeBase64(baos
-					.toByteArray()));
-			SharedPreferences.Editor editor = mSharedPreferences.edit();
-			editor.putString("boards", personBase64);
-			editor.commit();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public ArrayList<BoardBean> getBoards() {
-		ArrayList<BoardBean> info = null;
-		try {
-			SharedPreferences mSharedPreferences = getSharedPreferences(
-					"base64", Context.MODE_PRIVATE);
-			String personBase64 = mSharedPreferences.getString("boards", "");
-			byte[] base64Bytes = Base64.decodeBase64(personBase64.getBytes());
-			ByteArrayInputStream bais = new ByteArrayInputStream(base64Bytes);
-			ObjectInputStream ois = new ObjectInputStream(bais);
-			info = (ArrayList<BoardBean>) ois.readObject();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return info;
-	}
-
-	public void destoryBoards() {
-		SharedPreferences mSharedPreferences = getSharedPreferences("base64",
-				Context.MODE_PRIVATE);
-		SharedPreferences.Editor editor = mSharedPreferences.edit();
-		editor.putString("boards", "");
-		editor.commit();
-	}
-	
-	public void setPlayerInfo(PlayerInfoBean info) {
-		// TODO Auto-generated method stub
-		SharedPreferences mSharedPreferences = getSharedPreferences("player_info",
-				Context.MODE_PRIVATE);
-		try {
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			ObjectOutputStream oos = new ObjectOutputStream(baos);
-			oos.writeObject(info);
-			String personBase64 = new String(Base64.encodeBase64(baos
-					.toByteArray()));
-			SharedPreferences.Editor editor = mSharedPreferences.edit();
-			editor.putString("player_info", personBase64);
-			editor.commit();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public PlayerInfoBean getPlayerInfo() {
-		PlayerInfoBean info = null;
-		try {
-			SharedPreferences mSharedPreferences = getSharedPreferences(
-					"player_info", Context.MODE_PRIVATE);
-			String personBase64 = mSharedPreferences.getString("player_info", "");
-			byte[] base64Bytes = Base64.decodeBase64(personBase64.getBytes());
-			ByteArrayInputStream bais = new ByteArrayInputStream(base64Bytes);
-			ObjectInputStream ois = new ObjectInputStream(bais);
-			info = (PlayerInfoBean) ois.readObject();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return info;
-	}
-
-	public void destoryPlayerInfo() {
-		SharedPreferences mSharedPreferences = getSharedPreferences("player_info",
-				Context.MODE_PRIVATE);
-		SharedPreferences.Editor editor = mSharedPreferences.edit();
-		editor.putString("player_info", "");
-		editor.commit();
-	}
-	
 }

@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import cn.edu.mydotabuff.DotaApplication.LocalDataType;
 import cn.edu.mydotabuff.bean.BoardBean;
 import cn.edu.mydotabuff.bean.MatchBean;
 import cn.edu.mydotabuff.bean.PlayerBean;
@@ -50,7 +51,7 @@ public class FragBoard extends Fragment {
 				false);
 		lv = (ListView) newsLayout.findViewById(R.id.frag_board_list);
 		tx = (TextView) newsLayout.findViewById(R.id.update_time);
-		beans = DotaApplication.getApplication().getBoards();
+		beans = DotaApplication.getApplication().getData(LocalDataType.BOARDS);
 		myHandler = new MyHandler();
 		activity = getActivity();
 		if (beans == null) {
@@ -138,7 +139,7 @@ public class FragBoard extends Fragment {
 			case FETCH_BOARD:
 				ArrayList<BoardBean> beans = (ArrayList<BoardBean>) msg.obj;
 				if (beans != null) {
-					DotaApplication.getApplication().setBoards(beans);
+					DotaApplication.getApplication().saveData(beans, LocalDataType.BOARDS);
 					lv.setAdapter(adapter = new CommAdapter<BoardBean>(
 							activity, beans, R.layout.frag_board_item) {
 
