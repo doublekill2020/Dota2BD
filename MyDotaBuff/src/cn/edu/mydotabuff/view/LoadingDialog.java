@@ -1,4 +1,4 @@
-package cn.edu.mydotabuff.custom;
+package cn.edu.mydotabuff.view;
 
 import android.app.AlertDialog;
 import android.content.Context;

@@ -32,19 +32,18 @@ import cn.edu.mydotabuff.bean.HerosSatistics;
 import cn.edu.mydotabuff.common.CommAdapter;
 import cn.edu.mydotabuff.common.CommViewHolder;
 import cn.edu.mydotabuff.common.Common;
-import cn.edu.mydotabuff.custom.LoadingDialog;
-import cn.edu.mydotabuff.custom.TipsToast;
-import cn.edu.mydotabuff.custom.TipsToast.DialogType;
 import cn.edu.mydotabuff.http.OnWebDataGetListener;
 import cn.edu.mydotabuff.http.WebDataHelper;
 import cn.edu.mydotabuff.http.WebDataHelper.DataType;
 import cn.edu.mydotabuff.recently.ActMatchDetail;
 import cn.edu.mydotabuff.util.Utils;
+import cn.edu.mydotabuff.view.LoadingDialog;
 import cn.edu.mydotabuff.view.RoundAngleImageView;
+import cn.edu.mydotabuff.view.TipsToast;
 import cn.edu.mydotabuff.view.XListView;
+import cn.edu.mydotabuff.view.TipsToast.DialogType;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.umeng.update.net.i;
 
 public class FragHeroList extends Fragment implements OnWebDataGetListener {
 
