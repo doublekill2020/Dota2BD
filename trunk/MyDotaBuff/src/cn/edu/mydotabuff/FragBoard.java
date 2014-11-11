@@ -24,14 +24,14 @@ import cn.edu.mydotabuff.bean.MatchBean;
 import cn.edu.mydotabuff.bean.PlayerBean;
 import cn.edu.mydotabuff.common.CommAdapter;
 import cn.edu.mydotabuff.common.CommViewHolder;
-import cn.edu.mydotabuff.custom.TipsToast;
-import cn.edu.mydotabuff.custom.TipsToast.DialogType;
 import cn.edu.mydotabuff.http.IInfoReceive;
 import cn.edu.mydotabuff.http.IInfoReceive.ResponseObj;
 import cn.edu.mydotabuff.recently.FragItemAdapter;
 import cn.edu.mydotabuff.recently.FragRecently;
 import cn.edu.mydotabuff.util.PersonalRequestImpl;
 import cn.edu.mydotabuff.util.TimeHelper;
+import cn.edu.mydotabuff.view.TipsToast;
+import cn.edu.mydotabuff.view.TipsToast.DialogType;
 
 public class FragBoard extends Fragment {
 

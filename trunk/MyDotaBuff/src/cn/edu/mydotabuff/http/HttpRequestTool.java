@@ -12,9 +12,9 @@ import java.util.TimerTask;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import cn.edu.mydotabuff.custom.LoadingDialog;
 import cn.edu.mydotabuff.http.IInfoReceive.ReceiveMsgType;
 import cn.edu.mydotabuff.http.IInfoReceive.ResponseObj;
+import cn.edu.mydotabuff.view.LoadingDialog;
 
 import android.app.Activity;
 import android.util.Log;

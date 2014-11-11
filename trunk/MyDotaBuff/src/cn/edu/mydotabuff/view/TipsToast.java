@@ -1,4 +1,4 @@
-package cn.edu.mydotabuff.custom;
+package cn.edu.mydotabuff.view;
 
 import android.content.Context;
 import android.view.Gravity;

@@ -24,9 +24,9 @@ import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.bean.MatchBean;
 import cn.edu.mydotabuff.bean.PlayerDetailBean;
 import cn.edu.mydotabuff.common.Common;
-import cn.edu.mydotabuff.custom.TipsToast;
 import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.view.CircleImageView;
+import cn.edu.mydotabuff.view.TipsToast;
 
 public class ActMatchDetailItemAdapter extends BaseAdapter {
 	private Activity _caller;

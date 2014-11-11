@@ -30,9 +30,6 @@ import cn.edu.mydotabuff.bean.PlayerBean;
 import cn.edu.mydotabuff.bean.PlayerInfoBean;
 import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.common.CommonTitleBar;
-import cn.edu.mydotabuff.custom.LoadingDialog;
-import cn.edu.mydotabuff.custom.TipsToast;
-import cn.edu.mydotabuff.custom.TipsToast.DialogType;
 import cn.edu.mydotabuff.http.IInfoReceive;
 import cn.edu.mydotabuff.http.OnWebDataGetListener;
 import cn.edu.mydotabuff.http.WebDataHelper;
@@ -40,6 +37,9 @@ import cn.edu.mydotabuff.http.WebDataHelper.DataType;
 import cn.edu.mydotabuff.util.PersonalRequestImpl;
 import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.view.CircleImageView;
+import cn.edu.mydotabuff.view.LoadingDialog;
+import cn.edu.mydotabuff.view.TipsToast;
+import cn.edu.mydotabuff.view.TipsToast.DialogType;
 
 public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 	private CircleImageView iconView;
