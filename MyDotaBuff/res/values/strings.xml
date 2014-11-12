@@ -571,4 +571,6 @@
         <item>攻击范围</item>
         <item>弹道速度</item>
     </string-array>
+    
+    <string name="share_content">【Dota2数据通】全方位的dota2战绩查询分析app，你也来体验一下吧~</string>
 </resources>

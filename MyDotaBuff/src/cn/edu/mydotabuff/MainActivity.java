@@ -38,13 +38,18 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.CanvasTransformer;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.FeedbackAgent;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.bean.SocializeEntity;
 import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
+import com.umeng.socialize.controller.listener.SocializeListeners.SnsPostListener;
+import com.umeng.socialize.media.QQShareContent;
+import com.umeng.socialize.media.QZoneShareContent;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.sso.QZoneSsoHandler;
 import com.umeng.socialize.sso.SinaSsoHandler;
-import com.umeng.socialize.sso.TencentWBSsoHandler;
 import com.umeng.socialize.sso.UMQQSsoHandler;
+import com.umeng.socialize.sso.UMSsoHandler;
 import com.umeng.socialize.weixin.controller.UMWXHandler;
 import com.umeng.update.UmengUpdateAgent;
 
@@ -117,6 +122,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		openMenuView = findViewById(R.id.layout_left);
 		loader = ImageLoader.getInstance();
 
+		initUMShare();
 		initViews();
 		initEvents();
 		myPreferences = getSharedPreferences("user_info", Activity.MODE_PRIVATE);
@@ -331,33 +337,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			break;
 		case R.id.share:
 			menu.toggle();
-			// startActivity(new Intent(this, ActInvokerGame.class));
-			// 设置分享内容
-			mController.setShareContent("分享测试：http://iapk.aliapp.com/");
-			// 设置分享图片, 参数2为图片的url地址
-			mController
-					.setShareMedia(new UMImage(this, R.drawable.ic_launcher));
-			String appID = "wx967daebe835fbeac";
-			String appSecret = "5fa9e68ca3970e87a1f83e563c8dcbce";
-			// 添加微信平台
-			UMWXHandler wxHandler = new UMWXHandler(this, appID, appSecret);
-			wxHandler.addToSocialSDK();
-
-			// 添加微信朋友圈
-			UMWXHandler wxCircleHandler = new UMWXHandler(this, appID,
-					appSecret);
-			wxCircleHandler.setToCircle(true);
-			wxCircleHandler.addToSocialSDK();
-			UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler(this, "100424468",
-					"c7394704798a158208a74ab60104f0ba");
-			qqSsoHandler.addToSocialSDK();
-			QZoneSsoHandler qZoneSsoHandler = new QZoneSsoHandler(this, appID,
-					appSecret);
-			qZoneSsoHandler.addToSocialSDK();
-			mController.getConfig().setSsoHandler(new SinaSsoHandler());
-			mController.getConfig().setSsoHandler(new TencentWBSsoHandler());
-
-			mController.openShare(this, false);
+			mController.openShare(this, null);
 			break;
 		case R.id.feedback:
 			menu.toggle();
@@ -386,6 +366,60 @@ public class MainActivity extends Activity implements OnClickListener {
 		default:
 			break;
 		}
+	}
+
+	private void initUMShare() {
+
+		mController.getConfig().removePlatform(SHARE_MEDIA.TENCENT);
+		String targetUrl = "http://4evercai.aliapp.com/";
+		mController.setShareContent(getString(R.string.share_content));
+		// 设置分享图片, 参数2为图片的url地址
+		mController.setShareMedia(new UMImage(this, R.drawable.ic_launcher));
+		String appID = "wx1aa7275fa99e880f";
+		String appSecret = "09811403cd21959cc384dea048c01aba";
+		// 添加微信平台
+		UMWXHandler wxHandler = new UMWXHandler(this, appID, appSecret);
+		wxHandler.setTargetUrl(targetUrl);
+		wxHandler.addToSocialSDK();
+
+		// 添加微信朋友圈
+		UMWXHandler wxCircleHandler = new UMWXHandler(this, appID, appSecret);
+		wxCircleHandler.setToCircle(true);
+		wxCircleHandler.setTargetUrl(targetUrl);
+		wxCircleHandler.addToSocialSDK();
+
+		String QQappID = "1103458121";
+		String QQappSecret = "PtcezFKwEHmAF0t9";
+		UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler(this, QQappID,
+				QQappSecret);
+		qqSsoHandler.setTargetUrl(targetUrl);
+		QQShareContent qqShareContent = new QQShareContent();
+		// 设置分享文字
+		qqShareContent.setShareContent(getString(R.string.share_content));
+		// 设置分享title
+		qqShareContent.setTitle(getString(R.string.app_name));
+		// 设置点击分享内容的跳转链接
+		qqShareContent.setTargetUrl(targetUrl);
+		qqShareContent.setShareImage(new UMImage(this, R.drawable.ic_launcher));
+		mController.setShareMedia(qqShareContent);
+		qqSsoHandler.addToSocialSDK();
+		
+		QZoneSsoHandler qZoneSsoHandler = new QZoneSsoHandler(this, QQappID,
+				QQappSecret);
+		qZoneSsoHandler.setTargetUrl(targetUrl);
+		QZoneShareContent qzone = new QZoneShareContent();
+		// 设置分享文字
+		qzone.setShareContent(getString(R.string.share_content));
+		// 设置点击消息的跳转URL
+		qzone.setTargetUrl(targetUrl);
+		qzone.setShareImage(new UMImage(this, R.drawable.ic_launcher));
+		// 设置分享内容的标题
+		qzone.setTitle(getString(R.string.app_name));
+		mController.setShareMedia(qzone);
+		qZoneSsoHandler.addToSocialSDK();
+		SinaSsoHandler sinaHandler = new SinaSsoHandler();
+		sinaHandler.setTargetUrl(targetUrl);
+		mController.getConfig().setSsoHandler(sinaHandler);
 	}
 
 	/**
@@ -511,6 +545,17 @@ public class MainActivity extends Activity implements OnClickListener {
 		try {
 			listener = (OnMainEventListener) fragment;
 		} catch (Exception e) {
+		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		/** 使用SSO授权必须添加如下代码 */
+		UMSsoHandler ssoHandler = mController.getConfig().getSsoHandler(
+				requestCode);
+		if (ssoHandler != null) {
+			ssoHandler.authorizeCallBack(requestCode, resultCode, data);
 		}
 	}
 }
