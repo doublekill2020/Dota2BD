@@ -74,10 +74,16 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 			helper.setDataGetListener(this);
 			helper.getWebData(DataType.DETAIL,
 					myPreferences.getString("userID", ""));
-		}else{
-			bean = DotaApplication.getApplication().getData(LocalDataType.PLAYER_DETAIL_INFO);
-			initView();
-			bindDataFromWeb();
+		} else {
+			bean = DotaApplication.getApplication().getData(
+					LocalDataType.PLAYER_DETAIL_INFO);
+			if (bean == null) {
+				TipsToast.showToast(activity, "暂无数据", Toast.LENGTH_SHORT,
+						DialogType.LOAD_FAILURE);
+			} else {
+				initView();
+				bindDataFromWeb();
+			}
 		}
 		rightView = (TextView) activity.findViewById(CommonTitleBar.rightId);
 		initEvent();
@@ -91,13 +97,18 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if (bean.isLoadMap() && bean.isLoadWebData()) {
-					Intent intent = new Intent(activity,
-							ActUserStatistics.class);
-					startActivity(intent);
-				} else {
+				if (bean == null) {
 					TipsToast.showToast(activity, "暂无数据", Toast.LENGTH_SHORT,
 							DialogType.LOAD_FAILURE);
+				} else {
+					if (bean.isLoadMap() && bean.isLoadWebData()) {
+						Intent intent = new Intent(activity,
+								ActUserStatistics.class);
+						startActivity(intent);
+					} else {
+						TipsToast.showToast(activity, "暂无数据",
+								Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
+					}
 				}
 			}
 		});
@@ -139,7 +150,8 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 	@Override
 	public <T> void onGetFinished(T data) {
 		// TODO Auto-generated method stub
-		bean = DotaApplication.getApplication().getData(LocalDataType.PLAYER_DETAIL_INFO);
+		bean = DotaApplication.getApplication().getData(
+				LocalDataType.PLAYER_DETAIL_INFO);
 		initView();
 		bindDataFromWeb();
 		dialog.dismiss();
