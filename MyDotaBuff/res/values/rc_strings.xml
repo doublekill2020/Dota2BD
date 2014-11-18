@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="sys_resource_dir">"RongCloud"</string>
+    <string name="content_description">"融云"</string>
+    <string name="view_message_bar_send">"发送"</string>
+    <string name="view_message_bar_voice_speak">"按住 说话"</string>
+    <string name="view_message_bar_voice_speak_end">"松开 结束"</string>
+    <string name="loading">"正在加载中\.\.\."</string>
+    <string name="conversation_list_action_bar_title">"会话"</string>
+    <string name="re_start_app">"应用已被关闭，请重启应用"</string>
+
+    <!-- rich icon text -->
+    <string name="rich_icon_image_txt">"图片"</string>
+    <string name="rich_icon_take_photo_txt">"拍照"</string>
+    <string name="rich_icon_location_txt">"位置"</string>
+    <string name="rich_icon_phone_txt">"语音通话"</string>
+
+    <!-- show image -->
+    <string name="show_image_reselect">"重选"</string>
+    <string name="show_image_comfirm">"确定"</string>
+    <string name="image_out_of_memeroy">"内存低"</string>
+    <string name="show_image_save">"保存"</string>
+    <string name="show_image_save_success">"保存成功"</string>
+    <string name="show_image_save_failure">"保存失败"</string>
+    <string name="show_image_download_failure">"图片加载失败"</string>
+    <!-- message -->
+    <string name="message_type_image_content">"[图片]"</string>
+    <string name="message_type_voice_content">"[语音]"</string>
+    <string name="message_type_video_content">"[视频]"</string>
+    <string name="message_type_image_text_content">"[图文]"</string>
+    <string name="message_type_draft_content">"[草稿]"</string>
+    <string name="tag_id">tagId</string>
+    <string name="message_image_send_fail">图片发送失败，请重试。</string>
+
+    <!-- conversationSeting -->
+    <string name="conversation_setting_title">"聊天设置"</string>
+    <string name="conversation_setting_istop">"置顶聊天"</string>
+    <string name="conversation_setting_notify">"新消息通知"</string>
+    <string name="conversation_setting_set_bg">"设置当前聊天背景"</string>
+    <string name="conversation_setting_history_message">"查看聊天记录"</string>
+    <string name="conversation_setting_clear_messages">"清空聊天消息"</string>
+    <string name="conversation_setting_discussion_exit">"删除并退出"</string>
+    <string name="conversation_setting_discussion_exit_failure">"退出讨论失败"</string>
+    <string name="conversation_setting_get_info_failure">"获取信息失败"</string>
+    <string name="conversation_setting_exit_prompt">"退出该讨论组后，将不再收到讨论组聊天信息，聊天记录也一并删除。确定退出？"</string>
+    <string name="rc_conversation_setting_clear_messages_prompt">"你确定清空聊天记录？"</string>
+    <string name="rc_conversation_setting_discussion_name">"讨论组名称"</string>
+    <string name="rc_conversation_setting_discussion_open_invite">"开放成员邀请"</string>
+    <string name="rc_conversation_setting_new_message_receive">"新消息通知"</string>
+    <string name="rc_conversation_setting_update_discussion_name">"修改讨论组名称"</string>
+    <string name="rc_conversation_setting_exit_discussion_failure">"退出讨论组失败"</string>
+    <string name="rc_conversation_setting_remove_discussion_member_failure">"移除讨论组成员失败"</string>
+    <string name="rc_conversation_setting_add_discussion_member_failure">"添加讨论组成员失败"</string>
+    <string name="rc_conversation_setting_update_discussion_name_failure">"修改讨论组名字失败"</string>
+
+    <!-- discussion -->
+    <string name="discussion_create_failure">"创建讨论组失败"</string>
+    <string name="discussion_create_loading_title">"正在创建讨论组"</string>
+    <string name="discussion_remove_member_failure">"删除成员失败"</string>
+    <string name="default_discussion_name">"讨论组"</string>
+
+    <!-- chatroom -->
+    <string name="rc_create_chatroom_notice">"正在进入聊天室"</string>
+    <string name="rc_create_chatroom_fail">"进入聊天室失败，请重试"</string>
+    <!-- item message -->
+    <string name="voice_length">"%1$s''"</string>
+
+    <!-- converastion list -->
+    <string name="list_converastion_emtpy_prompt">"暂时没有会话\n点击右上角开始会话"</string>
+    <string name="dialog_converastion_title">""</string>
+    <string name="dialog_converastion_istop">"置顶该会话"</string>
+    <string name="dialog_converastion_istop_cancel">"取消置顶"</string>
+    <string name="dialog_converastion_cope_message">"复制消息"</string>
+    <string name="dialog_converastion_delete_message">"删除消息"</string>
+    <string name="dialog_converastion_remove">"从会话列表中移除"</string>
+    <string name="converastion_list_notify_load_data">"正在初始化数据...."</string>
+    <string name="conversation_list_set_top_cancel">取消置顶</string>
+    <string name="conversation_list_set_top">已置顶</string>
+    <!-- group -->
+    <string name="rc_group_conversation_list_name">"我的群组"</string>
+
+    <!-- friend list -->
+    <string name="friend_list_multi_choice_comfirt_btn">"确定(%1$s)"</string>
+    <string name="friend_list_multi_choice_title">"选择好友"</string>
+    <!-- showDownLoadImage -->
+    <string name="show_download_image_title">"查看大图"</string>
+    <string name="show_download_image_loading">"图片加载中...."</string>
+
+    <!--  FriendMultiChoiceFragment -->
+     <string name="friend_multi_choice_people_max_prompt">"讨论组人数上限为50人"</string>
+
+    <!--publishShowImage-->
+    <string name="rc_image_load_fail">图片加载失败</string>
+
+    <!-- send voice -->
+    <string name="voice_dialog_collect">"手指上滑，取消发送"</string>
+    <string name="voice_dialog_cancel_send">"松开手指，取消发送"</string>
+    <string name="voice_dialog_time_short">"说话时间太短"</string>
+
+    <!-- connect state -->
+    <string name="conntect_state_prompt_disconnect">"服务尚未连接"</string>
+    <string name="conntect_state_prompt_other_device_login">"该用户在其他设备上登录"</string>
+    <string name="conntect_state_prompt_unknow_error">"服务尚未连接"</string>
+    <string name="conntect_state_prompt_network_unavailable">"当前网络不可用"</string>
+    <string name="conntect_state_prompt_service_unavailable">"当前服务不可用"</string>
+    <string name="conntect_state_prompt_auth_unavailable">"验证失败"</string>
+
+    <string name="connect_auto_reconnect">自动连接中...</string>
+    <string name="connect_auto_success">自动重连成功</string>
+    <string name="connect_auto_fail">自动重连失败</string>
+
+    <!-- notification  -->
+    <string name="notification_new_message">"您有了一条新消息"</string>
+    <string name="notification_new_message_one_p">"发来了%1$s条消息"</string>
+    <string name="notification_new_message_mang_p">"%1$s个联系人发来%2$s条消息"</string>
+    <string name="notification_new_message_one_p_one">"%1$s发来一条消息"</string>
+    <string name="new_message_more">"···"</string>
+
+
+    <!-- public Field-->
+    <string name="rc_public_data_process">"数据处理中···"</string>
+    <string name="default_name">"用户名"</string>
+    <string name="alter_dialog_confirm">"确定"</string>
+    <string name="alter_dialog_cancel">"取消"</string>
+    <!-- notification message -->
+    <string name="notification_message_discussion_rename">"%1$s修改讨论组名称为%2$s"</string>
+    <string name="notification_message_discussion_added">"%1$s邀请%2$s加入了讨论组"</string>
+    <string name="notification_message_discussion_add">"%1$s邀请了%2$s位成员加入了讨论组"</string>
+    <string name="notification_message_discussion_exit">"%1$s退出了讨论组"</string>
+    <string name="notification_message_discussion_removed">"你被%1$s移出了讨论组"</string>
+    <string name="notification_message_discussion_who_removed">"%1$s被%2$s 移出了讨论组"</string>
+    <string name="notification_message_discussion_is_open_invite">"%1$s%2$s了成员邀请"</string>
+    <!--<string name="notification_message_discussion_n_add">"%1$s位成员被 %2$s 加入了讨论组"</string>-->
+
+
+</resources>

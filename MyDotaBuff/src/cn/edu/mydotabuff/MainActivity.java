@@ -371,6 +371,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	private void initUMShare() {
 
 		mController.getConfig().removePlatform(SHARE_MEDIA.TENCENT);
+		mController.getConfig().removePlatform(SHARE_MEDIA.SINA);
 		String targetUrl = "http://4evercai.aliapp.com/";
 		mController.setShareContent(getString(R.string.share_content));
 		// 设置分享图片, 参数2为图片的url地址

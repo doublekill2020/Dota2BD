@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/px_to_dip_22"
+    android:background="#EBEBEB"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/conversation_message_time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/px_to_dip_20"
+        android:layout_marginTop="@dimen/px_to_dip_20"
+        android:background="#d3d3d3"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/px_to_dip_10"
+        android:paddingLeft="@dimen/px_to_dip_20"
+        android:paddingRight="@dimen/px_to_dip_20"
+        android:paddingTop="@dimen/px_to_dip_10"
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/px_to_dip_25"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#EBEBEB"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/text_left_layout_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/px_to_dip_25"
+            android:layout_marginRight="@dimen/px_to_dip_100"
+            android:background="#EBEBEB"
+            android:orientation="horizontal">
+
+            <io.rong.imkit.veiw.AsyncImageView
+                android:src="@drawable/rc_default_portrait"
+                android:id="@+id/conversation_message_other_portrait"
+                app:defDrawable="@drawable/rc_default_portrait"
+                android:layout_width="@dimen/px_to_dip_82"
+                android:layout_height="@dimen/px_to_dip_82"
+                app:shape="square"
+                android:layout_gravity="left"
+                android:layout_marginLeft="@dimen/px_to_dip_16"
+                android:layout_marginRight="@dimen/px_to_dip_16"
+                />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/conversation_message_username_left_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:paddingLeft="@dimen/px_to_dip_15"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="left|center_vertical"
+                    android:orientation="horizontal">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rc_conversation_bubble_white">
+
+                        <io.rong.imkit.veiw.AsyncImageView
+                            android:id="@+id/conversation_message_left_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:contentDescription="@string/content_description"
+                            android:scaleType="center"
+                            android:src="@drawable/rc_ic_launcher" />
+
+                    </FrameLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/text_right_layout_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/px_to_dip_25"
+            android:layout_marginLeft="@dimen/px_to_dip_100">
+
+
+            <LinearLayout
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right|center_vertical"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <ProgressBar
+                    android:id="@+id/conversation_message_progressbar"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical|right"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/conversation_message_send_failed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical|right"
+                    android:src="@drawable/rc_ic_warning" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:background="@drawable/rc_conversation_bubble_blue"
+                    android:gravity="center_vertical|right"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/conversation_message_username_right_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:paddingLeft="@dimen/px_to_dip_15"
+                        android:visibility="gone" />
+
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <io.rong.imkit.veiw.AsyncImageView
+                            android:id="@+id/conversation_message_right_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:contentDescription="@string/content_description"
+                            android:scaleType="center" />
+
+                        <TextView
+                            android:id="@+id/progress_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:textColor="@android:color/white"
+                            android:visibility="gone" />
+                    </FrameLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <io.rong.imkit.veiw.AsyncImageView
+                android:id="@+id/conversation_message_self_portrait"
+                app:defDrawable="@drawable/rc_default_portrait"
+                android:src="@drawable/rc_default_portrait"
+                android:layout_width="@dimen/px_to_dip_82"
+                android:layout_height="@dimen/px_to_dip_82"
+                android:layout_gravity="right"
+                app:shape="square"
+                android:layout_marginLeft="@dimen/px_to_dip_16"
+                android:layout_marginRight="@dimen/px_to_dip_16"
+                 />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

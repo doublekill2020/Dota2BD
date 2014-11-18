@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<io.rong.imkit.veiw.CoverFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rong_cover_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:coverView="@+id/rong_voice_cover"
+    app:triggerView="@+id/conversation_message_bar_voice_btn" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#EBEBEB" >
+
+        <io.rong.imkit.veiw.ConversationMessageBar
+            android:id="@+id/conversation_message_bar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
+
+        <io.rong.imkit.veiw.PullDownRefreshListView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/conversation_message_bar"
+            android:background="#EBEBEB"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@android:color/transparent"
+            android:drawSelectorOnTop="true"
+            android:listSelector="@android:color/transparent"
+            android:scrollbars="vertical"
+            android:scrollingCache="false" />
+
+        <TextView
+            android:id="@+id/connect_state"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/px_to_dip_68"
+            android:background="#FBE8E8"
+            android:drawableLeft="@drawable/rc_ic_warning"
+            android:drawablePadding="@dimen/px_to_dip_16"
+            android:gravity="center_vertical|left"
+            android:paddingLeft="@dimen/px_to_dip_16"
+            android:textColor="#8c8c8c"
+            android:textSize="@dimen/px_to_dip_30"
+            android:visibility="gone" >
+        </TextView>
+    </RelativeLayout>
+
+    <io.rong.imkit.veiw.VoiceCoverView
+        android:id="@id/rong_voice_cover"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:background="@drawable/rc_bg_toast" >
+    </io.rong.imkit.veiw.VoiceCoverView>
+
+    <FrameLayout
+        android:id="@android:id/toggle"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"></FrameLayout>
+
+</io.rong.imkit.veiw.CoverFrameLayout>

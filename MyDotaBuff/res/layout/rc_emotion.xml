@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:fadingEdgeLength="0dp"
+    android:horizontalSpacing="@dimen/px_to_dip_58"
+    android:verticalSpacing="@dimen/px_to_dip_44"
+    android:padding="@dimen/px_to_dip_20"
+    android:listSelector="@null"
+    android:scrollingCache="false"
+    android:stretchMode="columnWidth"
+     />

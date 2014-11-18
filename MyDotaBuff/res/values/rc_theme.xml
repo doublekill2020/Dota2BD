@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <style name="RcTheme" parent="@android:style/Theme.Light">
+        <item name="android:listDivider">@android:color/transparent</item>
+        <item name="android:listSelector">@android:color/transparent</item>
+        <item name="android:textColorPrimary">@color/rc_text_color_primary</item>
+        <item name="android:textColorSecondary">@color/rc_text_color_secondary</item>
+        <item name="android:textColorTertiary">@color/rc_text_color_tertiary</item>
+        <item name="android:textColorPrimaryInverse">@color/rc_text_color_primary_inverse</item>
+        <item name="android:textColorSecondaryInverse">@color/rc_text_color_secondary_inverse</item>
+        <item name="android:textColorTertiaryInverse">@color/rc_text_color_tertiary_inverse</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:indeterminateDrawable">@drawable/rc_progress_round</item>
+    </style>
+    <style name="RcDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="RcTheme.ActionBar">
+        <item name="android:background">@color/rc_title_bg</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+    </style>
+
+    <style name="RcTheme.ActionBar.Button" parent="@android:TextAppearance.Small.Inverse">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:background">@drawable/rc_select_friends_selector</item>
+        <item name="android:textColor">@drawable/rc_co_select_selector</item>
+    </style>
+
+    <style name="RcTheme.ActionBar.Title" parent="@android:TextAppearance.Medium.Inverse">
+    </style>
+
+    <style name="RcTheme.ActionBar.Logo" >
+        <item name="android:src">@drawable/rc_bar_logo</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="RcTheme.ActionBar.Back">
+        <item name="android:src">@drawable/rc_bar_back</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:paddingLeft">5dp</item>
+    </style>
+
+    <style name="RcTheme.Setting">
+    </style>
+
+    <style name="RcTheme.Setting.Submit">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">40dp</item>
+        <item name="android:layout_marginLeft">18dp</item>
+        <item name="android:layout_marginRight">18dp</item>
+        <item name="android:layout_marginBottom">30dp</item>
+        <item name="android:textColor">@color/rc_text_color_primary_inverse</item>
+        <item name="android:background">@color/rc_btn_submit</item>
+
+
+    </style>
+
+    <style name="RcTheme.Setting.HighLight">
+        <item name="android:background">@color/rc_bg_highlight</item>
+    </style>
+
+    <style name="RcTheme.Toolbar">
+        <item name="android:background">@color/rc_bg_toolbar</item>
+    </style>
+
+
+</resources>

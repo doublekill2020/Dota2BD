@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="rc_title_bg">#3498DB</color>
+    <color name="rc_rich_image_bg_color">#F3C44E</color>
+    <color name="rc_rich_take_photo_bg_color">#97a0e5</color>
+    <color name="rc_rich_location_bg_color">#79cc60</color>
+    <color name="rc_rich_voice_bg_color">#47bbd4</color>
+    <color name="rc_rich_add_bg_color">#bdbdbd</color>
+    <!-- conversation item -->
+    <color name="rc_item_conversation_send_color">@android:color/white</color>
+    <color name="rc_item_conversation_recevier_color">#666666</color>
+    <color name="rc_message_bar_edit_color">#F8F8F8</color>
+    <color name="rc_message_bar_control_color">#aab2ba</color>
+    
+    
+    <color name="dialog_conversation_line_color">#3498db</color>
+    
+    <!-- conversation_list_item hover -->
+    <color name="rc_list_item_normal_color">#FFFFFF</color>
+    <color name="rc_list_item_hover_color">#FAFAFA</color>
+    <color name="rc_list_item_istop_bg_color">#F4FBFF</color>
+    
+    <color name="rc_text_color_primary">#252525</color>
+    <color name="rc_text_color_secondary">#8e8e8e</color>
+    <color name="rc_text_color_tertiary">#cbcbcb</color>
+    <color name="rc_text_color_primary_inverse">@android:color/white</color>
+    <color name="rc_text_color_secondary_inverse">@android:color/white</color>
+    <color name="rc_text_color_tertiary_inverse">@android:color/white</color>
+    <color name="rc_text_color_warning">#99ff0000</color>
+    <color name="rc_bottom_toolbar_bg">#7f000000</color>
+    <color name="rc_text_color_select_btn_disable">#97d9b3</color>
+
+    <color name="rc_btn_submit">#ff4444</color>
+    <color name="rc_bg_highlight">#d3d3d3</color>
+    <color name="rc_bg_toolbar">#dee0e2</color>
+
+</resources>

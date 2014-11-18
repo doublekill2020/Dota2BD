@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/px_to_dip_22"
+    android:background="#EBEBEB"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/conversation_message_time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/px_to_dip_20"
+        android:layout_marginTop="@dimen/px_to_dip_20"
+        android:background="#d3d3d3"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/px_to_dip_10"
+        android:paddingLeft="@dimen/px_to_dip_20"
+        android:paddingRight="@dimen/px_to_dip_20"
+        android:paddingTop="@dimen/px_to_dip_10"
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/px_to_dip_25"
+        android:visibility="visible" />
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<View-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@android:color/transparent"></View>-->
+
+        <TextView
+            android:id="@+id/conversation_notification_message_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/px_to_dip_20"
+            android:layout_marginTop="@dimen/px_to_dip_20"
+            android:layout_marginRight="@dimen/px_to_dip_20"
+            android:layout_marginLeft="@dimen/px_to_dip_20"
+            android:background="#d3d3d3"
+            android:gravity="center"
+            android:paddingBottom="@dimen/px_to_dip_10"
+            android:paddingLeft="@dimen/px_to_dip_20"
+            android:paddingRight="@dimen/px_to_dip_20"
+            android:paddingTop="@dimen/px_to_dip_10"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/px_to_dip_25"
+            android:visibility="visible" />
+
+        <!--<View-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@android:color/transparent"></View>-->
+
+    <!--</LinearLayout>-->
+
+</LinearLayout>

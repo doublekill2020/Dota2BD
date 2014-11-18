@@ -320,7 +320,7 @@ public class FragRecently extends Fragment implements OnMainEventListener {
 				break;
 			case NO_DATA:
 				dialog.cancel();
-				TipsToast.showToast(activity, "未开启比赛数据共享", Toast.LENGTH_SHORT,
+				TipsToast.showToast(activity, "没有更多数据~", Toast.LENGTH_SHORT,
 						DialogType.LOAD_FAILURE);
 				listView.setPullLoadEnable(false);
 				listView.setPullRefreshEnable(true);

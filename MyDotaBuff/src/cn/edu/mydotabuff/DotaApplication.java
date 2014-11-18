@@ -1,5 +1,7 @@
 package cn.edu.mydotabuff;
 
+import io.rong.imkit.RongIM;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -95,6 +97,7 @@ public class DotaApplication extends Application {
 				.writeDebugLogs() // Remove for release app
 				.defaultDisplayImageOptions(options).build();// 开始构建
 		ImageLoader.getInstance().init(config);
+		//RongIM.init(this, "25wehl3uw6q5w", R.drawable.ic_launcher);
 	}
 
 	public static DotaApplication getApplication() {

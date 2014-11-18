@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/rc_text_color_select_btn_disable" />
+    <item android:color="@color/rc_text_color_secondary_inverse" android:state_enabled="false"/>
+</selector>

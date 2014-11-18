@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/dialog_layout_one"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/px_to_dip_94"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/px_to_dip_34" >
+
+        <TextView
+            android:id="@android:id/text1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/px_to_dip_30" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/px_to_dip_1"
+        android:background="@android:color/black" />
+
+    <RelativeLayout
+        android:id="@+id/dialog_layout_two"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/px_to_dip_94"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/px_to_dip_34" >
+
+        <TextView
+            android:id="@android:id/text2"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/px_to_dip_30" />
+    </RelativeLayout>
+
+</LinearLayout>

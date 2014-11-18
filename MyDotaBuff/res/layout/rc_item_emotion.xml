@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/px_to_dip_48"
+    android:layout_height="@dimen/px_to_dip_48"
+    android:padding="5dp"
+	android:contentDescription="@string/content_description"
+	/>

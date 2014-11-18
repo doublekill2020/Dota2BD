@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <ImageView
+        android:id="@id/rc_back"
+        style="@style/RcTheme.ActionBar.Back"/>
+
+    <FrameLayout
+        android:id="@id/rc_title_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/rc_back"
+        android:padding="5dp">
+
+        <ImageView
+            android:id="@id/rc_logo"
+            style="@style/RcTheme.ActionBar.Logo"/>
+
+        <TextView
+            android:id="@id/rc_new"
+            style="@android:style/TextAppearance.Small.Inverse"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_gravity="right|top"
+            android:background="@drawable/rc_new_message"
+            android:gravity="center"
+            android:scaleType="center"
+            android:textSize="12sp"
+            android:textColor="@color/rc_text_color_secondary_inverse"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@id/rc_title"
+        style="@style/RcTheme.ActionBar.Title"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/rc_title_layout"
+        android:ellipsize="end"
+        android:singleLine="true" />
+
+</merge>

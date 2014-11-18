@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/toggle"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <io.rong.imkit.veiw.ActionBar
+        android:id="@id/rc_actionbar"
+        style="@style/RcTheme.ActionBar">
+    </io.rong.imkit.veiw.ActionBar>
+
+    <FrameLayout
+        android:id="@id/rc_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
