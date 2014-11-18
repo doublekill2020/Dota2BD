@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/RcTheme.Toolbar"
+    android:orientation="vertical" >
+
+    <io.rong.imkit.veiw.MessageBar
+        android:id="@+id/conversation_message_bar_message_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/conversation_message_bar_expression_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/px_to_dip_480"
+        android:visibility="gone" >
+
+        <io.rong.imkit.veiw.EmotionView
+            android:id="@+id/conversation_message_bar_emotion_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/conversation_message_bar_rich_text_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/px_to_dip_480"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/px_to_dip_30"
+        android:gravity="left"
+        android:paddingBottom="@dimen/px_to_dip_44"
+        android:paddingTop="@dimen/px_to_dip_44"
+        android:visibility="gone" >
+
+        <io.rong.imkit.veiw.RichIconTextView
+            android:id="@+id/imagetRichIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true" />
+
+        <io.rong.imkit.veiw.RichIconTextView
+            android:id="@+id/camertRichIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_to_dip_50"
+            android:layout_toRightOf="@id/imagetRichIcon"
+            android:clickable="true" />
+
+        <io.rong.imkit.veiw.RichIconTextView
+            android:id="@+id/voipRichIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/px_to_dip_50"
+            android:layout_toRightOf="@id/camertRichIcon" />
+
+    </RelativeLayout>
+
+</LinearLayout>

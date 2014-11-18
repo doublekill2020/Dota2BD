@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rc_dialog"
+    android:layout_width="@dimen/px_to_dip_564"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rc_bg_select_dialog"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@android:id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/px_to_dip_64"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/px_to_dip_18"
+        android:gravity="center_vertical"
+        android:textColor="#3498DB"
+        android:textSize="@dimen/px_to_dip_30" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/px_to_dip_1"
+        android:background="@color/dialog_conversation_line_color" />
+
+    <EditText
+        android:id="@android:id/edit"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/px_to_dip_90"
+        android:layout_marginLeft="@dimen/px_to_dip_10"
+        android:layout_marginRight="@dimen/px_to_dip_10"
+        android:background="@drawable/rc_dialog_edit_bg"
+        android:gravity="bottom"
+        android:textColor="#d3d3d3"
+        android:textSize="@dimen/px_to_dip_28" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/px_to_dip_82"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@android:id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#d3d3d3"
+            android:gravity="center_horizontal|center_vertical"
+            android:background="@android:color/transparent"
+            android:textSize="@dimen/px_to_dip_28" />
+
+        <Button
+            android:id="@android:id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#d3d3d3"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical"
+            android:background="@android:color/transparent"
+            android:textSize="@dimen/px_to_dip_28" />
+
+    </LinearLayout>
+
+</LinearLayout>

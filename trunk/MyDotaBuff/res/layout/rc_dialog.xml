@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rc_dialog"
+    android:layout_width="@dimen/px_to_dip_564"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rc_bg_select_dialog"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:id="@+id/dialog_topbar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/px_to_dip_128"
+        android:padding="5dp" >
+
+        <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:paddingTop="4dp"
+            android:textColor="@color/dialog_conversation_line_color"
+            android:textSize="@dimen/px_to_dip_30" >
+        </TextView>
+    </FrameLayout>
+
+    <View android:id="@+id/dialog_top_line"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/px_to_dip_1"
+        android:background="@color/dialog_conversation_line_color" />
+
+    <FrameLayout
+        android:id="@+id/dialog_content"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/dialog_content_txt"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="7.0dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="22dp"
+            android:paddingTop="25dp"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/px_to_dip_30"
+            android:visibility="gone" >
+        </TextView>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/dialog_bottombar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="3dp"
+        android:visibility="gone" >
+
+        <Button
+            android:id="@android:id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:textColor="#2e2e2e"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@android:id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:textColor="#2e2e2e"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@android:id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp"
+            android:textColor="#2e2e2e"
+            android:visibility="gone" />
+    </LinearLayout>
+
+</LinearLayout>

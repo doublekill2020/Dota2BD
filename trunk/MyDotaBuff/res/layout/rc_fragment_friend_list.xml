@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <io.rong.imkit.veiw.PinnedHeaderListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fadingEdge="none"
+        android:fastScrollEnabled="false"
+        android:scrollbars="none" />
+
+    <io.rong.imkit.veiw.SwitchGroup
+        android:id="@android:id/message"
+        android:layout_width="@dimen/px_to_dip_50"
+        android:paddingTop="@dimen/px_to_dip_20"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/px_to_dip_96"
+        app:orientation="vertical"
+        app:pinned_item="@layout/rc_pinned_item"
+        app:pinned_item_array="@array/rc_search_letters" />
+
+</RelativeLayout>

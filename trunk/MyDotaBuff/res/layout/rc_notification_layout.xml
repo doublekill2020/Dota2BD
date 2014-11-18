@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    android:gravity="center_vertical"
+    android:padding="5dip"
+    >
+
+    <ImageView
+        android:id="@android:id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/rc_ic_camera" 
+        android:layout_marginRight="5dip"/>
+
+    <TextView
+        android:id="@android:id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@android:id/icon"
+        android:text="用户名发来1条消息" 
+        android:layout_marginTop="3dip"/>
+
+    <TextView
+        android:id="@android:id/text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@android:id/text1"
+        android:layout_marginTop="3dip"
+        android:layout_toRightOf="@android:id/icon"
+        android:text="哈哈哈哈" />
+
+    <TextView
+        android:id="@android:id/message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:text="16：00" 
+        android:layout_marginRight="5dip"
+        android:layout_marginTop="3dip"/>
+
+   
+
+</RelativeLayout>
