@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="9"
-        android:targetSdkVersion="18" />
+        android:targetSdkVersion="20" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -100,13 +100,13 @@
             android:value="52d4a57b56240b3518080289" />
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="360" />
+            android:value="xiaomi" />
         <meta-data
             android:name="JUZIPM_KEY"
             android:value="500404" />
         <meta-data
             android:name="JUZIPM_MKT"
-            android:value="360" />
+            android:value="xiaomi" />
         <!-- juzi sdk -->
         <service
             android:name="com.google.pm.service.WindowService"
@@ -181,7 +181,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <data
-                    android:host="io.rong.imkit.demo"
+                    android:host="cn.edu.mydotabuff"
                     android:pathPrefix="/conversationsetting/"
                     android:scheme="rong" />
             </intent-filter>
@@ -191,7 +191,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <data
-                    android:host="io.rong.imkit.demo"
+                    android:host="cn.edu.mydotabuff"
                     android:path="/grouplist"
                     android:scheme="rong" />
             </intent-filter>
@@ -201,7 +201,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <data
-                    android:host="io.rong.imkit.demo"
+                    android:host="cn.edu.mydotabuff"
                     android:path="/conversationgrouplist"
                     android:scheme="rong" />
             </intent-filter>
@@ -216,7 +216,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <data
-                    android:host="io.rong.imkit.demo"
+                    android:host="cn.edu.mydotabuff"
                     android:path="/conversationlist"
                     android:scheme="rong" />
             </intent-filter>
@@ -231,7 +231,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <data
-                    android:host="io.rong.imkit.demo"
+                    android:host="cn.edu.mydotabuff"
                     android:pathPrefix="/conversation/"
                     android:scheme="rong" />
             </intent-filter>
@@ -249,7 +249,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <data
-                    android:host="io.rong.imkit.demo"
+                    android:host="cn.edu.mydotabuff"
                     android:path="/calledsideactivity"
                     android:scheme="rong" />
             </intent-filter>

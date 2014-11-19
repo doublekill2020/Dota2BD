@@ -2,6 +2,10 @@
 <resources>
 
     <declare-styleable name="SwitchGroup">
+        <attr name="_orientation">
+            <flag name="horizontal" value="0"></flag>
+            <flag name="vertical" value="1"></flag>
+        </attr>
         <attr name="pinned_view" format="reference" />
         <attr name="pinned_item" format="reference" />
         <attr name="pinned_item_array" format="reference" />
