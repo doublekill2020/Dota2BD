@@ -1,5 +1,12 @@
 package cn.edu.mydotabuff;
 
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,6 +23,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -39,10 +47,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.FeedbackAgent;
 import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.bean.SocializeEntity;
 import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
-import com.umeng.socialize.controller.listener.SocializeListeners.SnsPostListener;
 import com.umeng.socialize.media.QQShareContent;
 import com.umeng.socialize.media.QZoneShareContent;
 import com.umeng.socialize.media.UMImage;
@@ -56,37 +62,21 @@ import com.umeng.update.UmengUpdateAgent;
 public class MainActivity extends Activity implements OnClickListener {
 
 	private FragRecently recentlyFragment;
-
 	private FragHeroList contactsFragment;
-
 	private FragBoard newsFragment;
-
 	private FragMyDetail settingFragment;
-
 	private View recentlyLayout;
-
 	private View contactsLayout;
-
 	private View newsLayout;
-
 	private View settingLayout;
-
 	private ImageView messageImage;
-
 	private ImageView contactsImage;
-
 	private ImageView newsImage;
-
 	private ImageView settingImage;
-
 	private TextView messageText;
-
 	private TextView contactsText;
-
 	private TextView newsText;
-
 	private TextView settingText;
-
 	private FragmentManager fragmentManager;
 	private TextView titleView, rightView;
 	private View openMenuView;
@@ -110,6 +100,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
+
 
 		UmengUpdateAgent.setUpdateOnlyWifi(false);
 		UmengUpdateAgent.update(this);
@@ -323,6 +314,8 @@ public class MainActivity extends Activity implements OnClickListener {
 			setTabSelection(2);
 			titleView.setText("天梯排行榜");
 			rightView.setVisibility(View.GONE);
+
+			//RongIM.getInstance().startPrivateChat(this, "2", "聊天");
 			break;
 		case R.id.setting_layout:
 			setTabSelection(3);

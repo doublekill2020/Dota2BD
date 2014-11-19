@@ -1,6 +1,8 @@
 package cn.edu.mydotabuff;
 
 import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
+import io.rong.imlib.RongIMClient.ConnectCallback.ErrorCode;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -10,6 +12,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -20,6 +23,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory.Options;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
+import android.view.View;
 import cn.edu.mydotabuff.bean.BoardBean;
 import cn.edu.mydotabuff.bean.MatchBean;
 import cn.edu.mydotabuff.bean.PlayerDetailBean;
@@ -94,10 +99,68 @@ public class DotaApplication extends Application {
 																				// readTimeout
 																				// (30
 																				// s)超时时间
-				.writeDebugLogs() // Remove for release app
+				//.writeDebugLogs() // Remove for release app
 				.defaultDisplayImageOptions(options).build();// 开始构建
 		ImageLoader.getInstance().init(config);
-		//RongIM.init(this, "25wehl3uw6q5w", R.drawable.ic_launcher);
+		
+//		RongIM.init(this, "25wehl3uw6q5w", R.drawable.ic_launcher);
+//        // 此处直接 hardcode 给 token 赋值，请替换为您自己的 Token。
+//        String token = "YMuGi5vs2EGG700+TnBYCe4ojYjBMJnJrmW5Rq87UVkSiih43YSR2cSnP9/CIgmvAGhIw1l9CIEB/S6hlnHkHG9JEbovp9fL";
+//        // 连接融云服务器。
+//        RongIM.connect(token, new RongIMClient.ConnectCallback() {
+//
+//            @Override
+//            public void onSuccess(String s) {
+//                // 此处处理连接成功。
+//                Log.d("Connect:", "Login successfully.");
+//            }
+//
+//            @Override
+//            public void onError(ErrorCode errorCode) {
+//                // 此处处理连接错误。
+//                Log.d("Connect:", "Login failed.");
+//                Log.d("Connect:", errorCode.getMessage());
+//            }
+//        });
+//        // 设置用户信息提供者。
+//        RongIM.setGetUserInfoProvider(new RongIM.GetUserInfoProvider() {
+//            // App 返回指定的用户信息给 IMKit 界面组件。
+//            // 原则上 App 应该将用户信息和头像在移动设备上进行缓存，每次获取用户信息的时候，就不用再通过网络获取，提高加载速度，提升用户体验。我们后续将提供用户信息缓存功能，方便您开发。
+//            @Override
+//            public RongIMClient.UserInfo getUserInfo(String userId) {
+//                if (userId.equals("1")) {
+//                    RongIMClient.UserInfo user = new RongIMClient.UserInfo("1", "zhangsan", "http://www.baidu.com/img/bdlogo.png");
+//
+//                    return user;
+//                }
+//                else if(userId.equals("2")) {
+//                    RongIMClient.UserInfo user = new RongIMClient.UserInfo("2", "lisi", "http://2.su.bdimg.com/star_skin/1001_t.png");
+//
+//                    return user;
+//                }
+//
+//                return null;
+//            }
+//        }, false);
+//
+//        // 设置好友信息提供者。
+//        RongIM.setGetFriendsProvider(new RongIM.GetFriendsProvider() {
+//            @Override
+//            public List<RongIMClient.UserInfo> getFriends() {
+//                // 返回 App 的好友列表给 IMKit 界面组件，供会话列表页中选择好友时使用。
+//                List<RongIMClient.UserInfo> list = new ArrayList<RongIMClient.UserInfo>();
+//
+//                RongIMClient.UserInfo user1 = new RongIMClient.UserInfo("1", "zhangsan", "http://www.baidu.com/img/bdlogo.png");
+//
+//                list.add(user1);
+//
+//                RongIMClient.UserInfo user2 = new RongIMClient.UserInfo("2", "lisi", "http://2.su.bdimg.com/star_skin/1001_t.png");
+//
+//                list.add(user2);
+//
+//                return list;
+//            }
+//        });
 	}
 
 	public static DotaApplication getApplication() {
