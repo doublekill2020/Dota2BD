@@ -80,6 +80,10 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 			if (bean == null) {
 				TipsToast.showToast(activity, "暂无数据", Toast.LENGTH_SHORT,
 						DialogType.LOAD_FAILURE);
+				helper = new WebDataHelper(activity);
+				helper.setDataGetListener(this);
+				helper.getWebData(DataType.DETAIL,
+						myPreferences.getString("userID", ""));
 			} else {
 				initView();
 				bindDataFromWeb();
