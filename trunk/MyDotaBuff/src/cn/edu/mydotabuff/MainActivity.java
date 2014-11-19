@@ -2,6 +2,7 @@ package cn.edu.mydotabuff;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
+import io.rong.imlib.RongIMClient.ConnectCallback.ErrorCode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,7 @@ import cn.edu.mydotabuff.DotaApplication.LocalDataType;
 import cn.edu.mydotabuff.bean.PlayerInfoBean;
 import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.common.CommonTitleBar;
+import cn.edu.mydotabuff.game.ActInvokerGame;
 import cn.edu.mydotabuff.hero.FragHeroList;
 import cn.edu.mydotabuff.http.IInfoReceive;
 import cn.edu.mydotabuff.mydetail.FragMyDetail;
@@ -315,7 +317,71 @@ public class MainActivity extends Activity implements OnClickListener {
 			titleView.setText("天梯排行榜");
 			rightView.setVisibility(View.GONE);
 
-			//RongIM.getInstance().startPrivateChat(this, "2", "聊天");
+			// 此处直接 hardcode 给 token 赋值，请替换为您自己的 Token。
+			String token = "YMuGi5vs2EGG700+TnBYCe4ojYjBMJnJrmW5Rq87UVkSiih43YSR2cSnP9/CIgmvAGhIw1l9CIEB/S6hlnHkHG9JEbovp9fL";
+			// 连接融云服务器。
+			RongIM.connect(token, new RongIMClient.ConnectCallback() {
+
+				@Override
+				public void onSuccess(String s) {
+					// 此处处理连接成功。
+					Toast.makeText(MainActivity.this, "登录成功！", Toast.LENGTH_SHORT)
+							.show();
+				}
+
+				@Override
+				public void onError(ErrorCode errorCode) {
+					// 此处处理连接错误。
+					Toast.makeText(MainActivity.this, errorCode.getMessage(),
+							Toast.LENGTH_SHORT).show();
+				}
+			});
+			// 设置用户信息提供者。
+			RongIM.setGetUserInfoProvider(new RongIM.GetUserInfoProvider() {
+				// App 返回指定的用户信息给 IMKit 界面组件。
+				// 原则上 App
+				// 应该将用户信息和头像在移动设备上进行缓存，每次获取用户信息的时候，就不用再通过网络获取，提高加载速度，提升用户体验。我们后续将提供用户信息缓存功能，方便您开发。
+				@Override
+				public RongIMClient.UserInfo getUserInfo(String userId) {
+					if (userId.equals("1")) {
+						RongIMClient.UserInfo user = new RongIMClient.UserInfo("1",
+								"zhangsan", "http://www.baidu.com/img/bdlogo.png");
+
+						return user;
+					} else if (userId.equals("2")) {
+						RongIMClient.UserInfo user = new RongIMClient.UserInfo("2",
+								"lisi",
+								"http://2.su.bdimg.com/star_skin/1001_t.png");
+
+						return user;
+					}
+
+					return null;
+				}
+			}, false);
+
+			// 设置好友信息提供者。
+			RongIM.setGetFriendsProvider(new RongIM.GetFriendsProvider() {
+				@Override
+				public List<RongIMClient.UserInfo> getFriends() {
+					// 返回 App 的好友列表给 IMKit 界面组件，供会话列表页中选择好友时使用。
+					List<RongIMClient.UserInfo> list = new ArrayList<RongIMClient.UserInfo>();
+
+					RongIMClient.UserInfo user1 = new RongIMClient.UserInfo("1",
+							"zhangsan", "http://www.baidu.com/img/bdlogo.png");
+
+					list.add(user1);
+
+					RongIMClient.UserInfo user2 = new RongIMClient.UserInfo("2",
+							"lisi", "http://2.su.bdimg.com/star_skin/1001_t.png");
+
+					list.add(user2);
+
+					return list;
+				}
+			});
+			
+			RongIM.getInstance().startPrivateChat(this, "2", "聊天");
 			break;
 		case R.id.setting_layout:
 			setTabSelection(3);

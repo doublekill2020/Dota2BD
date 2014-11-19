@@ -1,6 +1,11 @@
 package cn.edu.mydotabuff.game;
 
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -12,6 +17,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.common.CommonTitleBar;
 
@@ -64,6 +70,7 @@ public class ActInvokerGame extends Activity implements OnClickListener {
 		loader = ImageLoader.getInstance();
 		initView();
 		initEvent();
+		
 	}
 
 	private void initView() {
@@ -131,6 +138,7 @@ public class ActInvokerGame extends Activity implements OnClickListener {
 			break;
 		}
 	}
+
 	public void onResume() {
 		super.onResume();
 		MobclickAgent.onResume(this);

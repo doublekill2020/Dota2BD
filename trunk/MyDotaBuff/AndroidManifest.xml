@@ -33,8 +33,7 @@
         android:theme="@style/Theme.Tupdota2" >
         <activity
             android:name="cn.edu.mydotabuff.ActLogin"
-            android:label="@string/app_name"
-            android:process=":occultation" >
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,26 +42,18 @@
         </activity>
         <activity
             android:name="cn.edu.mydotabuff.MainActivity"
-            android:label="@string/app_name"
-            android:process=":occultation" >
+            android:label="@string/app_name" >
         </activity>
-        <activity
-            android:name="cn.edu.mydotabuff.recently.ActMatchDetail"
-            android:process=":occultation" >
+        <activity android:name="cn.edu.mydotabuff.recently.ActMatchDetail" >
         </activity>
-        <activity
-            android:name="cn.edu.mydotabuff.game.ActInvokerGame"
-            android:process=":occultation" >
+        <activity android:name="cn.edu.mydotabuff.game.ActInvokerGame" >
         </activity>
-        <activity
-            android:name="cn.edu.mydotabuff.mydetail.ActUserStatistics"
-            android:process=":occultation" >
+        <activity android:name="cn.edu.mydotabuff.mydetail.ActUserStatistics" >
         </activity>
         <activity
             android:name="cn.edu.mydotabuff.hero.HeroDetailActivity"
             android:label="@string/title_activity_hero_detail"
-            android:parentActivityName=".MainActivity"
-            android:process=":occultation" >
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -70,8 +61,7 @@
         <activity
             android:name="cn.edu.mydotabuff.item.ItemsDetailActivity"
             android:label="@string/title_activity_items_detail"
-            android:parentActivityName=".MainActivity"
-            android:process=":occultation" >
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
