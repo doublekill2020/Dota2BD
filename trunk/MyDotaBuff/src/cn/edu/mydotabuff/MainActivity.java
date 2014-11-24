@@ -7,7 +7,6 @@ import io.rong.imlib.RongIMClient.ConnectCallback.ErrorCode;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +24,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -42,6 +42,7 @@ import cn.edu.mydotabuff.mydetail.FragMyDetail;
 import cn.edu.mydotabuff.recently.FragRecently;
 import cn.edu.mydotabuff.util.PersonalRequestImpl;
 import cn.edu.mydotabuff.view.CircleImageView;
+import cn.edu.mydotabuff.view.TipsToast;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.CanvasTransformer;
@@ -102,7 +103,6 @@ public class MainActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
-
 
 		UmengUpdateAgent.setUpdateOnlyWifi(false);
 		UmengUpdateAgent.update(this);
@@ -325,8 +325,8 @@ public class MainActivity extends Activity implements OnClickListener {
 				@Override
 				public void onSuccess(String s) {
 					// 此处处理连接成功。
-					Toast.makeText(MainActivity.this, "登录成功！", Toast.LENGTH_SHORT)
-							.show();
+					Toast.makeText(MainActivity.this, "登录成功！",
+							Toast.LENGTH_SHORT).show();
 				}
 
 				@Override
@@ -344,13 +344,14 @@ public class MainActivity extends Activity implements OnClickListener {
 				@Override
 				public RongIMClient.UserInfo getUserInfo(String userId) {
 					if (userId.equals("1")) {
-						RongIMClient.UserInfo user = new RongIMClient.UserInfo("1",
-								"zhangsan", "http://www.baidu.com/img/bdlogo.png");
+						RongIMClient.UserInfo user = new RongIMClient.UserInfo(
+								"1", "zhangsan",
+								"http://www.baidu.com/img/bdlogo.png");
 
 						return user;
 					} else if (userId.equals("2")) {
-						RongIMClient.UserInfo user = new RongIMClient.UserInfo("2",
-								"lisi",
+						RongIMClient.UserInfo user = new RongIMClient.UserInfo(
+								"2", "lisi",
 								"http://2.su.bdimg.com/star_skin/1001_t.png");
 
 						return user;
@@ -367,20 +368,22 @@ public class MainActivity extends Activity implements OnClickListener {
 					// 返回 App 的好友列表给 IMKit 界面组件，供会话列表页中选择好友时使用。
 					List<RongIMClient.UserInfo> list = new ArrayList<RongIMClient.UserInfo>();
 
-					RongIMClient.UserInfo user1 = new RongIMClient.UserInfo("1",
-							"zhangsan", "http://www.baidu.com/img/bdlogo.png");
+					RongIMClient.UserInfo user1 = new RongIMClient.UserInfo(
+							"1", "zhangsan",
+							"http://www.baidu.com/img/bdlogo.png");
 
 					list.add(user1);
 
-					RongIMClient.UserInfo user2 = new RongIMClient.UserInfo("2",
-							"lisi", "http://2.su.bdimg.com/star_skin/1001_t.png");
+					RongIMClient.UserInfo user2 = new RongIMClient.UserInfo(
+							"2", "lisi",
+							"http://2.su.bdimg.com/star_skin/1001_t.png");
 
 					list.add(user2);
 
 					return list;
 				}
 			});
-			
+
 			RongIM.getInstance().startPrivateChat(this, "2", "聊天");
 			break;
 		case R.id.setting_layout:
@@ -463,7 +466,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		qqShareContent.setShareImage(new UMImage(this, R.drawable.ic_launcher));
 		mController.setShareMedia(qqShareContent);
 		qqSsoHandler.addToSocialSDK();
-		
+
 		QZoneSsoHandler qZoneSsoHandler = new QZoneSsoHandler(this, QQappID,
 				QQappSecret);
 		qZoneSsoHandler.setTargetUrl(targetUrl);
@@ -617,5 +620,30 @@ public class MainActivity extends Activity implements OnClickListener {
 		if (ssoHandler != null) {
 			ssoHandler.authorizeCallBack(requestCode, resultCode, data);
 		}
+	}
+
+	private boolean flags = false;
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if (flags) {
+				finish();
+				System.exit(0);
+			} else {
+				flags = true;
+				Toast.makeText(this, "再按一次退出程序!", 500).show();
+				new Handler().postDelayed(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						flags = false;
+					}
+				}, 1000);
+			}
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
 	}
 }
