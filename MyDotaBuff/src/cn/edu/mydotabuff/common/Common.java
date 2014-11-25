@@ -2222,6 +2222,8 @@ public class Common {
 			return "stout_shield";
 		case 0:
 			return "default";
+		case 242:
+			return "crimson_guard";
 		default:
 			return "default";
 		}
@@ -2452,6 +2454,8 @@ public class Common {
 			return "phoenix";
 		if (chineseName.equals("105"))
 			return "techies";
+		if (chineseName.equals("111"))
+			return "oracle";
 		return "default";
 	}
 	
@@ -2680,6 +2684,8 @@ public class Common {
 			return "phoenix";
 		if (chineseName.equals("工程师"))
 			return "techies";
+		if (chineseName.equals("神谕者"))
+			return "oracle";
 		return "default";
 	}
 }
