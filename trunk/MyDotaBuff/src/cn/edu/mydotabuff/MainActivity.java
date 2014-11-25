@@ -553,7 +553,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			}
 			break;
 		}
-		transaction.commit();
+		transaction.commitAllowingStateLoss();
 	}
 
 	/**
