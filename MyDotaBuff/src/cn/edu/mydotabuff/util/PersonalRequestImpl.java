@@ -74,5 +74,12 @@ public class PersonalRequestImpl extends BaseRequestInterface {
 		params.put("division", division);
 		request(APIConstants.GET_BOARD, params, true);
 	}
-
+	public void getUserToken(String userId,String name,String portraitUri) {
+		// TODO Auto-generated method stub
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("userId", userId);
+		params.put("name", name);
+		params.put("portraitUri", portraitUri);
+		request(APIConstants.GET_USER_TOKEN, params, true);
+	}
 }
