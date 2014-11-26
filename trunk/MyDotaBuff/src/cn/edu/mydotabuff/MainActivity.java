@@ -47,6 +47,7 @@ import cn.edu.mydotabuff.view.TipsToast;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.CanvasTransformer;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.tencent.a.b.m;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.fb.FeedbackAgent;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -87,7 +88,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	private TextView checkUpdateBtn, feedBackBtn, shareBtn, logoutBtn;
 
 	private String steamID;
-	private static final int FETCH_DETAIL = 1, FETCH_FAILED = 2;
+	private static final int FETCH_DETAIL = 1, FETCH_FAILED = 2,LOGIN_SUCCESS =3;
 	private MyHandler myHandler = new MyHandler();
 	private CircleImageView userIcon;
 	private TextView userName;
@@ -226,6 +227,75 @@ public class MainActivity extends Activity implements OnClickListener {
 			case FETCH_FAILED:
 
 				break;
+			case LOGIN_SUCCESS:
+				String token = (String) msg.obj;
+				// 连接融云服务器。
+				RongIM.connect(token, new RongIMClient.ConnectCallback() {
+
+					@Override
+					public void onSuccess(String s) {
+						// 此处处理连接成功。
+						Toast.makeText(MainActivity.this, "登录成功！",
+								Toast.LENGTH_SHORT).show();
+					}
+
+					@Override
+					public void onError(ErrorCode errorCode) {
+						// 此处处理连接错误。
+						Toast.makeText(MainActivity.this, errorCode.getMessage(),
+								Toast.LENGTH_SHORT).show();
+					}
+				});
+//				// 设置用户信息提供者。
+//				RongIM.setGetUserInfoProvider(new RongIM.GetUserInfoProvider() {
+//					// App 返回指定的用户信息给 IMKit 界面组件。
+//					// 原则上 App
+//					// 应该将用户信息和头像在移动设备上进行缓存，每次获取用户信息的时候，就不用再通过网络获取，提高加载速度，提升用户体验。我们后续将提供用户信息缓存功能，方便您开发。
+//					@Override
+//					public RongIMClient.UserInfo getUserInfo(String userId) {
+//						if (userId.equals("188929113")) {
+//							RongIMClient.UserInfo user = new RongIMClient.UserInfo(
+//									"188929113", "zhangsan",
+//									"http://www.baidu.com/img/bdlogo.png");
+//
+//							return user;
+//						} else if (userId.equals("202055420")) {
+//							RongIMClient.UserInfo user = new RongIMClient.UserInfo(
+//									"202055420", "lisi",
+//									"http://2.su.bdimg.com/star_skin/1001_t.png");
+//
+//							return user;
+//						}
+//
+//						return null;
+//					}
+//				}, false);
+
+//				// 设置好友信息提供者。
+//				RongIM.setGetFriendsProvider(new RongIM.GetFriendsProvider() {
+//					@Override
+//					public List<RongIMClient.UserInfo> getFriends() {
+//						// 返回 App 的好友列表给 IMKit 界面组件，供会话列表页中选择好友时使用。
+//						List<RongIMClient.UserInfo> list = new ArrayList<RongIMClient.UserInfo>();
+//
+//						RongIMClient.UserInfo user1 = new RongIMClient.UserInfo(
+//								"188929113", "zhangsan",
+//								"http://www.baidu.com/img/bdlogo.png");
+//
+//						list.add(user1);
+//
+//						RongIMClient.UserInfo user2 = new RongIMClient.UserInfo(
+//								"202055420", "lisi",
+//								"http://2.su.bdimg.com/star_skin/1001_t.png");
+//
+//						list.add(user2);
+//
+//						return list;
+//					}
+//				});
+				RongIM.getInstance().startChatroom(MainActivity.this, "chatroom002", "聊天室");
+				//RongIM.getInstance().startPrivateChat(MainActivity.this, "202055420", "聊天");
+				break;
 			default:
 				break;
 			}
@@ -317,74 +387,34 @@ public class MainActivity extends Activity implements OnClickListener {
 			titleView.setText("天梯排行榜");
 			rightView.setVisibility(View.GONE);
 
-			// 此处直接 hardcode 给 token 赋值，请替换为您自己的 Token。
-			String token = "YMuGi5vs2EGG700+TnBYCe4ojYjBMJnJrmW5Rq87UVkSiih43YSR2cSnP9/CIgmvAGhIw1l9CIEB/S6hlnHkHG9JEbovp9fL";
-			// 连接融云服务器。
-			RongIM.connect(token, new RongIMClient.ConnectCallback() {
+			PersonalRequestImpl request = new PersonalRequestImpl(new IInfoReceive(){
 
 				@Override
-				public void onSuccess(String s) {
-					// 此处处理连接成功。
-					Toast.makeText(MainActivity.this, "登录成功！",
-							Toast.LENGTH_SHORT).show();
-				}
-
-				@Override
-				public void onError(ErrorCode errorCode) {
-					// 此处处理连接错误。
-					Toast.makeText(MainActivity.this, errorCode.getMessage(),
-							Toast.LENGTH_SHORT).show();
-				}
-			});
-			// 设置用户信息提供者。
-			RongIM.setGetUserInfoProvider(new RongIM.GetUserInfoProvider() {
-				// App 返回指定的用户信息给 IMKit 界面组件。
-				// 原则上 App
-				// 应该将用户信息和头像在移动设备上进行缓存，每次获取用户信息的时候，就不用再通过网络获取，提高加载速度，提升用户体验。我们后续将提供用户信息缓存功能，方便您开发。
-				@Override
-				public RongIMClient.UserInfo getUserInfo(String userId) {
-					if (userId.equals("1")) {
-						RongIMClient.UserInfo user = new RongIMClient.UserInfo(
-								"1", "zhangsan",
-								"http://www.baidu.com/img/bdlogo.png");
-
-						return user;
-					} else if (userId.equals("2")) {
-						RongIMClient.UserInfo user = new RongIMClient.UserInfo(
-								"2", "lisi",
-								"http://2.su.bdimg.com/star_skin/1001_t.png");
-
-						return user;
+				public void onMsgReceiver(ResponseObj receiveInfo) {
+					// TODO Auto-generated method stub
+					try {
+						JSONObject obj = new JSONObject(receiveInfo.getJsonStr());
+						int code = obj.getInt("code");
+						if(code == 200){
+							Message msg = myHandler.obtainMessage();
+							msg.obj = obj.getString("token");
+							msg.arg1 = LOGIN_SUCCESS;
+							myHandler.sendMessage(msg);
+						}else{
+							
+						}
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-
-					return null;
 				}
-			}, false);
-
-			// 设置好友信息提供者。
-			RongIM.setGetFriendsProvider(new RongIM.GetFriendsProvider() {
-				@Override
-				public List<RongIMClient.UserInfo> getFriends() {
-					// 返回 App 的好友列表给 IMKit 界面组件，供会话列表页中选择好友时使用。
-					List<RongIMClient.UserInfo> list = new ArrayList<RongIMClient.UserInfo>();
-
-					RongIMClient.UserInfo user1 = new RongIMClient.UserInfo(
-							"1", "zhangsan",
-							"http://www.baidu.com/img/bdlogo.png");
-
-					list.add(user1);
-
-					RongIMClient.UserInfo user2 = new RongIMClient.UserInfo(
-							"2", "lisi",
-							"http://2.su.bdimg.com/star_skin/1001_t.png");
-
-					list.add(user2);
-
-					return list;
-				}
+				
 			});
+			request.setActivity(this);
+			request.setDialogTitle("登录中，请稍候...");
+			PlayerInfoBean bean = DotaApplication.getApplication().getData(LocalDataType.PLAYER_INFO);
+			request.getUserToken(userID, bean.getName(), bean.getMediumIcon());
 
-			RongIM.getInstance().startPrivateChat(this, "2", "聊天");
 			break;
 		case R.id.setting_layout:
 			setTabSelection(3);
