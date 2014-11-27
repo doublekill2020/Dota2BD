@@ -108,6 +108,7 @@ public class FragRecently extends Fragment implements OnMainEventListener {
 			@Override
 			public void onRefresh() {
 				// TODO Auto-generated method stub
+				DotaApplication.getApplication().destoryData(LocalDataType.MATCHES);
 				mAdapter = null;
 				allMatchBeans.clear();
 				lastId = "";
@@ -302,6 +303,7 @@ public class FragRecently extends Fragment implements OnMainEventListener {
 					listView.setAdapter(mAdapter);
 					allMatchBeans.addAll(beans);
 				} else {
+					allMatchBeans.addAll(beans);
 					mAdapter.addMoreData(beans);
 				}
 				break;
