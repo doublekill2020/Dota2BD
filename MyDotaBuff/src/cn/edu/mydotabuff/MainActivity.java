@@ -85,7 +85,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	private TextView titleView, rightView;
 	private View openMenuView;
 	private SlidingMenu menu;
-	private TextView checkUpdateBtn, feedBackBtn, shareBtn, logoutBtn;
+	private TextView checkUpdateBtn, feedBackBtn, shareBtn, logoutBtn,chatBtn;
 
 	private String steamID;
 	private static final int FETCH_DETAIL = 1, FETCH_FAILED = 2,LOGIN_SUCCESS =3;
@@ -150,6 +150,9 @@ public class MainActivity extends Activity implements OnClickListener {
 												.getInt("communityvisibilitystate"));
 										bean.setLastlogooff(obj
 												.getString("lastlogoff"));
+										if(bean.getLastlogooff() == null){
+											bean.setLastlogooff("1417140906");
+										}
 										bean.setMediumIcon(obj
 												.getString("avatarmedium"));
 										bean.setName(obj
@@ -294,7 +297,6 @@ public class MainActivity extends Activity implements OnClickListener {
 //					}
 //				});
 				RongIM.getInstance().startChatroom(MainActivity.this, "chatroom002", "聊天室");
-				//RongIM.getInstance().startPrivateChat(MainActivity.this, "202055420", "聊天");
 				break;
 			default:
 				break;
@@ -338,6 +340,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		userIcon = (CircleImageView) findViewById(R.id.user_icon);
 		userName = (TextView) findViewById(R.id.user_name);
 		logoutBtn = (TextView) findViewById(R.id.logout);
+		chatBtn = (TextView) findViewById(R.id.chat_room);
 	}
 
 	private void initEvents() {
@@ -351,6 +354,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		feedBackBtn.setOnClickListener(this);
 		shareBtn.setOnClickListener(this);
 		logoutBtn.setOnClickListener(this);
+		chatBtn.setOnClickListener(this);
 		menu.setBehindCanvasTransformer(new CanvasTransformer() {
 			@Override
 			public void transformCanvas(Canvas canvas, float percentOpen) {
@@ -386,7 +390,8 @@ public class MainActivity extends Activity implements OnClickListener {
 			setTabSelection(2);
 			titleView.setText("天梯排行榜");
 			rightView.setVisibility(View.GONE);
-
+			break;
+		case R.id.chat_room:
 			PersonalRequestImpl request = new PersonalRequestImpl(new IInfoReceive(){
 
 				@Override
@@ -414,7 +419,6 @@ public class MainActivity extends Activity implements OnClickListener {
 			request.setDialogTitle("登录中，请稍候...");
 			PlayerInfoBean bean = DotaApplication.getApplication().getData(LocalDataType.PLAYER_INFO);
 			request.getUserToken(userID, bean.getName(), bean.getMediumIcon());
-
 			break;
 		case R.id.setting_layout:
 			setTabSelection(3);

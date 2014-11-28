@@ -24,11 +24,11 @@
                 android:layout_height="96dp" />
 
             <TextView
-                android:singleLine="true"
                 android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp" />
+                android:layout_marginTop="5dp"
+                android:singleLine="true" />
         </LinearLayout>
 
         <LinearLayout
@@ -72,6 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/black" />
+
             <TextView
                 android:id="@+id/logout"
                 android:layout_width="match_parent"
@@ -81,10 +82,27 @@
                 android:gravity="center"
                 android:text="切换登录"
                 android:textSize="26sp" />
-             <View
+
+            <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/black" />
+
+            <TextView
+                android:id="@+id/chat_room"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="聊天室"
+                android:textSize="26sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black" />
+
             <TextView
                 android:id="@+id/share"
                 android:layout_width="match_parent"
