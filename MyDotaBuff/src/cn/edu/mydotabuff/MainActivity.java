@@ -240,6 +240,7 @@ public class MainActivity extends Activity implements OnClickListener {
 						// 此处处理连接成功。
 						Toast.makeText(MainActivity.this, "登录成功！",
 								Toast.LENGTH_SHORT).show();
+						RongIM.getInstance().startChatroom(MainActivity.this, "chatroom002", "聊天室");
 					}
 
 					@Override
@@ -296,7 +297,6 @@ public class MainActivity extends Activity implements OnClickListener {
 //						return list;
 //					}
 //				});
-				RongIM.getInstance().startChatroom(MainActivity.this, "chatroom002", "聊天室");
 				break;
 			default:
 				break;
@@ -392,6 +392,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			rightView.setVisibility(View.GONE);
 			break;
 		case R.id.chat_room:
+			menu.toggle();
 			PersonalRequestImpl request = new PersonalRequestImpl(new IInfoReceive(){
 
 				@Override
