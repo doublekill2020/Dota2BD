@@ -209,151 +209,172 @@ public class WebDataHelper {
 						doc = Jsoup.connect(url).timeout(timeout).get();
 						if (doc != null) {
 							// 获取连胜连败
-							Elements trs = doc
-									.select("div.container.xuning-box")
+							if (doc.select("div.container.xuning-box")
 									.select("table.table.table-hover.table-striped.table-sfield")
-									.get(2).select("tr");
-							for (int i = 0; i < trs.size(); i++) {
-								String resString = trs.get(i).select("td")
-										.text();
-								resString = resString.replace(" ", "");
-								resString = resString.trim().substring(7,
-										resString.length());
-								switch (i) {
-								case 0:
-									bean.setWinStreak(resString);
-									break;
-								case 1:
-									bean.setLoseStreak(resString);
-									break;
-								default:
-									break;
-								}
-							}
-							// 获取最高记录
-							ArrayList<BestRecord> beans = new ArrayList<BestRecord>();
-							Element bestRecordDiv = doc.select(
-									"div.flat-grey-box").get(2);
-							Elements trs2 = bestRecordDiv.select("tbody")
-									.select("tr");
-							for (int i = 0; i < trs2.size(); i++) {
-								BestRecord bestRecordBeans = new BestRecord();
-								Elements tds = trs2.get(i).select("td");
-								for (int j = 0; j < tds.size(); j++) {
-									switch (j) {
+									.size() > 0) {
+								Elements trs = doc
+										.select("div.container.xuning-box")
+										.select("table.table.table-hover.table-striped.table-sfield")
+										.get(2).select("tr");
+								for (int i = 0; i < trs.size(); i++) {
+									String resString = trs.get(i).select("td")
+											.text();
+									resString = resString.replace(" ", "");
+									resString = resString.trim().substring(7,
+											resString.length());
+									if (resString == null) {
+										resString = "0";
+									}
+									switch (i) {
 									case 0:
-										bestRecordBeans.setRecordType(tds
-												.get(j).text());
+										bean.setWinStreak(resString);
 										break;
 									case 1:
-										bestRecordBeans.setMmatchID(tds.get(j)
-												.text());
-										break;
-									case 2:
-										bestRecordBeans.setResult(tds.get(j)
-												.text());
-										break;
-									case 3:
-										bestRecordBeans.setImageUri(tds.get(j)
-												.getElementsByTag("img")
-												.first().attr("src"));
-										bestRecordBeans.setHeroName(tds.get(j)
-												.text());
-										break;
-									case 4:
-										bestRecordBeans.setRecordNum(tds.get(j)
-												.text());
+										bean.setLoseStreak(resString);
 										break;
 									default:
 										break;
 									}
-
 								}
-								beans.add(bestRecordBeans);
-							}
-							bean.setBeans(beans);
-							bean.setLoadWebData(true);
-
-							ArrayList<MacthStatistics> list = new ArrayList<MacthStatistics>();
-							for (int type = 0; type <= 1; type++) {
-								Element table = doc
-										.select("div.container.xuning-box")
-										.select("table.table.table-hover.table-striped.table-sfield")
-										.get(type);
-								String test = table.toString().replaceAll(
-										"<span(.*)span>", "");
-								Elements _trs = Jsoup.parse(test).select("tr");
-								for (int k = 1; k < _trs.size() + 1; k = k + 2) {
-									MacthStatistics macthStatisticsBeans = new MacthStatistics();
-									// int n = 0;
-									// if (type == 0) {
-									// n = 1;
-									// } else {
-									// n = -3;
-									// }
-									for (int i = k - 1; i < k + 1; i++) {
-										int m = i + 1;
-										if (m % 2 == 0) {
-											Elements divs = _trs.get(i)
-													.select("td").select("div");
-											for (int j = 0; j < divs.size(); j++) {
-												switch (j) {
-												case 0:
-													macthStatisticsBeans
-															.setPlayTimes(divs
-																	.get(j)
-																	.text()
-																	.trim()
-																	.replace(
-																			" ",
-																			"")
-																	.substring(
-																			3));
-													break;
-												case 1:
-													String rate = divs.get(j)
-															.text().trim()
-															.replace(" ", "")
-															.substring(3, 8);
-													if (rate.contains("%")) {
-														rate = rate.substring(
-																0,
-																rate.length() - 1);
-													}
-													macthStatisticsBeans
-															.setWinning(rate);
-													break;
-												case 2:
-													macthStatisticsBeans
-															.setKAD(divs
-																	.get(j)
-																	.text()
-																	.trim()
-																	.replace(
-																			" ",
-																			"")
-																	.substring(
-																			4));
-													break;
-												default:
-													break;
-												}
-											}
-										} else {
-											macthStatisticsBeans.setType(_trs
-													.get(i).select("td").text()
-													.trim().replace(" ", ""));
+								// 获取最高记录
+								ArrayList<BestRecord> beans = new ArrayList<BestRecord>();
+								Element bestRecordDiv = doc.select(
+										"div.flat-grey-box").get(2);
+								Elements trs2 = bestRecordDiv.select("tbody")
+										.select("tr");
+								for (int i = 0; i < trs2.size(); i++) {
+									BestRecord bestRecordBeans = new BestRecord();
+									Elements tds = trs2.get(i).select("td");
+									for (int j = 0; j < tds.size(); j++) {
+										switch (j) {
+										case 0:
+											bestRecordBeans.setRecordType(tds
+													.get(j).text());
+											break;
+										case 1:
+											bestRecordBeans.setMmatchID(tds
+													.get(j).text());
+											break;
+										case 2:
+											bestRecordBeans.setResult(tds
+													.get(j).text());
+											break;
+										case 3:
+											bestRecordBeans.setImageUri(tds
+													.get(j)
+													.getElementsByTag("img")
+													.first().attr("src"));
+											bestRecordBeans.setHeroName(tds
+													.get(j).text());
+											break;
+										case 4:
+											bestRecordBeans.setRecordNum(tds
+													.get(j).text());
+											break;
+										default:
+											break;
 										}
 
 									}
-									list.add(macthStatisticsBeans);
+									beans.add(bestRecordBeans);
 								}
+								bean.setBeans(beans);
+								bean.setLoadWebData(true);
+
+								ArrayList<MacthStatistics> list = new ArrayList<MacthStatistics>();
+								for (int type = 0; type <= 1; type++) {
+									Element table = doc
+											.select("div.container.xuning-box")
+											.select("table.table.table-hover.table-striped.table-sfield")
+											.get(type);
+									String test = table.toString().replaceAll(
+											"<span(.*)span>", "");
+									Elements _trs = Jsoup.parse(test).select(
+											"tr");
+									for (int k = 1; k < _trs.size() + 1; k = k + 2) {
+										MacthStatistics macthStatisticsBeans = new MacthStatistics();
+										// int n = 0;
+										// if (type == 0) {
+										// n = 1;
+										// } else {
+										// n = -3;
+										// }
+										for (int i = k - 1; i < k + 1; i++) {
+											int m = i + 1;
+											if (m % 2 == 0) {
+												Elements divs = _trs.get(i)
+														.select("td")
+														.select("div");
+												for (int j = 0; j < divs.size(); j++) {
+													switch (j) {
+													case 0:
+														macthStatisticsBeans
+																.setPlayTimes(divs
+																		.get(j)
+																		.text()
+																		.trim()
+																		.replace(
+																				" ",
+																				"")
+																		.substring(
+																				3));
+														break;
+													case 1:
+														String rate = divs
+																.get(j)
+																.text()
+																.trim()
+																.replace(" ",
+																		"")
+																.substring(3, 8);
+														if (rate.contains("%")) {
+															rate = rate
+																	.substring(
+																			0,
+																			rate.length() - 1);
+														}
+														macthStatisticsBeans
+																.setWinning(rate);
+														break;
+													case 2:
+														macthStatisticsBeans
+																.setKAD(divs
+																		.get(j)
+																		.text()
+																		.trim()
+																		.replace(
+																				" ",
+																				"")
+																		.substring(
+																				4));
+														break;
+													default:
+														break;
+													}
+												}
+											} else {
+												macthStatisticsBeans
+														.setType(_trs
+																.get(i)
+																.select("td")
+																.text()
+																.trim()
+																.replace(" ",
+																		""));
+											}
+
+										}
+										list.add(macthStatisticsBeans);
+									}
+								}
+								bean.setList(list);
+								bean.setLoadMap(true);
+								DotaApplication.getApplication().saveData(bean,
+										LocalDataType.PLAYER_DETAIL_INFO);
+								status = 1;
+							}else{
+								status = -2;
 							}
-							bean.setList(list);
-							bean.setLoadMap(true);
-							DotaApplication.getApplication().saveData(bean,
-									LocalDataType.PLAYER_DETAIL_INFO);
-							status = 1;
 						} else {
 							status = -2;
 						}

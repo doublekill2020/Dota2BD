@@ -103,7 +103,7 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 					TipsToast.showToast(activity, "暂无数据", Toast.LENGTH_SHORT,
 							DialogType.LOAD_FAILURE);
 				} else {
-					if (bean.isLoadMap() && bean.isLoadWebData()) {
+					if (bean.isLoadMap() && bean.isLoadWebData() &&bean.getBeans() != null) {
 						Intent intent = new Intent(activity,
 								ActUserStatistics.class);
 						startActivity(intent);

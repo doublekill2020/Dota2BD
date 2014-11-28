@@ -14,5 +14,5 @@ public final class APIConstants {
 	public final static String GET_ONLINE_NUM = "http://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1";
 	public final static String GET_BOARD = "http://www.dota2.com/webapi/ILeaderboard/GetDivisionLeaderboard/v0001";
 	
-	public final static String GET_USER_TOKEN = "http://4evercai.aliapp.com/client/rongcloud_getToken.action";
+	public final static String GET_USER_TOKEN = "http://dota2helper.jd-app.com/client/rongcloud_getToken.action";
 }
