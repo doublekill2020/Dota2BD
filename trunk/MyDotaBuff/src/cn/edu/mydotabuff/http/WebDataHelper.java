@@ -204,6 +204,9 @@ public class WebDataHelper {
 					url = "http://dotamax.com/player/detail/" + userId;
 					PlayerInfoBean bean = DotaApplication.getApplication()
 							.getData(LocalDataType.PLAYER_INFO);
+					if(bean == null){
+						bean = new PlayerInfoBean();
+					}
 					Document doc = null;
 					try {
 						doc = Jsoup.connect(url).timeout(timeout).get();
