@@ -6,6 +6,8 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
@@ -48,16 +50,20 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 	private ProgressBar all_nBar, all_hBar, all_vhBar, rank_nBar, rank_hBar,
 			rank_vhBar;
 	private TextView all_n_data, all_h_data, all_vh_data, rank_n_data,
-			rank_h_data, rank_vh_data,all_tag,rank_tag;
+			rank_h_data, rank_vh_data, all_tag, rank_tag;
 	private TextView all_n_rating, all_h_rating, all_vh_rating, rank_n_rating,
 			rank_h_rating, rank_vh_rating;
+	private static final int ALL_N = 1, ALL_H = 2, ALL_VH = 3, RANK_N = 4,
+			RANK_H = 5, RANK_VH = 6;
+	private final int rateDatas[] = new int[6];
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO 自动生成的方法存根
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
-		bean = DotaApplication.getApplication().getData(LocalDataType.PLAYER_DETAIL_INFO);
+		bean = DotaApplication.getApplication().getData(
+				LocalDataType.PLAYER_DETAIL_INFO);
 		beans = bean.getBeans();
 		list = bean.getList();
 		if (beans != null) {
@@ -94,7 +100,7 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 			public void convert(CommViewHolder helper, BestRecord item) {
 				// TODO Auto-generated method stub
 				helper.setImageFromWeb(R.id.icon, Utils.getHeroImageUri(Common
-						.getHeroName(item.getHeroName())),1);
+						.getHeroName(item.getHeroName())), 1);
 				helper.setText(R.id.name, item.getHeroName());
 				helper.setText(R.id.tag1,
 						item.getRecordType() + ":" + item.getRecordNum());
@@ -135,33 +141,41 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 		rank_tag = (TextView) view2.findViewById(R.id.rank_tag);
 		ArrayList<MacthStatistics> statisticsList = bean.getList();
 		MacthStatistics bean = statisticsList.get(1);
-		all_n_data.setText(bean.getPlayTimes()+"场 KDA:"+bean.getKAD());
-		all_n_rating.setText((int)Float.parseFloat(bean.getWinning())+"%");
-		all_nBar.setProgress((int)Float.parseFloat(bean.getWinning()));
+		all_n_data.setText(bean.getPlayTimes() + "场 KDA:" + bean.getKAD());
+		// all_n_rating.setText((int)Float.parseFloat(bean.getWinning())+"%");
+		// all_nBar.setProgress((int)Float.parseFloat(bean.getWinning()));
+		rateDatas[0] = (int) Float.parseFloat(bean.getWinning());
 		bean = statisticsList.get(0);
-		all_tag.setText("("+bean.getPlayTimes()+"场 平均KDA:"+bean.getKAD()+" 胜率:"+bean.getWinning()+"%)");
+		all_tag.setText("(" + bean.getPlayTimes() + "场 平均KDA:" + bean.getKAD()
+				+ " 胜率:" + bean.getWinning() + "%)");
 		bean = statisticsList.get(2);
-		all_h_data.setText(bean.getPlayTimes()+"场 KDA:"+bean.getKAD());
-		all_h_rating.setText((int)Float.parseFloat(bean.getWinning())+"%");
-		all_hBar.setProgress((int)Float.parseFloat(bean.getWinning()));
+		all_h_data.setText(bean.getPlayTimes() + "场 KDA:" + bean.getKAD());
+		// all_h_rating.setText((int)Float.parseFloat(bean.getWinning())+"%");
+		// all_hBar.setProgress((int)Float.parseFloat(bean.getWinning()));
+		rateDatas[1] = (int) Float.parseFloat(bean.getWinning());
 		bean = statisticsList.get(3);
-		all_vh_data.setText(bean.getPlayTimes()+"场 KDA:"+bean.getKAD());
-		all_vh_rating.setText((int)Float.parseFloat(bean.getWinning())+"%");
-		all_vhBar.setProgress((int)Float.parseFloat(bean.getWinning()));
+		all_vh_data.setText(bean.getPlayTimes() + "场 KDA:" + bean.getKAD());
+		// all_vh_rating.setText((int)Float.parseFloat(bean.getWinning())+"%");
+		// all_vhBar.setProgress((int)Float.parseFloat(bean.getWinning()));
+		rateDatas[2] = (int) Float.parseFloat(bean.getWinning());
 		bean = statisticsList.get(6);
-		rank_tag.setText("("+bean.getPlayTimes()+"场 平均KDA:"+bean.getKAD()+" 胜率:"+bean.getWinning()+"%)");
+		rank_tag.setText("(" + bean.getPlayTimes() + "场 平均KDA:" + bean.getKAD()
+				+ " 胜率:" + bean.getWinning() + "%)");
 		bean = statisticsList.get(7);
-		rank_n_data.setText(bean.getPlayTimes()+"场 KDA:"+bean.getKAD());
-		rank_n_rating.setText((int)Float.parseFloat(bean.getWinning())+"%");
-		rank_nBar.setProgress((int)Float.parseFloat(bean.getWinning()));
+		rank_n_data.setText(bean.getPlayTimes() + "场 KDA:" + bean.getKAD());
+		// rank_n_rating.setText((int)Float.parseFloat(bean.getWinning())+"%");
+		// rank_nBar.setProgress((int)Float.parseFloat(bean.getWinning()));
+		rateDatas[3] = (int) Float.parseFloat(bean.getWinning());
 		bean = statisticsList.get(8);
-		rank_h_data.setText(bean.getPlayTimes()+"场 KDA:"+bean.getKAD());
-		rank_h_rating.setText((int)Float.parseFloat(bean.getWinning())+"%");
-		rank_hBar.setProgress((int)Float.parseFloat(bean.getWinning()));
+		rank_h_data.setText(bean.getPlayTimes() + "场 KDA:" + bean.getKAD());
+		// rank_h_rating.setText((int)Float.parseFloat(bean.getWinning())+"%");
+		// rank_hBar.setProgress((int)Float.parseFloat(bean.getWinning()));
+		rateDatas[4] = (int) Float.parseFloat(bean.getWinning());
 		bean = statisticsList.get(9);
-		rank_vh_data.setText(bean.getPlayTimes()+"场 KDA:"+bean.getKAD());
-		rank_vh_rating.setText((int)Float.parseFloat(bean.getWinning())+"%");
-		rank_vhBar.setProgress((int)Float.parseFloat(bean.getWinning()));
+		rank_vh_data.setText(bean.getPlayTimes() + "场 KDA:" + bean.getKAD());
+		// rank_vh_rating.setText((int)Float.parseFloat(bean.getWinning())+"%");
+		// rank_vhBar.setProgress((int)Float.parseFloat(bean.getWinning()));
+		rateDatas[5] = (int) Float.parseFloat(bean.getWinning());
 		views.add(view2);
 		if (adapter == null) {
 			adapter = new ViewpagerAdapter(views);
@@ -169,6 +183,84 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 		} else {
 			adapter.setNewList(views);
 		}
+	}
+
+	Handler h = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case ALL_N:
+				 all_n_rating.setText(msg.arg1+"%");
+				 all_nBar.setProgress(msg.arg1);
+				break;
+			case ALL_H:
+				 all_h_rating.setText(msg.arg1+"%");
+				 all_hBar.setProgress(msg.arg1);
+				break;
+			case ALL_VH:
+				 all_vh_rating.setText(msg.arg1+"%");
+				 all_vhBar.setProgress(msg.arg1);
+				break;
+			case RANK_N:
+				 rank_n_rating.setText(msg.arg1+"%");
+				 rank_nBar.setProgress(msg.arg1);
+				break;
+			case RANK_H:
+				 rank_h_rating.setText(msg.arg1+"%");
+				 rank_hBar.setProgress(msg.arg1);
+				break;
+			case RANK_VH:
+				 rank_vh_rating.setText(msg.arg1+"%");
+				 rank_vhBar.setProgress(msg.arg1);
+				break;
+			default:
+				break;
+			}
+		};
+	};
+
+	private void showProgress(final int type) {
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				int maxProgress = 0;
+				switch (type) {
+				case ALL_N:
+					maxProgress = rateDatas[0];
+					break;
+				case ALL_H:
+					maxProgress = rateDatas[1];
+					break;
+				case ALL_VH:
+					maxProgress = rateDatas[2];
+					break;
+				case RANK_N:
+					maxProgress = rateDatas[3];
+					break;
+				case RANK_H:
+					maxProgress = rateDatas[4];
+					break;
+				case RANK_VH:
+					maxProgress = rateDatas[5];
+					break;
+				default:
+					break;
+				}
+				for (int p = 0; p <= maxProgress; p++) {
+					Message msg = h.obtainMessage();
+					try {
+						Thread.sleep(20);
+						msg.what = type;
+						msg.arg1 = p;
+						h.sendMessage(msg);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}).start();
 	}
 
 	private void initEvents() {
@@ -211,15 +303,17 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 
 	private void setTabChange(final int index) {
 		if (index == 0) {
-			// leftBtn.setTextColor(getResources().getColor(R.color.white));
-			// rightBtn.setTextColor(getResources().getColor(R.color.my_blue));
 			leftBtn.setSelected(true);
 			rightBtn.setSelected(false);
 		} else {
-			// rightBtn.setTextColor(getResources().getColor(R.color.white));
-			// leftBtn.setTextColor(getResources().getColor(R.color.my_blue));
 			rightBtn.setSelected(true);
 			leftBtn.setSelected(false);
+			showProgress(ALL_N);
+			showProgress(ALL_H);
+			showProgress(ALL_VH);
+			showProgress(RANK_N);
+			showProgress(RANK_H);
+			showProgress(RANK_VH);
 		}
 	}
 
