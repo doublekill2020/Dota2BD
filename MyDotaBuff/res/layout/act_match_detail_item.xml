@@ -220,11 +220,15 @@
                 android:id="@+id/hero_icon"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                  />
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="5dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -242,21 +246,18 @@
                     android:id="@+id/tag1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/tag2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/tag3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:textColor="@color/black" />
             </LinearLayout>
 
@@ -271,21 +272,18 @@
                     android:id="@+id/tag4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/tag5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/tag6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:textColor="@color/black" />
             </LinearLayout>
         </LinearLayout>
