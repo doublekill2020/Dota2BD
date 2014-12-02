@@ -225,9 +225,6 @@ public class WebDataHelper {
 									resString = resString.replace(" ", "");
 									resString = resString.trim().substring(7,
 											resString.length());
-									if (resString == null) {
-										resString = "0";
-									}
 									switch (i) {
 									case 0:
 										bean.setWinStreak(resString);
