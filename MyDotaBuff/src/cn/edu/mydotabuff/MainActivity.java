@@ -664,7 +664,6 @@ public class MainActivity extends Activity implements OnClickListener {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			if (flags) {
 				finish();
-				System.exit(0);
 			} else {
 				flags = true;
 				Toast.makeText(this, "再按一次退出程序!", 500).show();
