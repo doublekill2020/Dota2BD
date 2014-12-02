@@ -16,6 +16,8 @@ import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -341,6 +343,8 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 					// .getHeroDrawableId(bean.getHero_id()));
 					loader.displayImage(Utils.getHeroImageUri(Common
 							.getHeroName(bean.getHero_id())), holder.heroIcon);
+					Animation animation =AnimationUtils.loadAnimation(_caller, R.anim.listview_moreview_show);
+					holder.moreView.setAnimation(animation);
 					holder.heroIcon.setOnClickListener(new OnClickListener() {
 						
 						@Override
@@ -352,6 +356,8 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 				} else if (holder.moreView.getVisibility() == View.VISIBLE) {
 					holder.arrowView.setImageResource(R.drawable.arrow_down);
 					holder.moreView.setVisibility(View.GONE);
+//					Animation animation =AnimationUtils.loadAnimation(_caller, R.anim.listview_moreview_gone);
+//					holder.moreView.setAnimation(animation);
 				}
 			}
 		});
