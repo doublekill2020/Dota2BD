@@ -23,6 +23,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -63,7 +64,7 @@ import com.umeng.socialize.sso.UMSsoHandler;
 import com.umeng.socialize.weixin.controller.UMWXHandler;
 import com.umeng.update.UmengUpdateAgent;
 
-public class MainActivity extends Activity implements OnClickListener {
+public class MainActivity extends ActionBarActivity implements OnClickListener {
 
 	private FragRecently recentlyFragment;
 	private FragHeroList contactsFragment;
@@ -125,6 +126,7 @@ public class MainActivity extends Activity implements OnClickListener {
 			steamID = Common.getSteamID(userID);
 			fetchData(FETCH_DETAIL);
 		}
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
 	void fetchData(final int type) {
