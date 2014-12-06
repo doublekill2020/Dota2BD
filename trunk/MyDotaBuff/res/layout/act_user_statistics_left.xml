@@ -6,7 +6,6 @@
     android:orientation="vertical" >
 
     <cn.edu.mydotabuff.view.XListView
-        android:divider="@drawable/myinfro_divi_short_icon"
         android:id="@+id/left_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
