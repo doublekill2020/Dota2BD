@@ -9,11 +9,15 @@
         android:id="@+id/cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="8dp" >
 
         <LinearLayout
+            android:background="@drawable/umeng_socialize_shareboard_item_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
