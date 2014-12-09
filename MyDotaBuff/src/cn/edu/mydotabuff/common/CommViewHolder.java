@@ -1,5 +1,7 @@
 package cn.edu.mydotabuff.common;
 
+import java.util.WeakHashMap;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.SparseArray;
@@ -15,7 +17,7 @@ import cn.edu.mydotabuff.view.RoundAngleImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class CommViewHolder {
-	private final SparseArray<View> mViews;
+	private WeakHashMap<Integer, View> mViews;
 	private int mPosition;
 	private View mConvertView;
 	private ImageLoader loader;
@@ -24,7 +26,7 @@ public class CommViewHolder {
 			int position) {
 		loader = ImageLoader.getInstance();
 		this.mPosition = position;
-		this.mViews = new SparseArray<View>();
+		this.mViews = new WeakHashMap<Integer, View>();
 		mConvertView = LayoutInflater.from(context).inflate(layoutId, parent,
 				false);
 		// setTag

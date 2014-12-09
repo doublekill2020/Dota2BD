@@ -18,6 +18,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.select.Evaluator.Matches;
 
+import com.nhaarman.listviewanimations.appearance.simple.SwingBottomInAnimationAdapter;
+import com.nhaarman.listviewanimations.appearance.simple.SwingRightInAnimationAdapter;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
@@ -64,6 +67,7 @@ public class FragRecently extends Fragment implements OnMainEventListener {
 	private String userID;
 	private Activity activity;
 	private FragItemAdapter mAdapter;
+	SwingRightInAnimationAdapter sAdapter;
 	private LoadingDialog dialog;
 	private ArrayList<String> matchIds;
 	private ArrayList<MatchBean> allMatchBeans;
@@ -108,7 +112,8 @@ public class FragRecently extends Fragment implements OnMainEventListener {
 			@Override
 			public void onRefresh() {
 				// TODO Auto-generated method stub
-				DotaApplication.getApplication().destoryData(LocalDataType.MATCHES);
+				DotaApplication.getApplication().destoryData(
+						LocalDataType.MATCHES);
 				mAdapter = null;
 				allMatchBeans.clear();
 				lastId = "";
@@ -300,11 +305,14 @@ public class FragRecently extends Fragment implements OnMainEventListener {
 				ArrayList<MatchBean> beans = (ArrayList<MatchBean>) msg.obj;
 				if (mAdapter == null) {
 					mAdapter = new FragItemAdapter(activity, beans);
-					listView.setAdapter(mAdapter);
+					sAdapter = new SwingRightInAnimationAdapter(mAdapter);
+					sAdapter.setAbsListView(listView);
+					listView.setAdapter(sAdapter);
 					allMatchBeans.addAll(beans);
 				} else {
 					allMatchBeans.addAll(beans);
 					mAdapter.addMoreData(beans);
+					sAdapter.notifyDataSetChanged();
 				}
 				break;
 			case FETCH_ONLINE_NUM:
@@ -358,7 +366,9 @@ public class FragRecently extends Fragment implements OnMainEventListener {
 				allMatchBeans.addAll(beans);
 				if (mAdapter == null) {
 					mAdapter = new FragItemAdapter(activity, allMatchBeans);
-					listView.setAdapter(mAdapter);
+					sAdapter = new SwingRightInAnimationAdapter(mAdapter);
+					sAdapter.setAbsListView(listView);
+					listView.setAdapter(sAdapter);
 					if (allMatchBeans.size() > 0) {
 						lastId = allMatchBeans.get(allMatchBeans.size() - 1)
 								.getMatchId();

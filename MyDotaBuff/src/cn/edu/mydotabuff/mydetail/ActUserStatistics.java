@@ -33,6 +33,7 @@ import cn.edu.mydotabuff.recently.ActMatchDetail;
 import cn.edu.mydotabuff.util.Utils;
 import cn.edu.mydotabuff.view.XListView;
 
+import com.nhaarman.listviewanimations.appearance.simple.SwingRightInAnimationAdapter;
 import com.umeng.analytics.MobclickAgent;
 
 public class ActUserStatistics extends Activity implements OnClickListener {
@@ -42,6 +43,7 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 	private ViewPager pager;
 	private ViewpagerAdapter adapter;
 	private CommAdapter<BestRecord> commAdapter;
+	private SwingRightInAnimationAdapter animationAdapter;
 	private PlayerInfoBean bean;
 	private ArrayList<BestRecord> beans;
 	private XListView leftList;
@@ -93,7 +95,7 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 		leftList.setPullLoadEnable(false);
 		leftList.setPullRefreshEnable(false);
 		leftList.setVerticalScrollBarEnabled(false);
-		leftList.setAdapter(commAdapter = new CommAdapter<BestRecord>(this,
+		animationAdapter = new SwingRightInAnimationAdapter(commAdapter = new CommAdapter<BestRecord>(this,
 				beans, R.layout.act_user_statistics_left_item) {
 
 			@Override
@@ -117,6 +119,8 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 				}
 			}
 		});
+		animationAdapter.setAbsListView(leftList);
+		leftList.setAdapter(animationAdapter);
 		views.add(view1);
 		view2 = View.inflate(this, R.layout.act_user_statistics_right, null);
 		all_n_data = (TextView) view2.findViewById(R.id.all_n_data);
