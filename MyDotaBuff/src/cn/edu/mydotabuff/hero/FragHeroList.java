@@ -121,14 +121,12 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 
 		private List<HerosSatistics> beans; // 数据
 		private Activity context;
-		private WeakHashMap<Integer, View> map;
 		private ImageLoader loader;
 
 		public HeroListAdapter(Activity context, List<HerosSatistics> beans) {
 			this.context = context;
 			this.beans = beans;
 			loader = ImageLoader.getInstance();
-			map = new WeakHashMap<Integer, View>();
 		}
 
 		@Override
@@ -149,7 +147,6 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			convertView = map.get(position);
 			if (convertView == null) {
 				convertView = context.getLayoutInflater().inflate(
 						R.layout.frag_hero_used_list_item, null);
@@ -188,7 +185,6 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 			loader.displayImage(
 					Utils.getHeroImageUri(Common.getHeroName(bean.getHeroID())),
 					holder.icon);
-			map.put(position, convertView);
 			return convertView;
 		}
 

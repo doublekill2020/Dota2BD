@@ -35,7 +35,6 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 	private final ArrayList<PlayerDetailBean> _beans;
 	private ImageLoader loader;
 	private int num[] = new int[8];
-	private WeakHashMap<Integer, View> map;
 
 	public ActMatchDetailItemAdapter(Activity caller,
 			ArrayList<PlayerDetailBean> beans, int num[]) {
@@ -43,7 +42,6 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 		_beans = beans;
 		loader = ImageLoader.getInstance();
 		this.num = num;
-		map = new WeakHashMap<Integer, View>();
 	}
 
 	public int getCount() {
@@ -67,7 +65,6 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		convertView = map.get(position);
 		if (convertView == null) {
 			convertView = _caller.getLayoutInflater().inflate(
 					R.layout.act_match_detail_item, null);
@@ -361,7 +358,6 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 				}
 			}
 		});
-		map.put(position, convertView);
 		return convertView;
 	}
 
