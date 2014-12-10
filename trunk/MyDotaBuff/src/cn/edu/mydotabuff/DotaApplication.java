@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.apache.commons.codec.binary.Base64;
 
+import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -54,6 +55,8 @@ public class DotaApplication extends Application {
 		context = mInstance.getApplicationContext();
 		File cacheDir = StorageUtils.getOwnCacheDirectory(
 				getApplicationContext(), "mydotabuff/imageloader");
+		int maxMem = ((ActivityManager) context
+				.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryClass();
 		DisplayImageOptions options = new DisplayImageOptions.Builder()
 				.showImageOnLoading(R.drawable.myinfro_up_img_btn) // 设置图片在下载期间显示的图片
 				.showImageForEmptyUri(R.drawable.myinfro_up_img_btn)// 设置图片Uri为空或是错误的时候显示的图片
@@ -68,7 +71,7 @@ public class DotaApplication extends Application {
 				// 设置图片加入缓存前，对bitmap进行设置
 				// .preProcessor(BitmapProcessor preProcessor)
 				.resetViewBeforeLoading(true)// 设置图片在下载前是否重置，复位
-				.displayer(new RoundedBitmapDisplayer(20))// 是否设置为圆角，弧度为多少
+				// .displayer(new RoundedBitmapDisplayer(20))// 是否设置为圆角，弧度为多少
 				.displayer(new FadeInBitmapDisplayer(100))// 是否图片加载好后渐入的动画时间
 				.build();// 构建完成
 		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
@@ -79,7 +82,9 @@ public class DotaApplication extends Application {
 				// 线程池内加载的数量
 				.threadPriority(Thread.NORM_PRIORITY - 2)
 				.denyCacheImageMultipleSizesInMemory()
-				.memoryCache(new UsingFreqLimitedMemoryCache(2 * 1024 * 1024))
+				.memoryCache(
+						new UsingFreqLimitedMemoryCache(
+								1024 * 1024 * maxMem / 5))
 				// You can pass your own memory cache
 				// implementation/你可以通过自己的内存缓存实现
 				.memoryCacheSize(2 * 1024 * 1024)
@@ -99,7 +104,7 @@ public class DotaApplication extends Application {
 																				// readTimeout
 																				// (30
 																				// s)超时时间
-				//.writeDebugLogs() // Remove for release app
+				// .writeDebugLogs() // Remove for release app
 				.defaultDisplayImageOptions(options).build();// 开始构建
 		ImageLoader.getInstance().init(config);
 
