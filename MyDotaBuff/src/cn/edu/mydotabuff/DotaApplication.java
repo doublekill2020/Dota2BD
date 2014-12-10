@@ -87,7 +87,7 @@ public class DotaApplication extends Application {
 								1024 * 1024 * maxMem / 5))
 				// You can pass your own memory cache
 				// implementation/你可以通过自己的内存缓存实现
-				.memoryCacheSize(2 * 1024 * 1024)
+				.memoryCacheSize(1024 * 1024 * maxMem / 5)
 				.discCacheSize(50 * 1024 * 1024)
 				.discCacheFileNameGenerator(new Md5FileNameGenerator())
 				// 将保存的时候的URI名称用MD5 加密
