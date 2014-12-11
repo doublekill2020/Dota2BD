@@ -59,7 +59,7 @@ public class ActLogin extends Activity implements OnClickListener,
 			startActivity(new Intent(this, MainActivity.class));
 			finish();
 		} else {
-			requestWindowFeature(Window.FEATURE_NO_TITLE);
+			//requestWindowFeature(Window.FEATURE_NO_TITLE);
 			dialog = new LoadingDialog(this);
 			initView();
 			Occultation.getInstance(this).oponeData();
