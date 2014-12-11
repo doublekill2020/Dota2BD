@@ -18,14 +18,20 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -84,9 +90,8 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 	private TextView settingText;
 	private FragmentManager fragmentManager;
 	private TextView titleView, rightView;
-	private View openMenuView;
-	private SlidingMenu menu;
-	private TextView checkUpdateBtn, feedBackBtn, shareBtn, logoutBtn,chatBtn;
+	//private SlidingMenu menu;
+	//private TextView checkUpdateBtn, feedBackBtn, shareBtn, logoutBtn,chatBtn;
 
 	private String steamID;
 	private static final int FETCH_DETAIL = 1, FETCH_FAILED = 2,LOGIN_SUCCESS =3;
@@ -100,21 +105,19 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 	// 首先在您的Activity中添加如下成员变量
 	final UMSocialService mController = UMServiceFactory
 			.getUMSocialService("com.umeng.share");
-
+	private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		//requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 
 		UmengUpdateAgent.setUpdateOnlyWifi(false);
 		UmengUpdateAgent.update(this);
 
 		setContentView(R.layout.main);
-		CommonTitleBar.addCurrencyTitleBar(this, null,
-				R.drawable.biz_main_back_normal, "", null, "最近比赛", null, "");
 		titleView = (TextView) findViewById(CommonTitleBar.titleId);
 		rightView = (TextView) findViewById(CommonTitleBar.rightId);
-		openMenuView = findViewById(R.id.layout_left);
 		loader = ImageLoader.getInstance();
 
 		initUMShare();
@@ -124,11 +127,78 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 		userID = myPreferences.getString("userID", "");
 		if (!userID.equals("")) {
 			steamID = Common.getSteamID(userID);
-			fetchData(FETCH_DETAIL);
+			//fetchData(FETCH_DETAIL);
 		}
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		//getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		if (savedInstanceState == null) {
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            SlidingTabFragment fragment = new SlidingTabFragment();
+            transaction.replace(R.id.sample_content_fragment, fragment);
+            transaction.commit();
+        }
+		configureToolbar();
+        configureDrawer();
 	}
+	
+	private void configureToolbar() {
+        Toolbar mainToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mainToolbar);
+        getSupportActionBar().setTitle("最近比赛");
 
+        mainToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (mDrawerLayout.isDrawerOpen(Gravity.START)) {
+                    mDrawerLayout.closeDrawer(Gravity.START);
+
+                } else {
+                    mDrawerLayout.openDrawer(Gravity.START);
+                }
+            }
+        });
+    }
+
+    private void configureDrawer() {
+        // Configure drawer
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                R.string.dan,
+                R.string.dan) {
+
+            public void onDrawerClosed(View view) {
+                supportInvalidateOptionsMenu();
+            }
+
+            public void onDrawerOpened(View drawerView) {
+                supportInvalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
 	void fetchData(final int type) {
 		PersonalRequestImpl request = new PersonalRequestImpl(
 				new IInfoReceive() {
@@ -325,24 +395,22 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 		// 第一次启动时选中第0个tab
 		setTabSelection(0);
 
-		menu = new SlidingMenu(this);// 直接new，而不是getSlidingMenu
-		menu.setMode(SlidingMenu.LEFT);
-		menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-		menu.setShadowDrawable(R.drawable.drawer_shadow);
-		menu.setShadowWidthRes(R.dimen.shadow_width);
-		menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
-		menu.setBehindWidth(400);// 设置SlidingMenu菜单的宽度
-		menu.setFadeDegree(0.35f);
-		menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);// 必须调用
-		menu.setMenu(R.layout.frame_left_menu);// 就是普通的layout布局
+//		menu = new SlidingMenu(this);// 直接new，而不是getSlidingMenu
+//		menu.setMode(SlidingMenu.LEFT);
+//		menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+//		menu.setShadowDrawable(R.drawable.drawer_shadow);
+//		menu.setShadowWidthRes(R.dimen.shadow_width);
+//		menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+//		menu.setBehindWidth(400);// 设置SlidingMenu菜单的宽度
+//		menu.setFadeDegree(0.35f);
+//		menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);// 必须调用
+//		menu.setMenu(R.layout.frame_left_menu);// 就是普通的layout布局
 
-		checkUpdateBtn = (TextView) findViewById(R.id.check_update);
-		feedBackBtn = (TextView) findViewById(R.id.feedback);
-		shareBtn = (TextView) findViewById(R.id.share);
+//		checkUpdateBtn = (TextView) findViewById(R.id.check_update);
+//		feedBackBtn = (TextView) findViewById(R.id.feedback);
+//		shareBtn = (TextView) findViewById(R.id.share);
 		userIcon = (CircleImageView) findViewById(R.id.user_icon);
 		userName = (TextView) findViewById(R.id.user_name);
-		logoutBtn = (TextView) findViewById(R.id.logout);
-		chatBtn = (TextView) findViewById(R.id.chat_room);
 	}
 
 	private void initEvents() {
@@ -351,28 +419,27 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 		newsLayout.setOnClickListener(this);
 		settingLayout.setOnClickListener(this);
 
-		openMenuView.setOnClickListener(this);
-		checkUpdateBtn.setOnClickListener(this);
-		feedBackBtn.setOnClickListener(this);
-		shareBtn.setOnClickListener(this);
-		logoutBtn.setOnClickListener(this);
-		chatBtn.setOnClickListener(this);
-		menu.setBehindCanvasTransformer(new CanvasTransformer() {
-			@Override
-			public void transformCanvas(Canvas canvas, float percentOpen) {
-				float scale = (float) (percentOpen * 0.25 + 0.75);
-				canvas.scale(scale, scale, canvas.getWidth() / 2,
-						canvas.getHeight() / 2);
-			}
-		});
-		openMenuView.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				menu.toggle();
-			}
-		});
+//		checkUpdateBtn.setOnClickListener(this);
+//		feedBackBtn.setOnClickListener(this);
+//		shareBtn.setOnClickListener(this);
+//		logoutBtn.setOnClickListener(this);
+//		chatBtn.setOnClickListener(this);
+//		menu.setBehindCanvasTransformer(new CanvasTransformer() {
+//			@Override
+//			public void transformCanvas(Canvas canvas, float percentOpen) {
+//				float scale = (float) (percentOpen * 0.25 + 0.75);
+//				canvas.scale(scale, scale, canvas.getWidth() / 2,
+//						canvas.getHeight() / 2);
+//			}
+//		});
+//		openMenuView.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				menu.toggle();
+//			}
+//		});
 	}
 
 	@Override
@@ -394,7 +461,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 			rightView.setVisibility(View.GONE);
 			break;
 		case R.id.chat_room:
-			menu.toggle();
+			//menu.toggle();
 			PersonalRequestImpl request = new PersonalRequestImpl(new IInfoReceive(){
 
 				@Override
@@ -430,16 +497,16 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 			rightView.setVisibility(View.VISIBLE);
 			break;
 		case R.id.check_update:
-			menu.toggle();
+			//menu.toggle();
 			Toast.makeText(this, "检测更新中，请稍后...", 1000).show();
 			UmengUpdateAgent.forceUpdate(this);
 			break;
 		case R.id.share:
-			menu.toggle();
+			//menu.toggle();
 			mController.openShare(this, null);
 			break;
 		case R.id.feedback:
-			menu.toggle();
+			//menu.toggle();
 			FeedbackAgent agent = new FeedbackAgent(this);
 			agent.startFeedbackActivity();
 			break;

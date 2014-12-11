@@ -19,15 +19,8 @@
 
 <resources>
 
-    <style name="Theme.Tupdota2" parent="@style/Theme.AppCompat">
-        <item name="popupMenuStyle">@style/PopupMenu.Tupdota2</item>
-        <item name="actionBarTabStyle">@style/ActionBarTabStyle.Tupdota2</item>
-        <item name="actionDropDownStyle">@style/DropDownNav.Tupdota2</item>
-        <item name="actionBarStyle">@style/ActionBar.Solid.Tupdota2</item>
-        <item name="actionModeBackground">@drawable/cab_background_top_tupdota2</item>
-        <item name="actionModeSplitBackground">@drawable/cab_background_bottom_tupdota2</item>
-        <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Tupdota2</item>
-        <item name="android:windowIsTranslucent">true</item>
+    <style name="Theme.Tupdota2" parent="@style/Theme.AppCompat.NoActionBar">
+
     </style>
 
     <style name="ActionBar.Solid.Tupdota2" parent="@style/Widget.AppCompat.ActionBar.Solid">
