@@ -49,7 +49,7 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 	private WebDataHelper helper;
 	private Activity activity;
 	private LoadingDialog dialog;
-	private TextView rightView, winNum, loseNum;
+	private TextView winNum, loseNum;
 	private SharedPreferences myPreferences;
 
 	@Override
@@ -87,33 +87,33 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 				bindDataFromWeb();
 			}
 		}
-		rightView = (TextView) activity.findViewById(CommonTitleBar.rightId);
 		initEvent();
 		return view;
 	}
 
 	private void initEvent() {
 		// TODO Auto-generated method stub
-		rightView.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				if (bean == null) {
-					TipsToast.showToast(activity, "暂无数据", Toast.LENGTH_SHORT,
-							DialogType.LOAD_FAILURE);
-				} else {
-					if (bean.isLoadMap() && bean.isLoadWebData() &&bean.getBeans() != null) {
-						Intent intent = new Intent(activity,
-								ActUserStatistics.class);
-						startActivity(intent);
-					} else {
-						TipsToast.showToast(activity, "暂无数据",
-								Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
-					}
-				}
-			}
-		});
+//		rightView.setOnClickListener(new OnClickListener() {
+//
+//			@Override
+//			public void onClick(View v) {
+//				// TODO Auto-generated method stub
+//				if (bean == null) {
+//					TipsToast.showToast(activity, "暂无数据", Toast.LENGTH_SHORT,
+//							DialogType.LOAD_FAILURE);
+//				} else {
+//					if (bean.isLoadMap() && bean.isLoadWebData()
+//							&& bean.getBeans() != null) {
+//						Intent intent = new Intent(activity,
+//								ActUserStatistics.class);
+//						startActivity(intent);
+//					} else {
+//						TipsToast.showToast(activity, "暂无数据",
+//								Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
+//					}
+//				}
+//			}
+//		});
 	}
 
 	private void initView() {

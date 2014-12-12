@@ -89,9 +89,8 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 	private TextView newsText;
 	private TextView settingText;
 	private FragmentManager fragmentManager;
-	private TextView titleView, rightView;
 	//private SlidingMenu menu;
-	//private TextView checkUpdateBtn, feedBackBtn, shareBtn, logoutBtn,chatBtn;
+	private TextView checkUpdateBtn, feedBackBtn, shareBtn, logoutBtn,chatBtn;
 
 	private String steamID;
 	private static final int FETCH_DETAIL = 1, FETCH_FAILED = 2,LOGIN_SUCCESS =3;
@@ -116,8 +115,6 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 		UmengUpdateAgent.update(this);
 
 		setContentView(R.layout.main);
-		titleView = (TextView) findViewById(CommonTitleBar.titleId);
-		rightView = (TextView) findViewById(CommonTitleBar.rightId);
 		loader = ImageLoader.getInstance();
 
 		initUMShare();
@@ -127,19 +124,11 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 		userID = myPreferences.getString("userID", "");
 		if (!userID.equals("")) {
 			steamID = Common.getSteamID(userID);
-			//fetchData(FETCH_DETAIL);
+			fetchData(FETCH_DETAIL);
 		}
-		//getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		if (savedInstanceState == null) {
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            SlidingTabFragment fragment = new SlidingTabFragment();
-            transaction.replace(R.id.sample_content_fragment, fragment);
-            transaction.commit();
-        }
 		configureToolbar();
         configureDrawer();
 	}
-	
 	private void configureToolbar() {
         Toolbar mainToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mainToolbar);
@@ -406,9 +395,11 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 //		menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);// 必须调用
 //		menu.setMenu(R.layout.frame_left_menu);// 就是普通的layout布局
 
-//		checkUpdateBtn = (TextView) findViewById(R.id.check_update);
-//		feedBackBtn = (TextView) findViewById(R.id.feedback);
-//		shareBtn = (TextView) findViewById(R.id.share);
+		checkUpdateBtn = (TextView) findViewById(R.id.check_update);
+		feedBackBtn = (TextView) findViewById(R.id.feedback);
+		shareBtn = (TextView) findViewById(R.id.share);
+		logoutBtn = (TextView)findViewById(R.id.logout);
+		chatBtn = (TextView)findViewById(R.id.chat_room);
 		userIcon = (CircleImageView) findViewById(R.id.user_icon);
 		userName = (TextView) findViewById(R.id.user_name);
 	}
@@ -419,11 +410,11 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 		newsLayout.setOnClickListener(this);
 		settingLayout.setOnClickListener(this);
 
-//		checkUpdateBtn.setOnClickListener(this);
-//		feedBackBtn.setOnClickListener(this);
-//		shareBtn.setOnClickListener(this);
-//		logoutBtn.setOnClickListener(this);
-//		chatBtn.setOnClickListener(this);
+		checkUpdateBtn.setOnClickListener(this);
+		feedBackBtn.setOnClickListener(this);
+		shareBtn.setOnClickListener(this);
+		logoutBtn.setOnClickListener(this);
+		chatBtn.setOnClickListener(this);
 //		menu.setBehindCanvasTransformer(new CanvasTransformer() {
 //			@Override
 //			public void transformCanvas(Canvas canvas, float percentOpen) {
@@ -447,21 +438,18 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.message_layout:
 			setTabSelection(0);
-			titleView.setText("最近比赛");
-			rightView.setVisibility(View.GONE);
+			getSupportActionBar().setTitle("最近比赛");
 			break;
 		case R.id.contacts_layout:
 			setTabSelection(1);
-			titleView.setText("英雄使用");
-			rightView.setVisibility(View.GONE);
+			getSupportActionBar().setTitle("英雄使用");
 			break;
 		case R.id.board_layout:
 			setTabSelection(2);
-			titleView.setText("天梯排行榜");
-			rightView.setVisibility(View.GONE);
+			getSupportActionBar().setTitle("天梯排行榜");
 			break;
 		case R.id.chat_room:
-			//menu.toggle();
+			mDrawerLayout.closeDrawer(Gravity.LEFT);
 			PersonalRequestImpl request = new PersonalRequestImpl(new IInfoReceive(){
 
 				@Override
@@ -492,21 +480,19 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 			break;
 		case R.id.setting_layout:
 			setTabSelection(3);
-			titleView.setText("个人资料");
-			rightView.setText("统计");
-			rightView.setVisibility(View.VISIBLE);
+			getSupportActionBar().setTitle("个人资料");
 			break;
 		case R.id.check_update:
-			//menu.toggle();
+			mDrawerLayout.closeDrawer(Gravity.LEFT);
 			Toast.makeText(this, "检测更新中，请稍后...", 1000).show();
 			UmengUpdateAgent.forceUpdate(this);
 			break;
 		case R.id.share:
-			//menu.toggle();
+			mDrawerLayout.closeDrawer(Gravity.LEFT);
 			mController.openShare(this, null);
 			break;
 		case R.id.feedback:
-			//menu.toggle();
+			mDrawerLayout.closeDrawer(Gravity.LEFT);
 			FeedbackAgent agent = new FeedbackAgent(this);
 			agent.startFeedbackActivity();
 			break;
