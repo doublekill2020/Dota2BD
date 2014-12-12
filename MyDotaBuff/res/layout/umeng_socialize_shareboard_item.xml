@@ -13,6 +13,7 @@
         android:scaleType="fitXY"
         android:src="@drawable/umeng_socialize_tx_on" />
 	<TextView 
+	    android:textColor="@color/black"
 	    android:layout_width="wrap_content"
 	    android:layout_height="20dp"
 	    android:id="@+id/umeng_socialize_shareboard_pltform_name"
