@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/act_bg"
     android:orientation="vertical" >
-    <android.support.v7.widget.Toolbar
+
+    <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,7 +13,8 @@
     <LinearLayout
         android:id="@+id/llMRBMid"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
+        android:background="@color/act_bg"
         android:orientation="horizontal" >
 
         <TextView
@@ -23,6 +24,8 @@
             android:layout_weight="1"
             android:background="@drawable/user_statistics_top_btn_selector"
             android:gravity="center"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
             android:text="最高纪录"
             android:textColor="@color/white"
             android:textSize="18sp" />
@@ -34,6 +37,8 @@
             android:layout_weight="1"
             android:background="@drawable/user_statistics_top_btn_selector"
             android:gravity="center"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
             android:text="比赛统计"
             android:textColor="@color/lightgray"
             android:textSize="18sp" />

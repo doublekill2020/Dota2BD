@@ -1,44 +1,34 @@
 package cn.edu.mydotabuff.mydetail;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import com.nostra13.universalimageloader.core.ImageLoader;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.edu.mydotabuff.DotaApplication;
-import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.DotaApplication.LocalDataType;
-import cn.edu.mydotabuff.bean.MatchBean;
-import cn.edu.mydotabuff.bean.PlayerBean;
+import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.bean.PlayerInfoBean;
 import cn.edu.mydotabuff.common.Common;
-import cn.edu.mydotabuff.http.IInfoReceive;
 import cn.edu.mydotabuff.http.OnWebDataGetListener;
 import cn.edu.mydotabuff.http.WebDataHelper;
 import cn.edu.mydotabuff.http.WebDataHelper.DataType;
-import cn.edu.mydotabuff.util.PersonalRequestImpl;
 import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.view.CircleImageView;
 import cn.edu.mydotabuff.view.LoadingDialog;
 import cn.edu.mydotabuff.view.TipsToast;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;
+
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 	private CircleImageView iconView;
@@ -55,6 +45,7 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.frag_my_detail, container, false);
+		setHasOptionsMenu(true);
 		nameView = (TextView) view.findViewById(R.id.name);
 		statusView = (TextView) view.findViewById(R.id.status);
 		timeView = (TextView) view.findViewById(R.id.regist_time);
@@ -92,27 +83,27 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 
 	private void initEvent() {
 		// TODO Auto-generated method stub
-//		rightView.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				// TODO Auto-generated method stub
-//				if (bean == null) {
-//					TipsToast.showToast(activity, "暂无数据", Toast.LENGTH_SHORT,
-//							DialogType.LOAD_FAILURE);
-//				} else {
-//					if (bean.isLoadMap() && bean.isLoadWebData()
-//							&& bean.getBeans() != null) {
-//						Intent intent = new Intent(activity,
-//								ActUserStatistics.class);
-//						startActivity(intent);
-//					} else {
-//						TipsToast.showToast(activity, "暂无数据",
-//								Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
-//					}
-//				}
-//			}
-//		});
+		// rightView.setOnClickListener(new OnClickListener() {
+		//
+		// @Override
+		// public void onClick(View v) {
+		// // TODO Auto-generated method stub
+		// if (bean == null) {
+		// TipsToast.showToast(activity, "暂无数据", Toast.LENGTH_SHORT,
+		// DialogType.LOAD_FAILURE);
+		// } else {
+		// if (bean.isLoadMap() && bean.isLoadWebData()
+		// && bean.getBeans() != null) {
+		// Intent intent = new Intent(activity,
+		// ActUserStatistics.class);
+		// startActivity(intent);
+		// } else {
+		// TipsToast.showToast(activity, "暂无数据",
+		// Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
+		// }
+		// }
+		// }
+		// });
 	}
 
 	private void initView() {
@@ -166,4 +157,19 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 				DialogType.LOAD_FAILURE);
 	}
 
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		// TODO Auto-generated method stub
+		MenuItem item = menu.add(0, 0, 0, "统计");
+		item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(activity, ActUserStatistics.class);
+				startActivity(intent);
+				return false;
+			}
+		});
+	}
 }
