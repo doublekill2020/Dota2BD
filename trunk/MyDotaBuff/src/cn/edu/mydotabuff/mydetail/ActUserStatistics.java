@@ -10,7 +10,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -28,7 +31,6 @@ import cn.edu.mydotabuff.bean.PlayerInfoBean;
 import cn.edu.mydotabuff.common.CommAdapter;
 import cn.edu.mydotabuff.common.CommViewHolder;
 import cn.edu.mydotabuff.common.Common;
-import cn.edu.mydotabuff.common.CommonTitleBar;
 import cn.edu.mydotabuff.recently.ActMatchDetail;
 import cn.edu.mydotabuff.util.Utils;
 import cn.edu.mydotabuff.view.XListView;
@@ -36,7 +38,8 @@ import cn.edu.mydotabuff.view.XListView;
 import com.nhaarman.listviewanimations.appearance.simple.SwingRightInAnimationAdapter;
 import com.umeng.analytics.MobclickAgent;
 
-public class ActUserStatistics extends Activity implements OnClickListener {
+public class ActUserStatistics extends ActionBarActivity implements
+		OnClickListener {
 
 	private List<View> views;
 	private TextView leftBtn, rightBtn;
@@ -62,7 +65,6 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO 自动生成的方法存根
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		bean = DotaApplication.getApplication().getData(
 				LocalDataType.PLAYER_DETAIL_INFO);
@@ -77,14 +79,11 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 	private void initView() {
 		// TODO Auto-generated method stub
 		setContentView(R.layout.act_user_statistics);
-		CommonTitleBar.addLeftBackAndMidTitle(this, new OnClickListener() {
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setTitle("统计");
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				finish();
-			}
-		}, "统计");
 		views = new ArrayList<View>();
 		leftBtn = (TextView) findViewById(R.id.leftBtn);
 		rightBtn = (TextView) findViewById(R.id.rightBtn);
@@ -95,30 +94,32 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 		leftList.setPullLoadEnable(false);
 		leftList.setPullRefreshEnable(false);
 		leftList.setVerticalScrollBarEnabled(false);
-		animationAdapter = new SwingRightInAnimationAdapter(commAdapter = new CommAdapter<BestRecord>(this,
-				beans, R.layout.act_user_statistics_left_item) {
+		animationAdapter = new SwingRightInAnimationAdapter(
+				commAdapter = new CommAdapter<BestRecord>(this, beans,
+						R.layout.act_user_statistics_left_item) {
 
-			@Override
-			public void convert(CommViewHolder helper, BestRecord item) {
-				// TODO Auto-generated method stub
-				helper.setImageFromWeb(R.id.icon, Utils.getHeroImageUri(Common
-						.getHeroName(item.getHeroName())), 1);
-				helper.setText(R.id.name, item.getHeroName());
-				helper.setText(R.id.tag1,
-						item.getRecordType() + ":" + item.getRecordNum());
-				helper.setText(R.id.tag2, "比赛编号：" + item.getMmatchID());
-				helper.setText(R.id.status, item.getResult());
-				String result = item.getResult();
-				helper.setText(R.id.status, result);
-				if (result.equals("胜利")) {
-					helper.setBackgroundColor(R.id.status, getResources()
-							.getColor(R.color.my_green));
-				} else {
-					helper.setBackgroundColor(R.id.status, getResources()
-							.getColor(R.color.my_orange));
-				}
-			}
-		});
+					@Override
+					public void convert(CommViewHolder helper, BestRecord item) {
+						// TODO Auto-generated method stub
+						helper.setImageFromWeb(R.id.icon, Utils
+								.getHeroImageUri(Common.getHeroName(item
+										.getHeroName())), 1);
+						helper.setText(R.id.name, item.getHeroName());
+						helper.setText(R.id.tag1, item.getRecordType() + ":"
+								+ item.getRecordNum());
+						helper.setText(R.id.tag2, "比赛编号：" + item.getMmatchID());
+						helper.setText(R.id.status, item.getResult());
+						String result = item.getResult();
+						helper.setText(R.id.status, result);
+						if (result.equals("胜利")) {
+							helper.setBackgroundColor(R.id.status,
+									getResources().getColor(R.color.my_green));
+						} else {
+							helper.setBackgroundColor(R.id.status,
+									getResources().getColor(R.color.my_orange));
+						}
+					}
+				});
 		animationAdapter.setAbsListView(leftList);
 		leftList.setAdapter(animationAdapter);
 		views.add(view1);
@@ -193,28 +194,28 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case ALL_N:
-				 all_n_rating.setText(msg.arg1+"%");
-				 all_nBar.setProgress(msg.arg1);
+				all_n_rating.setText(msg.arg1 + "%");
+				all_nBar.setProgress(msg.arg1);
 				break;
 			case ALL_H:
-				 all_h_rating.setText(msg.arg1+"%");
-				 all_hBar.setProgress(msg.arg1);
+				all_h_rating.setText(msg.arg1 + "%");
+				all_hBar.setProgress(msg.arg1);
 				break;
 			case ALL_VH:
-				 all_vh_rating.setText(msg.arg1+"%");
-				 all_vhBar.setProgress(msg.arg1);
+				all_vh_rating.setText(msg.arg1 + "%");
+				all_vhBar.setProgress(msg.arg1);
 				break;
 			case RANK_N:
-				 rank_n_rating.setText(msg.arg1+"%");
-				 rank_nBar.setProgress(msg.arg1);
+				rank_n_rating.setText(msg.arg1 + "%");
+				rank_nBar.setProgress(msg.arg1);
 				break;
 			case RANK_H:
-				 rank_h_rating.setText(msg.arg1+"%");
-				 rank_hBar.setProgress(msg.arg1);
+				rank_h_rating.setText(msg.arg1 + "%");
+				rank_hBar.setProgress(msg.arg1);
 				break;
 			case RANK_VH:
-				 rank_vh_rating.setText(msg.arg1+"%");
-				 rank_vhBar.setProgress(msg.arg1);
+				rank_vh_rating.setText(msg.arg1 + "%");
+				rank_vhBar.setProgress(msg.arg1);
 				break;
 			default:
 				break;
@@ -340,5 +341,16 @@ public class ActUserStatistics extends Activity implements OnClickListener {
 		} else if (viewId == R.id.rightBtn) {
 			pager.setCurrentItem(1);
 		}
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			// NavUtils.navigateUpFromSameTask(this);
+			finish();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }

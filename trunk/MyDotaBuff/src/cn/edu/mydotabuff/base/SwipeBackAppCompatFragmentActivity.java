@@ -4,6 +4,7 @@ import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.util.Utils;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
@@ -20,6 +21,10 @@ public class SwipeBackAppCompatFragmentActivity extends ActionBarActivity {
         // mHelper = new SwipeBackActivityHelper(this);
         // mHelper.onActivityCreate();
 
+        setContentView(R.layout.swipe_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        
         final SystemBarTintManager tintManager = new SystemBarTintManager(this);
         tintManager.setStatusBarTintEnabled(true);
         tintManager.setStatusBarTintResource(R.color.actionbar_bg);

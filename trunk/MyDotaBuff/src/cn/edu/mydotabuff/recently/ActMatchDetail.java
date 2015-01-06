@@ -6,12 +6,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.umeng.analytics.MobclickAgent;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
@@ -25,15 +29,15 @@ import cn.edu.mydotabuff.bean.PlayerBean;
 import cn.edu.mydotabuff.bean.PlayerDetailBean;
 import cn.edu.mydotabuff.bean.PlayerInfoBean;
 import cn.edu.mydotabuff.common.Common;
-import cn.edu.mydotabuff.common.CommonTitleBar;
 import cn.edu.mydotabuff.http.IInfoReceive;
 import cn.edu.mydotabuff.util.PersonalRequestImpl;
 import cn.edu.mydotabuff.util.TimeHelper;
+import cn.edu.mydotabuff.util.Utils;
 import cn.edu.mydotabuff.view.LoadingDialog;
 import cn.edu.mydotabuff.view.TipsToast;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;
 
-public class ActMatchDetail extends Activity {
+public class ActMatchDetail extends ActionBarActivity {
 	private String matchId;
 	private static final int FETCH_DETAIL = 1;
 	private static final int FETCH_PLAYER_DETAIL = 2;
@@ -53,17 +57,18 @@ public class ActMatchDetail extends Activity {
 	private int lobby_type;
 	private ArrayList<String> ids, idsFromWeb;
 	private LoadingDialog dialog;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO 自动生成的方法存根
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
+
 		myHandler = new MyHandler();
 		matchId = getIntent().getStringExtra("matchId");
 		ids = getIntent().getStringArrayListExtra("ids");
 		idsFromWeb = new ArrayList<String>();
 		dialog = new LoadingDialog(this);
-		
+
 		dialog.show();
 		fetchData(FETCH_DETAIL);
 		initView();
@@ -72,18 +77,16 @@ public class ActMatchDetail extends Activity {
 	private void initView() {
 		// TODO Auto-generated method stub
 		setContentView(R.layout.act_match_detail);
+
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setTitle("比赛详情");
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 		startTimeView = (TextView) findViewById(R.id.start_time);
 		durationView = (TextView) findViewById(R.id.duration);
 		matchTypeView = (TextView) findViewById(R.id.match_type);
 		list = (ListView) findViewById(R.id.list);
-		CommonTitleBar.addLeftBackAndMidTitle(this, new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				finish();
-			}
-		}, "比赛详情");
 	}
 
 	void fetchData(final int type) {
@@ -245,7 +248,7 @@ public class ActMatchDetail extends Activity {
 				if (ids.get(i).equals("4294967295")) {
 				}
 			}
-			request.getPlayerDetail(steamIDs,false);
+			request.getPlayerDetail(steamIDs, false);
 			break;
 		default:
 			break;
@@ -348,5 +351,16 @@ public class ActMatchDetail extends Activity {
 	public void onPause() {
 		super.onPause();
 		MobclickAgent.onPause(this);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			// NavUtils.navigateUpFromSameTask(this);
+			finish();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }

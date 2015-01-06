@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<!-- android:background="@drawable/tips_bg" -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:wheel="http://schemas.android.com/apk/res/cn.edu.mydotabuff"
     android:id="@+id/flDialogLoadin"
-    android:layout_width="wrap_content"
-    android:layout_gravity="center"
-    android:layout_height="wrap_content" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/tips_bg"
+    android:orientation="vertical" >
 
-    <ImageView
-        android:id="@+id/ivDialogLoading"
-        android:layout_width="95dp"
-        android:layout_height="95dp"
+    <cn.edu.mydotabuff.view.ProgressWheel
+        android:id="@+id/progress_wheel"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_gravity="center"
-        android:src="@drawable/loading_01" />
-
-    <ImageView
-        android:layout_width="71dp"
-        android:layout_height="71dp"
-        android:layout_gravity="center"
-        android:src="@drawable/hall_icon_icon_06" />
+        wheel:barColor="@color/my_blue"
+        wheel:progressIndeterminate="true" />
 
     <TextView
         android:id="@+id/tvDialogLoading"
@@ -29,4 +28,4 @@
         android:textColor="@color/white"
         android:textSize="12sp" />
 
-</FrameLayout>
+</LinearLayout>
