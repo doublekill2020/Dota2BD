@@ -20,7 +20,7 @@
 
 <resources>
 
-    <style name="Theme.Tupdota2" parent="@style/Theme.AppCompat.NoActionBar">
+    <style name="Theme.Tupdota2" parent="Theme.AppCompat.NoActionBar">
     </style>
 
     <style name="ActionBar.Solid.Tupdota2" parent="@style/Widget.AppCompat.ActionBar.Solid">
