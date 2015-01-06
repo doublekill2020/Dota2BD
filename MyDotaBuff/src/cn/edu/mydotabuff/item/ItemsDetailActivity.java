@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
@@ -57,11 +58,10 @@ public class ItemsDetailActivity extends SwipeBackAppCompatFragmentActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
 
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+		
 		Utils.fillFragment(this, ItemsDetailFragment.newInstance(this
 				.getIntent().getStringExtra(KEY_ITEMS_DETAIL_KEY_NAME), this
 				.getIntent().getStringExtra(KEY_ITEMS_DETAIL_PARENT_KEY_NAME)));

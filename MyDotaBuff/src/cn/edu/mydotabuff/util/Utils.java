@@ -260,7 +260,7 @@ public final class Utils {
 
 		final FragmentManager fm = fragmentActivity.getSupportFragmentManager();
 		if (fm.findFragmentById(android.R.id.content) == null) {
-			fm.beginTransaction().add(android.R.id.content, cFragment).commit();
+			fm.beginTransaction().add(R.id.content, cFragment).commit();
 		}
 	}
 

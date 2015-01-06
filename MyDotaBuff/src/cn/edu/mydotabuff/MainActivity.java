@@ -41,7 +41,6 @@ import android.widget.Toast;
 import cn.edu.mydotabuff.DotaApplication.LocalDataType;
 import cn.edu.mydotabuff.bean.PlayerInfoBean;
 import cn.edu.mydotabuff.common.Common;
-import cn.edu.mydotabuff.common.CommonTitleBar;
 import cn.edu.mydotabuff.game.ActInvokerGame;
 import cn.edu.mydotabuff.hero.FragHeroList;
 import cn.edu.mydotabuff.http.IInfoReceive;

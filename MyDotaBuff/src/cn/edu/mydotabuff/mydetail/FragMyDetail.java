@@ -29,7 +29,6 @@ import cn.edu.mydotabuff.bean.MatchBean;
 import cn.edu.mydotabuff.bean.PlayerBean;
 import cn.edu.mydotabuff.bean.PlayerInfoBean;
 import cn.edu.mydotabuff.common.Common;
-import cn.edu.mydotabuff.common.CommonTitleBar;
 import cn.edu.mydotabuff.http.IInfoReceive;
 import cn.edu.mydotabuff.http.OnWebDataGetListener;
 import cn.edu.mydotabuff.http.WebDataHelper;

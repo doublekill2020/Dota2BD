@@ -19,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.edu.mydotabuff.R;
-import cn.edu.mydotabuff.common.CommonTitleBar;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
@@ -76,14 +75,6 @@ public class ActInvokerGame extends Activity implements OnClickListener {
 	private void initView() {
 		// TODO Auto-generated method stub
 		setContentView(R.layout.act_invoker_game);
-		CommonTitleBar.addLeftBackAndMidTitle(this, new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				finish();
-			}
-		}, "卡尔-技能练习");
 		skillView = (ImageView) findViewById(R.id.skill);
 		wBtn = (ImageView) findViewById(R.id.wBtn);
 		qBtn = (ImageView) findViewById(R.id.qBtn);
