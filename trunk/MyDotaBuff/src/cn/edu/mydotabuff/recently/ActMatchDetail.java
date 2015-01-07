@@ -234,7 +234,6 @@ public class ActMatchDetail extends ActionBarActivity {
 
 				});
 		request.setActivity(this);
-		request.setDialogTitle("获取中");
 		switch (type) {
 		case FETCH_DETAIL:
 			request.getMatchDetails(matchId);

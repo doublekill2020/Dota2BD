@@ -245,7 +245,6 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 
 				});
 		request.setActivity(this);
-		request.setDialogTitle("获取中");
 		switch (type) {
 		case FETCH_DETAIL:
 			if (myPreferences.getString("isNeedUpdate", "").equals("")) {
