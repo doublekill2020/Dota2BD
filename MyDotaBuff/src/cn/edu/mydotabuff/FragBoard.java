@@ -123,7 +123,6 @@ public class FragBoard extends Fragment {
 
 				});
 		request.setActivity(activity);
-		request.setDialogTitle("获取中");
 		switch (type) {
 		case FETCH_BOARD:
 			request.getBoard("china");

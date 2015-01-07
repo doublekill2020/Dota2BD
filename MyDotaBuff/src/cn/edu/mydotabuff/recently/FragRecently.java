@@ -279,7 +279,6 @@ public class FragRecently extends Fragment implements OnMainEventListener {
 
 				});
 		request.setActivity(activity);
-		request.setDialogTitle("获取中");
 		switch (type) {
 		case FETCH_MATCH:
 			request.getMatchHistory(userID, lastId);
