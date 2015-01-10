@@ -50,8 +50,6 @@ import cn.edu.mydotabuff.util.PersonalRequestImpl;
 import cn.edu.mydotabuff.view.CircleImageView;
 import cn.edu.mydotabuff.view.TipsToast;
 
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.CanvasTransformer;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.tencent.a.b.m;
 import com.umeng.analytics.MobclickAgent;
