@@ -39,6 +39,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.edu.mydotabuff.DotaApplication.LocalDataType;
+import cn.edu.mydotabuff.base.BaseActivity;
 import cn.edu.mydotabuff.bean.PlayerInfoBean;
 import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.game.ActInvokerGame;
@@ -49,6 +50,7 @@ import cn.edu.mydotabuff.recently.FragRecently;
 import cn.edu.mydotabuff.util.PersonalRequestImpl;
 import cn.edu.mydotabuff.view.CircleImageView;
 import cn.edu.mydotabuff.view.TipsToast;
+import cn.edu.mydotabuff.view.TipsToast.DialogType;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.tencent.a.b.m;
@@ -67,7 +69,7 @@ import com.umeng.socialize.sso.UMSsoHandler;
 import com.umeng.socialize.weixin.controller.UMWXHandler;
 import com.umeng.update.UmengUpdateAgent;
 
-public class MainActivity extends ActionBarActivity implements OnClickListener {
+public class MainActivity extends BaseActivity implements OnClickListener {
 
 	private FragRecently recentlyFragment;
 	private FragHeroList contactsFragment;
@@ -86,11 +88,12 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 	private TextView newsText;
 	private TextView settingText;
 	private FragmentManager fragmentManager;
-	//private SlidingMenu menu;
-	private TextView checkUpdateBtn, feedBackBtn, shareBtn, logoutBtn,chatBtn;
+	// private SlidingMenu menu;
+	private TextView checkUpdateBtn, feedBackBtn, shareBtn, logoutBtn, chatBtn;
 
 	private String steamID;
-	private static final int FETCH_DETAIL = 1, FETCH_FAILED = 2,LOGIN_SUCCESS =3;
+	private static final int FETCH_DETAIL = 1, FETCH_FAILED = 2,
+			LOGIN_SUCCESS = 3;
 	private MyHandler myHandler = new MyHandler();
 	private CircleImageView userIcon;
 	private TextView userName;
@@ -102,10 +105,11 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 	final UMSocialService mController = UMServiceFactory
 			.getUMSocialService("com.umeng.share");
 	private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle mDrawerToggle;
+	private ActionBarDrawerToggle mDrawerToggle;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		//requestWindowFeature(Window.FEATURE_NO_TITLE);
+		// requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 
 		UmengUpdateAgent.setUpdateOnlyWifi(false);
@@ -124,67 +128,70 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 			fetchData(FETCH_DETAIL);
 		}
 		configureToolbar();
-        configureDrawer();
+		configureDrawer();
 	}
+
 	private void configureToolbar() {
-        Toolbar mainToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mainToolbar);
-        getSupportActionBar().setTitle("最近比赛");
+		Toolbar mainToolbar = (Toolbar) findViewById(R.id.toolbar);
+		setSupportActionBar(mainToolbar);
+		getSupportActionBar().setTitle("最近比赛");
 
-        mainToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+		mainToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
 
-                if (mDrawerLayout.isDrawerOpen(Gravity.START)) {
-                    mDrawerLayout.closeDrawer(Gravity.START);
+				if (mDrawerLayout.isDrawerOpen(Gravity.START)) {
+					mDrawerLayout.closeDrawer(Gravity.START);
 
-                } else {
-                    mDrawerLayout.openDrawer(Gravity.START);
-                }
-            }
-        });
-    }
+				} else {
+					mDrawerLayout.openDrawer(Gravity.START);
+				}
+			}
+		});
+	}
 
-    private void configureDrawer() {
-        // Configure drawer
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+	private void configureDrawer() {
+		// Configure drawer
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-                R.string.dan,
-                R.string.dan) {
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+				R.string.dan, R.string.dan) {
 
-            public void onDrawerClosed(View view) {
-                supportInvalidateOptionsMenu();
-            }
+			public void onDrawerClosed(View view) {
+				supportInvalidateOptionsMenu();
+			}
 
-            public void onDrawerOpened(View drawerView) {
-                supportInvalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-        };
+			public void onDrawerOpened(View drawerView) {
+				supportInvalidateOptionsMenu(); // creates call to
+												// onPrepareOptionsMenu()
+			}
+		};
 
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+		mDrawerLayout.setDrawerListener(mDrawerToggle);
+	}
 
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
 
-        return super.onOptionsItemSelected(item);
-    }
+		if (mDrawerToggle.onOptionsItemSelected(item)) {
+			return true;
+		}
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        mDrawerToggle.syncState();
-    }
+		return super.onOptionsItemSelected(item);
+	}
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
-    }
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState) {
+		super.onPostCreate(savedInstanceState);
+		mDrawerToggle.syncState();
+	}
+
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		mDrawerToggle.onConfigurationChanged(newConfig);
+	}
+
 	void fetchData(final int type) {
 		PersonalRequestImpl request = new PersonalRequestImpl(
 				new IInfoReceive() {
@@ -192,6 +199,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 					@Override
 					public void onMsgReceiver(ResponseObj receiveInfo) {
 						// TODO Auto-generated method stub
+						Message msg = myHandler.obtainMessage();
 						switch (type) {
 						case FETCH_DETAIL:
 							PlayerInfoBean bean = new PlayerInfoBean();
@@ -208,7 +216,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 												.getInt("communityvisibilitystate"));
 										bean.setLastlogooff(obj
 												.getString("lastlogoff"));
-										if(bean.getLastlogooff() == null){
+										if (bean.getLastlogooff() == null) {
 											bean.setLastlogooff("1417140906");
 										}
 										bean.setMediumIcon(obj
@@ -221,13 +229,13 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 												.getString("timecreated"));
 										bean.setSteamid(obj
 												.getString("steamid"));
+										msg.arg1 = type;
+										msg.obj = bean;
+									} else {
+										msg.arg1 = FETCH_FAILED;
 									}
-									Message msg = myHandler.obtainMessage();
-									msg.arg1 = type;
-									msg.obj = bean;
 									myHandler.sendMessage(msg);
 								} else {
-									Message msg = myHandler.obtainMessage();
 									msg.arg1 = FETCH_FAILED;
 									myHandler.sendMessage(msg);
 								}
@@ -285,7 +293,8 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 				}
 				break;
 			case FETCH_FAILED:
-
+				TipsToast.showToast(MainActivity.this, "steam被墙了，你懂得",
+						Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
 				break;
 			case LOGIN_SUCCESS:
 				String token = (String) msg.obj;
@@ -297,63 +306,69 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 						// 此处处理连接成功。
 						Toast.makeText(MainActivity.this, "登录成功！",
 								Toast.LENGTH_SHORT).show();
-						RongIM.getInstance().startChatroom(MainActivity.this, "chatroom002", "聊天室");
+						RongIM.getInstance().startChatroom(MainActivity.this,
+								"chatroom002", "聊天室");
 					}
 
 					@Override
 					public void onError(ErrorCode errorCode) {
 						// 此处处理连接错误。
-						Toast.makeText(MainActivity.this, errorCode.getMessage(),
-								Toast.LENGTH_SHORT).show();
+						Toast.makeText(MainActivity.this,
+								errorCode.getMessage(), Toast.LENGTH_SHORT)
+								.show();
 					}
 				});
-//				// 设置用户信息提供者。
-//				RongIM.setGetUserInfoProvider(new RongIM.GetUserInfoProvider() {
-//					// App 返回指定的用户信息给 IMKit 界面组件。
-//					// 原则上 App
-//					// 应该将用户信息和头像在移动设备上进行缓存，每次获取用户信息的时候，就不用再通过网络获取，提高加载速度，提升用户体验。我们后续将提供用户信息缓存功能，方便您开发。
-//					@Override
-//					public RongIMClient.UserInfo getUserInfo(String userId) {
-//						if (userId.equals("188929113")) {
-//							RongIMClient.UserInfo user = new RongIMClient.UserInfo(
-//									"188929113", "zhangsan",
-//									"http://www.baidu.com/img/bdlogo.png");
-//
-//							return user;
-//						} else if (userId.equals("202055420")) {
-//							RongIMClient.UserInfo user = new RongIMClient.UserInfo(
-//									"202055420", "lisi",
-//									"http://2.su.bdimg.com/star_skin/1001_t.png");
-//
-//							return user;
-//						}
-//
-//						return null;
-//					}
-//				}, false);
+				// // 设置用户信息提供者。
+				// RongIM.setGetUserInfoProvider(new
+				// RongIM.GetUserInfoProvider() {
+				// // App 返回指定的用户信息给 IMKit 界面组件。
+				// // 原则上 App
+				// //
+				// 应该将用户信息和头像在移动设备上进行缓存，每次获取用户信息的时候，就不用再通过网络获取，提高加载速度，提升用户体验。我们后续将提供用户信息缓存功能，方便您开发。
+				// @Override
+				// public RongIMClient.UserInfo getUserInfo(String userId) {
+				// if (userId.equals("188929113")) {
+				// RongIMClient.UserInfo user = new RongIMClient.UserInfo(
+				// "188929113", "zhangsan",
+				// "http://www.baidu.com/img/bdlogo.png");
+				//
+				// return user;
+				// } else if (userId.equals("202055420")) {
+				// RongIMClient.UserInfo user = new RongIMClient.UserInfo(
+				// "202055420", "lisi",
+				// "http://2.su.bdimg.com/star_skin/1001_t.png");
+				//
+				// return user;
+				// }
+				//
+				// return null;
+				// }
+				// }, false);
 
-//				// 设置好友信息提供者。
-//				RongIM.setGetFriendsProvider(new RongIM.GetFriendsProvider() {
-//					@Override
-//					public List<RongIMClient.UserInfo> getFriends() {
-//						// 返回 App 的好友列表给 IMKit 界面组件，供会话列表页中选择好友时使用。
-//						List<RongIMClient.UserInfo> list = new ArrayList<RongIMClient.UserInfo>();
-//
-//						RongIMClient.UserInfo user1 = new RongIMClient.UserInfo(
-//								"188929113", "zhangsan",
-//								"http://www.baidu.com/img/bdlogo.png");
-//
-//						list.add(user1);
-//
-//						RongIMClient.UserInfo user2 = new RongIMClient.UserInfo(
-//								"202055420", "lisi",
-//								"http://2.su.bdimg.com/star_skin/1001_t.png");
-//
-//						list.add(user2);
-//
-//						return list;
-//					}
-//				});
+				// // 设置好友信息提供者。
+				// RongIM.setGetFriendsProvider(new RongIM.GetFriendsProvider()
+				// {
+				// @Override
+				// public List<RongIMClient.UserInfo> getFriends() {
+				// // 返回 App 的好友列表给 IMKit 界面组件，供会话列表页中选择好友时使用。
+				// List<RongIMClient.UserInfo> list = new
+				// ArrayList<RongIMClient.UserInfo>();
+				//
+				// RongIMClient.UserInfo user1 = new RongIMClient.UserInfo(
+				// "188929113", "zhangsan",
+				// "http://www.baidu.com/img/bdlogo.png");
+				//
+				// list.add(user1);
+				//
+				// RongIMClient.UserInfo user2 = new RongIMClient.UserInfo(
+				// "202055420", "lisi",
+				// "http://2.su.bdimg.com/star_skin/1001_t.png");
+				//
+				// list.add(user2);
+				//
+				// return list;
+				// }
+				// });
 				break;
 			default:
 				break;
@@ -380,22 +395,22 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 		// 第一次启动时选中第0个tab
 		setTabSelection(0);
 
-//		menu = new SlidingMenu(this);// 直接new，而不是getSlidingMenu
-//		menu.setMode(SlidingMenu.LEFT);
-//		menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-//		menu.setShadowDrawable(R.drawable.drawer_shadow);
-//		menu.setShadowWidthRes(R.dimen.shadow_width);
-//		menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
-//		menu.setBehindWidth(400);// 设置SlidingMenu菜单的宽度
-//		menu.setFadeDegree(0.35f);
-//		menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);// 必须调用
-//		menu.setMenu(R.layout.frame_left_menu);// 就是普通的layout布局
+		// menu = new SlidingMenu(this);// 直接new，而不是getSlidingMenu
+		// menu.setMode(SlidingMenu.LEFT);
+		// menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		// menu.setShadowDrawable(R.drawable.drawer_shadow);
+		// menu.setShadowWidthRes(R.dimen.shadow_width);
+		// menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+		// menu.setBehindWidth(400);// 设置SlidingMenu菜单的宽度
+		// menu.setFadeDegree(0.35f);
+		// menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);// 必须调用
+		// menu.setMenu(R.layout.frame_left_menu);// 就是普通的layout布局
 
 		checkUpdateBtn = (TextView) findViewById(R.id.check_update);
 		feedBackBtn = (TextView) findViewById(R.id.feedback);
 		shareBtn = (TextView) findViewById(R.id.share);
-		logoutBtn = (TextView)findViewById(R.id.logout);
-		chatBtn = (TextView)findViewById(R.id.chat_room);
+		logoutBtn = (TextView) findViewById(R.id.logout);
+		chatBtn = (TextView) findViewById(R.id.chat_room);
 		userIcon = (CircleImageView) findViewById(R.id.user_icon);
 		userName = (TextView) findViewById(R.id.user_name);
 	}
@@ -411,22 +426,22 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 		shareBtn.setOnClickListener(this);
 		logoutBtn.setOnClickListener(this);
 		chatBtn.setOnClickListener(this);
-//		menu.setBehindCanvasTransformer(new CanvasTransformer() {
-//			@Override
-//			public void transformCanvas(Canvas canvas, float percentOpen) {
-//				float scale = (float) (percentOpen * 0.25 + 0.75);
-//				canvas.scale(scale, scale, canvas.getWidth() / 2,
-//						canvas.getHeight() / 2);
-//			}
-//		});
-//		openMenuView.setOnClickListener(new OnClickListener() {
-//
-//			@Override
-//			public void onClick(View v) {
-//				// TODO Auto-generated method stub
-//				menu.toggle();
-//			}
-//		});
+		// menu.setBehindCanvasTransformer(new CanvasTransformer() {
+		// @Override
+		// public void transformCanvas(Canvas canvas, float percentOpen) {
+		// float scale = (float) (percentOpen * 0.25 + 0.75);
+		// canvas.scale(scale, scale, canvas.getWidth() / 2,
+		// canvas.getHeight() / 2);
+		// }
+		// });
+		// openMenuView.setOnClickListener(new OnClickListener() {
+		//
+		// @Override
+		// public void onClick(View v) {
+		// // TODO Auto-generated method stub
+		// menu.toggle();
+		// }
+		// });
 	}
 
 	@Override
@@ -446,32 +461,35 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
 			break;
 		case R.id.chat_room:
 			mDrawerLayout.closeDrawer(Gravity.LEFT);
-			PersonalRequestImpl request = new PersonalRequestImpl(new IInfoReceive(){
+			PersonalRequestImpl request = new PersonalRequestImpl(
+					new IInfoReceive() {
 
-				@Override
-				public void onMsgReceiver(ResponseObj receiveInfo) {
-					// TODO Auto-generated method stub
-					try {
-						JSONObject obj = new JSONObject(receiveInfo.getJsonStr());
-						int code = obj.getInt("code");
-						if(code == 200){
-							Message msg = myHandler.obtainMessage();
-							msg.obj = obj.getString("token");
-							msg.arg1 = LOGIN_SUCCESS;
-							myHandler.sendMessage(msg);
-						}else{
-							
+						@Override
+						public void onMsgReceiver(ResponseObj receiveInfo) {
+							// TODO Auto-generated method stub
+							try {
+								JSONObject obj = new JSONObject(
+										receiveInfo.getJsonStr());
+								int code = obj.getInt("code");
+								if (code == 200) {
+									Message msg = myHandler.obtainMessage();
+									msg.obj = obj.getString("token");
+									msg.arg1 = LOGIN_SUCCESS;
+									myHandler.sendMessage(msg);
+								} else {
+
+								}
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 						}
-					} catch (JSONException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				
-			});
+
+					});
 			request.setActivity(this);
 			request.setDialogTitle("登录中，请稍候...");
-			PlayerInfoBean bean = DotaApplication.getApplication().getData(LocalDataType.PLAYER_INFO);
+			PlayerInfoBean bean = DotaApplication.getApplication().getData(
+					LocalDataType.PLAYER_INFO);
 			request.getUserToken(userID, bean.getName(), bean.getMediumIcon());
 			break;
 		case R.id.setting_layout:

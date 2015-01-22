@@ -1,18 +1,17 @@
 package cn.edu.mydotabuff.base;
 
 import java.lang.ref.WeakReference;
-
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.app.Activity;
+import android.util.Log;
 import cn.edu.mydotabuff.APIConstants;
 import cn.edu.mydotabuff.http.HttpRequestTool;
 import cn.edu.mydotabuff.http.IInfoReceive;
-
-import android.app.Activity;
 
 public class BaseRequestInterface {
 
@@ -308,6 +307,7 @@ public class BaseRequestInterface {
 				}
 
 				http = sb.toString();
+				Log.i("hao",http);
 				tool.doGet(http);
 			} catch (Exception e) {
 				e.printStackTrace();

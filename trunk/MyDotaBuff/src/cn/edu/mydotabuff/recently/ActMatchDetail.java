@@ -23,6 +23,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.edu.mydotabuff.R;
+import cn.edu.mydotabuff.base.BaseActivity;
 import cn.edu.mydotabuff.bean.AbilityBean;
 import cn.edu.mydotabuff.bean.MatchBean;
 import cn.edu.mydotabuff.bean.PlayerBean;
@@ -37,7 +38,7 @@ import cn.edu.mydotabuff.view.LoadingDialog;
 import cn.edu.mydotabuff.view.TipsToast;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;
 
-public class ActMatchDetail extends ActionBarActivity {
+public class ActMatchDetail extends BaseActivity {
 	private String matchId;
 	private static final int FETCH_DETAIL = 1;
 	private static final int FETCH_PLAYER_DETAIL = 2;
