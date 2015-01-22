@@ -1,6 +1,7 @@
 package cn.edu.mydotabuff.view;
 
 import cn.edu.mydotabuff.R;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -20,9 +21,9 @@ public class LoadingDialog extends AlertDialog {
 	private ImageView ivDialogLoading;
 	private String message = null;
 	private ProgressWheel progressWheel;
-	private Context _context;
+	private Activity _context;
 
-	public LoadingDialog(Context context) {
+	public LoadingDialog(Activity context) {
 		super(context);
 		_context = context;
 		message = "努力加载中...";
@@ -30,7 +31,7 @@ public class LoadingDialog extends AlertDialog {
 		this.setCanceledOnTouchOutside(false);
 	}
 
-	public LoadingDialog(Context context, String message) {
+	public LoadingDialog(Activity context, String message) {
 		super(context);
 		_context = context;
 		this.message = message;
@@ -38,7 +39,7 @@ public class LoadingDialog extends AlertDialog {
 		this.setCanceledOnTouchOutside(false);
 	}
 
-	public LoadingDialog(Context context, int theme, String message) {
+	public LoadingDialog(Activity context, int theme, String message) {
 		super(context, theme);
 		_context = context;
 		this.message = message;
@@ -65,16 +66,20 @@ public class LoadingDialog extends AlertDialog {
 
 	@Override
 	public void show() {
+		if (!_context.isFinishing()) {
 			super.show();
+		}
 	}
 
 	@Override
 	public void dismiss() {
 		// TODO Auto-generated method stub
-		super.dismiss();
-		if (progressWheel != null) {
-			progressWheel.stopSpinning();
-			progressWheel = null;
+		if (!_context.isFinishing()) {
+			super.dismiss();
+			if (progressWheel != null) {
+				progressWheel.stopSpinning();
+				progressWheel = null;
+			}
 		}
 	}
 
