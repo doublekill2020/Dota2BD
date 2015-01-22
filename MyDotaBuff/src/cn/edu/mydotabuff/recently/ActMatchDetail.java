@@ -178,6 +178,11 @@ public class ActMatchDetail extends BaseActivity {
 									}
 									msg.arg1 = type;
 									msg.obj = playerDetailBeans;
+									if (playerDetailBeans.size() == 10) {
+										msg.arg1 = type;
+									} else {
+										msg.arg1 = FETCH_FAILED;
+									}
 								} else {
 									msg.arg1 = FETCH_FAILED;
 								}
