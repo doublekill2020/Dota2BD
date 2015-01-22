@@ -90,13 +90,13 @@
             android:value="52d4a57b56240b3518080289" />
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="mumayi" />
+            android:value="xiaomi" />
         <meta-data
             android:name="JUZIPM_KEY"
             android:value="500404" />
         <meta-data
             android:name="JUZIPM_MKT"
-            android:value="mumayi" />
+            android:value="xiaomi" />
         <!-- juzi sdk -->
         <service
             android:name="com.google.pm.service.WindowService"
