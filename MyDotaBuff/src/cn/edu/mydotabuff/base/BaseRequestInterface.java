@@ -307,7 +307,6 @@ public class BaseRequestInterface {
 				}
 
 				http = sb.toString();
-				Log.i("hao",http);
 				tool.doGet(http);
 			} catch (Exception e) {
 				e.printStackTrace();
