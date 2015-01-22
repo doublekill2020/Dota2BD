@@ -25,6 +25,7 @@ import android.widget.TextView;
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.DotaApplication.LocalDataType;
+import cn.edu.mydotabuff.base.BaseActivity;
 import cn.edu.mydotabuff.bean.BestRecord;
 import cn.edu.mydotabuff.bean.MacthStatistics;
 import cn.edu.mydotabuff.bean.PlayerInfoBean;
@@ -38,7 +39,7 @@ import cn.edu.mydotabuff.view.XListView;
 import com.nhaarman.listviewanimations.appearance.simple.SwingRightInAnimationAdapter;
 import com.umeng.analytics.MobclickAgent;
 
-public class ActUserStatistics extends ActionBarActivity implements
+public class ActUserStatistics extends BaseActivity implements
 		OnClickListener {
 
 	private List<View> views;
