@@ -1,22 +1,12 @@
 package cn.edu.mydotabuff.util;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.content.Context;
-import android.util.Log;
 
 import cn.edu.mydotabuff.base.BaseRequestInterface;
-import cn.edu.mydotabuff.http.APIConstants;
-import cn.edu.mydotabuff.http.HttpRequestImpl;
-import cn.edu.mydotabuff.http.IInfoReceive;
+import cn.edu.mydotabuff.common.http.APIConstants;
+import cn.edu.mydotabuff.common.http.IInfoReceive;
 
 public class PersonalRequestImpl extends BaseRequestInterface {
 

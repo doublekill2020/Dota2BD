@@ -8,10 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
-import android.util.Log;
-import cn.edu.mydotabuff.http.APIConstants;
-import cn.edu.mydotabuff.http.HttpRequestTool;
-import cn.edu.mydotabuff.http.IInfoReceive;
+import cn.edu.mydotabuff.common.http.APIConstants;
+import cn.edu.mydotabuff.common.http.HttpRequestTool;
+import cn.edu.mydotabuff.common.http.IInfoReceive;
 
 public class BaseRequestInterface {
 
