@@ -142,6 +142,7 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 	@Override
 	public void onStartGetData() {
 		// TODO Auto-generated method stub
+		dialog.setCancelable(false);
 		dialog.show();
 	}
 
