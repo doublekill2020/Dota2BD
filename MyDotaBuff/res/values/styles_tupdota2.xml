@@ -19,9 +19,7 @@
 
 <resources>
 
-    <style name="Theme.Tupdota2" parent="@style/Theme.AppCompat.NoActionBar">
-
-    </style>
+    <style name="Theme.Tupdota2" parent="@style/Theme.AppCompat.NoActionBar"></style>
 
     <style name="ActionBar.Solid.Tupdota2" parent="@style/Widget.AppCompat.ActionBar.Solid">
         <item name="background">@drawable/ab_solid_tupdota2</item>
@@ -37,7 +35,6 @@
         <item name="android:popupBackground">@drawable/menu_dropdown_panel_tupdota2</item>
     </style>
 
-
     <style name="ActionBarTabStyle.Tupdota2" parent="@style/Widget.AppCompat.ActionBar.TabView">
         <item name="android:background">@drawable/tab_indicator_ab_tupdota2</item>
     </style>
@@ -46,7 +43,6 @@
         <item name="android:background">@drawable/spinner_background_ab_tupdota2</item>
         <item name="android:popupBackground">@drawable/menu_dropdown_panel_tupdota2</item>
     </style>
-
 
     <style name="ProgressBar.MyProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/progress_horizontal_green</item>
@@ -59,6 +55,29 @@
     <!-- this style is only referenced in a Light.DarkActionBar based theme -->
     <style name="Theme.Tupdota2.Widget" parent="@style/Theme.AppCompat">
         <item name="popupMenuStyle">@style/PopupMenu.Tupdota2</item>
+    </style>
+
+    <!-- 基本组件公共style -->
+    <style name="CommonEditText" parent="@android:style/Widget.EditText">
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="CommonTextView" parent="@android:style/Widget.TextView">
+        <item name="android:singleLine">true</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="CommonTextView.Small" parent="@style/CommonTextView">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="CommonTextView.Middle" parent="@style/CommonTextView">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="CommonTextView.Big" parent="@style/CommonTextView">
+        <item name="android:textSize">18sp</item>
     </style>
 
 </resources>
