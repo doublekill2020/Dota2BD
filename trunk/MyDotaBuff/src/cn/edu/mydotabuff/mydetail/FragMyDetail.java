@@ -4,13 +4,19 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
+import android.text.InputType;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
+import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -157,15 +163,13 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 				DialogType.LOAD_FAILURE);
 	}
 
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		// TODO Auto-generated method stub
-		MenuItem item = menu.add(0, 0, 0, "统计");
-		item.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+	OnMenuItemClickListener itemListener = new OnMenuItemClickListener() {
 
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				// TODO Auto-generated method stub
+		@Override
+		public boolean onMenuItemClick(MenuItem item) {
+			// TODO Auto-generated method stub
+			switch (item.getItemId()) {
+			case R.id.more_detail:
 				if (bean == null) {
 					TipsToast.showToast(activity, "暂无数据", Toast.LENGTH_SHORT,
 							DialogType.LOAD_FAILURE);
@@ -179,6 +183,49 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 						TipsToast.showToast(activity, "暂无数据",
 								Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
 					}
+				}
+				break;
+			case R.id.give_mark:
+				try {
+					Uri uri = Uri.parse("market://details?id="
+							+ getActivity().getPackageName());
+					Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					startActivity(intent);
+				} catch (Exception e) {
+					TipsToast.showToast(activity, "抱歉，您还未安装相应的应用市场",
+							Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
+				}
+				break;
+			default:
+				break;
+			}
+			return false;
+		}
+	};
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		// TODO Auto-generated method stub
+		inflater.inflate(R.menu.frag_my_detail, menu);
+		MenuItem moreDetailBtn = menu.findItem(R.id.more_detail);
+		MenuItem goToMark = menu.findItem(R.id.give_mark);
+		moreDetailBtn.setOnMenuItemClickListener(itemListener);
+		goToMark.setOnMenuItemClickListener(itemListener);
+		SearchView searchView = (SearchView) menu.findItem(R.id.action_search)
+				.getActionView();
+		searchView.setQueryHint("输入玩家ID");
+		searchView.setInputType(InputType.TYPE_CLASS_NUMBER);
+		searchView.setOnKeyListener(new OnKeyListener() {
+
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				// TODO Auto-generated method stub
+				Log.i("hao", keyCode + "---------" + event.getAction());
+				if (keyCode == KeyEvent.KEYCODE_SEARCH) {
+					TipsToast.showToast(activity, "大虎逼你来写~~",
+							Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
+					return true;
 				}
 				return false;
 			}

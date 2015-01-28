@@ -152,7 +152,7 @@
 
         <fragment
             android:id="@+id/navigation_drawer"
-            android:name="cn.edu.mydotabuff.NavigationFragment"
+            android:name="cn.edu.mydotabuff.LeftMenuFrag"
             android:layout_width="240dp"
             android:layout_height="match_parent"
             android:layout_gravity="start" />
