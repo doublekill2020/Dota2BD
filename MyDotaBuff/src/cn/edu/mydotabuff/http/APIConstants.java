@@ -1,4 +1,4 @@
-package cn.edu.mydotabuff;
+package cn.edu.mydotabuff.http;
 
 public final class APIConstants {
 	public final static String GET_MATCH_HISTORY = "https://api.steampowered.com/IDOTA2Match_570/GetMatchHistory/v001/";
