@@ -57,5 +57,9 @@
         <attr name="barWidth" format="dimension" />
         <attr name="linearProgress" format="boolean" />
     </declare-styleable>
+    <declare-styleable name="RoundAngleImageView">
+        <attr name="roundWidth" format="dimension" />
+        <attr name="roundHeight" format="dimension" />
+    </declare-styleable>
 
 </resources>
