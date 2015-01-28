@@ -14,8 +14,12 @@ import android.os.PersistableBundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 import cn.edu.mydotabuff.R;
+import cn.edu.mydotabuff.ui.ActMain;
 import cn.edu.mydotabuff.util.Utils;
+import cn.edu.mydotabuff.view.TipsToast;
+import cn.edu.mydotabuff.view.TipsToast.DialogType;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.umeng.analytics.MobclickAgent;
@@ -68,5 +72,27 @@ public abstract class BaseActivity extends ActionBarActivity {
 	protected void onPause() {
 		super.onPause();
 		MobclickAgent.onPause(this);
+	}
+
+	/**
+	 * 显示提示（屏幕中央）
+	 * 
+	 * @param content
+	 *            内容
+	 * @param type
+	 *            对话框类型
+	 */
+	public void showTip(String content, DialogType type) {
+		TipsToast.showToast(this, content, Toast.LENGTH_SHORT, type);
+	}
+
+	/**
+	 * 显示Toast
+	 * 
+	 * @param content
+	 *            内容
+	 */
+	public void showToast(String content) {
+		Toast.makeText(this, content, Toast.LENGTH_SHORT).show();
 	}
 }
