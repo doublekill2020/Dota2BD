@@ -4,11 +4,7 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical" >
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize" />
+    <include layout="@layout/common_toolbar" />
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"

@@ -61,7 +61,7 @@ public final class HeroImagesAdapter extends BaseAdapter {
 
         final ViewHolder holder;
         if (convertView == null) {
-            view = mInflater.inflate(R.layout.fragment_itemsdetail_hero_grid_item, parent, false);
+            view = mInflater.inflate(R.layout.frag_itemsdetail_hero_grid_item, parent, false);
 
             holder = new ViewHolder();
             holder.text = (TextView) view.findViewById(R.id.text_hero_name);
