@@ -41,7 +41,7 @@ import android.widget.Toast;
 import cn.edu.mydotabuff.APIConstants;
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.DotaApplication.LocalDataType;
-import cn.edu.mydotabuff.MainActivity;
+import cn.edu.mydotabuff.ActMain;
 import cn.edu.mydotabuff.OnMainEventListener;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.bean.AbilityBean;
