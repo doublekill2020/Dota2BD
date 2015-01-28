@@ -318,57 +318,6 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 								.show();
 					}
 				});
-				// // 设置用户信息提供者。
-				// RongIM.setGetUserInfoProvider(new
-				// RongIM.GetUserInfoProvider() {
-				// // App 返回指定的用户信息给 IMKit 界面组件。
-				// // 原则上 App
-				// //
-				// 应该将用户信息和头像在移动设备上进行缓存，每次获取用户信息的时候，就不用再通过网络获取，提高加载速度，提升用户体验。我们后续将提供用户信息缓存功能，方便您开发。
-				// @Override
-				// public RongIMClient.UserInfo getUserInfo(String userId) {
-				// if (userId.equals("188929113")) {
-				// RongIMClient.UserInfo user = new RongIMClient.UserInfo(
-				// "188929113", "zhangsan",
-				// "http://www.baidu.com/img/bdlogo.png");
-				//
-				// return user;
-				// } else if (userId.equals("202055420")) {
-				// RongIMClient.UserInfo user = new RongIMClient.UserInfo(
-				// "202055420", "lisi",
-				// "http://2.su.bdimg.com/star_skin/1001_t.png");
-				//
-				// return user;
-				// }
-				//
-				// return null;
-				// }
-				// }, false);
-
-				// // 设置好友信息提供者。
-				// RongIM.setGetFriendsProvider(new RongIM.GetFriendsProvider()
-				// {
-				// @Override
-				// public List<RongIMClient.UserInfo> getFriends() {
-				// // 返回 App 的好友列表给 IMKit 界面组件，供会话列表页中选择好友时使用。
-				// List<RongIMClient.UserInfo> list = new
-				// ArrayList<RongIMClient.UserInfo>();
-				//
-				// RongIMClient.UserInfo user1 = new RongIMClient.UserInfo(
-				// "188929113", "zhangsan",
-				// "http://www.baidu.com/img/bdlogo.png");
-				//
-				// list.add(user1);
-				//
-				// RongIMClient.UserInfo user2 = new RongIMClient.UserInfo(
-				// "202055420", "lisi",
-				// "http://2.su.bdimg.com/star_skin/1001_t.png");
-				//
-				// list.add(user2);
-				//
-				// return list;
-				// }
-				// });
 				break;
 			default:
 				break;
@@ -426,22 +375,6 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		shareBtn.setOnClickListener(this);
 		logoutBtn.setOnClickListener(this);
 		chatBtn.setOnClickListener(this);
-		// menu.setBehindCanvasTransformer(new CanvasTransformer() {
-		// @Override
-		// public void transformCanvas(Canvas canvas, float percentOpen) {
-		// float scale = (float) (percentOpen * 0.25 + 0.75);
-		// canvas.scale(scale, scale, canvas.getWidth() / 2,
-		// canvas.getHeight() / 2);
-		// }
-		// });
-		// openMenuView.setOnClickListener(new OnClickListener() {
-		//
-		// @Override
-		// public void onClick(View v) {
-		// // TODO Auto-generated method stub
-		// menu.toggle();
-		// }
-		// });
 	}
 
 	@Override
