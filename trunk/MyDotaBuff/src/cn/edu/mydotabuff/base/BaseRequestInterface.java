@@ -31,6 +31,7 @@ public class BaseRequestInterface {
 
 	private int timeout;
 	ArrayList<String> matchIds;
+	private boolean cancelAble = true;
 
 	public String getUrl() {
 		return url;
@@ -111,6 +112,11 @@ public class BaseRequestInterface {
 			weakActivity = new WeakReference<Activity>((Activity) receive);
 		}
 		this.timeout = 10000;
+	}
+
+	public void setIsCancelAble(boolean flag) {
+		// TODO Auto-generated method stub
+		this.cancelAble = flag;
 	}
 
 	protected void request(String url, Map<String, String> params,
@@ -215,10 +221,10 @@ public class BaseRequestInterface {
 				request();
 				break;
 			case HTTP_FORM_TYPE_POST_NORMAL:
-				simplepost();
+				//simplepost();
 				break;
 			case HTTP_FORM_TYPE_POST_BYTE:
-				postHeadIcon();
+				//postHeadIcon();
 				break;
 			// case HTTP_FORM_TYPE_POST_URI:
 			// postrequest();
@@ -263,7 +269,7 @@ public class BaseRequestInterface {
 						}
 
 						http = sb.toString();
-						tool.doGet(http);
+						tool.doGet(http, cancelAble);
 					} catch (Exception e) {
 						e.printStackTrace();
 						tool.hideProgressDialog();
@@ -306,7 +312,7 @@ public class BaseRequestInterface {
 				}
 
 				http = sb.toString();
-				tool.doGet(http);
+				tool.doGet(http, cancelAble);
 			} catch (Exception e) {
 				e.printStackTrace();
 				tool.hideProgressDialog();
@@ -348,49 +354,49 @@ public class BaseRequestInterface {
 		// }
 
 		// 传图片
-		protected synchronized void postHeadIcon() {
-			showDialog = true;
-			try {
-				// byte[] bytes = BitmapCompress.compress(path, 25, 128, 128);
-				tool = new HttpRequestTool(receive);
-				tool.setTimeout(timeout);
-				if (showDialog) {
-					if (title != null) {
-						tool.setProgressDialogTitle(title);
-					}
-					if (weakActivity != null && weakActivity.get() != null) {
-						tool.setProgressDialog(weakActivity.get());
-					}
-				} else {
-					tool.setProgressDialog(null);
-				}
-				tool.doPost(getUrl(), params, bytes, fileName, contentType);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+//		protected synchronized void postHeadIcon() {
+//			showDialog = true;
+//			try {
+//				// byte[] bytes = BitmapCompress.compress(path, 25, 128, 128);
+//				tool = new HttpRequestTool(receive);
+//				tool.setTimeout(timeout);
+//				if (showDialog) {
+//					if (title != null) {
+//						tool.setProgressDialogTitle(title);
+//					}
+//					if (weakActivity != null && weakActivity.get() != null) {
+//						tool.setProgressDialog(weakActivity.get());
+//					}
+//				} else {
+//					tool.setProgressDialog(null);
+//				}
+//				tool.doPost(getUrl(), params, bytes, fileName, contentType);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
 
-		protected synchronized void simplepost() {
-			try {
-				tool = new HttpRequestTool(receive);
-				tool.setTimeout(timeout);
-				if (showDialog) {
-					if (title != null) {
-						tool.setProgressDialogTitle(title);
-					}
-					if (weakActivity != null && weakActivity.get() != null) {
-						tool.setProgressDialog(weakActivity.get());
-					}
-				} else {
-					tool.setProgressDialog(null);
-				}
-				tool.doPost(getUrl(), fileName);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+//		protected synchronized void simplepost() {
+//			try {
+//				tool = new HttpRequestTool(receive);
+//				tool.setTimeout(timeout);
+//				if (showDialog) {
+//					if (title != null) {
+//						tool.setProgressDialogTitle(title);
+//					}
+//					if (weakActivity != null && weakActivity.get() != null) {
+//						tool.setProgressDialog(weakActivity.get());
+//					}
+//				} else {
+//					tool.setProgressDialog(null);
+//				}
+//				tool.doPost(getUrl(), fileName);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
 
 	}
 
