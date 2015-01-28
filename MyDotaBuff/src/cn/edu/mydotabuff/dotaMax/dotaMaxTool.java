@@ -13,10 +13,10 @@ import org.jsoup.select.Elements;
 
 import u.aly.m;
 
-import cn.edu.mydotabuff.bean.BestRecord;
-import cn.edu.mydotabuff.bean.HeroMatchStatistics;
-import cn.edu.mydotabuff.bean.HerosSatistics;
-import cn.edu.mydotabuff.bean.MacthStatistics;
+import cn.edu.mydotabuff.common.bean.BestRecord;
+import cn.edu.mydotabuff.common.bean.HeroMatchStatistics;
+import cn.edu.mydotabuff.common.bean.HerosSatistics;
+import cn.edu.mydotabuff.common.bean.MacthStatistics;
 
 public class dotaMaxTool {
 

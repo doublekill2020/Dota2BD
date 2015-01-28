@@ -26,12 +26,12 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import cn.edu.mydotabuff.bean.UserInfo;
+import cn.edu.mydotabuff.common.bean.UserInfo;
 import cn.edu.mydotabuff.common.CommAdapter;
 import cn.edu.mydotabuff.common.CommViewHolder;
-import cn.edu.mydotabuff.http.OnWebDataGetListener;
-import cn.edu.mydotabuff.http.WebDataHelper;
-import cn.edu.mydotabuff.http.WebDataHelper.DataType;
+import cn.edu.mydotabuff.common.http.OnWebDataGetListener;
+import cn.edu.mydotabuff.common.http.WebDataHelper;
+import cn.edu.mydotabuff.common.http.WebDataHelper.DataType;
 import cn.edu.mydotabuff.view.LoadingDialog;
 import cn.edu.mydotabuff.view.TipsToast;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;

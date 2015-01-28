@@ -28,10 +28,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import cn.edu.mydotabuff.R;
-import cn.edu.mydotabuff.bean.HeroItem;
-import cn.edu.mydotabuff.bean.ItemsItem;
-import cn.edu.mydotabuff.hero.HeroDetailActivity;
-import cn.edu.mydotabuff.item.ItemsDetailActivity;
+import cn.edu.mydotabuff.common.bean.HeroItem;
+import cn.edu.mydotabuff.common.bean.ItemsItem;
+import cn.edu.mydotabuff.ui.hero.HeroDetailActivity;
+import cn.edu.mydotabuff.ui.item.ItemsDetailActivity;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
