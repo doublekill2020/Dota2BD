@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.WeakHashMap;
 
+import javax.crypto.spec.PSource;
+
 import org.json2.JSONException;
 
 import cn.edu.mydotabuff.entity.ItemsItem;
@@ -36,6 +38,8 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 	private ImageLoader loader;
 	private int num[] = new int[8];
 
+	private ArrayList<String> moreList = new ArrayList<String>();
+
 	public ActMatchDetailItemAdapter(Activity caller,
 			ArrayList<PlayerDetailBean> beans, int num[]) {
 		_caller = caller;
@@ -64,11 +68,12 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 	// }
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
+		final ViewHolder holder;
 		if (convertView == null) {
 			convertView = _caller.getLayoutInflater().inflate(
 					R.layout.act_match_detail_item, null);
-			ViewHolder holder = new ViewHolder();
+			holder = new ViewHolder();
 			holder.tipView = convertView.findViewById(R.id.tipView);
 			holder.label = (TextView) convertView.findViewById(R.id.label);
 			holder.level = (TextView) convertView.findViewById(R.id.level);
@@ -102,9 +107,17 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 			holder.heroIcon = (CircleImageView) convertView
 					.findViewById(R.id.hero_icon);
 			convertView.setTag(holder);
+		} else {
+			holder = (ViewHolder) convertView.getTag();
 		}
-		final ViewHolder holder = (ViewHolder) convertView.getTag();
+
 		final PlayerDetailBean bean = getItem(position);
+
+		if (moreList.contains(position + "")) {
+			showMoreView(holder, bean, false);
+		} else {
+			hideMoreView(holder);
+		}
 
 		holder.level.setText("Lv" + bean.getLevel() + " "
 				+ bean.getPlayerInfoBeans().getName());
@@ -326,39 +339,52 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if (holder.moreView.getVisibility() == View.GONE) {
-					holder.arrowView.setImageResource(R.drawable.arrow_up);
-					holder.moreView.setVisibility(View.VISIBLE);
-					holder.txView[0].setText("总经济:"
-							+ (bean.getGold() + bean.getGold_spent()));
-					holder.txView[2].setText("gold/min:"
-							+ bean.getGold_per_min());
-					holder.txView[1].setText("英雄伤害:" + bean.getHero_damage());
-					holder.txView[3].setText("英雄治疗:" + bean.getHero_healing());
-					holder.txView[4].setText("对建筑伤害:" + bean.getTower_damage());
-					holder.txView[5].setText("xp/min:" + bean.getXp_per_min());
-					// holder.heroIcon.setImageResource(Common
-					// .getHeroDrawableId(bean.getHero_id()));
-					loader.displayImage(Utils.getHeroImageUri(Common
-							.getHeroName(bean.getHero_id())), holder.heroIcon);
-					Animation animation =AnimationUtils.loadAnimation(_caller, R.anim.listview_moreview_show);
-					holder.moreView.setAnimation(animation);
-					holder.heroIcon.setOnClickListener(new OnClickListener() {
-						
-						@Override
-						public void onClick(View v) {
-							// TODO Auto-generated method stub
-							Utils.startHeroDetailActivity(_caller, Common.getHeroName(bean.getHero_id()));
-						}
-					});
+					showMoreView(holder, bean, true);
+					if (!moreList.contains(position + "")) {
+						moreList.add(position + "");
+					}
 				} else if (holder.moreView.getVisibility() == View.VISIBLE) {
-					holder.arrowView.setImageResource(R.drawable.arrow_down);
-					holder.moreView.setVisibility(View.GONE);
-//					Animation animation =AnimationUtils.loadAnimation(_caller, R.anim.listview_moreview_gone);
-//					holder.moreView.setAnimation(animation);
+					hideMoreView(holder);
+					moreList.remove(position + "");
 				}
 			}
 		});
 		return convertView;
+	}
+
+	private void showMoreView(ViewHolder holder, final PlayerDetailBean bean,
+			boolean isShowAnimation) {
+		holder.arrowView.setImageResource(R.drawable.arrow_up);
+		holder.moreView.setVisibility(View.VISIBLE);
+		holder.txView[0].setText("总经济:"
+				+ (bean.getGold() + bean.getGold_spent()));
+		holder.txView[2].setText("gold/min:" + bean.getGold_per_min());
+		holder.txView[1].setText("英雄伤害:" + bean.getHero_damage());
+		holder.txView[3].setText("英雄治疗:" + bean.getHero_healing());
+		holder.txView[4].setText("对建筑伤害:" + bean.getTower_damage());
+		holder.txView[5].setText("xp/min:" + bean.getXp_per_min());
+		loader.displayImage(
+				Utils.getHeroImageUri(Common.getHeroName(bean.getHero_id())),
+				holder.heroIcon);
+		if (isShowAnimation) {
+			Animation animation = AnimationUtils.loadAnimation(_caller,
+					R.anim.listview_moreview_show);
+			holder.moreView.setAnimation(animation);
+		}
+		holder.heroIcon.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Utils.startHeroDetailActivity(_caller,
+						Common.getHeroName(bean.getHero_id()));
+			}
+		});
+	}
+
+	private void hideMoreView(ViewHolder holder) {
+		holder.arrowView.setImageResource(R.drawable.arrow_down);
+		holder.moreView.setVisibility(View.GONE);
 	}
 
 	class ViewHolder {
