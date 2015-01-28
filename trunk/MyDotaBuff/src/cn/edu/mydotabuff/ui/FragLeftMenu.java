@@ -1,5 +1,7 @@
-package cn.edu.mydotabuff;
+package cn.edu.mydotabuff.ui;
 
+import cn.edu.mydotabuff.R;
+import cn.edu.mydotabuff.R.layout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;

@@ -5,7 +5,7 @@
     android:background="@drawable/biz_pc_main_bg"
     android:divider="@android:color/transparent"
     android:dividerHeight="0dp"
-    tools:context="cn.edu.mydotabuff.FragLeftMenu" >
+    tools:context="cn.edu.mydotabuff.ui.FragLeftMenu" >
 
     <LinearLayout
         android:layout_width="match_parent"
