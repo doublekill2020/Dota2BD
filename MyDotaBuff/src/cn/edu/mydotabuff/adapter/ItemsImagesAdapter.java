@@ -62,7 +62,7 @@ public final class ItemsImagesAdapter extends BaseAdapter {
 
         final ViewHolder holder;
         if (convertView == null) {
-            view = mInflater.inflate(R.layout.fragment_itemsdetail_components_grid_item,
+            view = mInflater.inflate(R.layout.frag_itemsdetail_components_grid_item,
                     parent, false);
 
             holder = new ViewHolder();

@@ -39,7 +39,7 @@ public class SamplePagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
 
         View view = LayoutInflater.from(context).inflate(
-            R.layout.fragment_dialer_sample_page,
+            R.layout.frag_dialer_sample_page,
             container, false);
 
         container.addView(view);

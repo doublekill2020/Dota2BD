@@ -124,7 +124,7 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.fragment_herodetail, container, false);
+            return inflater.inflate(R.layout.frag_herodetail, container, false);
         }
 
 //        @Override
@@ -334,7 +334,7 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
             for (int i = 0; i < cItem.stats1.size(); i++) {
                 cParent = (i <= 2 ? layoutStats1 : layoutStats2);
                 view = inflater.inflate(
-                        R.layout.fragment_herodetail_stats_list_item, cParent,
+                        R.layout.frag_herodetail_stats_list_item, cParent,
                         false);
 
                 text = Utils.findById(view, R.id.text_hero_stats_label);
@@ -576,7 +576,7 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
                 final ViewHolder holder;
                 if (convertView == null) {
                     view = mInflater.inflate(
-                            R.layout.fragment_herodetail_abilities_list_item,
+                            R.layout.frag_herodetail_abilities_list_item,
                             parent, false);
 
                     holder = new ViewHolder();
@@ -655,7 +655,7 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
                 final ViewHolder holder;
                 if (convertView == null) {
                     view = mInflater.inflate(
-                            R.layout.fragment_herodetail_skillup_list_item,
+                            R.layout.frag_herodetail_skillup_list_item,
                             parent, false);
 
                     holder = new ViewHolder();
@@ -720,7 +720,7 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
                 final ViewHolder holder;
                 if (convertView == null) {
                     view = mInflater.inflate(
-                            R.layout.fragment_herodetail_skillup_ability_item,
+                            R.layout.frag_herodetail_skillup_ability_item,
                             parent, false);
 
                     holder = new ViewHolder();

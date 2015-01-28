@@ -115,7 +115,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 		UmengUpdateAgent.setUpdateOnlyWifi(false);
 		UmengUpdateAgent.update(this);
 
-		setContentView(R.layout.main);
+		setContentView(R.layout.act_main);
 		loader = ImageLoader.getInstance();
 
 		initUMShare();

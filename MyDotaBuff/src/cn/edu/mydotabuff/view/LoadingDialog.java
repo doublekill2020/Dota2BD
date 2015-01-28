@@ -50,7 +50,7 @@ public class LoadingDialog extends AlertDialog {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.setContentView(R.layout.dialog_loading);
+		this.setContentView(R.layout.dlg_loading);
 		tvDialogLoading = (TextView) findViewById(R.id.tvDialogLoading);
 		tvDialogLoading.setText(this.message);
 		progressWheel = (ProgressWheel) findViewById(R.id.progress_wheel);
