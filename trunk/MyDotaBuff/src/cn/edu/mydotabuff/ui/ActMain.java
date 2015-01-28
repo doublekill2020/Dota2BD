@@ -335,8 +335,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 				}
 				break;
 			case FETCH_FAILED:
-				TipsToast.showToast(ActMain.this, "steam被墙了，你懂得",
-						Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
+				showTip("steam被墙了，你懂得", DialogType.LOAD_FAILURE);
 				break;
 			case LOGIN_SUCCESS:
 				String token = (String) msg.obj;
