@@ -79,14 +79,8 @@ public class ActMain extends BaseActivity implements OnClickListener {
 	private View contactsLayout;
 	private View newsLayout;
 	private View settingLayout;
-	private ImageView messageImage;
-	private ImageView contactsImage;
-	private ImageView newsImage;
-	private ImageView settingImage;
-	private TextView messageText;
-	private TextView contactsText;
-	private TextView newsText;
-	private TextView settingText;
+	private ImageView messageImage, contactsImage, newsImage, settingImage;
+	private TextView messageText, contactsText, newsText, settingText;
 	private FragmentManager fragmentManager;
 	// private SlidingMenu menu;
 	private TextView checkUpdateBtn, feedBackBtn, shareBtn, logoutBtn, chatBtn;
@@ -112,23 +106,64 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		// requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 
+	}
+
+	@Override
+	protected void initViewAndData() {
+		// TODO Auto-generated method stub
 		UmengUpdateAgent.setUpdateOnlyWifi(false);
 		UmengUpdateAgent.update(this);
+		initUMShare();
+
+		configureToolbar();
+		configureDrawer();
 
 		setContentView(R.layout.act_main);
 		loader = ImageLoader.getInstance();
 
-		initUMShare();
-		initViews();
-		initEvents();
+		recentlyLayout = findViewById(R.id.message_layout);
+		contactsLayout = findViewById(R.id.contacts_layout);
+		newsLayout = findViewById(R.id.board_layout);
+		settingLayout = findViewById(R.id.setting_layout);
+		messageImage = (ImageView) findViewById(R.id.message_image);
+		contactsImage = (ImageView) findViewById(R.id.contacts_image);
+		newsImage = (ImageView) findViewById(R.id.news_image);
+		settingImage = (ImageView) findViewById(R.id.setting_image);
+		messageText = (TextView) findViewById(R.id.message_text);
+		contactsText = (TextView) findViewById(R.id.contacts_text);
+		newsText = (TextView) findViewById(R.id.news_text);
+		settingText = (TextView) findViewById(R.id.setting_text);
+		fragmentManager = getFragmentManager();
+		// 第一次启动时选中第0个tab
+		setTabSelection(0);
+		checkUpdateBtn = (TextView) findViewById(R.id.check_update);
+		feedBackBtn = (TextView) findViewById(R.id.feedback);
+		shareBtn = (TextView) findViewById(R.id.share);
+		logoutBtn = (TextView) findViewById(R.id.logout);
+		chatBtn = (TextView) findViewById(R.id.chat_room);
+		userIcon = (CircleImageView) findViewById(R.id.user_icon);
+		userName = (TextView) findViewById(R.id.user_name);
+
 		myPreferences = getSharedPreferences("user_info", Activity.MODE_PRIVATE);
 		userID = myPreferences.getString("userID", "");
 		if (!userID.equals("")) {
 			steamID = Common.getSteamID(userID);
 			fetchData(FETCH_DETAIL);
 		}
-		configureToolbar();
-		configureDrawer();
+	}
+
+	@Override
+	protected void initEvent() {
+		// TODO Auto-generated method stub
+		recentlyLayout.setOnClickListener(this);
+		contactsLayout.setOnClickListener(this);
+		newsLayout.setOnClickListener(this);
+		settingLayout.setOnClickListener(this);
+		checkUpdateBtn.setOnClickListener(this);
+		feedBackBtn.setOnClickListener(this);
+		shareBtn.setOnClickListener(this);
+		logoutBtn.setOnClickListener(this);
+		chatBtn.setOnClickListener(this);
 	}
 
 	private void configureToolbar() {
@@ -313,9 +348,8 @@ public class ActMain extends BaseActivity implements OnClickListener {
 					@Override
 					public void onError(ErrorCode errorCode) {
 						// 此处处理连接错误。
-						Toast.makeText(ActMain.this,
-								errorCode.getMessage(), Toast.LENGTH_SHORT)
-								.show();
+						Toast.makeText(ActMain.this, errorCode.getMessage(),
+								Toast.LENGTH_SHORT).show();
 					}
 				});
 				break;
@@ -323,58 +357,6 @@ public class ActMain extends BaseActivity implements OnClickListener {
 				break;
 			}
 		}
-	}
-
-	private void initViews() {
-
-		recentlyLayout = findViewById(R.id.message_layout);
-		contactsLayout = findViewById(R.id.contacts_layout);
-		newsLayout = findViewById(R.id.board_layout);
-		settingLayout = findViewById(R.id.setting_layout);
-		messageImage = (ImageView) findViewById(R.id.message_image);
-		contactsImage = (ImageView) findViewById(R.id.contacts_image);
-		newsImage = (ImageView) findViewById(R.id.news_image);
-		settingImage = (ImageView) findViewById(R.id.setting_image);
-		messageText = (TextView) findViewById(R.id.message_text);
-		contactsText = (TextView) findViewById(R.id.contacts_text);
-		newsText = (TextView) findViewById(R.id.news_text);
-		settingText = (TextView) findViewById(R.id.setting_text);
-
-		fragmentManager = getFragmentManager();
-		// 第一次启动时选中第0个tab
-		setTabSelection(0);
-
-		// menu = new SlidingMenu(this);// 直接new，而不是getSlidingMenu
-		// menu.setMode(SlidingMenu.LEFT);
-		// menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-		// menu.setShadowDrawable(R.drawable.drawer_shadow);
-		// menu.setShadowWidthRes(R.dimen.shadow_width);
-		// menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
-		// menu.setBehindWidth(400);// 设置SlidingMenu菜单的宽度
-		// menu.setFadeDegree(0.35f);
-		// menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);// 必须调用
-		// menu.setMenu(R.layout.frame_left_menu);// 就是普通的layout布局
-
-		checkUpdateBtn = (TextView) findViewById(R.id.check_update);
-		feedBackBtn = (TextView) findViewById(R.id.feedback);
-		shareBtn = (TextView) findViewById(R.id.share);
-		logoutBtn = (TextView) findViewById(R.id.logout);
-		chatBtn = (TextView) findViewById(R.id.chat_room);
-		userIcon = (CircleImageView) findViewById(R.id.user_icon);
-		userName = (TextView) findViewById(R.id.user_name);
-	}
-
-	private void initEvents() {
-		recentlyLayout.setOnClickListener(this);
-		contactsLayout.setOnClickListener(this);
-		newsLayout.setOnClickListener(this);
-		settingLayout.setOnClickListener(this);
-
-		checkUpdateBtn.setOnClickListener(this);
-		feedBackBtn.setOnClickListener(this);
-		shareBtn.setOnClickListener(this);
-		logoutBtn.setOnClickListener(this);
-		chatBtn.setOnClickListener(this);
 	}
 
 	@Override
@@ -628,16 +610,6 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		}
 	}
 
-	public void onResume() {
-		super.onResume();
-		MobclickAgent.onResume(this);
-	}
-
-	public void onPause() {
-		super.onPause();
-		MobclickAgent.onPause(this);
-	}
-
 	@Override
 	public void onAttachFragment(Fragment fragment) {
 		// TODO Auto-generated method stub
@@ -682,4 +654,5 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		}
 		return super.onKeyDown(keyCode, event);
 	}
+
 }

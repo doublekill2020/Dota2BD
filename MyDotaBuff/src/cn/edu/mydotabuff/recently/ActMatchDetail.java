@@ -60,10 +60,9 @@ public class ActMatchDetail extends BaseActivity {
 	private LoadingDialog dialog;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		// TODO 自动生成的方法存根
-		super.onCreate(savedInstanceState);
-
+	protected void initViewAndData() {
+		// TODO Auto-generated method stub
+		setContentView(R.layout.act_match_detail);
 		myHandler = new MyHandler();
 		matchId = getIntent().getStringExtra("matchId");
 		ids = getIntent().getStringArrayListExtra("ids");
@@ -72,13 +71,6 @@ public class ActMatchDetail extends BaseActivity {
 
 		dialog.show();
 		fetchData(FETCH_DETAIL);
-		initView();
-	}
-
-	private void initView() {
-		// TODO Auto-generated method stub
-		setContentView(R.layout.act_match_detail);
-
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 		getSupportActionBar().setTitle("比赛详情");
@@ -88,6 +80,12 @@ public class ActMatchDetail extends BaseActivity {
 		durationView = (TextView) findViewById(R.id.duration);
 		matchTypeView = (TextView) findViewById(R.id.match_type);
 		list = (ListView) findViewById(R.id.list);
+	}
+
+	@Override
+	protected void initEvent() {
+		// TODO Auto-generated method stub
+
 	}
 
 	void fetchData(final int type) {
@@ -368,4 +366,5 @@ public class ActMatchDetail extends BaseActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
 }

@@ -39,8 +39,7 @@ import cn.edu.mydotabuff.view.XListView;
 import com.nhaarman.listviewanimations.appearance.simple.SwingRightInAnimationAdapter;
 import com.umeng.analytics.MobclickAgent;
 
-public class ActUserStatistics extends BaseActivity implements
-		OnClickListener {
+public class ActUserStatistics extends BaseActivity implements OnClickListener {
 
 	private List<View> views;
 	private TextView leftBtn, rightBtn;
@@ -64,131 +63,159 @@ public class ActUserStatistics extends BaseActivity implements
 	private final int rateDatas[] = new int[6];
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		// TODO 自动生成的方法存根
-		super.onCreate(savedInstanceState);
+	protected void initViewAndData() {
+		// TODO Auto-generated method stub
 		bean = DotaApplication.getApplication().getData(
 				LocalDataType.PLAYER_DETAIL_INFO);
 		beans = bean.getBeans();
 		list = bean.getList();
 		if (beans != null) {
-			initView();
-			initEvents();
+			setContentView(R.layout.act_user_statistics);
+			Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+			setSupportActionBar(toolbar);
+			getSupportActionBar().setTitle("统计");
+			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+			views = new ArrayList<View>();
+			leftBtn = (TextView) findViewById(R.id.leftBtn);
+			rightBtn = (TextView) findViewById(R.id.rightBtn);
+			setTabChange(0);
+			pager = (ViewPager) findViewById(R.id.viewPager);
+			view1 = View.inflate(this, R.layout.act_user_statistics_left, null);
+			leftList = (XListView) view1.findViewById(R.id.left_list);
+			leftList.setPullLoadEnable(false);
+			leftList.setPullRefreshEnable(false);
+			leftList.setVerticalScrollBarEnabled(false);
+			animationAdapter = new SwingRightInAnimationAdapter(
+					commAdapter = new CommAdapter<BestRecord>(this, beans,
+							R.layout.act_user_statistics_left_item) {
+
+						@Override
+						public void convert(CommViewHolder helper,
+								BestRecord item) {
+							// TODO Auto-generated method stub
+							helper.setImageFromWeb(R.id.icon, Utils
+									.getHeroImageUri(Common.getHeroName(item
+											.getHeroName())), 1);
+							helper.setText(R.id.name, item.getHeroName());
+							helper.setText(R.id.tag1, item.getRecordType()
+									+ ":" + item.getRecordNum());
+							helper.setText(R.id.tag2,
+									"比赛编号：" + item.getMmatchID());
+							helper.setText(R.id.status, item.getResult());
+							String result = item.getResult();
+							helper.setText(R.id.status, result);
+							if (result.equals("胜利")) {
+								helper.setBackgroundColor(
+										R.id.status,
+										getResources().getColor(
+												R.color.my_green));
+							} else {
+								helper.setBackgroundColor(
+										R.id.status,
+										getResources().getColor(
+												R.color.my_orange));
+							}
+						}
+					});
+			animationAdapter.setAbsListView(leftList);
+			leftList.setAdapter(animationAdapter);
+			views.add(view1);
+			view2 = View
+					.inflate(this, R.layout.act_user_statistics_right, null);
+			all_n_data = (TextView) view2.findViewById(R.id.all_n_data);
+			all_h_data = (TextView) view2.findViewById(R.id.all_h_data);
+			all_vh_data = (TextView) view2.findViewById(R.id.all_vh_data);
+			rank_n_data = (TextView) view2.findViewById(R.id.rank_n_data);
+			rank_h_data = (TextView) view2.findViewById(R.id.rank_h_data);
+			rank_vh_data = (TextView) view2.findViewById(R.id.rank_vh_data);
+			all_n_rating = (TextView) view2.findViewById(R.id.all_n_rating);
+			all_h_rating = (TextView) view2.findViewById(R.id.all_h_rating);
+			all_vh_rating = (TextView) view2.findViewById(R.id.all_vh_rating);
+			rank_n_rating = (TextView) view2.findViewById(R.id.rank_n_rating);
+			rank_h_rating = (TextView) view2.findViewById(R.id.rank_h_rating);
+			rank_vh_rating = (TextView) view2.findViewById(R.id.rank_vh_rating);
+			all_nBar = (ProgressBar) view2.findViewById(R.id.all_n_rate);
+			all_hBar = (ProgressBar) view2.findViewById(R.id.all_h_rate);
+			all_vhBar = (ProgressBar) view2.findViewById(R.id.all_vh_rate);
+			rank_nBar = (ProgressBar) view2.findViewById(R.id.rank_n_rate);
+			rank_hBar = (ProgressBar) view2.findViewById(R.id.rank_h_rate);
+			rank_vhBar = (ProgressBar) view2.findViewById(R.id.rank_vh_rate);
+			all_tag = (TextView) view2.findViewById(R.id.all_tag);
+			rank_tag = (TextView) view2.findViewById(R.id.rank_tag);
+			ArrayList<MacthStatistics> statisticsList = bean.getList();
+			MacthStatistics bean = statisticsList.get(1);
+			all_n_data.setText(bean.getPlayTimes() + "场 KDA:" + bean.getKAD());
+			rateDatas[0] = (int) Float.parseFloat(bean.getWinning());
+			bean = statisticsList.get(0);
+			all_tag.setText("(" + bean.getPlayTimes() + "场 平均KDA:"
+					+ bean.getKAD() + " 胜率:" + bean.getWinning() + "%)");
+			bean = statisticsList.get(2);
+			all_h_data.setText(bean.getPlayTimes() + "场 KDA:" + bean.getKAD());
+			rateDatas[1] = (int) Float.parseFloat(bean.getWinning());
+			bean = statisticsList.get(3);
+			all_vh_data.setText(bean.getPlayTimes() + "场 KDA:" + bean.getKAD());
+			rateDatas[2] = (int) Float.parseFloat(bean.getWinning());
+			bean = statisticsList.get(6);
+			rank_tag.setText("(" + bean.getPlayTimes() + "场 平均KDA:"
+					+ bean.getKAD() + " 胜率:" + bean.getWinning() + "%)");
+			bean = statisticsList.get(7);
+			rank_n_data.setText(bean.getPlayTimes() + "场 KDA:" + bean.getKAD());
+			rateDatas[3] = (int) Float.parseFloat(bean.getWinning());
+			bean = statisticsList.get(8);
+			rank_h_data.setText(bean.getPlayTimes() + "场 KDA:" + bean.getKAD());
+			rateDatas[4] = (int) Float.parseFloat(bean.getWinning());
+			bean = statisticsList.get(9);
+			rank_vh_data
+					.setText(bean.getPlayTimes() + "场 KDA:" + bean.getKAD());
+			rateDatas[5] = (int) Float.parseFloat(bean.getWinning());
+			views.add(view2);
+			if (adapter == null) {
+				adapter = new ViewpagerAdapter(views);
+				pager.setAdapter(adapter);
+			} else {
+				adapter.setNewList(views);
+			}
 		}
 	}
 
-	private void initView() {
+	@Override
+	protected void initEvent() {
 		// TODO Auto-generated method stub
-		setContentView(R.layout.act_user_statistics);
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		setSupportActionBar(toolbar);
-		getSupportActionBar().setTitle("统计");
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		leftBtn.setOnClickListener(this);
+		rightBtn.setOnClickListener(this);
+		pager.setOnPageChangeListener(new OnPageChangeListener() {
 
-		views = new ArrayList<View>();
-		leftBtn = (TextView) findViewById(R.id.leftBtn);
-		rightBtn = (TextView) findViewById(R.id.rightBtn);
-		setTabChange(0);
-		pager = (ViewPager) findViewById(R.id.viewPager);
-		view1 = View.inflate(this, R.layout.act_user_statistics_left, null);
-		leftList = (XListView) view1.findViewById(R.id.left_list);
-		leftList.setPullLoadEnable(false);
-		leftList.setPullRefreshEnable(false);
-		leftList.setVerticalScrollBarEnabled(false);
-		animationAdapter = new SwingRightInAnimationAdapter(
-				commAdapter = new CommAdapter<BestRecord>(this, beans,
-						R.layout.act_user_statistics_left_item) {
+			@Override
+			public void onPageSelected(int arg0) {
+				setTabChange(arg0);
+			}
 
-					@Override
-					public void convert(CommViewHolder helper, BestRecord item) {
-						// TODO Auto-generated method stub
-						helper.setImageFromWeb(R.id.icon, Utils
-								.getHeroImageUri(Common.getHeroName(item
-										.getHeroName())), 1);
-						helper.setText(R.id.name, item.getHeroName());
-						helper.setText(R.id.tag1, item.getRecordType() + ":"
-								+ item.getRecordNum());
-						helper.setText(R.id.tag2, "比赛编号：" + item.getMmatchID());
-						helper.setText(R.id.status, item.getResult());
-						String result = item.getResult();
-						helper.setText(R.id.status, result);
-						if (result.equals("胜利")) {
-							helper.setBackgroundColor(R.id.status,
-									getResources().getColor(R.color.my_green));
-						} else {
-							helper.setBackgroundColor(R.id.status,
-									getResources().getColor(R.color.my_orange));
-						}
-					}
-				});
-		animationAdapter.setAbsListView(leftList);
-		leftList.setAdapter(animationAdapter);
-		views.add(view1);
-		view2 = View.inflate(this, R.layout.act_user_statistics_right, null);
-		all_n_data = (TextView) view2.findViewById(R.id.all_n_data);
-		all_h_data = (TextView) view2.findViewById(R.id.all_h_data);
-		all_vh_data = (TextView) view2.findViewById(R.id.all_vh_data);
-		rank_n_data = (TextView) view2.findViewById(R.id.rank_n_data);
-		rank_h_data = (TextView) view2.findViewById(R.id.rank_h_data);
-		rank_vh_data = (TextView) view2.findViewById(R.id.rank_vh_data);
-		all_n_rating = (TextView) view2.findViewById(R.id.all_n_rating);
-		all_h_rating = (TextView) view2.findViewById(R.id.all_h_rating);
-		all_vh_rating = (TextView) view2.findViewById(R.id.all_vh_rating);
-		rank_n_rating = (TextView) view2.findViewById(R.id.rank_n_rating);
-		rank_h_rating = (TextView) view2.findViewById(R.id.rank_h_rating);
-		rank_vh_rating = (TextView) view2.findViewById(R.id.rank_vh_rating);
-		all_nBar = (ProgressBar) view2.findViewById(R.id.all_n_rate);
-		all_hBar = (ProgressBar) view2.findViewById(R.id.all_h_rate);
-		all_vhBar = (ProgressBar) view2.findViewById(R.id.all_vh_rate);
-		rank_nBar = (ProgressBar) view2.findViewById(R.id.rank_n_rate);
-		rank_hBar = (ProgressBar) view2.findViewById(R.id.rank_h_rate);
-		rank_vhBar = (ProgressBar) view2.findViewById(R.id.rank_vh_rate);
-		all_tag = (TextView) view2.findViewById(R.id.all_tag);
-		rank_tag = (TextView) view2.findViewById(R.id.rank_tag);
-		ArrayList<MacthStatistics> statisticsList = bean.getList();
-		MacthStatistics bean = statisticsList.get(1);
-		all_n_data.setText(bean.getPlayTimes() + "场 KDA:" + bean.getKAD());
-		// all_n_rating.setText((int)Float.parseFloat(bean.getWinning())+"%");
-		// all_nBar.setProgress((int)Float.parseFloat(bean.getWinning()));
-		rateDatas[0] = (int) Float.parseFloat(bean.getWinning());
-		bean = statisticsList.get(0);
-		all_tag.setText("(" + bean.getPlayTimes() + "场 平均KDA:" + bean.getKAD()
-				+ " 胜率:" + bean.getWinning() + "%)");
-		bean = statisticsList.get(2);
-		all_h_data.setText(bean.getPlayTimes() + "场 KDA:" + bean.getKAD());
-		// all_h_rating.setText((int)Float.parseFloat(bean.getWinning())+"%");
-		// all_hBar.setProgress((int)Float.parseFloat(bean.getWinning()));
-		rateDatas[1] = (int) Float.parseFloat(bean.getWinning());
-		bean = statisticsList.get(3);
-		all_vh_data.setText(bean.getPlayTimes() + "场 KDA:" + bean.getKAD());
-		// all_vh_rating.setText((int)Float.parseFloat(bean.getWinning())+"%");
-		// all_vhBar.setProgress((int)Float.parseFloat(bean.getWinning()));
-		rateDatas[2] = (int) Float.parseFloat(bean.getWinning());
-		bean = statisticsList.get(6);
-		rank_tag.setText("(" + bean.getPlayTimes() + "场 平均KDA:" + bean.getKAD()
-				+ " 胜率:" + bean.getWinning() + "%)");
-		bean = statisticsList.get(7);
-		rank_n_data.setText(bean.getPlayTimes() + "场 KDA:" + bean.getKAD());
-		// rank_n_rating.setText((int)Float.parseFloat(bean.getWinning())+"%");
-		// rank_nBar.setProgress((int)Float.parseFloat(bean.getWinning()));
-		rateDatas[3] = (int) Float.parseFloat(bean.getWinning());
-		bean = statisticsList.get(8);
-		rank_h_data.setText(bean.getPlayTimes() + "场 KDA:" + bean.getKAD());
-		// rank_h_rating.setText((int)Float.parseFloat(bean.getWinning())+"%");
-		// rank_hBar.setProgress((int)Float.parseFloat(bean.getWinning()));
-		rateDatas[4] = (int) Float.parseFloat(bean.getWinning());
-		bean = statisticsList.get(9);
-		rank_vh_data.setText(bean.getPlayTimes() + "场 KDA:" + bean.getKAD());
-		// rank_vh_rating.setText((int)Float.parseFloat(bean.getWinning())+"%");
-		// rank_vhBar.setProgress((int)Float.parseFloat(bean.getWinning()));
-		rateDatas[5] = (int) Float.parseFloat(bean.getWinning());
-		views.add(view2);
-		if (adapter == null) {
-			adapter = new ViewpagerAdapter(views);
-			pager.setAdapter(adapter);
-		} else {
-			adapter.setNewList(views);
-		}
+			@Override
+			public void onPageScrolled(int arg0, float arg1, int arg2) {
+
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int arg0) {
+
+			}
+		});
+		leftList.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				if (beans.size() > 0) {
+					Intent intent = new Intent(ActUserStatistics.this,
+							ActMatchDetail.class);
+					intent.putExtra("matchId", beans.get(position - 1)
+							.getMmatchID());
+					startActivity(intent);
+				}
+			}
+		});
 	}
 
 	Handler h = new Handler() {
@@ -269,44 +296,6 @@ public class ActUserStatistics extends BaseActivity implements
 		}).start();
 	}
 
-	private void initEvents() {
-		// TODO Auto-generated method stub
-		leftBtn.setOnClickListener(this);
-		rightBtn.setOnClickListener(this);
-		pager.setOnPageChangeListener(new OnPageChangeListener() {
-
-			@Override
-			public void onPageSelected(int arg0) {
-				setTabChange(arg0);
-			}
-
-			@Override
-			public void onPageScrolled(int arg0, float arg1, int arg2) {
-
-			}
-
-			@Override
-			public void onPageScrollStateChanged(int arg0) {
-
-			}
-		});
-		leftList.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// TODO Auto-generated method stub
-				if (beans.size() > 0) {
-					Intent intent = new Intent(ActUserStatistics.this,
-							ActMatchDetail.class);
-					intent.putExtra("matchId", beans.get(position - 1)
-							.getMmatchID());
-					startActivity(intent);
-				}
-			}
-		});
-	}
-
 	private void setTabChange(final int index) {
 		if (index == 0) {
 			leftBtn.setSelected(true);
@@ -321,16 +310,6 @@ public class ActUserStatistics extends BaseActivity implements
 			showProgress(RANK_H);
 			showProgress(RANK_VH);
 		}
-	}
-
-	public void onResume() {
-		super.onResume();
-		MobclickAgent.onResume(this);
-	}
-
-	public void onPause() {
-		super.onPause();
-		MobclickAgent.onPause(this);
 	}
 
 	@Override
@@ -348,10 +327,10 @@ public class ActUserStatistics extends BaseActivity implements
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			// NavUtils.navigateUpFromSameTask(this);
 			finish();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
 }

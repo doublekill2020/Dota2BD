@@ -36,8 +36,6 @@ import cn.edu.mydotabuff.view.LoadingDialog;
 import cn.edu.mydotabuff.view.TipsToast;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;
 
-import com.umeng.analytics.MobclickAgent;
-
 public class ActLogin extends Activity implements OnClickListener,
 		OnWebDataGetListener {
 	private EditText editText;
@@ -58,7 +56,7 @@ public class ActLogin extends Activity implements OnClickListener,
 			startActivity(new Intent(this, ActMain.class));
 			finish();
 		} else {
-			//requestWindowFeature(Window.FEATURE_NO_TITLE);
+			// requestWindowFeature(Window.FEATURE_NO_TITLE);
 			dialog = new LoadingDialog(this);
 			initView();
 		}
@@ -75,16 +73,6 @@ public class ActLogin extends Activity implements OnClickListener,
 		if (userID != null) {
 			editText.setText(userID);
 		}
-	}
-
-	public void onResume() {
-		super.onResume();
-		MobclickAgent.onResume(this);
-	}
-
-	public void onPause() {
-		super.onPause();
-		MobclickAgent.onPause(this);
 	}
 
 	@Override
