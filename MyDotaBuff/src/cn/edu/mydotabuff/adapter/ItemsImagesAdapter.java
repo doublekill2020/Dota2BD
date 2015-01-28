@@ -3,7 +3,7 @@ package cn.edu.mydotabuff.adapter;
 import java.util.List;
 
 import cn.edu.mydotabuff.R;
-import cn.edu.mydotabuff.entity.ItemsItem;
+import cn.edu.mydotabuff.bean.ItemsItem;
 import cn.edu.mydotabuff.util.Utils;
 import android.content.Context;
 import android.view.LayoutInflater;

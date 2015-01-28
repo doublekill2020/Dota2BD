@@ -1,4 +1,4 @@
-package cn.edu.mydotabuff.entity;
+package cn.edu.mydotabuff.bean;
 
 import java.util.List;
 import java.util.Map;

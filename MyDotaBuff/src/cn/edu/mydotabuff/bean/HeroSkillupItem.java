@@ -1,4 +1,4 @@
-package cn.edu.mydotabuff.entity;
+package cn.edu.mydotabuff.bean;
 
 /**
  * 英雄技能加点实体

@@ -8,7 +8,6 @@ import javax.crypto.spec.PSource;
 
 import org.json2.JSONException;
 
-import cn.edu.mydotabuff.entity.ItemsItem;
 import cn.edu.mydotabuff.util.Utils;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -25,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import cn.edu.mydotabuff.DataManager;
 import cn.edu.mydotabuff.R;
+import cn.edu.mydotabuff.bean.ItemsItem;
 import cn.edu.mydotabuff.bean.MatchBean;
 import cn.edu.mydotabuff.bean.PlayerDetailBean;
 import cn.edu.mydotabuff.common.Common;

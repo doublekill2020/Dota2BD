@@ -8,7 +8,7 @@ import org.json2.JSONException;
 
 import cn.edu.mydotabuff.DataManager;
 import cn.edu.mydotabuff.DotaApplication;
-import cn.edu.mydotabuff.entity.FavoriteItem;
+import cn.edu.mydotabuff.bean.FavoriteItem;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
