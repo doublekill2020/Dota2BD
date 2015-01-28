@@ -3,7 +3,6 @@ package cn.edu.mydotabuff.util;
 import java.util.HashMap;
 import java.util.Map;
 
-
 import cn.edu.mydotabuff.base.BaseRequestInterface;
 import cn.edu.mydotabuff.common.http.APIConstants;
 import cn.edu.mydotabuff.common.http.IInfoReceive;
@@ -50,7 +49,7 @@ public class PersonalRequestImpl extends BaseRequestInterface {
 		request(APIConstants.GET_MATCH_DETAILS, params, false);
 	}
 
-	public void getPlayerDetail(String steamID,boolean isShowDlg) {
+	public void getPlayerDetail(String steamID, boolean isShowDlg) {
 		// TODO Auto-generated method stub
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("key", APIConstants.API_KEY);
@@ -64,7 +63,8 @@ public class PersonalRequestImpl extends BaseRequestInterface {
 		params.put("division", division);
 		request(APIConstants.GET_BOARD, params, true);
 	}
-	public void getUserToken(String userId,String name,String portraitUri) {
+
+	public void getUserToken(String userId, String name, String portraitUri) {
 		// TODO Auto-generated method stub
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("userId", userId);
@@ -72,4 +72,5 @@ public class PersonalRequestImpl extends BaseRequestInterface {
 		params.put("portraitUri", portraitUri);
 		request(APIConstants.GET_USER_TOKEN, params, true);
 	}
+
 }

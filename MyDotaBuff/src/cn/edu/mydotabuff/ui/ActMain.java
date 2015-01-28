@@ -298,6 +298,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 				request.getPlayerDetail(steamID, false);
 			} else {
 				request.getPlayerDetail(steamID, true);
+				request.setIsCancelAble(false);
 			}
 			break;
 		default:
