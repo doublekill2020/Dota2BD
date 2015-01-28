@@ -1,8 +1,6 @@
 package cn.edu.mydotabuff.common.http;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +12,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-
+import com.sea_monster.core.common.Const.SYS;
 
 import android.app.Activity;
-
-
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.DotaApplication.LocalDataType;
 import cn.edu.mydotabuff.common.bean.BestRecord;
@@ -201,7 +197,7 @@ public class WebDataHelper {
 					url = "http://dotamax.com/player/detail/" + userId;
 					PlayerInfoBean bean = DotaApplication.getApplication()
 							.getData(LocalDataType.PLAYER_INFO);
-					if(bean == null){
+					if (bean == null) {
 						bean = new PlayerInfoBean();
 					}
 					Document doc = null;
@@ -369,7 +365,7 @@ public class WebDataHelper {
 								DotaApplication.getApplication().saveData(bean,
 										LocalDataType.PLAYER_DETAIL_INFO);
 								status = 1;
-							}else{
+							} else {
 								status = -2;
 							}
 						} else {
@@ -587,23 +583,33 @@ public class WebDataHelper {
 							// 查询结果唯一
 							else {
 								UserInfo haojj = new UserInfo();
-								String result = doc.getElementById(
-										"ibackground").toString();
-								result = result.trim().replace(" ", "");
-								String imgUrl = (result.substring(
-										result.indexOf("pic:\"") + 5,
-										result.indexOf("});"))).trim().replace(
-										"\"", "");
-								String name = (result.substring(
-										result.indexOf("title:\"") + 7,
-										result.indexOf("-DOTA2个人主页\""))).trim();
-								String Id = result.substring(
-										result.indexOf("ID:") + 3,
-										result.indexOf("ID:") + 3 + 9);
 
+								String result = doc.getElementsByClass(
+										"maxtopmainbar").toString();
+
+								Document parse = Jsoup.parse(result);
+
+								String imgUrl = parse.getElementsByTag("img")
+										.first().attr("src").toString();
+
+								Elements script = doc.getElementsByClass(
+										"maxtopmainbar").select("script");
+
+								result = script.get(0).toString();
+								Pattern pattern = Pattern
+										.compile("url:\"([^\"]*)\"");
+								Matcher matcher = pattern.matcher(result);
+								while (matcher.find()) {
+									String userID = matcher.group(0);
+									System.out.println(userID);
+									// http://dotamax.com/player/detail/129929396/"
+									userID = userID.substring(
+											userID.lastIndexOf("il/")+3,
+											userID.length() -2);
+									haojj.setUserID(userID);
+								}
 								haojj.setImgUrl(imgUrl);
-								haojj.setUserName(name);
-								haojj.setUserID(Id);
+								haojj.setUserName(userId);
 								infos.add(haojj);
 								saveFlag = true;
 							}
