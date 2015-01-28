@@ -655,4 +655,14 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		return super.onKeyDown(keyCode, event);
 	}
 
+	/**
+	 * @ClassName: OnMainEventListener
+	 * @Description: TODO(监听Mainactivity获取用户资料的行为)
+	 * @author 袁浩 1006401052yh@gmail.com
+	 * @date 2014-11-7 下午4:42:52
+	 * 
+	 */
+	public interface OnMainEventListener {
+		void onFinishGetPlayerInfo();
+	}
 }
