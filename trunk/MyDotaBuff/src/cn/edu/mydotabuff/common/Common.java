@@ -21,10 +21,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import cn.edu.mydotabuff.APIConstants;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.bean.AbilityBean;
 import cn.edu.mydotabuff.bean.PlayerDetailBean;
+import cn.edu.mydotabuff.http.APIConstants;
 
 public class Common {
 	public static String getSteamID(String userID) {

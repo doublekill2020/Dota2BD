@@ -13,8 +13,8 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.util.Log;
 
-import cn.edu.mydotabuff.APIConstants;
 import cn.edu.mydotabuff.base.BaseRequestInterface;
+import cn.edu.mydotabuff.http.APIConstants;
 import cn.edu.mydotabuff.http.HttpRequestImpl;
 import cn.edu.mydotabuff.http.IInfoReceive;
 

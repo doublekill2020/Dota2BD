@@ -9,7 +9,7 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.util.Log;
-import cn.edu.mydotabuff.APIConstants;
+import cn.edu.mydotabuff.http.APIConstants;
 import cn.edu.mydotabuff.http.HttpRequestTool;
 import cn.edu.mydotabuff.http.IInfoReceive;
 
