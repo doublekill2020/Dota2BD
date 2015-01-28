@@ -9,12 +9,6 @@ import cn.edu.mydotabuff.DataManager;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.adapter.DBAdapter;
 import cn.edu.mydotabuff.adapter.ItemsImagesAdapter;
-import cn.edu.mydotabuff.entity.AbilityItem;
-import cn.edu.mydotabuff.entity.FavoriteItem;
-import cn.edu.mydotabuff.entity.HeroDetailItem;
-import cn.edu.mydotabuff.entity.HeroItem;
-import cn.edu.mydotabuff.entity.HeroSkillupItem;
-import cn.edu.mydotabuff.entity.ItemsItem;
 import cn.edu.mydotabuff.util.Utils;
 import cn.edu.mydotabuff.view.SimpleGridView;
 import cn.edu.mydotabuff.view.SimpleListView;
@@ -46,6 +40,12 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import cn.edu.mydotabuff.base.SwipeBackAppCompatFragmentActivity;
+import cn.edu.mydotabuff.bean.AbilityItem;
+import cn.edu.mydotabuff.bean.FavoriteItem;
+import cn.edu.mydotabuff.bean.HeroDetailItem;
+import cn.edu.mydotabuff.bean.HeroItem;
+import cn.edu.mydotabuff.bean.HeroSkillupItem;
+import cn.edu.mydotabuff.bean.ItemsItem;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
