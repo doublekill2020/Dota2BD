@@ -115,10 +115,10 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		UmengUpdateAgent.update(this);
 		initUMShare();
 
+		setContentView(R.layout.act_main);
 		configureToolbar();
 		configureDrawer();
 
-		setContentView(R.layout.act_main);
 		loader = ImageLoader.getInstance();
 
 		recentlyLayout = findViewById(R.id.message_layout);
