@@ -1,4 +1,4 @@
-package cn.edu.mydotabuff;
+package cn.edu.mydotabuff.ui;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +18,11 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import cn.edu.mydotabuff.DotaApplication;
+import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.DotaApplication.LocalDataType;
+import cn.edu.mydotabuff.R.id;
+import cn.edu.mydotabuff.R.layout;
 import cn.edu.mydotabuff.common.bean.BoardBean;
 import cn.edu.mydotabuff.common.bean.MatchBean;
 import cn.edu.mydotabuff.common.bean.PlayerBean;

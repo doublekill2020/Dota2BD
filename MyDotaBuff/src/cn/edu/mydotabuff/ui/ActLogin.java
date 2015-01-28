@@ -1,4 +1,4 @@
-package cn.edu.mydotabuff;
+package cn.edu.mydotabuff.ui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +26,9 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import cn.edu.mydotabuff.R;
+import cn.edu.mydotabuff.R.id;
+import cn.edu.mydotabuff.R.layout;
 import cn.edu.mydotabuff.common.bean.UserInfo;
 import cn.edu.mydotabuff.common.CommAdapter;
 import cn.edu.mydotabuff.common.CommViewHolder;

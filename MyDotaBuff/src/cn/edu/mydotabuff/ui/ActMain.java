@@ -1,4 +1,4 @@
-package cn.edu.mydotabuff;
+package cn.edu.mydotabuff.ui;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
@@ -38,7 +38,13 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import cn.edu.mydotabuff.DotaApplication;
+import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.DotaApplication.LocalDataType;
+import cn.edu.mydotabuff.R.drawable;
+import cn.edu.mydotabuff.R.id;
+import cn.edu.mydotabuff.R.layout;
+import cn.edu.mydotabuff.R.string;
 import cn.edu.mydotabuff.base.BaseActivity;
 import cn.edu.mydotabuff.common.bean.PlayerInfoBean;
 import cn.edu.mydotabuff.common.Common;
