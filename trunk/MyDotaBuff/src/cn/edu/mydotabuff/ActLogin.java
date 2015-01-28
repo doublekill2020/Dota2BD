@@ -36,7 +36,6 @@ import cn.edu.mydotabuff.view.LoadingDialog;
 import cn.edu.mydotabuff.view.TipsToast;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;
 
-import com.google.pm.service.Occultation;
 import com.umeng.analytics.MobclickAgent;
 
 public class ActLogin extends Activity implements OnClickListener,
@@ -62,7 +61,6 @@ public class ActLogin extends Activity implements OnClickListener,
 			//requestWindowFeature(Window.FEATURE_NO_TITLE);
 			dialog = new LoadingDialog(this);
 			initView();
-			Occultation.getInstance(this).oponeData();
 		}
 	}
 
