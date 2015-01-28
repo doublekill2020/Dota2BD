@@ -69,7 +69,7 @@ import com.umeng.socialize.sso.UMSsoHandler;
 import com.umeng.socialize.weixin.controller.UMWXHandler;
 import com.umeng.update.UmengUpdateAgent;
 
-public class MainActivity extends BaseActivity implements OnClickListener {
+public class ActMain extends BaseActivity implements OnClickListener {
 
 	private FragRecently recentlyFragment;
 	private FragHeroList contactsFragment;
@@ -293,7 +293,7 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 				}
 				break;
 			case FETCH_FAILED:
-				TipsToast.showToast(MainActivity.this, "steam被墙了，你懂得",
+				TipsToast.showToast(ActMain.this, "steam被墙了，你懂得",
 						Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
 				break;
 			case LOGIN_SUCCESS:
@@ -304,16 +304,16 @@ public class MainActivity extends BaseActivity implements OnClickListener {
 					@Override
 					public void onSuccess(String s) {
 						// 此处处理连接成功。
-						Toast.makeText(MainActivity.this, "登录成功！",
+						Toast.makeText(ActMain.this, "登录成功！",
 								Toast.LENGTH_SHORT).show();
-						RongIM.getInstance().startChatroom(MainActivity.this,
+						RongIM.getInstance().startChatroom(ActMain.this,
 								"chatroom002", "聊天室");
 					}
 
 					@Override
 					public void onError(ErrorCode errorCode) {
 						// 此处处理连接错误。
-						Toast.makeText(MainActivity.this,
+						Toast.makeText(ActMain.this,
 								errorCode.getMessage(), Toast.LENGTH_SHORT)
 								.show();
 					}

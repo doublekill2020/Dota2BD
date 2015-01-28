@@ -41,7 +41,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="cn.edu.mydotabuff.MainActivity"
+            android:name="cn.edu.mydotabuff.ActMain"
             android:label="@string/app_name" >
         </activity>
         <activity android:name="cn.edu.mydotabuff.recently.ActMatchDetail" >
@@ -53,7 +53,7 @@
         <activity
             android:name="cn.edu.mydotabuff.hero.HeroDetailActivity"
             android:label="@string/title_activity_hero_detail"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".ActMain" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -61,7 +61,7 @@
         <activity
             android:name="cn.edu.mydotabuff.item.ItemsDetailActivity"
             android:label="@string/title_activity_items_detail"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".ActMain" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />

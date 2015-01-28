@@ -55,7 +55,7 @@ public class ActLogin extends Activity implements OnClickListener,
 		myPreferences = getSharedPreferences("user_info", Activity.MODE_PRIVATE);
 		userID = myPreferences.getString("userID", "");
 		if (myPreferences.getString("isLogin", "").equals("true")) {
-			startActivity(new Intent(this, MainActivity.class));
+			startActivity(new Intent(this, ActMain.class));
 			finish();
 		} else {
 			//requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -95,7 +95,7 @@ public class ActLogin extends Activity implements OnClickListener,
 				String ID = editText.getText().toString();
 				if (ID != null && (ID.length() == 9 || ID.length() == 8)) {
 					saveUserInfo(ID);
-					startActivity(new Intent(this, MainActivity.class));
+					startActivity(new Intent(this, ActMain.class));
 					finish();
 				} else {
 					new AlertDialog.Builder(this)
@@ -173,7 +173,7 @@ public class ActLogin extends Activity implements OnClickListener,
 			UserInfo info = (UserInfo) beans.get(0);
 			String ID = info.getUserID().trim();
 			saveUserInfo(ID);
-			startActivity(new Intent(this, MainActivity.class));
+			startActivity(new Intent(this, ActMain.class));
 			finish();
 		} else {
 			View dlgView = getLayoutInflater().inflate(R.layout.dlg_user_list,
@@ -214,7 +214,7 @@ public class ActLogin extends Activity implements OnClickListener,
 					// 除去ID：
 					ID = ID.substring(3, ID.length());
 					saveUserInfo(ID);
-					startActivity(new Intent(ActLogin.this, MainActivity.class));
+					startActivity(new Intent(ActLogin.this, ActMain.class));
 					finish();
 				}
 			});
