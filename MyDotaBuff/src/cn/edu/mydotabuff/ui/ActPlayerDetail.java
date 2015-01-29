@@ -9,22 +9,18 @@
  */
 package cn.edu.mydotabuff.ui;
 
-import android.app.Activity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.R;
-import cn.edu.mydotabuff.DotaApplication.LocalDataType;
 import cn.edu.mydotabuff.base.BaseActivity;
 import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.common.bean.PlayerInfoBean;
 import cn.edu.mydotabuff.common.http.OnWebDataGetListener;
 import cn.edu.mydotabuff.common.http.WebDataHelper;
-import cn.edu.mydotabuff.common.http.WebDataHelper.DataType;
 import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.view.CircleImageView;
 import cn.edu.mydotabuff.view.LoadingDialog;
