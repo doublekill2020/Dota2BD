@@ -8,11 +8,13 @@ import javax.crypto.spec.PSource;
 
 import org.json2.JSONException;
 
+import cn.edu.mydotabuff.ui.ActPlayerDetail;
 import cn.edu.mydotabuff.util.Utils;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,6 +24,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import cn.edu.mydotabuff.DataManager;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.common.bean.ItemsItem;
@@ -31,6 +34,7 @@ import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.view.CircleImageView;
 import cn.edu.mydotabuff.view.TipsToast;
+import cn.edu.mydotabuff.view.TipsToast.DialogType;
 
 public class ActMatchDetailItemAdapter extends BaseAdapter {
 	private Activity _caller;
@@ -265,6 +269,27 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				}
+			}
+		});
+		holder.icon.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				if (bean.getPlayerInfoBeans().getSteamid()
+						.equals("76561202255233023")) {
+					TipsToast.showToast(_caller, "该玩家未开启比赛数据共享！",
+							Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
+				} else if (bean.getPlayerInfoBeans().getSteamid()
+						.equals("76561197960265728")) {
+					TipsToast.showToast(_caller, "该玩家为电脑！", Toast.LENGTH_SHORT,
+							DialogType.LOAD_FAILURE);
+				} else {
+					Intent i = new Intent();
+					i.setClass(_caller, ActPlayerDetail.class);
+					i.putExtra("data", bean.getPlayerInfoBeans());
+					_caller.startActivity(i);
 				}
 			}
 		});
