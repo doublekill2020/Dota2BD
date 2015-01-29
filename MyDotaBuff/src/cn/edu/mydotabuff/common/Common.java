@@ -2,12 +2,29 @@ package cn.edu.mydotabuff.common;
 
 import java.math.BigInteger;
 
-
 public class Common {
+	/**
+	 * userID转SteamID
+	 * 
+	 * @param userID
+	 * @return
+	 */
 	public static String getSteamID(String userID) {
 		BigInteger big = new BigInteger("76561197960265728");
 		big = big.add(new BigInteger(userID));
 		return big.toString();
+	}
+
+	/**
+	 * SteamID转userID
+	 * 
+	 * @param steamID
+	 * @return
+	 */
+	public static String getUserID(String steamID) {
+		BigInteger steamid = new BigInteger(steamID);
+		BigInteger big = new BigInteger("76561197960265728");
+		return steamid.subtract(big).toString();
 	}
 
 	// 获取在线状态
@@ -72,1660 +89,1662 @@ public class Common {
 		return str;
 	}
 
-//	public static int getHeroDrawableId(int ID) {
-//		switch (ID) {
-//		case 1:
-//			return R.drawable.hero_1;
-//		case 2:
-//			return R.drawable.hero_2;
-//		case 3:
-//			return R.drawable.hero_3;
-//		case 4:
-//			return R.drawable.hero_4;
-//		case 5:
-//			return R.drawable.hero_5;
-//		case 6:
-//			return R.drawable.hero_6;
-//		case 7:
-//			return R.drawable.hero_7;
-//		case 8:
-//			return R.drawable.hero_8;
-//		case 9:
-//			return R.drawable.hero_9;
-//		case 10:
-//			return R.drawable.hero_10;
-//		case 11:
-//			return R.drawable.hero_11;
-//		case 12:
-//			return R.drawable.hero_12;
-//		case 13:
-//			return R.drawable.hero_13;
-//		case 14:
-//			return R.drawable.hero_14;
-//		case 15:
-//			return R.drawable.hero_15;
-//		case 16:
-//			return R.drawable.hero_16;
-//		case 17:
-//			return R.drawable.hero_17;
-//		case 18:
-//			return R.drawable.hero_18;
-//		case 19:
-//			return R.drawable.hero_19;
-//		case 20:
-//			return R.drawable.hero_20;
-//		case 21:
-//			return R.drawable.hero_21;
-//		case 22:
-//			return R.drawable.hero_22;
-//		case 23:
-//			return R.drawable.hero_23;
-//		case 25:
-//			return R.drawable.hero_25;
-//		case 26:
-//			return R.drawable.hero_26;
-//		case 27:
-//			return R.drawable.hero_27;
-//		case 28:
-//			return R.drawable.hero_28;
-//		case 29:
-//			return R.drawable.hero_29;
-//		case 30:
-//			return R.drawable.hero_30;
-//		case 31:
-//			return R.drawable.hero_31;
-//		case 32:
-//			return R.drawable.hero_32;
-//		case 33:
-//			return R.drawable.hero_33;
-//		case 34:
-//			return R.drawable.hero_34;
-//		case 35:
-//			return R.drawable.hero_35;
-//		case 36:
-//			return R.drawable.hero_36;
-//		case 37:
-//			return R.drawable.hero_37;
-//		case 38:
-//			return R.drawable.hero_38;
-//		case 39:
-//			return R.drawable.hero_39;
-//		case 40:
-//			return R.drawable.hero_40;
-//		case 41:
-//			return R.drawable.hero_41;
-//		case 42:
-//			return R.drawable.hero_42;
-//		case 43:
-//			return R.drawable.hero_43;
-//		case 44:
-//			return R.drawable.hero_44;
-//		case 45:
-//			return R.drawable.hero_45;
-//		case 46:
-//			return R.drawable.hero_46;
-//		case 47:
-//			return R.drawable.hero_47;
-//		case 48:
-//			return R.drawable.hero_48;
-//		case 49:
-//			return R.drawable.hero_49;
-//		case 50:
-//			return R.drawable.hero_50;
-//		case 51:
-//			return R.drawable.hero_51;
-//		case 52:
-//			return R.drawable.hero_52;
-//		case 53:
-//			return R.drawable.hero_53;
-//		case 54:
-//			return R.drawable.hero_54;
-//		case 55:
-//			return R.drawable.hero_55;
-//		case 56:
-//			return R.drawable.hero_56;
-//		case 57:
-//			return R.drawable.hero_57;
-//		case 58:
-//			return R.drawable.hero_58;
-//		case 59:
-//			return R.drawable.hero_59;
-//		case 60:
-//			return R.drawable.hero_60;
-//		case 61:
-//			return R.drawable.hero_61;
-//		case 62:
-//			return R.drawable.hero_62;
-//		case 63:
-//			return R.drawable.hero_63;
-//		case 64:
-//			return R.drawable.hero_64;
-//		case 65:
-//			return R.drawable.hero_65;
-//		case 66:
-//			return R.drawable.hero_66;
-//
-//		case 67:
-//			return R.drawable.hero_67;
-//
-//		case 68:
-//			return R.drawable.hero_68;
-//
-//		case 69:
-//			return R.drawable.hero_69;
-//
-//		case 70:
-//			return R.drawable.hero_70;
-//
-//		case 71:
-//			return R.drawable.hero_71;
-//
-//		case 72:
-//			return R.drawable.hero_72;
-//
-//		case 73:
-//			return R.drawable.hero_73;
-//
-//		case 74:
-//			return R.drawable.hero_74;
-//
-//		case 75:
-//			return R.drawable.hero_75;
-//
-//		case 76:
-//			return R.drawable.hero_76;
-//
-//		case 77:
-//			return R.drawable.hero_77;
-//
-//		case 78:
-//			return R.drawable.hero_78;
-//
-//		case 79:
-//			return R.drawable.hero_79;
-//
-//		case 80:
-//			return R.drawable.hero_80;
-//
-//		case 81:
-//			return R.drawable.hero_81;
-//
-//		case 82:
-//			return R.drawable.hero_82;
-//
-//		case 83:
-//			return R.drawable.hero_83;
-//
-//		case 84:
-//			return R.drawable.hero_84;
-//
-//		case 85:
-//			return R.drawable.hero_85;
-//
-//		case 86:
-//			return R.drawable.hero_86;
-//
-//		case 87:
-//			return R.drawable.hero_87;
-//
-//		case 88:
-//			return R.drawable.hero_88;
-//
-//		case 89:
-//			return R.drawable.hero_89;
-//
-//		case 90:
-//			return R.drawable.hero_90;
-//
-//		case 91:
-//			return R.drawable.hero_91;
-//
-//		case 92:
-//			return R.drawable.hero_92;
-//
-//		case 93:
-//			return R.drawable.hero_93;
-//
-//		case 94:
-//			return R.drawable.hero_94;
-//
-//		case 95:
-//			return R.drawable.hero_95;
-//
-//		case 96:
-//			return R.drawable.hero_96;
-//
-//		case 97:
-//			return R.drawable.hero_97;
-//
-//		case 98:
-//			return R.drawable.hero_98;
-//
-//		case 99:
-//			return R.drawable.hero_99;
-//
-//		case 100:
-//			return R.drawable.hero_100;
-//
-//		case 101:
-//			return R.drawable.hero_101;
-//
-//		case 102:
-//			return R.drawable.hero_102;
-//
-//		case 103:
-//			return R.drawable.hero_103;
-//		case 104:
-//			return R.drawable.hero_104;
-//		case 105:
-//			return R.drawable.hero_105;
-//		case 106:
-//			return R.drawable.hero_106;
-//		case 107:
-//			return R.drawable.hero_107;
-//		case 109:
-//			return R.drawable.hero_109;
-//		case 110:
-//			return R.drawable.hero_110;
-//		default:
-//			return R.drawable.hero_103;
-//
-//		}
-//	}
+	// public static int getHeroDrawableId(int ID) {
+	// switch (ID) {
+	// case 1:
+	// return R.drawable.hero_1;
+	// case 2:
+	// return R.drawable.hero_2;
+	// case 3:
+	// return R.drawable.hero_3;
+	// case 4:
+	// return R.drawable.hero_4;
+	// case 5:
+	// return R.drawable.hero_5;
+	// case 6:
+	// return R.drawable.hero_6;
+	// case 7:
+	// return R.drawable.hero_7;
+	// case 8:
+	// return R.drawable.hero_8;
+	// case 9:
+	// return R.drawable.hero_9;
+	// case 10:
+	// return R.drawable.hero_10;
+	// case 11:
+	// return R.drawable.hero_11;
+	// case 12:
+	// return R.drawable.hero_12;
+	// case 13:
+	// return R.drawable.hero_13;
+	// case 14:
+	// return R.drawable.hero_14;
+	// case 15:
+	// return R.drawable.hero_15;
+	// case 16:
+	// return R.drawable.hero_16;
+	// case 17:
+	// return R.drawable.hero_17;
+	// case 18:
+	// return R.drawable.hero_18;
+	// case 19:
+	// return R.drawable.hero_19;
+	// case 20:
+	// return R.drawable.hero_20;
+	// case 21:
+	// return R.drawable.hero_21;
+	// case 22:
+	// return R.drawable.hero_22;
+	// case 23:
+	// return R.drawable.hero_23;
+	// case 25:
+	// return R.drawable.hero_25;
+	// case 26:
+	// return R.drawable.hero_26;
+	// case 27:
+	// return R.drawable.hero_27;
+	// case 28:
+	// return R.drawable.hero_28;
+	// case 29:
+	// return R.drawable.hero_29;
+	// case 30:
+	// return R.drawable.hero_30;
+	// case 31:
+	// return R.drawable.hero_31;
+	// case 32:
+	// return R.drawable.hero_32;
+	// case 33:
+	// return R.drawable.hero_33;
+	// case 34:
+	// return R.drawable.hero_34;
+	// case 35:
+	// return R.drawable.hero_35;
+	// case 36:
+	// return R.drawable.hero_36;
+	// case 37:
+	// return R.drawable.hero_37;
+	// case 38:
+	// return R.drawable.hero_38;
+	// case 39:
+	// return R.drawable.hero_39;
+	// case 40:
+	// return R.drawable.hero_40;
+	// case 41:
+	// return R.drawable.hero_41;
+	// case 42:
+	// return R.drawable.hero_42;
+	// case 43:
+	// return R.drawable.hero_43;
+	// case 44:
+	// return R.drawable.hero_44;
+	// case 45:
+	// return R.drawable.hero_45;
+	// case 46:
+	// return R.drawable.hero_46;
+	// case 47:
+	// return R.drawable.hero_47;
+	// case 48:
+	// return R.drawable.hero_48;
+	// case 49:
+	// return R.drawable.hero_49;
+	// case 50:
+	// return R.drawable.hero_50;
+	// case 51:
+	// return R.drawable.hero_51;
+	// case 52:
+	// return R.drawable.hero_52;
+	// case 53:
+	// return R.drawable.hero_53;
+	// case 54:
+	// return R.drawable.hero_54;
+	// case 55:
+	// return R.drawable.hero_55;
+	// case 56:
+	// return R.drawable.hero_56;
+	// case 57:
+	// return R.drawable.hero_57;
+	// case 58:
+	// return R.drawable.hero_58;
+	// case 59:
+	// return R.drawable.hero_59;
+	// case 60:
+	// return R.drawable.hero_60;
+	// case 61:
+	// return R.drawable.hero_61;
+	// case 62:
+	// return R.drawable.hero_62;
+	// case 63:
+	// return R.drawable.hero_63;
+	// case 64:
+	// return R.drawable.hero_64;
+	// case 65:
+	// return R.drawable.hero_65;
+	// case 66:
+	// return R.drawable.hero_66;
+	//
+	// case 67:
+	// return R.drawable.hero_67;
+	//
+	// case 68:
+	// return R.drawable.hero_68;
+	//
+	// case 69:
+	// return R.drawable.hero_69;
+	//
+	// case 70:
+	// return R.drawable.hero_70;
+	//
+	// case 71:
+	// return R.drawable.hero_71;
+	//
+	// case 72:
+	// return R.drawable.hero_72;
+	//
+	// case 73:
+	// return R.drawable.hero_73;
+	//
+	// case 74:
+	// return R.drawable.hero_74;
+	//
+	// case 75:
+	// return R.drawable.hero_75;
+	//
+	// case 76:
+	// return R.drawable.hero_76;
+	//
+	// case 77:
+	// return R.drawable.hero_77;
+	//
+	// case 78:
+	// return R.drawable.hero_78;
+	//
+	// case 79:
+	// return R.drawable.hero_79;
+	//
+	// case 80:
+	// return R.drawable.hero_80;
+	//
+	// case 81:
+	// return R.drawable.hero_81;
+	//
+	// case 82:
+	// return R.drawable.hero_82;
+	//
+	// case 83:
+	// return R.drawable.hero_83;
+	//
+	// case 84:
+	// return R.drawable.hero_84;
+	//
+	// case 85:
+	// return R.drawable.hero_85;
+	//
+	// case 86:
+	// return R.drawable.hero_86;
+	//
+	// case 87:
+	// return R.drawable.hero_87;
+	//
+	// case 88:
+	// return R.drawable.hero_88;
+	//
+	// case 89:
+	// return R.drawable.hero_89;
+	//
+	// case 90:
+	// return R.drawable.hero_90;
+	//
+	// case 91:
+	// return R.drawable.hero_91;
+	//
+	// case 92:
+	// return R.drawable.hero_92;
+	//
+	// case 93:
+	// return R.drawable.hero_93;
+	//
+	// case 94:
+	// return R.drawable.hero_94;
+	//
+	// case 95:
+	// return R.drawable.hero_95;
+	//
+	// case 96:
+	// return R.drawable.hero_96;
+	//
+	// case 97:
+	// return R.drawable.hero_97;
+	//
+	// case 98:
+	// return R.drawable.hero_98;
+	//
+	// case 99:
+	// return R.drawable.hero_99;
+	//
+	// case 100:
+	// return R.drawable.hero_100;
+	//
+	// case 101:
+	// return R.drawable.hero_101;
+	//
+	// case 102:
+	// return R.drawable.hero_102;
+	//
+	// case 103:
+	// return R.drawable.hero_103;
+	// case 104:
+	// return R.drawable.hero_104;
+	// case 105:
+	// return R.drawable.hero_105;
+	// case 106:
+	// return R.drawable.hero_106;
+	// case 107:
+	// return R.drawable.hero_107;
+	// case 109:
+	// return R.drawable.hero_109;
+	// case 110:
+	// return R.drawable.hero_110;
+	// default:
+	// return R.drawable.hero_103;
+	//
+	// }
+	// }
 
-//	public static void setHeroIcon(Context _caller, int ID, ImageView itemBg) {
-//		switch (ID) {
-//		case 1:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_1));
-//			break;
-//		case 2:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_2));
-//			break;
-//		case 3:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_3));
-//			break;
-//		case 4:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_4));
-//			break;
-//		case 5:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_5));
-//			break;
-//		case 6:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_6));
-//			break;
-//		case 7:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_7));
-//			break;
-//		case 8:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_8));
-//			break;
-//		case 9:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_9));
-//			break;
-//		case 10:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_10));
-//			break;
-//		case 11:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_11));
-//			break;
-//		case 12:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_12));
-//			break;
-//		case 13:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_13));
-//			break;
-//		case 14:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_14));
-//			break;
-//		case 15:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_15));
-//			break;
-//		case 16:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_16));
-//			break;
-//		case 17:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_17));
-//			break;
-//		case 18:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_18));
-//			break;
-//		case 19:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_19));
-//			break;
-//		case 20:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_20));
-//			break;
-//		case 21:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_21));
-//			break;
-//		case 22:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_22));
-//			break;
-//		case 23:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_23));
-//			break;
-//		case 25:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_25));
-//			break;
-//		case 26:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_26));
-//			break;
-//		case 27:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_27));
-//			break;
-//		case 28:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_28));
-//			break;
-//		case 29:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_29));
-//			break;
-//		case 30:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_30));
-//			break;
-//		case 31:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_31));
-//			break;
-//		case 32:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_32));
-//			break;
-//		case 33:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_33));
-//			break;
-//		case 34:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_34));
-//			break;
-//		case 35:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_35));
-//			break;
-//		case 36:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_36));
-//			break;
-//		case 37:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_37));
-//			break;
-//		case 38:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_38));
-//			break;
-//		case 39:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_39));
-//			break;
-//		case 40:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_40));
-//			break;
-//		case 41:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_41));
-//			break;
-//		case 42:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_42));
-//			break;
-//		case 43:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_43));
-//			break;
-//		case 44:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_44));
-//			break;
-//		case 45:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_45));
-//			break;
-//		case 46:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_46));
-//			break;
-//		case 47:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_47));
-//			break;
-//		case 48:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_48));
-//			break;
-//		case 49:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_49));
-//			break;
-//		case 50:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_50));
-//			break;
-//		case 51:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_51));
-//			break;
-//		case 52:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_52));
-//			break;
-//		case 53:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_53));
-//			break;
-//		case 54:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_54));
-//			break;
-//		case 55:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_55));
-//			break;
-//		case 56:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_56));
-//			break;
-//		case 57:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_57));
-//			break;
-//		case 58:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_58));
-//			break;
-//		case 59:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_59));
-//			break;
-//		case 60:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_60));
-//			break;
-//		case 61:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_61));
-//			break;
-//		case 62:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_62));
-//			break;
-//		case 63:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_63));
-//			break;
-//		case 64:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_64));
-//			break;
-//		case 65:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_65));
-//			break;
-//		case 66:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_66));
-//			break;
-//		case 67:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_67));
-//			break;
-//		case 68:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_68));
-//			break;
-//		case 69:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_69));
-//			break;
-//		case 70:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_70));
-//			break;
-//		case 71:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_71));
-//			break;
-//		case 72:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_72));
-//			break;
-//		case 73:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_73));
-//			break;
-//		case 74:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_74));
-//			break;
-//		case 75:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_75));
-//			break;
-//		case 76:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_76));
-//			break;
-//		case 77:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_77));
-//			break;
-//		case 78:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_78));
-//			break;
-//		case 79:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_79));
-//			break;
-//		case 80:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_80));
-//			break;
-//		case 81:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_81));
-//			break;
-//		case 82:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_82));
-//			break;
-//		case 83:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_83));
-//			break;
-//		case 84:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_84));
-//			break;
-//		case 85:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_85));
-//			break;
-//		case 86:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_86));
-//			break;
-//		case 87:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_87));
-//			break;
-//		case 88:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_88));
-//			break;
-//		case 89:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_89));
-//			break;
-//		case 90:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_90));
-//			break;
-//		case 91:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_91));
-//			break;
-//		case 92:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_92));
-//			break;
-//		case 93:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_93));
-//			break;
-//		case 94:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_94));
-//			break;
-//		case 95:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_95));
-//			break;
-//		case 96:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_96));
-//			break;
-//		case 97:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_97));
-//			break;
-//		case 98:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_98));
-//			break;
-//		case 99:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_99));
-//			break;
-//		case 100:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_100));
-//			break;
-//		case 101:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_101));
-//			break;
-//		case 102:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_102));
-//			break;
-//		case 103:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_103));
-//			break;
-//		case 104:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_104));
-//			break;
-//		case 105:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_105));
-//			break;
-//		case 106:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_106));
-//			break;
-//		case 107:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_107));
-//			break;
-//		case 109:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_109));
-//			break;
-//		case 110:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hero_110));
-//			break;
-//		case 0:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.default_pic));
-//			break;
-//		default:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.default_pic));
-//			break;
-//		}
-//	}
+	// public static void setHeroIcon(Context _caller, int ID, ImageView itemBg)
+	// {
+	// switch (ID) {
+	// case 1:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_1));
+	// break;
+	// case 2:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_2));
+	// break;
+	// case 3:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_3));
+	// break;
+	// case 4:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_4));
+	// break;
+	// case 5:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_5));
+	// break;
+	// case 6:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_6));
+	// break;
+	// case 7:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_7));
+	// break;
+	// case 8:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_8));
+	// break;
+	// case 9:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_9));
+	// break;
+	// case 10:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_10));
+	// break;
+	// case 11:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_11));
+	// break;
+	// case 12:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_12));
+	// break;
+	// case 13:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_13));
+	// break;
+	// case 14:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_14));
+	// break;
+	// case 15:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_15));
+	// break;
+	// case 16:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_16));
+	// break;
+	// case 17:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_17));
+	// break;
+	// case 18:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_18));
+	// break;
+	// case 19:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_19));
+	// break;
+	// case 20:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_20));
+	// break;
+	// case 21:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_21));
+	// break;
+	// case 22:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_22));
+	// break;
+	// case 23:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_23));
+	// break;
+	// case 25:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_25));
+	// break;
+	// case 26:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_26));
+	// break;
+	// case 27:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_27));
+	// break;
+	// case 28:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_28));
+	// break;
+	// case 29:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_29));
+	// break;
+	// case 30:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_30));
+	// break;
+	// case 31:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_31));
+	// break;
+	// case 32:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_32));
+	// break;
+	// case 33:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_33));
+	// break;
+	// case 34:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_34));
+	// break;
+	// case 35:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_35));
+	// break;
+	// case 36:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_36));
+	// break;
+	// case 37:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_37));
+	// break;
+	// case 38:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_38));
+	// break;
+	// case 39:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_39));
+	// break;
+	// case 40:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_40));
+	// break;
+	// case 41:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_41));
+	// break;
+	// case 42:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_42));
+	// break;
+	// case 43:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_43));
+	// break;
+	// case 44:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_44));
+	// break;
+	// case 45:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_45));
+	// break;
+	// case 46:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_46));
+	// break;
+	// case 47:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_47));
+	// break;
+	// case 48:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_48));
+	// break;
+	// case 49:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_49));
+	// break;
+	// case 50:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_50));
+	// break;
+	// case 51:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_51));
+	// break;
+	// case 52:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_52));
+	// break;
+	// case 53:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_53));
+	// break;
+	// case 54:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_54));
+	// break;
+	// case 55:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_55));
+	// break;
+	// case 56:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_56));
+	// break;
+	// case 57:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_57));
+	// break;
+	// case 58:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_58));
+	// break;
+	// case 59:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_59));
+	// break;
+	// case 60:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_60));
+	// break;
+	// case 61:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_61));
+	// break;
+	// case 62:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_62));
+	// break;
+	// case 63:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_63));
+	// break;
+	// case 64:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_64));
+	// break;
+	// case 65:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_65));
+	// break;
+	// case 66:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_66));
+	// break;
+	// case 67:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_67));
+	// break;
+	// case 68:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_68));
+	// break;
+	// case 69:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_69));
+	// break;
+	// case 70:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_70));
+	// break;
+	// case 71:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_71));
+	// break;
+	// case 72:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_72));
+	// break;
+	// case 73:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_73));
+	// break;
+	// case 74:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_74));
+	// break;
+	// case 75:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_75));
+	// break;
+	// case 76:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_76));
+	// break;
+	// case 77:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_77));
+	// break;
+	// case 78:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_78));
+	// break;
+	// case 79:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_79));
+	// break;
+	// case 80:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_80));
+	// break;
+	// case 81:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_81));
+	// break;
+	// case 82:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_82));
+	// break;
+	// case 83:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_83));
+	// break;
+	// case 84:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_84));
+	// break;
+	// case 85:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_85));
+	// break;
+	// case 86:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_86));
+	// break;
+	// case 87:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_87));
+	// break;
+	// case 88:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_88));
+	// break;
+	// case 89:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_89));
+	// break;
+	// case 90:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_90));
+	// break;
+	// case 91:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_91));
+	// break;
+	// case 92:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_92));
+	// break;
+	// case 93:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_93));
+	// break;
+	// case 94:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_94));
+	// break;
+	// case 95:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_95));
+	// break;
+	// case 96:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_96));
+	// break;
+	// case 97:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_97));
+	// break;
+	// case 98:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_98));
+	// break;
+	// case 99:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_99));
+	// break;
+	// case 100:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_100));
+	// break;
+	// case 101:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_101));
+	// break;
+	// case 102:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_102));
+	// break;
+	// case 103:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_103));
+	// break;
+	// case 104:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_104));
+	// break;
+	// case 105:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_105));
+	// break;
+	// case 106:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_106));
+	// break;
+	// case 107:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_107));
+	// break;
+	// case 109:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_109));
+	// break;
+	// case 110:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hero_110));
+	// break;
+	// case 0:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.default_pic));
+	// break;
+	// default:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.default_pic));
+	// break;
+	// }
+	// }
 
-//	public static void setItemIcon(Context _caller, int ID, ImageView itemBg) {
-//		switch (ID) {
-//		case 1:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.blink));
-//			break;
-//		case 2:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.blades_of_attack));
-//			break;
-//		case 3:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.broadsword));
-//			break;
-//		case 4:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.chainmail));
-//			break;
-//		case 5:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.claymore));
-//			break;
-//		case 6:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.helm_of_iron_will));
-//			break;
-//		case 7:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.javelin));
-//			break;
-//		case 8:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.mithril_hammer));
-//			break;
-//		case 9:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.platemail));
-//			break;
-//		case 10:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.quarterstaff));
-//			break;
-//		case 11:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.quelling_blade));
-//			break;
-//		case 12:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.ring_of_protection));
-//			break;
-//		case 13:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.gauntlets));
-//			break;
-//		case 14:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.slippers));
-//			break;
-//		case 15:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.mantle));
-//			break;
-//		case 16:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.branches));
-//			break;
-//		case 17:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.belt_of_strength));
-//			break;
-//		case 18:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.boots_of_elves));
-//			break;
-//		case 19:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.robe));
-//			break;
-//		case 20:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.circlet));
-//			break;
-//		case 21:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.ogre_axe));
-//			break;
-//		case 22:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.blade_of_alacrity));
-//			break;
-//		case 23:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.staff_of_wizardry));
-//			break;
-//		case 24:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.ultimate_orb));
-//			break;
-//		case 25:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.gloves));
-//			break;
-//		case 26:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.lifesteal));
-//			break;
-//		case 27:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.ring_of_regen));
-//			break;
-//		case 28:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.sobi_mask));
-//			break;
-//		case 29:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.boots));
-//			break;
-//		case 30:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.gem));
-//			break;
-//		case 31:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.cloak));
-//			break;
-//		case 32:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.talisman_of_evasion));
-//			break;
-//		case 33:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.cheese));
-//			break;
-//		case 34:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.magic_stick));
-//			break;
-//		case 35:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.magic_wand));
-//			break;
-//		case 36:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.magic_wand));
-//			break;
-//		case 37:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.ghost));
-//			break;
-//		case 38:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.clarity));
-//			break;
-//		case 39:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.flask));
-//			break;
-//		case 40:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.dust));
-//			break;
-//		case 41:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.bottle));
-//			break;
-//		case 42:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.ward_observer));
-//			break;
-//		case 43:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.ward_sentry));
-//			break;
-//		case 44:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.tango));
-//			break;
-//		case 45:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.courier));
-//			break;
-//		case 46:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.tpscroll));
-//			break;
-//		case 47:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.travel_boots));
-//			break;
-//		case 48:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.travel_boots));
-//			break;
-//		case 49:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.phase_boots));
-//			break;
-//		case 50:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.phase_boots));
-//			break;
-//		case 51:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.demon_edge));
-//			break;
-//		case 52:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.eagle));
-//			break;
-//		case 53:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.reaver));
-//			break;
-//		case 54:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.relic));
-//			break;
-//		case 55:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hyperstone));
-//			break;
-//		case 56:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.ring_of_health));
-//			break;
-//		case 57:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.void_stone));
-//			break;
-//		case 58:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.mystic_staff));
-//			break;
-//		case 59:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.energy_booster));
-//			break;
-//		case 60:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.point_booster));
-//			break;
-//		case 61:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.vitality_booster));
-//			break;
-//		case 62:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.power_treads));
-//			break;
-//		case 63:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.power_treads));
-//			break;
-//		case 64:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hand_of_midas));
-//			break;
-//		case 65:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hand_of_midas));
-//			break;
-//		case 66:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.oblivion_staff));
-//			break;
-//		case 67:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.oblivion_staff));
-//			break;
-//		case 68:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.pers));
-//			break;
-//		case 69:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.pers));
-//			break;
-//		case 70:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.poor_mans_shield));
-//			break;
-//		case 71:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.poor_mans_shield));
-//			break;
-//		case 72:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.bracer));
-//			break;
-//		case 73:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.bracer));
-//			break;
-//		case 74:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.wraith_band));
-//			break;
-//		case 75:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.wraith_band));
-//			break;
-//		case 76:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.null_talisman));
-//			break;
-//		case 77:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.null_talisman));
-//			break;
-//		case 78:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.mekansm));
-//			break;
-//		case 79:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.mekansm));
-//			break;
-//		case 80:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.vladmir));
-//			break;
-//		case 81:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.vladmir));
-//			break;
-//		case 84:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.flying_courier));
-//			break;
-//		case 85:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.buckler));
-//			break;
-//		case 86:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.buckler));
-//			break;
-//		case 87:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.ring_of_basilius));
-//			break;
-//		case 88:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.ring_of_basilius));
-//			break;
-//		case 89:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.pipe));
-//			break;
-//		case 90:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.pipe));
-//			break;
-//		case 91:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.urn_of_shadows));
-//			break;
-//		case 92:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.urn_of_shadows));
-//			break;
-//		case 93:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.headdress));
-//			break;
-//		case 94:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.headdress));
-//			break;
-//		case 95:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.sheepstick));
-//			break;
-//		case 96:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.sheepstick));
-//			break;
-//		case 97:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.orchid));
-//			break;
-//		case 98:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.orchid));
-//			break;
-//		case 99:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.cyclone));
-//			break;
-//		case 100:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.cyclone));
-//			break;
-//		case 101:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.force_staff));
-//			break;
-//		case 102:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.force_staff));
-//			break;
-//		case 103:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.dagon));
-//			break;
-//		case 197:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.dagon_2));
-//			break;
-//		case 198:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.dagon_3));
-//			break;
-//		case 199:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.dagon_4));
-//			break;
-//		case 200:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.dagon_5));
-//			break;
-//		case 104:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.dagon));
-//			break;
-//		case 201:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.dagon_2));
-//			break;
-//		case 202:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.dagon_3));
-//			break;
-//		case 203:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.dagon_4));
-//			break;
-//		case 204:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.dagon_5));
-//			break;
-//		case 105:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.necronomicon));
-//			break;
-//		case 191:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.necronomicon_2));
-//			break;
-//		case 192:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.necronomicon_3));
-//			break;
-//		case 106:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.necronomicon));
-//			break;
-//		case 193:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.necronomicon_2));
-//			break;
-//		case 194:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.necronomicon_3));
-//			break;
-//		case 107:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.ultimate_scepter));
-//			break;
-//		case 108:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.ultimate_scepter));
-//			break;
-//		case 109:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.refresher));
-//			break;
-//		case 110:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.refresher));
-//			break;
-//		case 111:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.assault));
-//			break;
-//		case 112:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.assault));
-//			break;
-//		case 113:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.heart));
-//			break;
-//		case 114:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.heart));
-//			break;
-//		case 115:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.black_king_bar));
-//			break;
-//		case 116:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.black_king_bar));
-//			break;
-//		case 117:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.aegis));
-//			break;
-//		case 118:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.shivas_guard));
-//			break;
-//		case 119:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.shivas_guard));
-//			break;
-//		case 120:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.bloodstone));
-//			break;
-//		case 121:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.bloodstone));
-//			break;
-//		case 122:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.sphere));
-//			break;
-//		case 123:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.sphere));
-//			break;
-//		case 124:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.vanguard));
-//			break;
-//		case 125:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.vanguard));
-//			break;
-//		case 126:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.blade_mail));
-//			break;
-//		case 127:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.blade_mail));
-//			break;
-//		case 128:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.soul_booster));
-//			break;
-//		case 129:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.soul_booster));
-//			break;
-//		case 130:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hood_of_defiance));
-//			break;
-//		case 131:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.hood_of_defiance));
-//			break;
-//		case 132:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.rapier));
-//			break;
-//		case 133:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.rapier));
-//			break;
-//		case 134:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.monkey_king_bar));
-//			break;
-//		case 135:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.monkey_king_bar));
-//			break;
-//		case 136:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.radiance));
-//			break;
-//		case 137:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.radiance));
-//			break;
-//		case 138:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.butterfly));
-//			break;
-//		case 139:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.butterfly));
-//			break;
-//		case 140:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.greater_crit));
-//			break;
-//		case 141:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.greater_crit));
-//			break;
-//		case 142:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.basher));
-//			break;
-//		case 143:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.basher));
-//			break;
-//		case 144:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.bfury));
-//			break;
-//		case 145:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.bfury));
-//			break;
-//		case 146:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.manta));
-//			break;
-//		case 147:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.manta));
-//			break;
-//		case 148:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.lesser_crit));
-//			break;
-//		case 149:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.lesser_crit));
-//			break;
-//		case 150:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.armlet));
-//			break;
-//		case 151:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.armlet));
-//			break;
-//		case 183:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.invis_sword));
-//			break;
-//		case 152:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.invis_sword));
-//			break;
-//		case 153:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.sange_and_yasha));
-//			break;
-//		case 154:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.sange_and_yasha));
-//			break;
-//		case 155:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.satanic));
-//			break;
-//		case 156:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.satanic));
-//			break;
-//		case 157:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.mjollnir));
-//			break;
-//		case 158:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.mjollnir));
-//			break;
-//		case 159:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.skadi));
-//			break;
-//		case 160:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.skadi));
-//			break;
-//		case 161:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.sange));
-//			break;
-//		case 162:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.sange));
-//			break;
-//		case 163:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.helm_of_the_dominator));
-//			break;
-//		case 164:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.helm_of_the_dominator));
-//			break;
-//		case 165:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.maelstrom));
-//			break;
-//		case 166:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.maelstrom));
-//			break;
-//		case 167:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.desolator));
-//			break;
-//		case 168:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.desolator));
-//			break;
-//		case 169:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.yasha));
-//			break;
-//		case 170:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.yasha));
-//			break;
-//		case 171:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.mask_of_madness));
-//			break;
-//		case 172:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.mask_of_madness));
-//			break;
-//		case 173:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.diffusal_blade));
-//			break;
-//		case 174:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.diffusal_blade));
-//			break;
-//		case 195:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.diffusal_blade_2));
-//			break;
-//		case 196:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.diffusal_blade_2));
-//			break;
-//		case 175:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.ethereal_blade));
-//			break;
-//		case 176:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.ethereal_blade));
-//			break;
-//		case 177:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.soul_ring));
-//			break;
-//		case 178:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.soul_ring));
-//			break;
-//		case 179:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.arcane_boots));
-//			break;
-//		case 180:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.arcane_boots));
-//			break;
-//		case 181:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.orb_of_venom));
-//			break;
-//		case 184:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.ancient_janggo));
-//			break;
-//		case 185:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.ancient_janggo));
-//			break;
-//		case 186:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.medallion_of_courage));
-//			break;
-//		case 187:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.medallion_of_courage));
-//			break;
-//		case 188:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.smoke_of_deceit));
-//			break;
-//		case 189:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.veil_of_discord));
-//			break;
-//		case 190:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.veil_of_discord));
-//			break;
-//		case 205:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.rod_of_atos));
-//			break;
-//		case 206:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.rod_of_atos));
-//			break;
-//		case 207:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.abyssal_blade));
-//			break;
-//		case 208:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.abyssal_blade));
-//			break;
-//		case 209:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.heavens_halberd));
-//			break;
-//		case 210:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.heavens_halberd));
-//			break;
-//		case 211:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.ring_of_aquila));
-//			break;
-//		case 212:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.ring_of_aquila));
-//			break;
-//		case 213:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.tranquil_boots));
-//			break;
-//		case 214:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.tranquil_boots));
-//			break;
-//		case 215:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.shadow_amulet));
-//			break;
-//		case 216:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.halloween_candy_corn));
-//			break;
-//		case 217:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.mystery_hook));
-//			break;
-//		case 218:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.mystery_arrow));
-//			break;
-//		case 219:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.mystery_missile));
-//			break;
-//		case 220:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.mystery_toss));
-//			break;
-//		case 221:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.mystery_vacuum));
-//			break;
-//		case 226:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.halloween_rapier));
-//			break;
-//		case 228:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.greevil_whistle));
-//			break;
-//		case 235:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.greevil_whistle_toggle));
-//			break;
-//		case 227:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.present));
-//			break;
-//		case 229:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.winter_stocking));
-//			break;
-//		case 230:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.winter_skates));
-//			break;
-//		case 231:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.winter_cake));
-//			break;
-//		case 232:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.winter_cookie));
-//			break;
-//		case 233:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.winter_coco));
-//			break;
-//		case 234:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.winter_ham));
-//			break;
-//		case 236:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.winter_kringle));
-//			break;
-//		case 237:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.winter_mushroom));
-//			break;
-//		case 238:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.winter_greevil_treat));
-//			break;
-//		case 239:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.winter_greevil_garbage));
-//			break;
-//		case 240:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.winter_greevil_chewy));
-//			break;
-//		case 182:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.stout_shield));
-//			break;
-//		case 0:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.default_item));
-//			break;
-//		default:
-//			itemBg.setImageDrawable(_caller.getResources().getDrawable(
-//					R.drawable.default_item));
-//			break;
-//		}
-//	}
+	// public static void setItemIcon(Context _caller, int ID, ImageView itemBg)
+	// {
+	// switch (ID) {
+	// case 1:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.blink));
+	// break;
+	// case 2:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.blades_of_attack));
+	// break;
+	// case 3:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.broadsword));
+	// break;
+	// case 4:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.chainmail));
+	// break;
+	// case 5:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.claymore));
+	// break;
+	// case 6:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.helm_of_iron_will));
+	// break;
+	// case 7:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.javelin));
+	// break;
+	// case 8:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.mithril_hammer));
+	// break;
+	// case 9:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.platemail));
+	// break;
+	// case 10:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.quarterstaff));
+	// break;
+	// case 11:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.quelling_blade));
+	// break;
+	// case 12:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.ring_of_protection));
+	// break;
+	// case 13:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.gauntlets));
+	// break;
+	// case 14:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.slippers));
+	// break;
+	// case 15:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.mantle));
+	// break;
+	// case 16:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.branches));
+	// break;
+	// case 17:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.belt_of_strength));
+	// break;
+	// case 18:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.boots_of_elves));
+	// break;
+	// case 19:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.robe));
+	// break;
+	// case 20:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.circlet));
+	// break;
+	// case 21:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.ogre_axe));
+	// break;
+	// case 22:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.blade_of_alacrity));
+	// break;
+	// case 23:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.staff_of_wizardry));
+	// break;
+	// case 24:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.ultimate_orb));
+	// break;
+	// case 25:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.gloves));
+	// break;
+	// case 26:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.lifesteal));
+	// break;
+	// case 27:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.ring_of_regen));
+	// break;
+	// case 28:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.sobi_mask));
+	// break;
+	// case 29:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.boots));
+	// break;
+	// case 30:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.gem));
+	// break;
+	// case 31:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.cloak));
+	// break;
+	// case 32:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.talisman_of_evasion));
+	// break;
+	// case 33:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.cheese));
+	// break;
+	// case 34:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.magic_stick));
+	// break;
+	// case 35:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.magic_wand));
+	// break;
+	// case 36:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.magic_wand));
+	// break;
+	// case 37:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.ghost));
+	// break;
+	// case 38:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.clarity));
+	// break;
+	// case 39:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.flask));
+	// break;
+	// case 40:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.dust));
+	// break;
+	// case 41:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.bottle));
+	// break;
+	// case 42:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.ward_observer));
+	// break;
+	// case 43:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.ward_sentry));
+	// break;
+	// case 44:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.tango));
+	// break;
+	// case 45:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.courier));
+	// break;
+	// case 46:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.tpscroll));
+	// break;
+	// case 47:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.travel_boots));
+	// break;
+	// case 48:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.travel_boots));
+	// break;
+	// case 49:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.phase_boots));
+	// break;
+	// case 50:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.phase_boots));
+	// break;
+	// case 51:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.demon_edge));
+	// break;
+	// case 52:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.eagle));
+	// break;
+	// case 53:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.reaver));
+	// break;
+	// case 54:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.relic));
+	// break;
+	// case 55:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hyperstone));
+	// break;
+	// case 56:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.ring_of_health));
+	// break;
+	// case 57:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.void_stone));
+	// break;
+	// case 58:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.mystic_staff));
+	// break;
+	// case 59:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.energy_booster));
+	// break;
+	// case 60:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.point_booster));
+	// break;
+	// case 61:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.vitality_booster));
+	// break;
+	// case 62:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.power_treads));
+	// break;
+	// case 63:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.power_treads));
+	// break;
+	// case 64:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hand_of_midas));
+	// break;
+	// case 65:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hand_of_midas));
+	// break;
+	// case 66:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.oblivion_staff));
+	// break;
+	// case 67:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.oblivion_staff));
+	// break;
+	// case 68:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.pers));
+	// break;
+	// case 69:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.pers));
+	// break;
+	// case 70:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.poor_mans_shield));
+	// break;
+	// case 71:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.poor_mans_shield));
+	// break;
+	// case 72:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.bracer));
+	// break;
+	// case 73:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.bracer));
+	// break;
+	// case 74:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.wraith_band));
+	// break;
+	// case 75:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.wraith_band));
+	// break;
+	// case 76:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.null_talisman));
+	// break;
+	// case 77:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.null_talisman));
+	// break;
+	// case 78:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.mekansm));
+	// break;
+	// case 79:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.mekansm));
+	// break;
+	// case 80:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.vladmir));
+	// break;
+	// case 81:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.vladmir));
+	// break;
+	// case 84:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.flying_courier));
+	// break;
+	// case 85:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.buckler));
+	// break;
+	// case 86:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.buckler));
+	// break;
+	// case 87:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.ring_of_basilius));
+	// break;
+	// case 88:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.ring_of_basilius));
+	// break;
+	// case 89:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.pipe));
+	// break;
+	// case 90:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.pipe));
+	// break;
+	// case 91:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.urn_of_shadows));
+	// break;
+	// case 92:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.urn_of_shadows));
+	// break;
+	// case 93:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.headdress));
+	// break;
+	// case 94:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.headdress));
+	// break;
+	// case 95:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.sheepstick));
+	// break;
+	// case 96:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.sheepstick));
+	// break;
+	// case 97:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.orchid));
+	// break;
+	// case 98:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.orchid));
+	// break;
+	// case 99:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.cyclone));
+	// break;
+	// case 100:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.cyclone));
+	// break;
+	// case 101:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.force_staff));
+	// break;
+	// case 102:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.force_staff));
+	// break;
+	// case 103:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.dagon));
+	// break;
+	// case 197:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.dagon_2));
+	// break;
+	// case 198:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.dagon_3));
+	// break;
+	// case 199:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.dagon_4));
+	// break;
+	// case 200:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.dagon_5));
+	// break;
+	// case 104:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.dagon));
+	// break;
+	// case 201:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.dagon_2));
+	// break;
+	// case 202:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.dagon_3));
+	// break;
+	// case 203:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.dagon_4));
+	// break;
+	// case 204:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.dagon_5));
+	// break;
+	// case 105:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.necronomicon));
+	// break;
+	// case 191:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.necronomicon_2));
+	// break;
+	// case 192:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.necronomicon_3));
+	// break;
+	// case 106:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.necronomicon));
+	// break;
+	// case 193:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.necronomicon_2));
+	// break;
+	// case 194:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.necronomicon_3));
+	// break;
+	// case 107:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.ultimate_scepter));
+	// break;
+	// case 108:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.ultimate_scepter));
+	// break;
+	// case 109:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.refresher));
+	// break;
+	// case 110:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.refresher));
+	// break;
+	// case 111:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.assault));
+	// break;
+	// case 112:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.assault));
+	// break;
+	// case 113:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.heart));
+	// break;
+	// case 114:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.heart));
+	// break;
+	// case 115:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.black_king_bar));
+	// break;
+	// case 116:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.black_king_bar));
+	// break;
+	// case 117:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.aegis));
+	// break;
+	// case 118:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.shivas_guard));
+	// break;
+	// case 119:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.shivas_guard));
+	// break;
+	// case 120:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.bloodstone));
+	// break;
+	// case 121:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.bloodstone));
+	// break;
+	// case 122:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.sphere));
+	// break;
+	// case 123:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.sphere));
+	// break;
+	// case 124:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.vanguard));
+	// break;
+	// case 125:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.vanguard));
+	// break;
+	// case 126:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.blade_mail));
+	// break;
+	// case 127:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.blade_mail));
+	// break;
+	// case 128:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.soul_booster));
+	// break;
+	// case 129:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.soul_booster));
+	// break;
+	// case 130:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hood_of_defiance));
+	// break;
+	// case 131:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.hood_of_defiance));
+	// break;
+	// case 132:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.rapier));
+	// break;
+	// case 133:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.rapier));
+	// break;
+	// case 134:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.monkey_king_bar));
+	// break;
+	// case 135:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.monkey_king_bar));
+	// break;
+	// case 136:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.radiance));
+	// break;
+	// case 137:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.radiance));
+	// break;
+	// case 138:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.butterfly));
+	// break;
+	// case 139:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.butterfly));
+	// break;
+	// case 140:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.greater_crit));
+	// break;
+	// case 141:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.greater_crit));
+	// break;
+	// case 142:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.basher));
+	// break;
+	// case 143:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.basher));
+	// break;
+	// case 144:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.bfury));
+	// break;
+	// case 145:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.bfury));
+	// break;
+	// case 146:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.manta));
+	// break;
+	// case 147:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.manta));
+	// break;
+	// case 148:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.lesser_crit));
+	// break;
+	// case 149:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.lesser_crit));
+	// break;
+	// case 150:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.armlet));
+	// break;
+	// case 151:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.armlet));
+	// break;
+	// case 183:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.invis_sword));
+	// break;
+	// case 152:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.invis_sword));
+	// break;
+	// case 153:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.sange_and_yasha));
+	// break;
+	// case 154:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.sange_and_yasha));
+	// break;
+	// case 155:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.satanic));
+	// break;
+	// case 156:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.satanic));
+	// break;
+	// case 157:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.mjollnir));
+	// break;
+	// case 158:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.mjollnir));
+	// break;
+	// case 159:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.skadi));
+	// break;
+	// case 160:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.skadi));
+	// break;
+	// case 161:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.sange));
+	// break;
+	// case 162:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.sange));
+	// break;
+	// case 163:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.helm_of_the_dominator));
+	// break;
+	// case 164:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.helm_of_the_dominator));
+	// break;
+	// case 165:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.maelstrom));
+	// break;
+	// case 166:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.maelstrom));
+	// break;
+	// case 167:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.desolator));
+	// break;
+	// case 168:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.desolator));
+	// break;
+	// case 169:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.yasha));
+	// break;
+	// case 170:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.yasha));
+	// break;
+	// case 171:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.mask_of_madness));
+	// break;
+	// case 172:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.mask_of_madness));
+	// break;
+	// case 173:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.diffusal_blade));
+	// break;
+	// case 174:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.diffusal_blade));
+	// break;
+	// case 195:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.diffusal_blade_2));
+	// break;
+	// case 196:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.diffusal_blade_2));
+	// break;
+	// case 175:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.ethereal_blade));
+	// break;
+	// case 176:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.ethereal_blade));
+	// break;
+	// case 177:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.soul_ring));
+	// break;
+	// case 178:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.soul_ring));
+	// break;
+	// case 179:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.arcane_boots));
+	// break;
+	// case 180:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.arcane_boots));
+	// break;
+	// case 181:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.orb_of_venom));
+	// break;
+	// case 184:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.ancient_janggo));
+	// break;
+	// case 185:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.ancient_janggo));
+	// break;
+	// case 186:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.medallion_of_courage));
+	// break;
+	// case 187:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.medallion_of_courage));
+	// break;
+	// case 188:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.smoke_of_deceit));
+	// break;
+	// case 189:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.veil_of_discord));
+	// break;
+	// case 190:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.veil_of_discord));
+	// break;
+	// case 205:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.rod_of_atos));
+	// break;
+	// case 206:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.rod_of_atos));
+	// break;
+	// case 207:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.abyssal_blade));
+	// break;
+	// case 208:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.abyssal_blade));
+	// break;
+	// case 209:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.heavens_halberd));
+	// break;
+	// case 210:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.heavens_halberd));
+	// break;
+	// case 211:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.ring_of_aquila));
+	// break;
+	// case 212:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.ring_of_aquila));
+	// break;
+	// case 213:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.tranquil_boots));
+	// break;
+	// case 214:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.tranquil_boots));
+	// break;
+	// case 215:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.shadow_amulet));
+	// break;
+	// case 216:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.halloween_candy_corn));
+	// break;
+	// case 217:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.mystery_hook));
+	// break;
+	// case 218:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.mystery_arrow));
+	// break;
+	// case 219:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.mystery_missile));
+	// break;
+	// case 220:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.mystery_toss));
+	// break;
+	// case 221:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.mystery_vacuum));
+	// break;
+	// case 226:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.halloween_rapier));
+	// break;
+	// case 228:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.greevil_whistle));
+	// break;
+	// case 235:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.greevil_whistle_toggle));
+	// break;
+	// case 227:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.present));
+	// break;
+	// case 229:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.winter_stocking));
+	// break;
+	// case 230:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.winter_skates));
+	// break;
+	// case 231:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.winter_cake));
+	// break;
+	// case 232:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.winter_cookie));
+	// break;
+	// case 233:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.winter_coco));
+	// break;
+	// case 234:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.winter_ham));
+	// break;
+	// case 236:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.winter_kringle));
+	// break;
+	// case 237:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.winter_mushroom));
+	// break;
+	// case 238:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.winter_greevil_treat));
+	// break;
+	// case 239:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.winter_greevil_garbage));
+	// break;
+	// case 240:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.winter_greevil_chewy));
+	// break;
+	// case 182:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.stout_shield));
+	// break;
+	// case 0:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.default_item));
+	// break;
+	// default:
+	// itemBg.setImageDrawable(_caller.getResources().getDrawable(
+	// R.drawable.default_item));
+	// break;
+	// }
+	// }
 
 	public static String getItemName(int ID) {
 		switch (ID) {
@@ -2214,7 +2233,7 @@ public class Common {
 	 * @return
 	 */
 	public static String getHeroName(int ID) {
-		String chineseName = ID+"";
+		String chineseName = ID + "";
 		if (chineseName.equals("1"))
 			return "antimage";
 		if (chineseName.equals("2"))
@@ -2435,7 +2454,7 @@ public class Common {
 			return "oracle";
 		return "default";
 	}
-	
+
 	/**
 	 * 获取英雄英文名（获取keyName）
 	 * 

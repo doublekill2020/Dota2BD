@@ -201,12 +201,23 @@ public class ActMatchDetail extends BaseActivity {
 									for (int i = 0; i < array.length(); i++) {
 										JSONObject obj = array.getJSONObject(i);
 										PlayerInfoBean bean = new PlayerInfoBean();
-										bean.setSteamid(obj
-												.getString("steamid"));
+										bean.setCommunityState(obj
+												.getInt("communityvisibilitystate"));
+										bean.setLastlogooff(obj
+												.getString("lastlogoff"));
+										if (bean.getLastlogooff() == null) {
+											bean.setLastlogooff("1417140906");
+										}
 										bean.setMediumIcon(obj
 												.getString("avatarmedium"));
 										bean.setName(obj
 												.getString("personaname"));
+										bean.setState(obj
+												.getInt("personastate"));
+										bean.setTimecreated(obj
+												.getString("timecreated"));
+										bean.setSteamid(obj
+												.getString("steamid"));
 										// 如果是电脑
 										if (bean.getSteamid().equals(
 												"76561197960265728")) {
@@ -297,6 +308,7 @@ public class ActMatchDetail extends BaseActivity {
 								playerInfoBeans.get(j).getName());
 						bean.getPlayerInfoBeans().setMediumIcon(
 								playerInfoBeans.get(j).getMediumIcon());
+						bean.setPlayerInfoBeans(playerInfoBeans.get(j));
 						break;
 					}
 				}
