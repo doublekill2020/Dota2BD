@@ -65,8 +65,14 @@ public class ActUserStatistics extends BaseActivity implements OnClickListener {
 	@Override
 	protected void initViewAndData() {
 		// TODO Auto-generated method stub
-		bean = DotaApplication.getApplication().getData(
-				LocalDataType.PLAYER_DETAIL_INFO);
+		String type = getIntent().getStringExtra("type");
+		// other其他玩家详细数据 current当前登录玩家详细数据
+		if (type.equals("other")) {
+			bean = (PlayerInfoBean) getIntent().getSerializableExtra("data");
+		} else if (type.equals("current")) {
+			bean = DotaApplication.getApplication().getData(
+					LocalDataType.PLAYER_DETAIL_INFO);
+		}
 		beans = bean.getBeans();
 		list = bean.getList();
 		if (beans != null) {
