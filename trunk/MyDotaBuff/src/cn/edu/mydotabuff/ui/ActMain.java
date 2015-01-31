@@ -378,7 +378,6 @@ public class ActMain extends BaseActivity implements OnClickListener {
 			break;
 		case R.id.board_layout:
 			setTabSelection(2);
-			getSupportActionBar().setTitle("天梯排行榜");
 			break;
 		case R.id.chat_room:
 			mDrawerLayout.closeDrawer(Gravity.LEFT);

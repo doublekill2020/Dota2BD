@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <item
+        android:id="@+id/china"
+        android:title="中国"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/americas"
+        android:title="美洲"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/europe"
+        android:title="欧洲"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/se_asia"
+        android:title="东南亚"
+        app:showAsAction="never"/>
+
+</menu>
