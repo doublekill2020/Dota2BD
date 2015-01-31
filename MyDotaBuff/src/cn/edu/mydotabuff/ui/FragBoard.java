@@ -30,6 +30,7 @@ import cn.edu.mydotabuff.common.bean.BoardBean;
 import cn.edu.mydotabuff.common.CommAdapter;
 import cn.edu.mydotabuff.common.CommViewHolder;
 import cn.edu.mydotabuff.common.http.IInfoReceive;
+import cn.edu.mydotabuff.util.Debug;
 import cn.edu.mydotabuff.util.PersonalRequestImpl;
 import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.view.TipsToast;
@@ -140,20 +141,33 @@ public class FragBoard extends Fragment {
 		}
 	}
 
+	private void setTitle() {
+		if (defaultPage.equals("china")) {
+			toolbar.setTitle("国服天梯");
+		} else if (defaultPage.equals("americas")) {
+			toolbar.setTitle("美服天梯");
+		} else if (defaultPage.equals("se_asia")) {
+			toolbar.setTitle("东南亚天梯");
+		} else if (defaultPage.equals("europe")) {
+			toolbar.setTitle("欧服天梯");
+		}
+	}
+
+	@Override
+	public void onHiddenChanged(boolean hidden) {
+		// TODO Auto-generated method stub
+		super.onHiddenChanged(hidden);
+		if (hidden == false) {
+			setTitle();
+		}
+	}
+
 	class MyHandler extends Handler {
 		public void handleMessage(Message msg) {
 			super.handleMessage(msg);
 			switch (msg.arg1) {
 			case FETCH_BOARD:
-				if (defaultPage.equals("china")) {
-					toolbar.setTitle("国服天梯");
-				} else if (defaultPage.equals("americas")) {
-					toolbar.setTitle("美服天梯");
-				} else if (defaultPage.equals("se_asia")) {
-					toolbar.setTitle("东南亚天梯");
-				} else if (defaultPage.equals("europe")) {
-					toolbar.setTitle("欧服天梯");
-				}
+				setTitle();
 				ArrayList<BoardBean> beans = (ArrayList<BoardBean>) msg.obj;
 				if (beans != null) {
 					if (defaultPage.equals("china")) {
