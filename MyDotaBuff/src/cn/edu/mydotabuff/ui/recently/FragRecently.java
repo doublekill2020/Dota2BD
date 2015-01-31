@@ -16,9 +16,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.SearchView;
+import android.text.InputType;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnKeyListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
@@ -62,6 +69,7 @@ public class FragRecently extends Fragment implements OnMainEventListener {
 			Bundle savedInstanceState) {
 		recentLayout = inflater.inflate(R.layout.frag_recently, container,
 				false);
+		setHasOptionsMenu(true);
 		activity = getActivity();
 		dialog = new LoadingDialog(activity, getString(R.string.send_info));
 		// 获得用户ID
@@ -351,5 +359,29 @@ public class FragRecently extends Fragment implements OnMainEventListener {
 				}
 			}
 		}
+	}
+
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		// TODO Auto-generated method stub
+		inflater.inflate(R.menu.frag_recently_menu, menu);
+		SearchView searchView = (SearchView) menu.findItem(R.id.action_search)
+				.getActionView();
+		searchView.setQueryHint("输入比赛ID");
+		searchView.setInputType(InputType.TYPE_CLASS_NUMBER);
+		searchView.setOnKeyListener(new OnKeyListener() {
+
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				// TODO Auto-generated method stub
+				Log.i("hao", keyCode + "---------" + event.getAction());
+				if (keyCode == KeyEvent.KEYCODE_SEARCH) {
+					TipsToast.showToast(activity, "大虎逼你来写~~",
+							Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
+					return true;
+				}
+				return false;
+			}
+		});
 	}
 }
