@@ -9,7 +9,19 @@
  */
 package cn.edu.mydotabuff.ui;
 
+import android.content.Intent;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MenuItem.OnMenuItemClickListener;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +33,7 @@ import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.common.bean.PlayerInfoBean;
 import cn.edu.mydotabuff.common.http.OnWebDataGetListener;
 import cn.edu.mydotabuff.common.http.WebDataHelper;
+import cn.edu.mydotabuff.ui.mydetail.ActUserStatistics;
 import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.view.CircleImageView;
 import cn.edu.mydotabuff.view.LoadingDialog;
@@ -106,4 +119,32 @@ public class ActPlayerDetail extends BaseActivity implements
 				DialogType.LOAD_FAILURE);
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		getMenuInflater().inflate(R.menu.act_player_detail_menu, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			finish();
+			break;
+		case R.id.more_detail:
+			if (bean == null) {
+				TipsToast.showToast(ActPlayerDetail.this, "暂无数据",
+						Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
+			} else {
+				Intent intent = new Intent(ActPlayerDetail.this,
+						ActUserStatistics.class);
+				intent.putExtra("type", "other");
+				intent.putExtra("data", bean);
+				startActivity(intent);
+			}
+			break;
+		}
+		return super.onOptionsItemSelected(item);
+	}
 }

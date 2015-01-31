@@ -143,38 +143,7 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 		@Override
 		public boolean onMenuItemClick(MenuItem item) {
 			// TODO Auto-generated method stub
-			switch (item.getItemId()) {
-			case R.id.more_detail:
-				if (bean == null) {
-					TipsToast.showToast(activity, "暂无数据", Toast.LENGTH_SHORT,
-							DialogType.LOAD_FAILURE);
-				} else {
-					if (bean.isLoadMap() && bean.isLoadWebData()
-							&& bean.getBeans() != null) {
-						Intent intent = new Intent(activity,
-								ActUserStatistics.class);
-						startActivity(intent);
-					} else {
-						TipsToast.showToast(activity, "暂无数据",
-								Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
-					}
-				}
-				break;
-			case R.id.give_mark:
-				try {
-					Uri uri = Uri.parse("market://details?id="
-							+ getActivity().getPackageName());
-					Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					startActivity(intent);
-				} catch (Exception e) {
-					TipsToast.showToast(activity, "抱歉，您还未安装相应的应用市场",
-							Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
-				}
-				break;
-			default:
-				break;
-			}
+
 			return false;
 		}
 	};
@@ -183,10 +152,6 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		// TODO Auto-generated method stub
 		inflater.inflate(R.menu.frag_my_detail, menu);
-		MenuItem moreDetailBtn = menu.findItem(R.id.more_detail);
-		MenuItem goToMark = menu.findItem(R.id.give_mark);
-		moreDetailBtn.setOnMenuItemClickListener(itemListener);
-		goToMark.setOnMenuItemClickListener(itemListener);
 		SearchView searchView = (SearchView) menu.findItem(R.id.action_search)
 				.getActionView();
 		searchView.setQueryHint("输入玩家ID");
@@ -205,5 +170,44 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 				return false;
 			}
 		});
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case R.id.more_detail:
+			if (bean == null) {
+				TipsToast.showToast(activity, "暂无数据", Toast.LENGTH_SHORT,
+						DialogType.LOAD_FAILURE);
+			} else {
+				if (bean.isLoadMap() && bean.isLoadWebData()
+						&& bean.getBeans() != null) {
+					Intent intent = new Intent(activity,
+							ActUserStatistics.class);
+					intent.putExtra("type", "current");
+					startActivity(intent);
+				} else {
+					TipsToast.showToast(activity, "暂无数据", Toast.LENGTH_SHORT,
+							DialogType.LOAD_FAILURE);
+				}
+			}
+			break;
+		case R.id.give_mark:
+			try {
+				Uri uri = Uri.parse("market://details?id="
+						+ getActivity().getPackageName());
+				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+			} catch (Exception e) {
+				TipsToast.showToast(activity, "抱歉，您还未安装相应的应用市场",
+						Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
+			}
+			break;
+		default:
+			break;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }
