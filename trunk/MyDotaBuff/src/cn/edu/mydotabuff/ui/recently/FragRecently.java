@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.SearchView.OnQueryTextListener;
 import android.text.InputType;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -33,10 +34,12 @@ import android.widget.Toast;
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.DotaApplication.LocalDataType;
 import cn.edu.mydotabuff.R;
+import cn.edu.mydotabuff.base.BaseActivity;
 import cn.edu.mydotabuff.common.bean.MatchBean;
 import cn.edu.mydotabuff.common.bean.PlayerBean;
 import cn.edu.mydotabuff.common.http.IInfoReceive;
 import cn.edu.mydotabuff.ui.ActMain.OnMainEventListener;
+import cn.edu.mydotabuff.util.Debug;
 import cn.edu.mydotabuff.util.PersonalRequestImpl;
 import cn.edu.mydotabuff.view.LoadingDialog;
 import cn.edu.mydotabuff.view.TipsToast;
@@ -365,21 +368,29 @@ public class FragRecently extends Fragment implements OnMainEventListener {
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		// TODO Auto-generated method stub
 		inflater.inflate(R.menu.frag_recently_menu, menu);
-		SearchView searchView = (SearchView) menu.findItem(R.id.action_search)
-				.getActionView();
+		final SearchView searchView = (SearchView) menu.findItem(
+				R.id.action_search).getActionView();
 		searchView.setQueryHint("输入比赛ID");
 		searchView.setInputType(InputType.TYPE_CLASS_NUMBER);
-		searchView.setOnKeyListener(new OnKeyListener() {
+		searchView.setOnQueryTextListener(new OnQueryTextListener() {
 
 			@Override
-			public boolean onKey(View v, int keyCode, KeyEvent event) {
+			public boolean onQueryTextSubmit(String arg0) {
 				// TODO Auto-generated method stub
-				Log.i("hao", keyCode + "---------" + event.getAction());
-				if (keyCode == KeyEvent.KEYCODE_SEARCH) {
-					TipsToast.showToast(activity, "大虎逼你来写~~",
-							Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
-					return true;
+				if (arg0.length() == 10) {
+					Intent intent = new Intent(activity, ActMatchDetail.class);
+					intent.putExtra("matchId", arg0);
+					startActivity(intent);
+				} else {
+					Toast.makeText(activity, "比赛ID有误，请重新输入~",
+							Toast.LENGTH_SHORT).show();
 				}
+				return false;
+			}
+
+			@Override
+			public boolean onQueryTextChange(String arg0) {
+				// TODO Auto-generated method stub
 				return false;
 			}
 		});
