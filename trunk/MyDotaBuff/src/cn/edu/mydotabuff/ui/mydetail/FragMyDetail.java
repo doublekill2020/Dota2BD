@@ -152,24 +152,6 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		// TODO Auto-generated method stub
 		inflater.inflate(R.menu.frag_my_detail, menu);
-		SearchView searchView = (SearchView) menu.findItem(R.id.action_search)
-				.getActionView();
-		searchView.setQueryHint("输入玩家ID");
-		searchView.setInputType(InputType.TYPE_CLASS_NUMBER);
-		searchView.setOnKeyListener(new OnKeyListener() {
-
-			@Override
-			public boolean onKey(View v, int keyCode, KeyEvent event) {
-				// TODO Auto-generated method stub
-				Log.i("hao", keyCode + "---------" + event.getAction());
-				if (keyCode == KeyEvent.KEYCODE_SEARCH) {
-					TipsToast.showToast(activity, "大虎逼你来写~~",
-							Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
-					return true;
-				}
-				return false;
-			}
-		});
 	}
 
 	@Override
