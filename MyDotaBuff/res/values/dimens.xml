@@ -1,6 +1,7 @@
 <resources>
 
     <!-- 虎逼专用 -->
+    <dimen name="list_item_small">4dp</dimen>
     <dimen name="list_item_nomal">8dp</dimen>
     <dimen name="list_item_big">12dp</dimen>
     <dimen name="list_item_biggest">16dp</dimen>
@@ -10,6 +11,7 @@
     <dimen name="icon_nomal">4dp</dimen>
     <dimen name="icon_big">8dp</dimen>
     <dimen name="icon_biggest">12dp</dimen>
+    <dimen name="common_cardview_radius_normal">4dp</dimen>
 
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
