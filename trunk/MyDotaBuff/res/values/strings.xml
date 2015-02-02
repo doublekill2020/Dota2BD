@@ -4,6 +4,61 @@
     <string name="app_name">Dota2数据通</string>
     <string name="action_settings">Settings</string>
     <string name="dlg_content">使用此app，必须在游戏中共享比赛历史。\n第一次使用，请输入数字id：</string>
+    <string name="home_didi">嘀嘀</string>
+    <string name="home_news">消息</string>
+    <string name="app_name_didi">神马嘀嘀商户端</string>
+    <string name="version">2.0</string>
+
+
+
+    <string name="select_hour">时</string>
+    <string name="select_min">分</string>
+    <string name="obtain_error">请求超时,请检查网络</string>
+    <string name="regist">注册</string>
+    <string name="cant_be_empty">商家名称和地址不能为空！</string>
+    <string name="please_upload_pic">请上传完相关证件</string>
+    <string name="continue_upload">接着上传</string>
+    <string name="net_time_out">网络超时，请检查网络</string>
+    <string name="pic_uploading">正在上传</string>
+    <string name="net_exception">异常了，请重试操作</string>
+    <string name="regist_success">注册成功</string>
+    <string name="input_error">手机号输入有误</string>
+    <string name="no_code">验证码为空</string>
+    <string name="code_error">验证码不正确</string>
+    <string name="password_error">密码输入有误</string>
+    <string name="re_password_error">重复密码有误</string>
+    <string name="only_num_and_letter">密码只能为数字和字母</string>
+    <string name="not_only_num">密码不能是纯数字</string>
+    <string name="not_only_letter">密码不能是纯字母</string>
+    <string name="password_different">两次密码不一样</string>
+    <string name="code_send">验证码已发送,请注意查收</string>
+    <string name="send_again">s之后再次发送</string>
+    <string name="obtaining">获取中...</string>
+    <string name="edit_time_out">修改超时，请检查网络</string>
+    <string name="lingchen">凌晨</string>
+    <string name="shangwu">上午</string>
+    <string name="zhongwu">中午</string>
+    <string name="xiawu">下午</string>
+    <string name="wanshang">晚上</string>
+    <string name="ganggang">刚刚</string>
+    <string name="fenzhongqian"> 分钟前</string>
+    <string name="xiaoshiqian"> 小时前</string>
+    <string name="jintian">今天</string>
+    <string name="zuotian">昨天</string>
+    <string name="qiantian">前天</string>
+    <string name="upload_jingweidu">上传经纬度成功..</string>
+
+    <!-- 公共提示 -->
+    <string name="time_out">请求超时，请检查网络</string>
+    <string name="exception">异常了，请重试操作</string>
+    <string name="time_get_out">获取超时，请检查网络</string>
+    <string name="get_ing">获取中...</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="network_error">网络异常!</string>
+    <string name="network_timeout">连接超时，请检查网络!</string>
+    <string name="network_xmpperror">网络异常!</string>
+
     <!-- Share SDK -->
     <string name="weibo_oauth_regiseter">应用授权</string>
     <string name="website">http://www.shareSDK.cn</string>
@@ -115,7 +170,6 @@
         <item>攻击范围</item>
         <item>弹道速度</item>
     </string-array>
-
+    
     <string name="share_content">【Dota2数据通】全方位的dota2战绩查询分析app，你也来体验一下吧~</string>
-
 </resources>
