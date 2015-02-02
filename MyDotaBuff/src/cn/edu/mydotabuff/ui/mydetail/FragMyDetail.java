@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.SearchView;
 import android.text.InputType;
 import android.util.Log;
@@ -23,6 +24,7 @@ import android.widget.Toast;
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.DotaApplication.LocalDataType;
 import cn.edu.mydotabuff.R;
+import cn.edu.mydotabuff.base.BaseFragment;
 import cn.edu.mydotabuff.common.bean.PlayerInfoBean;
 import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.common.http.OnWebDataGetListener;
@@ -36,7 +38,7 @@ import cn.edu.mydotabuff.view.TipsToast.DialogType;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-public class FragMyDetail extends Fragment implements OnWebDataGetListener {
+public class FragMyDetail extends BaseFragment implements OnWebDataGetListener {
 	private CircleImageView iconView;
 	private TextView nameView, statusView, timeView, loginView;
 	private ImageLoader loader;
@@ -48,8 +50,9 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 	private SharedPreferences myPreferences;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	protected View initViewAndData(LayoutInflater inflater,
+			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		View view = inflater.inflate(R.layout.frag_my_detail, container, false);
 		setHasOptionsMenu(true);
 		nameView = (TextView) view.findViewById(R.id.name);
@@ -84,6 +87,12 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 			}
 		}
 		return view;
+	}
+
+	@Override
+	protected void initEvent() {
+		// TODO Auto-generated method stub
+
 	}
 
 	private void initView() {
@@ -192,4 +201,5 @@ public class FragMyDetail extends Fragment implements OnWebDataGetListener {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
 }

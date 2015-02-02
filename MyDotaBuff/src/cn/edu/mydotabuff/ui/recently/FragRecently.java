@@ -10,23 +10,20 @@ import org.json.JSONObject;
 import com.nhaarman.listviewanimations.appearance.simple.SwingRightInAnimationAdapter;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.SearchView.OnQueryTextListener;
 import android.text.InputType;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnKeyListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
@@ -34,12 +31,11 @@ import android.widget.Toast;
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.DotaApplication.LocalDataType;
 import cn.edu.mydotabuff.R;
-import cn.edu.mydotabuff.base.BaseActivity;
+import cn.edu.mydotabuff.base.BaseFragment;
 import cn.edu.mydotabuff.common.bean.MatchBean;
 import cn.edu.mydotabuff.common.bean.PlayerBean;
 import cn.edu.mydotabuff.common.http.IInfoReceive;
 import cn.edu.mydotabuff.ui.ActMain.OnMainEventListener;
-import cn.edu.mydotabuff.util.Debug;
 import cn.edu.mydotabuff.util.PersonalRequestImpl;
 import cn.edu.mydotabuff.view.LoadingDialog;
 import cn.edu.mydotabuff.view.TipsToast;
@@ -47,7 +43,7 @@ import cn.edu.mydotabuff.view.XListView;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;
 import cn.edu.mydotabuff.view.XListView.IXListViewListener;
 
-public class FragRecently extends Fragment implements OnMainEventListener {
+public class FragRecently extends BaseFragment implements OnMainEventListener {
 	private XListView listView;
 	private View recentLayout;
 	private String userID;
@@ -68,8 +64,10 @@ public class FragRecently extends Fragment implements OnMainEventListener {
 	private SharedPreferences myPreferences;
 	private boolean flag = false;// 当拿本地数据时 会导致加载更多的第一天与本地最后一条重复，此变量用来标识
 
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	@Override
+	protected View initViewAndData(LayoutInflater inflater,
+			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		recentLayout = inflater.inflate(R.layout.frag_recently, container,
 				false);
 		setHasOptionsMenu(true);
@@ -88,12 +86,9 @@ public class FragRecently extends Fragment implements OnMainEventListener {
 		return recentLayout;
 	}
 
-	public void initView() {
-		listView = (XListView) recentLayout
-				.findViewById(R.id.frag_player_details_list);
-		listView.setVerticalScrollBarEnabled(true);
-		listView.setPullRefreshEnable(true);
-		listView.setPullLoadEnable(true);
+	@Override
+	protected void initEvent() {
+		// TODO Auto-generated method stub
 		listView.setXListViewListener(new IXListViewListener() {
 
 			@Override
@@ -136,6 +131,14 @@ public class FragRecently extends Fragment implements OnMainEventListener {
 				}
 			}
 		});
+	}
+
+	public void initView() {
+		listView = (XListView) recentLayout
+				.findViewById(R.id.frag_player_details_list);
+		listView.setVerticalScrollBarEnabled(true);
+		listView.setPullRefreshEnable(true);
+		listView.setPullLoadEnable(true);
 		onlineNum = (TextView) recentLayout.findViewById(R.id.online_num);
 	}
 
@@ -395,4 +398,5 @@ public class FragRecently extends Fragment implements OnMainEventListener {
 			}
 		});
 	}
+
 }
