@@ -34,6 +34,7 @@ import cn.edu.mydotabuff.common.CommViewHolder;
 import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.common.bean.PlayerInfoBean;
 import cn.edu.mydotabuff.common.http.IInfoReceive;
+import cn.edu.mydotabuff.util.Debug;
 import cn.edu.mydotabuff.util.PersonalRequestImpl;
 import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.view.CircleImageView;
@@ -146,13 +147,19 @@ public class ActFriendList extends BaseActivity {
 						try {
 							JSONObject obj = new JSONObject(receiveInfo
 									.getJsonStr());
+							msg.what = BaseActivity.OK;
 							switch (type) {
 							case GET_FRIEND_LIST:
-								JSONArray array = obj.getJSONObject(
-										"friendslist").getJSONArray("friends");
-								for (int i = 0; i < array.length(); i++) {
-									steamids.append(array.getJSONObject(i)
-											.getString("steamid") + ",");
+								if (obj.has("friendslist")) {
+									JSONArray array = obj.getJSONObject(
+											"friendslist").getJSONArray(
+											"friends");
+									for (int i = 0; i < array.length(); i++) {
+										steamids.append(array.getJSONObject(i)
+												.getString("steamid") + ",");
+									}
+								} else {
+									msg.what = BaseActivity.FAILED;
 								}
 								break;
 							case GET_USERS_INFO:
@@ -180,8 +187,13 @@ public class ActFriendList extends BaseActivity {
 													.getString("personaname"));
 											bean.setState(obj2
 													.getInt("personastate"));
+											if(obj2.has("")){
 											bean.setTimecreated(obj2
 													.getString("timecreated"));
+											}else{
+												bean.setTimecreated("1417140906");
+											}
+													
 											bean.setSteamid(obj2
 													.getString("steamid"));
 											// 如果是电脑
@@ -201,11 +213,11 @@ public class ActFriendList extends BaseActivity {
 							default:
 								break;
 							}
-							msg.what = BaseActivity.OK;
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 							msg.what = BaseActivity.JSON_ERROR;
+							Debug.d("hao", e.getMessage());
 						}
 						msg.arg1 = type;
 						h.sendMessage(msg);
