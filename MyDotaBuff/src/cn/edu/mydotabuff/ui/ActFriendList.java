@@ -187,7 +187,7 @@ public class ActFriendList extends BaseActivity {
 													.getString("personaname"));
 											bean.setState(obj2
 													.getInt("personastate"));
-											if(obj2.has("")){
+											if(obj2.has("timecreated")){
 											bean.setTimecreated(obj2
 													.getString("timecreated"));
 											}else{
