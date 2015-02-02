@@ -158,7 +158,6 @@ public class AppManager {
 				Activity activity = curractivity.get();
 				if (activity != null) {
 					if (!activity.getClass().equals(cls)) {
-						Debug.d("hao", activity.getClass().toString());
 						activity.finish();
 					}
 				}
