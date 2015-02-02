@@ -15,6 +15,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+import cn.edu.mydotabuff.AppManager;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.ui.ActMain;
 import cn.edu.mydotabuff.util.Utils;
@@ -42,6 +43,10 @@ public abstract class BaseActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+
+		if (!AppManager.getAppManager().isExists(this)) {
+			AppManager.getAppManager().addActivity(this);
+		}
 
 		final SystemBarTintManager tintManager = new SystemBarTintManager(this);
 		tintManager.setStatusBarTintEnabled(true);

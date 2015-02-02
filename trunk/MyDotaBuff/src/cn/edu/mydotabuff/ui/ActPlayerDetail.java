@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import cn.edu.mydotabuff.AppManager;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseActivity;
 import cn.edu.mydotabuff.common.Common;
@@ -155,7 +156,7 @@ public class ActPlayerDetail extends BaseActivity implements
 			}
 			break;
 		case R.id.back_to_main:
-			startActivity(new Intent(this, ActMain.class));
+			AppManager.getAppManager().finishAllActivity(ActMain.class);
 			finish();
 			break;
 		}
