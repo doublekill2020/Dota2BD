@@ -16,6 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.nhaarman.listviewanimations.appearance.simple.ScaleInAnimationAdapter;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.os.Handler;
@@ -32,6 +33,7 @@ import cn.edu.mydotabuff.util.PersonalRequestImpl;
 import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.view.CircleImageView;
 import cn.edu.mydotabuff.view.XListView;
+import cn.edu.mydotabuff.view.TipsToast.DialogType;
 import cn.edu.mydotabuff.view.XListView.IXListViewListener;
 
 /**
@@ -48,8 +50,9 @@ public class ActFriendList extends BaseActivity {
 	private XListView list;
 	private static final int GET_FRIEND_LIST = 1;
 	private static final int GET_USERS_INFO = 2;
-	private ArrayList<PlayerInfoBean> infoBeans;
+	private ArrayList<PlayerInfoBean> infoBeans = new ArrayList<PlayerInfoBean>();
 	private CommAdapter<PlayerInfoBean> adapter;
+	private ScaleInAnimationAdapter animationAdapter;
 
 	@Override
 	protected void initViewAndData() {
@@ -76,7 +79,8 @@ public class ActFriendList extends BaseActivity {
 				if (msg.arg1 == GET_FRIEND_LIST) {
 					fetchData(GET_USERS_INFO);
 				} else if (msg.arg1 == GET_USERS_INFO) {
-					list.setAdapter(adapter = new CommAdapter<PlayerInfoBean>(
+					list.stopRefresh();
+					adapter = new CommAdapter<PlayerInfoBean>(
 							ActFriendList.this, infoBeans,
 							R.layout.act_friend_list_item) {
 
@@ -107,10 +111,14 @@ public class ActFriendList extends BaseActivity {
 							ImageLoader.getInstance().displayImage(
 									item.getMediumIcon(), icon);
 						}
-					});
+					};
+					animationAdapter = new ScaleInAnimationAdapter(adapter);
+					animationAdapter.setAbsListView(list);
+					list.setAdapter(animationAdapter);
 				}
 				break;
 			case BaseActivity.FAILED:
+				showTip("网络超时，下拉重试~~", DialogType.LOAD_FAILURE);
 				break;
 			case BaseActivity.JSON_ERROR:
 
@@ -221,8 +229,14 @@ public class ActFriendList extends BaseActivity {
 				// TODO Auto-generated method stub
 
 				infoBeans.clear();
-				adapter.notifyDataSetChanged();
-				fetchData(GET_USERS_INFO);
+				if (adapter != null) {
+					adapter.notifyDataSetChanged();
+				}
+				if (steamids.length() > 0) {
+					fetchData(GET_USERS_INFO);
+				} else {
+					fetchData(GET_FRIEND_LIST);
+				}
 			}
 
 			@Override
