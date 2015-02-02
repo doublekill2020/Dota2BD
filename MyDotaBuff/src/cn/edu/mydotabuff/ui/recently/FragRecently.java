@@ -7,7 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.nhaarman.listviewanimations.appearance.simple.SwingRightInAnimationAdapter;
+import com.nhaarman.listviewanimations.appearance.simple.ScaleInAnimationAdapter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -50,7 +50,7 @@ public class FragRecently extends BaseFragment implements OnMainEventListener {
 	private String userID;
 	private Activity activity;
 	private FragItemAdapter mAdapter;
-	SwingRightInAnimationAdapter sAdapter;
+	private ScaleInAnimationAdapter sAdapter;
 	private LoadingDialog dialog;
 	private ArrayList<String> matchIds;
 	private ArrayList<MatchBean> allMatchBeans;
@@ -295,7 +295,7 @@ public class FragRecently extends BaseFragment implements OnMainEventListener {
 				ArrayList<MatchBean> beans = (ArrayList<MatchBean>) msg.obj;
 				if (mAdapter == null) {
 					mAdapter = new FragItemAdapter(activity, beans);
-					sAdapter = new SwingRightInAnimationAdapter(mAdapter);
+					sAdapter = new ScaleInAnimationAdapter(mAdapter);
 					sAdapter.setAbsListView(listView);
 					listView.setAdapter(sAdapter);
 					allMatchBeans.addAll(beans);
@@ -356,7 +356,7 @@ public class FragRecently extends BaseFragment implements OnMainEventListener {
 				allMatchBeans.addAll(beans);
 				if (mAdapter == null) {
 					mAdapter = new FragItemAdapter(activity, allMatchBeans);
-					sAdapter = new SwingRightInAnimationAdapter(mAdapter);
+					sAdapter = new ScaleInAnimationAdapter(mAdapter);
 					sAdapter.setAbsListView(listView);
 					listView.setAdapter(sAdapter);
 					if (allMatchBeans.size() > 0) {

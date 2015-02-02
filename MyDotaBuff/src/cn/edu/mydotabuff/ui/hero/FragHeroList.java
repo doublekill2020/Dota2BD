@@ -43,7 +43,7 @@ import cn.edu.mydotabuff.view.TipsToast;
 import cn.edu.mydotabuff.view.XListView;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;
 
-import com.nhaarman.listviewanimations.appearance.simple.SwingRightInAnimationAdapter;
+import com.nhaarman.listviewanimations.appearance.simple.ScaleInAnimationAdapter;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class FragHeroList extends BaseFragment implements OnWebDataGetListener {
@@ -54,7 +54,7 @@ public class FragHeroList extends BaseFragment implements OnWebDataGetListener {
 	private XListView listView;
 	private Activity activity;
 	private Drawable icon;
-	private SwingRightInAnimationAdapter adapter;
+	private ScaleInAnimationAdapter adapter;
 
 	@Override
 	protected View initViewAndData(LayoutInflater inflater,
@@ -83,7 +83,7 @@ public class FragHeroList extends BaseFragment implements OnWebDataGetListener {
 				helper.setDataGetListener(this);
 				helper.getWebData(DataType.HERO, userID);
 			} else {
-				adapter = new SwingRightInAnimationAdapter(new HeroListAdapter(
+				adapter = new ScaleInAnimationAdapter(new HeroListAdapter(
 						this.activity, heroSatisticsList));
 				adapter.setAbsListView(listView);
 				listView.setAdapter(adapter);
@@ -308,7 +308,7 @@ public class FragHeroList extends BaseFragment implements OnWebDataGetListener {
 		heroSatisticsList = (List<HerosSatistics>) data;
 		DotaApplication.getApplication().saveData(data,
 				LocalDataType.HERO_USED_LIST);
-		adapter = new SwingRightInAnimationAdapter(new HeroListAdapter(
+		adapter = new ScaleInAnimationAdapter(new HeroListAdapter(
 				this.activity, heroSatisticsList));
 		adapter.setAbsListView(listView);
 		listView.setAdapter(adapter);
