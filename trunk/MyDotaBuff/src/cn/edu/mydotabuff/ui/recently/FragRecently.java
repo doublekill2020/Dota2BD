@@ -139,7 +139,7 @@ public class FragRecently extends BaseFragment implements OnMainEventListener {
 				.findViewById(R.id.frag_player_details_list);
 		listView.setVerticalScrollBarEnabled(true);
 		listView.setPullRefreshEnable(true);
-		listView.setPullLoadEnable(true);
+		listView.setPullLoadEnable(false);
 		onlineNum = (TextView) recentLayout.findViewById(R.id.online_num);
 	}
 
@@ -253,11 +253,16 @@ public class FragRecently extends BaseFragment implements OnMainEventListener {
 							try {
 								JSONObject jsonObj = new JSONObject(receiveInfo
 										.getJsonStr());
-								JSONObject resultObj = jsonObj
-										.getJSONObject("response");
-								num = resultObj.getString("player_count");
-								msg.arg1 = type;
-								msg.obj = num;
+								if (jsonObj.has("response")) {
+									JSONObject resultObj = jsonObj
+											.getJSONObject("response");
+									num = resultObj.getString("player_count");
+									msg.arg1 = type;
+									msg.obj = num;
+								} else {
+									msg.arg1 = type;
+									msg.obj = "未知";
+								}
 							} catch (JSONException e) {
 								e.printStackTrace();
 							}

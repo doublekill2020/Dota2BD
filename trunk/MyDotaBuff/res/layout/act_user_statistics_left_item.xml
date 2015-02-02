@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/cn.edu.mydotabuff"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
 
@@ -8,12 +9,11 @@
         android:id="@+id/cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="4dp"
         app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="8dp" >
+        app:cardCornerRadius="@dimen/common_cardview_radius_normal" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,12 +28,15 @@
                 android:orientation="vertical" >
 
                 <cn.edu.mydotabuff.view.RoundAngleImageView
+                    app:roundWidth="4dp"
+                    app:roundHeight="4dp"
                     android:id="@+id/icon"
                     android:layout_width="92dp"
                     android:layout_height="54dp"
                     android:layout_gravity="center"
                     android:layout_marginBottom="8dp"
                     android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
                     android:layout_marginTop="8dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/default_pic" >
@@ -49,7 +52,10 @@
                     android:id="@+id/status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginTop="4dp"
                     android:background="#11AE91"
                     android:maxEms="1"
                     android:padding="2dp"
