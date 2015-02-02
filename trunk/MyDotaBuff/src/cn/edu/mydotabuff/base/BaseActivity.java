@@ -44,9 +44,7 @@ public abstract class BaseActivity extends ActionBarActivity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 
-		if (!AppManager.getAppManager().isExists(this)) {
-			AppManager.getAppManager().addActivity(this);
-		}
+		AppManager.getAppManager().addActivity(this);
 
 		final SystemBarTintManager tintManager = new SystemBarTintManager(this);
 		tintManager.setStatusBarTintEnabled(true);
