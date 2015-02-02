@@ -26,6 +26,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseActivity;
@@ -37,6 +38,7 @@ import cn.edu.mydotabuff.common.http.IInfoReceive;
 import cn.edu.mydotabuff.util.PersonalRequestImpl;
 import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.view.CircleImageView;
+import cn.edu.mydotabuff.view.TipsToast;
 import cn.edu.mydotabuff.view.XListView;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;
 import cn.edu.mydotabuff.view.XListView.IXListViewListener;
@@ -256,10 +258,16 @@ public class ActFriendList extends BaseActivity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				Intent i = new Intent();
-				i.setClass(ActFriendList.this, ActPlayerDetail.class);
-				i.putExtra("data", infoBeans.get(position - 1));
-				startActivity(i);
+				PlayerInfoBean bean = infoBeans.get(position - 1);
+				if (bean.getSteamid().equals("76561202255233023")) {
+					TipsToast.showToast(ActFriendList.this, "该玩家未开启比赛数据共享！",
+							Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
+				} else {
+					Intent i = new Intent();
+					i.setClass(ActFriendList.this, ActPlayerDetail.class);
+					i.putExtra("data", infoBeans.get(position - 1));
+					startActivity(i);
+				}
 			}
 		});
 	}
