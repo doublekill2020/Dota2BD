@@ -195,8 +195,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		// Configure drawer
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-				R.string.dan, R.string.dan) {
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, 0, 0) {
 
 			public void onDrawerClosed(View view) {
 				supportInvalidateOptionsMenu();
