@@ -30,42 +30,30 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="@dimen/margins_base"
                     android:layout_weight="1"
                     android:orientation="horizontal" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="使用英雄:"
-                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/tv_heroName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="幽鬼"
+                        android:text="使用英雄: 幽鬼"
                         android:textColor="@color/black" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
                     android:layout_weight="1"
                     android:orientation="horizontal" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="所有玩家平均KDA:"
-                        android:textColor="@color/black" />
 
                     <TextView
                         android:id="@+id/tv_allKAD"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="6.60"
+                        android:layout_gravity="right"
+                        android:text="所有玩家平均KDA: 6.60"
                         android:textColor="@color/black" />
                 </LinearLayout>
             </LinearLayout>
@@ -76,8 +64,6 @@
                 android:orientation="horizontal" >
 
                 <cn.edu.mydotabuff.view.RoundAngleImageView
-                    app:roundWidth="4dp"
-                    app:roundHeight="4dp"
                     android:id="@+id/icon"
                     android:layout_width="92dp"
                     android:layout_height="54dp"
@@ -86,7 +72,9 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="8dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/default_pic" >
+                    android:src="@drawable/default_pic"
+                    app:roundHeight="4dp"
+                    app:roundWidth="4dp" >
                 </cn.edu.mydotabuff.view.RoundAngleImageView>
 
                 <LinearLayout

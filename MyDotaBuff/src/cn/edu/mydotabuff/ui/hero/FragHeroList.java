@@ -7,12 +7,11 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,14 +23,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.edu.mydotabuff.DotaApplication;
-import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.DotaApplication.LocalDataType;
+import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseFragment;
-import cn.edu.mydotabuff.common.bean.HeroMatchStatistics;
-import cn.edu.mydotabuff.common.bean.HerosSatistics;
 import cn.edu.mydotabuff.common.CommAdapter;
 import cn.edu.mydotabuff.common.CommViewHolder;
 import cn.edu.mydotabuff.common.Common;
+import cn.edu.mydotabuff.common.bean.HeroMatchStatistics;
+import cn.edu.mydotabuff.common.bean.HerosSatistics;
 import cn.edu.mydotabuff.common.http.OnWebDataGetListener;
 import cn.edu.mydotabuff.common.http.WebDataHelper;
 import cn.edu.mydotabuff.common.http.WebDataHelper.DataType;
@@ -40,8 +39,8 @@ import cn.edu.mydotabuff.util.Utils;
 import cn.edu.mydotabuff.view.LoadingDialog;
 import cn.edu.mydotabuff.view.RoundAngleImageView;
 import cn.edu.mydotabuff.view.TipsToast;
-import cn.edu.mydotabuff.view.XListView;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;
+import cn.edu.mydotabuff.view.XListView;
 
 import com.nhaarman.listviewanimations.appearance.simple.ScaleInAnimationAdapter;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -355,10 +354,10 @@ public class FragHeroList extends BaseFragment implements OnWebDataGetListener {
 				convertView = context.getLayoutInflater().inflate(
 						R.layout.frag_hero_used_list_item, null);
 				ViewHolder holder = new ViewHolder();
-				holder.tv_allKAD = (TextView) convertView
-						.findViewById(R.id.tv_allKAD);
 				holder.tv_heroName = (TextView) convertView
 						.findViewById(R.id.tv_heroName);
+				holder.tv_allKAD = (TextView) convertView
+						.findViewById(R.id.tv_allKAD);
 				holder.tv_usesTimes = (TextView) convertView
 						.findViewById(R.id.usesTimes);
 				holder.tv_KDA = (TextView) convertView
@@ -377,8 +376,16 @@ public class FragHeroList extends BaseFragment implements OnWebDataGetListener {
 			}
 			ViewHolder holder = (ViewHolder) convertView.getTag();
 			HerosSatistics bean = beans.get(position);
-			holder.tv_allKAD.setText(bean.getAllKAD() + "");
-			holder.tv_heroName.setText(bean.getHeroName());
+			String format = getResources().getString(
+					R.string.text_hero_item_used);
+
+			holder.tv_heroName
+					.setText(String.format(format, bean.getHeroName()));
+
+			format = getResources().getString(R.string.text_hero_item_kda);
+
+			holder.tv_allKAD.setText(String.format(format, bean.getAllKAD()));
+
 			holder.tv_usesTimes.setText("使用次数: " + bean.getUseTimes() + "");
 			holder.tv_KDA.setText("KDA:       " + bean.getKDA() + "");
 			holder.tv_perCoin
@@ -391,7 +398,6 @@ public class FragHeroList extends BaseFragment implements OnWebDataGetListener {
 					holder.icon);
 			return convertView;
 		}
-
 	}
 
 	private static class ViewHolder {
