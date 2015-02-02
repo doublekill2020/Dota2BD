@@ -36,6 +36,7 @@ import cn.edu.mydotabuff.common.bean.MatchBean;
 import cn.edu.mydotabuff.common.bean.PlayerBean;
 import cn.edu.mydotabuff.common.http.IInfoReceive;
 import cn.edu.mydotabuff.ui.ActMain.OnMainEventListener;
+import cn.edu.mydotabuff.util.Debug;
 import cn.edu.mydotabuff.util.PersonalRequestImpl;
 import cn.edu.mydotabuff.view.LoadingDialog;
 import cn.edu.mydotabuff.view.TipsToast;
