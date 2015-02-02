@@ -9,6 +9,7 @@
  */
 package cn.edu.mydotabuff.ui;
 
+import java.security.acl.NotOwnerException;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -31,6 +32,7 @@ import cn.edu.mydotabuff.util.PersonalRequestImpl;
 import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.view.CircleImageView;
 import cn.edu.mydotabuff.view.XListView;
+import cn.edu.mydotabuff.view.XListView.IXListViewListener;
 
 /**
  * @ClassName: ActFriendList
@@ -47,6 +49,7 @@ public class ActFriendList extends BaseActivity {
 	private static final int GET_FRIEND_LIST = 1;
 	private static final int GET_USERS_INFO = 2;
 	private ArrayList<PlayerInfoBean> infoBeans;
+	private CommAdapter<PlayerInfoBean> adapter;
 
 	@Override
 	protected void initViewAndData() {
@@ -73,7 +76,7 @@ public class ActFriendList extends BaseActivity {
 				if (msg.arg1 == GET_FRIEND_LIST) {
 					fetchData(GET_USERS_INFO);
 				} else if (msg.arg1 == GET_USERS_INFO) {
-					list.setAdapter(new CommAdapter<PlayerInfoBean>(
+					list.setAdapter(adapter = new CommAdapter<PlayerInfoBean>(
 							ActFriendList.this, infoBeans,
 							R.layout.act_friend_list_item) {
 
@@ -108,10 +111,6 @@ public class ActFriendList extends BaseActivity {
 				}
 				break;
 			case BaseActivity.FAILED:
-				if (msg.arg1 == GET_FRIEND_LIST) {
-				} else if (msg.arg1 == GET_USERS_INFO) {
-
-				}
 				break;
 			case BaseActivity.JSON_ERROR:
 
@@ -204,7 +203,7 @@ public class ActFriendList extends BaseActivity {
 			request.getFriendList(steamid);
 			break;
 		case GET_USERS_INFO:
-			request.getPlayerDetail(steamids.toString(), false);
+			request.getPlayerDetail(steamids.toString(), true);
 			break;
 		default:
 			break;
@@ -215,6 +214,23 @@ public class ActFriendList extends BaseActivity {
 	protected void initEvent() {
 		// TODO Auto-generated method stub
 
+		list.setXListViewListener(new IXListViewListener() {
+
+			@Override
+			public void onRefresh() {
+				// TODO Auto-generated method stub
+
+				infoBeans.clear();
+				adapter.notifyDataSetChanged();
+				fetchData(GET_USERS_INFO);
+			}
+
+			@Override
+			public void onLoadMore() {
+				// TODO Auto-generated method stub
+
+			}
+		});
 	}
 
 }
