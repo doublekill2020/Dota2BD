@@ -36,6 +36,7 @@ import cn.edu.mydotabuff.ui.recently.ActMatchDetail;
 import cn.edu.mydotabuff.util.Utils;
 import cn.edu.mydotabuff.view.XListView;
 
+import com.nhaarman.listviewanimations.appearance.simple.ScaleInAnimationAdapter;
 import com.nhaarman.listviewanimations.appearance.simple.SwingRightInAnimationAdapter;
 import com.umeng.analytics.MobclickAgent;
 
@@ -46,7 +47,7 @@ public class ActUserStatistics extends BaseActivity implements OnClickListener {
 	private ViewPager pager;
 	private ViewpagerAdapter adapter;
 	private CommAdapter<BestRecord> commAdapter;
-	private SwingRightInAnimationAdapter animationAdapter;
+	private ScaleInAnimationAdapter animationAdapter;
 	private PlayerInfoBean bean;
 	private ArrayList<BestRecord> beans;
 	private XListView leftList;
@@ -92,7 +93,7 @@ public class ActUserStatistics extends BaseActivity implements OnClickListener {
 			leftList.setPullLoadEnable(false);
 			leftList.setPullRefreshEnable(false);
 			leftList.setVerticalScrollBarEnabled(false);
-			animationAdapter = new SwingRightInAnimationAdapter(
+			animationAdapter = new ScaleInAnimationAdapter(
 					commAdapter = new CommAdapter<BestRecord>(this, beans,
 							R.layout.act_user_statistics_left_item) {
 
