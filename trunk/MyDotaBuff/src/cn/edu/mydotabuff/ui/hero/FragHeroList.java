@@ -11,6 +11,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.DotaApplication.LocalDataType;
+import cn.edu.mydotabuff.base.BaseFragment;
 import cn.edu.mydotabuff.common.bean.HeroMatchStatistics;
 import cn.edu.mydotabuff.common.bean.HerosSatistics;
 import cn.edu.mydotabuff.common.CommAdapter;
@@ -44,7 +46,7 @@ import cn.edu.mydotabuff.view.TipsToast.DialogType;
 import com.nhaarman.listviewanimations.appearance.simple.SwingRightInAnimationAdapter;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-public class FragHeroList extends Fragment implements OnWebDataGetListener {
+public class FragHeroList extends BaseFragment implements OnWebDataGetListener {
 
 	private LoadingDialog dialog;
 	private List<HerosSatistics> heroSatisticsList = new ArrayList<HerosSatistics>();
@@ -53,9 +55,11 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 	private Activity activity;
 	private Drawable icon;
 	private SwingRightInAnimationAdapter adapter;
+
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	protected View initViewAndData(LayoutInflater inflater,
+			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		View view = inflater.inflate(R.layout.frag_hero_used_list, container,
 				false);
 		activity = getActivity();
@@ -79,128 +83,18 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 				helper.setDataGetListener(this);
 				helper.getWebData(DataType.HERO, userID);
 			} else {
-				adapter = new SwingRightInAnimationAdapter(new HeroListAdapter(this.activity, heroSatisticsList));
+				adapter = new SwingRightInAnimationAdapter(new HeroListAdapter(
+						this.activity, heroSatisticsList));
 				adapter.setAbsListView(listView);
 				listView.setAdapter(adapter);
 			}
 		}
-
-		initEvents();
-
 		return view;
 	}
 
 	@Override
-	public void onStartGetData() {
+	protected void initEvent() {
 		// TODO Auto-generated method stub
-		dialog.show();
-	}
-
-	@Override
-	public <T> void onGetFinished(T data) {
-		// TODO Auto-generated method stub
-		dialog.dismiss();
-		heroSatisticsList = (List<HerosSatistics>) data;
-		DotaApplication.getApplication().saveData(data,
-				LocalDataType.HERO_USED_LIST);
-		adapter = new SwingRightInAnimationAdapter(new HeroListAdapter(this.activity, heroSatisticsList));
-		adapter.setAbsListView(listView);
-		listView.setAdapter(adapter);
-	}
-
-	@Override
-	public void onGetFailed(String failMsg) {
-		dialog.dismiss();
-		TipsToast.showToast(activity, "不如去看个片放松下再来重新尝试~~ ", Toast.LENGTH_SHORT,
-				DialogType.LOAD_FAILURE);
-	}
-
-	class HeroListAdapter extends BaseAdapter {
-
-		private List<HerosSatistics> beans; // 数据
-		private Activity context;
-		private ImageLoader loader;
-
-		public HeroListAdapter(Activity context, List<HerosSatistics> beans) {
-			this.context = context;
-			this.beans = beans;
-			loader = ImageLoader.getInstance();
-		}
-
-		@Override
-		public int getCount() {
-			// TODO Auto-generated method stub
-			return beans.size();
-		}
-
-		@Override
-		public HerosSatistics getItem(int position) {
-			return beans.get(position);
-		}
-
-		@Override
-		public long getItemId(int position) {
-			return position;
-		}
-
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			if (convertView == null) {
-				convertView = context.getLayoutInflater().inflate(
-						R.layout.frag_hero_used_list_item, null);
-				ViewHolder holder = new ViewHolder();
-				holder.tv_allKAD = (TextView) convertView
-						.findViewById(R.id.tv_allKAD);
-				holder.tv_heroName = (TextView) convertView
-						.findViewById(R.id.tv_heroName);
-				holder.tv_usesTimes = (TextView) convertView
-						.findViewById(R.id.usesTimes);
-				holder.tv_KDA = (TextView) convertView
-						.findViewById(R.id.tv_KDA);
-				holder.tv_perCoin = (TextView) convertView
-						.findViewById(R.id.tv_perCoin);
-				holder.tv_perXp = (TextView) convertView
-						.findViewById(R.id.tv_perXP);
-				holder.icon = (RoundAngleImageView) convertView
-						.findViewById(R.id.icon);
-				holder.tv_wining = (TextView) convertView
-						.findViewById(R.id.pb_winRatesText);
-				holder.pb_winRate = (ProgressBar) convertView
-						.findViewById(R.id.pb_winRate);
-				convertView.setTag(holder);
-			}
-			ViewHolder holder = (ViewHolder) convertView.getTag();
-			HerosSatistics bean = beans.get(position);
-			holder.tv_allKAD.setText(bean.getAllKAD() + "");
-			holder.tv_heroName.setText(bean.getHeroName());
-			holder.tv_usesTimes.setText("使用次数: " + bean.getUseTimes() + "");
-			holder.tv_KDA.setText("KDA:       " + bean.getKDA() + "");
-			holder.tv_perCoin
-					.setText("gold/min: " + bean.getGold_PerMin() + "");
-			holder.tv_perXp.setText("xp/min:  " + bean.getXp_PerMin() + "");
-			holder.pb_winRate.setProgress((int) bean.getWinning());
-			holder.tv_wining.setText(bean.getWinning() + "%");
-			loader.displayImage(
-					Utils.getHeroImageUri(Common.getHeroName(bean.getHeroID())),
-					holder.icon);
-			return convertView;
-		}
-
-	}
-
-	private static class ViewHolder {
-		private TextView tv_allKAD;
-		private TextView tv_heroName;
-		private TextView tv_usesTimes;
-		private TextView tv_KDA;
-		private TextView tv_perCoin;
-		private TextView tv_perXp;
-		private RoundAngleImageView icon;
-		private TextView tv_wining;
-		private ProgressBar pb_winRate;
-	}
-
-	private void initEvents() {
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -399,7 +293,117 @@ public class FragHeroList extends Fragment implements OnWebDataGetListener {
 			}
 
 		});
+	}
 
+	@Override
+	public void onStartGetData() {
+		// TODO Auto-generated method stub
+		dialog.show();
+	}
+
+	@Override
+	public <T> void onGetFinished(T data) {
+		// TODO Auto-generated method stub
+		dialog.dismiss();
+		heroSatisticsList = (List<HerosSatistics>) data;
+		DotaApplication.getApplication().saveData(data,
+				LocalDataType.HERO_USED_LIST);
+		adapter = new SwingRightInAnimationAdapter(new HeroListAdapter(
+				this.activity, heroSatisticsList));
+		adapter.setAbsListView(listView);
+		listView.setAdapter(adapter);
+	}
+
+	@Override
+	public void onGetFailed(String failMsg) {
+		dialog.dismiss();
+		TipsToast.showToast(activity, "不如去看个片放松下再来重新尝试~~ ", Toast.LENGTH_SHORT,
+				DialogType.LOAD_FAILURE);
+	}
+
+	class HeroListAdapter extends BaseAdapter {
+
+		private List<HerosSatistics> beans; // 数据
+		private Activity context;
+		private ImageLoader loader;
+
+		public HeroListAdapter(Activity context, List<HerosSatistics> beans) {
+			this.context = context;
+			this.beans = beans;
+			loader = ImageLoader.getInstance();
+		}
+
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return beans.size();
+		}
+
+		@Override
+		public HerosSatistics getItem(int position) {
+			return beans.get(position);
+		}
+
+		@Override
+		public long getItemId(int position) {
+			return position;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			if (convertView == null) {
+				convertView = context.getLayoutInflater().inflate(
+						R.layout.frag_hero_used_list_item, null);
+				ViewHolder holder = new ViewHolder();
+				holder.tv_allKAD = (TextView) convertView
+						.findViewById(R.id.tv_allKAD);
+				holder.tv_heroName = (TextView) convertView
+						.findViewById(R.id.tv_heroName);
+				holder.tv_usesTimes = (TextView) convertView
+						.findViewById(R.id.usesTimes);
+				holder.tv_KDA = (TextView) convertView
+						.findViewById(R.id.tv_KDA);
+				holder.tv_perCoin = (TextView) convertView
+						.findViewById(R.id.tv_perCoin);
+				holder.tv_perXp = (TextView) convertView
+						.findViewById(R.id.tv_perXP);
+				holder.icon = (RoundAngleImageView) convertView
+						.findViewById(R.id.icon);
+				holder.tv_wining = (TextView) convertView
+						.findViewById(R.id.pb_winRatesText);
+				holder.pb_winRate = (ProgressBar) convertView
+						.findViewById(R.id.pb_winRate);
+				convertView.setTag(holder);
+			}
+			ViewHolder holder = (ViewHolder) convertView.getTag();
+			HerosSatistics bean = beans.get(position);
+			holder.tv_allKAD.setText(bean.getAllKAD() + "");
+			holder.tv_heroName.setText(bean.getHeroName());
+			holder.tv_usesTimes.setText("使用次数: " + bean.getUseTimes() + "");
+			holder.tv_KDA.setText("KDA:       " + bean.getKDA() + "");
+			holder.tv_perCoin
+					.setText("gold/min: " + bean.getGold_PerMin() + "");
+			holder.tv_perXp.setText("xp/min:  " + bean.getXp_PerMin() + "");
+			holder.pb_winRate.setProgress((int) bean.getWinning());
+			holder.tv_wining.setText(bean.getWinning() + "%");
+			loader.displayImage(
+					Utils.getHeroImageUri(Common.getHeroName(bean.getHeroID())),
+					holder.icon);
+			return convertView;
+		}
+
+	}
+
+	private static class ViewHolder {
+		private TextView tv_allKAD;
+		private TextView tv_heroName;
+		private TextView tv_usesTimes;
+		private TextView tv_KDA;
+		private TextView tv_perCoin;
+		private TextView tv_perXp;
+		private RoundAngleImageView icon;
+		private TextView tv_wining;
+		private ProgressBar pb_winRate;
 	}
 
 	@Override

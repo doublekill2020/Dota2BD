@@ -1,18 +1,16 @@
 package cn.edu.mydotabuff.ui;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.ActionBar;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -26,17 +24,17 @@ import android.widget.Toast;
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.DotaApplication.LocalDataType;
+import cn.edu.mydotabuff.base.BaseFragment;
 import cn.edu.mydotabuff.common.bean.BoardBean;
 import cn.edu.mydotabuff.common.CommAdapter;
 import cn.edu.mydotabuff.common.CommViewHolder;
 import cn.edu.mydotabuff.common.http.IInfoReceive;
-import cn.edu.mydotabuff.util.Debug;
 import cn.edu.mydotabuff.util.PersonalRequestImpl;
 import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.view.TipsToast;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;
 
-public class FragBoard extends Fragment {
+public class FragBoard extends BaseFragment {
 
 	private static final int FETCH_BOARD = 1;
 	private static final int FETCH_FAILED = 2;
@@ -49,10 +47,10 @@ public class FragBoard extends Fragment {
 	private String defaultPage = "china";
 	private int defaultItem;
 	private Toolbar toolbar;
-
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	protected View initViewAndData(LayoutInflater inflater,
+			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
 		View newsLayout = inflater.inflate(R.layout.frag_board, container,
 				false);
 		setHasOptionsMenu(true);
@@ -84,6 +82,12 @@ public class FragBoard extends Fragment {
 			}
 		}
 		return newsLayout;
+	}
+
+	@Override
+	protected void initEvent() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	void fetchData(final int type) {
@@ -236,4 +240,5 @@ public class FragBoard extends Fragment {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
 }

@@ -2,33 +2,27 @@ package cn.edu.mydotabuff.ui;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
-import io.rong.imlib.RongIMClient.ConnectCallback.ErrorCode;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -139,7 +133,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		contactsText = (TextView) findViewById(R.id.contacts_text);
 		newsText = (TextView) findViewById(R.id.news_text);
 		settingText = (TextView) findViewById(R.id.setting_text);
-		fragmentManager = getFragmentManager();
+		fragmentManager = getSupportFragmentManager();
 		// 第一次启动时选中第0个tab
 		setTabSelection(0);
 		checkUpdateBtn = (TextView) findViewById(R.id.check_update);
