@@ -74,7 +74,7 @@ public class FragRecently extends Fragment implements OnMainEventListener {
 				false);
 		setHasOptionsMenu(true);
 		activity = getActivity();
-		dialog = new LoadingDialog(activity, getString(R.string.send_info));
+		dialog = new LoadingDialog(activity);
 		// 获得用户ID
 		myPreferences = activity.getSharedPreferences("user_info",
 				Activity.MODE_PRIVATE);
