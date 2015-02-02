@@ -13,6 +13,7 @@ public final class APIConstants {
 	public final static String API_KEY = "5150B9DBEEFE515FC93F6419F77275BD";
 	public final static String GET_ONLINE_NUM = "http://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1";
 	public final static String GET_BOARD = "http://www.dota2.com/webapi/ILeaderboard/GetDivisionLeaderboard/v0001";
-	
+	public final static String GET_FRIEND_LIST = "http://api.steampowered.com/ISteamUser/GetFriendList/v1";
+
 	public final static String GET_USER_TOKEN = "http://dota2helper.jd-app.com/client/rongcloud_getToken.action";
 }

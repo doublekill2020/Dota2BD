@@ -8,9 +8,6 @@
     <string name="home_news">消息</string>
     <string name="app_name_didi">神马嘀嘀商户端</string>
     <string name="version">2.0</string>
-
-
-
     <string name="select_hour">时</string>
     <string name="select_min">分</string>
     <string name="obtain_error">请求超时,请检查网络</string>
@@ -170,6 +167,8 @@
         <item>攻击范围</item>
         <item>弹道速度</item>
     </string-array>
-    
+
     <string name="share_content">【Dota2数据通】全方位的dota2战绩查询分析app，你也来体验一下吧~</string>
+    <string name="last_login_time">上次在线： %1$s</string>
+
 </resources>

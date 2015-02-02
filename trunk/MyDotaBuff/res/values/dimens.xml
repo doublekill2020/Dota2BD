@@ -5,7 +5,7 @@
     <dimen name="list_item_nomal">8dp</dimen>
     <dimen name="list_item_big">12dp</dimen>
     <dimen name="list_item_biggest">16dp</dimen>
-    <dimen name="textview_nomal">4dp</dimen>
+    <dimen name="textview_normal">4dp</dimen>
     <dimen name="textview_big">8dp</dimen>
     <dimen name="textview_biggest">12dp</dimen>
     <dimen name="icon_nomal">4dp</dimen>

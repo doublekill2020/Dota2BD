@@ -2,14 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/act_bg"
     android:fitsSystemWindows="true"
+    android:background="@color/act_bg"
     android:orientation="vertical" >
 
+    <include layout="@layout/common_toolbar" />
+
     <cn.edu.mydotabuff.view.XListView
-        android:id="@+id/left_list"
+        android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="match_parent" >
     </cn.edu.mydotabuff.view.XListView>
 
 </LinearLayout>

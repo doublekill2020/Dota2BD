@@ -7,6 +7,10 @@
         android:id="@+id/more_detail"
         android:title="统计"
         app:showAsAction="never"/>
+        <item
+        android:id="@+id/friend_list"
+        android:title="好友列表"
+        app:showAsAction="never"/>
     <item
         android:id="@+id/give_mark"
         android:title="去评分"
