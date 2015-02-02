@@ -52,6 +52,8 @@
         </activity>
         <activity android:name="cn.edu.mydotabuff.ui.ActPlayerDetail" >
         </activity>
+        <activity android:name="cn.edu.mydotabuff.ui.ActFriendList" >
+        </activity>
         <activity
             android:name="cn.edu.mydotabuff.ui.hero.HeroDetailActivity"
             android:label="@string/title_activity_hero_detail"

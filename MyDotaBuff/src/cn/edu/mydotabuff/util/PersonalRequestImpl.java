@@ -73,4 +73,12 @@ public class PersonalRequestImpl extends BaseRequestInterface {
 		request(APIConstants.GET_USER_TOKEN, params, true);
 	}
 
+	public void getFriendList(String steamid) {
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("key", APIConstants.API_KEY);
+		params.put("appid", "570");
+		params.put("steamid", steamid);
+		params.put("relationship", "friend");
+		request(APIConstants.GET_FRIEND_LIST, params, true);
+	}
 }

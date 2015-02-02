@@ -30,6 +30,7 @@ import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.common.http.OnWebDataGetListener;
 import cn.edu.mydotabuff.common.http.WebDataHelper;
 import cn.edu.mydotabuff.common.http.WebDataHelper.DataType;
+import cn.edu.mydotabuff.ui.ActFriendList;
 import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.view.CircleImageView;
 import cn.edu.mydotabuff.view.LoadingDialog;
@@ -195,6 +196,16 @@ public class FragMyDetail extends BaseFragment implements OnWebDataGetListener {
 				TipsToast.showToast(activity, "抱歉，您还未安装相应的应用市场",
 						Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
 			}
+			break;
+		case R.id.friend_list:
+			Intent intent = new Intent(activity, ActFriendList.class);
+			if (bean == null) {
+				String userid = myPreferences.getString("userID", "");
+				intent.putExtra("steamid", Common.getSteamID(userid));
+			} else {
+				intent.putExtra("steamid", bean.getSteamid());
+			}
+			startActivity(intent);
 			break;
 		default:
 			break;
