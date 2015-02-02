@@ -6,5 +6,13 @@
         android:id="@+id/more_detail"
         android:title="统计"
         app:showAsAction="never"/>
+    <item
+        android:id="@+id/friend_list"
+        android:title="好友列表"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/back_to_main"
+        android:title="返回首页"
+        app:showAsAction="never"/>
 
 </menu>

@@ -144,6 +144,20 @@ public class ActPlayerDetail extends BaseActivity implements
 				startActivity(intent);
 			}
 			break;
+		case R.id.friend_list:
+			if (bean == null) {
+				TipsToast.showToast(ActPlayerDetail.this, "暂无数据",
+						Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
+			} else {
+				Intent intent = new Intent(this, ActFriendList.class);
+				intent.putExtra("steamid", bean.getSteamid());
+				startActivity(intent);
+			}
+			break;
+		case R.id.back_to_main:
+			startActivity(new Intent(this, ActMain.class));
+			finish();
+			break;
 		}
 		return super.onOptionsItemSelected(item);
 	}

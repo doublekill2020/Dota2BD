@@ -19,9 +19,14 @@ import org.json.JSONObject;
 import com.nhaarman.listviewanimations.appearance.simple.ScaleInAnimationAdapter;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseActivity;
 import cn.edu.mydotabuff.common.CommAdapter;
@@ -245,6 +250,30 @@ public class ActFriendList extends BaseActivity {
 
 			}
 		});
+		list.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent();
+				i.setClass(ActFriendList.this, ActPlayerDetail.class);
+				i.putExtra("data", infoBeans.get(position - 1));
+				startActivity(i);
+			}
+		});
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			finish();
+			break;
+		default:
+			break;
+		}
+		return super.onOptionsItemSelected(item);
+	}
 }

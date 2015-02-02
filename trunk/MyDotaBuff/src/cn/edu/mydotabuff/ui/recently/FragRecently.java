@@ -265,6 +265,8 @@ public class FragRecently extends BaseFragment implements OnMainEventListener {
 								}
 							} catch (JSONException e) {
 								e.printStackTrace();
+								msg.arg1 = type;
+								msg.obj = "未知";
 							}
 							break;
 						default:
