@@ -9,7 +9,6 @@
  */
 package cn.edu.mydotabuff.ui;
 
-import java.security.acl.NotOwnerException;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
@@ -52,7 +51,7 @@ import cn.edu.mydotabuff.view.XListView.IXListViewListener;
  */
 public class ActFriendList extends BaseActivity {
 
-	private String steamid = "", failedMsg = "";
+	private String steamid = "";
 	private StringBuilder steamids;
 	private XListView list;
 	private static final int GET_FRIEND_LIST = 1;
@@ -128,7 +127,7 @@ public class ActFriendList extends BaseActivity {
 				showTip("网络超时，下拉重试~~", DialogType.LOAD_FAILURE);
 				break;
 			case BaseActivity.JSON_ERROR:
-				showTip("网络超时，下拉重试~~", DialogType.LOAD_FAILURE);
+				showTip("网络超时，下拉重试~~~", DialogType.LOAD_FAILURE);
 				break;
 			default:
 				break;
