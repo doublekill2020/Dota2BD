@@ -121,7 +121,7 @@ public class ActFriendList extends BaseActivity {
 				showTip("网络超时，下拉重试~~", DialogType.LOAD_FAILURE);
 				break;
 			case BaseActivity.JSON_ERROR:
-
+				showTip("网络超时，下拉重试~~", DialogType.LOAD_FAILURE);
 				break;
 			default:
 				break;
