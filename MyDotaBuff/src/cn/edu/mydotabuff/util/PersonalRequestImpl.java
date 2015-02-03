@@ -81,4 +81,30 @@ public class PersonalRequestImpl extends BaseRequestInterface {
 		params.put("relationship", "friend");
 		request(APIConstants.GET_FRIEND_LIST, params, true);
 	}
+
+	public void getDota2News(int index, int page) {
+		StringBuilder sb = new StringBuilder();
+		switch (index) {
+		case 1:
+			sb.append(APIConstants.INDEX1_URL);
+			break;
+		case 2:
+			sb.append(APIConstants.INDEX2_URL);
+			break;
+		case 3:
+			sb.append(APIConstants.INDEX3_URL);
+			break;
+		case 4:
+			sb.append(APIConstants.INDEX4_URL);
+			break;
+		default:
+			break;
+		}
+		if (page == 0) {
+			sb.append(".html");
+		} else {
+			sb.append(page + ".html");
+		}
+		request(sb.toString(), new HashMap<String, String>(), true);
+	}
 }
