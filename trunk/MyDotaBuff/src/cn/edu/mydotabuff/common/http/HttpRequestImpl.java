@@ -11,6 +11,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -79,7 +81,7 @@ public class HttpRequestImpl {
 	/**
 	 * 供外部调用的GET接口
 	 */
-	public static byte[] httpGetFromServer(String path) throws Exception {
+	public static byte[] httpGetFromServer(String path){
 		return httpGetFromServer(path, encoding);
 	}
 
@@ -90,62 +92,62 @@ public class HttpRequestImpl {
 	 *            :服务器URL地址
 	 * @return byte[]
 	 */
-	private static byte[] httpGetFromServer(String path, String encoding)
-			throws Exception {
+	private static byte[] httpGetFromServer(String path, String encoding) {
 		byte[] result = null;
-		InputStream is = null;
-		Debug.d("hao", path);
-		URL url = new URL(path);
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-		conn.setConnectTimeout(CONNECTION_TIMEOUT);// 5000
-		conn.setReadTimeout(READ_TIMEOUT); // 3000
-		conn.setRequestMethod("GET");
-		conn.connect();
-		int code = conn.getResponseCode();
-		switch (code) {
-		case 200: {// 服务器成功返回网�?
-			is = conn.getInputStream();
-			int len = 0;
-			byte[] buff = new byte[1024];
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			while ((len = is.read(buff)) != -1) {
-				baos.write(buff, 0, len);
-				baos.flush();
+		try {
+			InputStream is = null;
+			Debug.d("hao", path);
+			URL url;
+			url = new URL(path);
+			HttpURLConnection conn;
+			conn = (HttpURLConnection) url.openConnection();
+			conn.setConnectTimeout(CONNECTION_TIMEOUT);// 5000
+			conn.setReadTimeout(READ_TIMEOUT); // 3000
+			conn.setRequestMethod("GET");
+			conn.connect();
+			int code;
+			code = conn.getResponseCode();
+			switch (code) {
+			case 200: {// 服务器成功返回网�?
+				is = conn.getInputStream();
+				int len = 0;
+				byte[] buff = new byte[1024];
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				while ((len = is.read(buff)) != -1) {
+					baos.write(buff, 0, len);
+					baos.flush();
+				}
+				// String temp = new String(baos.toByteArray(), encoding);
+				// result = temp.getBytes();
+				result = baos.toByteArray();
+				baos.close();
+				is.close();
+				
 			}
-			// String temp = new String(baos.toByteArray(), encoding);
-			// result = temp.getBytes();
-			result = baos.toByteArray();
-			baos.close();
-			is.close();
-
-		}
-			break;
-		case 404: {// 请求的网页不存在
-			String temp = "{\"data\":\"\",\"info\":\"网络问题!\",\"status\":404}";
+				break;
+			case 404: {// 请求的网页不存在
+				String temp = "{\"data\":\"\",\"info\":\"网络问题!\",\"status\":404}";
+				result = temp.getBytes();
+				break;
+			}
+			case 503: {// 服务器超�?
+				String temp = "{\"data\":\"\",\"info\":\"连接服务器超时?\",\"status\":503}";
+				result = temp.getBytes();
+				break;
+			}
+			}
+			conn.disconnect();
+		} catch (MalformedURLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			String temp = "{\"data\":\"\",\"info\":\"连接服务器超时?\",\"status\":503}";
 			result = temp.getBytes();
-			break;
-		}
-		case 503: {// 服务器超�?
-			String temp = "{\"data\":\"\",\"info\":\"连接服务器超�?\",\"status\":503}";
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			String temp = "{\"data\":\"\",\"info\":\"连接服务器超时?\",\"status\":503}";
 			result = temp.getBytes();
-			break;
 		}
-		}
-		conn.disconnect();
-		// HttpGet httpRequest = new HttpGet(path);
-		// String strResult = "";
-		// try {
-		// HttpClient httpClient = new DefaultHttpClient();
-		// HttpResponse httpResponse = httpClient.execute(httpRequest);
-		// if (httpResponse.getStatusLine().getStatusCode() == HttpStatus.SC_OK)
-		// {
-		// strResult = EntityUtils.toString(httpResponse.getEntity());
-		// }
-		// } catch (ClientProtocolException e) {
-		// e.printStackTrace();
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
 		return result;
 	}
 
