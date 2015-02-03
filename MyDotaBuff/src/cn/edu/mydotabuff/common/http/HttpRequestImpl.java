@@ -32,6 +32,8 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
+import cn.edu.mydotabuff.util.Debug;
+
 public class HttpRequestImpl {
 
 	/**
@@ -92,6 +94,7 @@ public class HttpRequestImpl {
 			throws Exception {
 		byte[] result = null;
 		InputStream is = null;
+		Debug.d("hao", path);
 		URL url = new URL(path);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		conn.setConnectTimeout(CONNECTION_TIMEOUT);// 5000
