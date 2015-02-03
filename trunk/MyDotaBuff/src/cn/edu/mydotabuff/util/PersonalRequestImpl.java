@@ -85,23 +85,23 @@ public class PersonalRequestImpl extends BaseRequestInterface {
 	/**
 	 * 
 	 * @param index
-	 *            1-全部 2-刀塔新闻 3-赛事资讯 4-版本公告
+	 *            0-全部 1-刀塔新闻 2-赛事资讯 3-版本公告
 	 * @param page
 	 *            0-第一页
 	 */
 	public void getDota2News(int index, int page) {
 		StringBuilder sb = new StringBuilder();
 		switch (index) {
-		case 1:
+		case 0:
 			sb.append(APIConstants.INDEX1_URL);
 			break;
-		case 2:
+		case 1:
 			sb.append(APIConstants.INDEX2_URL);
 			break;
-		case 3:
+		case 2:
 			sb.append(APIConstants.INDEX3_URL);
 			break;
-		case 4:
+		case 3:
 			sb.append(APIConstants.INDEX4_URL);
 			break;
 		default:

@@ -30,7 +30,7 @@ import cn.edu.mydotabuff.view.PagerSlidingTabStrip;
  * @date 2015-2-3 下午2:57:30
  * 
  */
-public class ActNews extends BaseActivity {
+public class ActNewsList extends BaseActivity {
 	private static final String[] TITLE = new String[] { "全部", "刀塔新闻", "赛事资讯",
 			"版本公告" };
 	private PagerSlidingTabStrip indicator;
