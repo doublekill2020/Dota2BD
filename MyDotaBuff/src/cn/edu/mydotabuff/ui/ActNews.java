@@ -9,17 +9,18 @@
  */
 package cn.edu.mydotabuff.ui;
 
-import com.viewpagerindicator.TabPageIndicator;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.Toast;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseActivity;
+import cn.edu.mydotabuff.view.PagerSlidingTabStrip;
 
 /**
  * @ClassName: ActNews
@@ -29,20 +30,24 @@ import cn.edu.mydotabuff.base.BaseActivity;
  * 
  */
 public class ActNews extends BaseActivity {
-	private static final String[] TITLE = new String[] { "头条", "房产", "另一面",
-			"女人", "财经", "数码", "情感", "科技" };
+	private static final String[] TITLE = new String[] { "全部", "刀塔新闻", "赛事资讯",
+			"版本公告" };
 
 	@Override
 	protected void initViewAndData() {
 		// TODO Auto-generated method stub
 		setContentView(R.layout.act_news_base);
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setTitle("新闻");
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 		FragmentPagerAdapter adapter = new TabPageIndicatorAdapter(
 				getSupportFragmentManager());
 		ViewPager pager = (ViewPager) findViewById(R.id.pager);
 		pager.setAdapter(adapter);
 
-		// 实例化TabPageIndicator然后设置ViewPager与之关联
-		TabPageIndicator indicator = (TabPageIndicator) findViewById(R.id.indicator);
+		PagerSlidingTabStrip indicator = (PagerSlidingTabStrip) findViewById(R.id.indicator);
 		indicator.setViewPager(pager);
 
 		// 如果我们要对ViewPager设置监听，用indicator设置就行了
@@ -97,5 +102,18 @@ public class ActNews extends BaseActivity {
 		public int getCount() {
 			return TITLE.length;
 		}
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			finish();
+			break;
+		default:
+			break;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }
