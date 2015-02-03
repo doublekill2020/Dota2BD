@@ -45,7 +45,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 /**
  * @ClassName: FragNewsItem
  * @Description: TODO(这里用一句话描述这个类的作用)
- * @author 袁浩 1006401052yh@gmail.com
+ * @author 袁浩小鸡巴 1006401052yh@gmail.com
  * @date 2015-2-3 下午3:06:46
  * 
  */
@@ -197,14 +197,10 @@ public class FragNewsItem extends BaseFragment {
 					int position, long id) {
 				// TODO Auto-generated method stub
 				NewsBean bean = beans.get(position - 1);
-				if (bean.getIsVideo().equals("true")) {
-
-				} else {
-					Intent i = new Intent();
-					i.setClass(act, ActNews.class);
-					i.putExtra("url", bean.getUrl());
-					act.startActivity(i);
-				}
+				Intent i = new Intent();
+				i.setClass(act, ActNews.class);
+				i.putExtra("url", bean.getUrl());
+				act.startActivity(i);
 			}
 		});
 	}
@@ -284,6 +280,13 @@ class NewsBean {
 		this.time = time;
 		this.url = url;
 		this.isVideo = isVideo;
+	}
+
+	@Override
+	public String toString() {
+		return "NewsBean [pic=" + pic + ", title=" + title + ", content="
+				+ content + ", time=" + time + ", url=" + url + ", isVideo="
+				+ isVideo + "]";
 	}
 
 }
