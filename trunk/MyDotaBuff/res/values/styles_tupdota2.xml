@@ -17,7 +17,7 @@
      limitations under the License.
 -->
 
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <style name="Theme.Tupdota2" parent="@style/Theme.AppCompat.NoActionBar"></style>
 
@@ -65,7 +65,7 @@
 
     <style name="CommonTextView" parent="@android:style/Widget.TextView">
         <item name="android:singleLine">true</item>
-        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="CommonTextView.Small" parent="@style/CommonTextView">
