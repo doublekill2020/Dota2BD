@@ -32,14 +32,16 @@ import cn.edu.mydotabuff.view.PagerSlidingTabStrip;
 public class ActNews extends BaseActivity {
 	private static final String[] TITLE = new String[] { "全部", "刀塔新闻", "赛事资讯",
 			"版本公告" };
+	private PagerSlidingTabStrip indicator;
+	private Toolbar toolbar;
 
 	@Override
 	protected void initViewAndData() {
 		// TODO Auto-generated method stub
 		setContentView(R.layout.act_news_base);
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
-		getSupportActionBar().setTitle("新闻");
+		getSupportActionBar().setTitle("全部");
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		FragmentPagerAdapter adapter = new TabPageIndicatorAdapter(
@@ -47,16 +49,34 @@ public class ActNews extends BaseActivity {
 		ViewPager pager = (ViewPager) findViewById(R.id.pager);
 		pager.setAdapter(adapter);
 
-		PagerSlidingTabStrip indicator = (PagerSlidingTabStrip) findViewById(R.id.indicator);
+		indicator = (PagerSlidingTabStrip) findViewById(R.id.indicator);
 		indicator.setViewPager(pager);
 
-		// 如果我们要对ViewPager设置监听，用indicator设置就行了
+	}
+
+	@Override
+	protected void initEvent() {
+		// TODO Auto-generated method stub
 		indicator.setOnPageChangeListener(new OnPageChangeListener() {
 
 			@Override
 			public void onPageSelected(int arg0) {
-				Toast.makeText(getApplicationContext(), TITLE[arg0],
-						Toast.LENGTH_SHORT).show();
+				switch (arg0) {
+				case 0:
+					toolbar.setTitle("全部");
+					break;
+				case 1:
+					toolbar.setTitle("刀塔新闻");
+					break;
+				case 2:
+					toolbar.setTitle("赛事资讯");
+					break;
+				case 3:
+					toolbar.setTitle("版本公告");
+					break;
+				default:
+					break;
+				}
 			}
 
 			@Override
@@ -71,12 +91,6 @@ public class ActNews extends BaseActivity {
 		});
 	}
 
-	@Override
-	protected void initEvent() {
-		// TODO Auto-generated method stub
-
-	}
-
 	class TabPageIndicatorAdapter extends FragmentPagerAdapter {
 		public TabPageIndicatorAdapter(FragmentManager fm) {
 			super(fm);
@@ -84,10 +98,9 @@ public class ActNews extends BaseActivity {
 
 		@Override
 		public Fragment getItem(int position) {
-			// 新建一个Fragment来展示ViewPager item的内容，并传递参数
 			Fragment fragment = new FragNewsItem();
 			Bundle args = new Bundle();
-			args.putString("arg", TITLE[position]);
+			args.putInt("index", position);
 			fragment.setArguments(args);
 
 			return fragment;
