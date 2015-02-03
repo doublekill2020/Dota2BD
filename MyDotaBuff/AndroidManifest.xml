@@ -31,7 +31,7 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.Tupdota2" >
         <activity
-            android:name="cn.edu.mydotabuff.ui.ActNews"
+            android:name="cn.edu.mydotabuff.ui.ActNewsList"
             android:label="@string/app_name"
             android:launchMode="singleTask" >
             <intent-filter>

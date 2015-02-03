@@ -16,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,6 +24,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseActivity;
@@ -34,6 +37,7 @@ import cn.edu.mydotabuff.util.Debug;
 import cn.edu.mydotabuff.util.PersonalRequestImpl;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;
 import cn.edu.mydotabuff.view.XListView;
+import cn.edu.mydotabuff.view.XListView.IXListViewListener;
 
 import com.nhaarman.listviewanimations.appearance.simple.ScaleInAnimationAdapter;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -54,6 +58,7 @@ public class FragNewsItem extends BaseFragment {
 	private Activity act;
 	private ArrayList<NewsBean> beans = new ArrayList<NewsBean>();
 	private View view;
+	private int currentPage = 0;
 
 	@Override
 	protected View initViewAndData(LayoutInflater inflater,
@@ -65,7 +70,9 @@ public class FragNewsItem extends BaseFragment {
 			index = getArguments().getInt("index");
 			act = getActivity();
 			list = (XListView) view.findViewById(R.id.list);
-			fetchData(index + 1, 0, true);
+			list.setPullLoadEnable(true);
+			list.setPullRefreshEnable(true);
+			fetchData(index, currentPage);
 		}
 		return view;
 	}
@@ -82,25 +89,31 @@ public class FragNewsItem extends BaseFragment {
 	private Handler h = new Handler() {
 		public void handleMessage(android.os.Message msg) {
 
+			list.stopLoadMore();
+			list.stopRefresh();
 			switch (msg.what) {
 			case BaseActivity.OK:
-				adapter = new CommAdapter<NewsBean>(act, beans,
-						R.layout.frag_news_item_list_item) {
+				if (adapter == null) {
+					adapter = new CommAdapter<NewsBean>(act, beans,
+							R.layout.frag_news_item_list_item) {
 
-					@Override
-					public void convert(CommViewHolder helper, NewsBean item) {
-						// TODO Auto-generated method stub
-						helper.setText(R.id.title, item.getTitle());
-						helper.setText(R.id.content, item.getContent());
-						helper.setText(R.id.time, item.getTime());
-						ImageView icon = helper.getView(R.id.pic);
-						ImageLoader.getInstance().displayImage(item.getPic(),
-								icon);
-					}
-				};
-				animationAdapter = new ScaleInAnimationAdapter(adapter);
-				animationAdapter.setAbsListView(list);
-				list.setAdapter(animationAdapter);
+						@Override
+						public void convert(CommViewHolder helper, NewsBean item) {
+							// TODO Auto-generated method stub
+							helper.setText(R.id.title, item.getTitle());
+							helper.setText(R.id.content, item.getContent());
+							helper.setText(R.id.time, item.getTime());
+							ImageView icon = helper.getView(R.id.pic);
+							ImageLoader.getInstance().displayImage(
+									item.getPic(), icon);
+						}
+					};
+					animationAdapter = new ScaleInAnimationAdapter(adapter);
+					animationAdapter.setAbsListView(list);
+					list.setAdapter(animationAdapter);
+				} else {
+					adapter.notifyDataSetChanged();
+				}
 				break;
 			case BaseActivity.FAILED:
 				((BaseActivity) act).showTip("网络超时~~", DialogType.LOAD_FAILURE);
@@ -113,7 +126,7 @@ public class FragNewsItem extends BaseFragment {
 		};
 	};
 
-	private void fetchData(final int type, final int page, boolean isFirstPage) {
+	private void fetchData(final int type, final int page) {
 		PersonalRequestImpl request = new PersonalRequestImpl(
 				new IInfoReceive() {
 
@@ -134,7 +147,8 @@ public class FragNewsItem extends BaseFragment {
 											info.getString("title"),
 											info.getString("desc"),
 											info.getString("date"),
-											info.getString("url"));
+											info.getString("url"),
+											info.getString("isVideo"));
 									beans.add(bean);
 								}
 							} else {
@@ -145,18 +159,54 @@ public class FragNewsItem extends BaseFragment {
 							e.printStackTrace();
 							msg.what = BaseActivity.JSON_ERROR;
 						}
-						msg.arg1 = type;
 						h.sendMessage(msg);
 					}
 				});
 		request.setActivity(getActivity());
+		request.setIsCancelAble(false);
 		request.getDota2News(type, page);
 	}
 
 	@Override
 	protected void initEvent() {
 		// TODO Auto-generated method stub
+		list.setXListViewListener(new IXListViewListener() {
 
+			@Override
+			public void onRefresh() {
+				// TODO Auto-generated method stub
+				beans.clear();
+				if (adapter != null) {
+					adapter.notifyDataSetChanged();
+				}
+				currentPage = 0;
+				fetchData(index, currentPage);
+			}
+
+			@Override
+			public void onLoadMore() {
+				// TODO Auto-generated method stub
+				currentPage++;
+				fetchData(index, currentPage);
+			}
+		});
+		list.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				NewsBean bean = beans.get(position - 1);
+				if (bean.getIsVideo().equals("true")) {
+
+				} else {
+					Intent i = new Intent();
+					i.setClass(act, cls);
+					i.putExtra("url", bean.getUrl());
+					act.startActivity(i);
+				}
+			}
+		});
 	}
 
 	@Override
@@ -175,6 +225,15 @@ class NewsBean {
 	private String content;
 	private String time;
 	private String url;
+	private String isVideo;
+
+	public String getIsVideo() {
+		return isVideo;
+	}
+
+	public void setIsVideo(String isVideo) {
+		this.isVideo = isVideo;
+	}
 
 	public String getPic() {
 		return pic;
@@ -217,13 +276,14 @@ class NewsBean {
 	}
 
 	public NewsBean(String pic, String title, String content, String time,
-			String url) {
+			String url, String isVideo) {
 		super();
 		this.pic = pic;
 		this.title = title;
 		this.content = content;
 		this.time = time;
 		this.url = url;
+		this.isVideo = isVideo;
 	}
 
 }

@@ -221,10 +221,10 @@ public class BaseRequestInterface {
 				request();
 				break;
 			case HTTP_FORM_TYPE_POST_NORMAL:
-				//simplepost();
+				// simplepost();
 				break;
 			case HTTP_FORM_TYPE_POST_BYTE:
-				//postHeadIcon();
+				// postHeadIcon();
 				break;
 			// case HTTP_FORM_TYPE_POST_URI:
 			// postrequest();
@@ -354,49 +354,49 @@ public class BaseRequestInterface {
 		// }
 
 		// 传图片
-//		protected synchronized void postHeadIcon() {
-//			showDialog = true;
-//			try {
-//				// byte[] bytes = BitmapCompress.compress(path, 25, 128, 128);
-//				tool = new HttpRequestTool(receive);
-//				tool.setTimeout(timeout);
-//				if (showDialog) {
-//					if (title != null) {
-//						tool.setProgressDialogTitle(title);
-//					}
-//					if (weakActivity != null && weakActivity.get() != null) {
-//						tool.setProgressDialog(weakActivity.get());
-//					}
-//				} else {
-//					tool.setProgressDialog(null);
-//				}
-//				tool.doPost(getUrl(), params, bytes, fileName, contentType);
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
+		// protected synchronized void postHeadIcon() {
+		// showDialog = true;
+		// try {
+		// // byte[] bytes = BitmapCompress.compress(path, 25, 128, 128);
+		// tool = new HttpRequestTool(receive);
+		// tool.setTimeout(timeout);
+		// if (showDialog) {
+		// if (title != null) {
+		// tool.setProgressDialogTitle(title);
+		// }
+		// if (weakActivity != null && weakActivity.get() != null) {
+		// tool.setProgressDialog(weakActivity.get());
+		// }
+		// } else {
+		// tool.setProgressDialog(null);
+		// }
+		// tool.doPost(getUrl(), params, bytes, fileName, contentType);
+		// } catch (Exception e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		// }
 
-//		protected synchronized void simplepost() {
-//			try {
-//				tool = new HttpRequestTool(receive);
-//				tool.setTimeout(timeout);
-//				if (showDialog) {
-//					if (title != null) {
-//						tool.setProgressDialogTitle(title);
-//					}
-//					if (weakActivity != null && weakActivity.get() != null) {
-//						tool.setProgressDialog(weakActivity.get());
-//					}
-//				} else {
-//					tool.setProgressDialog(null);
-//				}
-//				tool.doPost(getUrl(), fileName);
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
+		// protected synchronized void simplepost() {
+		// try {
+		// tool = new HttpRequestTool(receive);
+		// tool.setTimeout(timeout);
+		// if (showDialog) {
+		// if (title != null) {
+		// tool.setProgressDialogTitle(title);
+		// }
+		// if (weakActivity != null && weakActivity.get() != null) {
+		// tool.setProgressDialog(weakActivity.get());
+		// }
+		// } else {
+		// tool.setProgressDialog(null);
+		// }
+		// tool.doPost(getUrl(), fileName);
+		// } catch (Exception e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		// }
 
 	}
 
