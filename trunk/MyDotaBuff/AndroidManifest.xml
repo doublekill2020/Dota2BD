@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.edu.mydotabuff"
-    android:versionCode="8"
-    android:versionName="1.5.2" >
+    android:versionCode="9"
+    android:versionName="1.5.3" >
 
     <uses-sdk
         android:minSdkVersion="9"
@@ -95,7 +95,7 @@
             android:value="52d4a57b56240b3518080289" />
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="xiaomi" />
+            android:value="alpha" />
 
         <activity
             android:name="com.umeng.socialize.view.ShareActivity"
