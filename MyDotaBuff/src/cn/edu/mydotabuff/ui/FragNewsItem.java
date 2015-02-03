@@ -201,7 +201,7 @@ public class FragNewsItem extends BaseFragment {
 
 				} else {
 					Intent i = new Intent();
-					i.setClass(act, cls);
+					i.setClass(act, ActNews.class);
 					i.putExtra("url", bean.getUrl());
 					act.startActivity(i);
 				}
