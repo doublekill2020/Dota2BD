@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseActivity;
+import cn.edu.mydotabuff.ui.recently.FragItemAdapter;
 import cn.edu.mydotabuff.view.PagerSlidingTabStrip;
 
 /**
@@ -98,12 +99,7 @@ public class ActNews extends BaseActivity {
 
 		@Override
 		public Fragment getItem(int position) {
-			Fragment fragment = new FragNewsItem();
-			Bundle args = new Bundle();
-			args.putInt("index", position);
-			fragment.setArguments(args);
-
-			return fragment;
+			return FragNewsItem.newInstance(position);
 		}
 
 		@Override

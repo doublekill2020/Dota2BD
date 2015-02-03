@@ -21,7 +21,7 @@ public final class APIConstants {
 
 	// dota2 news
 	public final static String NEWS_URL = "http://www.dota2.com.cn/wapnews";
-	public final static String INDEX1_URL = NEWS_URL + "/hotnewsList/index";
+	public final static String INDEX1_URL = NEWS_URL + "/hotnewsList";
 	public final static String INDEX2_URL = NEWS_URL + "/govnews/index";
 	public final static String INDEX3_URL = NEWS_URL + "/matchnews/index";
 	public final static String INDEX4_URL = NEWS_URL + "/vernews/index";

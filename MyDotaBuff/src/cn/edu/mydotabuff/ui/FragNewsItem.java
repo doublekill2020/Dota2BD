@@ -30,6 +30,7 @@ import cn.edu.mydotabuff.base.BaseFragment;
 import cn.edu.mydotabuff.common.CommAdapter;
 import cn.edu.mydotabuff.common.CommViewHolder;
 import cn.edu.mydotabuff.common.http.IInfoReceive;
+import cn.edu.mydotabuff.util.Debug;
 import cn.edu.mydotabuff.util.PersonalRequestImpl;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;
 import cn.edu.mydotabuff.view.XListView;
@@ -52,18 +53,30 @@ public class FragNewsItem extends BaseFragment {
 	private ScaleInAnimationAdapter animationAdapter;
 	private Activity act;
 	private ArrayList<NewsBean> beans = new ArrayList<NewsBean>();
+	private View view;
 
 	@Override
 	protected View initViewAndData(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View view = inflater.inflate(R.layout.frag_news_item_base,
-				container, false);
-		index = getArguments().getInt("index");
-		act = getActivity();
-		list = (XListView) view.findViewById(R.id.list);
-		fetchData(2, 0);
+		if (view == null) {
+			view = inflater.inflate(R.layout.frag_news_item_base, container,
+					false);
+			index = getArguments().getInt("index");
+			act = getActivity();
+			list = (XListView) view.findViewById(R.id.list);
+			fetchData(index + 1, 0, true);
+		}
 		return view;
+	}
+
+	public static FragNewsItem newInstance(int position) {
+		final FragNewsItem f = new FragNewsItem();
+
+		final Bundle args = new Bundle();
+		args.putInt("index", position);
+		f.setArguments(args);
+		return f;
 	}
 
 	private Handler h = new Handler() {
@@ -100,7 +113,7 @@ public class FragNewsItem extends BaseFragment {
 		};
 	};
 
-	private void fetchData(final int type, final int page) {
+	private void fetchData(final int type, final int page, boolean isFirstPage) {
 		PersonalRequestImpl request = new PersonalRequestImpl(
 				new IInfoReceive() {
 
@@ -111,17 +124,21 @@ public class FragNewsItem extends BaseFragment {
 						try {
 							JSONObject obj = new JSONObject(
 									receiveInfo.getJsonStr());
-							msg.what = BaseActivity.OK;
-							JSONArray array = obj.getJSONArray("data");
-							for (int i = 0; i < array.length(); i++) {
-								JSONObject info = array.getJSONObject(i);
-								NewsBean bean = new NewsBean(
-										info.getString("pic"),
-										info.getString("title"),
-										info.getString("desc"),
-										info.getString("date"),
-										info.getString("url"));
-								beans.add(bean);
+							if (receiveInfo.getMsgType() == ReceiveMsgType.OK) {
+								msg.what = BaseActivity.OK;
+								JSONArray array = obj.getJSONArray("data");
+								for (int i = 0; i < array.length(); i++) {
+									JSONObject info = array.getJSONObject(i);
+									NewsBean bean = new NewsBean(
+											info.getString("pic"),
+											info.getString("title"),
+											info.getString("desc"),
+											info.getString("date"),
+											info.getString("url"));
+									beans.add(bean);
+								}
+							} else {
+								msg.what = BaseActivity.FAILED;
 							}
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
@@ -142,6 +159,14 @@ public class FragNewsItem extends BaseFragment {
 
 	}
 
+	@Override
+	public void onDestroyView() {
+		// TODO Auto-generated method stub
+		super.onDestroyView();
+		if (null != view) {
+			((ViewGroup) view.getParent()).removeView(view);
+		}
+	}
 }
 
 class NewsBean {

@@ -82,6 +82,13 @@ public class PersonalRequestImpl extends BaseRequestInterface {
 		request(APIConstants.GET_FRIEND_LIST, params, true);
 	}
 
+	/**
+	 * 
+	 * @param index
+	 *            1-全部 2-刀塔新闻 3-赛事资讯 4-版本公告
+	 * @param page
+	 *            0-第一页
+	 */
 	public void getDota2News(int index, int page) {
 		StringBuilder sb = new StringBuilder();
 		switch (index) {

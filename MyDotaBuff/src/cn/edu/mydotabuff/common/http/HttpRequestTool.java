@@ -10,6 +10,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import org.json.JSONException;
+import org.json2.JSONObject;
 
 import cn.edu.mydotabuff.common.http.IInfoReceive.ReceiveMsgType;
 import cn.edu.mydotabuff.common.http.IInfoReceive.ResponseObj;
@@ -27,7 +28,6 @@ public class HttpRequestTool {
 
 	LoadingDialog mProgressDialog = null;
 
-	
 	public LoadingDialog getmProgressDialog() {
 		return mProgressDialog;
 	}
@@ -42,7 +42,7 @@ public class HttpRequestTool {
 	String DialogTitle = "Loading...";
 
 	boolean isCancelAble;
-	
+
 	public boolean isCancelAble() {
 		return isCancelAble;
 	}
@@ -125,10 +125,10 @@ public class HttpRequestTool {
 	}
 
 	public void showProgressDialog(boolean flag) {
-		showProgressDialog(DialogTitle,flag);
+		showProgressDialog(DialogTitle, flag);
 	}
 
-	public void showProgressDialog(final String msg,final boolean flag) {
+	public void showProgressDialog(final String msg, final boolean flag) {
 		// if (activity != null) {
 		// activity.runOnUiThread(new Runnable() {
 		// @Override
@@ -191,171 +191,174 @@ public class HttpRequestTool {
 		}
 	}
 
-//	/**
-//	 * Post不传文件方式
-//	 * 
-//	 * @param url
-//	 * @param map
-//	 *            <key,value>
-//	 * @throws Exception
-//	 */
-//	public void doPost(String url, Map<String, String> map) throws Exception {
-//		Timer timer = new Timer();
-//		TimeoutTask timeoutTask = new TimeoutTask();
-//		timer.schedule(timeoutTask, timeout);
-//
-//		showProgressDialog();
-//		String jsonStr = "";
-//		ByteArrayOutputStream mByteArrayOutputStream = new ByteArrayOutputStream();
-//		mByteArrayOutputStream.write(HttpRequestImpl.httpPostFromServer(url,
-//				map));
-//		mByteArrayOutputStream.flush();
-//		jsonStr = mByteArrayOutputStream.toString();
-//		mByteArrayOutputStream.close();
-//
-//		ResponseObj mResponseObj = getJsonResponse(jsonStr);
-//		if (mIInfoReceive != null) {
-//			timer.cancel();
-//			if (!timeoutTask.IsTimeout()) {
-//				mIInfoReceive.onMsgReceiver(mResponseObj);
-//				hideProgressDialog();
-//			}
-//		}
-//	}
+	// /**
+	// * Post不传文件方式
+	// *
+	// * @param url
+	// * @param map
+	// * <key,value>
+	// * @throws Exception
+	// */
+	// public void doPost(String url, Map<String, String> map) throws Exception
+	// {
+	// Timer timer = new Timer();
+	// TimeoutTask timeoutTask = new TimeoutTask();
+	// timer.schedule(timeoutTask, timeout);
+	//
+	// showProgressDialog();
+	// String jsonStr = "";
+	// ByteArrayOutputStream mByteArrayOutputStream = new
+	// ByteArrayOutputStream();
+	// mByteArrayOutputStream.write(HttpRequestImpl.httpPostFromServer(url,
+	// map));
+	// mByteArrayOutputStream.flush();
+	// jsonStr = mByteArrayOutputStream.toString();
+	// mByteArrayOutputStream.close();
+	//
+	// ResponseObj mResponseObj = getJsonResponse(jsonStr);
+	// if (mIInfoReceive != null) {
+	// timer.cancel();
+	// if (!timeoutTask.IsTimeout()) {
+	// mIInfoReceive.onMsgReceiver(mResponseObj);
+	// hideProgressDialog();
+	// }
+	// }
+	// }
 
-//	/**
-//	 * Post多个文件
-//	 * 
-//	 * @param url
-//	 * @param map
-//	 * @param contentType
-//	 *            for example {@link}HttpRequestImpl.CONTENT_TYPE_FORMDATA
-//	 * @throws Exception
-//	 */
-//	public void doPost(String url, Map<String, ? extends Object> map,
-//			List<Map<String, Object>> files, String contentType)
-//			throws Exception {
-//		Timer timer = new Timer();
-//		TimeoutTask timeoutTask = new TimeoutTask();
-//		timer.schedule(timeoutTask, timeout);
-//
-//		showProgressDialog();
-//		String jsonStr = "";
-//		String temp_url = url;
-//		// log("" + temp_url);
-//		jsonStr = HttpRequestImpl.doPost(url, map, files, contentType);
-//		ResponseObj mResponseObj = getJsonResponse(jsonStr);
-//		if (mIInfoReceive != null) {
-//			timer.cancel();
-//			if (!timeoutTask.IsTimeout()) {
-//				mIInfoReceive.onMsgReceiver(mResponseObj);
-//				hideProgressDialog();
-//			}
-//		}
-//	}
+	// /**
+	// * Post多个文件
+	// *
+	// * @param url
+	// * @param map
+	// * @param contentType
+	// * for example {@link}HttpRequestImpl.CONTENT_TYPE_FORMDATA
+	// * @throws Exception
+	// */
+	// public void doPost(String url, Map<String, ? extends Object> map,
+	// List<Map<String, Object>> files, String contentType)
+	// throws Exception {
+	// Timer timer = new Timer();
+	// TimeoutTask timeoutTask = new TimeoutTask();
+	// timer.schedule(timeoutTask, timeout);
+	//
+	// showProgressDialog();
+	// String jsonStr = "";
+	// String temp_url = url;
+	// // log("" + temp_url);
+	// jsonStr = HttpRequestImpl.doPost(url, map, files, contentType);
+	// ResponseObj mResponseObj = getJsonResponse(jsonStr);
+	// if (mIInfoReceive != null) {
+	// timer.cancel();
+	// if (!timeoutTask.IsTimeout()) {
+	// mIInfoReceive.onMsgReceiver(mResponseObj);
+	// hideProgressDialog();
+	// }
+	// }
+	// }
 
-//	/**
-//	 * Post 上传单个文件，以字节流方式上传
-//	 * 
-//	 * @param url
-//	 * @param params
-//	 * @param image
-//	 * @param fileName
-//	 *            例如 123.jpg
-//	 * @param contentType
-//	 *            for example {@link}HttpRequestImpl.CONTENT_TYPE_FORMDATA
-//	 * @throws Exception
-//	 */
-//	public void doPost(String url, Map<String, String> params, byte[] image,
-//			String fileName, String contentType) throws Exception {
-//		Timer timer = new Timer();
-//		TimeoutTask timeoutTask = new TimeoutTask();
-//		timer.schedule(timeoutTask, timeout);
-//
-//		showProgressDialog();
-//		String jsonStr = "";
-//		String temp_url = url;
-//		// log("" + temp_url);
-//		jsonStr = HttpRequestImpl.doPost(url, params, image, fileName,
-//				contentType);
-//		ResponseObj mResponseObj = getJsonResponse(jsonStr);
-//		if (mIInfoReceive != null) {
-//			timer.cancel();
-//			if (!timeoutTask.IsTimeout()) {
-//				mIInfoReceive.onMsgReceiver(mResponseObj);
-//				hideProgressDialog();
-//			}
-//		}
-//	}
+	// /**
+	// * Post 上传单个文件，以字节流方式上传
+	// *
+	// * @param url
+	// * @param params
+	// * @param image
+	// * @param fileName
+	// * 例如 123.jpg
+	// * @param contentType
+	// * for example {@link}HttpRequestImpl.CONTENT_TYPE_FORMDATA
+	// * @throws Exception
+	// */
+	// public void doPost(String url, Map<String, String> params, byte[] image,
+	// String fileName, String contentType) throws Exception {
+	// Timer timer = new Timer();
+	// TimeoutTask timeoutTask = new TimeoutTask();
+	// timer.schedule(timeoutTask, timeout);
+	//
+	// showProgressDialog();
+	// String jsonStr = "";
+	// String temp_url = url;
+	// // log("" + temp_url);
+	// jsonStr = HttpRequestImpl.doPost(url, params, image, fileName,
+	// contentType);
+	// ResponseObj mResponseObj = getJsonResponse(jsonStr);
+	// if (mIInfoReceive != null) {
+	// timer.cancel();
+	// if (!timeoutTask.IsTimeout()) {
+	// mIInfoReceive.onMsgReceiver(mResponseObj);
+	// hideProgressDialog();
+	// }
+	// }
+	// }
 
-//	/**
-//	 * Post 上传单个文件，以Uri path方式上传
-//	 * 
-//	 * @param url
-//	 * @param params
-//	 * @param fileUri
-//	 *            例如 sdcard/aa/bc.jpg
-//	 * @param fileName
-//	 * @param contentType
-//	 *            for example {@link}HttpRequestImpl.CONTENT_TYPE_FORMDATA
-//	 * @throws Exception
-//	 */
-//	public void doPost(String url, Map<String, String> params, String fileUri,
-//			String contentType) throws Exception {
-//		Timer timer = new Timer();
-//		TimeoutTask timeoutTask = new TimeoutTask();
-//		timer.schedule(timeoutTask, timeout);
-//
-//		showProgressDialog();
-//		String jsonStr = "";
-//		String temp_url = url;
-//		// log("" + temp_url);
-//		jsonStr = HttpRequestImpl.doPost(url, params, fileUri, contentType);
-//		ResponseObj mResponseObj = getJsonResponse(jsonStr);
-//		if (mIInfoReceive != null) {
-//			timer.cancel();
-//			if (!timeoutTask.IsTimeout()) {
-//				mIInfoReceive.onMsgReceiver(mResponseObj);
-//				hideProgressDialog();
-//			}
-//		}
-//	}
+	// /**
+	// * Post 上传单个文件，以Uri path方式上传
+	// *
+	// * @param url
+	// * @param params
+	// * @param fileUri
+	// * 例如 sdcard/aa/bc.jpg
+	// * @param fileName
+	// * @param contentType
+	// * for example {@link}HttpRequestImpl.CONTENT_TYPE_FORMDATA
+	// * @throws Exception
+	// */
+	// public void doPost(String url, Map<String, String> params, String
+	// fileUri,
+	// String contentType) throws Exception {
+	// Timer timer = new Timer();
+	// TimeoutTask timeoutTask = new TimeoutTask();
+	// timer.schedule(timeoutTask, timeout);
+	//
+	// showProgressDialog();
+	// String jsonStr = "";
+	// String temp_url = url;
+	// // log("" + temp_url);
+	// jsonStr = HttpRequestImpl.doPost(url, params, fileUri, contentType);
+	// ResponseObj mResponseObj = getJsonResponse(jsonStr);
+	// if (mIInfoReceive != null) {
+	// timer.cancel();
+	// if (!timeoutTask.IsTimeout()) {
+	// mIInfoReceive.onMsgReceiver(mResponseObj);
+	// hideProgressDialog();
+	// }
+	// }
+	// }
 
-//	// 上传单纯文字给服务器dopost
-//	public void doPost(String urlString, String mobiles) {
-//		Timer timer = new Timer();
-//		TimeoutTask timeoutTask = new TimeoutTask();
-//		timer.schedule(timeoutTask, timeout);
-//
-//		showProgressDialog();
-//		String jsonStr = "";
-//		String temp_url = urlString;
-//		// log("" + temp_url);
-//		jsonStr = HttpRequestImpl.doPost(urlString, mobiles);
-//		ResponseObj mResponseObj;
-//		try {
-//			mResponseObj = getJsonResponse(jsonStr);
-//			if (mIInfoReceive != null) {
-//				timer.cancel();
-//				if (!timeoutTask.IsTimeout()) {
-//					mIInfoReceive.onMsgReceiver(mResponseObj);
-//					hideProgressDialog();
-//				}
-//			}
-//
-//		} catch (JSONException e1) {
-//			// TODO Auto-generated catch block
-//			e1.printStackTrace();
-//		}
-//
-//	}
+	// // 上传单纯文字给服务器dopost
+	// public void doPost(String urlString, String mobiles) {
+	// Timer timer = new Timer();
+	// TimeoutTask timeoutTask = new TimeoutTask();
+	// timer.schedule(timeoutTask, timeout);
+	//
+	// showProgressDialog();
+	// String jsonStr = "";
+	// String temp_url = urlString;
+	// // log("" + temp_url);
+	// jsonStr = HttpRequestImpl.doPost(urlString, mobiles);
+	// ResponseObj mResponseObj;
+	// try {
+	// mResponseObj = getJsonResponse(jsonStr);
+	// if (mIInfoReceive != null) {
+	// timer.cancel();
+	// if (!timeoutTask.IsTimeout()) {
+	// mIInfoReceive.onMsgReceiver(mResponseObj);
+	// hideProgressDialog();
+	// }
+	// }
+	//
+	// } catch (JSONException e1) {
+	// // TODO Auto-generated catch block
+	// e1.printStackTrace();
+	// }
+	//
+	// }
 
 	/**
 	 * @param url
 	 * @throws IOException
 	 * @throws Exception
 	 */
-	public void doGet(String url,boolean flag) {
+	public void doGet(String url, boolean flag) {
 		if (isAutoMode) {
 			showProgressDialog(flag);
 		}
@@ -418,7 +421,19 @@ public class HttpRequestTool {
 			}
 			// jsonStr = jsonStr.replaceAll("\\xef\\xbb\\xbf", "");
 		}
-		String status = "1";
+		String status = "503";
+		try {
+			JSONObject obj = new JSONObject(jsonStr);
+			// 数据源太乱 蛋疼 暂时这么处理
+			if (obj.has("status")) {
+				status = new JSONObject(jsonStr).getString("status");
+			} else {
+				status = "1";
+			}
+		} catch (org.json2.JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		ResponseObj mResponseObj = new ResponseObj();
 		if (status.equals("0")) {
 			mResponseObj.setMsgType(ReceiveMsgType.FAILED);
