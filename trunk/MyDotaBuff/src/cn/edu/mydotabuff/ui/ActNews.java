@@ -27,7 +27,7 @@ public class ActNews extends Activity {
 		webView = (WebView) findViewById(R.id.wv_news);
 		WebSettings settings = webView.getSettings();
 		settings.setJavaScriptEnabled(true);
-		webView.loadUrl("http://www.dota2.com.cn/wapnews/govnews/20141209/166787.htm");
+		webView.loadUrl(newsUrl);
 		webView.setWebViewClient(new WebViewClient());
 	}
 
