@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -60,7 +61,6 @@ public class ActNews extends Activity {
 	 */
 	private void initWebView() {
 
-		// TODO Auto-generated method stub
 		fullVideoView = (FrameLayout) findViewById(R.id.video_fullView);
 		videoWebView = (WebView) findViewById(R.id.video_webView);
 		WebSettings ws = videoWebView.getSettings();
