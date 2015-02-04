@@ -98,10 +98,15 @@ public class ActNews extends Activity {
 				hideCustomView();
 				return true;
 			} else {
-				videoWebView.loadUrl("about:blank");
-				// mTestWebView.loadData("", "text/html; charset=UTF-8", null);
-				ActNews.this.finish();
-				Log.i("testwebview", "===>>>2");
+				// 判断是否能返回
+				if (videoWebView.canGoBack()) {
+					videoWebView.goBack();
+					return true;
+				} else {
+					videoWebView.loadUrl("about:blank");
+					ActNews.this.finish();
+					Log.i("testwebview", "finish!");
+				}
 			}
 		}
 		return true;
