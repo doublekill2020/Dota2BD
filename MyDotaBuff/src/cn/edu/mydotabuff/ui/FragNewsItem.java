@@ -45,7 +45,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 /**
  * @ClassName: FragNewsItem
  * @Description: TODO(这里用一句话描述这个类的作用)
- * @author 袁浩小鸡巴 1006401052yh@gmail.com
+ * @author 姚偲小鸡巴 1006401052yh@gmail.com
  * @date 2015-2-3 下午3:06:46
  * 
  */
