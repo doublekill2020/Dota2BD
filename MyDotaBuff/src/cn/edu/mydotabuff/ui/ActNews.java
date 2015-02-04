@@ -231,10 +231,10 @@ public class ActNews extends Activity {
 		super.onConfigurationChanged(newConfig);
 
 		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-			Log.i("webview", "   现在是横屏1");
+			Log.i("webview", "   现在是横屏");
 			islandport = false;
 		} else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-			Log.i("webview", "   现在是竖屏1");
+			Log.i("webview", "   现在是竖屏");
 			islandport = true;
 		}
 	}
