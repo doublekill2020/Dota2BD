@@ -43,19 +43,19 @@
 
             <Button
                 android:layout_gravity="center"
-                android:id="@+id/btn"
-                android:text="按ID"
+                android:id="@+id/submit"
+                android:text="提交"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
     </LinearLayout>
 
     <Button
-        android:id="@+id/submit"
+        android:id="@+id/btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout1"
         android:layout_centerHorizontal="true"
-        android:text="提交" />
+        android:text="按ID" />
 
 </RelativeLayout>
