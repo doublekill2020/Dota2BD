@@ -7,18 +7,23 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.webkit.WebSettings.RenderPriority;
 import android.widget.FrameLayout;
+import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.R;
+import cn.edu.mydotabuff.base.BaseActivity;
 
-public class ActNews extends Activity {
+public class ActNews extends BaseActivity {
 
 	private FrameLayout fullVideoView;// 全屏时视频加载view
 	private WebView videoWebView;
@@ -29,17 +34,26 @@ public class ActNews extends Activity {
 	private View xCustomView;
 	private xWebChromeClient xwebchromeclient;
 	private WebChromeClient.CustomViewCallback xCustomViewCallback;
-
+	private static final String APP_CACAHE_DIRNAME = "/webcache";
 	private String newsUrl;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void initViewAndData() {
 		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
 		setContentView(R.layout.act_news);
+		Toolbar mainToolbar = (Toolbar) findViewById(R.id.toolbar);
+		setSupportActionBar(mainToolbar);
+		getSupportActionBar().setTitle("刀塔新闻");
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 		initIntent();
 		initWebView();
 		videoWebView.loadUrl(newsUrl);
+	}
+
+	@Override
+	protected void initEvent() {
+		// TODO Auto-generated method stub
 
 	}
 
@@ -76,7 +90,27 @@ public class ActNews extends Activity {
 		ws.setSavePassword(true);
 		ws.setSaveFormData(true);// 保存表单数据
 		ws.setJavaScriptEnabled(true);
+
+		ws.setRenderPriority(RenderPriority.HIGH);
+		if (DotaApplication.getApplication().isNetworkAvailabe()) {
+			ws.setCacheMode(WebSettings.LOAD_DEFAULT);
+		} else {
+			ws.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+		}
+		// 开启 DOM storage API 功能
 		ws.setDomStorageEnabled(true);
+		// 开启 database storage API 功能
+		ws.setDatabaseEnabled(true);
+		String cacheDirPath = getFilesDir().getAbsolutePath()
+				+ APP_CACAHE_DIRNAME;
+		// String cacheDirPath =
+		// getCacheDir().getAbsolutePath()+Constant.APP_DB_DIRNAME;
+		// 设置数据库缓存路径
+		ws.setDatabasePath(cacheDirPath);
+		// 设置 Application Caches 缓存目录
+		ws.setAppCachePath(cacheDirPath);
+		// 开启 Application Caches 功能
+		ws.setAppCacheEnabled(true);
 		xwebchromeclient = new xWebChromeClient();
 		videoWebView.setWebChromeClient(xwebchromeclient);
 		videoWebView.setWebViewClient(new xWebViewClientent());
@@ -240,5 +274,18 @@ public class ActNews extends Activity {
 			Log.i("webview", "   现在是竖屏");
 			islandport = true;
 		}
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			finish();
+			break;
+		default:
+			break;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }

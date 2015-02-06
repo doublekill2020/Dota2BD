@@ -1,3 +1,12 @@
+/**   
+ * @Title: ActBoard.java
+ * @ProjectName MyDotaBuff 
+ * @Package cn.edu.mydotabuff.ui 
+ * @author 袁浩 1006401052yh@gmail.com
+ * @date 2015-2-6 下午2:47:41 
+ * @version V1.4  
+ * Copyright 2013-2015 深圳市点滴互联科技有限公司  版权所有
+ */
 package cn.edu.mydotabuff.ui;
 
 import java.util.ArrayList;
@@ -7,64 +16,66 @@ import org.json2.JSONException;
 import org.json2.JSONObject;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.DotaApplication.LocalDataType;
-import cn.edu.mydotabuff.base.BaseFragment;
-import cn.edu.mydotabuff.common.bean.BoardBean;
+import cn.edu.mydotabuff.base.BaseActivity;
 import cn.edu.mydotabuff.common.CommAdapter;
 import cn.edu.mydotabuff.common.CommViewHolder;
+import cn.edu.mydotabuff.common.bean.BoardBean;
 import cn.edu.mydotabuff.common.http.IInfoReceive;
 import cn.edu.mydotabuff.util.PersonalRequestImpl;
 import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.view.TipsToast;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;
 
-public class FragBoard extends BaseFragment {
+/**
+ * @ClassName: ActBoard
+ * @Description: TODO(这里用一句话描述这个类的作用)
+ * @author 袁浩 1006401052yh@gmail.com
+ * @date 2015-2-6 下午2:47:41
+ * 
+ */
+public class ActBoard extends BaseActivity {
 
 	private static final int FETCH_BOARD = 1;
 	private static final int FETCH_FAILED = 2;
 	private ArrayList<BoardBean> beans;
 	private ListView lv;
 	private CommAdapter<BoardBean> adapter;
-	private Activity activity;
 	private TextView tx;
 	private MyHandler myHandler;
 	private String defaultPage = "china";
 	private int defaultItem;
 	private Toolbar toolbar;
+
 	@Override
-	protected View initViewAndData(LayoutInflater inflater,
-			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	protected void initViewAndData() {
 		// TODO Auto-generated method stub
-		View newsLayout = inflater.inflate(R.layout.frag_board, container,
-				false);
-		setHasOptionsMenu(true);
-		lv = (ListView) newsLayout.findViewById(R.id.frag_board_list);
-		tx = (TextView) newsLayout.findViewById(R.id.update_time);
+		setContentView(R.layout.act_board);
+		toolbar = (Toolbar) findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
+		getSupportActionBar().setTitle("国服天梯");
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+		lv = getViewById(R.id.frag_board_list);
+		tx = getViewById(R.id.update_time);
 		beans = DotaApplication.getApplication().getData(LocalDataType.BOARDS);
 		myHandler = new MyHandler();
-		activity = getActivity();
-		toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
 		if (beans == null) {
 			fetchData(FETCH_BOARD);
 		} else {
 			toolbar.setTitle("国服天梯");
-			lv.setAdapter(adapter = new CommAdapter<BoardBean>(activity, beans,
+			lv.setAdapter(adapter = new CommAdapter<BoardBean>(this, beans,
 					R.layout.frag_board_item) {
 
 				@Override
@@ -81,13 +92,6 @@ public class FragBoard extends BaseFragment {
 								.getUpdateTime(), "MM-dd HH:mm"));
 			}
 		}
-		return newsLayout;
-	}
-
-	@Override
-	protected void initEvent() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	void fetchData(final int type) {
@@ -135,34 +139,13 @@ public class FragBoard extends BaseFragment {
 					}
 
 				});
-		request.setActivity(activity);
+		request.setActivity(this);
 		switch (type) {
 		case FETCH_BOARD:
 			request.getBoard(defaultPage);
 			break;
 		default:
 			break;
-		}
-	}
-
-	private void setTitle() {
-		if (defaultPage.equals("china")) {
-			toolbar.setTitle("国服天梯");
-		} else if (defaultPage.equals("americas")) {
-			toolbar.setTitle("美服天梯");
-		} else if (defaultPage.equals("se_asia")) {
-			toolbar.setTitle("东南亚天梯");
-		} else if (defaultPage.equals("europe")) {
-			toolbar.setTitle("欧服天梯");
-		}
-	}
-
-	@Override
-	public void onHiddenChanged(boolean hidden) {
-		// TODO Auto-generated method stub
-		super.onHiddenChanged(hidden);
-		if (hidden == false) {
-			setTitle();
 		}
 	}
 
@@ -179,7 +162,7 @@ public class FragBoard extends BaseFragment {
 								LocalDataType.BOARDS);
 					}
 					lv.setAdapter(adapter = new CommAdapter<BoardBean>(
-							activity, beans, R.layout.frag_board_item) {
+							ActBoard.this, beans, R.layout.frag_board_item) {
 
 						@Override
 						public void convert(CommViewHolder helper,
@@ -199,8 +182,7 @@ public class FragBoard extends BaseFragment {
 				}
 				break;
 			case FETCH_FAILED:
-				TipsToast.showToast(activity, "steam被墙了，你懂得",
-						Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
+				showToast("steam被墙了，你懂得");
 				break;
 			default:
 				break;
@@ -208,11 +190,24 @@ public class FragBoard extends BaseFragment {
 		}
 	}
 
+	private void setTitle() {
+		if (defaultPage.equals("china")) {
+			toolbar.setTitle("国服天梯");
+		} else if (defaultPage.equals("americas")) {
+			toolbar.setTitle("美服天梯");
+		} else if (defaultPage.equals("se_asia")) {
+			toolbar.setTitle("东南亚天梯");
+		} else if (defaultPage.equals("europe")) {
+			toolbar.setTitle("欧服天梯");
+		}
+	}
+
 	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
-		inflater.inflate(R.menu.frag_board_menu, menu);
+		getMenuInflater().inflate(R.menu.frag_board_menu, menu);
 		defaultItem = ((MenuItem) menu.findItem(R.id.china)).getItemId();
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
@@ -238,7 +233,16 @@ public class FragBoard extends BaseFragment {
 			}
 			fetchData(FETCH_BOARD);
 		}
+		if (item.getItemId() == android.R.id.home) {
+			finish();
+		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	protected void initEvent() {
+		// TODO Auto-generated method stub
+
 	}
 
 }
