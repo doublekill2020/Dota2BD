@@ -18,16 +18,11 @@ import android.widget.Toast;
 
 public class AppManager {
 
-	public static final String LOGINOUT = "login_out";
-	public static final String TAG = "AppManager";
-	// private static Stack<Activity> activityStack;
 	private static Stack<WeakReference<Activity>> activityStack;
 	private static WeakReference<Activity> curractivity = null;
 	private static AppManager instance;
 
 	private AppManager() {
-		// XMPPConnection connection = new XMPPConnection(config);
-		// connection.connect();
 	}
 
 	/**
