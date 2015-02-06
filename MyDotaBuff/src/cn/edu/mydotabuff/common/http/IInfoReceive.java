@@ -26,30 +26,10 @@ public interface IInfoReceive {
 	}
 
 	public enum ReceiveMsgType {
-		/**
-		 * �ɹ�����
-		 * */
-		OK("ok"),
-		/**
-		 * ʧ�ܷ���
-		 */
-		FAILED("failed"),
-		/**
-		 * ��ʱ����
-		 */
-		TIMEOUT("timeout"),
-		/**
-		 * �������ҳ������?
-		 */
-		NOT_FOUND("not_found");
+		OK("ok"), FAILED("failed"), TIMEOUT("timeout"), NOT_FOUND("not_found");
 
 		private String TypeCode;
 
-		/**
-		 * ����һ������ָ���ַ��ö���?
-		 * 
-		 * @param inTypeCode
-		 */
 		private ReceiveMsgType(String inTypecode) {
 			this.TypeCode = inTypecode;
 		}
@@ -59,12 +39,6 @@ public interface IInfoReceive {
 			return TypeCode;
 		}
 
-		/**
-		 * ���ָ�����ַ��ȡ��Ӧ��ö��ֵ
-		 * 
-		 * @param inActionCode
-		 * @return
-		 */
 		public static ReceiveMsgType getMsgType(String inTypeCode) {
 			for (ReceiveMsgType type : ReceiveMsgType.values()) {
 				if (type.TypeCode.equals(inTypeCode))

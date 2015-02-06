@@ -11,9 +11,9 @@ package cn.edu.mydotabuff.ui;
 
 import java.util.ArrayList;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.json2.JSONArray;
+import org.json2.JSONException;
+import org.json2.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -33,7 +33,6 @@ import cn.edu.mydotabuff.base.BaseFragment;
 import cn.edu.mydotabuff.common.CommAdapter;
 import cn.edu.mydotabuff.common.CommViewHolder;
 import cn.edu.mydotabuff.common.http.IInfoReceive;
-import cn.edu.mydotabuff.util.Debug;
 import cn.edu.mydotabuff.util.PersonalRequestImpl;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;
 import cn.edu.mydotabuff.view.XListView;

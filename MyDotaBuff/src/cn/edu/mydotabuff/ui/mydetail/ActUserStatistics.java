@@ -3,24 +3,18 @@ package cn.edu.mydotabuff.ui.mydetail;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ProgressBar;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.R;
@@ -37,8 +31,6 @@ import cn.edu.mydotabuff.util.Utils;
 import cn.edu.mydotabuff.view.XListView;
 
 import com.nhaarman.listviewanimations.appearance.simple.ScaleInAnimationAdapter;
-import com.nhaarman.listviewanimations.appearance.simple.SwingRightInAnimationAdapter;
-import com.umeng.analytics.MobclickAgent;
 
 public class ActUserStatistics extends BaseActivity implements OnClickListener {
 
