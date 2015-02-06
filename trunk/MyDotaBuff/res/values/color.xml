@@ -3,6 +3,7 @@
 
     <!-- 所需的红色 -->
     <color name="act_bg">#ffffff</color>
+    <color name="act_base_bg">#EEEFF4</color>
     <color name="middlered">#f22514</color>
     <!-- 预置颜色值 -->
     <color name="gray1">#999999</color>

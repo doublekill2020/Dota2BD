@@ -73,7 +73,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 
 	private FragRecently recentlyFragment;
 	private FragHeroList contactsFragment;
-	private FragBoard newsFragment;
+	private FragFound newsFragment;
 	private FragMyDetail settingFragment;
 	private View recentlyLayout;
 	private View contactsLayout;
@@ -371,6 +371,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 			break;
 		case R.id.board_layout:
 			setTabSelection(2);
+			getSupportActionBar().setTitle("发现");
 			break;
 		case R.id.chat_room:
 			mDrawerLayout.closeDrawer(Gravity.LEFT);
@@ -548,7 +549,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 			newsText.setTextColor(Color.WHITE);
 			if (newsFragment == null) {
 				// 如果NewsFragment为空，则创建一个并添加到界面上
-				newsFragment = new FragBoard();
+				newsFragment = new FragFound();
 				transaction.add(R.id.content, newsFragment);
 			} else {
 				// 如果NewsFragment不为空，则直接将它显示出来

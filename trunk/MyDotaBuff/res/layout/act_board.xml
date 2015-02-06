@@ -3,9 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/act_bg"
+    android:fitsSystemWindows="true"
     android:orientation="vertical" >
 
-    <LinearLayout
+    <include layout="@layout/common_toolbar" />
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="24dp"
         android:background="@drawable/btn_blue_bg_normal"

@@ -55,6 +55,10 @@
         </activity>
         <activity android:name="cn.edu.mydotabuff.ui.ActFriendList" >
         </activity>
+        <activity android:name="cn.edu.mydotabuff.ui.ActBoard" >
+        </activity>
+        <activity android:name="cn.edu.mydotabuff.ui.ActNewsList" >
+        </activity>
         <activity
             android:name="cn.edu.mydotabuff.ui.ActNews"
             android:configChanges="orientation|keyboardHidden|screenSize" >
