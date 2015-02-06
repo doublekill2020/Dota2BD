@@ -11,9 +11,9 @@ package cn.edu.mydotabuff.ui;
 
 import java.util.ArrayList;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.json2.JSONArray;
+import org.json2.JSONException;
+import org.json2.JSONObject;
 
 import com.nhaarman.listviewanimations.appearance.simple.ScaleInAnimationAdapter;
 import com.nostra13.universalimageloader.core.ImageLoader;

@@ -12,7 +12,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import com.sea_monster.core.common.Const.SYS;
 
 import android.app.Activity;
 import cn.edu.mydotabuff.DotaApplication;

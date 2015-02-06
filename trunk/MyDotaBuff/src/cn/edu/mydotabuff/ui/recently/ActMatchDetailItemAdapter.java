@@ -2,9 +2,7 @@ package cn.edu.mydotabuff.ui.recently;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.WeakHashMap;
 
-import javax.crypto.spec.PSource;
 
 import org.json2.JSONException;
 

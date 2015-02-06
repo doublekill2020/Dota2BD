@@ -4,9 +4,9 @@ import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.json2.JSONArray;
+import org.json2.JSONException;
+import org.json2.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
