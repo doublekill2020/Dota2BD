@@ -14,13 +14,24 @@
     <RelativeLayout
         android:id="@+id/board"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_found_item"
+        android:clickable="true" >
+
+        <ImageView
+            android:id="@+id/found_img_ladder"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/found_ladder" />
 
         <TextView
             style="@style/CommonTextView.Big"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/found_img_ladder"
             android:gravity="center_vertical"
             android:text="天梯排行榜"
             android:textColor="#333333" />
@@ -43,13 +54,24 @@
     <RelativeLayout
         android:id="@+id/news"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_found_item"
+        android:clickable="true" >
+
+        <ImageView
+            android:id="@+id/found_img_news"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/found_news" />
 
         <TextView
             style="@style/CommonTextView.Big"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/found_img_news"
             android:gravity="center_vertical"
             android:text="刀塔资讯"
             android:textColor="#333333" />
