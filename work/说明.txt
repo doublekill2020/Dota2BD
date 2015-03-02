@@ -1,0 +1,12 @@
+
+jarsigner -verbose -keystore 密钥库位置 -signedjar 签名后的apk 签名前的apk 别名
+注意：给Qihuunsign.apk签名密匙库文件及别名必须要验证的apk一致。否则会导致验证不能通过。
+ 
+例如：
+要对Qihuunsign.apk 文件签名 希望签名后的文件名为 Qihusign.apk
+ 
+密匙库文件为 d:\project\360Wallpaper.keystore
+别名(Alias)为QIHU360
+ 
+那么签名的命令为:
+jarsigner -verbose -keystore d:\project\360Wallpaper.keystore -signedjar d:\qihusign.apk d:\Qihuunsign.apk QIHU360
