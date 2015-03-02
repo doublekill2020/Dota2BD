@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:orientation="vertical"
+	android:background="#ffffff" android:layout_height="fill_parent">
+	<TextView android:text="最近更新" android:layout_width="wrap_content" android:layout_height="wrap_content" 
+		android:layout_margin="5dip" android:id="@+id/tv1" />
+	<View style="@style/viewlinestyle" android:layout_width="fill_parent" />
+			<com.demo.GalleryItem android:id="@+id/item_gallery"
+				android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:spacing="10dip" android:layout_marginTop="10dip"
+				android:layout_marginBottom="10dip" />
+</LinearLayout>

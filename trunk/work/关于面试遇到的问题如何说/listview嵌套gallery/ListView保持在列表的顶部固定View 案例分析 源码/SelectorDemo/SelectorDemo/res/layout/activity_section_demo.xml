@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:background="#000000">
+
+
+	<com.miss.sos.FastScrollView
+		android:layout_width="fill_parent" android:layout_height="fill_parent">
+
+		<com.miss.sos.widget.SosUniversalListView
+			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:id="@+id/lsComposer" android:fastScrollEnabled="true" />
+	</com.miss.sos.FastScrollView>
+
+
+	<!--
+		<com.miss.sos.widget.SosUniversalListView
+		android:layout_width="fill_parent" android:layout_height="fill_parent"
+		android:id="@+id/lsComposer" /> <View
+		class="com.miss.sos.widget.SosUniversalListView"
+		android:id="@+id/lsComposer" android:layout_width="match_parent"
+		android:layout_height="match_parent" android:fastScrollEnabled="true"
+		/>
+	-->
+</LinearLayout>
