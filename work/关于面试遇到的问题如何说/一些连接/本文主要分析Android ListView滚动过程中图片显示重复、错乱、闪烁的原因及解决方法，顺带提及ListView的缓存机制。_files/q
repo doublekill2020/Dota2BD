@@ -1,0 +1,71 @@
+
+
+
+
+                                var amzn_wdgt={"cols":2,"tag":"trinea-23","width":"336","inner_bkgd_color":"#FFFFFF","serviceVersion":"20070822","head_text_color":"#000000","marketPlace":"CN","show_image":true,"price_color":"#9C0000","rows":5,"templateId":"8001","title":"在用的还不错的书籍","height":null,"items":[{"asin":"B00BSXRLR8","comment":[""]},{"asin":"B009VV6EG8","comment":[""]},{"asin":"B007SXI4AK","comment":[""]},{"asin":"B0011F7WU4","comment":[""]},{"asin":"B00D73BJWK","comment":[""]},{"asin":"B00CJ368JS","comment":[""]},{"asin":"B0077K9XHW","comment":[""]},{"asin":"B0088PF1IA","comment":[""]},{"asin":"B0011FBU34","comment":[""]},{"asin":"B0016K8XGQ","comment":[""]},{"asin":"B004GV08CY","comment":[""]},{"asin":"B001GNBZFE","comment":[""]},{"asin":"B001130JN8","comment":[""]},{"asin":"B004WHZGZQ","comment":[""]},{"asin":"B0011C2P7W","comment":[""]},{"asin":"B0011BVTRK","comment":[""]},{"asin":"B0084ASO7E","comment":[""]},{"asin":"B00D747OG4","comment":[""]},{"asin":"B003TSBAMM","comment":[""]},{"asin":"B00AIG0PGK","comment":[""]},{"asin":"B001PTGR52","comment":[""]},{"asin":"B0062P24GU","comment":[""]},{"asin":"B0061XKRXA","comment":[""]},{"asin":"B00AK7BYJY","comment":[""]},{"asin":"B00114GRG0","comment":[""]},{"asin":"B009OLU8EE","comment":[""]}],"outer_bkgd_color":"#DEDEDE","show_review":true,"sort_order":"Random","displayTemplate":"7","show_price":true,"border_color":"#636363","text_color":"#000000"}
+        amzn_wdgt.ID = "V20070822/CN/trinea-23/8001/5ae437ec-751a-4c4c-8b4d-bb75ceda39a4";
+        amzn_wdgt.rt = "as_li_wdgt_ex";
+        if (typeof _amzn_utils_strs == "undefined") { _amzn_utils_strs = {}; }; _amzn_utils_strs.getStringForCN = function(key){
+ var obj = new Object();        obj.Book = '图书';
+        obj.Search = '搜索';
+        obj.Loading = '加载';
+        obj.LoyaltyPoints = '';
+        obj.GetEditWidgetShort = '获得/编辑Widget';
+        obj.Kindle = '';
+        obj.Unbox = '亚马逊即时视频';
+        obj.GetEditWidgetLong = '获得/编辑这个Widget';
+        obj.BestPrice = '亚马逊价';
+        obj.Music = 'CD';
+        obj.NoItemsWishlist = '心愿单里没有商品';
+        obj.MP3 = 'MP3 ';
+        obj.Buy = '购买';
+        obj.Download = '下载';
+        obj.closeString = '关闭窗口';
+        obj.or = '';
+        obj.NoResultsFor = '无搜索结果';
+        obj.SortBy = '排序方式';
+        obj.Now = '现在';
+        obj.GetWidgetLong = '获得Widget';
+        obj.DVD = 'DVD';
+        obj.CustomerReviews = '评论';
+        obj.PrivacyPolicy = '隐私';
+        obj.ErrorMessage = '不能连接到服务器。请稍后再试。';
+        obj.Price = '价格';
+        obj.Searching = '搜索中';
+        obj.WatchNow = '现在观看';
+        obj.BuyNew = '亚马逊价';
+        obj.Video = '视频';
+        obj.selectStore = '设置一个亚马逊商店';
+        obj.Amazon = 'Amazon';
+        obj.CampaignID = '212361';
+        obj.AssocImpVIP = 'www.assoc-amazon.cn';
+        obj.PandaAssocImpVIP = 'ir-cn.amazon-adsystem.com';
+        obj.CompletionVIP = 'completion.amazon.cn/search/complete';
+        obj.issMktid = '3240';
+        obj.AmazonCom = 'Amazon.cn';
+        obj.AmazonComLink = 'http://www.amazon.cn/';
+        obj.PrivacyPolicyLink = 'http://rcm-cn.amazon-adsystem.com/e/cm/privacy-policy.html?o=28';
+        obj.DefaultTag = 'widgetsamazon-23';
+        obj.WebsiteRefTag = 'assoc_wdgt_cn';
+        obj.WSUrl = 'http://ws.assoc-amazon.cn/widgets';
+        obj.PandaWSUrl = 'http://ws-cn.amazon-adsystem.com/widgets';
+        obj.WMSUrl = 'http://wms.assoc-amazon.cn';
+        obj.PandaWMSUrl = 'http://wms-cn.amazon-adsystem.com';
+        obj.WebsiteUrl = 'http://widgets.amazon.cn/';
+        obj.PrivacyPolicyLinkLength = '7';
+        obj.AmazonComLogoLength = '86';
+        obj.GetLinkButtonLengthDark = '70';
+        obj.GetLinkButtonLength = '82';
+        obj.GetLinkLength = '10';
+        obj.PrivacyAmazonComPermissableLength = '128';
+        obj.PrivacyGetLinkPermissableLength = '120';
+        obj.PrivacyGetLinkButtonPermissableLength = '125';
+        obj.PrivacyGetLinkButtonPermissableLengthDark = '115';
+        obj.LetterToPixelRatio = '6';
+if(obj[key]){ 
+return  obj[key]; }else { return '未知的字符串';
+    }
+}
+
+        document.write('<script charset="utf-8" type="text/javascript" src="http://wms-cn.amazon-adsystem.com/panda/20070822/CN/js/8001_7.js"> </script>');
+    

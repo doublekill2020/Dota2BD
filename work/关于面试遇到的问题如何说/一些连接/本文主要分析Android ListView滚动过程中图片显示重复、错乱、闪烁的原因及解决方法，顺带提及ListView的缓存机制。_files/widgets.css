@@ -1,0 +1,544 @@
+/* Widget outer box ---------------*/
+.amzn_wdgt {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    font: 100% Verdana, Arial, Helvetica, sans-serif;
+}
+
+.amzn_wdgt * {
+    margin: 0;
+    padding: 0;
+    font: 100% Verdana, Arial, Helvetica, sans-serif;
+}
+
+.amzn_wdgt table {
+    border: none;
+    margin:0;
+    padding: 0 0 0 0;
+    overflow: hidden;
+    text-align: left;
+    text-decoration: none;
+    text-shadow: none;
+    background: none;
+    border-spacing: 0;
+}
+
+.amzn_wdgt table tr {
+    border: none;
+    margin:0;
+    padding: 0 0 0 0;
+    overflow: hidden;
+    text-align: left;
+    text-decoration: none;
+    text-shadow: none;
+    background: none;
+}
+
+.amzn_wdgt table td {
+    border: none;
+    margin:0;
+    padding: 0 0 0 0;
+    overflow: hidden;
+    text-align: left;
+    text-decoration: none;
+    text-shadow: none;
+    background: none;
+}
+
+.amzn_wdgt img {
+    border: none;
+    margin:0;
+    padding: 0 0 0 0;
+}
+
+.amzn_wdgt a img,
+.amzn_wdgt a:hover img
+.amzn_wdgt a:active img,
+.amzn_wdgt a:link img,
+.amzn_wdgt a:visited img {
+    border: none;
+    margin:0;
+    padding: 0 0 0 0;
+}
+
+.amzn_wdgt div {
+    border: none;
+    margin:0;
+    padding: 0 0 0 0;
+    background: none;
+    clear:none;
+}
+
+.amzn_wdgt .amzn_wdgt_pad {
+}
+
+.amzn_wdgt a {
+    text-decoration: none;
+    border-bottom: none;
+}
+
+.amzn_wdgt a:visited {
+}
+
+.amzn_wdgt a:active {
+}
+
+.amzn_wdgt a:hover {
+    text-decoration: underline;
+    background: none;
+}
+
+.amzn_wdgt resultsBox {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+/*endWidget outer box--------*/
+/*---------------------------*/
+/* Widget Header-------------*/
+
+.amzn_wdgt .wdgt_hd {
+    text-align: left;
+    padding: 5px 5px 8px 5px;
+    font-size: 10px;
+}
+
+.amzn_wdgt .wdgt_hd a {
+    text-decoration: none;
+}
+
+.amzn_wdgt .wdgt_hd a:visited {
+}
+
+.amzn_wdgt .wdgt_hd a:active {
+}
+
+.amzn_wdgt .wdgt_hd a:hover {
+    text-decoration: underline;
+    background: none;
+}
+
+.amzn_wdgt .wdgt_hd .hd_input {
+    font-size: 10px;
+}
+
+.amzn_wdgt .wdgt_hd h2 {
+    text-align: left;
+    font: bold 12px / 1em Verdana, Arial, Helvetica, sans-serif;
+}
+
+/*end Widget Header ---------*/
+/*---------------------------*/
+/* Widget border-------------*/
+
+.amzn_wdgt .wdgt_brdr {
+    float: left;
+    padding: 8px 0 0 0;
+}
+
+/* Tile-----------------*/
+.amzn_wdgt .wdgt_brdr .wdgt_tl {
+    /*position: relative;*/
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    /*margin: 0 0 2px;*/
+    text-align:left;
+    /*z-index: 5;*/
+}
+
+.amzn_wdgt .wdgt_brdr .wdgt_tl_pad {
+    float: left;
+    /*Top right bottom left*/
+    padding : 0 3px 5px 3px;
+    margin: 0;
+}
+
+.amzn_wdgt .wdgt_brdr .wdgt_tl .asin_h1 {
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 2px 2px 4px;
+}
+
+.amzn_wdgt .wdgt_brdr .wdgt_tl .asin_h2 {
+    padding: 2px 2px 2px 4px;
+    font-size: 9px;
+}
+
+.amzn_wdgt .wdgt_brdr .wdgt_tl .asin_img {
+    float:left;
+    border:none;
+    width: 40px;
+    height: 60px;
+    padding: 2px 2px 2px 4px;
+}
+
+.amzn_wdgt .wdgt_brdr .wdgt_tl .asin_cmnt {
+    font-size: 10px;
+    clear: left;
+    padding: 2px 2px 2px 4px;
+}
+
+.amzn_wdgt .wdgt_brdr .wdgt_tl .asin_price {
+    font-size: 10px;
+    font-weight: bold;
+    padding: 2px 2px 2px 4px;
+}
+
+.amzn_wdgt .wdgt_brdr .wdgt_tl .asin_category {
+    font-size: 10px;
+    padding: 2px 2px 2px 4px;
+}
+
+.amzn_wdgt .wdgt_brdr .wdgt_tl .asin_review {
+    font-size: 10px;
+    padding: 2px 2px 2px 4px;
+    /*clear: left;*/
+}
+/* endTile----------*/
+
+/*end Widget border ---------*/
+/*---------------------------*/
+/* Widget pagination---------*/
+.amzn_wdgt .wdgt_pgn {
+    clear: left;
+    text-align: center;
+    padding: 0;
+}
+
+.amzn_wdgt .wdgt_pgn .pgn_cnt strong {
+    padding: 0 2px;
+}
+
+.amzn_wdgt  .wdgt_pgn .pgn_cnt a {
+    text-decoration: none;
+    padding: 0 2px;
+}
+
+.amzn_wdgt .wdgt_pgn .pgn_cnt a:visited {
+}
+
+.amzn_wdgt  .wdgt_pgn .pgn_cnt a:active {
+}
+
+.amzn_wdgt  .wdgt_pgn .pgn_cnt a:hover {
+    border: none;
+}
+
+.amzn_wdgt .wdgt_pgn .pgn_cnt {
+    /*width: 12em;*/
+    font-size: 10px;
+    margin: 0 auto;
+}
+
+/*end Widget pagination -----*/
+/*---------------------------*/
+/* Widget footer-------------*/
+
+.amzn_wdgt .wdgt_ft {
+    padding: 5px 2px 8px 2px;
+}
+
+.amzn_wdgt  .wdgt_ft a {
+    text-decoration: none;
+}
+
+.amzn_wdgt  .wdgt_ft a:visited {
+}
+
+.amzn_wdgt  .wdgt_ft a:active {
+}
+
+.amzn_wdgt  .wdgt_ft a:hover {
+}
+
+.amzn_wdgt .wdgt_ft .ft_cnt {
+    font-size: 9px;
+    text-align: center;
+}
+
+.amzn_wdgt .wdgt_ft .new_ft_cnt {
+    font-size: 10px;
+}
+/* end Widget footer---------*/
+
+.amzn_wdgt .wdgt_hd .hd_input input.btn {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.amzn_wdgt .wdgt_hd .hd_input input.txt {
+    font-size: 10px;
+}
+
+.amzn_wdgt .wdgt_hd .hd_input img.go {
+    position: relative;
+    top: 3px;
+}
+
+/* For wait class begin*/
+.waiting {
+    visibility: visible;
+}
+
+.nowaiting {
+    visibility: hidden;
+}
+/* For wait class end */
+
+/* For the popup begin */
+#amzn_popup_div {
+    position: absolute;
+    visibility: hidden;
+    background-color: white;
+    padding: 0;
+    margin: 0;
+    line-height: 18px;
+    z-index: 100;
+}
+
+.wdgt_pop_tl {
+    padding: 0px 0 0px 0;
+    background-color: white;
+    font: 100% Verdana, Arial, Helvetica, sans-serif;
+    position: relative;
+    text-align: left;
+    z-index: 5;
+    border:none;
+    background:white;		
+}
+
+.wdgt_pop_tl table {
+    border: none;
+    margin:0;
+    padding: 0 0 0 0;
+    overflow: hidden;
+    text-align: left;
+    text-decoration: none;
+    text-shadow: none;
+    background: none;
+}
+
+.wdgt_pop_tl table tr {
+    border: none;
+    margin:0 0 0 0;
+    padding: 0 0 0 0;
+    overflow: hidden;
+    text-align: left;
+    text-decoration: none;
+    text-shadow: none;
+    background: none;
+}
+
+.wdgt_pop_tl table td {
+    border: none;
+    margin:0 0 0 0;
+    padding: 0 0 0 0;
+    overflow: hidden;
+    text-align: left;
+    text-decoration: none;
+    text-shadow: none;
+    background: none;
+}
+
+.wdgt_pop_tl a {
+    text-decoration: none;
+    border-bottom: none;
+}
+
+.wdgt_pop_tl a:visited {
+    text-decoration: none;
+    border-bottom: none;
+    	
+}
+
+.wdgt_pop_tl a:active {
+}
+
+.wdgt_pop_tl img {
+    padding:0px;
+    margin:0px;		
+    border:none;	
+}
+
+.wdgt_pop_tl a:hover {
+    text-decoration: none;
+    background: none;
+}
+
+.wdgt_pop_tl .asin_h1 {
+    font-size: 11px;
+    text-align: left;	
+    font-weight: bold;
+    padding: 6px 4px 2px 0px;
+    color: #010e8f;		
+}
+.wdgt_pop_tl .asin_h2 , .wdgt_pop_tl .asin_category{
+    font-size: 10px;
+    padding: 0px 4px 0px 0px;
+    color: #4b4b4b;
+}
+
+.wdgt_pop_tl a .asin_img {
+    border:none;	
+    margin:0 0 0 0;
+    padding:0px 0px 0px 0px;	
+}
+.wdgt_pop_tl .asin_cmnt {
+    font-size: 10px;
+    padding: 0px 6px 6px 6px;
+    color:#4b4b4b;	
+}
+.wdgt_pop_tl .asin_review {
+    font-size: 10px;
+    padding: 9px 2px 9px 0px;
+    font-color: #010e8f;
+}
+
+.wdgt_pop_tl .asin_review_empty {
+    font-size: 10px;
+    padding: 0px 2px 0px 0px;
+    height:9px;	
+    font-color: #010e8f;
+}
+
+.wdgt_pop_tl .cssbutton{
+        margin:0px 0px 0px 0px;
+        height:17px;
+	float:left;
+        padding:0px 0px 0px 0px;
+        cursor:pointer;
+        padding-top:0px;
+}
+
+.wdgt_pop_tl .cssbutton div{
+        padding:0px 0px 0px 0px;
+        height:17px;
+        font-size:10px;
+	float:left;
+        text-decoration:none;
+	vertical-align:center;
+}
+
+.wdgt_pop_tl .cssbutton .cssbuttonleft{
+        text-align:left;
+        font-weight:bold;
+        padding:2px 0px 0px 7px;
+        color:#2C2F76;
+        display:block;
+        float:left;
+        margin:0px;
+        font-size:10px;
+}
+.wdgt_pop_tl .cssbutton .cssbuttonright{
+        right:0px;
+        text-align:right;
+        padding:2px 0px 0px 0px;
+        margin:0px;
+        display:block;
+        float:right;
+        color:#990000;
+        font-size:10px;
+}
+.wdgt_pop_tl .cssbuttonor{
+        padding:0px 2px 0px 2px;
+        margin:0px;
+        float:left;
+        color:#4b4b4b;
+        font-size:10px;
+}
+.wdgt_pop_tl .cssbuttontype{
+        padding:1px 0px 9px 0px;
+        margin:0px;
+	text-align:center;
+        color:#010e8f;
+        font-size:10px;
+}
+.wdgt_pop_tl .cssbutton input{
+        top:0px;
+        height:100%;
+        width:100%;
+}
+.wdgt_pop_tl .cssbutton a{
+        text-decoration:none;
+        cursor:pointer;
+}
+/* For the popup end */
+
+.amzn_wdgt_cloud_outer {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+    text-align: left;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    line-height: normal;
+}
+.amzn_wdgt .amzn_wdgt_cloud {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+    margin: 0 0 0 0;
+    padding:4px 8px 4px 8px;
+    line-height: normal;
+}
+
+.amzn_wdgt_cloud {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+    margin: 0 0 0 0;
+    padding:4px 8px 4px 8px;
+    line-height: normal;
+}
+
+/*For rounded corners in IE begin*/
+/*Nifty Corners Cube CSS by Alessandro Fulciniti
+The following classes are added dynamically by javascript,
+and their use should be avoided in the markup */
+
+b.niftycorners,b.niftyfill{display:block}
+b.niftycorners *{
+    display:block;height: 1px;line-height:1px;font-size: 1px;
+    overflow:hidden;border-style:solid;border-width: 0 1px
+}
+/*normal*/
+b.r1{margin: 0 3px;border-width: 0 2px}
+b.r2{margin: 0 2px}
+b.r3{margin: 0 1px}
+b.r4{height: 2px}
+b.rb1{margin: 0 8px;border-width:0 2px}
+b.rb2{margin: 0 6px;border-width:0 2px}
+b.rb3{margin: 0 5px}
+b.rb4{margin: 0 4px}
+b.rb5{margin: 0 3px}
+b.rb6{margin: 0 2px}
+b.rb7{margin: 0 1px;height:2px}
+b.rb8{margin: 0;height:2px}
+b.rs1{margin: 0 1px}
+/*transparent inside*/
+b.t1{border-width: 0 5px}
+b.t2{border-width: 0 3px}
+b.t3{border-width: 0 2px}
+b.t4{height: 2px}
+b.tb1{border-width: 0 10px}
+b.tb2{border-width: 0 8px}
+b.tb3{border-width: 0 6px}
+b.tb4{border-width: 0 5px}
+b.tb5{border-width: 0 4px}
+b.tb6{border-width: 0 3px}
+b.tb7{border-width: 0 2px;height:2px}
+b.tb8{border-width: 0 1px;height:2px}
+b.ts1{border-width: 0 2px}
+
+/*For Search widget, autocompletion*/
+.suggest_link {
+    background-color: #FFFFFF;
+    white-space: normal;
+}
+
+.suggest_link_over {
+    background-color: #146EB4;
+    white-space: normal;
+    color: #FFFFFF;
+}
+
+/*#sugdivhdr {*/
+    /*font-size: 10px;*/
+    /*color: #888;*/
+    /*line-height: 12px;*/
+    /*padding-right: 4px;*/
+/*}*/
