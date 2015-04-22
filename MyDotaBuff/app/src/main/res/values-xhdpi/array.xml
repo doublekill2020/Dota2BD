@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+
     <string-array name="slidingmenu_left_menu">
-        <item >意见反馈</item>
-        <item >功能介绍</item>
-        <item >大发慈悲(给App打分)</item>
-        <item >版本更新</item>
-        <item >清除缓存</item>
+        <item>意见反馈</item>
+        <item>功能介绍</item>
+        <item>大发慈悲(给App打分)</item>
+        <item>版本更新</item>
+        <item>清除缓存</item>
     </string-array>
 </resources>
