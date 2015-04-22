@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources
+    xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
 
     <string name="pull_to_refresh_pull_label" translatable="false">向下拉动可以刷新</string>
     <string name="pull_to_refresh_release_label" translatable="false">松开可以刷新</string>
