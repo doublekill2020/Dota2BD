@@ -182,7 +182,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		// Configure drawer
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, 0, 0) {
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,(Toolbar) findViewById(R.id.toolbar), 0, 0) {
 
 			public void onDrawerClosed(View view) {
 				supportInvalidateOptionsMenu();
@@ -405,7 +405,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 			break;
 		case R.id.check_update:
 			mDrawerLayout.closeDrawer(Gravity.LEFT);
-			Toast.makeText(this, "检测更新中，请稍后...", 1000).show();
+			Toast.makeText(this, "检测更新中，请稍后...", Toast.LENGTH_SHORT).show();
 			UmengUpdateAgent.forceUpdate(this);
 			break;
 		case R.id.share:
