@@ -19,6 +19,9 @@ import cn.edu.mydotabuff.AppManager;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.ui.ActMain;
 import cn.edu.mydotabuff.util.Utils;
+import cn.edu.mydotabuff.view.SwipeBackActivityBase;
+import cn.edu.mydotabuff.view.SwipeBackActivityHelper;
+import cn.edu.mydotabuff.view.SwipeBackLayout;
 import cn.edu.mydotabuff.view.TipsToast;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;
 
@@ -32,17 +35,19 @@ import com.umeng.analytics.MobclickAgent;
  * @date 2015-1-22 下午6:05:10
  * 
  */
-public abstract class BaseActivity extends ActionBarActivity {
+public abstract class BaseActivity extends ActionBarActivity implements SwipeBackActivityBase {
 
 	// 网络请求状态码
 	public static final int OK = 1; // 成功
 	public static final int FAILED = 0;// 失败 超时 等
 	public static final int JSON_ERROR = -1;// json解析出错
-
+    private SwipeBackActivityHelper mHelper;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+        mHelper = new SwipeBackActivityHelper(this);
+        mHelper.onActivityCreate();
 
 		AppManager.getAppManager().addActivity(this);
 
@@ -58,6 +63,33 @@ public abstract class BaseActivity extends ActionBarActivity {
 		initEvent();
 	}
 
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mHelper.onPostCreate();
+    }
+    @Override
+    public SwipeBackLayout getSwipeBackLayout() {
+        return mHelper.getSwipeBackLayout();
+    }
+
+    @Override
+    public void setSwipeBackEnable(boolean enable) {
+        getSwipeBackLayout().setEnableGesture(enable);
+    }
+
+    @Override
+    public void scrollToFinishActivity() {
+        cn.edu.mydotabuff.view.Utils.convertActivityToTranslucent(this);
+        getSwipeBackLayout().scrollToFinishActivity();
+    }
+    @Override
+    public View findViewById(int id) {
+        View v = super.findViewById(id);
+        if (v == null && mHelper != null)
+            return mHelper.findViewById(id);
+        return v;
+    }
 	protected abstract void initViewAndData();
 
 	protected abstract void initEvent();

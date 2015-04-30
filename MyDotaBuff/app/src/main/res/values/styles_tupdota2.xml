@@ -19,7 +19,9 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="Theme.Tupdota2" parent="@style/Theme.AppCompat.NoActionBar"></style>
+    <style name="Theme.Tupdota2" parent="@style/Theme.AppCompat.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 
     <style name="ActionBar.Solid.Tupdota2" parent="@style/Widget.AppCompat.ActionBar.Solid">
         <item name="background">@drawable/ab_solid_tupdota2</item>
@@ -91,4 +93,10 @@
         <item name="pstsShouldExpand">true</item>
     </style>
 
+    <style name="SwipeBackLayout">
+        <item name="edge_size">50dip</item>
+        <item name="shadow_left">@drawable/shadow_left</item>
+        <item name="shadow_right">@drawable/shadow_right</item>
+        <item name="shadow_bottom">@drawable/shadow_bottom</item>
+    </style>
 </resources>

@@ -1,5 +1,6 @@
 package cn.edu.mydotabuff.ui;
 
+import cn.edu.mydotabuff.view.SwipeBackLayout;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
 
@@ -95,15 +96,11 @@ public class ActMain extends BaseActivity implements OnClickListener {
 	private ActionBarDrawerToggle mDrawerToggle;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		// requestWindowFeature(Window.FEATURE_NO_TITLE);
-		super.onCreate(savedInstanceState);
-
-	}
-
-	@Override
 	protected void initViewAndData() {
 		// TODO Auto-generated method stub
+        SwipeBackLayout swipeBackLayout = getSwipeBackLayout();
+        swipeBackLayout.setEnableGesture(false);
+
 		UmengUpdateAgent.setUpdateOnlyWifi(false);
 		UmengUpdateAgent.update(this);
 		initUMShare();
