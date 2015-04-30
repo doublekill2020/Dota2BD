@@ -21,6 +21,7 @@
 <resources>
 
     <style name="Theme.Tupdota2" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 
     <style name="ActionBar.Solid.Tupdota2" parent="@style/Widget.AppCompat.ActionBar.Solid">
