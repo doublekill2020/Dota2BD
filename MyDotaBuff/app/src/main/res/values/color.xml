@@ -317,7 +317,9 @@
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  See the License for the specific language governing permissions and
- limitations under the License.
+ limitations under the License.
+
+
     -->
     <color name="contents_text">#ff000000</color>
     <color name="encode_view">#ffffffff</color>
@@ -357,9 +359,9 @@
 
     <!-- Dialer theme -->
     <color name="dialer_call">#00C853</color>
-    <color name="theme_dialer_high">#0277BD</color>
-    <color name="theme_dialer_primary">#0288D1</color>
-    <color name="theme_dialer_accent">#FFF</color>
+    <color name="theme_dialer_high">#0288D1</color>
+    <color name="theme_dialer_primary">#2196F3</color>
+    <color name="theme_dialer_accent">#01579b</color>
 
     <!-- Reveal transition colors -->
     <color name="color_set_1_primary">#4fc3f7</color>
