@@ -20,8 +20,7 @@
 
 <resources>
 
-    <color name="pressed_tupdota2">#CC4C1A13</color>
-    <color name="actionbar_bg">#FF1a1a1a</color>
-    <color name="statusbar_bg">#FF1a1a1a</color>
+    <color name="actionbar_bg">#2196F3</color>
+    <color name="statusbar_bg">#2196F3</color>
 
 </resources>
