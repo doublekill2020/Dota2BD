@@ -339,13 +339,7 @@
     <string name="payment_not_support">暂不支持退款功能</string>
     <string name="requesting">正在请求</string>
     
-    <!-- App分享 -->
-    <string name="app_share_title">神马车城</string>
-    <string name="app_share_text">神马车城移动版将满足二手车消费者在购车前期、中期、后期整个过程的找车、议价、交易、汽车后服务的需求，快来看看吧！----http://www.cenmall.com</string>
-	<string name="app_share_url">http://www.cenmall.com</string>    
-	<string name="wechat_not_exist">请先安装微信客户端!</string>
-	
-	
+
 	<!-- 分享提示 -->
 	<string name="share_sucess">分享成功</string>
 	<string name="share_failuer">分享出错</string>
