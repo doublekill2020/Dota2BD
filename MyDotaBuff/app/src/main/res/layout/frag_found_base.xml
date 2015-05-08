@@ -15,7 +15,7 @@
         android:id="@+id/board"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/selector_found_item"
+        android:background="@drawable/umeng_socialize_shareboard_item_background"
         android:clickable="true" >
 
         <ImageView
@@ -55,7 +55,7 @@
         android:id="@+id/news"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/selector_found_item"
+        android:background="@drawable/umeng_socialize_shareboard_item_background"
         android:clickable="true" >
 
         <ImageView
