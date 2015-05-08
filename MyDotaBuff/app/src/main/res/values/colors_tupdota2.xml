@@ -20,7 +20,9 @@
 
 <resources>
 
-    <color name="actionbar_bg">#2196F3</color>
-    <color name="statusbar_bg">#2196F3</color>
+    <color name="main_color">#252930</color>
+    <color name="actionbar_bg">@color/main_color</color>
+    <color name="statusbar_bg">@color/main_color</color>
+    <!--#2196F3-->
 
 </resources>
