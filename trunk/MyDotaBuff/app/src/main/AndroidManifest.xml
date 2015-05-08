@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.edu.mydotabuff"
-    android:versionCode="10"
-    android:versionName="1.6" >
+    android:versionCode="11"
+    android:versionName="1.6.1" >
 
     <uses-sdk
-        android:minSdkVersion="9"
+        android:minSdkVersion="14"
         android:targetSdkVersion="18" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -72,7 +72,7 @@
             android:parentActivityName="cn.edu.mydotabuff.ui.ActMain" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".ui.ActMain" />
         </activity>
         <activity
             android:name="cn.edu.mydotabuff.ui.item.ItemsDetailActivity"
@@ -80,7 +80,7 @@
             android:parentActivityName="cn.edu.mydotabuff.ui.ActMain" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".ui.ActMain" />
         </activity>
 
         <!-- 友盟更新组件 -->
@@ -106,7 +106,7 @@
             android:value="52d4a57b56240b3518080289" />
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="wandoujia" />
+            android:value="${UMENG_CHANNEL_VALUE}" />
 
         <activity
             android:name="com.umeng.socialize.view.ShareActivity"

@@ -5,9 +5,9 @@
 
         <item name="android:windowIsTranslucent">true</item>
         <!-- android theme colors -->
-        <item name="android:colorPrimary">@color/main_color</item>
-        <item name="android:colorPrimaryDark">@color/main_color</item>
-        <item name="android:colorAccent">@color/main_color</item>
+        <!--<item name="android:colorPrimary">@color/main_color</item>-->
+        <!--<item name="android:colorPrimaryDark">@color/main_color</item>-->
+        <!--<item name="android:colorAccent">@color/main_color</item>-->
         <item name="android:navigationBarColor">@color/main_color</item>
         <item name="android:statusBarColor">@color/main_color</item>
 

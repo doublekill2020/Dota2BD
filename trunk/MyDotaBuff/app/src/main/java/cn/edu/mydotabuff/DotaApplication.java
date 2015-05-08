@@ -100,7 +100,7 @@ public class DotaApplication extends Application {
 				.defaultDisplayImageOptions(options).build();// 开始构建
 		ImageLoader.getInstance().init(config);
 
-		//RongIM.init(this, "25wehl3uw6q5w", R.drawable.ic_launcher);
+		RongIM.init(this, "25wehl3uw6q5w", R.drawable.ic_launcher);
 	}
 
 	public static DotaApplication getApplication() {
