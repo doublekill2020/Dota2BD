@@ -2,33 +2,11 @@
 <resources>
 
     <string name="app_name">Dota2数据通</string>
-    <string name="action_settings">Settings</string>
     <string name="dlg_content">使用此app，必须在游戏中共享比赛历史。\n第一次使用，请输入数字id：</string>
-    <string name="version">2.0</string>
-    <string name="select_hour">时</string>
-    <string name="select_min">分</string>
-    <string name="obtain_error">请求超时,请检查网络</string>
-    <string name="regist">注册</string>
-    <string name="cant_be_empty">商家名称和地址不能为空！</string>
-    <string name="please_upload_pic">请上传完相关证件</string>
-    <string name="continue_upload">接着上传</string>
-    <string name="net_time_out">网络超时，请检查网络</string>
-    <string name="pic_uploading">正在上传</string>
-    <string name="net_exception">异常了，请重试操作</string>
-    <string name="regist_success">注册成功</string>
-    <string name="input_error">手机号输入有误</string>
-    <string name="no_code">验证码为空</string>
-    <string name="code_error">验证码不正确</string>
-    <string name="password_error">密码输入有误</string>
-    <string name="re_password_error">重复密码有误</string>
-    <string name="only_num_and_letter">密码只能为数字和字母</string>
-    <string name="not_only_num">密码不能是纯数字</string>
-    <string name="not_only_letter">密码不能是纯字母</string>
-    <string name="password_different">两次密码不一样</string>
-    <string name="code_send">验证码已发送,请注意查收</string>
-    <string name="send_again">s之后再次发送</string>
-    <string name="obtaining">获取中...</string>
-    <string name="edit_time_out">修改超时，请检查网络</string>
+    <string name="share_content">【Dota2数据通】全方位的dota2战绩查询分析app，你也来体验一下吧~</string>
+    <string name="last_login_time">上次在线： %1$s</string>
+    <string name="action_bar_search">搜索</string>
+
     <string name="lingchen">凌晨</string>
     <string name="shangwu">上午</string>
     <string name="zhongwu">中午</string>
@@ -40,72 +18,7 @@
     <string name="jintian">今天</string>
     <string name="zuotian">昨天</string>
     <string name="qiantian">前天</string>
-    <string name="upload_jingweidu">上传经纬度成功..</string>
 
-    <!-- 公共提示 -->
-    <string name="time_out">请求超时，请检查网络</string>
-    <string name="exception">异常了，请重试操作</string>
-    <string name="time_get_out">获取超时，请检查网络</string>
-    <string name="get_ing">获取中...</string>
-    <string name="yes">是</string>
-    <string name="no">否</string>
-    <string name="network_error">网络异常!</string>
-    <string name="network_timeout">连接超时，请检查网络!</string>
-    <string name="network_xmpperror">网络异常!</string>
-
-    <!-- Share SDK -->
-    <string name="weibo_oauth_regiseter">应用授权</string>
-    <string name="website">http://www.shareSDK.cn</string>
-    <string name="weibo_upload_content">分享图片</string>
-    <string name="wechat_client_inavailable">目前您的微信版本过低或未安装微信，需要安装微信才能使用</string>
-    <string name="google_plus_client_inavailable">Google+ 版本过低或者没有安装，需要升级或安装Google+才能使用！</string>
-    <string name="qq_client_inavailable">QQ 版本过低或者没有安装，需要升级或安装QQ才能使用！</string>
-    <string name="pinterest_client_inavailable">Pinterest版本过低或者没有安装，需要升级或安装Pinterest才能使用！</string>
-    <string name="instagram_client_inavailable">Instagram版本过低或者没有安装，需要升级或安装Instagram才能使用！</string>
-    <string name="yixin_client_inavailable">目前您的易信版本过低或未安装易信，需要安装易信才能使用</string>
-    <string name="sinaweibo">新浪微博</string>
-    <string name="tencentweibo">腾讯微博</string>
-    <string name="qzone">QQ空间</string>
-    <string name="wechat">微信好友</string>
-    <string name="wechatmoments">微信朋友圈</string>
-    <string name="wechatfavorite">微信收藏</string>
-    <string name="facebook">Facebook</string>
-    <string name="twitter">Twitter</string>
-    <string name="renren">人人网</string>
-    <string name="kaixin">开心网</string>
-    <string name="email">邮件</string>
-    <string name="shortmessage">信息</string>
-    <string name="sohumicroblog">搜狐微博</string>
-    <string name="sohusuishenkan">搜狐随身看</string>
-    <string name="neteasemicroblog">网易微博</string>
-    <string name="douban">豆瓣</string>
-    <string name="youdao">有道云笔记</string>
-    <string name="evernote">印象笔记</string>
-    <string name="linkedin">Linked In</string>
-    <string name="googleplus">Google+</string>
-    <string name="foursquare">FourSquare</string>
-    <string name="qq">QQ</string>
-    <string name="pinterest">Pinterest</string>
-    <string name="flickr">Flickr</string>
-    <string name="tumblr">Tumblr</string>
-    <string name="dropbox">Dropbox</string>
-    <string name="vkontakte">VK</string>
-    <string name="instagram">Instagram</string>
-    <string name="yixin">易信</string>
-    <string name="yixinmoments">易信朋友圈</string>
-    <string name="mingdao">明道</string>
-    <string name="share_to_qzone">分享到QQ空间</string>
-    <string name="incentive_title">分享有奖</string>
-    <string name="failed_to_start_incentive_page">无法打开“分享有奖页面”</string>
-    <string name="download_faield">下载失败</string>
-    <string name="app_downloading">应用正在后台下载</string>
-    <string name="mingdao_share_content">网页分享</string>
-    <string name="share_to_mingdao">分享到明道</string>
-    <string name="scan_text">将二维码放入框内, 即可自动扫描</string>
-    <string name="menu_settings">设置</string>
-    <string name="menu_about">关于</string>
-    <string name="action_bar_search">搜索</string>
-    <string name="assets_about_dataVersion">6.81b|20140909</string>
     <!-- Activity title -->
     <string name="title_activity_items_detail">物品详细</string>
     <string name="title_activity_hero_detail">英雄详细</string>
@@ -167,7 +80,5 @@
         <item>弹道速度</item>
     </string-array>
 
-    <string name="share_content">【Dota2数据通】全方位的dota2战绩查询分析app，你也来体验一下吧~</string>
-    <string name="last_login_time">上次在线： %1$s</string>
 
 </resources>
