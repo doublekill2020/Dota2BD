@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "cn.edu.mydotabuff"
-        minSdkVersion 9
+        minSdkVersion 14
         targetSdkVersion 22
     }
 
