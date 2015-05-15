@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/umeng_comm_feed_detail_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <include
+        android:id="@+id/umeng_comm_feed_title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        layout="@layout/umeng_comm_title_layout" />
+
+    <include
+        android:id="@+id/umeng_comm_feed_title_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/umeng_comm_feed_title_layout"
+        layout="@layout/umeng_comm_divide_line" />
+
+    <!-- comment layout -->
+
+    <include
+        android:id="@+id/umeng_comm_detail_commnet_edit_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        layout="@layout/umeng_comm_comment_layout"
+        android:visibility="invisible" />
+
+    <!-- content layout -->
+
+    <ScrollView
+        android:id="@+id/umeng_comm_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/umeng_comm_detail_commnet_edit_layout"
+        android:layout_below="@id/umeng_comm_feed_title_line" >
+
+        <FrameLayout
+            android:id="@+id/umeng_comm_detail_root"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <!-- fragment container -->
+
+            <FrameLayout
+                android:id="@+id/umeng_comm_feed_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+            </FrameLayout>
+
+            <ProgressBar
+                android:id="@+id/umeng_comm_feed_loading"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center" />
+        </FrameLayout>
+    </ScrollView>
+
+</RelativeLayout>

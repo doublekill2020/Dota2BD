@@ -211,7 +211,7 @@ public class ProgressWheel extends View {
         rimWidth = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, rimWidth, metrics);
         circleRadius = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, circleRadius, metrics);
 
-        circleRadius = (int) a.getDimension(R.styleable.ProgressWheel_circleRadius, circleRadius);
+        circleRadius = (int) a.getDimension(R.styleable.ProgressWheel_cRadius, circleRadius);
 
         fillRadius = a.getBoolean(R.styleable.ProgressWheel_fillRadius, false);
 

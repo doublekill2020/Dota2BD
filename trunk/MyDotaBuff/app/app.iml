@@ -117,7 +117,6 @@
     <orderEntry type="library" exported="" name="support-v4-22.0.0" level="project" />
     <orderEntry type="library" exported="" name="umeng_social_sdk" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-22.0.0" level="project" />
-    <orderEntry type="library" exported="" name="Rong_IMKit_v1_2_1" level="project" />
     <orderEntry type="library" exported="" name="listviewanimations_lib-core_3.1.0" level="project" />
     <orderEntry type="library" exported="" name="umeng-analytics-v5.2.4" level="project" />
     <orderEntry type="library" exported="" name="SocialSDK_QQZone_1" level="project" />
@@ -129,5 +128,6 @@
     <orderEntry type="library" exported="" name="umeng-update-v2.4.2" level="project" />
     <orderEntry type="library" exported="" name="cardview-v7-22.0.0" level="project" />
     <orderEntry type="library" exported="" name="commons-codec-1.9" level="project" />
+    <orderEntry type="module" module-name="umeng_community_android_library" exported="" />
   </component>
 </module>
