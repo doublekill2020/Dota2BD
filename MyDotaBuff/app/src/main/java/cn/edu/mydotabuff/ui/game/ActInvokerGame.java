@@ -1,7 +1,5 @@
 package cn.edu.mydotabuff.ui.game;
 
-import io.rong.imkit.RongIM;
-import io.rong.imlib.RongIMClient;
 
 import java.util.ArrayList;
 import java.util.HashMap;

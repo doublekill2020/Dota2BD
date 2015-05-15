@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/umeng_comm_action_window_bg"
+    android:orientation="horizontal"
+    android:padding="6dp" >
+
+    <ToggleButton
+        android:id="@+id/umeng_comm_like_btn"
+        android:layout_width="20dp"
+        android:layout_height="16dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/umeng_comm_like_bt"
+        android:textOn=""
+        android:textOff=""
+        android:contentDescription="@string/umeng_comm_login" >
+    </ToggleButton>
+
+    <ImageView
+        android:id="@+id/umeng_comm_forward_btn"
+        android:layout_width="20dp"
+        android:layout_height="16dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/umeng_comm_forward_bt"
+        android:contentDescription="@string/umeng_comm_login" >
+    </ImageView>
+
+    <ImageView
+        android:id="@+id/umeng_comm_comment_btn"
+        android:layout_width="20dp"
+        android:layout_height="16dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/umeng_comm_comment_bt"
+        android:contentDescription="@string/umeng_comm_login" >
+    </ImageView>
+
+</LinearLayout>

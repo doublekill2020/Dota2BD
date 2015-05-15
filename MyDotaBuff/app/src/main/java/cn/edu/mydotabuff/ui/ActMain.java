@@ -1,8 +1,6 @@
 package cn.edu.mydotabuff.ui;
 
 import cn.edu.mydotabuff.view.SwipeBackLayout;
-import io.rong.imkit.RongIM;
-import io.rong.imlib.RongIMClient;
 
 
 import org.json2.JSONArray;
@@ -49,7 +47,13 @@ import cn.edu.mydotabuff.view.TipsToast.DialogType;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.tencent.a.b.m;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.comm.core.CommunitySDK;
+import com.umeng.comm.core.beans.CommConfig;
+import com.umeng.comm.core.impl.CommunityFactory;
+import com.umeng.comm.core.sdkmanager.LoginSDKManager;
 import com.umeng.fb.FeedbackAgent;
+import com.umeng.login.controller.UMAuthService;
+import com.umeng.login.controller.UMLoginServiceFactory;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
@@ -77,7 +81,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 	private TextView messageText, contactsText, newsText, settingText;
 	private FragmentManager fragmentManager;
 	// private SlidingMenu menu;
-	private TextView checkUpdateBtn, feedBackBtn, shareBtn, logoutBtn, chatBtn;
+	private TextView checkUpdateBtn, feedBackBtn, shareBtn, logoutBtn;
 
 	private String steamID;
 	private static final int FETCH_DETAIL = 1, FETCH_FAILED = 2,
@@ -130,7 +134,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		feedBackBtn = (TextView) findViewById(R.id.feedback);
 		shareBtn = (TextView) findViewById(R.id.share);
 		logoutBtn = (TextView) findViewById(R.id.logout);
-		chatBtn = (TextView) findViewById(R.id.chat_room);
+//		chatBtn = (TextView) findViewById(R.id.chat_room);
 		userIcon = (CircleImageView) findViewById(R.id.user_icon);
 		userName = (TextView) findViewById(R.id.user_name);
 
@@ -140,6 +144,14 @@ public class ActMain extends BaseActivity implements OnClickListener {
 			steamID = Common.getSteamID(userID);
 			fetchData(FETCH_DETAIL);
 		}
+		LoginSDKManager manager = CommConfig.getConfig().getLoginSDKManager();
+		UMAuthService mLogin = UMLoginServiceFactory.getLoginService("umeng_login_impl");
+// 将登录实现注入到sdk中,key为umeng_login
+		manager.addImpl("umeng_login",mLogin );
+// 获取CommunitySDK实例, 参数1为Context类型
+		CommunitySDK mCommSDK = CommunityFactory.getCommSDK(this);
+// 打开微社区的接口, 参数1为Context类型
+		mCommSDK.openCommunity(this);
 	}
 
 	@Override
@@ -153,7 +165,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		feedBackBtn.setOnClickListener(this);
 		shareBtn.setOnClickListener(this);
 		logoutBtn.setOnClickListener(this);
-		chatBtn.setOnClickListener(this);
+//		chatBtn.setOnClickListener(this);
 	}
 
 	private void configureToolbar() {
@@ -320,28 +332,28 @@ public class ActMain extends BaseActivity implements OnClickListener {
 			case FETCH_FAILED:
 				showTip("steam被墙了，你懂得", DialogType.LOAD_FAILURE);
 				break;
-			case LOGIN_SUCCESS:
-				String token = (String) msg.obj;
-				// 连接融云服务器。
-				RongIM.connect(token, new RongIMClient.ConnectCallback() {
-
-					@Override
-					public void onSuccess(String s) {
-						// 此处处理连接成功。
-						Toast.makeText(ActMain.this, "登录成功！",
-								Toast.LENGTH_SHORT).show();
-						RongIM.getInstance().startChatroom(ActMain.this,
-								"chatroom002", "聊天室");
-					}
-
-					@Override
-					public void onError(ErrorCode errorCode) {
-						// 此处处理连接错误。
-						Toast.makeText(ActMain.this, errorCode.getMessage(),
-								Toast.LENGTH_SHORT).show();
-					}
-				});
-				break;
+//			case LOGIN_SUCCESS:
+//				String token = (String) msg.obj;
+//				// 连接融云服务器。
+//				RongIM.connect(token, new RongIMClient.ConnectCallback() {
+//
+//					@Override
+//					public void onSuccess(String s) {
+//						// 此处处理连接成功。
+//						Toast.makeText(ActMain.this, "登录成功！",
+//								Toast.LENGTH_SHORT).show();
+//						RongIM.getInstance().startChatroom(ActMain.this,
+//								"chatroom002", "聊天室");
+//					}
+//
+//					@Override
+//					public void onError(ErrorCode errorCode) {
+//						// 此处处理连接错误。
+//						Toast.makeText(ActMain.this, errorCode.getMessage(),
+//								Toast.LENGTH_SHORT).show();
+//					}
+//				});
+//				break;
 			default:
 				break;
 			}
@@ -363,39 +375,39 @@ public class ActMain extends BaseActivity implements OnClickListener {
 			setTabSelection(2);
 			getSupportActionBar().setTitle("发现");
 			break;
-		case R.id.chat_room:
-			mDrawerLayout.closeDrawer(Gravity.LEFT);
-			PersonalRequestImpl request = new PersonalRequestImpl(
-					new IInfoReceive() {
-
-						@Override
-						public void onMsgReceiver(ResponseObj receiveInfo) {
-							// TODO Auto-generated method stub
-							try {
-								JSONObject obj = new JSONObject(
-										receiveInfo.getJsonStr());
-								int code = obj.getInt("code");
-								if (code == 200) {
-									Message msg = myHandler.obtainMessage();
-									msg.obj = obj.getString("token");
-									msg.arg1 = LOGIN_SUCCESS;
-									myHandler.sendMessage(msg);
-								} else {
-
-								}
-							} catch (JSONException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						}
-
-					});
-			request.setActivity(this);
-			request.setDialogTitle("登录中，请稍候...");
-			PlayerInfoBean bean = DotaApplication.getApplication().getData(
-					LocalDataType.PLAYER_INFO);
-			request.getUserToken(userID, bean.getName(), bean.getMediumIcon());
-			break;
+//		case R.id.chat_room:
+//			mDrawerLayout.closeDrawer(Gravity.LEFT);
+//			PersonalRequestImpl request = new PersonalRequestImpl(
+//					new IInfoReceive() {
+//
+//						@Override
+//						public void onMsgReceiver(ResponseObj receiveInfo) {
+//							// TODO Auto-generated method stub
+//							try {
+//								JSONObject obj = new JSONObject(
+//										receiveInfo.getJsonStr());
+//								int code = obj.getInt("code");
+//								if (code == 200) {
+//									Message msg = myHandler.obtainMessage();
+//									msg.obj = obj.getString("token");
+//									msg.arg1 = LOGIN_SUCCESS;
+//									myHandler.sendMessage(msg);
+//								} else {
+//
+//								}
+//							} catch (JSONException e) {
+//								// TODO Auto-generated catch block
+//								e.printStackTrace();
+//							}
+//						}
+//
+//					});
+//			request.setActivity(this);
+//			request.setDialogTitle("登录中，请稍候...");
+//			PlayerInfoBean bean = DotaApplication.getApplication().getData(
+//					LocalDataType.PLAYER_INFO);
+//			request.getUserToken(userID, bean.getName(), bean.getMediumIcon());
+//			break;
 		case R.id.setting_layout:
 			setTabSelection(3);
 			getSupportActionBar().setTitle("个人资料");

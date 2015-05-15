@@ -21,7 +21,9 @@
     <style name="Theme.Tupdota2" parent="@style/Theme.AppCompat.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
     </style>
-
+    <style name="Theme.Tupdota2.Light" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 
     <style name="ProgressBar.MyProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/progress_horizontal_green</item>

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:paddingBottom="15dp" >
+
+    <!-- feed类型,公告或者好友feed -->
+
+    <ImageView
+        android:id="@+id/feed_type_img_btn"
+        android:layout_width="20dp"
+        android:layout_height="14dp"
+        android:contentDescription="@string/umeng_comm_desc"
+        android:src="@drawable/umeng_comm_friends" />
+
+    <!-- 头像 -->
+
+    <com.umeng.comm.ui.widgets.RoundImageView
+        android:id="@+id/user_portrait_img_btn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_below="@id/feed_type_img_btn"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginBottom="3dp"
+        android:contentDescription="@string/umeng_comm_desc"
+        android:src="@drawable/umeng_comm_male" />
+
+    <ImageButton
+        android:id="@+id/umeng_comm_dialog_btn"
+        android:layout_width="26dp"
+        android:layout_height="8dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/feed_type_img_btn"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/umeng_comm_triangle_btn_style"
+        android:contentDescription="@string/umeng_comm_desc" />
+    <!-- 头像右边的内容布局 -->
+    <!-- 用户头像、文本、时间、图片的整体布局 -->
+
+    <TextView
+        android:id="@+id/umeng_comm_msg_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/feed_type_img_btn"
+        android:layout_marginLeft="0dp"
+        android:layout_toRightOf="@id/user_portrait_img_btn"
+        android:gravity="top"
+        android:text="海底捞"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/umeng_comm_msg_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/umeng_comm_msg_user_name"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/user_portrait_img_btn"
+        android:lineSpacingExtra="3dp"
+        android:text="友盟社区V1.0发布"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/umeng_comm_msg_location"
+        android:layout_width="12dp"
+        android:layout_height="16dp"
+        android:layout_below="@id/umeng_comm_msg_text"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/user_portrait_img_btn"
+        android:background="@drawable/umeng_community_location"
+        android:contentDescription="@string/umeng_comm_new_post" />
+
+    <TextView
+        android:id="@+id/umeng_comm_msg_location_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/umeng_comm_msg_text"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/umeng_comm_msg_location"
+        android:contentDescription="@string/umeng_comm_new_post"
+        android:gravity="left"
+        android:text="牡丹园 花园东路11号楼"
+        android:textColor="@color/umeng_comm_loction_text_color"
+        android:textSize="13sp" />
+
+    <!-- 被转发的内容和图片,这两个布局在转发的时候会成为一个整体 -->
+
+    <RelativeLayout
+        android:id="@+id/forward_image_gv_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_below="@id/umeng_comm_msg_location_text"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/user_portrait_img_btn"
+        android:background="@drawable/umeng_comm_forward_bg"
+        android:gravity="right" >
+
+        <TextView
+            android:id="@+id/forard_text_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="6dp"
+            android:lineSpacingExtra="3dp"
+            android:text="这是转发的内容"
+            android:textSize="@dimen/text_big15_size" />
+
+        <!-- 该条消息的图片的viewstub ( gridview),不一定有图片 -->
+
+        <ViewStub
+            android:id="@+id/umeng_comm_msg_images_gv_viewstub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/forard_text_tv"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout="@layout/umeng_comm_images_gv"
+            android:padding="5dp"
+            android:scrollbars="none" />
+    </RelativeLayout>
+
+    <!-- like, 评论,转发的触发按钮 -->
+
+    <ImageButton
+        android:id="@+id/msg_comment_btn"
+        android:layout_width="20dp"
+        android:layout_height="14dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/forward_image_gv_layout"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/umeng_comm_action_btn_style"
+        android:contentDescription="@string/umeng_comm_new_post"
+        android:focusable="false" />
+
+    <TextView
+        android:id="@+id/umeng_comm_msg_time_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/forward_image_gv_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@id/user_portrait_img_btn"
+        android:text="十五分钟前"
+        android:textColor="#bbbbbb"
+        android:textSize="13sp" />
+
+    <!-- 赞的用户列表 -->
+
+    <RelativeLayout
+        android:id="@+id/umeng_comm_like_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/msg_comment_btn"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="15dp"
+        android:layout_toRightOf="@id/user_portrait_img_btn"
+        android:background="@color/umeng_comm_user_center_title_color" >
+
+        <TextView
+            android:id="@+id/umeng_comm_like_count_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:gravity="bottom"
+            android:paddingBottom="2dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="10"
+            android:textColor="#8f8f91"
+            android:textSize="16sp" />
+
+        <com.umeng.comm.ui.widgets.LikeView
+            android:id="@+id/umeng_comm_like_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/umeng_comm_like_count_tv"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:paddingBottom="5dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="1dp"
+            android:paddingTop="2dp"
+            android:text="点赞的人名"
+            android:textSize="13sp" />
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/umeng_comm_divide_line_1"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/umeng_comm_like_layout"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="15dp"
+        android:layout_toRightOf="@id/user_portrait_img_btn"
+        layout="@layout/umeng_comm_divide_line"
+        android:background="@color/umeng_comm_divider" />
+
+    <!-- 评论的用户列表 -->
+
+    <ViewStub
+        android:id="@+id/umeng_comm_msg_comment_normal_stub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/umeng_comm_divide_line_1"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="15dp"
+        android:layout_toRightOf="@id/user_portrait_img_btn"
+        android:background="@color/umeng_comm_user_center_title_color"
+        android:inflatedId="@+id/umeng_comm_msg_normal_listview"
+        android:layout="@layout/umeng_comm_msg_comment" >
+    </ViewStub>
+
+</RelativeLayout>
