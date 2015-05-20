@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item>
+        <shape>
+            <solid android:color="#bec9c9" /> <!-- 填充色 -->
+            <corners android:radius="30dip" /> <!-- 圆角弧度 -->
+        </shape>
+    </item>
+
+</layer-list><!-- From: file:/E:/project/MyDotaBuff/umeng_community_android_library/src/main/res/drawable-xhdpi/umeng_comm_round_image.xml --><!-- From: file:/E:/project/MyDotaBuff/umeng_community_android_library/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/umeng_comm_round_image.xml -->

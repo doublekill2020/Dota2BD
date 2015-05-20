@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.badr.infodota.view.SquaredTextView
+        android:id="@+id/ability_1"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:background="@drawable/attribute_bkg"
+        android:gravity="center"
+        android:tag="0"
+        android:textColor="@color/primary" />
+
+    <com.badr.infodota.view.SquaredTextView
+        android:id="@+id/ability_2"
+        android:layout_width="@dimen/skillbuild_image_size"
+        android:layout_height="@dimen/skillbuild_image_size"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:background="@drawable/attribute_bkg"
+        android:gravity="center"
+        android:tag="1"
+        android:textColor="@color/primary" />
+
+    <com.badr.infodota.view.SquaredTextView
+        android:id="@+id/ability_3"
+        android:layout_width="@dimen/skillbuild_image_size"
+        android:layout_height="@dimen/skillbuild_image_size"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:background="@drawable/attribute_bkg"
+        android:gravity="center"
+        android:tag="2"
+        android:textColor="@color/primary" />
+
+    <com.badr.infodota.view.SquaredTextView
+        android:id="@+id/ability_4"
+        android:layout_width="@dimen/skillbuild_image_size"
+        android:layout_height="@dimen/skillbuild_image_size"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:background="@drawable/attribute_bkg"
+        android:gravity="center"
+        android:tag="3"
+        android:textColor="@color/primary" />
+
+    <com.badr.infodota.view.SquaredTextView
+        android:id="@+id/ability_attr"
+        android:layout_width="@dimen/skillbuild_image_size"
+        android:layout_height="@dimen/skillbuild_image_size"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:background="@drawable/attribute_bkg"
+        android:gravity="center"
+        android:tag="4"
+        android:textColor="@color/primary" />
+</TableRow>

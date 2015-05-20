@@ -12,6 +12,8 @@ package cn.edu.mydotabuff.base;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.ActionMenuView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -42,7 +44,27 @@ public abstract class BaseActivity extends ActionBarActivity implements SwipeBac
     public static final int FAILED = 0;// 失败 超时 等
     public static final int JSON_ERROR = -1;// json解析出错
     private SwipeBackActivityHelper mHelper;
+    public ActionMenuView mActionMenuView;
+    public Toolbar mToolbar;
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+        initActionBar();
+    }
 
+    @Override
+    public void setContentView(View view) {
+        super.setContentView(view);
+        initActionBar();
+    }
+    private void initActionBar() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        mActionMenuView = (ActionMenuView) findViewById(R.id.actionMenuView);
+        if (mActionMenuView != null) {
+            mActionMenuView.setVisibility(View.GONE);
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -128,5 +150,8 @@ public abstract class BaseActivity extends ActionBarActivity implements SwipeBac
      */
     public void showToast(String content) {
         Toast.makeText(this, content, Toast.LENGTH_SHORT).show();
+    }
+    public ActionMenuView getActionMenuView() {
+        return mActionMenuView;
     }
 }

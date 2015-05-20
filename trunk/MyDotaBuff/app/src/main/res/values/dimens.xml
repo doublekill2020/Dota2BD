@@ -44,4 +44,51 @@
     <dimen name="itemsdata_hero_grid_image_width">96dp</dimen>
     <dimen name="itemsdata_hero_grid_image_height">54dp</dimen>
 
+
+
+    <!-- trackdota dimen -->
+    <dimen name="carousel_width">183dp</dimen>
+    <dimen name="carousel_height">256dp</dimen>
+
+    <dimen name="carousel_anim_width">177dp</dimen>
+    <dimen name="carousel_anim_height">253dp</dimen>
+
+    <dimen name="carousel_main_attr_width">25dp</dimen>
+    <dimen name="carousel_main_attr_height">25dp</dimen>
+    <dimen name="carousel_main_attr_margin_top">5dp</dimen>
+    <dimen name="carousel_main_attr_margin_right">5dp</dimen>
+
+    <dimen name="carousel_name_margin_left">2dp</dimen>
+    <dimen name="carousel_name_margin_top">11dp</dimen>
+    <dimen name="carousel_name_text_size">13sp</dimen>
+
+    <dimen name="carousel_role_holder_margin_top">45dp</dimen>
+    <dimen name="carousel_role_holder_width">40dp</dimen>
+    <dimen name="carousel_role_holder_height">30dp</dimen>
+    <dimen name="carousel_role_size">20dp</dimen>
+
+    <dimen name="skill_role_holder_margin_bottom">10dp</dimen>
+    <dimen name="skill_role_holder_padding">1dp</dimen>
+    <dimen name="skill_role_holder_height">36dp</dimen>
+    <dimen name="skill_role_bkg_size">36dp</dimen>
+    <dimen name="skill_role_size">34dp</dimen>
+
+    <dimen name="hero_row_textSize">10.0sp</dimen>
+    <dimen name="hero_row_text_width">90dp</dimen>
+
+    <dimen name="item_row_image_size">60dp</dimen>
+
+    <dimen name="hero_skill_row_image_size">80dp</dimen>
+    <dimen name="hero_skill_affects_textSize">12sp</dimen>
+    <dimen name="hero_skill_name_textSize">16sp</dimen>
+
+    <dimen name="item_receipt_textSize">10sp</dimen>
+
+    <dimen name="match_player_summary_width">52dp</dimen>
+    <dimen name="match_player_summary_height">39dp</dimen>
+
+    <dimen name="skillbuild_image_size">60dp</dimen>
+
+    <dimen name="hero_row_width">128dp</dimen>
+    <dimen name="hero_row_height">62dp</dimen>
 </resources>

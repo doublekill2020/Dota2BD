@@ -56,14 +56,12 @@ public class ActBoard extends BaseActivity {
 	private MyHandler myHandler;
 	private String defaultPage = "china";
 	private int defaultItem;
-	private Toolbar toolbar;
 
 	@Override
 	protected void initViewAndData() {
 		// TODO Auto-generated method stub
 		setContentView(R.layout.act_board);
-		toolbar = (Toolbar) findViewById(R.id.toolbar);
-		setSupportActionBar(toolbar);
+		setSupportActionBar(mToolbar);
 		getSupportActionBar().setTitle("国服天梯");
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -74,7 +72,7 @@ public class ActBoard extends BaseActivity {
 		if (beans == null) {
 			fetchData(FETCH_BOARD);
 		} else {
-			toolbar.setTitle("国服天梯");
+			mToolbar.setTitle("国服天梯");
 			lv.setAdapter(adapter = new CommAdapter<BoardBean>(this, beans,
 					R.layout.frag_board_item) {
 
@@ -192,13 +190,13 @@ public class ActBoard extends BaseActivity {
 
 	private void setTitle() {
 		if (defaultPage.equals("china")) {
-			toolbar.setTitle("国服天梯");
+			mToolbar.setTitle("国服天梯");
 		} else if (defaultPage.equals("americas")) {
-			toolbar.setTitle("美服天梯");
+			mToolbar.setTitle("美服天梯");
 		} else if (defaultPage.equals("se_asia")) {
-			toolbar.setTitle("东南亚天梯");
+			mToolbar.setTitle("东南亚天梯");
 		} else if (defaultPage.equals("europe")) {
-			toolbar.setTitle("欧服天梯");
+			mToolbar.setTitle("欧服天梯");
 		}
 	}
 

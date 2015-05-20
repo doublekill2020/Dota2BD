@@ -31,14 +31,12 @@ public class ActNewsList extends BaseActivity {
 	private static final String[] TITLE = new String[] { "全部", "刀塔新闻", "赛事资讯",
 			"版本公告" };
 	private PagerSlidingTabStrip indicator;
-	private Toolbar toolbar;
 
 	@Override
 	protected void initViewAndData() {
 		// TODO Auto-generated method stub
 		setContentView(R.layout.act_news_base);
-		toolbar = (Toolbar) findViewById(R.id.toolbar);
-		setSupportActionBar(toolbar);
+		setSupportActionBar(mToolbar);
 		getSupportActionBar().setTitle("全部");
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -61,16 +59,16 @@ public class ActNewsList extends BaseActivity {
 			public void onPageSelected(int arg0) {
 				switch (arg0) {
 				case 0:
-					toolbar.setTitle("全部");
+					mToolbar.setTitle("全部");
 					break;
 				case 1:
-					toolbar.setTitle("刀塔新闻");
+					mToolbar.setTitle("刀塔新闻");
 					break;
 				case 2:
-					toolbar.setTitle("赛事资讯");
+					mToolbar.setTitle("赛事资讯");
 					break;
 				case 3:
-					toolbar.setTitle("版本公告");
+					mToolbar.setTitle("版本公告");
 					break;
 				default:
 					break;

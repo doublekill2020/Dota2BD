@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="42dp"
+    android:layout_marginTop="5dp"
+    android:paddingBottom="3dp"
+    android:paddingTop="3dp">
+
+    <ImageView
+        android:id="@+id/radiant_hero"
+        android:layout_width="99dp"
+        android:layout_height="57dp"
+        android:minHeight="57dp" />
+
+    <View
+        android:layout_width="0px"
+        android:layout_height="0px" />
+
+    <ImageView
+        android:id="@+id/dire_hero"
+        android:layout_width="99dp"
+        android:layout_height="57dp"
+        android:minHeight="57dp" />
+</TableRow>

@@ -270,7 +270,7 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
 
             /*
              * ImageLoader.getInstance().displayImage(
-             * Utils.getHeroIconUri(cItem.keyName),
+             * TrackUtils.getHeroIconUri(cItem.keyName),
              * ((ImageView) v.findViewById(R.id.image_hero_name_icon)),
              * cImageLoadOptions);
              */
@@ -739,7 +739,7 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
 
         @Override
         public void onItemClick(ListAdapter parent, View view, int position, long id) {
-            // Utils.startHeroDetailActivity(this.getActivity(),
+            // TrackUtils.startHeroDetailActivity(this.getActivity(),
             // (HeroDetailItem) parent.getItemAtPosition(position));
             final Object cItem = parent.getItem(position);
             if (cItem instanceof ItemsItem) {

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/selectableItemBackground"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/tooltip_img"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="top"
+        android:layout_margin="5dp" />
+
+    <TextView
+        android:id="@+id/tooltip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="5dp"
+        android:textSize="14sp" />
+</LinearLayout>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.umeng.comm.ui.widgets.WrapperListView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/umeng_comm_listview"
+    android:layout_width="match_parent"
+    android:divider="@color/umeng_comm_divider"
+    android:dividerHeight="1px"
+    android:layout_height="wrap_content" />
+<!-- From: file:/E:/project/MyDotaBuff/umeng_community_android_library/src/main/res/layout/umeng_comm_listview.xml --><!-- From: file:/E:/project/MyDotaBuff/umeng_community_android_library/build/intermediates/bundles/debug/res/layout/umeng_comm_listview.xml -->

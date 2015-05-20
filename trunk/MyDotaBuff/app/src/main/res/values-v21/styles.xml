@@ -17,7 +17,19 @@
         <item name="android:windowAllowReturnTransitionOverlap">true</item>
 
     </style>
+    <style name="Theme.Tupdota2.Light" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- android theme colors -->
+        <!--<item name="android:colorPrimary">@color/main_color</item>-->
+        <!--<item name="android:colorPrimaryDark">@color/main_color</item>-->
+        <!--<item name="android:colorAccent">@color/main_color</item>-->
+        <item name="android:statusBarColor">@color/main_color</item>
 
+        <!-- android transitions -->
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
+    </style>
     <style name="SlidingTextViewStyle" parent="@android:style/Widget.TextView">
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textColor">#FFF</item>

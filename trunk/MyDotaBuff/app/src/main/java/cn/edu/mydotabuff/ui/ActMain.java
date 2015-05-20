@@ -144,14 +144,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 			steamID = Common.getSteamID(userID);
 			fetchData(FETCH_DETAIL);
 		}
-		LoginSDKManager manager = CommConfig.getConfig().getLoginSDKManager();
-		UMAuthService mLogin = UMLoginServiceFactory.getLoginService("umeng_login_impl");
-// 将登录实现注入到sdk中,key为umeng_login
-		manager.addImpl("umeng_login",mLogin );
-// 获取CommunitySDK实例, 参数1为Context类型
-		CommunitySDK mCommSDK = CommunityFactory.getCommSDK(this);
-// 打开微社区的接口, 参数1为Context类型
-		mCommSDK.openCommunity(this);
+
 	}
 
 	@Override
@@ -169,11 +162,10 @@ public class ActMain extends BaseActivity implements OnClickListener {
 	}
 
 	private void configureToolbar() {
-		Toolbar mainToolbar = (Toolbar) findViewById(R.id.toolbar);
-		setSupportActionBar(mainToolbar);
+		setSupportActionBar(mToolbar);
 		getSupportActionBar().setTitle("最近比赛");
 
-		mainToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+		mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 
@@ -501,7 +493,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		mController.setShareMedia(qzone);
 		qZoneSsoHandler.addToSocialSDK();
 		SinaSsoHandler sinaHandler = new SinaSsoHandler();
-		sinaHandler.setTargetUrl(targetUrl);
+		sinaHandler.setTargetUrl("http://www.baidu.com");
 		mController.getConfig().setSsoHandler(sinaHandler);
 	}
 

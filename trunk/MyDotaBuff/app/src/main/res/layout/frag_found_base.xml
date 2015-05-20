@@ -90,5 +90,82 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/myinfro_divi_short_icon" />
+    <RelativeLayout
+        android:id="@+id/community"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/umeng_socialize_shareboard_item_background"
+        android:clickable="true" >
 
+        <ImageView
+            android:id="@+id/found_img_community"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/found_news" />
+
+        <TextView
+            style="@style/CommonTextView.Big"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/found_img_community"
+            android:gravity="center_vertical"
+            android:text="社区"
+            android:textColor="#333333" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/myinfor_change_right_icon"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/myinfro_divi_short_icon" />
+    <RelativeLayout
+        android:id="@+id/live"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/umeng_socialize_shareboard_item_background"
+        android:clickable="true" >
+
+        <ImageView
+            android:id="@+id/found_img_live"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/found_news" />
+
+        <TextView
+            style="@style/CommonTextView.Big"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/found_img_live"
+            android:gravity="center_vertical"
+            android:text="直播"
+            android:textColor="#333333" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/myinfor_change_right_icon"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/myinfro_divi_short_icon" />
 </LinearLayout>

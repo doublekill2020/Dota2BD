@@ -53,8 +53,7 @@ public class ActPlayerDetail extends BaseActivity implements
 	protected void initViewAndData() {
 		// TODO Auto-generated method stub
 		setContentView(R.layout.act_player_detail_base);
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		setSupportActionBar(toolbar);
+		setSupportActionBar(mToolbar);
 		getSupportActionBar().setTitle("个人资料");
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
