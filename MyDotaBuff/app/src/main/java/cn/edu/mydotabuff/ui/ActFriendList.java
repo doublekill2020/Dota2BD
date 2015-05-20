@@ -65,8 +65,7 @@ public class ActFriendList extends BaseActivity {
 	protected void initViewAndData() {
 		// TODO Auto-generated method stub
 		setContentView(R.layout.act_friend_list_base);
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		setSupportActionBar(toolbar);
+		setSupportActionBar(mToolbar);
 		getSupportActionBar().setTitle("好友列表");
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

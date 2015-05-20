@@ -36,7 +36,7 @@ import cn.edu.mydotabuff.ui.item.ItemsDetailActivity;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
 /**
- * Utils
+ * TrackUtils
  * 
  * @author tupunco
  * 

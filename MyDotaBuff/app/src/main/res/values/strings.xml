@@ -81,4 +81,343 @@
     </string-array>
 
 
+    <!-- trackdota string-->
+    <string name="language">english</string>
+
+    <string name="heroes_list">Loading heroes list</string>
+    <string name="loading_data_for">Loading data for: {0}</string>
+    <string name="loading">Loading…</string>
+    <string name="loading_complete">Loading completed</string>
+    <string name="error_during_load">There was an error during loading</string>
+    <string name="info">INFO</string>
+    <string name="skills">SKILLS</string>
+    <string name="melee">{0} (Melee)</string>
+    <string name="level">Level</string>
+    <string name="hp">Hit points</string>
+    <string name="mp">Mana</string>
+    <string name="damage">Damage</string>
+    <string name="armor">Armor</string>
+    <string name="attacks_per_second">Attacks/second</string>
+    <string name="movespeed">Movement Speed</string>
+    <string name="attack_range">Attack Range</string>
+    <string name="turn_rate">Turn rate</string>
+    <string name="sight_range">Sight range (day/night)</string>
+    <string name="attack_duration">Attack duration</string>
+    <string name="cast_duration">Cast duration</string>
+    <string name="missile_speed">Missile Speed</string>
+    <string name="instant">Instant</string>
+    <string name="exit_msg">Close app?</string>
+    <string name="back_toast">Click BACK again to exit</string>
+    <string name="makes_from">Recipe</string>
+    <string name="makes_to">Reqired for</string>
+    <string name="cd">Cooldown:</string>
+    <string name="mc">Mana cost:</string>
+    <string name="recipe">Recipe</string>
+    <string name="starting_items">STARTING ITEMS</string>
+    <string name="starting_items_secondary">STARTING ITEMS SECONDARY</string>
+    <string name="early_game">EARLY GAME</string>
+    <string name="early_game_secondary">EARLY GAME SECONDARY</string>
+    <string name="core_items">CORE ITEMS</string>
+    <string name="core_items_secondary">CORE ITEMS SECONDARY</string>
+    <string name="luxury_items">LUXURY</string>
+    <string name="default_guide">ITEMS</string>
+    <string name="guides">GUIDES</string>
+    <string name="nickname">Player\'s nickname</string>
+    <string name="kills"><b>Kills:</b></string>
+    <string name="deaths"><b>Deaths:</b></string>
+    <string name="assists"><b>Assists:</b></string>
+    <string name="gold"><b>Gold:</b></string>
+    <string name="last_hits"><b>Last hits:</b></string>
+    <string name="denies"><b>Denies:</b></string>
+    <string name="gpm"><b>GPM:</b></string>
+    <string name="xpm"><b>XPM:</b></string>
+    <string name="radiant">RADIANT</string>
+    <string name="dire">DIRE</string>
+    <string name="dire_win">Dire team win</string>
+    <string name="radiant_win">Radiant team win</string>
+    <string name="common">COMMON</string>
+    <string name="empty_player_list">If You would like to see your statistics, \n
+        You need to open Dota 2 client, \n
+        click Settings icon->Options \n
+        and set Expose Public Match Data to On. \n
+        After some time You\'ll be able to search game history by your dota2 nickname.</string>
+    <string name="empty_player_group_list">Add players to your group list \n
+        (press + after searching for player on SEARCH tab),\n
+        to see them here.
+    </string>
+    <string name="search_history">Search history:</string>
+    <string name="heroes_search">Search by heroes</string>
+    <string name="nick_search">Search by nickname</string>
+    <string name="empty_match_hostory">Empty match list</string>
+    <string name="error_loading">Data loading error. Please, check your internet connection and try again later.</string>
+    <string name="abandoned">Abandoned game</string>
+    <string name="leaved">Clicked leave</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="not_picked">Haven\'t picked</string>
+    <string name="afk">AFK</string>
+    <string name="never_connected">Never connected</string>
+    <string name="never_connected_too_long">Too long to connect</string>
+    <string name="match_id_">Match id:</string>
+    <string name="match_id">Match id</string>
+    <string name="start_time">Start time:</string>
+    <string name="match_length">Match length:</string>
+    <string name="lobby_type">Lobby type:</string>
+    <string name="game_mode">Game mode:</string>
+    <string name="bot">Bot</string>
+    <string name="hero_damage"><b>Hero damage:</b></string>
+    <string name="hero_healing"><b>Hero healing:</b></string>
+    <string name="tower_damage"><b>Tower damage:</b></string>
+    <string name="unknown_nickname">Nickname unknown</string>
+    <string name="skill_build">SKILL BUILD</string>
+    <string name="grid_carousel">Grid\carousel</string>
+    <string name="item_build">ITEM BUILD</string>
+    <string name="tooltips">TOOLTIPS</string>
+    <string name="guide">Guide:</string>
+    <string name="tooltips_for_skills">For skills:</string>
+    <string name="tooltips_for_items">For items:</string>
+    <string name="filter">FILTER</string>
+    <string name="about">About</string>
+    <string name="add_player_title">Add player to list</string>
+    <string name="delete_player_title">Delete player from list</string>
+    <string name="delete_player_msg">Are You sure You wanna delete {0} from Your lists?</string>
+    <string name="delete">Delete</string>
+    <string name="responses">RESPONSES</string>
+    <string name="response_search">Search by response</string>
+    <string name="response_dialog_title">Action with response</string>
+    <string name="file_saving_error">File saving error</string>
+    <string name="ringtone_set">Ringtone has been set!</string>
+    <string name="loading_response_error">Error on loading response</string>
+    <string name="match_history_closed">Cannot get match history for a user that hasn\'t allowed it</string>
+    <string name="download">Download</string>
+    <string name="invert_selection">Invert selection</string>
+    <string name="attempt">Attempts:</string>
+    <string name="score">Score:</string>
+    <string name="back">Back</string>
+    <string name="total_score">Total score: {0}</string>
+    <string name="game_over">Game over!</string>
+    <string name="show_right">Correct answer</string>
+    <string name="right">Right!</string>
+    <string name="wrong">Wrong!</string>
+    <string name="quiz">QUIZ</string>
+    <string name="choose_items_from">Test Your Dota 2 items knowledge</string>
+    <string name="choose_hero_skill">Choose ability of this hero</string>
+    <string name="by_items">By items</string>
+    <string name="by_abilities">By abilities</string>
+    <string name="by_random">Random</string>
+    <string name="record_attempt">With time limit</string>
+    <string name="repeat">Repeat</string>
+    <string name="seconds_remaining">Time left: {0} sec.</string>
+    <string name="record_attempt_help">You\'ll have 3 attempts and 60 seconds time limit. \n
+        Each correct answer will increase your time limit for 0.5 sec.</string>
+    <string name="show_records">Show records</string>
+    <string name="leaderboards">Leaderboards</string>
+    <string name="achievements">Achievements</string>
+    <string name="guide_name">Guide title</string>
+    <string name="attention">Attention</string>
+    <string name="guide_creator_message">Guides contains 2 parts:\n
+        -Items\n
+        -Abilities\n
+        On Items tab You can add up to 6 game stages. For each item You can add a tooltip (click on added item).\n
+        On Abilities tab You should set, which ability should be taken and on which level. By clicking on ability icon You can add a tooltip for it.\n
+        After saving guide You can send it to me via email (from Hero guides screen), so I can add it to apk. I won\'t add guides without tooltips!
+    </string>
+    <string name="guide_next">Next</string>
+    <string name="add_guide">Add guide</string>
+    <string name="save">Save</string>
+    <string name="add_game_part">Add game part</string>
+    <string name="sure_delete_part">Are You sure, You wanna delete this part?</string>
+    <string name="game_part_name">Game part name</string>
+    <string name="select_action">Select action</string>
+    <string name="add_tooltip">Add tooltip</string>
+    <string name="add">Add</string>
+
+    <string name="error">Error</string>
+    <string name="skill_tooltip">Skill tooltip</string>
+    <string name="guide_saved">Guide saved!</string>
+    <string name="edit_guide">Edit guide</string>
+    <string name="delete_guide">Delete guide</string>
+    <string name="guide_deleted">Guide deleted</string>
+    <string name="guide_deletion_error">Deleting guide error</string>
+    <string name="send_guide">Send to developer</string>
+    <string name="send_mail">Send mail…</string>
+    <string name="result">Result:</string>
+    <string name="record">Total score: {0}-{1}</string>
+    <string name="winRate">Total win rate: {0}</string>
+    <string name="record_with_win_rate">Total score: {0}-{1} ({2})</string>
+    <string name="win">Win</string>
+    <string name="lost">Lost</string>
+    <string name="highest_gold">Highest number of Gold:</string>
+    <string name="highest_gpm">Highest Gold Per Minute:</string>
+    <string name="highest_experience">Highest number of Experience:</string>
+    <string name="highest_xpm">Highest Experience Per Minute:</string>
+    <string name="highest_kills">Highest number of Kills:</string>
+    <string name="highest_kills_pm">Highest Kills Per Minute:</string>
+    <string name="highest_deaths">Highest number of Deaths:</string>
+    <string name="highest_deaths_pm">Highest Deaths Per Minute:</string>
+    <string name="highest_assists">Highest number of Assists:</string>
+    <string name="highest_assists_pm">Highest Assists Per Minute:</string>
+    <string name="highest_last_hits">Highest number of Last Hits:</string>
+    <string name="highest_lh_pm">Highest Last Hits Per Minute:</string>
+    <string name="highest_denies">Highest number of Denies:</string>
+    <string name="highest_denies_pm">Highest Denies Per Minute:</string>
+    <string name="highest_hd">Highest Hero Damage:</string>
+    <string name="highest_hd_pm">Highest Hero Damage Per Minute:</string>
+    <string name="highest_hh">Highest Hero Healing:</string>
+    <string name="highest_hh_pm">Highest Hero Healing Per Minute:</string>
+    <string name="longest_match_duration">Longest Match Duration:</string>
+    <string name="highest_td">Highest Tower Damage:</string>
+    <string name="highest_td_pm">Highest Tower Damage Per Minute:</string>
+    <string name="best_kda">Best KDA Ration:</string>
+    <string name="highest_kill_participation">Highest Kill Participation:</string>
+    <string name="longest_win_streak">Longest Winning Streak:</string>
+    <string name="longest_lost_streak">Longest Losing Streak:</string>
+
+    <string name="kills_">Kills: {0}</string>
+    <string name="deaths_">Deaths: {0}</string>
+    <string name="assists_">Assists: {0}</string>
+    <string name="gold_">Gold: {0}</string>
+    <string name="last_hits_">Last hits: {0}</string>
+    <string name="denies_">Denies: {0}</string>
+    <string name="gpm_">GPM: {0}</string>
+    <string name="xpm_">XPM: {0}</string>
+    <string name="experience_">Experience: {0}</string>
+    <string name="hero_damage_">Damage: {0}</string>
+    <string name="hero_healing_">Healed: {0}</string>
+    <string name="tower_damage_">Damage: {0}</string>
+    <string name="match_length_">Match length: {0}</string>
+    <string name="kda_">KDA: {0}</string>
+    <string name="kill_participation_">KP: {0}</string>
+    <string name="win_streak_">Winning Streak: {0}</string>
+    <string name="lost_streak_">Losing Streak: {0}</string>
+    <string name="change_language">Change app language</string>
+    <string name="locale">Language</string>
+    <string name="refresh">Refresh</string>
+    <string name="show_results">Show results</string>
+    <string name="time">Time:</string>
+    <string name="match_type">Match type:</string>
+    <string name="metric">Stats type:</string>
+    <string name="hero_header">Hero</string>
+    <string name="gpm_header">Gold / Minute</string>
+    <string name="xpm_header">Experience / Minute</string>
+    <string name="matches_played_header">Matches Played</string>
+    <string name="winRate_header">Win Rate</string>
+    <string name="kda_header">KDA Ratio</string>
+    <string name="kills_header">Kills</string>
+    <string name="deaths_header">Deaths</string>
+    <string name="assists_header">Assists</string>
+    <string name="ready">Ready</string>
+    <string name="allies_selected">Allies selected: {0}</string>
+    <string name="enemies_selected">Enemies selected: {0}</string>
+    <string name="allies">Allies:</string>
+    <string name="enemies">Enemies:</string>
+    <string name="select">Select</string>
+    <string name="recommended_to_you">Recommendations:</string>
+    <string name="hero_roles">Hero role</string>
+    <string name="truepicker_hero_roles">Choose hero roles</string>
+    <string name="players_level">Your level:</string>
+    <string name="any_role">Any role</string>
+    <string name="empty_truepicker">Cannot find heroes for You</string>
+    <string name="truepicker_attention">Counterpick function uses TruePicker services api.\n
+        That means, that Counterpick works only when internet-connection is enabled.\n
+        Counterpick does not guarantee You victory. \n
+        All questions about suggested heroes please send to TruePicker.com\'s support.
+    </string>
+    <string name="twitch_attention">Twitch.tv stream watching function is in a beta phase.\n
+        So please send all bug and error reports at my email which can be found in About section.
+    </string>
+    <string name="install">Install</string>
+    <string name="game_watch_help">If You want to watch live streams, You need to install Twitch app from play market. Do You want to install it?
+    </string>
+    <string name="truepicker">Truepicker.com</string>
+    <string name="quality">Quality</string>
+    <string name="coming_soon">Coming soon</string>
+    <string name="channel_name">Channel name</string>
+    <string name="add_channel">Add favourite channel</string>
+    <string name="player">Player</string>
+    <string name="native_player">Built-in player</string>
+    <string name="loading_heroes_completed_and_stoped">Finished loading.\n
+        If You can see this message, then your Google Play services app needs to update.
+        Update it from Play market and then restart Dota 2 Info app.
+    </string>
+    <string name="last_updated_time">Last update time: {0}</string>
+    <string name="part_of_set">Part of set/bundle:</string>
+    <string name="press_refresh_button">Press \'Refresh\' button</string>
+    <string name="network_unavailable">Network is unavailable</string>
+    <string name="watch_on_youtube">Watch on YouTube</string>
+    <string name="counters_not_found">Found no recommendations</string>
+    <string name="no_more_news">No more news</string>
+    <string name="view_original">View original</string>
+    <string name="author">Author:</string>
+    <string name="date">Date:</string>
+    <string name="rate_app">Rate App</string>
+    <string name="rate_app_name">Rate {0}</string>
+    <string name="rate_message">If you enjoy using {0}, please take a moment to rate it.\n
+        Thanks for your support!</string>
+    <string name="rate">Rate</string>
+    <string name="no_thanks">No, thanks</string>
+    <string name="no_more_games">No more games</string>
+    <string name="bans">Bans:</string>
+    <string name="picks">Picks:</string>
+    <string name="streams">Video streams</string>
+    <string name="add_calendar_event">Add Calendar Event</string>
+    <string name="current_prizepool">Current Prize Pool: ${0}</string>
+    <string name="upcoming_matches">SCHEDULE</string>
+    <string name="match_history">MATCH HISTORY</string>
+    <string name="sure_delete_Guide">Delete guide?</string>
+    <string name="alert">Attention!</string>
+    <string name="new_app_available">New version\'s available!</string>
+    <string name="no_new_version">No new version\'s available</string>
+    <string name="new_version">New version</string>
+    <string name="check_new_version">Check for updates</string>
+    <string name="hero_status">Hero status:</string>
+    <string name="ult_status">Ultimate status:</string>
+    <string name="alive">Alive</string>
+    <string name="dead">Dead</string>
+    <string name="not_levelled">Not levelled</string>
+    <string name="on_cooldown">On cooldown {0} sec.</string>
+    <string name="is_ready">Ready</string>
+    <string name="net_worth"><b>Net worth:</b></string>
+    <string name="respawn_in">Respawn in {0} sec.</string>
+    <string name="no_mana">Not enough mana</string>
+    <string name="unspecified_league">Unspecified league</string>
+    <string name="streams_">{0} streams</string>
+    <string name="in_hero_selection">In hero selection</string>
+    <string name="waiting_for_horn">Waiting for horn</string>
+    <string name="minutes_">{0} minutes</string>
+    <string name="viewers_">{0} viewers</string>
+    <string name="in_progress">Match in progress</string>
+    <string name="finished">Match has finished</string>
+    <string name="match_status_unknown">Unknown Status</string>
+    <string name="game">Game</string>
+    <string name="bo">BO</string>
+    <string name="paused">Paused</string>
+    <string name="roshan_status">Roshan status:</string>
+    <string name="picks_and_bans">Picks and bans</string>
+    <string name="picks_">{0} picks</string>
+    <string name="bans_">{0} bans</string>
+    <string name="team_wins_">{0} victory!</string>
+    <string name="player_kills_">{0} has killed a hero</string>
+    <string name="player_kills_multiple_">{0} has killed {1} heroes</string>
+    <string name="player_dies_">{0} has died</string>
+    <string name="player_dies_multiple_">{0} has died {1} times</string>
+    <string name="log_item_pickup">{0} picked up {1}</string>
+    <string name="log_item_purchased">{0} purchased {1}</string>
+    <string name="log_item_sold">{0} sold {1}</string>
+    <string name="log_item_used">{0} used {1}</string>
+    <string name="log_hero_drops_item">{0} dropped his {1}</string>
+    <string name="log_hero_buys_back">{0} bought back into the game</string>
+    <string name="roshan_death">Roshan has been slain</string>
+    <string name="roshan_respawn">Roshan has respawned</string>
+    <string name="log_team_loses_barracks">{0} lost their {1} {2} barracks</string>
+    <string name="log_team_loses_tower">{0} lost their {1} T{2} tower</string>
+    <string name="barrack_ranged">ranged</string>
+    <string name="barrack_melee">melee</string>
+    <string name="stat_not_found">Not found</string>
+    <string name="match_short_info">Short info</string>
+    <string name="api_is_down">Dota 2 API is currently down. Matches will not update until service resumes.</string>
+    <string name="search_match">Search by match id</string>
+    <string name="search">Search</string>
+    <string name="could_not_load_match">Could not load match</string>
+    <string name="trackdota_match">Open Trackdota match</string>
+
 </resources>

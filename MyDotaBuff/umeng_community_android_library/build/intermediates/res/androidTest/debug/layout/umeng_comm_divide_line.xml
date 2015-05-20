@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<View xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@color/umeng_comm_divider" />
+<!-- From: file:/E:/project/MyDotaBuff/umeng_community_android_library/src/main/res/layout/umeng_comm_divide_line.xml --><!-- From: file:/E:/project/MyDotaBuff/umeng_community_android_library/build/intermediates/bundles/debug/res/layout/umeng_comm_divide_line.xml -->

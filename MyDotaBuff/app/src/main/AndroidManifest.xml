@@ -61,6 +61,7 @@
         <activity android:name="cn.edu.mydotabuff.ui.ActBoard"></activity>
         <activity android:name="cn.edu.mydotabuff.ui.ActNewsList"></activity>
         <activity android:name="cn.edu.mydotabuff.base.BaseWebViewActivity"></activity>
+        <activity android:name="cn.edu.mydotabuff.ui.ActTrack"></activity>
         <activity
             android:name="cn.edu.mydotabuff.ui.ActNews"
             android:configChanges="orientation|keyboardHidden|screenSize"></activity>
@@ -80,6 +81,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.ActMain" />
         </activity>
+        <activity
+            android:name="com.badr.infodota.activity.ListHolderActivity"
+            android:windowSoftInputMode="adjustNothing"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
+        <activity
+            android:name="com.badr.infodota.activity.TrackdotaGameInfoActivity"
+            android:configChanges="keyboard|orientation|screenSize" />
+        <service android:name="com.octo.android.robospice.UncachedSpiceService"
+            android:exported="false"/>
 
         <!-- 友盟更新组件 -->
         <service
