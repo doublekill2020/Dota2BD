@@ -21,10 +21,12 @@
     <style name="Theme.Tupdota2" parent="@style/Theme.AppCompat.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>
+        <item name="android:windowBackground">@color/main_color</item>
     </style>
     <style name="Theme.Tupdota2.Light" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>
+        <item name="android:windowBackground">@color/main_color</item>
     </style>
 
     <style name="ProgressBar.MyProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
@@ -53,7 +55,8 @@
     <style name="CommonTextView.Big" parent="@style/CommonTextView">
         <item name="android:textSize">18sp</item>
     </style>
-
+    <style name="CommonBtn" parent="@android:style/Widget.Button">
+    </style>
     <style name="PagerSlidingTabStrip">
         <item name="android:gravity">center</item>
         <item name="android:paddingTop">8dp</item>

@@ -1,5 +1,7 @@
 package cn.edu.mydotabuff.ui;
 
+import android.view.MenuItem;
+
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseActivity;
 
@@ -40,5 +42,17 @@ public class ActTrack extends BaseActivity{
     @Override
     protected void initEvent() {
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // TODO Auto-generated method stub
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
