@@ -10,6 +10,7 @@
         <!--<item name="android:colorAccent">@color/main_color</item>-->
         <item name="android:navigationBarColor">@color/main_color</item>
         <item name="android:statusBarColor">@color/main_color</item>
+        <item name="android:windowBackground">@color/main_color</item>
 
         <!-- android transitions -->
         <item name="android:windowContentTransitions">true</item>
@@ -25,6 +26,7 @@
         <!--<item name="android:colorPrimaryDark">@color/main_color</item>-->
         <!--<item name="android:colorAccent">@color/main_color</item>-->
         <item name="android:statusBarColor">@color/main_color</item>
+        <item name="android:windowBackground">@color/main_color</item>
 
         <!-- android transitions -->
         <item name="android:windowContentTransitions">true</item>

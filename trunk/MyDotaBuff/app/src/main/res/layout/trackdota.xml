@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <cn.edu.mydotabuff.view.SlidingTabLayout
+        style="@style/PagerSlidingTabStrip"
         android:id="@+id/indicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
