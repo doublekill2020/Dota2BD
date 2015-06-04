@@ -56,9 +56,6 @@ public class LoadingDialog extends AlertDialog {
 		progressWheel = (ProgressWheel) findViewById(R.id.progress_wheel);
 		// 自动旋转
 		progressWheel.spin();
-		// 设置边缘Bar条颜色
-		progressWheel.setBarColor(_context.getResources().getColor(
-				R.color.my_blue));
 
 		// 设置wheel颜色
 		progressWheel.setRimColor(Color.LTGRAY);

@@ -14,5 +14,8 @@
         android:id="@+id/back_to_main"
         android:title="返回首页"
         app:showAsAction="never"/>
-
+    <item
+        android:id="@+id/go_to_star"
+        android:title="去评分"
+        app:showAsAction="never"/>
 </menu>

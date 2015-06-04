@@ -21,11 +21,12 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_below="@id/feed_type_img_btn"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginRight="6dp"
         android:layout_marginBottom="3dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginTop="3dp"
         android:contentDescription="@string/umeng_comm_desc"
+        android:scaleType="centerCrop"
         android:src="@drawable/umeng_comm_male" />
 
     <ImageButton

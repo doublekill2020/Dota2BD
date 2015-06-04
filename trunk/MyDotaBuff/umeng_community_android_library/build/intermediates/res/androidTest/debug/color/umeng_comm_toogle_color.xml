@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:state_checked="true" android:color="#4A90E2"/>
-    <!-- Default State -->
-    <item android:color="#000000"/>
-
-</selector><!-- From: file:/E:/project/MyDotaBuff/umeng_community_android_library/src/main/res/color/umeng_comm_toogle_color.xml --><!-- From: file:/E:/project/MyDotaBuff/umeng_community_android_library/build/intermediates/bundles/debug/res/color/umeng_comm_toogle_color.xml -->

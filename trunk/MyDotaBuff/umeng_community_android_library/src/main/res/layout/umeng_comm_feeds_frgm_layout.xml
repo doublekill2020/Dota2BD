@@ -3,31 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
-        <!-- 消息流列表 -->
+    <!-- 消息流列表 -->
 
-        <com.umeng.comm.ui.widgets.RefreshLvLayout
-            android:id="@+id/umeng_comm_swipe_layout"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" >
+    <com.umeng.comm.ui.widgets.RefreshLvLayout
+        android:id="@+id/umeng_comm_swipe_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
 
-            <ListView
-                android:id="@+id/umeng_comm_feed_listview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:divider="#EEEEEE"
-                android:dividerHeight="1dip"
-                android:fadingEdgeLength="0.0sp"
-                android:fastScrollEnabled="false"
-                android:listSelector="@android:color/transparent"
-                android:scrollbars="none"
-                android:scrollingCache="false" >
-            </ListView>
-        </com.umeng.comm.ui.widgets.RefreshLvLayout>
-    </LinearLayout>
+        <ListView
+            android:id="@+id/umeng_comm_feed_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="#EEEEEE"
+            android:dividerHeight="1dip"
+            android:fadingEdgeLength="0.0sp"
+            android:fastScrollEnabled="false"
+            android:headerDividersEnabled="false"
+            android:listSelector="@android:color/transparent"
+            android:scrollbars="none"
+            android:scrollingCache="false" />
+    </com.umeng.comm.ui.widgets.RefreshLvLayout>
 
     <!-- 发布feed按钮 -->
 

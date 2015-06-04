@@ -380,6 +380,7 @@ public class FragRecently extends BaseFragment implements OnMainEventListener {
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		// TODO Auto-generated method stub
+		menu.clear();
 		inflater.inflate(R.menu.frag_recently_menu, menu);
 		final SearchView searchView = (SearchView) menu.findItem(
 				R.id.action_search).getActionView();

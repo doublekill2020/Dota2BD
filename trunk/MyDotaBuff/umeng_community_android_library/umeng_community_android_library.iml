@@ -93,6 +93,7 @@
     <orderEntry type="library" exported="" name="umeng_comm_qq" level="project" />
     <orderEntry type="library" exported="" name="umeng_community_sdk_core" level="project" />
     <orderEntry type="library" exported="" name="umeng_community_sdk_login" level="project" />
+    <orderEntry type="library" exported="" name="activeandroid" level="project" />
     <orderEntry type="library" exported="" name="umeng_community_sdk_ui" level="project" />
     <orderEntry type="library" exported="" name="umeng_community_sdk_push" level="project" />
   </component>

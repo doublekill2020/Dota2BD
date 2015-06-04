@@ -28,6 +28,5 @@
         android:layout_height="80dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        wheel:barColor="@color/primary"
         wheel:progressIndeterminate="true" />
 </RelativeLayout>

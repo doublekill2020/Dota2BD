@@ -1,9 +1,13 @@
 package com.badr.infodota.activity;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -27,7 +31,10 @@ import java.text.MessageFormat;
 
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseActivity;
+import cn.edu.mydotabuff.ui.recently.ActMatchDetail;
+import cn.edu.mydotabuff.util.Debug;
 import cn.edu.mydotabuff.view.SlidingTabLayout;
+import cn.edu.mydotabuff.view.TipsToast;
 
 /**
  * Created by ABadretdinov
@@ -43,17 +50,17 @@ public class TrackdotaGameInfoActivity extends BaseActivity implements Refresher
     private TrackdotaGamePagerAdapter adapter;
     private View progressBar;
     private SpiceManager spiceManager = new SpiceManager(UncachedSpiceService.class);
-    private Handler updateHandler=new Handler();
+    private Handler updateHandler = new Handler();
     private Runnable updateTask;
     /*need to initialize*/
-    private GameManager mGameManager= GameManager.getInstance();
+    private GameManager mGameManager = GameManager.getInstance();
 
     @Override
     protected void onStart() {
         super.onStart();
-        if(!spiceManager.isStarted()) {
+        if (!spiceManager.isStarted()) {
             spiceManager.start(this);
-            if(liveGame==null||liveGame.getStatus()<4) {
+            if (liveGame == null || liveGame.getStatus() < 4) {
                 onRefresh();
             }
         }
@@ -69,7 +76,7 @@ public class TrackdotaGameInfoActivity extends BaseActivity implements Refresher
     }
 
     private void cancelDelayedUpdate() {
-        if(updateTask!=null) {
+        if (updateTask != null) {
             updateHandler.removeCallbacks(updateTask);
         }
     }
@@ -78,7 +85,10 @@ public class TrackdotaGameInfoActivity extends BaseActivity implements Refresher
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trackdota_game_info);
-        progressBar=findViewById(R.id.progressBar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        progressBar = findViewById(R.id.progressBar);
         Bundle intent = getIntent().getExtras();
         if (intent != null && intent.containsKey("id")) {
             matchId = intent.getLong("id");
@@ -104,7 +114,7 @@ public class TrackdotaGameInfoActivity extends BaseActivity implements Refresher
 
     @Override
     protected void onDestroy() {
-        mGameManager=null;
+        mGameManager = null;
         GameManager.clear();
         super.onDestroy();
     }
@@ -126,14 +136,14 @@ public class TrackdotaGameInfoActivity extends BaseActivity implements Refresher
     public void onRequestSuccess(Object object) {
         if (object instanceof CoreResult) {
             coreResult = (CoreResult) object;
-            spiceManager.execute(new LiveGameLoadRequest(this,matchId), this);
+            spiceManager.execute(new LiveGameLoadRequest(this, matchId), this);
         } else if (object instanceof LiveGame) {
             liveGame = (LiveGame) object;
-            LiveTeam radiantLive=liveGame.getRadiant();
-            Team radiant=coreResult.getRadiant();
-            LiveTeam direLive=liveGame.getDire();
-            Team dire=coreResult.getDire();
-            if(radiant!=null&&dire!=null&&radiantLive!=null&&direLive!=null){
+            LiveTeam radiantLive = liveGame.getRadiant();
+            Team radiant = coreResult.getRadiant();
+            LiveTeam direLive = liveGame.getDire();
+            Team dire = coreResult.getDire();
+            if (radiant != null && dire != null && radiantLive != null && direLive != null) {
                 getSupportActionBar().setTitle(
                         MessageFormat.format(
                                 "{0}:{1} - {2}:{3}",
@@ -145,18 +155,17 @@ public class TrackdotaGameInfoActivity extends BaseActivity implements Refresher
             }
             progressBar.setVisibility(View.GONE);
             adapter.update(coreResult, liveGame);
-            if(liveGame.getStatus()<4)
-            {
+            if (liveGame.getStatus() < 4) {
                 startDelayedUpdate();
             }
-            if(liveGame.getApiDowntime() > 0){
-                Toast.makeText(progressBar.getContext(),R.string.api_is_down,Toast.LENGTH_LONG).show();
+            if (liveGame.getApiDowntime() > 0) {
+                Toast.makeText(progressBar.getContext(), R.string.api_is_down, Toast.LENGTH_LONG).show();
             }
-        } else if(object==null){
+        } else if (object == null) {
             progressBar.setVisibility(View.GONE);
-            adapter.update(coreResult,liveGame);
-            if(coreResult==null&&liveGame==null){
-                Toast.makeText(progressBar.getContext(),R.string.could_not_load_match,Toast.LENGTH_LONG).show();
+            adapter.update(coreResult, liveGame);
+            if (coreResult == null && liveGame == null) {
+                Toast.makeText(progressBar.getContext(), R.string.could_not_load_match, Toast.LENGTH_LONG).show();
                 finish();
             }
         }
@@ -164,13 +173,13 @@ public class TrackdotaGameInfoActivity extends BaseActivity implements Refresher
 
     private void startDelayedUpdate() {
         cancelDelayedUpdate();
-        updateTask=new Runnable() {
+        updateTask = new Runnable() {
             @Override
             public void run() {
                 onRefresh();
             }
         };
-        updateHandler.postDelayed(updateTask,DELAY_20_SEC);
+        updateHandler.postDelayed(updateTask, DELAY_20_SEC);
     }
 
     public static class CoreGameLoadRequest extends TaskRequest<CoreResult> {
@@ -179,15 +188,15 @@ public class TrackdotaGameInfoActivity extends BaseActivity implements Refresher
         private long matchId;
         private Context context;
 
-        public CoreGameLoadRequest(Context context,long matchId) {
+        public CoreGameLoadRequest(Context context, long matchId) {
             super(CoreResult.class);
             this.matchId = matchId;
-            this.context=context;
+            this.context = context;
         }
 
         @Override
         public CoreResult loadData() throws Exception {
-            return trackdotaService.getGameCoreData(context,matchId);
+            return trackdotaService.getGameCoreData(context, matchId);
         }
     }
 
@@ -197,15 +206,51 @@ public class TrackdotaGameInfoActivity extends BaseActivity implements Refresher
         private long matchId;
         private Context context;
 
-        public LiveGameLoadRequest(Context context,long matchId) {
+        public LiveGameLoadRequest(Context context, long matchId) {
             super(LiveGame.class);
-            this.context=context;
+            this.context = context;
             this.matchId = matchId;
         }
 
         @Override
         public LiveGame loadData() throws Exception {
-            return trackdotaService.getLiveGame(context,matchId);
+            return trackdotaService.getLiveGame(context, matchId);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // TODO Auto-generated method stub
+        getMenuInflater().inflate(R.menu.act_track_dota_game_info_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            case R.id.more_detail:
+                intent = new Intent(this, ActMatchDetail.class);
+                intent.putExtra("matchId", String.valueOf(coreResult.getId()));
+                Debug.d("hao",coreResult.getId()+"");
+                startActivity(intent);
+                break;
+            case R.id.go_to_star:
+                try {
+                    Uri uri = Uri.parse("market://details?id="
+                            + getPackageName());
+                    intent = new Intent(Intent.ACTION_VIEW, uri);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    TipsToast.showToast(this, "抱歉，您还未安装相应的应用市场",
+                            Toast.LENGTH_SHORT, TipsToast.DialogType.LOAD_FAILURE);
+                }
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

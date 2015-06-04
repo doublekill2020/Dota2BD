@@ -103,7 +103,7 @@
             android:layout_height="24dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:src="@drawable/found_news" />
+            android:src="@drawable/found_social" />
 
         <TextView
             style="@style/CommonTextView.Big"
@@ -142,7 +142,7 @@
             android:layout_height="24dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:src="@drawable/found_news" />
+            android:src="@drawable/found_live" />
 
         <TextView
             style="@style/CommonTextView.Big"
@@ -151,7 +151,7 @@
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@id/found_img_live"
             android:gravity="center_vertical"
-            android:text="直播"
+            android:text="赛况直播"
             android:textColor="#333333" />
 
         <ImageView

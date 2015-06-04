@@ -44,6 +44,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 public final class Utils {
 	private final static String s_ItemsImage_Format = "assets://items_images/%s_lg.jpg";
 	private final static String s_HeroImage_Format = "assets://heroes_images/%s_full.jpg";
+	private final static String s_HeroImage_Format_MINI = "assets://heroes_images_mini/%s_mini.png";
 	// private final static String s_HeroIcon_Format =
 	// "assets://heroes_icons/%s_icon.jpg";
 	private final static String s_AbilitiesImage_Format = "assets://abilities_images/%s_hp1.jpg";
@@ -58,6 +59,9 @@ public final class Utils {
 		return String.format(s_HeroImage_Format, keyName);
 	}
 
+	public static String getHeroImageMINIUri(String keyName) {
+		return String.format(s_HeroImage_Format_MINI, keyName);
+	}
 	/**
 	 * 得到英雄头像 sh1tge
 	 * 

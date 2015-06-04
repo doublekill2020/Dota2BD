@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <item
+        android:id="@+id/more_detail"
+        android:title="基础数据"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/go_to_star"
+        android:title="去评分"
+        app:showAsAction="never"/>
+
+</menu>

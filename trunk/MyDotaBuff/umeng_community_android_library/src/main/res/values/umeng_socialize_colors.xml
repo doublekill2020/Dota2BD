@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?><resources>
     <color name="umeng_socialize_comments_bg">#F4F4F4</color>
     <color name="umeng_socialize_color_group">#2c3035</color>
 	<color name="umeng_socialize_list_item_textcolor">#333333</color>

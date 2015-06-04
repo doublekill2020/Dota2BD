@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
 
     <string name="pull_to_refresh_pull_label" translatable="false">向下拉动可以刷新</string>

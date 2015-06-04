@@ -22,15 +22,16 @@
             android:gravity="bottom"
             android:paddingBottom="12dp"
             android:paddingLeft="16dp"
-            android:textColor="#999999"
             android:text="@string/umeng_comm_recommend"
+            android:textColor="#999999"
             android:textSize="@dimen/text_big18_size" />
 
         <include layout="@layout/umeng_comm_divide_line" />
-        <!-- 话题推荐 -->
+
+        <!-- 朋友圈 -->
 
         <LinearLayout
-            android:id="@+id/umeng_comm_topic_recommend"
+            android:id="@+id/umeng_comm_friends"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:orientation="horizontal"
@@ -40,18 +41,19 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center"
-                android:src="@drawable/umeng_comm_topic_recommend" />
+                android:src="@drawable/umeng_comm_recommend_friends" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="12dp"
                 android:gravity="center"
-                android:text="@string/umeng_comm_recommend_topic"
+                android:text="@string/umeng_comm_recommend_friends"
                 android:textSize="@dimen/text_big18_size" />
         </LinearLayout>
 
         <include layout="@layout/umeng_comm_divide_line" />
+
         <!-- 用户推荐 -->
 
         <LinearLayout
@@ -78,14 +80,40 @@
 
         <include layout="@layout/umeng_comm_divide_line" />
 
+        <!-- 话题推荐 -->
+
+        <LinearLayout
+            android:id="@+id/umeng_comm_topic_recommend"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp" >
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/umeng_comm_topic_recommend" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="12dp"
+                android:gravity="center"
+                android:text="@string/umeng_comm_recommend_topic"
+                android:textSize="@dimen/text_big18_size" />
+        </LinearLayout>
+
+        <include layout="@layout/umeng_comm_divide_line" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="72dp"
             android:gravity="bottom"
             android:paddingBottom="12dp"
             android:paddingLeft="16dp"
-            android:textColor="#999999"
             android:text="@string/umeng_comm_other"
+            android:textColor="#999999"
             android:textSize="@dimen/text_big18_size" />
         <!-- 个人中心 -->
 

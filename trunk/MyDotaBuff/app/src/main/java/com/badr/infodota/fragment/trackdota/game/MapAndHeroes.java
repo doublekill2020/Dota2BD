@@ -56,7 +56,7 @@ import static com.badr.infodota.util.TrackUtils.TABLET_PORTRAIT;
  * 15.04.2015
  * 12:37
  */
-public class MapAndHeroes extends Fragment implements Updatable<Pair<CoreResult,LiveGame>> {
+public class MapAndHeroes extends Fragment implements Updatable<Pair<CoreResult, LiveGame>> {
     private Refresher refresher;
     private CoreResult coreResult;
     private LiveGame liveGame;
@@ -66,7 +66,7 @@ public class MapAndHeroes extends Fragment implements Updatable<Pair<CoreResult,
     private LinearLayout mHeroesHolder;
     private int mMapWidth;
     private int mMapHeight;
-    private GameManager gameManager=GameManager.getInstance();
+    private GameManager gameManager = GameManager.getInstance();
 
     private Point[] towers = new Point[]{
             new Point(13, 39), new Point(13, 55), new Point(9, 71), new Point(40, 59),
@@ -87,24 +87,24 @@ public class MapAndHeroes extends Fragment implements Updatable<Pair<CoreResult,
     final private SwipeRefreshLayout.OnRefreshListener mOnRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
-            if(refresher!=null) {
+            if (refresher != null) {
                 mScrollContainer.setRefreshing(true);
                 refresher.onRefresh();
             }
         }
     };
 
-    public static MapAndHeroes newInstance(Refresher refresher,CoreResult coreResult,LiveGame liveGame){
-        MapAndHeroes fragment=new MapAndHeroes();
-        fragment.refresher=refresher;
-        fragment.coreResult=coreResult;
-        fragment.liveGame=liveGame;
+    public static MapAndHeroes newInstance(Refresher refresher, CoreResult coreResult, LiveGame liveGame) {
+        MapAndHeroes fragment = new MapAndHeroes();
+        fragment.refresher = refresher;
+        fragment.coreResult = coreResult;
+        fragment.liveGame = liveGame;
         return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.trackdota_game_map_n_heroes,container,false);
+        View view = inflater.inflate(R.layout.trackdota_game_map_n_heroes, container, false);
 
         mScrollContainer = (SwipeRefreshLayout) view.findViewById(R.id.listContainer);
         mScrollContainer.setOnRefreshListener(mOnRefreshListener);
@@ -117,10 +117,9 @@ public class MapAndHeroes extends Fragment implements Updatable<Pair<CoreResult,
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        if(getResources().getBoolean(R.bool.is_tablet)&&newConfig.orientation==Configuration.ORIENTATION_LANDSCAPE){
+        if (getResources().getBoolean(R.bool.is_tablet) && newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             mHeroesHolder.setOrientation(LinearLayout.HORIZONTAL);
-        }
-        else {
+        } else {
             mHeroesHolder.setOrientation(LinearLayout.VERTICAL);
         }
         /*проверить*/
@@ -141,104 +140,96 @@ public class MapAndHeroes extends Fragment implements Updatable<Pair<CoreResult,
     }
 
     @Override
-    public void onUpdate(Pair<CoreResult,LiveGame> entity) {
+    public void onUpdate(Pair<CoreResult, LiveGame> entity) {
         mScrollContainer.setRefreshing(false);
-        this.coreResult=entity.first;
-        this.liveGame=entity.second;
+        this.coreResult = entity.first;
+        this.liveGame = entity.second;
         initView();
     }
 
-    private void initView(){
-        View root=getView();
-        Activity activity=getActivity();
-        if(liveGame!=null&&root!=null&&activity!=null){
-            final View map=root.findViewById(R.id.dota_map);
+    private void initView() {
+        View root = getView();
+        Activity activity = getActivity();
+        if (liveGame != null && root != null && activity != null) {
+            final View map = root.findViewById(R.id.dota_map);
             map.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
                 @SuppressWarnings("deprecation")
                 public void onGlobalLayout() {
-                    mMapHeight=map.getHeight();
-                    mMapWidth=map.getWidth();
+                    mMapHeight = map.getHeight();
+                    mMapWidth = map.getWidth();
                     map.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                    RelativeLayout mapObjectsHolder= (RelativeLayout) getView().findViewById(R.id.map_objects_holder);
+                    RelativeLayout mapObjectsHolder = (RelativeLayout) getView().findViewById(R.id.map_objects_holder);
                     mapObjectsHolder.removeAllViews();
-                    drawBuildings(mapObjectsHolder,liveGame.getTowerState(),liveGame.getBarracksState());
-                    if(liveGame.getRadiant()!=null) {
+                    drawBuildings(mapObjectsHolder, liveGame.getTowerState(), liveGame.getBarracksState());
+                    if (liveGame.getRadiant() != null) {
                         drawTeam(mapObjectsHolder, liveGame.getRadiant(), TrackdotaUtils.RADIANT);
                     }
-                    if(liveGame.getDire()!=null){
+                    if (liveGame.getDire() != null) {
                         drawTeam(mapObjectsHolder, liveGame.getDire(), TrackdotaUtils.DIRE);
                     }
                 }
             });
             initTeams();
-            initTeamPlayers(liveGame.getRadiant(), (ViewGroup) root.findViewById(R.id.radiant_heroes_holder),TrackdotaUtils.RADIANT);
-            initTeamPlayers(liveGame.getDire(), (ViewGroup) root.findViewById(R.id.dire_heroes_holder),TrackdotaUtils.DIRE);
+            initTeamPlayers(liveGame.getRadiant(), (ViewGroup) root.findViewById(R.id.radiant_heroes_holder), TrackdotaUtils.RADIANT);
+            initTeamPlayers(liveGame.getDire(), (ViewGroup) root.findViewById(R.id.dire_heroes_holder), TrackdotaUtils.DIRE);
         }
     }
 
     @SuppressWarnings("deprecation")
-    private void drawTeam(RelativeLayout holder, LiveTeam team, int align){
-        Activity activity=getActivity();
-        LayoutInflater inflater=activity.getLayoutInflater();
-        if(team.getPlayers()!=null){
-            int radiantColor=getResources().getColor(R.color.radiant_transparent);
-            int radiantDeadColor=getResources().getColor(R.color.radiant_transparent_dead);
-            int direColor=getResources().getColor(R.color.dire_transparent);
-            int direDeadColor=getResources().getColor(R.color.dire_transparent_dead);
-            for(final LivePlayer player:team.getPlayers()){
-                RelativeLayout row= (RelativeLayout) inflater.inflate(R.layout.trackdota_map_minihero,holder,false);
-                Hero hero=gameManager.getHero(player.getHeroId());
-                if(hero!=null) {
-                    imageLoader.displayImage(
-                            TrackUtils.getHeroMiniImage(hero.getDotaId()),
-                            (ImageView) row.findViewById(R.id.image),
-                            options);
-                    //todo переделать
-                    row.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Utils.startHeroDetailActivity(MapAndHeroes.this.getActivity(),
-                                    Common.getHeroName(new Long(player.getHeroId()).intValue()));
-                        }
-                    });
-                }
+    private void drawTeam(RelativeLayout holder, LiveTeam team, int align) {
+        Activity activity = getActivity();
+        LayoutInflater inflater = activity.getLayoutInflater();
+        if (team.getPlayers() != null) {
+            int radiantColor = getResources().getColor(R.color.radiant_transparent);
+            int radiantDeadColor = getResources().getColor(R.color.radiant_transparent_dead);
+            int direColor = getResources().getColor(R.color.dire_transparent);
+            int direDeadColor = getResources().getColor(R.color.dire_transparent_dead);
+            for (final LivePlayer player : team.getPlayers()) {
+                RelativeLayout row = (RelativeLayout) inflater.inflate(R.layout.trackdota_map_minihero, holder, false);
+                imageLoader.displayImage(
+                        Utils.getHeroImageMINIUri(Common.getHeroName(new Long(player.getHeroId()).intValue())),
+                        (ImageView) row.findViewById(R.id.image));
+                row.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Utils.startHeroDetailActivity(MapAndHeroes.this.getActivity(),
+                                Common.getHeroName(new Long(player.getHeroId()).intValue()));
+                    }
+                });
 
-                RelativeLayout.LayoutParams lp=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                int left=(int)(0.95f*player.getPositionX()/100*mMapWidth);
-                int top=(int)(0.95f*player.getPositionY()/100*mMapHeight);
-                lp.setMargins(left,top,0,0);
+                RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                int left = (int) (0.95f * player.getPositionX() / 100 * mMapWidth);
+                int top = (int) (0.95f * player.getPositionY() / 100 * mMapHeight);
+                lp.setMargins(left, top, 0, 0);
                 row.setLayoutParams(lp);
-                int circleSize= TrackUtils.dpSize(activity, 40);
-                Bitmap bitmap=Bitmap.createBitmap(circleSize,circleSize, Bitmap.Config.ARGB_8888);
+                int circleSize = TrackUtils.dpSize(activity, 40);
+                Bitmap bitmap = Bitmap.createBitmap(circleSize, circleSize, Bitmap.Config.ARGB_8888);
                 Paint paint = new Paint();
                 paint.setAntiAlias(true);
-                Canvas canvas=new Canvas(bitmap);
-                switch (align){
+                Canvas canvas = new Canvas(bitmap);
+                switch (align) {
                     case TrackdotaUtils.RADIANT:
-                        if(player.getRespawnTimer()>0){
+                        if (player.getRespawnTimer() > 0) {
                             paint.setColor(radiantDeadColor);
-                        }
-                        else {
+                        } else {
                             paint.setColor(radiantColor);
                         }
                         break;
                     case TrackdotaUtils.DIRE:
-                        if(player.getRespawnTimer()>0){
+                        if (player.getRespawnTimer() > 0) {
                             paint.setColor(direDeadColor);
-                        }
-                        else {
+                        } else {
                             paint.setColor(direColor);
                         }
                         break;
                 }
-                canvas.drawCircle(circleSize/2,circleSize/2,circleSize/2,paint);
-                BitmapDrawable drawable=new BitmapDrawable(activity.getResources(),bitmap);
-                if(player.getRespawnTimer()>0){
+                canvas.drawCircle(circleSize / 2, circleSize / 2, circleSize / 2, paint);
+                BitmapDrawable drawable = new BitmapDrawable(activity.getResources(), bitmap);
+                if (player.getRespawnTimer() > 0) {
                     row.removeView(row.findViewById(R.id.alive));
                     row.findViewById(R.id.dead).setBackgroundDrawable(drawable);
-                }
-                else {
+                } else {
                     row.removeView(row.findViewById(R.id.dead));
                     row.findViewById(R.id.alive).setBackgroundDrawable(drawable);
                 }
@@ -247,64 +238,60 @@ public class MapAndHeroes extends Fragment implements Updatable<Pair<CoreResult,
         }
     }
 
-    private void drawBuildings(RelativeLayout holder, int towersState,int barracksState){
-        ImageView buildingsImage=new ImageView(getActivity());
+    private void drawBuildings(RelativeLayout holder, int towersState, int barracksState) {
+        ImageView buildingsImage = new ImageView(getActivity());
         buildingsImage.setMinimumWidth(mMapWidth);
         buildingsImage.setMinimumHeight(mMapHeight);
-        Bitmap bitmap=Bitmap.createBitmap(mMapWidth,mMapHeight, Bitmap.Config.ARGB_8888);
-        Paint paint=new Paint();
+        Bitmap bitmap = Bitmap.createBitmap(mMapWidth, mMapHeight, Bitmap.Config.ARGB_8888);
+        Paint paint = new Paint();
         paint.setAntiAlias(true);
-        Canvas canvas=new Canvas(bitmap);
-        int towerMaxRadius= TrackUtils.dpSize(getActivity(), 7);
-        int towerMinRadius= TrackUtils.dpSize(getActivity(), 5);
-        int radiantColor=getResources().getColor(R.color.ally_team);
-        int radiantInnerColor=getResources().getColor(R.color.radiant_transparent);
-        int direColor=getResources().getColor(R.color.enemy_team);
-        int direInnerColor=getResources().getColor(R.color.dire_transparent);
+        Canvas canvas = new Canvas(bitmap);
+        int towerMaxRadius = TrackUtils.dpSize(getActivity(), 7);
+        int towerMinRadius = TrackUtils.dpSize(getActivity(), 5);
+        int radiantColor = getResources().getColor(R.color.ally_team);
+        int radiantInnerColor = getResources().getColor(R.color.radiant_transparent);
+        int direColor = getResources().getColor(R.color.enemy_team);
+        int direInnerColor = getResources().getColor(R.color.dire_transparent);
 
-        for(int i=0;i<towers.length;i++){
-            int alive=1<<i&towersState;
-            int left=(int)(towers[i].x/100f*mMapWidth);
-            int top=(int)(towers[i].y/100f*mMapHeight);
+        for (int i = 0; i < towers.length; i++) {
+            int alive = 1 << i & towersState;
+            int left = (int) (towers[i].x / 100f * mMapWidth);
+            int top = (int) (towers[i].y / 100f * mMapHeight);
 
-            if(alive==0){
+            if (alive == 0) {
                 paint.setColor(Color.WHITE);
             }
             /*если 1ая половина, то это Radiant*/
-            else if(i<11){
+            else if (i < 11) {
                 paint.setColor(radiantColor);
-            }
-            else {
+            } else {
                 paint.setColor(direColor);
             }
-            canvas.drawCircle(left,top,towerMaxRadius,paint);
+            canvas.drawCircle(left, top, towerMaxRadius, paint);
 
-            if(alive==0){
+            if (alive == 0) {
                 paint.setColor(Color.BLACK);
-            }
-            else if(i<11){
+            } else if (i < 11) {
                 paint.setColor(radiantInnerColor);
-            }
-            else {
+            } else {
                 paint.setColor(direInnerColor);
             }
-            canvas.drawCircle(left,top,towerMinRadius,paint);
+            canvas.drawCircle(left, top, towerMinRadius, paint);
         }
-        int barrackSize= TrackUtils.dpSize(getActivity(), 8);
-        int barrackInnerMargin= TrackUtils.dpSize(getActivity(), 2);
-        int barrackInnerSize= TrackUtils.dpSize(getActivity(), 6);
-        for(int i=0;i<barracks.length;i++){
-            int alive=1<<i&barracksState;
-            int left=(int)(barracks[i].x/100f*mMapWidth);
-            int top=(int)(barracks[i].y/100f*mMapHeight);
-            if(alive==0){
+        int barrackSize = TrackUtils.dpSize(getActivity(), 8);
+        int barrackInnerMargin = TrackUtils.dpSize(getActivity(), 2);
+        int barrackInnerSize = TrackUtils.dpSize(getActivity(), 6);
+        for (int i = 0; i < barracks.length; i++) {
+            int alive = 1 << i & barracksState;
+            int left = (int) (barracks[i].x / 100f * mMapWidth);
+            int top = (int) (barracks[i].y / 100f * mMapHeight);
+            if (alive == 0) {
                 paint.setColor(Color.WHITE);
             }
             /*если 1ая половина, то это Radiant*/
-            else if(i<6){
+            else if (i < 6) {
                 paint.setColor(radiantColor);
-            }
-            else {
+            } else {
                 paint.setColor(direColor);
             }
             canvas.drawRect(
@@ -314,13 +301,11 @@ public class MapAndHeroes extends Fragment implements Updatable<Pair<CoreResult,
                     top + barrackSize,
                     paint);
 
-            if(alive==0){
+            if (alive == 0) {
                 paint.setColor(Color.BLACK);
-            }
-            else if(i<6){
+            } else if (i < 6) {
                 paint.setColor(radiantInnerColor);
-            }
-            else {
+            } else {
                 paint.setColor(direInnerColor);
             }
             canvas.drawRect(
@@ -334,128 +319,116 @@ public class MapAndHeroes extends Fragment implements Updatable<Pair<CoreResult,
         buildingsImage.setImageBitmap(bitmap);
         holder.addView(buildingsImage);
     }
-    private void initTeams(){
-        View root=getView();
-        if(root!=null) {
-            Team radiant = coreResult.getRadiant();
-            ((TextView)root.findViewById(R.id.radiant_tag)).setText(TrackdotaUtils.getTeamTag(radiant,TrackdotaUtils.RADIANT));
-            ((TextView)root.findViewById(R.id.radiant_name)).setText(TrackdotaUtils.getTeamName(radiant, TrackdotaUtils.RADIANT));
-            imageLoader.displayImage(TrackdotaUtils.getTeamImageUrl(radiant), (ImageView) root.findViewById(R.id.radiant_logo),options);
 
-            Team dire=coreResult.getDire();
-            ((TextView)root.findViewById(R.id.dire_tag)).setText(TrackdotaUtils.getTeamTag(dire,TrackdotaUtils.DIRE));
-            ((TextView)root.findViewById(R.id.dire_name)).setText(TrackdotaUtils.getTeamName(dire,TrackdotaUtils.DIRE));
-            imageLoader.displayImage(TrackdotaUtils.getTeamImageUrl(dire), (ImageView) root.findViewById(R.id.dire_logo),options);
+    private void initTeams() {
+        View root = getView();
+        if (root != null) {
+            Team radiant = coreResult.getRadiant();
+            ((TextView) root.findViewById(R.id.radiant_tag)).setText(TrackdotaUtils.getTeamTag(radiant, TrackdotaUtils.RADIANT));
+            ((TextView) root.findViewById(R.id.radiant_name)).setText(TrackdotaUtils.getTeamName(radiant, TrackdotaUtils.RADIANT));
+            imageLoader.displayImage(TrackdotaUtils.getTeamImageUrl(radiant), (ImageView) root.findViewById(R.id.radiant_logo), options);
+
+            Team dire = coreResult.getDire();
+            ((TextView) root.findViewById(R.id.dire_tag)).setText(TrackdotaUtils.getTeamTag(dire, TrackdotaUtils.DIRE));
+            ((TextView) root.findViewById(R.id.dire_name)).setText(TrackdotaUtils.getTeamName(dire, TrackdotaUtils.DIRE));
+            imageLoader.displayImage(TrackdotaUtils.getTeamImageUrl(dire), (ImageView) root.findViewById(R.id.dire_logo), options);
         }
     }
 
-    private void initTeamPlayers(LiveTeam liveTeam,ViewGroup view, int align) {
+    private void initTeamPlayers(LiveTeam liveTeam, ViewGroup view, int align) {
         view.removeAllViews();
-        LayoutInflater inflater=getActivity().getLayoutInflater();
-        int state= TrackUtils.getDeviceState(getActivity());
-        int teamColor=getResources().getColor(align==TrackdotaUtils.RADIANT?R.color.ally_team:R.color.enemy_team);
-        if(liveTeam.getPlayers()!=null){
-            for(final LivePlayer livePlayer:liveTeam.getPlayers()){
-                LinearLayout playerRow= (LinearLayout) inflater.inflate(R.layout.match_player_row,view,false);
-                LinearLayout unitHolder= (LinearLayout) playerRow.findViewById(R.id.unit_holder);
-                LinearLayout additionalUnitHolder= (LinearLayout) playerRow.findViewById(R.id.additional_unit_holder);
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        int state = TrackUtils.getDeviceState(getActivity());
+        int teamColor = getResources().getColor(align == TrackdotaUtils.RADIANT ? R.color.ally_team : R.color.enemy_team);
+        if (liveTeam.getPlayers() != null) {
+            for (final LivePlayer livePlayer : liveTeam.getPlayers()) {
+                LinearLayout playerRow = (LinearLayout) inflater.inflate(R.layout.match_player_row, view, false);
+                LinearLayout unitHolder = (LinearLayout) playerRow.findViewById(R.id.unit_holder);
+                LinearLayout additionalUnitHolder = (LinearLayout) playerRow.findViewById(R.id.additional_unit_holder);
 
-                switch (state){
+                switch (state) {
                     case TABLET_LANDSCAPE:
                         unitHolder.setOrientation(LinearLayout.VERTICAL);
                         additionalUnitHolder.setOrientation(LinearLayout.VERTICAL);
-                        ((LinearLayout)playerRow.findViewById(R.id.item_holder)).setOrientation(LinearLayout.HORIZONTAL);
+                        ((LinearLayout) playerRow.findViewById(R.id.item_holder)).setOrientation(LinearLayout.HORIZONTAL);
                         playerRow.setOrientation(LinearLayout.HORIZONTAL);
                         break;
                     case TABLET_PORTRAIT:
                         unitHolder.setOrientation(LinearLayout.VERTICAL);
                         additionalUnitHolder.setOrientation(LinearLayout.VERTICAL);
-                        ((LinearLayout)playerRow.findViewById(R.id.item_holder)).setOrientation(LinearLayout.VERTICAL);
+                        ((LinearLayout) playerRow.findViewById(R.id.item_holder)).setOrientation(LinearLayout.VERTICAL);
                         playerRow.setOrientation(LinearLayout.HORIZONTAL);
                         break;
                     case PHONE:
                         unitHolder.setOrientation(LinearLayout.HORIZONTAL);
                         additionalUnitHolder.setOrientation(LinearLayout.HORIZONTAL);
-                        ((LinearLayout)playerRow.findViewById(R.id.item_holder)).setOrientation(LinearLayout.VERTICAL);
+                        ((LinearLayout) playerRow.findViewById(R.id.item_holder)).setOrientation(LinearLayout.VERTICAL);
                         playerRow.setOrientation(LinearLayout.VERTICAL);
                         break;
                 }
-                Hero hero=gameManager.getHero(livePlayer.getHeroId());
-                if(hero!=null){
-                    TextView heroName=(TextView)playerRow.findViewById(R.id.nick);
-                    heroName.setVisibility(View.VISIBLE);
-                    heroName.setText(hero.getLocalizedName());
-                    imageLoader.displayImage(TrackUtils.getHeroFullImage(hero.getDotaId()),
-                            (ImageView) playerRow.findViewById(R.id.hero_img),
-                            options);
-                }
-                TextView playerNick=(TextView)playerRow.findViewById(R.id.hero_name);
+                TextView heroName = (TextView) playerRow.findViewById(R.id.nick);
+                heroName.setVisibility(View.VISIBLE);
+                heroName.setText(Common.getHeroName(new Long(livePlayer.getHeroId()).intValue()));
+                imageLoader.displayImage(
+                        Utils.getHeroImageUri(Common.getHeroName(new Long(livePlayer.getHeroId()).intValue())),
+                        (ImageView) playerRow.findViewById(R.id.hero_img));
+                TextView playerNick = (TextView) playerRow.findViewById(R.id.hero_name);
                 playerNick.setTextColor(teamColor);
-                final Player player=gameManager.getPlayer(livePlayer.getAccountId());
-                if(player!=null){
+                final Player player = gameManager.getPlayer(livePlayer.getAccountId());
+                if (player != null) {
                     playerNick.setText(player.getName());
                 }
-                ((TextView)playerRow.findViewById(R.id.player_lvl)).setText(getString(R.string.level) + ": " + livePlayer.getLevel());
-                ((TextView)playerRow.findViewById(R.id.kills)).setText(Html.fromHtml(getString(R.string.kills) + " " + livePlayer.getKills()));
-                ((TextView)playerRow.findViewById(R.id.death)).setText(Html.fromHtml(getString(R.string.deaths) + " " + livePlayer.getDeath()));
-                ((TextView)playerRow.findViewById(R.id.assists)).setText(Html.fromHtml(getString(R.string.assists) + " " + livePlayer.getAssists()));
-                ((TextView)playerRow.findViewById(R.id.gold)).setText(Html.fromHtml(getString(R.string.gold) + " " + livePlayer.getGold()));
-                ((TextView)playerRow.findViewById(R.id.last_hits)).setText(Html.fromHtml(getString(R.string.last_hits) + " " + livePlayer.getLastHits()));
-                ((TextView)playerRow.findViewById(R.id.denies)).setText(Html.fromHtml(getString(R.string.denies) + " " + livePlayer.getDenies()));
-                ((TextView)playerRow.findViewById(R.id.gpm)).setText(Html.fromHtml(getString(R.string.gpm) + " " + livePlayer.getGpm()));
-                ((TextView)playerRow.findViewById(R.id.xpm)).setText(Html.fromHtml(getString(R.string.xpm) + " " + livePlayer.getXpm()));
+                ((TextView) playerRow.findViewById(R.id.player_lvl)).setText(getString(R.string.level) + ": " + livePlayer.getLevel());
+                ((TextView) playerRow.findViewById(R.id.kills)).setText(Html.fromHtml(getString(R.string.kills) + " " + livePlayer.getKills()));
+                ((TextView) playerRow.findViewById(R.id.death)).setText(Html.fromHtml(getString(R.string.deaths) + " " + livePlayer.getDeath()));
+                ((TextView) playerRow.findViewById(R.id.assists)).setText(Html.fromHtml(getString(R.string.assists) + " " + livePlayer.getAssists()));
+                ((TextView) playerRow.findViewById(R.id.gold)).setText(Html.fromHtml(getString(R.string.gold) + " " + livePlayer.getGold()));
+                ((TextView) playerRow.findViewById(R.id.last_hits)).setText(Html.fromHtml(getString(R.string.last_hits) + " " + livePlayer.getLastHits()));
+                ((TextView) playerRow.findViewById(R.id.denies)).setText(Html.fromHtml(getString(R.string.denies) + " " + livePlayer.getDenies()));
+                ((TextView) playerRow.findViewById(R.id.gpm)).setText(Html.fromHtml(getString(R.string.gpm) + " " + livePlayer.getGpm()));
+                ((TextView) playerRow.findViewById(R.id.xpm)).setText(Html.fromHtml(getString(R.string.xpm) + " " + livePlayer.getXpm()));
 
-                int[] itemViewIds=new int[]{
-                        R.id.item0,R.id.item1,R.id.item2,R.id.item3,R.id.item4, R.id.item5,
-                        R.id.additional_unit_item0,R.id.additional_unit_item1,R.id.additional_unit_item2,R.id.additional_unit_item3,R.id.additional_unit_item4, R.id.additional_unit_item5
+                int[] itemViewIds = new int[]{
+                        R.id.item0, R.id.item1, R.id.item2, R.id.item3, R.id.item4, R.id.item5,
+                        R.id.additional_unit_item0, R.id.additional_unit_item1, R.id.additional_unit_item2, R.id.additional_unit_item3, R.id.additional_unit_item4, R.id.additional_unit_item5
                 };
-                if(livePlayer.getItemIds()!=null){
-                    int size=livePlayer.getItemIds().length;
-                    for(int i=0;i<size;i++){
-                        ImageView itemView= (ImageView) playerRow.findViewById(itemViewIds[i]);
-                        final long itemId=livePlayer.getItemIds()[i];
-                        Item item=gameManager.getItem(itemId);
-                        if(item!=null) {
-                            imageLoader.displayImage(
-                                    TrackUtils.getItemImage(item.getDotaId()),
-                                    itemView,
-                                    options);
-                            itemView.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    try {
-                                        Utils.startItemsDetailActivity(
-                                                MapAndHeroes.this.getActivity(),
-                                                DataManager.getItemsItem(MapAndHeroes.this.getActivity(),
-                                                        Common.getItemName(new Long(itemId).intValue())));
-                                    } catch (IOException e) {
-                                        // TODO Auto-generated catch block
-                                        e.printStackTrace();
-                                    } catch (JSONException e) {
-                                        // TODO Auto-generated catch block
-                                        e.printStackTrace();
-                                    }
-                                }
-                            });
+                int size = livePlayer.getItemIds().length;
+                for (int i = 0; i < size; i++) {
+                    ImageView itemView = (ImageView) playerRow.findViewById(itemViewIds[i]);
+                    final long itemId = livePlayer.getItemIds()[i];
+                    imageLoader.displayImage(
+                            Utils.getItemsImageUri(Common.getItemName(new Long(itemId).intValue())),
+                            itemView);
+                    itemView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+                                Utils.startItemsDetailActivity(
+                                        MapAndHeroes.this.getActivity(),
+                                        DataManager.getItemsItem(MapAndHeroes.this.getActivity(),
+                                                Common.getItemName(new Long(itemId).intValue())));
+                            } catch (IOException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            } catch (JSONException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
                         }
-                        else {
-                            itemView.setImageResource(R.drawable.default_pic);
-                        }
-                    }
-                    for(int i=size;i<itemViewIds.length;i++){
-                        ImageView itemView= (ImageView) playerRow.findViewById(itemViewIds[i]);
-                        itemView.setImageResource(R.drawable.default_pic);
-                    }
-                    if(size>itemViewIds.length/2){
-                        additionalUnitHolder.setVisibility(View.VISIBLE);
-                    }
-                    else {
-                        additionalUnitHolder.setVisibility(View.GONE);
-                    }
+                    });
+                }
+                for (int i = size; i < itemViewIds.length; i++) {
+                    ImageView itemView = (ImageView) playerRow.findViewById(itemViewIds[i]);
+                    itemView.setImageResource(R.drawable.default_pic);
+                }
+                if (size > itemViewIds.length / 2) {
+                    additionalUnitHolder.setVisibility(View.VISIBLE);
+                } else {
+                    additionalUnitHolder.setVisibility(View.GONE);
                 }
                 /*if not in pick mode*/
-                if(liveGame.getStatus()>1) {
-                    playerRow.setOnClickListener(new TrackdotaUtils.OnLivePlayerClickListener(livePlayer,player.getName()));
+                if (liveGame.getStatus() > 1) {
+                    playerRow.setOnClickListener(new TrackdotaUtils.OnLivePlayerClickListener(livePlayer, player.getName()));
                 }
                 view.addView(playerRow);
             }

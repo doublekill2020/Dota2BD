@@ -1,0 +1,6 @@
+<RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/umeng_comm_segment_radioButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/umeng_comm_radio_shape" />
+<!-- From: file:/E:/project/MyDotaBuff/umeng_community_android_library/src/main/res/layout/umeng_comm_radio_button_item.xml -->

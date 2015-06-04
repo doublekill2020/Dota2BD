@@ -6,13 +6,13 @@
     <string name="umeng_comm_edittext_hint">分享新鲜事&#8230;#此处添加话题更好哦#</string>
     <string name="umeng_comm_3rdparty_login">使用第三方账户登录</string>
     <string name="umeng_comm_username">MR.SIMPLE</string>
-    <string name="umeng_comm_posted_msg">发表消息</string>
+    <string name="umeng_comm_posted_msg">消息</string>
     <string name="umeng_comm_followed_topic">关注话题</string>
-    <string name="umeng_comm_followed_user">关注用户</string>
-    <string name="umeng_comm_my_fans">我的粉丝</string>
+    <string name="umeng_comm_followed_user">关注</string>
+    <string name="umeng_comm_my_fans">粉丝</string>
     <string name="umeng_comm_topic_followed">取消关注</string>
     <string name="umeng_comm_follow_topic">关注</string>
-    <string name="umeng_comm_search_hint">搜索话题&#8230;</string>
+    <string name="umeng_comm_search_hint">搜索话题</string>
     <string name="umeng_comm_search_topic_failed">未找到匹配的话题</string>
     <string name="umeng_comm_search_key">搜索</string>
     <string name="umeng_comm_search_keyword_input">请输入话题关键字&#8230;</string>
@@ -47,7 +47,7 @@
     <string name="umeng_comm_send_success">发送成功</string>
     <string name="umeng_comm_send_ing">发送中&#8230;</string>
     <string name="umeng_comm_send_failed">发送失败</string>
-    <string name="umeng_comm_topic_search_no_keyword">请输入话题关键字</string>
+    <string name="umeng_comm_topic_search_no_keyword">请输入关键字</string>
     <string name="umeng_comm_logining">登录中&#8230;</string>
     <string name="umeng_comm_nickname">昵称</string>
     <string name="umeng_comm_male">男</string>
@@ -106,6 +106,8 @@
     <string name="umeng_comm_load_delete_success">删除成功</string>
     <string name="umeng_comm_liked">您已经点赞</string>
     <string name="umeng_comm_like_failed">点赞失败~</string>
+    <string name="umeng_comm_like_success">点赞成功</string>
+    <string name="umeng_comm_cancel_like_success">取消点赞成功</string>
     <string name="umeng_comm_cancel_like_failed">取消点赞失败~</string>
     <string name="umeng_comm_load_failed">加载失败</string>
     <string name="umeng_comm_text_confirm">确认</string>
@@ -140,14 +142,15 @@
     <string name="umeng_comm_user_unusable">操作失败,用户被删除或者禁言</string>
     <!-- 对应着server的20005错误 -->
     <string name="umeng_comm_origin_feed_delete">原帖已被删除,不能转发</string>
-    <string name="umeng_comm_duplicate_name">昵称已存在，请修改昵称...</string>
-    <string name="umeng_comm_before_save">请先保用户信息，再更新头像...</string>
+    <string name="umeng_comm_duplicate_name">昵称已存在，请修改昵称&#8230;</string>
+    <string name="umeng_comm_before_save">请先保用户信息，再更新头像&#8230;</string>
     <string name="umeng_comm_save_pic_success">图片保存成功</string>
     <string name="umeng_comm_save_pic_failed">图片保存失败</string>
     <string name="umeng_comm_feeds_num">发表消息：</string>
     <string name="umeng_comm_fans_num">粉丝：</string>
     <string name="umeng_comm_skip">跳过</string>
     <string name="umeng_comm_recommend_user">用户推荐</string>
+    <string name="umeng_comm_recommend_friends">好友圈</string>
     <string name="umeng_comm_recommend_topic">话题推荐</string>
     <string name="umeng_comm_topic_tip_male">大哥啊，添加个话题吧！</string>
     <string name="umeng_comm_topic_tip_female">大妹砸，添加个话题吧！</string>
@@ -155,20 +158,32 @@
     <string name="umeng_comm_recommend">推荐</string>
     <string name="umeng_comm_other">其它</string>
     <string name="umeng_comm_no_recommend_user">暂时没有推荐用户咯</string>
-    <string name="umeng_comm_no_recommend_topic">暂时没有推荐话题咯</string>
     <string name="umeng_comm_no_follow_unfollow_myself">不能关注/取消关注自己咯~</string>
+    <string name="umeng_comm_topic_has_deleted">该话题应经被删除&#8230;</string>
+    <string name="umeng_comm_relation_user">相关用户</string>
+    <string name="umeng_comm_all_msg">全部消息</string>
+    <string name="umeng_comm_all">全部</string>
+    <string name="umeng_comm_no_search_user">未找到相关用户</string>
+    <string name="umeng_comm_no_search_feed">未找到相关Feed</string>
+    <string name="umeng_comm_no_recommend_topic">暂时没有推荐话题咯</string>
+    <string name="umeng_comm_search_content">请输入用户或内容关键字</string>
+    <string name="umeng_comm_invalid_token">您的登录信息已过期,请重新登录</string>
+    <string name="umeng_comm_search_view_hint">搜索用户和内容</string>
+    <string name="umeng_comm_dots"> &#8230; </string>
+
     
-    <string name="umeng_comm__topic_has_deleted">该话题应经被删除...</string>
-	<string-array name="umeng_comm_topic_detail_tabs">
+    <string-array name="umeng_comm_topic_detail_tabs">
         <item>话题聚合</item>
         <item>活跃用户</item>
     </string-array>
-    
-	<string-array name="umeng_comm_feed_titles">
-        <item>全部</item>
+    <string-array name="umeng_comm_feed_titles">
+        <item>关注</item>
         <item>推荐</item>
+        <item>话题</item>
     </string-array>
-    
+
+    <string name="umeng_comm_content_short_tips">发布的内容太少啦，再多写点内容。</string>
+
     <!-- 社区名字 -->
     <string name="umeng_comm_name">微社区</string>
 
