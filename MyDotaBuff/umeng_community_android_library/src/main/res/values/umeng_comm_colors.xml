@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
 
     <color name="umeng_comm_comments_bg">#F4F4F4</color>
@@ -24,7 +24,7 @@
     <color name="umeng_comm_feed_layout_bg_color">#f0f0f0</color>
     <color name="umeng_comm_white_color">#ffffff</color>
     <color name="umeng_comm_skip_text_color">#4971e3</color>
-    <color name="umeng_comm_topic_tip_bg">#cfcfcf</color><!-- 发送feed页面，提示语背景颜色 -->
+    <color name="umeng_comm_topic_tip_bg">#cfcfcf</color> <!-- 发送feed页面，提示语背景颜色 -->
     <!-- 消息流listview下拉刷新的header上的四个颜色值 -->
     <!--
          <color name="umeng_comm_lv_header_color1">#33b5e5</color>
@@ -40,5 +40,11 @@
 
     <!-- 剪切图片页面，paint的颜色 -->
     <color name="umeng_comm_clip_image_paint">#aa000000</color>
+    
+    <!--  -->
+    <color name="radio_button_selected_color">#ff33b5e5</color>
+    <!-- <color name="radio_button_unselected_color">@android:color/transparent</color> -->
+    <color name="radio_button_unselected_color">#ff0000</color>
+    <color name="umeng_comm_radio_stroke_color">#4A90E2</color>
 
 </resources>

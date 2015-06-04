@@ -45,15 +45,7 @@ import cn.edu.mydotabuff.view.CircleImageView;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.tencent.a.b.m;
-import com.umeng.analytics.MobclickAgent;
-import com.umeng.comm.core.CommunitySDK;
-import com.umeng.comm.core.beans.CommConfig;
-import com.umeng.comm.core.impl.CommunityFactory;
-import com.umeng.comm.core.sdkmanager.LoginSDKManager;
 import com.umeng.fb.FeedbackAgent;
-import com.umeng.login.controller.UMAuthService;
-import com.umeng.login.controller.UMLoginServiceFactory;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
@@ -69,14 +61,14 @@ import com.umeng.update.UmengUpdateAgent;
 
 public class ActMain extends BaseActivity implements OnClickListener {
 
-	private FragRecently recentlyFragment;
-	private FragHeroList contactsFragment;
-	private FragFound newsFragment;
-	private FragMyDetail settingFragment;
+	private FragRecently recentlyFrag;
+	private FragHeroList heroListFrag;
+	private FragFound foundFrag;
+	private FragMyDetail myDetailFrag;
 	private View recentlyLayout;
-	private View contactsLayout;
-	private View newsLayout;
-	private View settingLayout;
+	private View heroListLayout;
+	private View foundLayout;
+	private View myDetailLayout;
 	private ImageView messageImage, contactsImage, newsImage, settingImage;
 	private TextView messageText, contactsText, newsText, settingText;
 	private FragmentManager fragmentManager;
@@ -116,9 +108,9 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		loader = ImageLoader.getInstance();
 
 		recentlyLayout = findViewById(R.id.message_layout);
-		contactsLayout = findViewById(R.id.contacts_layout);
-		newsLayout = findViewById(R.id.board_layout);
-		settingLayout = findViewById(R.id.setting_layout);
+		heroListLayout = findViewById(R.id.contacts_layout);
+		foundLayout = findViewById(R.id.board_layout);
+		myDetailLayout = findViewById(R.id.setting_layout);
 		messageImage = (ImageView) findViewById(R.id.message_image);
 		contactsImage = (ImageView) findViewById(R.id.contacts_image);
 		newsImage = (ImageView) findViewById(R.id.news_image);
@@ -151,9 +143,9 @@ public class ActMain extends BaseActivity implements OnClickListener {
 	protected void initEvent() {
 		// TODO Auto-generated method stub
 		recentlyLayout.setOnClickListener(this);
-		contactsLayout.setOnClickListener(this);
-		newsLayout.setOnClickListener(this);
-		settingLayout.setOnClickListener(this);
+		heroListLayout.setOnClickListener(this);
+		foundLayout.setOnClickListener(this);
+		myDetailLayout.setOnClickListener(this);
 		checkUpdateBtn.setOnClickListener(this);
 		feedBackBtn.setOnClickListener(this);
 		shareBtn.setOnClickListener(this);
@@ -515,39 +507,39 @@ public class ActMain extends BaseActivity implements OnClickListener {
 			// 当点击了消息tab时，改变控件的图片和文字颜色
 			messageImage.setImageResource(R.drawable.recently_selected);
 			messageText.setTextColor(Color.WHITE);
-			if (recentlyFragment == null) {
+			if (recentlyFrag == null) {
 				// 如果MessageFragment为空，则创建一个并添加到界面上
-				recentlyFragment = new FragRecently();
-				transaction.add(R.id.content, recentlyFragment);
+				recentlyFrag = new FragRecently();
+				transaction.add(R.id.content, recentlyFrag);
 			} else {
 				// 如果MessageFragment不为空，则直接将它显示出来
-				transaction.show(recentlyFragment);
+				transaction.show(recentlyFrag);
 			}
 			break;
 		case 1:
 			// 当点击了联系人tab时，改变控件的图片和文字颜色
 			contactsImage.setImageResource(R.drawable.live_selected);
 			contactsText.setTextColor(Color.WHITE);
-			if (contactsFragment == null) {
+			if (heroListFrag == null) {
 				// 如果ContactsFragment为空，则创建一个并添加到界面上
-				contactsFragment = new FragHeroList();
-				transaction.add(R.id.content, contactsFragment);
+				heroListFrag = new FragHeroList();
+				transaction.add(R.id.content, heroListFrag);
 			} else {
 				// 如果ContactsFragment不为空，则直接将它显示出来
-				transaction.show(contactsFragment);
+				transaction.show(heroListFrag);
 			}
 			break;
 		case 2:
 			// 当点击了动态tab时，改变控件的图片和文字颜色
 			newsImage.setImageResource(R.drawable.find_seleted);
 			newsText.setTextColor(Color.WHITE);
-			if (newsFragment == null) {
+			if (foundFrag == null) {
 				// 如果NewsFragment为空，则创建一个并添加到界面上
-				newsFragment = new FragFound();
-				transaction.add(R.id.content, newsFragment);
+				foundFrag = new FragFound();
+				transaction.add(R.id.content, foundFrag);
 			} else {
 				// 如果NewsFragment不为空，则直接将它显示出来
-				transaction.show(newsFragment);
+				transaction.show(foundFrag);
 			}
 			break;
 		case 3:
@@ -555,13 +547,13 @@ public class ActMain extends BaseActivity implements OnClickListener {
 			// 当点击了设置tab时，改变控件的图片和文字颜色
 			settingImage.setImageResource(R.drawable.my_detail_selected);
 			settingText.setTextColor(Color.WHITE);
-			if (settingFragment == null) {
+			if (myDetailFrag == null) {
 				// 如果SettingFragment为空，则创建一个并添加到界面上
-				settingFragment = new FragMyDetail();
-				transaction.add(R.id.content, settingFragment);
+				myDetailFrag = new FragMyDetail();
+				transaction.add(R.id.content, myDetailFrag);
 			} else {
 				// 如果SettingFragment不为空，则直接将它显示出来
-				transaction.show(settingFragment);
+				transaction.show(myDetailFrag);
 			}
 			break;
 		}
@@ -589,17 +581,17 @@ public class ActMain extends BaseActivity implements OnClickListener {
 	 *            用于对Fragment执行操作的事务
 	 */
 	private void hideFragments(FragmentTransaction transaction) {
-		if (recentlyFragment != null) {
-			transaction.hide(recentlyFragment);
+		if (recentlyFrag != null) {
+			transaction.hide(recentlyFrag);
 		}
-		if (contactsFragment != null) {
-			transaction.hide(contactsFragment);
+		if (heroListFrag != null) {
+			transaction.hide(heroListFrag);
 		}
-		if (newsFragment != null) {
-			transaction.hide(newsFragment);
+		if (foundFrag != null) {
+			transaction.hide(foundFrag);
 		}
-		if (settingFragment != null) {
-			transaction.hide(settingFragment);
+		if (myDetailFrag != null) {
+			transaction.hide(myDetailFrag);
 		}
 	}
 
@@ -624,26 +616,10 @@ public class ActMain extends BaseActivity implements OnClickListener {
 		}
 	}
 
-	private boolean flags = false;
-
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			if (flags) {
-				finish();
-			} else {
-				flags = true;
-				Toast.makeText(this, "再按一次退出程序!", 500).show();
-				new Handler().postDelayed(new Runnable() {
-
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						flags = false;
-					}
-				}, 1000);
-			}
-			return true;
+			moveTaskToBack(false);
 		}
 		return super.onKeyDown(keyCode, event);
 	}

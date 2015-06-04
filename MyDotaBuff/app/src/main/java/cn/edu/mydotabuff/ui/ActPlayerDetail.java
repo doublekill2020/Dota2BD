@@ -1,16 +1,16 @@
-/**   
+/**
  * @Title: ActPlayerDetail.java
- * @ProjectName MyDotaBuff 
- * @Package cn.edu.mydotabuff.ui 
+ * @ProjectName MyDotaBuff
+ * @Package cn.edu.mydotabuff.ui
  * @author 袁浩 1006401052yh@gmail.com
- * @date 2015-1-29 下午1:54:11 
- * @version V1.4  
+ * @date 2015-1-29 下午1:54:11
+ * @version V1.4
  * Copyright 2013-2015 深圳市点滴互联科技有限公司  版权所有
  */
 package cn.edu.mydotabuff.ui;
 
 import android.content.Intent;
-import android.support.v7.widget.Toolbar;
+import android.net.Uri;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -37,119 +37,131 @@ import cn.edu.mydotabuff.view.TipsToast.DialogType;
  * @Description: TODO(这里用一句话描述这个类的作用)
  * @author 袁浩 1006401052yh@gmail.com
  * @date 2015-1-29 下午1:54:11
- * 
+ *
  */
 public class ActPlayerDetail extends BaseActivity implements
-		OnWebDataGetListener {
-	private TextView nameView, statusView, timeView, loginView;
-	private ImageLoader loader;
-	private PlayerInfoBean bean;
-	private WebDataHelper helper;
-	private LoadingDialog dialog;
-	private TextView winNum, loseNum;
-	private CircleImageView iconView;
+        OnWebDataGetListener {
+    private TextView nameView, statusView, timeView, loginView;
+    private ImageLoader loader;
+    private PlayerInfoBean bean;
+    private WebDataHelper helper;
+    private LoadingDialog dialog;
+    private TextView winNum, loseNum;
+    private CircleImageView iconView;
 
-	@Override
-	protected void initViewAndData() {
-		// TODO Auto-generated method stub
-		setContentView(R.layout.act_player_detail_base);
-		setSupportActionBar(mToolbar);
-		getSupportActionBar().setTitle("个人资料");
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    @Override
+    protected void initViewAndData() {
+        // TODO Auto-generated method stub
+        setContentView(R.layout.act_player_detail_base);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("个人资料");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-		nameView = getViewById(R.id.name);
-		statusView = getViewById(R.id.status);
-		timeView = getViewById(R.id.regist_time);
-		loginView = getViewById(R.id.last_login);
-		winNum = getViewById(R.id.most_win_num);
-		loseNum = getViewById(R.id.most_lose_num);
-		iconView = getViewById(R.id.myinfrom_up_img);
-		loader = ImageLoader.getInstance();
-		dialog = new LoadingDialog(this);
-		bean = (PlayerInfoBean) getIntent().getSerializableExtra("data");
+        nameView = getViewById(R.id.name);
+        statusView = getViewById(R.id.status);
+        timeView = getViewById(R.id.regist_time);
+        loginView = getViewById(R.id.last_login);
+        winNum = getViewById(R.id.most_win_num);
+        loseNum = getViewById(R.id.most_lose_num);
+        iconView = getViewById(R.id.myinfrom_up_img);
+        loader = ImageLoader.getInstance();
+        dialog = new LoadingDialog(this);
+        bean = (PlayerInfoBean) getIntent().getSerializableExtra("data");
 
-		helper = new WebDataHelper(this);
-		helper.setDataGetListener(this);
-		helper.getWebData(bean);
-	}
+        helper = new WebDataHelper(this);
+        helper.setDataGetListener(this);
+        helper.getWebData(bean);
+    }
 
-	@Override
-	protected void initEvent() {
-		// TODO Auto-generated method stub
+    @Override
+    protected void initEvent() {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	@Override
-	public void onStartGetData() {
-		// TODO Auto-generated method stub
-		dialog.setCancelable(false);
-		dialog.show();
-	}
+    @Override
+    public void onStartGetData() {
+        // TODO Auto-generated method stub
+        dialog.setCancelable(false);
+        dialog.show();
+    }
 
-	@Override
-	public <T> void onGetFinished(T data) {
-		// TODO Auto-generated method stub
-		bean = (PlayerInfoBean) data;
-		nameView.setText(bean.getName());
-		statusView.setText(Common.getPersonState(bean.getState()));
-		timeView.setText(TimeHelper.TimeStamp2Date(bean.getTimecreated(),
-				"yyyy-MM-dd HH:mm"));
-		loginView.setText(TimeHelper.TimeStamp2Date(bean.getLastlogooff(),
-				"yyyy-MM-dd HH:mm"));
-		loader.displayImage(bean.getMediumIcon(), iconView);
-		winNum.setText(bean.getWinStreak() + "场");
-		loseNum.setText(bean.getLoseStreak() + "场");
-		dialog.dismiss();
-	}
+    @Override
+    public <T> void onGetFinished(T data) {
+        // TODO Auto-generated method stub
+        bean = (PlayerInfoBean) data;
+        nameView.setText(bean.getName());
+        statusView.setText(Common.getPersonState(bean.getState()));
+        timeView.setText(TimeHelper.TimeStamp2Date(bean.getTimecreated(),
+                "yyyy-MM-dd HH:mm"));
+        loginView.setText(TimeHelper.TimeStamp2Date(bean.getLastlogooff(),
+                "yyyy-MM-dd HH:mm"));
+        loader.displayImage(bean.getMediumIcon(), iconView);
+        winNum.setText(bean.getWinStreak() + "场");
+        loseNum.setText(bean.getLoseStreak() + "场");
+        dialog.dismiss();
+    }
 
-	@Override
-	public void onGetFailed(String failMsg) {
-		// TODO Auto-generated method stub
-		dialog.dismiss();
-		TipsToast.showToast(this, failMsg, Toast.LENGTH_SHORT,
-				DialogType.LOAD_FAILURE);
-	}
+    @Override
+    public void onGetFailed(String failMsg) {
+        // TODO Auto-generated method stub
+        dialog.dismiss();
+        TipsToast.showToast(this, failMsg, Toast.LENGTH_SHORT,
+                DialogType.LOAD_FAILURE);
+    }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// TODO Auto-generated method stub
-		getMenuInflater().inflate(R.menu.act_player_detail_menu, menu);
-		return super.onCreateOptionsMenu(menu);
-	}
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // TODO Auto-generated method stub
+        getMenuInflater().inflate(R.menu.act_player_detail_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			finish();
-			break;
-		case R.id.more_detail:
-			if (bean == null) {
-				TipsToast.showToast(ActPlayerDetail.this, "暂无数据",
-						Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
-			} else {
-				Intent intent = new Intent(ActPlayerDetail.this,
-						ActUserStatistics.class);
-				intent.putExtra("type", "other");
-				intent.putExtra("data", bean);
-				startActivity(intent);
-			}
-			break;
-		case R.id.friend_list:
-			if (bean == null) {
-				TipsToast.showToast(ActPlayerDetail.this, "暂无数据",
-						Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
-			} else {
-				Intent intent = new Intent(this, ActFriendList.class);
-				intent.putExtra("steamid", bean.getSteamid());
-				startActivity(intent);
-			}
-			break;
-		case R.id.back_to_main:
-			AppManager.getAppManager().finishAllActivity(ActMain.class);
-			finish();
-			break;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            case R.id.more_detail:
+                if (bean == null) {
+                    TipsToast.showToast(ActPlayerDetail.this, "暂无数据",
+                            Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
+                } else {
+                    Intent intent = new Intent(ActPlayerDetail.this,
+                            ActUserStatistics.class);
+                    intent.putExtra("type", "other");
+                    intent.putExtra("data", bean);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.friend_list:
+                if (bean == null) {
+                    TipsToast.showToast(ActPlayerDetail.this, "暂无数据",
+                            Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
+                } else {
+                    Intent intent = new Intent(this, ActFriendList.class);
+                    intent.putExtra("steamid", bean.getSteamid());
+                    startActivity(intent);
+                }
+                break;
+            case R.id.back_to_main:
+                AppManager.getAppManager().finishAllActivity(ActMain.class);
+                finish();
+                break;
+            case R.id.go_to_star:
+                try {
+                    Uri uri = Uri.parse("market://details?id="
+                            + getPackageName());
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    TipsToast.showToast(this, "抱歉，您还未安装相应的应用市场",
+                            Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
+                }
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

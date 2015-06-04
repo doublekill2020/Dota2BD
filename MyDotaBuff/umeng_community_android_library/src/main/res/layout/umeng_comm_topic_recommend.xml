@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
-    <include
-        android:id="@+id/umeng_comm_title_layout"
-        layout="@layout/umeng_comm_setting_title_bar" />
+    <include layout="@layout/umeng_comm_setting_title_bar" />
 
     <com.umeng.comm.ui.widgets.RefreshLvLayout
         android:id="@+id/umeng_comm_topic_refersh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/umeng_comm_title_layout" >
+        android:layout_height="wrap_content" >
 
         <ListView
             android:id="@+id/umeng_comm_topic_listview"
@@ -26,11 +24,10 @@
             android:scrollingCache="false" />
     </com.umeng.comm.ui.widgets.RefreshLvLayout>
 
-    <ViewStub
+    <com.umeng.comm.ui.widgets.EmptyView
         android:id="@+id/umeng_comm_empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:layout="@layout/umeng_comm_no_data" />
+        android:gravity="center" />
 
-</RelativeLayout>
+</LinearLayout>

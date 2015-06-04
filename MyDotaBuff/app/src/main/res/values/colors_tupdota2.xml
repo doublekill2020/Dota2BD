@@ -25,7 +25,7 @@
     <color name="statusbar_bg">@color/main_color</color>
     <!--#2196F3-->
     <color name="item_pressed">#D6D6D6</color>//item点击高亮
-
+    <color name="pager_indicator">#2196F3</color>
     <!-- trackdota color-->
     <color name="dota_holo_blue_dark">#ff0099cc</color>
     <color name="dota_gray">#717171</color>

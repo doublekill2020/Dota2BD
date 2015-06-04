@@ -224,17 +224,16 @@
         <item>Crates</item>
     </string-array>
     <string-array name="trackdota">
-        <item>LIVE</item>
-        <item>POPULAR</item>
-        <item>RECENT</item>
+        <item>直播</item>
+        <item>最受欢迎</item>
+        <item>最近</item>
     </string-array>
     <string-array name="trackdota_game">
-        <item>COMMON</item>
-        <item>MAP &amp; HEROES</item>
-        <item>GRAPHS</item>
-        <item>STATISTICS</item>
-        <item>LOG</item>
-        <item>STREAMS</item>
+        <item>概况</item>
+        <item>地图 &amp; 英雄</item>
+        <item>图表</item>
+        <item>统计</item>
+        <item>日志</item>
     </string-array>
     <string-array name="map_barracks_line">
         <item>top</item>

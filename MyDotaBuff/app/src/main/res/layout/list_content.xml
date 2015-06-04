@@ -28,6 +28,5 @@
         android:layout_height="80dp"
         android:layout_gravity="center"
         android:visibility="visible"
-        wheel:barColor="?attr/colorPrimary"
         wheel:progressIndeterminate="true" />
 </FrameLayout >

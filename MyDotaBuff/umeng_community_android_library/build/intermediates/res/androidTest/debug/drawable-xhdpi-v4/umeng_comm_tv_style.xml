@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:drawable="@android:color/transparent" android:state_pressed="false" android:state_window_focused="false"/>
-    <item android:drawable="@color/umeng_comm_text_color_origin" android:state_pressed="true" android:state_window_focused="true"/>
-    <item android:drawable="@color/umeng_comm_text_color_origin" android:state_focused="true"/>
-
-</selector><!-- From: file:/E:/project/MyDotaBuff/umeng_community_android_library/src/main/res/drawable-xhdpi/umeng_comm_tv_style.xml --><!-- From: file:/E:/project/MyDotaBuff/umeng_community_android_library/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/umeng_comm_tv_style.xml -->

@@ -47,7 +47,7 @@ public class ProgressWheel extends View {
     private final long pauseGrowingTime = 200;
 
     //Colors (with defaults)
-    private int barColor = 0xAA000000;
+    private int barColor = getResources().getColor(R.color.pager_indicator);
     private int rimColor = 0x00FFFFFF;
 
     //Paints

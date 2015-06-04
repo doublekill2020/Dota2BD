@@ -20,9 +20,11 @@
 
     <style name="Theme.Tupdota2" parent="@style/Theme.AppCompat.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>
     </style>
     <style name="Theme.Tupdota2.Light" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>
     </style>
 
     <style name="ProgressBar.MyProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
@@ -58,7 +60,7 @@
         <item name="android:paddingBottom">8dp</item>
         <item name="android:textSize">16sp</item>
         <item name="android:maxLines">1</item>
-        <item name="pstsIndicatorColor">@color/my_blue</item>
+        <item name="pstsIndicatorColor">@color/pager_indicator</item>
         <item name="pstsIndicatorHeight">4dp</item>
         <item name="pstsShouldExpand">true</item>
     </style>
@@ -68,5 +70,12 @@
         <item name="shadow_left">@drawable/shadow_left</item>
         <item name="shadow_right">@drawable/shadow_right</item>
         <item name="shadow_bottom">@drawable/shadow_bottom</item>
+    </style>
+    <style name="ActivityAnimation" parent="@android:style/Animation">
+        <item name="android:activityOpenEnterAnimation">@anim/slidein_r2l_anim</item>
+        <item name="android:activityOpenExitAnimation">@anim/base_slide_remain</item>
+        <item name="android:activityCloseEnterAnimation">@anim/base_slide_remain</item>
+        <item name="android:activityCloseExitAnimation">@anim/slideout_l2r_anim</item>
+
     </style>
 </resources>

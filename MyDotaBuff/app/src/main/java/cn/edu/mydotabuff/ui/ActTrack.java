@@ -32,6 +32,9 @@ public class ActTrack extends BaseActivity{
     @Override
     protected void initViewAndData() {
         setContentView(R.layout.act_track);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("赛况直播");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

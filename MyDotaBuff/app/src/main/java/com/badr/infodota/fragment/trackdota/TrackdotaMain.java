@@ -96,73 +96,73 @@ public class TrackdotaMain extends Fragment implements RequestListener<GamesResu
         return view;
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//
+//        inflater.inflate(R.menu.frag_recently_menu, menu);
+//        final SearchView searchView = (SearchView) menu.findItem(
+//                R.id.action_search).getActionView();
+//        searchView.setQueryHint("输入比赛ID");
+//        searchView.setInputType(InputType.TYPE_CLASS_NUMBER);
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//
+//            @Override
+//            public boolean onQueryTextSubmit(String arg0) {
+//                // TODO Auto-generated method stub
+////                if (arg0.length() == 10) {
+////                    Intent intent = new Intent(activity, ActMatchDetail.class);
+////                    intent.putExtra("matchId", arg0);
+////                    startActivity(intent);
+////                } else {
+////                    Toast.makeText(activity, "比赛ID有误，请重新输入~",
+////                            Toast.LENGTH_SHORT).show();
+////                }
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String arg0) {
+//                // TODO Auto-generated method stub
+//                return false;
+//            }
+//        });
+//    }
 
-        inflater.inflate(R.menu.frag_recently_menu, menu);
-        final SearchView searchView = (SearchView) menu.findItem(
-                R.id.action_search).getActionView();
-        searchView.setQueryHint("输入比赛ID");
-        searchView.setInputType(InputType.TYPE_CLASS_NUMBER);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-            @Override
-            public boolean onQueryTextSubmit(String arg0) {
-                // TODO Auto-generated method stub
-//                if (arg0.length() == 10) {
-//                    Intent intent = new Intent(activity, ActMatchDetail.class);
-//                    intent.putExtra("matchId", arg0);
-//                    startActivity(intent);
-//                } else {
-//                    Toast.makeText(activity, "比赛ID有误，请重新输入~",
-//                            Toast.LENGTH_SHORT).show();
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        if (item.getItemId() == SEARCH_MATCH) {
+//            Activity activity=getActivity();
+//            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+//            final EditText textView = new EditText(activity);
+//            ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//            textView.setLayoutParams(lp);
+//            textView.setHint(R.string.match_id);
+//            textView.setInputType(EditorInfo.TYPE_CLASS_NUMBER);
+//            builder.setTitle(R.string.search_match);
+//            builder.setView(textView);
+//            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    dialog.dismiss();
 //                }
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String arg0) {
-                // TODO Auto-generated method stub
-                return false;
-            }
-        });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == SEARCH_MATCH) {
-            Activity activity=getActivity();
-            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-            final EditText textView = new EditText(activity);
-            ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            textView.setLayoutParams(lp);
-            textView.setHint(R.string.match_id);
-            textView.setInputType(EditorInfo.TYPE_CLASS_NUMBER);
-            builder.setTitle(R.string.search_match);
-            builder.setView(textView);
-            builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            });
-            builder.setPositiveButton(R.string.search, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    String matchId = textView.getText().toString();
-                    if (!TextUtils.isEmpty(matchId)) {
-                        Intent intent = new Intent(getActivity(), TrackdotaGameInfoActivity.class);
-                        intent.putExtra("id", Long.valueOf(matchId));
-                        startActivity(intent);
-                    }
-                    dialog.dismiss();
-                }
-            });
-            builder.show();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//            });
+//            builder.setPositiveButton(R.string.search, new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    String matchId = textView.getText().toString();
+//                    if (!TextUtils.isEmpty(matchId)) {
+//                        Intent intent = new Intent(getActivity(), TrackdotaGameInfoActivity.class);
+//                        intent.putExtra("id", Long.valueOf(matchId));
+//                        startActivity(intent);
+//                    }
+//                    dialog.dismiss();
+//                }
+//            });
+//            builder.show();
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
 
     @Override

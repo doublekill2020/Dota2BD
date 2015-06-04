@@ -49,10 +49,20 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:background">@android:color/white</item>
     </style>
-    
+
     <style name="umeng_comm_image_browser" parent="@android:Theme.Dialog">
-        <item name="android:windowEnterAnimation">@anim/umeng_comm_image_browser_in</item>  
-        <item name="android:windowExitAnimation">@anim/umeng_comm_image_browser_out</item> 
+        <item name="android:windowEnterAnimation">@anim/umeng_comm_image_browser_in</item>
+        <item name="android:windowExitAnimation">@anim/umeng_comm_image_browser_out</item>
+    </style>
+
+    <style name="umeng_comm_segment_radioButton">
+        <item name="android:textColor">@drawable/umeng_comm_button_text_color</item>
+        <item name="android:minHeight">33dp</item>
+        <item name="android:minWidth">60dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:button">@null</item>
+        <item name="android:paddingLeft">3dp</item>
+        <item name="android:paddingRight">3dp</item>
     </style>
 
 </resources>

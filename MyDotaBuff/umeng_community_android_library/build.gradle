@@ -26,4 +26,5 @@ dependencies {
     compile files('libs/umeng_community_sdk_login.jar')
     compile files('libs/umeng_community_sdk_push.jar')
     compile files('libs/umeng_community_sdk_ui.jar')
+    compile files('libs/activeandroid.jar')
 }

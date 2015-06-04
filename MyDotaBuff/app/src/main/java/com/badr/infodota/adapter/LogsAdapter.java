@@ -32,6 +32,8 @@ import java.util.Collections;
 import java.util.List;
 
 import cn.edu.mydotabuff.R;
+import cn.edu.mydotabuff.common.Common;
+import cn.edu.mydotabuff.util.Utils;
 
 /**
  * Created by ABadretdinov
@@ -115,8 +117,9 @@ public class LogsAdapter extends BaseAdapter implements PinnedSectionListView.Pi
                 holder.itemIcon.setVisibility(View.GONE);
                 holder.text.setTextColor(Color.WHITE);
                 Player player=gameManager.getPlayer(logEvent.getAccountId());
-                Hero hero=gameManager.getHero(player.getHeroId());
-                imageLoader.displayImage(TrackUtils.getHeroMiniImage(hero.getDotaId()),holder.heroIcon,options);
+                imageLoader.displayImage(
+                        Utils.getHeroImageMINIUri(Common.getHeroName(new Long(player.getHeroId()).intValue())),
+                        holder.heroIcon);
                 String playerName=getHtmlColorWrap(player.getName(),player.getTeam()== TrackdotaUtils.RADIANT?resources.getColor(R.color.ally_team):resources.getColor(R.color.enemy_team));
                 if(logEvent.getDelta()>1){
                     holder.text.setText(
@@ -144,8 +147,9 @@ public class LogsAdapter extends BaseAdapter implements PinnedSectionListView.Pi
                 holder.itemIcon.setVisibility(View.GONE);
                 holder.text.setTextColor(Color.WHITE);
                 Player player=gameManager.getPlayer(logEvent.getAccountId());
-                Hero hero=gameManager.getHero(player.getHeroId());
-                imageLoader.displayImage(TrackUtils.getHeroMiniImage(hero.getDotaId()),holder.heroIcon,options);
+                imageLoader.displayImage(
+                        Utils.getHeroImageMINIUri(Common.getHeroName(new Long(player.getHeroId()).intValue())),
+                        holder.heroIcon);
                 String playerName=getHtmlColorWrap(player.getName(),player.getTeam()== TrackdotaUtils.RADIANT?resources.getColor(R.color.ally_team):resources.getColor(R.color.enemy_team));
                 if(logEvent.getDelta()>1){
                     holder.text.setText(
@@ -172,16 +176,14 @@ public class LogsAdapter extends BaseAdapter implements PinnedSectionListView.Pi
             else if("item".equals(logEvent.getAction())){
                 Player player=gameManager.getPlayer(logEvent.getAccountId());
                 holder.text.setTextColor(Color.WHITE);
-                Hero hero=gameManager.getHero(player.getHeroId());
                 long itemId=Long.valueOf(logEvent.getId());
-                Item item=gameManager.getItem(itemId);
-                imageLoader.displayImage(TrackUtils.getHeroMiniImage(hero.getDotaId()),holder.heroIcon,options);
-                if(item==null){
-                    item=itemService.getItemById(context,itemId);
-                    gameManager.addItem(item);
-                }
-                imageLoader.displayImage(TrackUtils.getItemImage(item.getDotaId()),holder.itemIcon,options);
-                String itemName=getHtmlColorWrap(item.getDname(),resources.getColor(R.color.item));
+                imageLoader.displayImage(
+                        Utils.getHeroImageMINIUri(Common.getHeroName(new Long(player.getHeroId()).intValue())),
+                        holder.heroIcon);
+                imageLoader.displayImage(
+                        Utils.getItemsImageUri(Common.getItemName(new Long(itemId).intValue())),
+                        holder.itemIcon);
+                String itemName=getHtmlColorWrap(Common.getItemName(new Long(itemId).intValue()),resources.getColor(R.color.item));
                 String playerName=getHtmlColorWrap(player.getName(),player.getTeam()== TrackdotaUtils.RADIANT?resources.getColor(R.color.ally_team):resources.getColor(R.color.enemy_team));
                 if((itemId==117||itemId==33)&&logEvent.getDelta()>=1){
                     holder.text.setText(
@@ -300,8 +302,9 @@ public class LogsAdapter extends BaseAdapter implements PinnedSectionListView.Pi
                 holder.itemIcon.setVisibility(View.GONE);
                 holder.text.setTextColor(resources.getColor(R.color.buyback));
                 Player player=gameManager.getPlayer(logEvent.getAccountId());
-                Hero hero=gameManager.getHero(player.getHeroId());
-                imageLoader.displayImage(TrackUtils.getHeroMiniImage(hero.getDotaId()),holder.heroIcon,options);
+                imageLoader.displayImage(
+                        Utils.getHeroImageMINIUri(Common.getHeroName(new Long(player.getHeroId()).intValue())),
+                        holder.heroIcon);
                 String playerName=getHtmlColorWrap(player.getName(),player.getTeam()== TrackdotaUtils.RADIANT?resources.getColor(R.color.ally_team):resources.getColor(R.color.enemy_team));
                 holder.text.setText(
                         Html.fromHtml(
@@ -357,16 +360,15 @@ public class LogsAdapter extends BaseAdapter implements PinnedSectionListView.Pi
                 holder.text.setTextColor(resources.getColor(R.color.rapier));
                 holder.text.setTextColor(Color.WHITE);
                 Player player=gameManager.getPlayer(logEvent.getAccountId());
-                Hero hero=gameManager.getHero(player.getHeroId());
                 long itemId=133;
-                Item item=gameManager.getItem(itemId);
-                imageLoader.displayImage(TrackUtils.getHeroMiniImage(hero.getDotaId()),holder.heroIcon,options);
-                if(item==null){
-                    item=itemService.getItemById(context,itemId);
-                    gameManager.addItem(item);
-                }
-                imageLoader.displayImage(TrackUtils.getItemImage(item.getDotaId()),holder.itemIcon,options);
-                String itemName=getHtmlColorWrap(item.getDname(),resources.getColor(R.color.item));
+                imageLoader.displayImage(
+                        Utils.getHeroImageMINIUri(Common.getHeroName(new Long(player.getHeroId()).intValue())),
+                        holder.heroIcon);
+
+                imageLoader.displayImage(
+                        Utils.getItemsImageUri(Common.getItemName(new Long(itemId).intValue())),
+                        holder.itemIcon);
+                String itemName=getHtmlColorWrap(Common.getItemName(new Long(itemId).intValue()),resources.getColor(R.color.item));
                 String playerName=getHtmlColorWrap(player.getName(),player.getTeam()== TrackdotaUtils.RADIANT?resources.getColor(R.color.ally_team):resources.getColor(R.color.enemy_team));
                 if(logEvent.getDelta()>0){
                     holder.text.setText(

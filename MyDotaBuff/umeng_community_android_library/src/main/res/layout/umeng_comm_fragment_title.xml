@@ -26,12 +26,14 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:contentDescription="@string/umeng_comm_new_post"
-        android:paddingRight="14dp"
+        android:paddingRight="16dp"
         android:src="@drawable/umeng_comm_find_bt" />
 
     <!-- 选择话题按钮 -->
 
-    <ImageView
+
+    <!--
+         <ImageView
         android:id="@+id/umeng_comm_topic_select_btn"
         android:layout_width="26dp"
         android:layout_height="match_parent"
@@ -41,8 +43,11 @@
         android:layout_toLeftOf="@id/umeng_comm_user_info_btn"
         android:contentDescription="@string/umeng_comm_new_post"
         android:src="@drawable/umeng_comm_topic_search_bt" />
+    -->
 
-    <com.umeng.comm.ui.widgets.SlidingTextView
+
+    <!--
+         <com.umeng.comm.ui.widgets.SlidingTextView
         android:id="@+id/umeng_comm_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,6 +57,18 @@
         android:paddingTop="3dp"
         android:text="@string/umeng_comm_name"
         android:textSize="@dimen/text_big18_size" />
+    -->
+
+    <com.umeng.comm.ui.widgets.SegmentView
+        android:id="@+id/umeng_comm_segment_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="top|center"
+        android:layout_margin="10dp"
+        android:background="@drawable/umeng_comm_segment_shape"
+        android:gravity="center"
+        android:orientation="horizontal" />
 
     <!--
     <TextView

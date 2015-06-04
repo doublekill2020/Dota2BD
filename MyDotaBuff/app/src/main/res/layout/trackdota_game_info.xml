@@ -5,20 +5,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar xmlns:support="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        support:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        support:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <include layout="@layout/common_toolbar" />
 
 
     <cn.edu.mydotabuff.view.SlidingTabLayout
         android:id="@+id/indicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary" />
+         />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -28,7 +22,7 @@
         <android.support.v4.view.ViewPager
             android:id="@+id/pager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
         <cn.edu.mydotabuff.view.ProgressWheel xmlns:wheel="http://schemas.android.com/apk/res-auto"
             android:id="@+id/progressBar"
@@ -36,7 +30,6 @@
             android:layout_height="80dp"
             android:layout_gravity="center"
             android:visibility="gone"
-            wheel:barColor="?attr/colorPrimary"
             wheel:progressIndeterminate="true" />
 
     </FrameLayout>
