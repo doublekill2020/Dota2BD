@@ -288,7 +288,7 @@ public class ActMatchDetail extends BaseActivity {
                     break;
                 case FETCH_FAILED:
                     dialog.dismiss();
-                    TipsToast.showToast(ActMatchDetail.this, "steam被墙了，你懂得",
+                    TipsToast.showToast(ActMatchDetail.this, "比赛不存在",
                             Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
                     break;
                 default:
