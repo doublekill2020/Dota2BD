@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/umeng_comm_main_container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-
-
-</LinearLayout><!-- From: file:/E:/project/MyDotaBuff/umeng_community_android_library/src/main/res/layout/umeng_comm_search_activity.xml --><!-- From: file:/E:/project/MyDotaBuff/umeng_community_android_library/build/intermediates/bundles/debug/res/layout/umeng_comm_search_activity.xml -->
