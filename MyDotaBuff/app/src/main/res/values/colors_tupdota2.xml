@@ -23,14 +23,16 @@
     <color name="main_color">#252930</color>
     <color name="actionbar_bg">@color/main_color</color>
     <color name="statusbar_bg">@color/main_color</color>
-    <!--#2196F3-->
+    <color name="main_red_color">#F44336</color>
+    <color name="main_green_color">#4CAF50</color>
+    <color name="main_zongse_color">#785448</color>
     <color name="item_pressed">#D6D6D6</color>//item点击高亮
     <color name="pager_indicator">#2196F3</color>
     <!-- trackdota color-->
     <color name="dota_holo_blue_dark">#ff0099cc</color>
     <color name="dota_gray">#717171</color>
-    <color name="enemy_team">#ff0000</color>
-    <color name="ally_team">#009900</color>
+    <color name="enemy_team">@color/main_red_color</color>
+    <color name="ally_team">@color/main_green_color</color>
 
     <color name="common">#b0c3d9</color>
     <!--item_quality=1-->
@@ -38,7 +40,7 @@
     <color name="rare">#4b69ff</color>
     <color name="mythical">#8847ff</color>
     <color name="legendary">#d32ce6</color>
-    <color name="ancient">#eb4b4b</color>
+    <color name="ancient">@color/main_red_color</color>
     <color name="immortal">#e4ae39</color>
     <color name="arcana">#ade55c</color>
 
@@ -70,7 +72,7 @@
     <color name="background">#ff000000</color>
 
 
-    <color name="radiant_transparent">#9b00a527</color>
+    <color name="radiant_transparent">@color/main_green_color</color>
     <color name="radiant_transparent_dead">#c400310c</color>
     <color name="radiant_dark">#ff003a11</color>
     <color name="dire_transparent">#9baf1715</color>

@@ -55,7 +55,7 @@
     <style name="CommonTextView.Big" parent="@style/CommonTextView">
         <item name="android:textSize">18sp</item>
     </style>
-    <style name="CommonBtn" parent="@android:style/Widget.Button">
+    <style name="CommonBtn" parent="@style/Widget.AppCompat.Button">
     </style>
     <style name="PagerSlidingTabStrip">
         <item name="android:gravity">center</item>

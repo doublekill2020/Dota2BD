@@ -37,6 +37,7 @@ import com.octo.android.robospice.request.listener.RequestListener;
 
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.ui.recently.ActMatchDetail;
+import cn.edu.mydotabuff.view.PagerSlidingTabStrip;
 import cn.edu.mydotabuff.view.SlidingTabLayout;
 
 /**
@@ -182,7 +183,7 @@ public class TrackdotaMain extends Fragment implements RequestListener<GamesResu
             pager.setAdapter(adapter);
             pager.setOffscreenPageLimit(3);
 
-            SlidingTabLayout indicator = (SlidingTabLayout) root.findViewById(R.id.indicator);
+            PagerSlidingTabStrip indicator = (PagerSlidingTabStrip) root.findViewById(R.id.indicator);
             indicator.setViewPager(pager);
         }
     }

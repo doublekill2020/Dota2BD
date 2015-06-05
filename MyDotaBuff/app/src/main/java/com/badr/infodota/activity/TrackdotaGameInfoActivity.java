@@ -33,6 +33,7 @@ import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseActivity;
 import cn.edu.mydotabuff.ui.recently.ActMatchDetail;
 import cn.edu.mydotabuff.util.Debug;
+import cn.edu.mydotabuff.view.PagerSlidingTabStrip;
 import cn.edu.mydotabuff.view.SlidingTabLayout;
 import cn.edu.mydotabuff.view.TipsToast;
 
@@ -97,7 +98,7 @@ public class TrackdotaGameInfoActivity extends BaseActivity implements Refresher
             final ViewPager pager = (ViewPager) findViewById(R.id.pager);
             pager.setAdapter(adapter);
             pager.setOffscreenPageLimit(2);
-            SlidingTabLayout indicator = (SlidingTabLayout) findViewById(R.id.indicator);
+            PagerSlidingTabStrip indicator = (PagerSlidingTabStrip) findViewById(R.id.indicator);
             indicator.setViewPager(pager);
         }
     }

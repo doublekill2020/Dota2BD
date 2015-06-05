@@ -245,8 +245,12 @@ public class ActMain extends BaseActivity implements OnClickListener {
 												.getString("personaname"));
 										bean.setState(obj
 												.getInt("personastate"));
-										bean.setTimecreated(obj
-												.getString("timecreated"));
+										if(obj.has("timecreated")) {
+											bean.setTimecreated(obj
+													.getString("timecreated"));
+										}else{
+											bean.setTimecreated("1417140906");
+										}
 										bean.setSteamid(obj
 												.getString("steamid"));
 										msg.arg1 = type;
@@ -620,6 +624,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			moveTaskToBack(false);
+			return true;
 		}
 		return super.onKeyDown(keyCode, event);
 	}
