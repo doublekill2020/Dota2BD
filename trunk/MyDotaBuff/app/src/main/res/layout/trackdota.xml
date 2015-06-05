@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <cn.edu.mydotabuff.view.SlidingTabLayout
+    <cn.edu.mydotabuff.view.PagerSlidingTabStrip
         style="@style/PagerSlidingTabStrip"
         android:id="@+id/indicator"
         android:layout_width="match_parent"
