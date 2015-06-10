@@ -26,8 +26,9 @@
     <color name="main_red_color">#F44336</color>
     <color name="main_green_color">#4CAF50</color>
     <color name="main_zongse_color">#785448</color>
+    <color name="main_blue_color">#2196F3</color>
     <color name="item_pressed">#D6D6D6</color>//item点击高亮
-    <color name="pager_indicator">#2196F3</color>
+    <color name="pager_indicator">@color/main_blue_color</color>
     <!-- trackdota color-->
     <color name="dota_holo_blue_dark">#ff0099cc</color>
     <color name="dota_gray">#717171</color>

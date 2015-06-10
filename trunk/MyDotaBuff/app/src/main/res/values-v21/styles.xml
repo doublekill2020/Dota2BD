@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Tupdota2" parent="Theme.AppCompat.NoActionBar">
+    <style name="DotaTheme" parent="Theme.AppCompat.NoActionBar">
 
         <item name="android:windowIsTranslucent">true</item>
         <!-- android theme colors -->
@@ -19,7 +19,7 @@
         <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>
 
     </style>
-    <style name="Theme.Tupdota2.Light" parent="@style/Theme.AppCompat.Light.NoActionBar">
+    <style name="DotaTheme.Light" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
         <!-- android theme colors -->
         <!--<item name="android:colorPrimary">@color/main_color</item>-->

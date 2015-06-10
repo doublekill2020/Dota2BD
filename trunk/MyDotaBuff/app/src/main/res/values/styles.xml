@@ -18,18 +18,18 @@
 
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="Theme.Tupdota2" parent="@style/Theme.AppCompat.NoActionBar">
+    <style name="DotaTheme" parent="@style/Theme.AppCompat.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>
         <item name="android:windowBackground">@color/main_color</item>
     </style>
-    <style name="Theme.Tupdota2.Light" parent="@style/Theme.AppCompat.Light.NoActionBar">
+    <style name="DotaTheme.Light" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>
         <item name="android:windowBackground">@color/main_color</item>
     </style>
 
-    <style name="ProgressBar.MyProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
+    <style name="MyProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/progress_horizontal_green</item>
     </style>
 
@@ -80,5 +80,8 @@
         <item name="android:activityCloseEnterAnimation">@anim/base_slide_remain</item>
         <item name="android:activityCloseExitAnimation">@anim/slideout_l2r_anim</item>
 
+    </style>
+    <style name="PgBarStyle">
+        <item name="android:background">@color/main_blue_color</item>
     </style>
 </resources>
