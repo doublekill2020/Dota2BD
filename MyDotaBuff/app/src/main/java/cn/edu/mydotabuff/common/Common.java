@@ -2217,7 +2217,7 @@ public class Common {
             case 182:
                 return "stout_shield";
             case 0:
-                return "default";
+                return "default_black";
             case 242:
                 return "crimson_guard";
             case 248:

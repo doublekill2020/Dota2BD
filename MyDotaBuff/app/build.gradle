@@ -45,6 +45,7 @@ android {
 
 repositories {
     maven { url "https://jitpack.io" }
+    jcenter()
 }
 dependencies {
     compile files('libs/commons-codec-1.9.jar')
@@ -70,4 +71,5 @@ dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v2.1.0'
     compile 'com.octo.android.robospice:robospice:1.4.14'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
+    compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
 }

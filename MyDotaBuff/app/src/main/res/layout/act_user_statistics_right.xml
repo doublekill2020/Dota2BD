@@ -67,7 +67,7 @@
 
                 <ProgressBar
                     android:id="@+id/all_n_rate"
-                    style="@style/ProgressBar.MyProgressBar"
+                    style="@style/MyProgressBar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:max="100" />
@@ -123,7 +123,7 @@
 
                 <ProgressBar
                     android:id="@+id/all_h_rate"
-                    style="@style/ProgressBar.MyProgressBar"
+                    style="@style/MyProgressBar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:max="100"
@@ -180,7 +180,7 @@
 
                 <ProgressBar
                     android:id="@+id/all_vh_rate"
-                    style="@style/ProgressBar.MyProgressBar"
+                    style="@style/MyProgressBar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:max="100"
@@ -260,7 +260,7 @@
 
                 <ProgressBar
                     android:id="@+id/rank_n_rate"
-                    style="@style/ProgressBar.MyProgressBar"
+                    style="@style/MyProgressBar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:max="100" />
@@ -316,7 +316,7 @@
 
                 <ProgressBar
                     android:id="@+id/rank_h_rate"
-                    style="@style/ProgressBar.MyProgressBar"
+                    style="@style/MyProgressBar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:max="100"
@@ -373,7 +373,7 @@
 
                 <ProgressBar
                     android:id="@+id/rank_vh_rate"
-                    style="@style/ProgressBar.MyProgressBar"
+                    style="@style/MyProgressBar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:max="100"
