@@ -26,7 +26,7 @@
         <!--<item name="android:colorPrimaryDark">@color/main_color</item>-->
         <!--<item name="android:colorAccent">@color/main_color</item>-->
         <item name="android:statusBarColor">@color/main_color</item>
-        <item name="android:windowBackground">@color/main_color</item>
+        <item name="android:windowBackground">@color/act_bg</item>
 
         <!-- android transitions -->
         <item name="android:windowContentTransitions">true</item>

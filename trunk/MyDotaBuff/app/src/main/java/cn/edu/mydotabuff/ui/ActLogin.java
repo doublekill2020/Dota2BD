@@ -14,10 +14,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.rey.material.widget.Button;
 
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.common.bean.UserInfo;
