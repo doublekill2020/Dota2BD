@@ -31,7 +31,7 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
-        <item name="android:windowBackground">@color/main_color</item>
+        <item name="android:windowBackground">@color/act_bg</item>
         <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>
     </style>
 </resources>
