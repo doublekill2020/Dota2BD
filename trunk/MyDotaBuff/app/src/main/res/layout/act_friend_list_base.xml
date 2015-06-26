@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@color/act_bg"
     android:orientation="vertical" >
 
     <include layout="@layout/common_toolbar" />
 
     <cn.edu.mydotabuff.view.XListView
+        android:background="@color/act_bg"
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >

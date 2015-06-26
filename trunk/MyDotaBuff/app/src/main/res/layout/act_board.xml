@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/act_bg"
+
     android:fitsSystemWindows="true"
     android:orientation="vertical" >
 
@@ -24,6 +24,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:background="@color/act_bg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
@@ -56,6 +57,7 @@
     </LinearLayout>
 
     <ListView
+        android:background="@color/act_bg"
         android:id="@+id/frag_board_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
