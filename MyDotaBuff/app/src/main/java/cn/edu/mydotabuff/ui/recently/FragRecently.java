@@ -71,6 +71,7 @@ public class FragRecently extends BaseFragment implements OnMainEventListener {
 	protected View initViewAndData(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
+		System.out.print("");
 		recentLayout = inflater.inflate(R.layout.frag_recently, container,
 				false);
 		setHasOptionsMenu(true);
