@@ -155,6 +155,7 @@ public class FragMyDetail extends BaseFragment implements OnWebDataGetListener {
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		// TODO Auto-generated method stub
+		menu.clear();
 		inflater.inflate(R.menu.frag_my_detail, menu);
 	}
 

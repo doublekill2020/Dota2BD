@@ -74,7 +74,7 @@ public class LoadingDialog extends AlertDialog {
 		if (!_context.isFinishing()) {
 			super.dismiss();
 			if (progressWheel != null) {
-				progressWheel.stopSpinning();
+				//progressWheel.stopSpinning();
 				progressWheel = null;
 			}
 		}
