@@ -5,7 +5,7 @@
 
     <item
         android:id="@+id/more_detail"
-        android:title="统计"
+        android:title="统计(暂不可用)"
         app:showAsAction="never"/>
         <item
         android:id="@+id/friend_list"
