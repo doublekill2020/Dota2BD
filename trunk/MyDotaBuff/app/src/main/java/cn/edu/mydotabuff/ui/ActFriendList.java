@@ -273,10 +273,11 @@ public class ActFriendList extends BaseActivity {
 					TipsToast.showToast(ActFriendList.this, "该玩家未开启比赛数据共享！",
 							Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
 				} else {
-					Intent i = new Intent();
-					i.setClass(ActFriendList.this, ActPlayerDetail.class);
-					i.putExtra("data", infoBeans.get(position - 1));
-					startActivity(i);
+					//TODO domax网页发生变化 暂不可用
+//					Intent i = new Intent();
+//					i.setClass(ActFriendList.this, ActPlayerDetail.class);
+//					i.putExtra("data", infoBeans.get(position - 1));
+//					startActivity(i);
 				}
 			}
 		});

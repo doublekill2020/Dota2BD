@@ -284,10 +284,11 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 					TipsToast.showToast(_caller, "该玩家为电脑！", Toast.LENGTH_SHORT,
 							DialogType.LOAD_FAILURE);
 				} else {
-					Intent i = new Intent();
-					i.setClass(_caller, ActPlayerDetail.class);
-					i.putExtra("data", bean.getPlayerInfoBeans());
-					_caller.startActivity(i);
+					//TODO domax网页发生变化 暂不可用
+//					Intent i = new Intent();
+//					i.setClass(_caller, ActPlayerDetail.class);
+//					i.putExtra("data", bean.getPlayerInfoBeans());
+//					_caller.startActivity(i);
 				}
 			}
 		});

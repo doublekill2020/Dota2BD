@@ -164,21 +164,22 @@ public class FragMyDetail extends BaseFragment implements OnWebDataGetListener {
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case R.id.more_detail:
-			if (bean == null) {
-				TipsToast.showToast(activity, "暂无数据", Toast.LENGTH_SHORT,
-						DialogType.LOAD_FAILURE);
-			} else {
-				if (bean.isLoadMap() && bean.isLoadWebData()
-						&& bean.getBeans() != null) {
-					Intent intent = new Intent(activity,
-							ActUserStatistics.class);
-					intent.putExtra("type", "current");
-					startActivity(intent);
-				} else {
-					TipsToast.showToast(activity, "暂无数据", Toast.LENGTH_SHORT,
-							DialogType.LOAD_FAILURE);
-				}
-			}
+			//TODO domax网页发生变化 暂不可用
+//			if (bean == null) {
+//				TipsToast.showToast(activity, "暂无数据", Toast.LENGTH_SHORT,
+//						DialogType.LOAD_FAILURE);
+//			} else {
+//				if (bean.isLoadMap() && bean.isLoadWebData()
+//						&& bean.getBeans() != null) {
+//					Intent intent = new Intent(activity,
+//							ActUserStatistics.class);
+//					intent.putExtra("type", "current");
+//					startActivity(intent);
+//				} else {
+//					TipsToast.showToast(activity, "暂无数据", Toast.LENGTH_SHORT,
+//							DialogType.LOAD_FAILURE);
+//				}
+//			}
 			break;
 		case R.id.give_mark:
 			try {
