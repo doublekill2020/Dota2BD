@@ -1,19 +1,18 @@
 package cn.edu.mydotabuff.common.http;
 
-import java.io.IOException;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import android.app.Activity;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-
-import android.app.Activity;
+import java.io.IOException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.DotaApplication.LocalDataType;
@@ -135,7 +134,7 @@ public class WebDataHelper {
                                             break;
                                         case 3:
                                     /*
-									 * 原始数据 2.71 (10.9 / 9.4 / 14.4) 替换所有空格, ( ,
+                                     * 原始数据 2.71 (10.9 / 9.4 / 14.4) 替换所有空格, ( ,
 									 * ) 为 / 以"/"分割 得到 kad 以及 K, A , D
 									 */
                                             String replaceString = text
@@ -278,9 +277,8 @@ public class WebDataHelper {
                                                 "<span(.*)span>", "");
                                         Elements _trs = Jsoup.parse(test).select(
                                                 "tr");
-                                        for (int k = 0; k < _trs.size() ; k ++) {
+                                        for (int k = 0; k < _trs.size(); k++) {
                                             MacthStatistics macthStatisticsBeans = new MacthStatistics();
-
 
 
                                             list.add(macthStatisticsBeans);
@@ -392,8 +390,8 @@ public class WebDataHelper {
                                                                     .text());
                                                     break;
                                                 case 4:
-											/*
-											 * 原始数据 2.71 (10.9 / 9.4 / 14.4)
+                                            /*
+                                             * 原始数据 2.71 (10.9 / 9.4 / 14.4)
 											 * 替换所有空格, ( , ) 为 / 以"/"分割 得到 KDA
 											 * 以及 K, D , A
 											 */
@@ -476,15 +474,14 @@ public class WebDataHelper {
                         try {
                             boolean saveFlag = false;
                             String newUserId = URLEncoder.encode(userId, "UTF-8");
-                            url = "http://dotamax.com/search/?q=" + newUserId;
+                            url = "http://dotamax.com/search/?p=1&q=" + newUserId;
                             doc = Jsoup.connect(url).timeout(timeout).get();
                             if (doc != null) {
-
                                 String flag = doc.toString();
                                 // 查询结果为多个
-                                if (flag.indexOf("主页  Dotamax -") >= 0) {
+                                if (flag.indexOf("后一页") >= 0) {
                                     Elements trs = doc
-                                            .select("table.table.table-hover.table-striped.table-list.table-search-result")
+                                            .select("table.table-list-small")
                                             .select("tbody").select("tr");
                                     for (int i = 1; i < trs.size(); i++) {
                                         UserInfo caijj = new UserInfo();
@@ -492,12 +489,9 @@ public class WebDataHelper {
                                                 .getElementsByTag("img").first()
                                                 .attr("src").toString();
                                         caijj.setImgUrl(imgUrl);
-                                        String tmp = trs.get(i).select("td")
-                                                .first().text().replace(" ", "");
-                                        int num = tmp.indexOf("ID:");
-                                        caijj.setUserName(tmp.substring(0, num));
-                                        caijj.setUserID(tmp.substring(num,
-                                                tmp.length()));
+                                        Elements tmps = trs.get(i).select("td").first().select("div").first().select("div");
+                                        caijj.setUserName(tmps.get(1).text());
+                                        caijj.setUserID(tmps.get(2).text());
                                         infos.add(caijj);
                                     }
                                     saveFlag = true;
@@ -506,39 +500,7 @@ public class WebDataHelper {
                                 else if (flag.indexOf("公开比赛数据") >= 0) {
                                     saveFlag = false;
                                 }
-                                // 查询结果唯一
-                                else {
-                                    UserInfo haojj = new UserInfo();
 
-                                    String result = doc.getElementsByClass(
-                                            "maxtopmainbar").toString();
-
-                                    Document parse = Jsoup.parse(result);
-
-                                    String imgUrl = parse.getElementsByTag("img")
-                                            .first().attr("src").toString();
-
-                                    Elements script = doc.getElementsByClass(
-                                            "maxtopmainbar").select("script");
-
-                                    result = script.get(0).toString();
-                                    Pattern pattern = Pattern
-                                            .compile("url:\"([^\"]*)\"");
-                                    Matcher matcher = pattern.matcher(result);
-                                    while (matcher.find()) {
-                                        String userID = matcher.group(0);
-                                        System.out.println(userID);
-                                        // http://dotamax.com/player/detail/129929396/"
-                                        userID = userID.substring(
-                                                userID.lastIndexOf("il/") + 3,
-                                                userID.length() - 2);
-                                        haojj.setUserID(userID);
-                                    }
-                                    haojj.setImgUrl(imgUrl);
-                                    haojj.setUserName(userId);
-                                    infos.add(haojj);
-                                    saveFlag = true;
-                                }
                                 if (saveFlag) {
                                     status = 1;
                                 } else {
