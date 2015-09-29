@@ -27,7 +27,6 @@
             android:layout_below="@id/umeng_comm_user_picture"
             android:layout_toRightOf="@id/umeng_comm_user_picture"
             android:contentDescription="@string/umeng_comm_desc"
-            android:src="@drawable/umeng_comm_level_3"
             android:visibility="gone" />
 
         <TextView

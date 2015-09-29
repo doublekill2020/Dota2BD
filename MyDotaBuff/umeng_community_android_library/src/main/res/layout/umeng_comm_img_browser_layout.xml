@@ -10,35 +10,18 @@
         android:layout_height="match_parent" />
 
     <TextView
-        android:id="@+id/umeng_comm_save_img_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:paddingTop="6dp"
-        android:paddingBottom="6dp"
-        android:gravity="center"
-        android:textColor="@android:color/white"
-        android:text="@string/umeng_comm_save"
-        android:background="@drawable/umeng_comm_image_save_bg"
-        android:textSize="@dimen/text_big15_size" />
-    
-    <TextView
         android:id="@+id/umeng_comm_current_pos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|center"
         android:layout_marginTop="12dp"
+        android:background="@drawable/umeng_comm_current_pos_bg"
+        android:paddingBottom="3dp"
         android:paddingLeft="18dp"
         android:paddingRight="18dp"
         android:paddingTop="3dp"
-        android:paddingBottom="3dp"
-        android:textStyle="bold"
         android:textColor="@android:color/white"
-        android:background="@drawable/umeng_comm_current_pos_bg"
-        android:textSize="@dimen/text_big18_size" />
+        android:textSize="@dimen/text_big18_size"
+        android:textStyle="bold" />
 
 </FrameLayout>

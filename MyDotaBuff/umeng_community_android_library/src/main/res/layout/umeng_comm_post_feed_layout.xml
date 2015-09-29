@@ -233,7 +233,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1" >
 
-                <ToggleButton
+                <ImageButton
                     android:id="@+id/umeng_comm_add_image_btn"
                     android:layout_width="22dp"
                     android:layout_height="22dp"

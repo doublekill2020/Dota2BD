@@ -3,5 +3,7 @@
     android:id="@+id/umeng_comm_listview"
     android:layout_width="match_parent"
     android:divider="@color/umeng_comm_divider"
+    android:footerDividersEnabled="false"
+    android:overScrollFooter="@android:color/transparent"
     android:dividerHeight="1px"
     android:layout_height="wrap_content" />

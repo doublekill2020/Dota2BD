@@ -10,7 +10,7 @@
         android:layout_width="28dp"
         android:layout_height="28dp"
         android:layout_alignParentLeft="true"
-        android:background="@drawable/umeng_comm_back_bt"
+        android:background="@drawable/umeng_socialize_title_back_bt"
         android:layout_centerVertical="true"
         android:textColor="#ffffff"
         android:layout_marginLeft="8dp"
@@ -39,6 +39,7 @@
             android:id="@+id/umeng_socialize_title_middle_left"
             android:layout_width="98dp"
             android:layout_height="fill_parent"
+            android:background="@drawable/umeng_socialize_title_tab_button_left"
             android:text="@string/umeng_socialize_near_At"
             android:textColor="#ffffff"
             android:textSize="12sp" />
@@ -48,6 +49,7 @@
             android:layout_width="98dp"
             android:layout_height="fill_parent"
             android:layout_toRightOf="@id/umeng_socialize_title_middle_left"
+            android:background="@drawable/umeng_socialize_title_tab_button_right"
             android:text="@string/umeng_socialize_friends"
             android:textColor="#ffffff"
             android:textSize="12sp" />
@@ -63,7 +65,7 @@
             android:id="@+id/umeng_socialize_title_bar_rightBt"
             android:layout_width="28dp"
             android:layout_height="28dp"
-            android:background="@drawable/umeng_comm_send_bt"
+            android:background="@drawable/umeng_socialize_title_right_bt"
             android:layout_centerVertical="true"
             android:textColor="#ffffff"
             android:textSize="12sp" />
