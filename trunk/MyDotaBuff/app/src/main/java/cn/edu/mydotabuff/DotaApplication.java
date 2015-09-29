@@ -31,6 +31,8 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.nostra13.universalimageloader.utils.StorageUtils;
+import com.umeng.comm.core.sdkmanager.LocationSDKManager;
+import com.umeng.comm.ui.location.DefaultLocationImpl;
 
 public class DotaApplication extends Application {
     private static DotaApplication mInstance = null;
@@ -42,6 +44,7 @@ public class DotaApplication extends Application {
         mInstance = DotaApplication.this;
         context = mInstance.getApplicationContext();
         initImageLoader();
+        LocationSDKManager.getInstance().addAndUse(new DefaultLocationImpl());
 
         //RongIM.init(this, "25wehl3uw6q5w", R.drawable.ic_launcher);
     }
