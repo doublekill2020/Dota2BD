@@ -38,11 +38,12 @@
     <!-- 评论布局 -->
 
     <include
-        android:id="@+id/umeng_comm_commnet_edit_layout"
+        android:id="@+id/umeng_comm_comment_edit_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         layout="@layout/umeng_comm_comment_layout"
+        android:clickable="true"
         android:gravity="center"
         android:visibility="invisible" />
 

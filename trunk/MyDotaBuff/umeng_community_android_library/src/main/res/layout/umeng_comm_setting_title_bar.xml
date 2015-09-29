@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:focusableInTouchMode="true"
+    android:background="@android:color/white"
     android:orientation="vertical" >
 
     <!-- title -->
@@ -10,8 +11,7 @@
     <RelativeLayout
         android:id="@+id/umeng_comm_title_bar_root"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@color/umeng_comm_user_center_title_color" >
+        android:layout_height="48dp" >
 
         <ImageView
             android:id="@+id/umeng_comm_setting_back"
@@ -44,6 +44,6 @@
             android:textSize="@dimen/text_big16_size" />
     </RelativeLayout>
 
-    <include layout="@layout/umeng_comm_divide_line" />
+    <include layout="@layout/umeng_comm_divide_line"  />
 
 </LinearLayout>

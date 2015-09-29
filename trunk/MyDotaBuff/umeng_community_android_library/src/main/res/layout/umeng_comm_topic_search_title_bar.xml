@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:background="#ececec"
     android:focusableInTouchMode="true"
+    android:id="@+id/umeng_comm_topic_search_title_layout"
     android:orientation="vertical" >
 
     <!-- title -->

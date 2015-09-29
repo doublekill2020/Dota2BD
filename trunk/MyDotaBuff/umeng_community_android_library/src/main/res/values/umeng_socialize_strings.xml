@@ -41,16 +41,16 @@
     <string name="umeng_socialize_text_tencent_oauth_login_fail">授权登录失败</string>
     <string name="umeng_socialize_text_tencent_version_no_match">版本不匹配，SSO只对微博客户端V3.8.1及以上的版本提供支持</string>
     <string name="umeng_socialize_text_tencent_no_install">未安装腾讯微博客户端</string>
-    <string name="umeng_socialize_text_waitting">请稍候&#8230;</string>
-    <string name="umeng_socialize_text_waitting_weixin">跳转微信中，请稍候&#8230;</string>
-    <string name="umeng_socialize_text_waitting_weixin_circle">跳转朋友圈中，请稍候&#8230;</string>
-    <string name="umeng_socialize_text_waitting_yixin">跳转易信中，请稍候&#8230;</string>
-    <string name="umeng_socialize_text_waitting_yixin_circle">跳转易信朋友圈中，请稍候&#8230;</string>
-    <string name="umeng_socialize_text_waitting_qq">跳转QQ中，请稍候&#8230;</string>
-    <string name="umeng_socialize_text_waitting_qzone">跳转QZone中，请稍候&#8230;</string>
+    <string name="umeng_socialize_text_waitting">请稍候...</string>
+    <string name="umeng_socialize_text_waitting_weixin">跳转微信中，请稍候...</string>
+    <string name="umeng_socialize_text_waitting_weixin_circle">跳转朋友圈中，请稍候...</string>
+    <string name="umeng_socialize_text_waitting_yixin">跳转易信中，请稍候...</string>
+    <string name="umeng_socialize_text_waitting_yixin_circle">跳转易信朋友圈中，请稍候...</string>
+    <string name="umeng_socialize_text_waitting_qq">跳转QQ中，请稍候...</string>
+    <string name="umeng_socialize_text_waitting_qzone">跳转QZone中，请稍候...</string>
     <string name="umeng_socialize_text_waitting_redirect">跳转</string>
-    <string name="umeng_socialize_text_waitting_message">,请稍候&#8230;</string>
-    <string name="umeng_socialize_text_loading_message">载入中,请稍候&#8230;</string>
+    <string name="umeng_socialize_text_waitting_message">,请稍候...</string>
+    <string name="umeng_socialize_text_loading_message">载入中,请稍候...</string>
     <!-- 平台名称 -->
     <string name="umeng_socialize_text_tencent_key">腾讯微博</string>
     <string name="umeng_socialize_text_sina_key">微博</string>
@@ -67,12 +67,6 @@
     <string name="umeng_socialize_cancel_btn_str">取消</string>
     <string name="umeng_socialize_send_btn_str">发送</string>
     <string name="umeng_socialize_img_des"></string>
-    <string name="umeng_socialize_fetch_info_failed">获取用户信息失败</string>
     <string name="umeng_socialize_share">分享</string>
-    <string name="com_facebook_loading">Loading&#8230;</string>
-    <string name="umeng_comm_not_support">暂不支持该平台登录</string>
-    <string name="umeng_socialize_3rdparty_login">使用第三方账户登录</string>
-    <string name="umeng_socialize_login_statement">我们不会在未经同意的情况下在任何社交媒体发布消息</string>
-    <string name="umeng_socialize_load_userinfo">获取用户信息中...</string>
 
 </resources>

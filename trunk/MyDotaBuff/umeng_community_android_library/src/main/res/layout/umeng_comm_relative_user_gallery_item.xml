@@ -14,7 +14,7 @@
         android:layout_marginRight="5dp"
         android:layout_marginTop="10dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/umeng_comm_more_users" />
+        android:background="@drawable/umeng_comm_like_more_user_normal"/>
 
     <TextView
         android:id="@+id/umeng_comm_user_name"

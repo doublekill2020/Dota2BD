@@ -95,7 +95,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/umeng_socialize_shareboard_item_background"
-        android:visibility="gone"
+        android:visibility="visible"
         android:clickable="true" >
 
         <ImageView
