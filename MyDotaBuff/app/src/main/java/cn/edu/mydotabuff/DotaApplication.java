@@ -1,17 +1,5 @@
 package cn.edu.mydotabuff;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import org.apache.commons.codec.binary.Base64;
-
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
@@ -34,6 +22,15 @@ import com.nostra13.universalimageloader.utils.StorageUtils;
 import com.umeng.comm.core.sdkmanager.LocationSDKManager;
 import com.umeng.comm.ui.location.DefaultLocationImpl;
 
+import org.apache.commons.codec.binary.Base64;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 public class DotaApplication extends Application {
     private static DotaApplication mInstance = null;
     private Context context;
@@ -44,7 +41,7 @@ public class DotaApplication extends Application {
         mInstance = DotaApplication.this;
         context = mInstance.getApplicationContext();
         initImageLoader();
-        LocationSDKManager.getInstance().addAndUse(new DefaultLocationImpl());
+        //LocationSDKManager.getInstance().addAndUse(new DefaultLocationImpl());
 
         //RongIM.init(this, "25wehl3uw6q5w", R.drawable.ic_launcher);
     }

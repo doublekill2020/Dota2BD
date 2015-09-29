@@ -1,5 +1,7 @@
 package cn.edu.mydotabuff.ui;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -34,6 +36,7 @@ import cn.edu.mydotabuff.base.BaseFragment;
 public class FragFound extends BaseFragment implements OnClickListener {
 
     private View view;
+    private CommunitySDK mCommSDK;
 
     @Override
     protected View initViewAndData(LayoutInflater inflater,
@@ -112,8 +115,7 @@ public class FragFound extends BaseFragment implements OnClickListener {
                                     manager.addImpl(MyLoginImpl.class.getSimpleName(), new MyLoginImpl(info));
                                     // 使用该登录实现
                                     manager.useThis(MyLoginImpl.class.getSimpleName());
-                                    // 获取CommunitySDK实例, 参数1为Context类型
-                                    CommunitySDK mCommSDK = CommunityFactory.getCommSDK(getActivity());
+
 
                                     // 打开微社区的接口, 参数1为Context类型
                                     mCommSDK.openCommunity(getActivity());
@@ -143,5 +145,14 @@ public class FragFound extends BaseFragment implements OnClickListener {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        // 获取CommunitySDK实例, 参数1为Context类型
+        if(mCommSDK == null) {
+            mCommSDK = CommunityFactory.getCommSDK(context);
+        }
     }
 }
