@@ -7,7 +7,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.2.3'
+        classpath 'com.android.tools.build:gradle:2.3.0'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
     }
 }
@@ -31,12 +31,20 @@ allprojects {
 }
 android {
     compileSdkVersion 22
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "25.0.0"
 
     defaultConfig {
         applicationId "cn.edu.mydotabuff"
         minSdkVersion 14
         targetSdkVersion 22
+        splits {
+            abi {
+                enable true
+                reset()
+                include 'x86', 'armeabi-v7a'
+                universalApk true
+            }
+        }
     }
 
     buildTypes {
@@ -84,7 +92,6 @@ dependencies {
     compile 'com.android.support:cardview-v7:22.0.0'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.nineoldandroids:library:2.4.0'
-    compile project(':umeng_community_android_library')
     compile 'com.github.PhilJay:MPAndroidChart:v2.1.0'
     compile 'com.octo.android.robospice:robospice:1.4.14'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
