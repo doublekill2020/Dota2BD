@@ -1,2 +1,1 @@
 include ':app'
-include ':umeng_community_android_library'
