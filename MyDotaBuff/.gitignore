@@ -1,0 +1,14 @@
+build
+app.iml
+.idea
+local.properties
+.gradle/*
+.idea/*
+.idea/vcs.xml
+
+MyDotaBuff.iml
+
+captures/
+captures/*
+
+app.iml
