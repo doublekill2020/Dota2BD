@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -65,9 +66,11 @@ public class ActLogin extends Activity implements OnClickListener,
 		typeBtn = (Button) findViewById(R.id.btn);
 		submitBtn.setOnClickListener(this);
 		typeBtn.setOnClickListener(this);
-		if (userID != null) {
+		if (!TextUtils.isEmpty(userID)) {
 			editText.setText(userID);
-		}
+		}else {
+            editText.setText("172750452");
+        }
 	}
 
 	@Override
