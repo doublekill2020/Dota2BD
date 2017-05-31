@@ -52,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:gravity="center"
-            android:text="单排积分"
+            android:text="单排1积分"
             android:textColor="@color/black" />
     </LinearLayout>
 
