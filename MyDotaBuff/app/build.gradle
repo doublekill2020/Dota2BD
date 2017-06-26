@@ -1,26 +1,9 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'android'
 buildscript {
     repositories {
         mavenCentral()
         jcenter()
-    }
-    dependencies {
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
-    }
-}
-apt {
-    arguments {
-        androidManifestFile variant.outputs[0].processResources.manifestFile
-        // if you have multiple outputs (when using splits), you may want to have other index than 0
-
-        // you should set your package name here if you are using different application IDs
-        // resourcePackageName "your.package.name"
-
-        // You can set optional annotation processing options here, like these commented options:
-        // logLevel 'INFO'
-        // logFile '/var/log/aa.log'
     }
 }
 allprojects {
@@ -29,6 +12,9 @@ allprojects {
     }
 }
 android {
+    //TODO 用okhttp后去掉
+    useLibrary 'org.apache.http.legacy'
+
     compileSdkVersion 25
     buildToolsVersion "26.0.0"
 
@@ -100,6 +86,8 @@ dependencies {
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.github.rey5137:material:1.1.1'
     compile 'de.greenrobot:eventbus:2.4.0'
-    apt "org.androidannotations:androidannotations:3.3.1"
-    compile 'org.androidannotations:androidannotations-api:3.3.1'
+
+    ext.butterKnifeVersion = '8.6.0'
+    compile("com.jakewharton:butterknife:${butterKnifeVersion}")
+    annotationProcessor "com.jakewharton:butterknife-compiler:${butterKnifeVersion}"
 }
