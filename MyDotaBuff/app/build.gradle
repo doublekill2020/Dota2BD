@@ -1,16 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'android'
-buildscript {
-    repositories {
-        mavenCentral()
-        jcenter()
-    }
-}
-allprojects {
-    repositories {
-        jcenter()
-    }
-}
 android {
     //TODO 用okhttp后去掉
     useLibrary 'org.apache.http.legacy'
@@ -22,13 +10,9 @@ android {
         applicationId "cn.edu.mydotabuff"
         minSdkVersion 14
         targetSdkVersion 22
-        splits {
-            abi {
-                enable true
-                reset()
-                include 'x86', 'armeabi-v7a'
-                universalApk true
-            }
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'x86'
         }
     }
 
@@ -78,7 +62,7 @@ dependencies {
     ext.supportLibVersion = '25.3.1'
     compile "com.android.support:appcompat-v7:${supportLibVersion}"
     compile "com.android.support:cardview-v7:${supportLibVersion}"
-    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'com.google.code.gson:gson:2.8.0'
 
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.github.PhilJay:MPAndroidChart:v2.1.0'
@@ -99,6 +83,12 @@ dependencies {
     ext.okhttpVersion = '3.8.1'
     compile "com.squareup.okhttp3:okhttp:${okhttpVersion}"
     compile "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}"
+
+    ext.frescoVersion = '1.3.0'
+    compile "com.facebook.fresco:fresco:${frescoVersion}"
+    compile "com.facebook.fresco:animated-gif:${frescoVersion}"
+    compile "com.facebook.fresco:animated-webp:${frescoVersion}"
+    compile "com.facebook.fresco:webpsupport:${frescoVersion}"
 
     compile 'com.jaeger.statusbarutil:library:1.4.0'
     compile 'io.reactivex:rxjava:1.3.0'
