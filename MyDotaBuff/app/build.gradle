@@ -99,4 +99,6 @@ dependencies {
     ext.okhttpVersion = '3.8.1'
     compile "com.squareup.okhttp3:okhttp:${okhttpVersion}"
     compile "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}"
+
+    compile 'com.jaeger.statusbarutil:library:1.4.0'
 }
