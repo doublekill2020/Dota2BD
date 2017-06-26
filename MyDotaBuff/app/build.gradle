@@ -7,7 +7,6 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.0'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
     }
 }
@@ -57,6 +56,8 @@ android {
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE.txt'
     }
+    flavorDimensions "channel"
+
     productFlavors {
         xiaomi {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "xiaomi"]
@@ -74,7 +75,7 @@ android {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "mumayi"]
         }
     }
-    lintOptions{
+    lintOptions {
         checkReleaseBuilds false
         abortOnError false
     }
