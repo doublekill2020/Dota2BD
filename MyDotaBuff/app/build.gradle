@@ -1,4 +1,16 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android'
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+}
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
 android {
     //TODO 用okhttp后去掉
     useLibrary 'org.apache.http.legacy'
@@ -95,6 +107,6 @@ dependencies {
     compile "com.facebook.fresco:webpsupport:${frescoVersion}"
 
     compile 'com.jaeger.statusbarutil:library:1.4.0'
-
-
+    compile 'io.reactivex:rxjava:1.3.0'
+    compile 'io.reactivex:rxandroid:1.2.1'
 }

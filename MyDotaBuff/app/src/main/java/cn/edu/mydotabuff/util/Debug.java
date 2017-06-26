@@ -23,7 +23,7 @@ public class Debug {
 	/**
 	 * @Fields ENABLE_DEBUG : TODO 日志打印开关------------------------传市场时关闭
 	 */
-	public static boolean ENABLE_DEBUG = false;
+	public static boolean ENABLE_DEBUG = true;
 
 	/**
 	 * @Fields MYLOG_PATH_SDCARD_DIR : TODO 日志保存目录

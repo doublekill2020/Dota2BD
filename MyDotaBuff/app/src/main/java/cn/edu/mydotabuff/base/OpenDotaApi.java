@@ -7,11 +7,16 @@ import java.io.File;
 
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.common.http.APIConstants;
+import cn.edu.mydotabuff.model.PlayerWL;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
+import rx.Observable;
 import rx.schedulers.Schedulers;
 
 /**
@@ -22,6 +27,7 @@ public class OpenDotaApi {
 
     private static OpenDotaApi mOpenDotaApi = new OpenDotaApi();
     private static Retrofit mRetrofit;
+    private static OpenDotaService mService;
     private static final long HTTP_DISK_CACHE_MAX_SIZE = 1024 * 1024 * 10; // 10 MB
 
     public static OpenDotaApi getInstance() {
@@ -36,15 +42,22 @@ public class OpenDotaApi {
                 .addCallAdapterFactory(RxJavaCallAdapterFactory
                         .createWithScheduler(Schedulers.io()))
                 .build();
+        mService = mRetrofit.create(OpenDotaService.class);
     }
 
     private static Gson createGson() {
         return new GsonBuilder().create();
     }
+    public static OpenDotaService getService(){
+        return mService;
+    }
 
     private static OkHttpClient getOkHttpClient() {
+        final HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor()
+                .setLevel(HttpLoggingInterceptor.Level.BODY);
         return new OkHttpClient.Builder()
                 .cache(getCache())
+                .addInterceptor(httpLoggingInterceptor)
                 .build();
     }
 
@@ -52,5 +65,11 @@ public class OpenDotaApi {
         File appCacheDir = DotaApplication.getApplication().getCacheDir();
         File httpCacheFile = new File(appCacheDir, "HttpCache");
         return new Cache(httpCacheFile, HTTP_DISK_CACHE_MAX_SIZE);
+    }
+
+    public interface OpenDotaService {
+
+        @GET("players/{account_id}/wl")
+        Observable<PlayerWL> getPlayerWL(@Path("account_id") String accountId);
     }
 }
