@@ -12,3 +12,4 @@ captures/
 captures/*
 
 app.iml
+gradle.properties
