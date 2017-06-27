@@ -57,13 +57,13 @@ public class ActPlayerDetail extends BaseActivity implements
         getSupportActionBar().setTitle("个人资料");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        nameView = getViewById(R.id.name);
-        statusView = getViewById(R.id.status);
-        timeView = getViewById(R.id.regist_time);
-        loginView = getViewById(R.id.last_login);
-        winNum = getViewById(R.id.most_win_num);
-        loseNum = getViewById(R.id.most_lose_num);
-        iconView = getViewById(R.id.myinfrom_up_img);
+        nameView = (TextView) findViewById(R.id.name);
+        statusView = (TextView) findViewById(R.id.status);
+        timeView = (TextView) findViewById(R.id.regist_time);
+        loginView = (TextView) findViewById(R.id.last_login);
+        winNum = (TextView) findViewById(R.id.most_win_num);
+        loseNum = (TextView) findViewById(R.id.most_lose_num);
+        iconView = (CircleImageView) findViewById(R.id.myinfrom_up_img);
         loader = ImageLoader.getInstance();
         dialog = new LoadingDialog(this);
         bean = (PlayerInfoBean) getIntent().getSerializableExtra("data");

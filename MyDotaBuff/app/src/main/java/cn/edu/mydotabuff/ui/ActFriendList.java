@@ -70,7 +70,7 @@ public class ActFriendList extends BaseActivity {
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		steamid = getIntent().getStringExtra("steamid");
-		list = getViewById(R.id.list);
+		list = (XListView) findViewById(R.id.list);
 		list.setPullLoadEnable(false);
 		list.setPullRefreshEnable(true);
 		steamids = new StringBuilder();
