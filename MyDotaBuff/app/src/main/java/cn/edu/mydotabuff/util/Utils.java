@@ -30,8 +30,8 @@ import android.widget.TextView;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.common.bean.HeroItem;
 import cn.edu.mydotabuff.common.bean.ItemsItem;
-import cn.edu.mydotabuff.ui.hero.HeroDetailActivity;
-import cn.edu.mydotabuff.ui.item.ItemsDetailActivity;
+import cn.edu.mydotabuff.ui.hero.HeroDetailActivityAppCompat;
+import cn.edu.mydotabuff.ui.item.ItemsDetailActivityAppCompat;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
@@ -204,8 +204,8 @@ public final class Utils {
 		}
 
 		final Intent intent = new Intent(packageContext,
-				HeroDetailActivity.class);
-		intent.putExtra(HeroDetailActivity.KEY_HERO_DETAIL_KEY_NAME,
+				HeroDetailActivityAppCompat.class);
+		intent.putExtra(HeroDetailActivityAppCompat.KEY_HERO_DETAIL_KEY_NAME,
 				cItemKeyName);
 		packageContext.startActivity(intent);
 	}
@@ -239,19 +239,19 @@ public final class Utils {
 		}
 
 		final Intent intent = new Intent(packageContext,
-				ItemsDetailActivity.class);
-		intent.putExtra(ItemsDetailActivity.KEY_ITEMS_DETAIL_KEY_NAME,
+				ItemsDetailActivityAppCompat.class);
+		intent.putExtra(ItemsDetailActivityAppCompat.KEY_ITEMS_DETAIL_KEY_NAME,
 				cItemKeyName);
 		if (!TextUtils.isEmpty(cItemParentKeyName)) {
 			intent.putExtra(
-					ItemsDetailActivity.KEY_ITEMS_DETAIL_PARENT_KEY_NAME,
+					ItemsDetailActivityAppCompat.KEY_ITEMS_DETAIL_PARENT_KEY_NAME,
 					cItemParentKeyName);
 		}
 		packageContext.startActivity(intent);
 	}
 
 	/**
-	 * fill Fragment to FragmentActivity
+	 * fill Fragment to AppCompatFragmentActivity
 	 * 
 	 * @param fragmentActivity
 	 * @param cFragment

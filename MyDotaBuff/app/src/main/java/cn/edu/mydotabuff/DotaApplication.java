@@ -29,6 +29,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import cn.bingoogolapple.swipebacklayout.BGASwipeBackManager;
+
 public class DotaApplication extends Application {
     private static DotaApplication mInstance = null;
     private Context context;
@@ -39,6 +41,7 @@ public class DotaApplication extends Application {
         mInstance = DotaApplication.this;
         context = mInstance.getApplicationContext();
         initImageLoader();
+        BGASwipeBackManager.getInstance().init(this);
         //LocationSDKManager.getInstance().addAndUse(new DefaultLocationImpl());
 
         //RongIM.init(this, "25wehl3uw6q5w", R.drawable.ic_launcher);

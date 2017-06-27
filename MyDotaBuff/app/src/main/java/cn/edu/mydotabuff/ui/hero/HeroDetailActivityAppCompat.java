@@ -1,17 +1,5 @@
 package cn.edu.mydotabuff.ui.hero;
 
-import java.io.IOException;
-import java.util.List;
-
-import org.json2.JSONException;
-
-import cn.edu.mydotabuff.DataManager;
-import cn.edu.mydotabuff.R;
-import cn.edu.mydotabuff.common.adapter.DBAdapter;
-import cn.edu.mydotabuff.common.adapter.ItemsImagesAdapter;
-import cn.edu.mydotabuff.util.Utils;
-import cn.edu.mydotabuff.view.SimpleGridView;
-import cn.edu.mydotabuff.view.SimpleListView;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
@@ -20,13 +8,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.NavUtils;
 import android.text.Html.ImageGetter;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,25 +24,38 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import cn.edu.mydotabuff.base.SwipeBackAppCompatFragmentActivity;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.umeng.analytics.MobclickAgent;
+
+import org.json2.JSONException;
+
+import java.io.IOException;
+import java.util.List;
+
+import cn.edu.mydotabuff.DataManager;
+import cn.edu.mydotabuff.R;
+import cn.edu.mydotabuff.base.AppCompatFragmentActivity;
+import cn.edu.mydotabuff.common.adapter.DBAdapter;
+import cn.edu.mydotabuff.common.adapter.ItemsImagesAdapter;
 import cn.edu.mydotabuff.common.bean.AbilityItem;
 import cn.edu.mydotabuff.common.bean.FavoriteItem;
 import cn.edu.mydotabuff.common.bean.HeroDetailItem;
 import cn.edu.mydotabuff.common.bean.HeroItem;
 import cn.edu.mydotabuff.common.bean.HeroSkillupItem;
 import cn.edu.mydotabuff.common.bean.ItemsItem;
-
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.umeng.analytics.MobclickAgent;
+import cn.edu.mydotabuff.util.Utils;
+import cn.edu.mydotabuff.view.SimpleGridView;
+import cn.edu.mydotabuff.view.SimpleListView;
 
 /**
  * 英雄详细 Activity
- * 
+ *
  * @author tupunco
  */
-public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
-    private static final String TAG = "HeroDetailActivity";
+public class HeroDetailActivityAppCompat extends AppCompatFragmentActivity {
+
+    private static final String TAG = "HeroDetailActivityAppCompat";
     /**
      * 英雄名称 Intent 参数
      */
@@ -89,13 +87,14 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
      */
     public static class HeroDetailFragment extends Fragment
             implements SimpleGridView.OnItemClickListener {
+
         private DisplayImageOptions mImageLoadOptions;
         private HeroDetailItem mHeroDetailItem;
         private MenuItem mMenuCheckAddCollection;
 
         /**
-         * 
          * @param hero_keyName
+         *
          * @return
          */
         static HeroDetailFragment newInstance(String hero_keyName) {
@@ -123,26 +122,26 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+                                 Bundle savedInstanceState) {
             return inflater.inflate(R.layout.frag_herodetail, container, false);
         }
 
-//        @Override
-//        public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//            super.onCreateOptionsMenu(menu, inflater);
-//
-//            inflater.inflate(R.menu.fragment_herodetail, menu);
-//        }
-//
-//        @Override
-//        public void onPrepareOptionsMenu(Menu menu) {
-//            super.onPrepareOptionsMenu(menu);
-//
-//            // ----加收藏按钮---
-//            final MenuItem check = menu.findItem(R.id.menu_check_addcollection);
-//            mMenuCheckAddCollection = check;
-//            tryFillMenuCheckAddCollection();
-//        }
+        //        @Override
+        //        public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        //            super.onCreateOptionsMenu(menu, inflater);
+        //
+        //            inflater.inflate(R.menu.fragment_herodetail, menu);
+        //        }
+        //
+        //        @Override
+        //        public void onPrepareOptionsMenu(Menu menu) {
+        //            super.onPrepareOptionsMenu(menu);
+        //
+        //            // ----加收藏按钮---
+        //            final MenuItem check = menu.findItem(R.id.menu_check_addcollection);
+        //            mMenuCheckAddCollection = check;
+        //            tryFillMenuCheckAddCollection();
+        //        }
 
         /**
          * fill MenuItem Check AddCollection
@@ -182,8 +181,8 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
 
         /**
          * 绑定视图
-         * 
-         * @param cHeroItem
+         *
+         * @param cItem
          */
         @SuppressLint("NewApi")
         private void bindHeroItemView(final HeroDetailItem cItem) {
@@ -232,8 +231,7 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
                 final SimpleListView list = Utils.findById(v, R.id.list_hero_abilities);
                 list.setAdapter(adapter);
                 // list.setOnItemClickListener(this);
-            }
-            else {
+            } else {
                 v.findViewById(R.id.llayout_hero_abilities).setVisibility(View.GONE);
             }
 
@@ -243,21 +241,20 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
                 final SimpleListView list = Utils.findById(v, R.id.list_hero_skillup);
                 list.setAdapter(adapter);
                 // list.setOnItemClickListener(this);
-            }
-            else {
+            } else {
                 v.findViewById(R.id.llayout_hero_skillup).setVisibility(View.GONE);
             }
         }
 
         /**
          * 绑定视图-英雄简单数据信息
-         * 
+         *
          * @param v
          * @param cItem
          * @param cImageLoadOptions
          */
         public static void bindHeroItemSimpleView(final View v, final HeroItem cItem,
-                final DisplayImageOptions cImageLoadOptions) {
+                                                  final DisplayImageOptions cImageLoadOptions) {
             if (v == null || cItem == null || cImageLoadOptions == null) {
                 return;
             }
@@ -299,7 +296,7 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
 
         /**
          * 绑定视图-统计信息
-         * 
+         *
          * @param cView
          * @param cItem
          */
@@ -318,7 +315,7 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
             final Context context = cView.getContext();
             final Resources res = context.getResources();
             final String[] labels = res.getStringArray(R.array.array_hero_stats);
-            final int[] resIds = new int[] {
+            final int[] resIds = new int[]{
                     R.drawable.overviewicon_int, R.drawable.overviewicon_agi,
                     R.drawable.overviewicon_str, R.drawable.overviewicon_attack,
                     R.drawable.overviewicon_speed, R.drawable.overviewicon_defense
@@ -355,7 +352,7 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
 
         /**
          * 绑定视图-详细统计信息
-         * 
+         *
          * @param cView
          * @param cItem
          */
@@ -427,14 +424,10 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
 
         /**
          * 绑定视图-推荐出装
-         * 
-         * @param key
-         * @param layoutResId
-         * @param itemsGridResId
          */
         private void bindItembuildsItems(View cView, HeroDetailItem cItem,
-                String cItembuildsKey,
-                int layoutResId, int itemsGridResId) {
+                                         String cItembuildsKey,
+                                         int layoutResId, int itemsGridResId) {
             if (cItem.itembuilds_i == null || cItem.itembuilds_i.size() <= 0
                     || TextUtils.isEmpty(cItembuildsKey))
                 return;
@@ -454,8 +447,8 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
         }
 
         /**
-         * 
-         * 
+         *
+         *
          */
         private final ImageGetter mImageGetter = new ImageGetter() {
             @Override
@@ -478,9 +471,10 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
         };
 
         /**
-         * 
+         *
          */
-        private final AsyncTask<String, Void, HeroDetailItem> mLoaderTask = new AsyncTask<String, Void, HeroDetailItem>() {
+        private final AsyncTask<String, Void, HeroDetailItem> mLoaderTask = new AsyncTask<String,
+                Void, HeroDetailItem>() {
             @Override
             protected void onPreExecute() {
                 HeroDetailFragment.this.getActivity()
@@ -531,7 +525,9 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
          * 技能 List Adapter
          */
         private final class HeroAbilitiesAdapter extends BaseAdapter {
+
             private final class ViewHolder {
+
                 public ImageView image;
                 public TextView dname;
                 public TextView affects;
@@ -546,7 +542,7 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
             private final List<AbilityItem> mAbilities;
 
             public HeroAbilitiesAdapter(Context context,
-                    List<AbilityItem> abilities) {
+                                        List<AbilityItem> abilities) {
                 super();
 
                 mInflater = (LayoutInflater) context
@@ -614,7 +610,9 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
          * 技能加点 List Adapter
          */
         private final class HeroSkillupAdapter extends BaseAdapter {
+
             private final class ViewHolder {
+
                 public TextView groupName;
                 public TextView desc;
                 public SimpleGridView abilityKeys;
@@ -683,7 +681,9 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
          * 技能加点 List Adapter
          */
         private final class HeroSkillupAbilityKeysAdapter extends BaseAdapter {
+
             private final class ViewHolder {
+
                 public ImageView image;
             }
 
@@ -746,15 +746,18 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
                 Utils.startItemsDetailActivity(this.getActivity(),
                         (ItemsItem) cItem);
             }
-        };
-    }
-	public void onResume() {
-		super.onResume();
-		MobclickAgent.onResume(this);
-	}
+        }
 
-	public void onPause() {
-		super.onPause();
-		MobclickAgent.onPause(this);
-	}
+        ;
+    }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
 }

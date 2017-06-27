@@ -3,49 +3,42 @@
  * @ProjectName MyDotaBuff
  * @Package cn.edu.mydotabuff.base
  * @author 袁浩 1006401052yh@gmail.com
- * @date 2015-1-22 下午6:05:10 
+ * @date 2015-1-22 下午6:05:10
  * @version V1.4
  * Copyright 2013-2015 深圳市点滴互联科技有限公司  版权所有
  */
 package cn.edu.mydotabuff.base;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
-import cn.edu.mydotabuff.AppManager;
-import cn.edu.mydotabuff.R;
-import cn.edu.mydotabuff.ui.ActMain;
-import cn.edu.mydotabuff.util.Utils;
-import cn.edu.mydotabuff.view.SwipeBackActivityBase;
-import cn.edu.mydotabuff.view.SwipeBackActivityHelper;
-import cn.edu.mydotabuff.view.SwipeBackLayout;
-import cn.edu.mydotabuff.view.TipsToast;
-import cn.edu.mydotabuff.view.TipsToast.DialogType;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.umeng.analytics.MobclickAgent;
 
+import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
+import cn.edu.mydotabuff.AppManager;
+import cn.edu.mydotabuff.R;
+import cn.edu.mydotabuff.view.TipsToast;
+import cn.edu.mydotabuff.view.TipsToast.DialogType;
+
 /**
- * @author 袁浩 1006401052yh@gmail.com
- * @ClassName: BaseActivity
- * @Description: TODO(这里用一句话描述这个类的作用)
  * @date 2015-1-22 下午6:05:10
  */
-public abstract class BaseActivity extends ActionBarActivity implements SwipeBackActivityBase {
+public abstract class BaseActivity extends AppCompatActivity implements BGASwipeBackHelper
+        .Delegate {
 
     // 网络请求状态码
     public static final int OK = 1; // 成功
     public static final int FAILED = 0;// 失败 超时 等
     public static final int JSON_ERROR = -1;// json解析出错
-    private SwipeBackActivityHelper mHelper;
     public ActionMenuView mActionMenuView;
     public Toolbar mToolbar;
+    protected BGASwipeBackHelper mSwipeBackHelper;
+
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
@@ -57,6 +50,7 @@ public abstract class BaseActivity extends ActionBarActivity implements SwipeBac
         super.setContentView(view);
         initActionBar();
     }
+
     private void initActionBar() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
@@ -65,12 +59,11 @@ public abstract class BaseActivity extends ActionBarActivity implements SwipeBac
             mActionMenuView.setVisibility(View.GONE);
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
+        initSwipeBackFinish();
         super.onCreate(savedInstanceState);
-        mHelper = new SwipeBackActivityHelper(this);
-        mHelper.onActivityCreate();
 
         AppManager.getAppManager().addActivity(this);
 
@@ -84,34 +77,29 @@ public abstract class BaseActivity extends ActionBarActivity implements SwipeBac
         initEvent();
     }
 
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        mHelper.onPostCreate();
-    }
+    /**
+     * 初始化滑动返回。在 super.onCreate(savedInstanceState) 之前调用该方法
+     */
+    private void initSwipeBackFinish() {
+        mSwipeBackHelper = new BGASwipeBackHelper(this, this);
 
-    @Override
-    public SwipeBackLayout getSwipeBackLayout() {
-        return mHelper.getSwipeBackLayout();
-    }
+        // 「必须在 Application 的 onCreate 方法中执行 BGASwipeBackManager.getInstance().init(this) 来初始化滑动返回」
+        // 下面几项可以不配置，这里只是为了讲述接口用法。
 
-    @Override
-    public void setSwipeBackEnable(boolean enable) {
-        getSwipeBackLayout().setEnableGesture(enable);
-    }
-
-    @Override
-    public void scrollToFinishActivity() {
-        cn.edu.mydotabuff.view.Utils.convertActivityToTranslucent(this);
-        getSwipeBackLayout().scrollToFinishActivity();
-    }
-
-    @Override
-    public View findViewById(int id) {
-        View v = super.findViewById(id);
-        if (v == null && mHelper != null)
-            return mHelper.findViewById(id);
-        return v;
+        // 设置滑动返回是否可用。默认值为 true
+        mSwipeBackHelper.setSwipeBackEnable(true);
+        // 设置是否仅仅跟踪左侧边缘的滑动返回。默认值为 true
+        mSwipeBackHelper.setIsOnlyTrackingLeftEdge(true);
+        // 设置是否是微信滑动返回样式。默认值为 true
+        mSwipeBackHelper.setIsWeChatStyle(true);
+        // 设置阴影资源 id。默认值为 R.drawable.bga_sbl_shadow
+        mSwipeBackHelper.setShadowResId(R.drawable.bga_sbl_shadow);
+        // 设置是否显示滑动返回的阴影效果。默认值为 true
+        mSwipeBackHelper.setIsNeedShowShadow(true);
+        // 设置阴影区域的透明度是否根据滑动的距离渐变。默认值为 true
+        mSwipeBackHelper.setIsShadowAlphaGradient(true);
+        // 设置触发释放后自动滑动返回的阈值，默认值为 0.3f
+        mSwipeBackHelper.setSwipeBackThreshold(0.3f);
     }
 
     protected abstract void initViewAndData();
@@ -151,7 +139,51 @@ public abstract class BaseActivity extends ActionBarActivity implements SwipeBac
     public void showToast(String content) {
         Toast.makeText(this, content, Toast.LENGTH_SHORT).show();
     }
+
     public ActionMenuView getActionMenuView() {
         return mActionMenuView;
+    }
+
+    /**
+     * 是否支持滑动返回。这里在父类中默认返回 true 来支持滑动返回，如果某个界面不想支持滑动返回则重写该方法返回 false 即可
+     *
+     * @return
+     */
+    @Override
+    public boolean isSupportSwipeBack() {
+        return true;
+    }
+
+    /**
+     * 正在滑动返回
+     *
+     * @param slideOffset 从 0 到 1
+     */
+    @Override
+    public void onSwipeBackLayoutSlide(float slideOffset) {
+    }
+
+    /**
+     * 没达到滑动返回的阈值，取消滑动返回动作，回到默认状态
+     */
+    @Override
+    public void onSwipeBackLayoutCancel() {
+    }
+
+    /**
+     * 滑动返回执行完毕，销毁当前 Activity
+     */
+    @Override
+    public void onSwipeBackLayoutExecuted() {
+        mSwipeBackHelper.swipeBackward();
+    }
+
+    @Override
+    public void onBackPressed() {
+        // 正在滑动返回的时候取消返回按钮事件
+        if (mSwipeBackHelper.isSliding()) {
+            return;
+        }
+        mSwipeBackHelper.backward();
     }
 }
