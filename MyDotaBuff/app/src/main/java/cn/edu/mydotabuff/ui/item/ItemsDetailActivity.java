@@ -9,7 +9,6 @@ import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.common.adapter.DBAdapter;
 import cn.edu.mydotabuff.common.adapter.HeroImagesAdapter;
 import cn.edu.mydotabuff.common.adapter.ItemsImagesAdapter;
-import cn.edu.mydotabuff.base.SwipeBackAppCompatFragmentActivity;
 import cn.edu.mydotabuff.common.bean.FavoriteItem;
 import cn.edu.mydotabuff.common.bean.HeroItem;
 import cn.edu.mydotabuff.common.bean.ItemsItem;
@@ -21,6 +20,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.text.TextUtils;
@@ -45,7 +45,7 @@ import com.umeng.analytics.MobclickAgent;
  * 
  * @author tupunco
  */
-public class ItemsDetailActivity extends SwipeBackAppCompatFragmentActivity {
+public class ItemsDetailActivity extends AppCompatActivity {
 	private static final String TAG = "ItemsDetailActivity";
 	/**
 	 * 物品名称 Intent 参数

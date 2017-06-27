@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Html.ImageGetter;
 import android.text.TextUtils;
 import android.util.Log;
@@ -39,7 +40,6 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import cn.edu.mydotabuff.base.SwipeBackAppCompatFragmentActivity;
 import cn.edu.mydotabuff.common.bean.AbilityItem;
 import cn.edu.mydotabuff.common.bean.FavoriteItem;
 import cn.edu.mydotabuff.common.bean.HeroDetailItem;
@@ -56,7 +56,7 @@ import com.umeng.analytics.MobclickAgent;
  * 
  * @author tupunco
  */
-public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
+public class HeroDetailActivity extends AppCompatActivity {
     private static final String TAG = "HeroDetailActivity";
     /**
      * 英雄名称 Intent 参数
@@ -183,7 +183,7 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
         /**
          * 绑定视图
          * 
-         * @param cHeroItem
+         * @param cItem
          */
         @SuppressLint("NewApi")
         private void bindHeroItemView(final HeroDetailItem cItem) {
@@ -427,10 +427,7 @@ public class HeroDetailActivity extends SwipeBackAppCompatFragmentActivity {
 
         /**
          * 绑定视图-推荐出装
-         * 
-         * @param key
-         * @param layoutResId
-         * @param itemsGridResId
+         *
          */
         private void bindItembuildsItems(View cView, HeroDetailItem cItem,
                 String cItembuildsKey,

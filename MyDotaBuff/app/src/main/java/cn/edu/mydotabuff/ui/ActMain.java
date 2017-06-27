@@ -58,7 +58,6 @@ import cn.edu.mydotabuff.ui.mydetail.FragMyDetail;
 import cn.edu.mydotabuff.ui.recently.FragRecently;
 import cn.edu.mydotabuff.util.PersonalRequestImpl;
 import cn.edu.mydotabuff.view.CircleImageView;
-import cn.edu.mydotabuff.view.SwipeBackLayout;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -98,9 +97,6 @@ public class ActMain extends BaseActivity implements OnClickListener {
 
     @Override
     protected void initViewAndData() {
-        // TODO Auto-generated method stub
-        SwipeBackLayout swipeBackLayout = getSwipeBackLayout();
-        swipeBackLayout.setEnableGesture(false);
 
         UmengUpdateAgent.setUpdateOnlyWifi(false);
         UmengUpdateAgent.update(this);
