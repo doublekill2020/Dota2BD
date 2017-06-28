@@ -17,12 +17,12 @@ import java.util.regex.Pattern;
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.DotaApplication.LocalDataType;
 import cn.edu.mydotabuff.common.Common;
-import cn.edu.mydotabuff.common.bean.BestRecord;
-import cn.edu.mydotabuff.common.bean.HeroMatchStatistics;
-import cn.edu.mydotabuff.common.bean.HerosSatistics;
-import cn.edu.mydotabuff.common.bean.MacthStatistics;
-import cn.edu.mydotabuff.common.bean.PlayerInfoBean;
-import cn.edu.mydotabuff.common.bean.UserInfo;
+import cn.edu.mydotabuff.model.BestRecord;
+import cn.edu.mydotabuff.model.HeroMatchStatistics;
+import cn.edu.mydotabuff.model.HerosSatistics;
+import cn.edu.mydotabuff.model.MacthStatistics;
+import cn.edu.mydotabuff.model.PlayerInfoBean;
+import cn.edu.mydotabuff.model.UserInfo;
 import cn.edu.mydotabuff.util.Debug;
 
 /**

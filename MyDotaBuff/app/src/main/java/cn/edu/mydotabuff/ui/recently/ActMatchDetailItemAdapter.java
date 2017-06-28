@@ -6,13 +6,11 @@ import java.util.ArrayList;
 
 import org.json2.JSONException;
 
-import cn.edu.mydotabuff.ui.ActPlayerDetail;
 import cn.edu.mydotabuff.util.Utils;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,11 +23,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cn.edu.mydotabuff.DataManager;
 import cn.edu.mydotabuff.R;
-import cn.edu.mydotabuff.common.bean.ItemsItem;
-import cn.edu.mydotabuff.common.bean.MatchBean;
-import cn.edu.mydotabuff.common.bean.PlayerDetailBean;
+import cn.edu.mydotabuff.model.PlayerDetailBean;
 import cn.edu.mydotabuff.common.Common;
-import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.view.CircleImageView;
 import cn.edu.mydotabuff.view.TipsToast;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;

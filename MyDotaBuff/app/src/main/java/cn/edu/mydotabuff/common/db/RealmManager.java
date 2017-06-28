@@ -1,4 +1,4 @@
-package cn.edu.mydotabuff.db;
+package cn.edu.mydotabuff.common.db;
 
 import android.content.Context;
 

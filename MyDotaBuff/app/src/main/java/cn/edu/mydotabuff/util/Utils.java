@@ -28,8 +28,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import cn.edu.mydotabuff.R;
-import cn.edu.mydotabuff.common.bean.HeroItem;
-import cn.edu.mydotabuff.common.bean.ItemsItem;
+import cn.edu.mydotabuff.model.HeroItem;
+import cn.edu.mydotabuff.model.ItemsItem;
 import cn.edu.mydotabuff.ui.hero.HeroDetailActivityAppCompat;
 import cn.edu.mydotabuff.ui.item.ItemsDetailActivityAppCompat;
 

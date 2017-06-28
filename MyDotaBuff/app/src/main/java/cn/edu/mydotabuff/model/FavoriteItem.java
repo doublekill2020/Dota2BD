@@ -1,4 +1,4 @@
-package cn.edu.mydotabuff.common.bean;
+package cn.edu.mydotabuff.model;
 
 /**
  * 收藏实体

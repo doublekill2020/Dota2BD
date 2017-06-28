@@ -31,7 +31,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackManager;
-import cn.edu.mydotabuff.db.RealmManager;
+import cn.edu.mydotabuff.common.db.RealmManager;
 
 public class DotaApplication extends Application {
     private static DotaApplication mInstance = null;

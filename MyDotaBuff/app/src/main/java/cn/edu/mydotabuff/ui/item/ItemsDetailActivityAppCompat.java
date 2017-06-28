@@ -29,9 +29,9 @@ import cn.edu.mydotabuff.base.AppCompatFragmentActivity;
 import cn.edu.mydotabuff.common.adapter.DBAdapter;
 import cn.edu.mydotabuff.common.adapter.HeroImagesAdapter;
 import cn.edu.mydotabuff.common.adapter.ItemsImagesAdapter;
-import cn.edu.mydotabuff.common.bean.FavoriteItem;
-import cn.edu.mydotabuff.common.bean.HeroItem;
-import cn.edu.mydotabuff.common.bean.ItemsItem;
+import cn.edu.mydotabuff.model.FavoriteItem;
+import cn.edu.mydotabuff.model.HeroItem;
+import cn.edu.mydotabuff.model.ItemsItem;
 import cn.edu.mydotabuff.util.Utils;
 import cn.edu.mydotabuff.view.SimpleGridView;
 
