@@ -7,7 +7,6 @@ import java.io.File;
 
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.common.http.APIConstants;
-import cn.edu.mydotabuff.model.PlayerWL;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -69,7 +68,7 @@ public class OpenDotaApi {
 
     public interface OpenDotaService {
 
-        @GET("players/{account_id}/wl")
-        Observable<PlayerWL> getPlayerWL(@Path("account_id") String accountId);
+//        @GET("players/{account_id}/wl")
+//        Observable<PlayerWL> getPlayerWL(@Path("account_id") String accountId);
     }
 }
