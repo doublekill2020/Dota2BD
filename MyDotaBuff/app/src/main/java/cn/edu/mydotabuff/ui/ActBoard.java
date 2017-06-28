@@ -65,8 +65,8 @@ public class ActBoard extends BaseActivity {
 		getSupportActionBar().setTitle("国服天梯");
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-		lv = getViewById(R.id.frag_board_list);
-		tx = getViewById(R.id.update_time);
+		lv = (ListView) findViewById(R.id.frag_board_list);
+		tx = (TextView) findViewById(R.id.update_time);
 		beans = DotaApplication.getApplication().getData(LocalDataType.BOARDS);
 		myHandler = new MyHandler();
 		if (beans == null) {

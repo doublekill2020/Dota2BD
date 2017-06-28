@@ -9,11 +9,17 @@
  */
 package cn.edu.mydotabuff.base;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ActionMenuView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
@@ -28,8 +34,8 @@ import cn.edu.mydotabuff.view.TipsToast.DialogType;
 /**
  * @date 2015-1-22 下午6:05:10
  */
-public abstract class BaseActivity extends AppCompatActivity implements BGASwipeBackHelper
-        .Delegate {
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements BGASwipeBackHelper
+        .Delegate,BaseView {
 
     // 网络请求状态码
     public static final int OK = 1; // 成功
@@ -38,6 +44,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BGASwipe
     public ActionMenuView mActionMenuView;
     public Toolbar mToolbar;
     protected BGASwipeBackHelper mSwipeBackHelper;
+    protected T mPresenter;
+    protected ViewGroup mContainerView;
+    protected View mEmptyView;
+    protected View mSuccessView;
+    private boolean mHasShowSuccessView = false;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public void setContentView(int layoutResID) {
@@ -106,11 +118,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BGASwipe
 
     protected abstract void initEvent();
 
-    @SuppressWarnings("unchecked")
-    protected <T extends View> T getViewById(int resId) {
-        return (T) findViewById(resId);
-    }
-
     protected void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
@@ -129,15 +136,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BGASwipe
      */
     public void showTip(String content, DialogType type) {
         TipsToast.showToast(this, content, Toast.LENGTH_SHORT, type);
-    }
-
-    /**
-     * 显示Toast
-     *
-     * @param content 内容
-     */
-    public void showToast(String content) {
-        Toast.makeText(this, content, Toast.LENGTH_SHORT).show();
     }
 
     public ActionMenuView getActionMenuView() {
@@ -185,5 +183,115 @@ public abstract class BaseActivity extends AppCompatActivity implements BGASwipe
             return;
         }
         mSwipeBackHelper.backward();
+    }
+    @Override
+    public void toOtherActivity(Intent intent) {
+        startActivity(intent);
+    }
+
+    @Override
+    public void showSuccessLayout() {
+        showSuccessView();
+    }
+
+    @Override
+    public void showEmptyLayout(int drawableResId, int stringResId) {
+        showEmptyView(drawableResId, stringResId);
+    }
+
+    @Override
+    public void showEmptyLayout() {
+        showEmptyView();
+    }
+
+    @Override
+    public void showErrorLayout(int errorCode) {
+
+    }
+
+    @Override
+    public void showErrorLayout() {
+
+    }
+
+    @Override
+    public void showToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showToast(int stringResId) {
+        Toast.makeText(this, stringResId, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void toOtherActivityForResult(Intent intent, int requestCode) {
+        startActivityForResult(intent, requestCode);
+    }
+
+    protected void setSuccessView(View v) {
+        mSuccessView = v;
+        mContainerView = (ViewGroup) v.getParent();
+    }
+
+    private void showSuccessView() {
+        if (mContainerView != null && !mHasShowSuccessView) {
+            mContainerView.removeAllViews();
+            if (mSuccessView != null) {
+                mContainerView.addView(mSuccessView);
+                mHasShowSuccessView = true;
+            } else {
+                throw new RuntimeException("please invoke setSuccessView!");
+            }
+        }
+    }
+
+    private void showEmptyView(int drawableResId, int stringResId) {
+        if (mContainerView != null) {
+            mContainerView.removeAllViews();
+            if (mEmptyView == null) {
+                mEmptyView = getEmptyView(drawableResId, stringResId);
+            }
+            mContainerView.addView(mEmptyView);
+            mHasShowSuccessView = false;
+        } else {
+            throw new RuntimeException("please invoke setSuccessView!");
+        }
+    }
+
+    private void showEmptyView() {
+        showEmptyView(0, 0);
+    }
+
+    protected View getEmptyView(int resourceId, int stringResId) {
+        mEmptyView = LayoutInflater.from(BaseActivity.this).inflate(R.layout.layout_empty,
+                mContainerView, false);
+        ImageView imageView = (ImageView) mEmptyView.findViewById(R.id.iv_empty);
+        TextView textView = (TextView) mEmptyView.findViewById(R.id.blank_text);
+        swipeRefreshLayout = (SwipeRefreshLayout) mEmptyView.findViewById(R.id.swipe_layout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                onEmptyViewRefresh();
+            }
+        });
+        if (resourceId != 0) {
+            imageView.setImageResource(resourceId);
+        }
+        if (stringResId != 0) {
+            textView.setText(getString(stringResId));
+        }
+        return mEmptyView;
+    }
+
+    //如子类activity需要处理空页面状态下的刷新，则重写改方法实现刷新逻辑
+    protected void onEmptyViewRefresh() {
+        refreshComplete();
+    }
+
+    public void refreshComplete() {
+        if (swipeRefreshLayout != null && swipeRefreshLayout.isRefreshing()) {
+            swipeRefreshLayout.setRefreshing(false);
+        }
     }
 }
