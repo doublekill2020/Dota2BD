@@ -104,16 +104,6 @@ public class TrackdotaGameInfoActivity extends BaseActivity implements Refresher
     }
 
     @Override
-    protected void initViewAndData() {
-
-    }
-
-    @Override
-    protected void initEvent() {
-
-    }
-
-    @Override
     protected void onDestroy() {
         mGameManager = null;
         GameManager.clear();

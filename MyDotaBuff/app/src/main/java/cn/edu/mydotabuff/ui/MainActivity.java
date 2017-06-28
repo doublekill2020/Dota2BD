@@ -97,7 +97,7 @@ public class MainActivity extends BaseActivity {
         init();
     }
 
-    private void init() {
+    public void init() {
         mVp.setAdapter(mPageAdapter);
         mTabLayout.setupWithViewPager(mVp);
         UmengUpdateAgent.setUpdateOnlyWifi(false);
@@ -353,16 +353,6 @@ public class MainActivity extends BaseActivity {
         public CharSequence getPageTitle(int position) {
             return titles[position];
         }
-    }
-
-    @Override
-    protected void initViewAndData() {
-
-    }
-
-    @Override
-    protected void initEvent() {
-
     }
 
     @Override

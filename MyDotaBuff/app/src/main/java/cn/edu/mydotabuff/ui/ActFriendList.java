@@ -19,6 +19,7 @@ import com.nhaarman.listviewanimations.appearance.simple.ScaleInAnimationAdapter
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.Toolbar;
@@ -61,21 +62,67 @@ public class ActFriendList extends BaseActivity {
 	private CommAdapter<PlayerInfoBean> adapter;
 	private ScaleInAnimationAdapter animationAdapter;
 
-	@Override
-	protected void initViewAndData() {
-		// TODO Auto-generated method stub
-		setContentView(R.layout.act_friend_list_base);
-		setSupportActionBar(mToolbar);
-		getSupportActionBar().setTitle("好友列表");
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
+    }
 
-		steamid = getIntent().getStringExtra("steamid");
-		list = (XListView) findViewById(R.id.list);
-		list.setPullLoadEnable(false);
-		list.setPullRefreshEnable(true);
-		steamids = new StringBuilder();
-		fetchData(GET_FRIEND_LIST);
-	}
+    protected void init() {
+        setContentView(R.layout.act_friend_list_base);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("好友列表");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        steamid = getIntent().getStringExtra("steamid");
+        list = (XListView) findViewById(R.id.list);
+        list.setPullLoadEnable(false);
+        list.setPullRefreshEnable(true);
+        steamids = new StringBuilder();
+        fetchData(GET_FRIEND_LIST);
+        list.setXListViewListener(new IXListViewListener() {
+
+            @Override
+            public void onRefresh() {
+                // TODO Auto-generated method stub
+
+                infoBeans.clear();
+                if (adapter != null) {
+                    adapter.notifyDataSetChanged();
+                }
+                if (steamids.length() > 0) {
+                    fetchData(GET_USERS_INFO);
+                } else {
+                    fetchData(GET_FRIEND_LIST);
+                }
+            }
+
+            @Override
+            public void onLoadMore() {
+                // TODO Auto-generated method stub
+
+            }
+        });
+        list.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                // TODO Auto-generated method stub
+                PlayerInfoBean bean = infoBeans.get(position - 1);
+                if (bean.getSteamid().equals("76561202255233023")) {
+                    TipsToast.showToast(ActFriendList.this, "该玩家未开启比赛数据共享！",
+                            Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
+                } else {
+                    //TODO domax网页发生变化 暂不可用
+                    //					Intent i = new Intent();
+                    //					i.setClass(ActFriendList.this, ActPlayerDetail.class);
+                    //					i.putExtra("data", infoBeans.get(position - 1));
+                    //					startActivity(i);
+                }
+            }
+        });
+    }
 
 	private Handler h = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -234,55 +281,6 @@ public class ActFriendList extends BaseActivity {
 			break;
 		}
 	}
-
-	@Override
-	protected void initEvent() {
-		// TODO Auto-generated method stub
-
-		list.setXListViewListener(new IXListViewListener() {
-
-			@Override
-			public void onRefresh() {
-				// TODO Auto-generated method stub
-
-				infoBeans.clear();
-				if (adapter != null) {
-					adapter.notifyDataSetChanged();
-				}
-				if (steamids.length() > 0) {
-					fetchData(GET_USERS_INFO);
-				} else {
-					fetchData(GET_FRIEND_LIST);
-				}
-			}
-
-			@Override
-			public void onLoadMore() {
-				// TODO Auto-generated method stub
-
-			}
-		});
-		list.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// TODO Auto-generated method stub
-				PlayerInfoBean bean = infoBeans.get(position - 1);
-				if (bean.getSteamid().equals("76561202255233023")) {
-					TipsToast.showToast(ActFriendList.this, "该玩家未开启比赛数据共享！",
-							Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
-				} else {
-					//TODO domax网页发生变化 暂不可用
-//					Intent i = new Intent();
-//					i.setClass(ActFriendList.this, ActPlayerDetail.class);
-//					i.putExtra("data", infoBeans.get(position - 1));
-//					startActivity(i);
-				}
-			}
-		});
-	}
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub

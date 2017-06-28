@@ -16,6 +16,7 @@ import org.json2.JSONException;
 import org.json2.JSONObject;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.Toolbar;
@@ -57,40 +58,44 @@ public class ActBoard extends BaseActivity {
 	private String defaultPage = "china";
 	private int defaultItem;
 
-	@Override
-	protected void initViewAndData() {
-		// TODO Auto-generated method stub
-		setContentView(R.layout.act_board);
-		setSupportActionBar(mToolbar);
-		getSupportActionBar().setTitle("国服天梯");
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
+    }
 
-		lv = (ListView) findViewById(R.id.frag_board_list);
-		tx = (TextView) findViewById(R.id.update_time);
-		beans = DotaApplication.getApplication().getData(LocalDataType.BOARDS);
-		myHandler = new MyHandler();
-		if (beans == null) {
-			fetchData(FETCH_BOARD);
-		} else {
-			mToolbar.setTitle("国服天梯");
-			lv.setAdapter(adapter = new CommAdapter<BoardBean>(this, beans,
-					R.layout.frag_board_item) {
+    protected void init() {
+        setContentView(R.layout.act_board);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("国服天梯");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-				@Override
-				public void convert(CommViewHolder helper, BoardBean item) {
-					// TODO Auto-generated method stub
-					helper.setText(R.id.name, item.getName());
-					helper.setText(R.id.rank, item.getRank() + "");
-					helper.setText(R.id.solo_mmr, item.getSolo_mmr() + "");
-				}
-			});
-			if (beans.size() > 0) {
-				tx.setText("上次更新时间："
-						+ TimeHelper.TimeStamp2Date(beans.get(0)
-								.getUpdateTime(), "MM-dd HH:mm"));
-			}
-		}
-	}
+        lv = (ListView) findViewById(R.id.frag_board_list);
+        tx = (TextView) findViewById(R.id.update_time);
+        beans = DotaApplication.getApplication().getData(LocalDataType.BOARDS);
+        myHandler = new MyHandler();
+        if (beans == null) {
+            fetchData(FETCH_BOARD);
+        } else {
+            mToolbar.setTitle("国服天梯");
+            lv.setAdapter(adapter = new CommAdapter<BoardBean>(this, beans,
+                    R.layout.frag_board_item) {
+
+                @Override
+                public void convert(CommViewHolder helper, BoardBean item) {
+                    // TODO Auto-generated method stub
+                    helper.setText(R.id.name, item.getName());
+                    helper.setText(R.id.rank, item.getRank() + "");
+                    helper.setText(R.id.solo_mmr, item.getSolo_mmr() + "");
+                }
+            });
+            if (beans.size() > 0) {
+                tx.setText("上次更新时间："
+                        + TimeHelper.TimeStamp2Date(beans.get(0)
+                        .getUpdateTime(), "MM-dd HH:mm"));
+            }
+        }
+    }
 
 	void fetchData(final int type) {
 		PersonalRequestImpl request = new PersonalRequestImpl(
@@ -235,12 +240,6 @@ public class ActBoard extends BaseActivity {
 			finish();
 		}
 		return super.onOptionsItemSelected(item);
-	}
-
-	@Override
-	protected void initEvent() {
-		// TODO Auto-generated method stub
-
 	}
 
 }

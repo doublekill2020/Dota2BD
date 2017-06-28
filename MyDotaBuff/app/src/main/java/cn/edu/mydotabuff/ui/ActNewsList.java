@@ -9,6 +9,7 @@
  */
 package cn.edu.mydotabuff.ui;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -32,60 +33,58 @@ public class ActNewsList extends BaseActivity {
 			"版本公告" };
 	private PagerSlidingTabStrip indicator;
 
-	@Override
-	protected void initViewAndData() {
-		// TODO Auto-generated method stub
-		setContentView(R.layout.act_news_base);
-		setSupportActionBar(mToolbar);
-		getSupportActionBar().setTitle("全部");
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
+    }
 
-		FragmentPagerAdapter adapter = new TabPageIndicatorAdapter(
-				getSupportFragmentManager());
-		ViewPager pager = (ViewPager) findViewById(R.id.pager);
-		pager.setAdapter(adapter);
+    protected void init() {
+        setContentView(R.layout.act_news_base);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("全部");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-		indicator = (PagerSlidingTabStrip) findViewById(R.id.indicator);
-		indicator.setViewPager(pager);
+        FragmentPagerAdapter adapter = new TabPageIndicatorAdapter(
+                getSupportFragmentManager());
+        ViewPager pager = (ViewPager) findViewById(R.id.pager);
+        pager.setAdapter(adapter);
 
-	}
+        indicator = (PagerSlidingTabStrip) findViewById(R.id.indicator);
+        indicator.setViewPager(pager);
+        indicator.setOnPageChangeListener(new OnPageChangeListener() {
 
-	@Override
-	protected void initEvent() {
-		// TODO Auto-generated method stub
-		indicator.setOnPageChangeListener(new OnPageChangeListener() {
+            @Override
+            public void onPageSelected(int arg0) {
+                switch (arg0) {
+                    case 0:
+                        mToolbar.setTitle("全部");
+                        break;
+                    case 1:
+                        mToolbar.setTitle("刀塔新闻");
+                        break;
+                    case 2:
+                        mToolbar.setTitle("赛事资讯");
+                        break;
+                    case 3:
+                        mToolbar.setTitle("版本公告");
+                        break;
+                    default:
+                        break;
+                }
+            }
 
-			@Override
-			public void onPageSelected(int arg0) {
-				switch (arg0) {
-				case 0:
-					mToolbar.setTitle("全部");
-					break;
-				case 1:
-					mToolbar.setTitle("刀塔新闻");
-					break;
-				case 2:
-					mToolbar.setTitle("赛事资讯");
-					break;
-				case 3:
-					mToolbar.setTitle("版本公告");
-					break;
-				default:
-					break;
-				}
-			}
+            @Override
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
 
-			@Override
-			public void onPageScrolled(int arg0, float arg1, int arg2) {
+            }
 
-			}
+            @Override
+            public void onPageScrollStateChanged(int arg0) {
 
-			@Override
-			public void onPageScrollStateChanged(int arg0) {
-
-			}
-		});
-	}
+            }
+        });
+    }
 
 	class TabPageIndicatorAdapter extends FragmentPagerAdapter {
 		public TabPageIndicatorAdapter(FragmentManager fm) {

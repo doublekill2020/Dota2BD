@@ -49,25 +49,19 @@ public class BaseWebViewActivity extends BaseActivity {
 	private static final String APP_CACAHE_DIRNAME = "/webcache";
 	private String url;
 
-	@Override
-	protected void initViewAndData() {
-		// TODO Auto-generated method stub
-		setContentView(R.layout.common_webview_base);
-		Toolbar mainToolbar = (Toolbar) findViewById(R.id.toolbar);
-		setSupportActionBar(mainToolbar);
-		getSupportActionBar().setTitle("刀塔新闻");
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    @Override
+    public void setContentView(View view) {
+        super.setContentView(view);
+        setContentView(R.layout.common_webview_base);
+        Toolbar mainToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mainToolbar);
+        getSupportActionBar().setTitle("刀塔新闻");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-		url = getIntent().getStringExtra("url");
-		initWebView();
-		videoWebView.loadUrl(url);
-	}
-
-	@Override
-	protected void initEvent() {
-		// TODO Auto-generated method stub
-
-	}
+        url = getIntent().getStringExtra("url");
+        initWebView();
+        videoWebView.loadUrl(url);
+    }
 
 	/**
 	 * 初始化webview以及设置

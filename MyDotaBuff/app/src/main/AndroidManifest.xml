@@ -57,7 +57,6 @@
             android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name="cn.edu.mydotabuff.ui.recently.ActMatchDetail"></activity>
         <activity android:name="cn.edu.mydotabuff.ui.game.ActInvokerGame"></activity>
-        <activity android:name="cn.edu.mydotabuff.ui.mydetail.ActUserStatistics"></activity>
         <activity android:name="cn.edu.mydotabuff.ui.ActPlayerDetail"></activity>
         <activity android:name="cn.edu.mydotabuff.ui.ActFriendList"></activity>
         <activity android:name="cn.edu.mydotabuff.ui.ActBoard"></activity>
