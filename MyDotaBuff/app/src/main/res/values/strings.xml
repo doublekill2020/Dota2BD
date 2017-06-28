@@ -79,7 +79,10 @@
         <item>攻击范围</item>
         <item>弹道速度</item>
     </string-array>
-
+    <string-array name="search_type_array">
+        <item>精确</item>
+        <item>模糊</item>
+    </string-array>
 
     <!-- trackdota string-->
     <string name="language">english</string>
@@ -419,5 +422,6 @@
     <string name="search">Search</string>
     <string name="could_not_load_match">Could not load match</string>
     <string name="trackdota_match">Open Trackdota match</string>
+    <string name="search_player_content_empty_hint">昵称或者SteamId不能为空</string>
 
 </resources>

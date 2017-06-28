@@ -13,66 +13,33 @@
         android:text="使用此app，必须在游戏中开启共享比赛历史。" />
 
     <LinearLayout
+        android:id="@+id/ll_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tv_login_hint"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:orientation="horizontal">
 
         <Spinner
             android:id="@+id/player_search_spinner"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:entries="@array/search_type_array" />
 
         <EditText
             android:id="@+id/et_search_word"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </LinearLayout>
+            android:layout_weight="1"
+            android:hint="请输入steamId或者昵称" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:gravity="center"
-        android:orientation="vertical">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="精确搜索" />
-
-            <EditText
-                android:id="@+id/editText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="请输入要查询的数字ID："
-                android:inputType="number"
-                android:singleLine="true" />
-
-            <Button
-                android:id="@+id/submit"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:background="@null"
-                android:text="提交" />
-        </LinearLayout>
+            android:text="搜索" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout1"
-        android:layout_centerHorizontal="true"
-        android:background="@null"
-        android:text="搜索" />
 
 </RelativeLayout>

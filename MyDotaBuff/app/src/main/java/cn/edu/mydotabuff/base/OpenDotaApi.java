@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.File;
+import java.util.List;
 
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.common.http.APIConstants;
@@ -77,6 +78,6 @@ public class OpenDotaApi {
 
 
         @GET("/search")
-        Observable<SearchPlayerResult> searchAccountId(@Query(value = "q", encoded = true) String nickName, @Query("similarity") float similarity);
+        Observable<List<SearchPlayerResult>> searchAccountId(@Query(value = "q", encoded = true) String nickName, @Query("similarity") float similarity);
     }
 }

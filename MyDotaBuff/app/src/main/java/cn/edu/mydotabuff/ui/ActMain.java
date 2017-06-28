@@ -53,6 +53,7 @@ import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.common.bean.PlayerInfoBean;
 import cn.edu.mydotabuff.common.http.IInfoReceive;
 import cn.edu.mydotabuff.model.PlayerWL;
+import cn.edu.mydotabuff.tmpUI.impl.ActLogin;
 import cn.edu.mydotabuff.ui.hero.FragHeroList;
 import cn.edu.mydotabuff.ui.mydetail.FragMyDetail;
 import cn.edu.mydotabuff.ui.recently.FragRecently;
