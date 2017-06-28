@@ -37,7 +37,7 @@ import cn.edu.mydotabuff.base.BaseFragment;
 import cn.edu.mydotabuff.common.bean.MatchBean;
 import cn.edu.mydotabuff.common.bean.PlayerBean;
 import cn.edu.mydotabuff.common.http.IInfoReceive;
-import cn.edu.mydotabuff.ui.ActMain.OnMainEventListener;
+import cn.edu.mydotabuff.ui.MainActivity;
 import cn.edu.mydotabuff.util.Debug;
 import cn.edu.mydotabuff.util.PersonalRequestImpl;
 import cn.edu.mydotabuff.view.LoadingDialog;
@@ -46,7 +46,7 @@ import cn.edu.mydotabuff.view.XListView;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;
 import cn.edu.mydotabuff.view.XListView.IXListViewListener;
 
-public class FragRecently extends BaseFragment implements OnMainEventListener {
+public class FragRecently extends BaseFragment implements MainActivity.OnMainEventListener {
 	private XListView listView;
 	private View recentLayout;
 	private String userID;

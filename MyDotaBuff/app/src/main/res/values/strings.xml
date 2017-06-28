@@ -420,4 +420,8 @@
     <string name="could_not_load_match">Could not load match</string>
     <string name="trackdota_match">Open Trackdota match</string>
 
+    <string name="check_for_update">检测更新</string>
+    <string name="feedback">意见反馈</string>
+    <string name="switch_to_login">切换登录</string>
+    <string name="share_to_friends">分享给好友</string>
 </resources>

@@ -146,7 +146,7 @@ public class ActPlayerDetail extends BaseActivity implements
                 }
                 break;
             case R.id.back_to_main:
-                AppManager.getAppManager().finishAllActivity(ActMain.class);
+                AppManager.getAppManager().finishAllActivity(MainActivity.class);
                 finish();
                 break;
             case R.id.go_to_star:
