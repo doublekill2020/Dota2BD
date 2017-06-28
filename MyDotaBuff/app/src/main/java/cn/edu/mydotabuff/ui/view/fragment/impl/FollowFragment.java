@@ -12,7 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseFragment;
-import cn.edu.mydotabuff.ui.presenter.FollowFragmentPresenter;
+import cn.edu.mydotabuff.ui.presenter.IFollowFragmentPresenter;
 import cn.edu.mydotabuff.ui.view.fragment.FollowFragmentView;
 import cn.edu.mydotabuff.view.SwipeRefreshRecycleView;
 
@@ -20,7 +20,7 @@ import cn.edu.mydotabuff.view.SwipeRefreshRecycleView;
  * Created by nevermore on 2017/6/28 0028.
  */
 
-public class FollowFragment extends BaseFragment<FollowFragmentPresenter> implements FollowFragmentView {
+public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> implements FollowFragmentView {
     @BindView(R.id.rv_list)
     SwipeRefreshRecycleView mRvList;
     @BindView(R.id.fab)
