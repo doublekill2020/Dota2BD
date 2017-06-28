@@ -3,6 +3,7 @@ package cn.edu.mydotabuff.tmpUI.impl;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import butterknife.ButterKnife;
 import cn.edu.mydotabuff.tmpUI.IBaseView;
 import cn.edu.mydotabuff.view.LoadingDialog;
 
@@ -12,6 +13,12 @@ import cn.edu.mydotabuff.view.LoadingDialog;
  */
 public class ActBase extends AppCompatActivity implements IBaseView {
     private LoadingDialog dialog;
+
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+        ButterKnife.bind(this);
+    }
 
     @Override
     public void showToast(String content) {

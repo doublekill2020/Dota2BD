@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
@@ -30,6 +31,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackManager;
+import cn.edu.mydotabuff.db.RealmManager;
 
 public class DotaApplication extends Application {
     private static DotaApplication mInstance = null;

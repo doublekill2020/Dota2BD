@@ -32,6 +32,8 @@
     <uses-permission android:name="android.permission.READ_LOGS" />
     <!-- QQ登录所需权限 -->
     <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:name=".DotaApplication"
         android:allowBackup="true"
@@ -39,10 +41,10 @@
         android:label="@string/app_name"
         android:theme="@style/DotaTheme.Transparent">
         <activity
-            android:theme="@style/DotaTheme"
-            android:name="cn.edu.mydotabuff.tmpUI.impl.ActLogin"
+            android:name=".tmpUI.impl.ActLogin"
             android:label="@string/app_name"
             android:launchMode="singleTask"
+            android:theme="@style/DotaTheme"
             android:windowSoftInputMode="stateAlwaysVisible">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,49 +53,49 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ui.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/DotaTheme"
-            android:name="cn.edu.mydotabuff.ui.MainActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
-        <activity android:name="cn.edu.mydotabuff.ui.recently.ActMatchDetail"></activity>
-        <activity android:name="cn.edu.mydotabuff.ui.game.ActInvokerGame"></activity>
-        <activity android:name="cn.edu.mydotabuff.ui.ActPlayerDetail"></activity>
-        <activity android:name="cn.edu.mydotabuff.ui.ActFriendList"></activity>
-        <activity android:name="cn.edu.mydotabuff.ui.ActBoard"></activity>
-        <activity android:name="cn.edu.mydotabuff.ui.ActNewsList"></activity>
-        <activity android:name="cn.edu.mydotabuff.base.BaseWebViewActivity"></activity>
-        <activity android:name="cn.edu.mydotabuff.ui.ActTrack"></activity>
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.recently.ActMatchDetail" />
+        <activity android:name=".ui.game.ActInvokerGame" />
+        <activity android:name=".ui.ActPlayerDetail" />
+        <activity android:name=".ui.ActFriendList" />
+        <activity android:name=".ui.ActBoard" />
+        <activity android:name=".ui.ActNewsList" />
+        <activity android:name=".base.BaseWebViewActivity" />
+        <activity android:name=".ui.ActTrack" />
         <activity
-            android:name="cn.edu.mydotabuff.ui.ActNews"
-            android:configChanges="orientation|keyboardHidden|screenSize"></activity>
+            android:name=".ui.ActNews"
+            android:configChanges="orientation|keyboardHidden|screenSize" />
         <activity
-            android:theme="@style/DotaTheme"
-            android:name="cn.edu.mydotabuff.ui.hero.HeroDetailActivityAppCompat"
-            android:label="@string/title_activity_hero_detail">
-        </activity>
+            android:name=".ui.hero.HeroDetailActivityAppCompat"
+            android:label="@string/title_activity_hero_detail"
+            android:theme="@style/DotaTheme"></activity>
         <activity
-            android:theme="@style/DotaTheme"
-            android:name="cn.edu.mydotabuff.ui.item.ItemsDetailActivityAppCompat"
-            android:label="@string/title_activity_items_detail">
-        </activity>
+            android:name=".ui.item.ItemsDetailActivityAppCompat"
+            android:label="@string/title_activity_items_detail"
+            android:theme="@style/DotaTheme"></activity>
         <activity
             android:name="com.badr.infodota.activity.ListHolderActivity"
-            android:windowSoftInputMode="adjustNothing"
-            android:configChanges="orientation|keyboardHidden|screenSize" />
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name="com.badr.infodota.activity.TrackdotaGameInfoActivity"
             android:configChanges="keyboard|orientation|screenSize" />
-        <service android:name="com.octo.android.robospice.UncachedSpiceService"
-            android:exported="false"/>
+
+        <service
+            android:name="com.octo.android.robospice.UncachedSpiceService"
+            android:exported="false" />
 
         <!-- 友盟更新组件 -->
         <service
             android:name="com.umeng.update.net.DownloadingService"
-            android:process=":DownloadingService"></service>
+            android:process=":DownloadingService" />
 
         <activity
             android:name="com.umeng.update.UpdateDialogActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!-- 友盟反馈 -->
         <activity
             android:name="com.umeng.fb.ConversationActivity"
@@ -111,6 +113,7 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="2e137cae707b5e9b90c5d4c76356236e" />
+
         <activity
             android:name="com.umeng.socialize.view.ShareActivity"
             android:configChanges="orientation|keyboard"
@@ -144,7 +147,8 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!-- 友盟微社区 -->
         <!-- feed主页面 -->
-        <activity android:name="com.umeng.comm.ui.activities.FeedsActivity"
+        <activity
+            android:name="com.umeng.comm.ui.activities.FeedsActivity"
             android:configChanges="orientation|keyboardHidden"
             android:launchMode="singleTask"
             android:taskAffinity="com.umeng.community"
@@ -181,36 +185,35 @@
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <!-- 设置页面activity -->
         <activity android:name="com.umeng.comm.ui.activities.SettingActivity" />
-        <!--点赞用户Activity-->
+        <!-- 点赞用户Activity -->
         <activity android:name="com.umeng.comm.ui.activities.LikeUsersActivity" />
-        <!--搜索Activity-->
+        <!-- 搜索Activity -->
         <activity android:name="com.umeng.comm.ui.activities.SearchActivity" />
-        <!--引导页Activity-->
+        <!-- 引导页Activity -->
         <activity android:name="com.umeng.comm.ui.activities.GuideActivity" />
-        <!--相关用户Activity-->
+        <!-- 相关用户Activity -->
         <activity android:name="com.umeng.comm.ui.activities.RelativeUserActivity" />
         <!-- 友盟登录界面 -->
         <activity android:name="com.umeng.community.login.LoginActivity" />
         <!-- 显示某个位置Feed的Activity -->
         <activity android:name="com.umeng.comm.ui.activities.LocationFeedActivity" />
-        <!--相册Activity-->
+        <!-- 相册Activity -->
         <activity android:name="com.umeng.comm.ui.activities.AlbumActivity" />
-        <!--已关注的话题Activity-->
+        <!-- 已关注的话题Activity -->
         <activity android:name="com.umeng.comm.ui.activities.FollowedTopicActivity" />
-        <!--通知Activity-->
+        <!-- 通知Activity -->
         <activity android:name="com.umeng.comm.ui.activities.NotificationActivity" />
-        <!--新消息Activity-->
+        <!-- 新消息Activity -->
         <activity android:name="com.umeng.comm.ui.activities.NewMsgActivity" />
 
         <!-- ##################### 推送相关 ##################### -->
         <receiver
             android:name="com.umeng.message.NotificationProxyBroadcastReceiver"
             android:exported="false"
-            android:process=":push" >
-        </receiver>
+            android:process=":push"></receiver>
         <receiver
             android:name="com.umeng.message.SystemReceiver"
-            android:process=":push" >
+            android:process=":push">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -219,42 +222,44 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
         <receiver
             android:name="com.umeng.message.MessageReceiver"
-            android:process=":push" >
+            android:process=":push">
             <intent-filter>
                 <action android:name="org.agoo.android.intent.action.RECEIVE" />
             </intent-filter>
         </receiver>
         <receiver
             android:name="com.umeng.message.ElectionReceiver"
-            android:process=":push" >
+            android:process=":push">
             <intent-filter>
                 <action android:name="org.agoo.android.intent.action.ELECTION_RESULT_V4" />
+
                 <category android:name="umeng" />
             </intent-filter>
         </receiver>
         <receiver
             android:name="com.umeng.message.RegistrationReceiver"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="cn.edu.mydotabuff.intent.action.COMMAND" />
             </intent-filter>
         </receiver>
-        <receiver
-            android:name="com.umeng.message.BootBroadcastReceiver" >
+        <receiver android:name="com.umeng.message.BootBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+
         <service
             android:name="com.umeng.message.UmengService"
             android:exported="true"
             android:label="PushService"
-            android:process=":push" >
+            android:process=":push">
             <intent-filter>
                 <action android:name="cn.edu.mydotabuff.intent.action.START" />
             </intent-filter>
@@ -263,6 +268,7 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="org.agoo.android.intent.action.PING_V4" />
+
                 <category android:name="umeng" />
             </intent-filter>
         </service>
@@ -272,7 +278,7 @@
         <service
             android:name="com.umeng.message.UmengMessageIntentReceiverService"
             android:exported="true"
-            android:process=":push" >
+            android:process=":push">
             <intent-filter>
                 <action android:name="org.android.agoo.client.MessageReceiverService" />
             </intent-filter>
@@ -283,15 +289,14 @@
         <!-- V1.3.0添加的service，负责下载通知的资源 -->
         <service android:name="com.umeng.message.UmengDownloadResourceService" />
 
-        <!-- ###################分享相关Activity##################-->
+        <!-- ###################分享相关Activity################## -->
         <activity
             android:name="com.umeng.socialize.view.ShareActivity"
             android:configChanges="orientation|keyboard"
             android:launchMode="singleTask"
             android:noHistory="true"
             android:theme="@style/Theme.UMDialog"
-            android:windowSoftInputMode="stateVisible|adjustResize" >
-        </activity>
+            android:windowSoftInputMode="stateVisible|adjustResize"></activity>
 
         <!-- 图片选择相关 -->
         <activity android:name="com.umeng.comm.ui.imagepicker.PhotoSelectorActivity" />

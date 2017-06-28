@@ -28,8 +28,7 @@ import cn.edu.mydotabuff.model.SearchPlayerResult;
 import cn.edu.mydotabuff.presenter.ILoginPresenter;
 import cn.edu.mydotabuff.presenter.impl.LoginPresenterImpl;
 import cn.edu.mydotabuff.tmpUI.ILoginView;
-import cn.edu.mydotabuff.ui.ActMain;
-import cn.edu.mydotabuff.view.LoadingDialog;
+import cn.edu.mydotabuff.ui.MainActivity;
 
 public class ActLogin extends ActBase implements ILoginView {
 
@@ -51,7 +50,7 @@ public class ActLogin extends ActBase implements ILoginView {
         myPreferences = getSharedPreferences("user_info", Activity.MODE_PRIVATE);
         userID = myPreferences.getString("userID", "");
         if (myPreferences.getString("isLogin", "").equals("true")) {
-            startActivity(new Intent(this, ActMain.class));
+            startActivity(new Intent(this, MainActivity.class));
             finish();
         } else {
             // requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -61,8 +60,8 @@ public class ActLogin extends ActBase implements ILoginView {
     }
 
     public void initView() {
+        ButterKnife.setDebug(true);
         setContentView(R.layout.act_login);
-        ButterKnife.bind(this);
         if (!TextUtils.isEmpty(userID)) {
             mKeywordEdittext.setText(userID);
         } else {
@@ -124,7 +123,7 @@ public class ActLogin extends ActBase implements ILoginView {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                startActivity(new Intent(ActLogin.this, ActMain.class));
+                startActivity(new Intent(ActLogin.this, MainActivity.class));
                 finish();
             }
         });
