@@ -3,7 +3,7 @@ package cn.edu.mydotabuff.base;
 import android.content.Intent;
 
 
-public interface BaseView {
+public interface IBaseView {
 
     void toOtherActivity(Intent intent);
 

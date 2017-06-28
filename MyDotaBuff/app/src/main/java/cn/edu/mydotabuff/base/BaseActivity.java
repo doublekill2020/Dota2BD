@@ -32,9 +32,9 @@ import cn.edu.mydotabuff.view.TipsToast.DialogType;
 /**
  * @date 2015-1-22 下午6:05:10
  */
-public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements
+public abstract class BaseActivity<T extends IBasePresenter> extends AppCompatActivity implements
         BGASwipeBackHelper
-        .Delegate, BaseView {
+        .Delegate, IBaseView {
 
     // 网络请求状态码
     public static final int OK = 1; // 成功

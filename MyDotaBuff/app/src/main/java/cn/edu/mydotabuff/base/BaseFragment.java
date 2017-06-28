@@ -30,7 +30,7 @@ import cn.edu.mydotabuff.R;
  * @Description: TODO(这里用一句话描述这个类的作用)
  * @date 2015-2-2 下午12:03:38
  */
-public abstract class BaseFragment<T extends BasePresenter> extends Fragment implements BaseView {
+public abstract class BaseFragment<T extends IBasePresenter> extends Fragment implements IBaseView {
 
     private View view;
     protected ViewGroup mContainerView;

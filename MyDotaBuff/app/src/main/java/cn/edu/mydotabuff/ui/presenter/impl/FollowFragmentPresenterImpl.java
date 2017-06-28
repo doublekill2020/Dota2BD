@@ -1,16 +1,16 @@
 package cn.edu.mydotabuff.ui.presenter.impl;
 
-import cn.edu.mydotabuff.ui.presenter.FollowFragmentPresenter;
-import cn.edu.mydotabuff.ui.view.FollowFragmentView;
+import cn.edu.mydotabuff.ui.presenter.IFollowFragmentPresenter;
+import cn.edu.mydotabuff.ui.view.IFollowFragmentView;
 
 /**
  * Created by nevermore on 2017/6/28 0028.
  */
 
-public class FollowFragmentPresenterImpl implements FollowFragmentPresenter {
-    private FollowFragmentView mView;
+public class FollowFragmentPresenterImpl implements IFollowFragmentPresenter {
+    private IFollowFragmentView mView;
 
-    public FollowFragmentPresenterImpl(FollowFragmentView view) {
+    public FollowFragmentPresenterImpl(IFollowFragmentView view) {
         mView = view;
     }
 
