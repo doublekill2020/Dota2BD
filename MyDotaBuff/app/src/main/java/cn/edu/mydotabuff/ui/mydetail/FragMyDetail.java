@@ -19,7 +19,7 @@ import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.DotaApplication.LocalDataType;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseFragment;
-import cn.edu.mydotabuff.common.bean.PlayerInfoBean;
+import cn.edu.mydotabuff.model.PlayerInfoBean;
 import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.common.http.OnWebDataGetListener;
 import cn.edu.mydotabuff.common.http.WebDataHelper;

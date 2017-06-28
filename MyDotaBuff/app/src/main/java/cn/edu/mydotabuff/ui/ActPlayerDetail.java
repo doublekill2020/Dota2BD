@@ -22,7 +22,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseActivity;
 import cn.edu.mydotabuff.common.Common;
-import cn.edu.mydotabuff.common.bean.PlayerInfoBean;
+import cn.edu.mydotabuff.model.PlayerInfoBean;
 import cn.edu.mydotabuff.common.http.OnWebDataGetListener;
 import cn.edu.mydotabuff.common.http.WebDataHelper;
 import cn.edu.mydotabuff.util.TimeHelper;

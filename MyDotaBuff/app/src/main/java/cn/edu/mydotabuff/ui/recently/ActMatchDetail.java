@@ -19,9 +19,9 @@ import android.widget.Toast;
 
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseActivity;
-import cn.edu.mydotabuff.common.bean.AbilityBean;
-import cn.edu.mydotabuff.common.bean.PlayerDetailBean;
-import cn.edu.mydotabuff.common.bean.PlayerInfoBean;
+import cn.edu.mydotabuff.model.AbilityBean;
+import cn.edu.mydotabuff.model.PlayerDetailBean;
+import cn.edu.mydotabuff.model.PlayerInfoBean;
 import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.common.http.IInfoReceive;
 import cn.edu.mydotabuff.util.Debug;

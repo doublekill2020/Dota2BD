@@ -11,7 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import cn.edu.mydotabuff.R;
-import cn.edu.mydotabuff.common.bean.MatchBean;
+import cn.edu.mydotabuff.model.MatchBean;
 import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.util.Utils;
