@@ -1,4 +1,4 @@
-package cn.edu.mydotabuff.ui;
+package cn.edu.mydotabuff.ui.view.fragment.impl;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,7 +13,7 @@ import butterknife.ButterKnife;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseFragment;
 import cn.edu.mydotabuff.ui.presenter.FollowFragmentPresenter;
-import cn.edu.mydotabuff.ui.view.FollowFragmentView;
+import cn.edu.mydotabuff.ui.view.fragment.FollowFragmentView;
 import cn.edu.mydotabuff.view.SwipeRefreshRecycleView;
 
 /**

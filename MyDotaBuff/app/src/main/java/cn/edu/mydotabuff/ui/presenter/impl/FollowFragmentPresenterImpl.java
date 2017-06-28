@@ -1,7 +1,7 @@
 package cn.edu.mydotabuff.ui.presenter.impl;
 
 import cn.edu.mydotabuff.ui.presenter.FollowFragmentPresenter;
-import cn.edu.mydotabuff.ui.view.FollowFragmentView;
+import cn.edu.mydotabuff.ui.view.fragment.FollowFragmentView;
 
 /**
  * Created by nevermore on 2017/6/28 0028.

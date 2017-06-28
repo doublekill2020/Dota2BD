@@ -1,4 +1,4 @@
-package cn.edu.mydotabuff.tmpUI;
+package cn.edu.mydotabuff.ui.view.activity;
 
 import android.support.annotation.StringRes;
 

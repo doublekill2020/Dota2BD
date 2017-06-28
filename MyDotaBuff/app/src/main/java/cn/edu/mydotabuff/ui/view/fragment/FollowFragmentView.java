@@ -1,4 +1,4 @@
-package cn.edu.mydotabuff.ui.view;
+package cn.edu.mydotabuff.ui.view.fragment;
 
 import cn.edu.mydotabuff.base.BaseView;
 

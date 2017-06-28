@@ -41,7 +41,7 @@
         android:label="@string/app_name"
         android:theme="@style/DotaTheme.Transparent">
         <activity
-            android:name=".tmpUI.impl.ActLogin"
+            android:name=".ui.view.activity.impl.LoginActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:theme="@style/DotaTheme"
