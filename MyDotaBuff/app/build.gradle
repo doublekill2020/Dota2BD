@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 android {
     //TODO 用okhttp后去掉
     useLibrary 'org.apache.http.legacy'
@@ -56,6 +57,7 @@ repositories {
     maven {
         url "https://oss.sonatype.org/content/repositories/snapshots"
     }
+    mavenCentral()
 }
 dependencies {
     compile fileTree(include: '*.jar', dir: 'libs')
@@ -95,4 +97,5 @@ dependencies {
     compile 'io.reactivex:rxjava:1.3.0'
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'cn.bingoogolapple:bga-swipebacklayout:1.0.8'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }

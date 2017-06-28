@@ -153,7 +153,7 @@ public class ActMain extends BaseActivity implements OnClickListener {
         //		chatBtn.setOnClickListener(this);
     }
 
-    private void test(){
+    private void test() {
         //for test
         OpenDotaApi.getInstance().getService().getPlayerWL(userID)
                 .subscribeOn(Schedulers.io())
@@ -171,10 +171,12 @@ public class ActMain extends BaseActivity implements OnClickListener {
 
                     @Override
                     public void onNext(PlayerWL playerWL) {
-                        Log.i("hao", "player win lose is" + playerWL.win + ":" + playerWL.lose);
+                        Log.i("hao", "player win lose is" + playerWL.getWin() + ":" + playerWL
+                                .getLose());
                     }
                 });
     }
+
     private void configureToolbar() {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("最近比赛");
