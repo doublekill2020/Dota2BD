@@ -73,8 +73,8 @@ public class OpenDotaApi {
 
     public interface OpenDotaService {
 
-        @GET("players/{account_id}/wl")
-        Observable<PlayerWL> getPlayerWL(@Path("account_id") String accountId);
+//        @GET("players/{account_id}/wl")
+//        Observable<PlayerWL> getPlayerWL(@Path("account_id") String accountId);
 
 
         @GET("/search")

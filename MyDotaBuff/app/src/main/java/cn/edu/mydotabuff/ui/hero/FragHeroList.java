@@ -58,9 +58,7 @@ public class FragHeroList extends BaseFragment implements OnWebDataGetListener {
 	private ScaleInAnimationAdapter adapter;
 
 	@Override
-	protected View initViewAndData(LayoutInflater inflater,
-			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.frag_hero_used_list, container,
 				false);
 		activity = getActivity();
@@ -90,17 +88,11 @@ public class FragHeroList extends BaseFragment implements OnWebDataGetListener {
 				listView.setAdapter(adapter);
 			}
 		}
-		return view;
-	}
-
-	@Override
-	protected void initEvent() {
-		// TODO Auto-generated method stub
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+									int position, long id) {
 				// TODO Auto-generated method stub
 				if (heroSatisticsList.size() > 0) {
 
@@ -137,7 +129,7 @@ public class FragHeroList extends BaseFragment implements OnWebDataGetListener {
 
 								@Override
 								public void convert(CommViewHolder helper,
-										HeroMatchStatistics item) {
+													HeroMatchStatistics item) {
 
 									// 设置 K D A textView内容
 									helper.setText(R.id.tv_kill,
@@ -236,7 +228,7 @@ public class FragHeroList extends BaseFragment implements OnWebDataGetListener {
 
 								@Override
 								public void onItemClick(AdapterView<?> parent,
-										View view, int position, long id) {
+														View view, int position, long id) {
 
 									String matchID = beans.get(position)
 											.getMatchID();
@@ -294,8 +286,8 @@ public class FragHeroList extends BaseFragment implements OnWebDataGetListener {
 			}
 
 		});
+		return view;
 	}
-
 	@Override
 	public void onStartGetData() {
 		// TODO Auto-generated method stub
