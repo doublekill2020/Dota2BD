@@ -68,10 +68,7 @@ public class FragRecently extends BaseFragment implements MainActivity.OnMainEve
 	private boolean flag = false;// 当拿本地数据时 会导致加载更多的第一天与本地最后一条重复，此变量用来标识
 
 	@Override
-	protected View initViewAndData(LayoutInflater inflater,
-			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		System.out.print("");
+	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		recentLayout = inflater.inflate(R.layout.frag_recently, container,
 				false);
 		setHasOptionsMenu(true);
@@ -87,12 +84,6 @@ public class FragRecently extends BaseFragment implements MainActivity.OnMainEve
 		allMatchBeans = new ArrayList<MatchBean>();
 		initView();
 		fetchData(FETCH_ONLINE_NUM, "");
-		return recentLayout;
-	}
-
-	@Override
-	protected void initEvent() {
-		// TODO Auto-generated method stub
 		listView.setXListViewListener(new IXListViewListener() {
 
 			@Override
@@ -115,7 +106,7 @@ public class FragRecently extends BaseFragment implements MainActivity.OnMainEve
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+									int position, long id) {
 				// TODO Auto-generated method stub
 				if (allMatchBeans.size() > 0) {
 					Intent intent = new Intent(activity, ActMatchDetail.class);
@@ -135,6 +126,7 @@ public class FragRecently extends BaseFragment implements MainActivity.OnMainEve
 				}
 			}
 		});
+		return recentLayout;
 	}
 
 	public void initView() {

@@ -1,11 +1,8 @@
 package cn.edu.mydotabuff.ui;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,21 +18,13 @@ public class FragFound extends BaseFragment implements OnClickListener {
     private View view;
 
     @Override
-    protected View initViewAndData(LayoutInflater inflater,
-                                   @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
-
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frag_found_base, null);
-        return view;
-    }
-
-    @Override
-    protected void initEvent() {
-        // TODO Auto-generated method stub
         view.findViewById(R.id.board).setOnClickListener(this);
         view.findViewById(R.id.news).setOnClickListener(this);
         view.findViewById(R.id.community).setOnClickListener(this);
         view.findViewById(R.id.live).setOnClickListener(this);
+        return view;
     }
 
     @Override

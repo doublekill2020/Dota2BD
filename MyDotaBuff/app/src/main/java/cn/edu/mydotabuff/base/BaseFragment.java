@@ -52,16 +52,8 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.mInflater = inflater;
-        view = initViewAndData(inflater, container, savedInstanceState);
-        initEvent();
-        return view;
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
-
-    protected abstract View initViewAndData(LayoutInflater inflater,
-                                            @Nullable ViewGroup container, @Nullable Bundle
-                                                    savedInstanceState);
-
-    protected abstract void initEvent();
 
     private final void showSuccessView() {
         if (mContainerView != null && !mHasShowSuccessView) {

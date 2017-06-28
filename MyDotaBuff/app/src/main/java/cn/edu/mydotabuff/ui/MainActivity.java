@@ -71,7 +71,7 @@ public class MainActivity extends BaseActivity {
     ArcNavigationView mNavigationView;
     @BindView(R.id.drawerLayout)
     DrawerLayout mDrawerLayout;
-    private MainPageAdapter mPageAdapter = new MainPageAdapter(getSupportFragmentManager());
+    private MainPageAdapter mPageAdapter;
 
     private String steamID;
     private static final int FETCH_DETAIL = 1, FETCH_FAILED = 2,
@@ -98,6 +98,7 @@ public class MainActivity extends BaseActivity {
     }
 
     public void init() {
+        mPageAdapter = new MainPageAdapter(getSupportFragmentManager());
         mVp.setAdapter(mPageAdapter);
         mTabLayout.setupWithViewPager(mVp);
         UmengUpdateAgent.setUpdateOnlyWifi(false);
