@@ -22,11 +22,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.umeng.analytics.MobclickAgent;
 
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
-import cn.edu.mydotabuff.AppManager;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.view.TipsToast;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;
@@ -34,8 +32,9 @@ import cn.edu.mydotabuff.view.TipsToast.DialogType;
 /**
  * @date 2015-1-22 下午6:05:10
  */
-public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements BGASwipeBackHelper
-        .Delegate,BaseView {
+public abstract class BaseActivity<T extends BasePresenter> extends AppCompatActivity implements
+        BGASwipeBackHelper
+        .Delegate, BaseView {
 
     // 网络请求状态码
     public static final int OK = 1; // 成功
@@ -76,17 +75,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     protected void onCreate(Bundle savedInstanceState) {
         initSwipeBackFinish();
         super.onCreate(savedInstanceState);
-
-        AppManager.getAppManager().addActivity(this);
-
-        final SystemBarTintManager tintManager = new SystemBarTintManager(this);
-        tintManager.setStatusBarTintEnabled(true);
-        tintManager.setStatusBarTintResource(R.color.actionbar_bg);
-        tintManager.setNavigationBarTintEnabled(true);
-        tintManager.setNavigationBarTintResource(R.color.statusbar_bg);
-
-        initViewAndData();
-        initEvent();
     }
 
     /**
@@ -113,10 +101,6 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         // 设置触发释放后自动滑动返回的阈值，默认值为 0.3f
         mSwipeBackHelper.setSwipeBackThreshold(0.3f);
     }
-
-    protected abstract void initViewAndData();
-
-    protected abstract void initEvent();
 
     protected void onResume() {
         super.onResume();
@@ -184,6 +168,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
         }
         mSwipeBackHelper.backward();
     }
+
     @Override
     public void toOtherActivity(Intent intent) {
         startActivity(intent);

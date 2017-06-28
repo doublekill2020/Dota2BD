@@ -51,14 +51,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:theme="@style/DotaTheme"
-            android:name="cn.edu.mydotabuff.ui.ActMain"
             android:label="@string/app_name"
-            android:launchMode="singleTask"
+            android:theme="@style/DotaTheme"
+            android:name="cn.edu.mydotabuff.ui.MainActivity"
             android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name="cn.edu.mydotabuff.ui.recently.ActMatchDetail"></activity>
         <activity android:name="cn.edu.mydotabuff.ui.game.ActInvokerGame"></activity>
-        <activity android:name="cn.edu.mydotabuff.ui.mydetail.ActUserStatistics"></activity>
         <activity android:name="cn.edu.mydotabuff.ui.ActPlayerDetail"></activity>
         <activity android:name="cn.edu.mydotabuff.ui.ActFriendList"></activity>
         <activity android:name="cn.edu.mydotabuff.ui.ActBoard"></activity>
@@ -71,20 +69,12 @@
         <activity
             android:theme="@style/DotaTheme"
             android:name="cn.edu.mydotabuff.ui.hero.HeroDetailActivityAppCompat"
-            android:label="@string/title_activity_hero_detail"
-            android:parentActivityName="cn.edu.mydotabuff.ui.ActMain">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.ActMain" />
+            android:label="@string/title_activity_hero_detail">
         </activity>
         <activity
             android:theme="@style/DotaTheme"
             android:name="cn.edu.mydotabuff.ui.item.ItemsDetailActivityAppCompat"
-            android:label="@string/title_activity_items_detail"
-            android:parentActivityName="cn.edu.mydotabuff.ui.ActMain">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.ActMain" />
+            android:label="@string/title_activity_items_detail">
         </activity>
         <activity
             android:name="com.badr.infodota.activity.ListHolderActivity"

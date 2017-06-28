@@ -424,4 +424,8 @@
     <string name="trackdota_match">Open Trackdota match</string>
     <string name="search_player_content_empty_hint">昵称或者SteamId不能为空</string>
 
+    <string name="check_for_update">检测更新</string>
+    <string name="feedback">意见反馈</string>
+    <string name="switch_to_login">切换登录</string>
+    <string name="share_to_friends">分享给好友</string>
 </resources>

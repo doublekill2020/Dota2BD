@@ -11,6 +11,7 @@ package cn.edu.mydotabuff.ui;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -18,14 +19,12 @@ import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import cn.edu.mydotabuff.AppManager;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseActivity;
 import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.common.bean.PlayerInfoBean;
 import cn.edu.mydotabuff.common.http.OnWebDataGetListener;
 import cn.edu.mydotabuff.common.http.WebDataHelper;
-import cn.edu.mydotabuff.ui.mydetail.ActUserStatistics;
 import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.view.CircleImageView;
 import cn.edu.mydotabuff.view.LoadingDialog;
@@ -50,8 +49,12 @@ public class ActPlayerDetail extends BaseActivity implements
     private CircleImageView iconView;
 
     @Override
-    protected void initViewAndData() {
-        // TODO Auto-generated method stub
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
+    }
+
+    protected void init() {
         setContentView(R.layout.act_player_detail_base);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("个人资料");
@@ -71,12 +74,6 @@ public class ActPlayerDetail extends BaseActivity implements
         helper = new WebDataHelper(this);
         helper.setDataGetListener(this);
         helper.getWebData(bean);
-    }
-
-    @Override
-    protected void initEvent() {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
@@ -124,16 +121,6 @@ public class ActPlayerDetail extends BaseActivity implements
                 finish();
                 break;
             case R.id.more_detail:
-                if (bean == null) {
-                    TipsToast.showToast(ActPlayerDetail.this, "暂无数据",
-                            Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
-                } else {
-                    Intent intent = new Intent(ActPlayerDetail.this,
-                            ActUserStatistics.class);
-                    intent.putExtra("type", "other");
-                    intent.putExtra("data", bean);
-                    startActivity(intent);
-                }
                 break;
             case R.id.friend_list:
                 if (bean == null) {
@@ -146,7 +133,6 @@ public class ActPlayerDetail extends BaseActivity implements
                 }
                 break;
             case R.id.back_to_main:
-                AppManager.getAppManager().finishAllActivity(ActMain.class);
                 finish();
                 break;
             case R.id.go_to_star:

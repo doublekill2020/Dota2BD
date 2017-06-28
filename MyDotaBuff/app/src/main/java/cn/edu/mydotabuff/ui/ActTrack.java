@@ -1,5 +1,6 @@
 package cn.edu.mydotabuff.ui;
 
+import android.os.Bundle;
 import android.view.MenuItem;
 
 import cn.edu.mydotabuff.R;
@@ -31,17 +32,18 @@ import cn.edu.mydotabuff.base.BaseActivity;
  * //         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  */
 public class ActTrack extends BaseActivity{
+
     @Override
-    protected void initViewAndData() {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
+    }
+
+    protected void init() {
         setContentView(R.layout.act_track);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("赛况直播");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    @Override
-    protected void initEvent() {
-
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -62,16 +62,6 @@ public class ListHolderActivity extends BaseActivity implements SearchView.OnQue
     }
 
     @Override
-    protected void initViewAndData() {
-
-    }
-
-    @Override
-    protected void initEvent() {
-
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
         getMenuInflater().inflate(R.menu.frag_search, menu);
