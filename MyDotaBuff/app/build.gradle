@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'realm-android'
 android {
     //TODO 用okhttp后去掉
     useLibrary 'org.apache.http.legacy'
@@ -100,4 +101,6 @@ dependencies {
     compile 'cn.bingoogolapple:bga-swipebacklayout:1.0.8'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     compile 'com.rom4ek:arcnavigationview:1.0.3'
+    compile 'com.hwangjr.rxbus:rxbus:1.0.5'
+    compile 'io.realm:android-adapters:1.2.1'
 }
