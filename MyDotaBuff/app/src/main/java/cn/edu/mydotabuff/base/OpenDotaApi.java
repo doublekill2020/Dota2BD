@@ -75,7 +75,7 @@ public class OpenDotaApi {
 //        Observable<PlayerWL> getPlayerWL(@Path("account_id") String accountId);
 
 
-        @GET("api/search")
+        @GET("search")
         Observable<List<SearchPlayerResult>> searchAccountId(@Query(value = "q", encoded = true) String nickName, @Query("similarity") float similarity);
     }
 }
