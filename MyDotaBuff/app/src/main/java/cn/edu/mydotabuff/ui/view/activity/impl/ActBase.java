@@ -1,10 +1,10 @@
-package cn.edu.mydotabuff.tmpUI.impl;
+package cn.edu.mydotabuff.ui.view.activity.impl;
 
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import butterknife.ButterKnife;
-import cn.edu.mydotabuff.tmpUI.IBaseView;
+import cn.edu.mydotabuff.ui.view.activity.IBaseView;
 import cn.edu.mydotabuff.view.LoadingDialog;
 
 /**

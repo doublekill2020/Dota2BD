@@ -1,4 +1,4 @@
-package cn.edu.mydotabuff.tmpUI.impl;
+package cn.edu.mydotabuff.ui.view.activity.impl;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -25,12 +25,12 @@ import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.common.CommAdapter;
 import cn.edu.mydotabuff.common.CommViewHolder;
 import cn.edu.mydotabuff.model.SearchPlayerResult;
-import cn.edu.mydotabuff.presenter.ILoginPresenter;
-import cn.edu.mydotabuff.presenter.impl.LoginPresenterImpl;
-import cn.edu.mydotabuff.tmpUI.ILoginView;
+import cn.edu.mydotabuff.ui.presenter.ILoginPresenter;
+import cn.edu.mydotabuff.ui.presenter.impl.LoginPresenterImpl;
+import cn.edu.mydotabuff.ui.view.activity.ILoginView;
 import cn.edu.mydotabuff.ui.MainActivity;
 
-public class ActLogin extends ActBase implements ILoginView {
+public class LoginActivity extends ActBase implements ILoginView {
 
     @BindView(R.id.player_search_spinner)
     Spinner mSpinner;
@@ -123,7 +123,7 @@ public class ActLogin extends ActBase implements ILoginView {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                startActivity(new Intent(ActLogin.this, MainActivity.class));
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 finish();
             }
         });
