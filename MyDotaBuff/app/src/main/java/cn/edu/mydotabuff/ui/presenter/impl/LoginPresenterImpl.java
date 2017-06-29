@@ -5,9 +5,11 @@ import android.util.Log;
 import java.util.List;
 
 import cn.edu.mydotabuff.base.OpenDotaApi;
+import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.model.SearchPlayerResult;
 import cn.edu.mydotabuff.ui.presenter.ILoginPresenter;
 import cn.edu.mydotabuff.ui.view.activity.ILoginView;
+import io.realm.Realm;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -19,6 +21,7 @@ import rx.schedulers.Schedulers;
 public class LoginPresenterImpl implements ILoginPresenter {
     private static final String TAG = "LoginPresenterImpl";
     private ILoginView mView;
+    private List<SearchPlayerResult> mPlayerResults;
 
     public LoginPresenterImpl(ILoginView view) {
         this.mView = view;
@@ -45,6 +48,7 @@ public class LoginPresenterImpl implements ILoginPresenter {
 
                     @Override
                     public void onNext(List<SearchPlayerResult> searchPlayerResults) {
+                        mPlayerResults = searchPlayerResults;
                         mView.dismissLoadingDialog();
                         mView.showResult(searchPlayerResults);
                     }
@@ -52,8 +56,11 @@ public class LoginPresenterImpl implements ILoginPresenter {
     }
 
     @Override
-    public void bindPlayer(long accountId) {
-
+    public void bindPlayer(PlayerInfo info) {
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        realm.copyToRealmOrUpdate(info);
+        realm.commitTransaction();
     }
 
     @Override

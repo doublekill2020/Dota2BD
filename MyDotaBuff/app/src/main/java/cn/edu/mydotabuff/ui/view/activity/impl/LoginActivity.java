@@ -1,10 +1,7 @@
 package cn.edu.mydotabuff.ui.view.activity.impl;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
@@ -24,11 +21,12 @@ import butterknife.OnClick;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.common.CommAdapter;
 import cn.edu.mydotabuff.common.CommViewHolder;
+import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.model.SearchPlayerResult;
+import cn.edu.mydotabuff.ui.MainActivity;
 import cn.edu.mydotabuff.ui.presenter.ILoginPresenter;
 import cn.edu.mydotabuff.ui.presenter.impl.LoginPresenterImpl;
 import cn.edu.mydotabuff.ui.view.activity.ILoginView;
-import cn.edu.mydotabuff.ui.MainActivity;
 
 public class LoginActivity extends ActBase implements ILoginView {
 
@@ -40,49 +38,30 @@ public class LoginActivity extends ActBase implements ILoginView {
     Button mSearchBtn;
 
 
-    private SharedPreferences myPreferences;
-    private String userID;
     private ILoginPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        myPreferences = getSharedPreferences("user_info", Activity.MODE_PRIVATE);
-        userID = myPreferences.getString("userID", "");
-        myPreferences.edit().putString("userID","172750452");
-        myPreferences.edit().putString("isLogin","true");
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
-        if (myPreferences.getString("isLogin", "").equals("true")) {
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
-        } else {
-            // requestWindowFeature(Window.FEATURE_NO_TITLE);
-            mPresenter = new LoginPresenterImpl(this);
-            initView();
-        }
+        mPresenter = new LoginPresenterImpl(this);
+        initView();
     }
 
     public void initView() {
         ButterKnife.setDebug(true);
         setContentView(R.layout.act_login);
-        if (!TextUtils.isEmpty(userID)) {
-            mKeywordEdittext.setText(userID);
-        } else {
-            mKeywordEdittext.setText("172750452");
-        }
+        mKeywordEdittext.setText("172750452");
     }
 
 
     @OnClick(R.id.btn_search)
-    public void submit(View view) {
+    public void onSearchClicked(View view) {
         if (TextUtils.isEmpty(mKeywordEdittext.getText())) {
             showToast(getString(R.string.search_player_content_empty_hint));
         } else {
             mPresenter.searchPlayer(mKeywordEdittext.getText().toString(),
                     mSpinner.getSelectedItemPosition() == 0);
         }
-
     }
 
 
@@ -99,7 +78,7 @@ public class LoginActivity extends ActBase implements ILoginView {
         View dlgView = getLayoutInflater().inflate(R.layout.dlg_user_list,
                 null);
         ListView list = (ListView) dlgView.findViewById(R.id.list);
-        AlertDialog dialog = new AlertDialog.Builder(this)
+        final AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("搜索结果:")
                 .setView(dlgView)
                 .setNegativeButton("取消",
@@ -110,11 +89,8 @@ public class LoginActivity extends ActBase implements ILoginView {
                                 dialog.dismiss();
                             }
                         }).create();
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
         list.setAdapter(new CommAdapter<SearchPlayerResult>(this, beans,
                 R.layout.dlg_user_list_item) {
-
             @Override
             public void convert(CommViewHolder helper, SearchPlayerResult item) {
                 helper.setText(R.id.name, item.personaName);
@@ -123,41 +99,22 @@ public class LoginActivity extends ActBase implements ILoginView {
             }
         });
         list.setOnItemClickListener(new OnItemClickListener() {
-
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
+                PlayerInfo info = new PlayerInfo();
+                info.account_id = String.valueOf(beans.get(position).accountId);
+                info.avatarUrl = String.valueOf(beans.get(position).avatarfull);
+                info.name = String.valueOf(beans.get(position).personaName);
+                info.follow = true;
+                mPresenter.bindPlayer(info);
+                dialog.dismiss();
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 finish();
             }
         });
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
     }
-
-
-//    @SuppressWarnings("unchecked")
-//    @Override
-//    public <T> void onGetFinished(T data) {
-//        // TODO Auto-generated method stub
-//        dialog.dismiss();
-//        // size=1 只有一条数据 直接跳转
-//        final ArrayList<UserInfo> beans = (ArrayList<UserInfo>) data;
-//        if (beans.size() == 1) {
-//            UserInfo info = (UserInfo) beans.get(0);
-//            String ID = info.getUserID().trim();
-//            saveUserInfo(ID);
-//            startActivity(new Intent(this, ActMain.class));
-//            finish();
-//        } else {
-//        }
-//    }
-
-    private void saveUserInfo(String id) {
-        // TODO Auto-generated method stub
-        Editor editor = myPreferences.edit();
-        editor.putString("userID", id);
-        editor.putString("isLogin", "true");
-        editor.commit();
-    }
-
 
 }

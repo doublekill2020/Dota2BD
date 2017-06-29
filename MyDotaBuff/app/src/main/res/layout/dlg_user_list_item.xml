@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/umeng_socialize_shareboard_item_background"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingBottom="8dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="8dp">
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/icon"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:layout_margin="5dp"
-        app:roundAsCircle="true"
-        app:placeholderImage="@drawable/default_pic" />
+        app:placeholderImage="@drawable/default_pic"
+        app:roundAsCircle="true" />
+
     <TextView
         android:id="@+id/name"
         android:layout_width="0dp"
@@ -20,16 +24,16 @@
         android:layout_weight="1"
         android:gravity="center"
         android:singleLine="true"
-        android:text="nevermore"
-        android:textColor="@color/black" />
+        android:textColor="@color/white"
+        tools:text="nevermore" />
 
     <TextView
         android:id="@+id/id"
-        android:layout_width="0dp"
+        android:layout_width="120dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:gravity="center"
         android:singleLine="true"
-        android:textColor="@color/black" />
+        tools:text="11111111"
+        android:textColor="@color/white" />
 
 </LinearLayout>
