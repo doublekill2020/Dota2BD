@@ -41,6 +41,5 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
     private void init() {
         setSuccessView(mFlSuccess);
         mPresenter = new FollowFragmentPresenterImpl(this);
-        mPresenter.getDataFromDb();
     }
 }

@@ -1,5 +1,7 @@
 package cn.edu.mydotabuff.ui.presenter;
 
+import java.util.List;
+
 import cn.edu.mydotabuff.base.IBasePresenter;
 
 /**
@@ -8,7 +10,7 @@ import cn.edu.mydotabuff.base.IBasePresenter;
 
 public interface IFollowFragmentPresenter extends IBasePresenter {
 
-    void getDataFromDb();
+    void getDataFromDb(List<String> followers);
 
-    void doSync();
+    void doSync(List<String> followers);
 }
