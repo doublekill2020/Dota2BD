@@ -8,6 +8,7 @@ import java.util.List;
 
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.common.http.APIConstants;
+import cn.edu.mydotabuff.model.Match;
 import cn.edu.mydotabuff.model.SearchPlayerResult;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
@@ -16,6 +17,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import rx.Observable;
 import rx.schedulers.Schedulers;
@@ -71,11 +73,15 @@ public class OpenDotaApi {
 
     public interface OpenDotaService {
 
-//        @GET("players/{account_id}/wl")
-//        Observable<PlayerWL> getPlayerWL(@Path("account_id") String accountId);
+        //        @GET("players/{account_id}/wl")
+        //        Observable<PlayerWL> getPlayerWL(@Path("account_id") String accountId);
 
+        @GET("players/{account_id}/recentMatches")
+        Observable<List<Match>> getRecentMatch(@Path("account_id") String accountId);
 
         @GET("search")
-        Observable<List<SearchPlayerResult>> searchAccountId(@Query(value = "q", encoded = true) String nickName, @Query("similarity") float similarity);
+        Observable<List<SearchPlayerResult>> searchAccountId(@Query(value = "q", encoded = true)
+                                                                     String nickName, @Query
+                ("similarity") float similarity);
     }
 }

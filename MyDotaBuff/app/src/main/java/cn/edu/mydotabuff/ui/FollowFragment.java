@@ -13,6 +13,7 @@ import butterknife.ButterKnife;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseFragment;
 import cn.edu.mydotabuff.ui.presenter.IFollowFragmentPresenter;
+import cn.edu.mydotabuff.ui.presenter.impl.FollowFragmentPresenterImpl;
 import cn.edu.mydotabuff.ui.view.IFollowFragmentView;
 import cn.edu.mydotabuff.view.SwipeRefreshRecycleView;
 
@@ -39,5 +40,7 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
 
     private void init() {
         setSuccessView(mFlSuccess);
+        mPresenter = new FollowFragmentPresenterImpl(this);
+        mPresenter.getDataFromDb();
     }
 }
