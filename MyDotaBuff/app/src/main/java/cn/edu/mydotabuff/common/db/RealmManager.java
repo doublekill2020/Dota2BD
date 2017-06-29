@@ -41,4 +41,9 @@ public class RealmManager {
             }
         };
     }
+    public static void closeRealm(Realm realm) {
+        if (realm != null && !realm.isClosed()) {
+            realm.close();
+        }
+    }
 }

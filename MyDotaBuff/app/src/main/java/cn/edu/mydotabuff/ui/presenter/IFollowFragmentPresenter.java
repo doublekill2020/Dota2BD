@@ -7,4 +7,8 @@ import cn.edu.mydotabuff.base.IBasePresenter;
  */
 
 public interface IFollowFragmentPresenter extends IBasePresenter {
+
+    void getDataFromDb();
+
+    void doSync();
 }

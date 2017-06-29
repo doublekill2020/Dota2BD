@@ -410,4 +410,9 @@ public class MainActivity extends BaseActivity {
         } catch (Exception e) {
         }
     }
+
+    @Override
+    public boolean isSupportSwipeBack() {
+        return false;
+    }
 }

@@ -1,4 +1,4 @@
-package cn.edu.mydotabuff.ui.view.fragment.impl;
+package cn.edu.mydotabuff.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,14 +13,15 @@ import butterknife.ButterKnife;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseFragment;
 import cn.edu.mydotabuff.ui.presenter.IFollowFragmentPresenter;
-import cn.edu.mydotabuff.ui.view.fragment.FollowFragmentView;
+import cn.edu.mydotabuff.ui.presenter.impl.FollowFragmentPresenterImpl;
+import cn.edu.mydotabuff.ui.view.IFollowFragmentView;
 import cn.edu.mydotabuff.view.SwipeRefreshRecycleView;
 
 /**
  * Created by nevermore on 2017/6/28 0028.
  */
 
-public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> implements FollowFragmentView {
+public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> implements IFollowFragmentView {
     @BindView(R.id.rv_list)
     SwipeRefreshRecycleView mRvList;
     @BindView(R.id.fab)
@@ -39,5 +40,7 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
 
     private void init() {
         setSuccessView(mFlSuccess);
+        mPresenter = new FollowFragmentPresenterImpl(this);
+        mPresenter.getDataFromDb();
     }
 }
