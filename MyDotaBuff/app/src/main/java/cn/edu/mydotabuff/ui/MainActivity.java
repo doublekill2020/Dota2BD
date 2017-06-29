@@ -333,7 +333,7 @@ public class MainActivity extends BaseActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new FragRecently();
+                    return new FollowFragment();
                 case 1:
                     return new FragHeroList();
                 case 2:
