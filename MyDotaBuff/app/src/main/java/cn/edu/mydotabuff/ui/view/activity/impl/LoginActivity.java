@@ -25,10 +25,10 @@ import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.common.CommAdapter;
 import cn.edu.mydotabuff.common.CommViewHolder;
 import cn.edu.mydotabuff.model.SearchPlayerResult;
+import cn.edu.mydotabuff.ui.MainActivity;
 import cn.edu.mydotabuff.ui.presenter.ILoginPresenter;
 import cn.edu.mydotabuff.ui.presenter.impl.LoginPresenterImpl;
 import cn.edu.mydotabuff.ui.view.activity.ILoginView;
-import cn.edu.mydotabuff.ui.MainActivity;
 
 public class LoginActivity extends ActBase implements ILoginView {
 
@@ -95,7 +95,7 @@ public class LoginActivity extends ActBase implements ILoginView {
         View dlgView = getLayoutInflater().inflate(R.layout.dlg_user_list,
                 null);
         ListView list = (ListView) dlgView.findViewById(R.id.list);
-        AlertDialog dialog = new AlertDialog.Builder(this)
+        final AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("搜索结果:")
                 .setView(dlgView)
                 .setNegativeButton("取消",
@@ -123,6 +123,8 @@ public class LoginActivity extends ActBase implements ILoginView {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
+                dialog.dismiss();
+                saveUserInfo(String.valueOf(beans.get(position).accountId));
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 finish();
             }
