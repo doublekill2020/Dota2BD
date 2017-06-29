@@ -10,6 +10,7 @@ import io.realm.annotations.PrimaryKey;
 public class PlayerInfo extends RealmObject {
     @PrimaryKey
     public String account_id;
-
+    public String name;
+    public String avatarUrl;
     public boolean follow = false;
 }
