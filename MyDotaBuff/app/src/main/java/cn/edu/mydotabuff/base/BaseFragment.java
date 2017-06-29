@@ -23,6 +23,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import cn.edu.mydotabuff.R;
+import cn.edu.mydotabuff.common.db.RealmManager;
+import io.realm.Realm;
 
 /**
  * @author 袁浩 1006401052yh@gmail.com
@@ -41,6 +43,8 @@ public abstract class BaseFragment<T extends IBasePresenter> extends Fragment im
     private boolean mHasShowSuccessView = false;
     protected T mPresenter;
     private SwipeRefreshLayout swipeRefreshLayout;
+    protected Realm mRealm;
+    private boolean mIsGetRealm = false;
 
     @Override
     public void onAttach(Activity activity) {
@@ -163,5 +167,24 @@ public abstract class BaseFragment<T extends IBasePresenter> extends Fragment im
     @Override
     public void showErrorLayout() {
 
+    }
+    public Realm getRealm() {
+        if (mRealm == null) {
+            mIsGetRealm = true;
+            mRealm = Realm.getDefaultInstance();
+        }
+        return mRealm;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mIsGetRealm) {
+            mRealm.removeAllChangeListeners();
+            RealmManager.closeRealm(mRealm);
+        }
+        if (mPresenter != null) {
+            mPresenter.onDestroy();
+        }
     }
 }
