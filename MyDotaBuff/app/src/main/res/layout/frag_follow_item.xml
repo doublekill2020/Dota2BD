@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/dp_8">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdv_user_icon"
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="@dimen/dp_48"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true" />
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/sdv_hero_icon"
+        android:layout_width="@dimen/dp_48"
+        android:layout_height="@dimen/dp_48"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true" />
+
+    <TextView
+        android:id="@+id/tv_player_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/sdv_user_icon"
+        android:layout_marginTop="@dimen/dp_4"
+        android:layout_toEndOf="@+id/sdv_user_icon"
+        android:layout_toLeftOf="@+id/tv_mmr"
+        android:layout_toRightOf="@+id/sdv_user_icon"
+        android:layout_toStartOf="@+id/tv_mmr"
+        android:text="user_name" />
+
+    <TextView
+        android:id="@+id/tv_game_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_player_name"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_toRightOf="@id/sdv_user_icon"
+        android:text="胜利" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tv_game_status"
+        android:layout_marginLeft="@dimen/dp_4"
+        android:layout_toRightOf="@id/tv_game_status"
+        android:text="2小时前" />
+
+    <TextView
+        android:id="@+id/tv_mmr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tv_player_name"
+        android:layout_toLeftOf="@id/sdv_hero_icon"
+        android:text="4000(VH)" />
+
+    <TextView
+        android:id="@+id/tv_kda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_mmr"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_toLeftOf="@id/sdv_hero_icon"
+        android:text="4/4/4" />
+</RelativeLayout>
