@@ -22,6 +22,7 @@ import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.common.CommAdapter;
 import cn.edu.mydotabuff.common.CommViewHolder;
 import cn.edu.mydotabuff.model.PlayerInfo;
+import cn.edu.mydotabuff.model.Profile;
 import cn.edu.mydotabuff.model.SearchPlayerResult;
 import cn.edu.mydotabuff.ui.MainActivity;
 import cn.edu.mydotabuff.ui.presenter.ILoginPresenter;
@@ -103,9 +104,10 @@ public class LoginActivity extends ActBase implements ILoginView {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 PlayerInfo info = new PlayerInfo();
-                info.account_id = String.valueOf(beans.get(position).accountId);
-                info.avatarUrl = String.valueOf(beans.get(position).avatarfull);
-                info.name = String.valueOf(beans.get(position).personaName);
+                info.profile = new Profile();
+                info.profile.account_id = String.valueOf(beans.get(position).accountId);
+                //info.avatarUrl = String.valueOf(beans.get(position).avatarfull);
+                //info.name = String.valueOf(beans.get(position).personaName);
                 info.follow = true;
                 mPresenter.bindPlayer(info);
                 dialog.dismiss();

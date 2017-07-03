@@ -8,6 +8,7 @@ import cn.edu.mydotabuff.base.OpenDotaApi;
 import cn.edu.mydotabuff.model.Match;
 import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.ui.presenter.IFollowFragmentPresenter;
+import cn.edu.mydotabuff.ui.service.PlayerInfoService;
 import cn.edu.mydotabuff.ui.view.IFollowFragmentView;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
@@ -39,7 +40,8 @@ public class FollowFragmentPresenterImpl implements IFollowFragmentPresenter {
                 if (playerInfos.size() > 0 && !mHasLoaded) {
                     mFolloers.clear();
                     for (PlayerInfo playerInfo : playerInfos) {
-                        mFolloers.add(playerInfo.account_id);
+                        mFolloers.add(playerInfo.profile.account_id);
+                        syncPlayerData(playerInfo.profile.account_id);
                     }
                     getDataFromDb(mFolloers);
                     doSync(mFolloers);
@@ -50,6 +52,10 @@ public class FollowFragmentPresenterImpl implements IFollowFragmentPresenter {
         });
     }
 
+    private void syncPlayerData(String accountId) {
+        PlayerInfoService.getPlayerInfo(accountId);
+    }
+
     @Override
     public void onDestroy() {
 
@@ -58,12 +64,14 @@ public class FollowFragmentPresenterImpl implements IFollowFragmentPresenter {
     @Override
     public void getDataFromDb(final List<String> followers) {
         String[] params = followers.toArray(new String[0]);
-        RealmResults<Match> matches = mRealm.where(Match.class).in("account_id", params).findAllAsync();
+        RealmResults<Match> matches = mRealm.where(Match.class).in("account_id", params)
+                .findAllAsync();
         matches.addChangeListener(new RealmChangeListener<RealmResults<Match>>() {
             @Override
             public void onChange(RealmResults<Match> matches) {
                 if (matches.size() > 0) {
-
+                    mView.showSuccessLayout();
+                    mView.setDataToRecycleView(matches);
                 }
             }
         });

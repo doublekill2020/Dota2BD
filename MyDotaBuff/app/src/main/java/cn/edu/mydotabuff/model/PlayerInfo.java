@@ -8,9 +8,15 @@ import io.realm.annotations.PrimaryKey;
  */
 
 public class PlayerInfo extends RealmObject {
+
     @PrimaryKey
     public String account_id;
-    public String name;
-    public String avatarUrl;
     public boolean follow = false;
+    //单排积分
+    public String solo_competitive_rank;
+    //最近普通匹配的积分
+    public String competitive_rank;
+
+    public Profile profile;
+
 }

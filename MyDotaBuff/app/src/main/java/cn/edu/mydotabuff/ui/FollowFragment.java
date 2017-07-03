@@ -19,8 +19,10 @@ import cn.edu.mydotabuff.base.BaseListAdapter;
 import cn.edu.mydotabuff.base.BaseListHolder;
 import cn.edu.mydotabuff.common.ClickTag;
 import cn.edu.mydotabuff.model.Match;
+import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.ui.presenter.IFollowFragmentPresenter;
 import cn.edu.mydotabuff.ui.presenter.impl.FollowFragmentPresenterImpl;
+import cn.edu.mydotabuff.ui.service.PlayerInfoService;
 import cn.edu.mydotabuff.ui.view.IFollowFragmentView;
 import cn.edu.mydotabuff.view.SwipeRefreshRecycleView;
 
@@ -49,14 +51,36 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
 
     private void init() {
         setSuccessView(mFlSuccess);
+        mRvList.setRefreshLoadMoreListener(new SwipeRefreshRecycleView.RefreshLoadMoreListener() {
+            @Override
+            public void onRefresh() {
+                //mPresenter.doSync();
+            }
+
+            @Override
+            public void onLoadMore() {
+
+            }
+        });
         mRvList.setAdapter(mAdapter = new BaseListAdapter<Match>(mMatches, R.layout.fragment_follow_item, ClickTag.CLICK_TO_DETAIL) {
             @Override
-            public void getView(BaseListHolder holder, Match bean, int pos) {
-                //holder.setImageURI(R.id.sdv_user_icon,mat);
-                //holder.setText(R.id.tv_player_name,);
-                //holder.setText(bean.radiant_win ? "" : "");
+            public void getView(BaseListHolder holder, Match match, int pos) {
+                PlayerInfo playerInfo = PlayerInfoService.queryPlayerInfo(mRealm,match.account_id);
+                if(playerInfo.isLoaded()) {
+                    holder.setImageURI(R.id.sdv_user_icon, playerInfo.profile.avatar);
+                    holder.setText(R.id.tv_player_name, playerInfo.profile.personaname);
+                    holder.setText(R.id.tv_mmr, playerInfo.solo_competitive_rank + "VH");
+                    holder.setText(R.id.tv_kda, match.kills + "/" + match.deaths + "/" + match.assists);
+                }
             }
         });
         mPresenter = new FollowFragmentPresenterImpl(this);
+    }
+
+    @Override
+    public void setDataToRecycleView(List<Match> matches) {
+        mMatches.clear();
+        mMatches.addAll(matches);
+        mAdapter.notifyDataSetChanged();
     }
 }
