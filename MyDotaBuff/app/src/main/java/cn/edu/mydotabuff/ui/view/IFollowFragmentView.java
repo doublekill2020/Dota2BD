@@ -12,4 +12,6 @@ import cn.edu.mydotabuff.model.Match;
 public interface IFollowFragmentView extends IBaseView {
 
     void setDataToRecycleView(List<Match> matches);
+
+    void setRefreshCompleted();
 }

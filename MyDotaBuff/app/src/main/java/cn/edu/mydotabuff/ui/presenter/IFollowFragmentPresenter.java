@@ -13,4 +13,7 @@ public interface IFollowFragmentPresenter extends IBasePresenter {
     void getDataFromDb(List<String> followers);
 
     void doSync(List<String> followers);
+
+    List<String> getAllFollowers();
+
 }

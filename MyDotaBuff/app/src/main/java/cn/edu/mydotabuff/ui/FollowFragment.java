@@ -54,7 +54,7 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
         mRvList.setRefreshLoadMoreListener(new SwipeRefreshRecycleView.RefreshLoadMoreListener() {
             @Override
             public void onRefresh() {
-                //mPresenter.doSync();
+                mPresenter.doSync(mPresenter.getAllFollowers());
             }
 
             @Override
@@ -65,12 +65,14 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
         mRvList.setAdapter(mAdapter = new BaseListAdapter<Match>(mMatches, R.layout.fragment_follow_item, ClickTag.CLICK_TO_DETAIL) {
             @Override
             public void getView(BaseListHolder holder, Match match, int pos) {
-                PlayerInfo playerInfo = PlayerInfoService.queryPlayerInfo(mRealm,match.account_id);
-                if(playerInfo.isLoaded()) {
-                    holder.setImageURI(R.id.sdv_user_icon, playerInfo.profile.avatar);
-                    holder.setText(R.id.tv_player_name, playerInfo.profile.personaname);
-                    holder.setText(R.id.tv_mmr, playerInfo.solo_competitive_rank + "VH");
-                    holder.setText(R.id.tv_kda, match.kills + "/" + match.deaths + "/" + match.assists);
+                if (match.isValid()) {
+                    holder.setText(R.id.tv_kda, match.getKills() + "/" + match.getDeaths() + "/" + match.getAssists());
+                }
+                PlayerInfo playerInfo = PlayerInfoService.queryPlayerInfo(mRealm, match.account_id);
+                if (playerInfo != null && playerInfo.isValid()) {
+                    holder.setImageURI(R.id.sdv_user_icon, playerInfo.getProfile().avatar);
+                    holder.setText(R.id.tv_player_name, playerInfo.getProfile().personaname);
+                    holder.setText(R.id.tv_mmr, playerInfo.getSolo_competitive_rank() + "VH");
                 }
             }
         });
@@ -82,5 +84,10 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
         mMatches.clear();
         mMatches.addAll(matches);
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void setRefreshCompleted() {
+        mRvList.setRefreshCompleted();
     }
 }

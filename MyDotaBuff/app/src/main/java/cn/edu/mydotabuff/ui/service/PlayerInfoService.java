@@ -1,7 +1,10 @@
 package cn.edu.mydotabuff.ui.service;
 
+import android.util.Log;
+
 import cn.edu.mydotabuff.base.OpenDotaApi;
 import cn.edu.mydotabuff.model.PlayerInfo;
+import cn.edu.mydotabuff.util.ThreadUtils;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import rx.android.schedulers.AndroidSchedulers;
@@ -17,15 +20,20 @@ public class PlayerInfoService {
 
     public static void getPlayerInfo(final String accountId) {
         OpenDotaApi.getService().getPlayerInfo(accountId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(Schedulers.io())
                 .map(new Func1<PlayerInfo, Boolean>() {
                     @Override
                     public Boolean call(PlayerInfo playerInfo) {
+                        Log.d("hao", ThreadUtils.isMainThread()+"bbb");
                         Realm realm = Realm.getDefaultInstance();
                         try {
+                            PlayerInfo old = realm.where(PlayerInfo.class).equalTo("account_id", accountId).findFirst();
                             realm.beginTransaction();
                             playerInfo.account_id = playerInfo.profile.account_id;
+                            if (old.follow) {
+                                playerInfo.follow = true;
+                            }
                             realm.copyToRealmOrUpdate(playerInfo);
                             realm.commitTransaction();
                         } catch (Exception e) {

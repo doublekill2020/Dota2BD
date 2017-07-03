@@ -428,4 +428,5 @@
     <string name="feedback">意见反馈</string>
     <string name="switch_to_login">切换登录</string>
     <string name="share_to_friends">分享给好友</string>
+    <string name="data_in_loading">数据正在加载,请稍候...</string>
 </resources>
