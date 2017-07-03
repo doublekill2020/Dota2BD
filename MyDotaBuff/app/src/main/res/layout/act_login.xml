@@ -32,7 +32,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="请输入steamId或者昵称" />
+            android:hint="@string/please_input_steamId_or_name"
+            android:imeOptions="actionDone"
+            android:inputType="number" />
 
         <Button
             android:id="@+id/btn_search"
