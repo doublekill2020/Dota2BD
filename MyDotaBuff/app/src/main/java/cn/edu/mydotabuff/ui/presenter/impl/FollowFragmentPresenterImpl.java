@@ -15,6 +15,7 @@ import cn.edu.mydotabuff.ui.service.PlayerInfoService;
 import cn.edu.mydotabuff.ui.view.IFollowFragmentView;
 import cn.edu.mydotabuff.util.ThreadUtils;
 import io.realm.Realm;
+import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -37,35 +38,23 @@ public class FollowFragmentPresenterImpl implements IFollowFragmentPresenter {
     public FollowFragmentPresenterImpl(IFollowFragmentView view) {
         mView = view;
         mRealm = ((BaseFragment) mView).getRealm();
-//        mPlayerInfos = mRealm.where(PlayerInfo.class).equalTo("follow", true).findAllAsync();
-//        mPlayerInfos.addChangeListener(new RealmChangeListener<RealmResults<PlayerInfo>>() {
-//            @Override
-//            public void onChange(RealmResults<PlayerInfo> playerInfos) {
-//                if (playerInfos.size() > 0 && !mHasLoaded) {
-//                    mFolloers.clear();
-//                    for (PlayerInfo playerInfo : playerInfos) {
-//                        mFolloers.add(playerInfo.profile.account_id);
-//                        syncPlayerData(playerInfo.profile.account_id);
-//                    }
-//                    getDataFromDb(mFolloers);
-//                    doSync(mFolloers);
-//
-//                    mHasLoaded = true;
-//                }
-//            }
-//        });
-        mPlayerInfos = mRealm.where(PlayerInfo.class).equalTo("follow", true).findAll();
-        if (mPlayerInfos.size() > 0 && !mHasLoaded) {
-            mFolloers.clear();
-            for (PlayerInfo playerInfo : mPlayerInfos) {
-                mFolloers.add(playerInfo.profile.account_id);
-                syncPlayerData(playerInfo.profile.account_id);
-            }
-            getDataFromDb(mFolloers);
-            doSync(mFolloers);
+        mPlayerInfos = mRealm.where(PlayerInfo.class).equalTo("follow", true).findAllAsync();
+        mPlayerInfos.addChangeListener(new RealmChangeListener<RealmResults<PlayerInfo>>() {
+            @Override
+            public void onChange(RealmResults<PlayerInfo> playerInfos) {
+                if (playerInfos.size() > 0 && !mHasLoaded) {
+                    mFolloers.clear();
+                    for (PlayerInfo playerInfo : playerInfos) {
+                        mFolloers.add(playerInfo.profile.account_id);
+                        syncPlayerData(playerInfo.profile.account_id);
+                    }
+                    getDataFromDb(mFolloers);
+                    doSync(mFolloers);
 
-            mHasLoaded = true;
-        }
+                    mHasLoaded = true;
+                }
+            }
+        });
     }
 
     @Override
@@ -88,24 +77,17 @@ public class FollowFragmentPresenterImpl implements IFollowFragmentPresenter {
     @Override
     public void getDataFromDb(final List<String> followers) {
         String[] params = followers.toArray(new String[0]);
-//        matches = mRealm.where(Match.class).in("account_id", params)
-//                .findAllAsync();
-//        matches.addChangeListener(new RealmChangeListener<RealmResults<Match>>() {
-//            @Override
-//            public void onChange(RealmResults<Match> matches) {
-//                if (matches.size() > 0) {
-//                    mView.showSuccessLayout();
-//                    mView.setDataToRecycleView(matches);
-//                }
-//            }
-//        });
-        matches = mRealm.where(Match.class).in("account_id", params).findAll();
-        if (matches.size() > 0) {
-            mView.showSuccessLayout();
-            List<Match> results = mRealm.copyFromRealm(matches);
-            mView.setDataToRecycleView(results);
-        }
-        //doSync(mFolloers);
+        matches = mRealm.where(Match.class).in("account_id", params)
+                .findAllAsync();
+        matches.addChangeListener(new RealmChangeListener<RealmResults<Match>>() {
+            @Override
+            public void onChange(RealmResults<Match> matches) {
+                if (matches.size() > 0) {
+                    mView.showSuccessLayout();
+                    mView.setDataToRecycleView(matches);
+                }
+            }
+        });
     }
 
     @Override
@@ -117,7 +99,7 @@ public class FollowFragmentPresenterImpl implements IFollowFragmentPresenter {
                     .map(new Func1<List<Match>, List<Match>>() {
                         @Override
                         public List<Match> call(List<Match> matches) {
-                            Log.d("hao", ThreadUtils.isMainThread()+"aaa");
+                            Log.d("hao", ThreadUtils.isMainThread() + "aaa");
                             Realm realm = Realm.getDefaultInstance();
                             try {
                                 realm.beginTransaction();

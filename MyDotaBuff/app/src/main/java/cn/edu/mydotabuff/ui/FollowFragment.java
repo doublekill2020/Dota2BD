@@ -65,14 +65,12 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
         mRvList.setAdapter(mAdapter = new BaseListAdapter<Match>(mMatches, R.layout.fragment_follow_item, ClickTag.CLICK_TO_DETAIL) {
             @Override
             public void getView(BaseListHolder holder, Match match, int pos) {
-                if (match.isValid()) {
-                    holder.setText(R.id.tv_kda, match.getKills() + "/" + match.getDeaths() + "/" + match.getAssists());
-                }
+                holder.setText(R.id.tv_kda, match.kills + "/" + match.deaths + "/" + match.assists);
                 PlayerInfo playerInfo = PlayerInfoService.queryPlayerInfo(mRealm, match.account_id);
-                if (playerInfo != null && playerInfo.isValid()) {
-                    holder.setImageURI(R.id.sdv_user_icon, playerInfo.getProfile().avatar);
-                    holder.setText(R.id.tv_player_name, playerInfo.getProfile().personaname);
-                    holder.setText(R.id.tv_mmr, playerInfo.getSolo_competitive_rank() + "VH");
+                if (playerInfo != null) {
+                    holder.setImageURI(R.id.sdv_user_icon, playerInfo.profile.avatar);
+                    holder.setText(R.id.tv_player_name, playerInfo.profile.personaname);
+                    holder.setText(R.id.tv_mmr, playerInfo.solo_competitive_rank + "VH");
                 }
             }
         });
