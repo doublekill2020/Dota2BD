@@ -4,14 +4,18 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.text.InputType;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -22,8 +26,6 @@ import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.common.CommAdapter;
 import cn.edu.mydotabuff.common.CommViewHolder;
 import cn.edu.mydotabuff.model.PlayerInfo;
-import cn.edu.mydotabuff.model.Profile;
-import cn.edu.mydotabuff.model.SearchPlayerResult;
 import cn.edu.mydotabuff.ui.MainActivity;
 import cn.edu.mydotabuff.ui.presenter.ILoginPresenter;
 import cn.edu.mydotabuff.ui.presenter.impl.LoginPresenterImpl;
@@ -52,11 +54,38 @@ public class LoginActivity extends ActBase implements ILoginView {
         ButterKnife.setDebug(true);
         setContentView(R.layout.act_login);
         mKeywordEdittext.setText("172750452");
+        mKeywordEdittext.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    onSearchClicked();
+                    return true;
+                }
+                return false;
+            }
+        });
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {
+                    mKeywordEdittext.setInputType(InputType.TYPE_CLASS_NUMBER);
+                    mKeywordEdittext.setHint(R.string.please_input_steamId);
+                } else {
+                    mKeywordEdittext.setInputType(InputType.TYPE_CLASS_TEXT);
+                    mKeywordEdittext.setHint(R.string.please_input_steamId_or_name);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
 
     @OnClick(R.id.btn_search)
-    public void onSearchClicked(View view) {
+    public void onSearchClicked() {
         if (TextUtils.isEmpty(mKeywordEdittext.getText())) {
             showToast(getString(R.string.search_player_content_empty_hint));
         } else {
@@ -67,15 +96,15 @@ public class LoginActivity extends ActBase implements ILoginView {
 
 
     @Override
-    public void showResult(List<SearchPlayerResult> searchPlayerResults) {
-        if (searchPlayerResults.size() > 0) {
-            showwResultDialog(searchPlayerResults);
+    public void showResult(List<PlayerInfo> playerInfos) {
+        if (playerInfos.size() > 0) {
+            showResultDialog(playerInfos);
         } else {
             showToast("没有匹配结果");
         }
     }
 
-    private void showwResultDialog(final List<SearchPlayerResult> beans) {
+    private void showResultDialog(final List<PlayerInfo> beans) {
         View dlgView = getLayoutInflater().inflate(R.layout.dlg_user_list,
                 null);
         ListView list = (ListView) dlgView.findViewById(R.id.list);
@@ -90,24 +119,20 @@ public class LoginActivity extends ActBase implements ILoginView {
                                 dialog.dismiss();
                             }
                         }).create();
-        list.setAdapter(new CommAdapter<SearchPlayerResult>(this, beans,
+        list.setAdapter(new CommAdapter<PlayerInfo>(this, beans,
                 R.layout.dlg_user_list_item) {
             @Override
-            public void convert(CommViewHolder helper, SearchPlayerResult item) {
-                helper.setText(R.id.name, item.personaName);
-                helper.setText(R.id.id, item.accountId);
-                helper.setImagUri(R.id.icon, item.avatarfull);
+            public void convert(CommViewHolder helper, PlayerInfo item) {
+                helper.setText(R.id.name, item.profile.personaname);
+                helper.setText(R.id.id, item.profile.account_id);
+                helper.setImagUri(R.id.icon, item.profile.avatarfull);
             }
         });
         list.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                PlayerInfo info = new PlayerInfo();
-                info.profile = new Profile();
-                info.profile.account_id = String.valueOf(beans.get(position).accountId);
-                //info.avatarUrl = String.valueOf(beans.get(position).avatarfull);
-                //info.name = String.valueOf(beans.get(position).personaName);
+                PlayerInfo info = beans.get(position);
                 info.follow = true;
                 mPresenter.bindPlayer(info);
                 dialog.dismiss();

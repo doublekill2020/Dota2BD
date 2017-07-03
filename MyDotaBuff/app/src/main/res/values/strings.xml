@@ -428,5 +428,6 @@
     <string name="feedback">意见反馈</string>
     <string name="switch_to_login">切换登录</string>
     <string name="share_to_friends">分享给好友</string>
-    <string name="data_in_loading">数据正在加载,请稍候...</string>
+    <string name="please_input_steamId_or_name">请输入steamId或者昵称</string>
+    <string name="please_input_steamId">请输入steamId</string>
 </resources>
