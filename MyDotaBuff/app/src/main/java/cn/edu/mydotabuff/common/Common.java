@@ -1,12 +1,19 @@
 package cn.edu.mydotabuff.common;
 
+import android.text.TextUtils;
+
 import java.math.BigInteger;
 
+import cn.edu.mydotabuff.DotaApplication;
+import cn.edu.mydotabuff.R;
+
 public class Common {
+
     /**
      * userID转SteamID
      *
      * @param userID
+     *
      * @return
      */
     public static String getSteamID(String userID) {
@@ -19,6 +26,7 @@ public class Common {
      * SteamID转userID
      *
      * @param steamID
+     *
      * @return
      */
     public static String getUserID(String steamID) {
@@ -2172,32 +2180,32 @@ public class Common {
                 return "tranquil_boots";
             case 215:
                 return "shadow_amulet";
-//            case 216:
-//                return "halloween_candy_corn";
-//            case 217:
-//                return "mystery_hook";
-//            case 218:
-//                return "mystery_arrow";
-//            case 219:
-//                return "mystery_missile";
-//            case 220:
-//                return "mystery_toss";
-//            case 221:
-//                return "mystery_vacuum";
-//            case 226:
-//                return "halloween_rapier";
-//            case 228:
-//                return "greevil_whistle";
-//            case 235:
-//                return "greevil_whistle_toggle";
-//            case 227:
-//                return "present";
-//            case 229:
-//                return "winter_stocking";
-//            case 230:
-//                return "winter_skates";
-//            case 231:
-//                return "winter_cake";
+            //            case 216:
+            //                return "halloween_candy_corn";
+            //            case 217:
+            //                return "mystery_hook";
+            //            case 218:
+            //                return "mystery_arrow";
+            //            case 219:
+            //                return "mystery_missile";
+            //            case 220:
+            //                return "mystery_toss";
+            //            case 221:
+            //                return "mystery_vacuum";
+            //            case 226:
+            //                return "halloween_rapier";
+            //            case 228:
+            //                return "greevil_whistle";
+            //            case 235:
+            //                return "greevil_whistle_toggle";
+            //            case 227:
+            //                return "present";
+            //            case 229:
+            //                return "winter_stocking";
+            //            case 230:
+            //                return "winter_skates";
+            //            case 231:
+            //                return "winter_cake";
             case 232:
                 return "winter_cookie";
             case 233:
@@ -2267,6 +2275,7 @@ public class Common {
      * 获取英雄英文名（获取keyName）
      *
      * @param ID 英雄ID
+     *
      * @return
      */
     public static String getHeroName(int ID) {
@@ -2499,6 +2508,7 @@ public class Common {
      * 获取英雄英文名（获取keyName）
      *
      * @param chineseName 英雄中文名
+     *
      * @return
      */
     public static String getHeroName(String chineseName) {
@@ -2724,5 +2734,19 @@ public class Common {
         if (chineseName.equals("寒冬飞龙"))
             return "winter_wyvern";
         return "default";
+    }
+
+    public static String getMmrLevel(String mmr) {
+        if (TextUtils.isEmpty(mmr)) {
+            return DotaApplication.getApplication().getString(R.string.rank_level_unknow);
+        }
+        int score = Integer.parseInt(mmr);
+        if (score >= 0 && score <= 3200) {
+            return DotaApplication.getApplication().getString(R.string.rank_level_n);
+        } else if (score > 3200 && score <= 3800) {
+            return DotaApplication.getApplication().getString(R.string.rank_level_h);
+        } else {
+            return DotaApplication.getApplication().getString(R.string.rank_level_vh);
+        }
     }
 }

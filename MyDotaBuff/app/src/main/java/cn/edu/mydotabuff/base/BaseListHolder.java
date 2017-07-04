@@ -78,6 +78,10 @@ public class BaseListHolder extends RecyclerView.ViewHolder {
         TextView view = findViewById(viewId);
         view.setText(text);
     }
+    public void setText(int viewId,int resId){
+        TextView view = findViewById(viewId);
+        view.setText(resId);
+    }
 
     public void setTextColor(int viewId, int color) {
         TextView view = findViewById(viewId);

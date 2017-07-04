@@ -74,15 +74,11 @@ public class MainActivity extends BaseActivity {
     private MainPageAdapter mPageAdapter;
 
     private String steamID;
-    private static final int FETCH_DETAIL = 1, FETCH_FAILED = 2,
-            LOGIN_SUCCESS = 3;
-    private MyHandler myHandler = new MyHandler();
     private CircleImageView userIcon;
     private TextView userName;
     private ImageLoader loader;
     private String userID;
     private SharedPreferences myPreferences;
-    private OnMainEventListener listener;
     // 首先在您的Activity中添加如下成员变量
     final UMSocialService mController = UMServiceFactory
             .getUMSocialService("com.umeng.share");
@@ -113,120 +109,6 @@ public class MainActivity extends BaseActivity {
         userID = myPreferences.getString("userID", "");
         if (!userID.equals("")) {
             steamID = Common.getSteamID(userID);
-            fetchData(FETCH_DETAIL);
-        }
-    }
-
-    void fetchData(final int type) {
-        PersonalRequestImpl request = new PersonalRequestImpl(
-                new IInfoReceive() {
-
-                    @Override
-                    public void onMsgReceiver(ResponseObj receiveInfo) {
-                        // TODO Auto-generated method stub
-                        Message msg = myHandler.obtainMessage();
-                        switch (type) {
-                            case FETCH_DETAIL:
-                                PlayerInfoBean bean = new PlayerInfoBean();
-                                try {
-                                    if (new JSONObject(receiveInfo.getJsonStr())
-                                            .has("response")) {
-                                        JSONArray array = new JSONObject(
-                                                receiveInfo.getJsonStr())
-                                                .getJSONObject("response")
-                                                .getJSONArray("players");
-                                        if (array.length() > 0) {
-                                            JSONObject obj = array.getJSONObject(0);
-                                            bean.setCommunityState(obj
-                                                    .getInt("communityvisibilitystate"));
-                                            bean.setLastlogooff(obj
-                                                    .getString("lastlogoff"));
-                                            if (bean.getLastlogooff() == null) {
-                                                bean.setLastlogooff("1417140906");
-                                            }
-                                            bean.setMediumIcon(obj
-                                                    .getString("avatarmedium"));
-                                            bean.setName(obj
-                                                    .getString("personaname"));
-                                            bean.setState(obj
-                                                    .getInt("personastate"));
-                                            if (obj.has("timecreated")) {
-                                                bean.setTimecreated(obj
-                                                        .getString("timecreated"));
-                                            } else {
-                                                bean.setTimecreated("1417140906");
-                                            }
-                                            bean.setSteamid(obj
-                                                    .getString("steamid"));
-                                            msg.arg1 = type;
-                                            msg.obj = bean;
-                                        } else {
-                                            msg.arg1 = FETCH_FAILED;
-                                        }
-                                        myHandler.sendMessage(msg);
-                                    } else {
-                                        msg.arg1 = FETCH_FAILED;
-                                        myHandler.sendMessage(msg);
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-
-                });
-        request.setActivity(this);
-        switch (type) {
-            case FETCH_DETAIL:
-                if (myPreferences.getString("isNeedUpdate", "").equals("")) {
-                    request.getPlayerDetail(steamID, false);
-                } else {
-                    request.getPlayerDetail(steamID, true);
-                    request.setIsCancelAble(false);
-                }
-                break;
-            default:
-                break;
-        }
-    }
-
-    class MyHandler extends Handler {
-
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.arg1) {
-                case FETCH_DETAIL:
-                    PlayerInfoBean bean = (PlayerInfoBean) msg.obj;
-                    if (bean != null) {
-                        DotaApplication.getApplication().saveData(bean,
-                                DotaApplication.LocalDataType.PLAYER_INFO);
-
-                        long time = Long.parseLong(bean.getLastlogooff());
-                        long lastUpdateTime = myPreferences.getLong(
-                                "lastUpdateTime", 0);
-                        SharedPreferences.Editor editor = myPreferences.edit();
-                        if (time > lastUpdateTime) {
-                            editor.putLong("lastUpdateTime", time);
-                            editor.putString("isNeedUpdate", "true");
-                            editor.commit();
-                        } else {
-                            editor.putString("isNeedUpdate", "false");
-                            editor.commit();
-                        }
-                        if (listener != null)
-                            listener.onFinishGetPlayerInfo();
-                    }
-                    break;
-                case FETCH_FAILED:
-                    showTip("steam被墙了，你懂得", TipsToast.DialogType.LOAD_FAILURE);
-                    break;
-                default:
-                    break;
-            }
         }
     }
 
@@ -396,19 +278,6 @@ public class MainActivity extends BaseActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
-    }
-    public interface OnMainEventListener {
-
-        void onFinishGetPlayerInfo();
-    }
-    @Override
-    public void onAttachFragment(Fragment fragment) {
-        // TODO Auto-generated method stub
-        super.onAttachFragment(fragment);
-        try {
-            listener = (OnMainEventListener) fragment;
-        } catch (Exception e) {
-        }
     }
 
     @Override

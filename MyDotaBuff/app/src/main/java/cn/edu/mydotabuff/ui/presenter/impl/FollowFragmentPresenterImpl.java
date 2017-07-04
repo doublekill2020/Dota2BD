@@ -2,12 +2,17 @@ package cn.edu.mydotabuff.ui.presenter.impl;
 
 import android.util.Log;
 
+import com.hwangjr.rxbus.RxBus;
+import com.hwangjr.rxbus.annotation.Subscribe;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseFragment;
+import cn.edu.mydotabuff.base.BaseListClickEvent;
 import cn.edu.mydotabuff.base.OpenDotaApi;
+import cn.edu.mydotabuff.common.ClickTag;
 import cn.edu.mydotabuff.model.Match;
 import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.ui.presenter.IFollowFragmentPresenter;
@@ -17,6 +22,7 @@ import cn.edu.mydotabuff.util.ThreadUtils;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
+import io.realm.Sort;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -55,6 +61,7 @@ public class FollowFragmentPresenterImpl implements IFollowFragmentPresenter {
                 }
             }
         });
+        RxBus.get().register(this);
     }
 
     @Override
@@ -71,14 +78,21 @@ public class FollowFragmentPresenterImpl implements IFollowFragmentPresenter {
 
     @Override
     public void onDestroy() {
+        RxBus.get().unregister(this);
         mView = null;
+    }
+    @Subscribe
+    public void onItemClicked(BaseListClickEvent event){
+        if(event.tag == ClickTag.CLICK_TO_DETAIL){
+
+        }
     }
 
     @Override
     public void getDataFromDb(final List<String> followers) {
         String[] params = followers.toArray(new String[0]);
         matches = mRealm.where(Match.class).in("account_id", params)
-                .findAllAsync();
+                .findAllAsync().sort("start_time", Sort.DESCENDING);
         matches.addChangeListener(new RealmChangeListener<RealmResults<Match>>() {
             @Override
             public void onChange(RealmResults<Match> matches) {
@@ -99,7 +113,6 @@ public class FollowFragmentPresenterImpl implements IFollowFragmentPresenter {
                     .map(new Func1<List<Match>, List<Match>>() {
                         @Override
                         public List<Match> call(List<Match> matches) {
-                            Log.d("hao", ThreadUtils.isMainThread() + "aaa");
                             Realm realm = Realm.getDefaultInstance();
                             try {
                                 realm.beginTransaction();
@@ -122,10 +135,7 @@ public class FollowFragmentPresenterImpl implements IFollowFragmentPresenter {
                     .subscribe(new Action1<List<Match>>() {
                         @Override
                         public void call(List<Match> matches) {
-                            if (matches == null) {
-                            } else {
-                                mView.setDataToRecycleView(matches);
-                                mView.showSuccessLayout();
+                            if(mView != null){
                                 mView.setRefreshCompleted();
                             }
                         }

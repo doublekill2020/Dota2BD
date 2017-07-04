@@ -45,7 +45,7 @@ import cn.edu.mydotabuff.view.XListView;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;
 import cn.edu.mydotabuff.view.XListView.IXListViewListener;
 
-public class FragRecently extends BaseFragment implements MainActivity.OnMainEventListener {
+public class FragRecently extends BaseFragment {
 	private XListView listView;
 	private View recentLayout;
 	private String userID;
@@ -339,34 +339,6 @@ public class FragRecently extends BaseFragment implements MainActivity.OnMainEve
 		super.onDestroy();
 		DotaApplication.getApplication().saveData(allMatchBeans,
 				LocalDataType.MATCHES);
-	}
-
-	@Override
-	public void onFinishGetPlayerInfo() {
-		// TODO Auto-generated method stub
-		String isNeedUpdate = myPreferences.getString("isNeedUpdate", "");
-		if (isNeedUpdate.equals("true") || isNeedUpdate.equals("")) {
-			fetchData(FETCH_MATCH, lastId);
-		} else {
-			flag = true;
-			ArrayList<MatchBean> beans = DotaApplication.getApplication()
-					.getData(LocalDataType.MATCHES);
-			if (beans == null) {
-				fetchData(FETCH_MATCH, lastId);
-			} else {
-				allMatchBeans.addAll(beans);
-				if (mAdapter == null) {
-					mAdapter = new FragItemAdapter(activity, allMatchBeans);
-					sAdapter = new ScaleInAnimationAdapter(mAdapter);
-					sAdapter.setAbsListView(listView);
-					listView.setAdapter(sAdapter);
-					if (allMatchBeans.size() > 0) {
-						lastId = allMatchBeans.get(allMatchBeans.size() - 1)
-								.getMatchId();
-					}
-				}
-			}
-		}
 	}
 
 	@Override
