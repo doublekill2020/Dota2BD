@@ -103,7 +103,6 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'cn.bingoogolapple:bga-swipebacklayout:1.0.8'
     //compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    compile 'com.rom4ek:arcnavigationview:1.0.3'
     compile 'com.hwangjr.rxbus:rxbus:1.0.5'
     compile 'io.realm:android-adapters:1.2.1'
 

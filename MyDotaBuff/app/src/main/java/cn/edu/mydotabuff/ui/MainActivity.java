@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -22,7 +23,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.rom4ek.arcnavigationview.ArcNavigationView;
 import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.controller.UMServiceFactory;
 import com.umeng.socialize.controller.UMSocialService;
@@ -68,7 +68,7 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.vp)
     ViewPager mVp;
     @BindView(R.id.navigation_view)
-    ArcNavigationView mNavigationView;
+    NavigationView mNavigationView;
     @BindView(R.id.drawerLayout)
     DrawerLayout mDrawerLayout;
     private MainPageAdapter mPageAdapter;
@@ -205,7 +205,7 @@ public class MainActivity extends BaseActivity {
 
     class MainPageAdapter extends FragmentStatePagerAdapter {
 
-        private String[] titles = new String[]{"关注", "英雄", "发现", "我"};
+        private String[] titles = new String[]{"关注", "英雄", "天梯", "发现"};
 
         public MainPageAdapter(FragmentManager fm) {
             super(fm);
@@ -219,9 +219,9 @@ public class MainActivity extends BaseActivity {
                 case 1:
                     return new FragHeroList();
                 case 2:
-                    return new FragFound();
+                    return new RankFragment();
                 case 3:
-                    return new FragMyDetail();
+                    return new FragFound();
                 default:
                     return null;
             }

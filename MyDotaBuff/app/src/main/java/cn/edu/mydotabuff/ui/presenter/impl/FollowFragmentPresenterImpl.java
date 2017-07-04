@@ -1,7 +1,5 @@
 package cn.edu.mydotabuff.ui.presenter.impl;
 
-import android.util.Log;
-
 import com.hwangjr.rxbus.RxBus;
 import com.hwangjr.rxbus.annotation.Subscribe;
 
@@ -18,7 +16,6 @@ import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.ui.presenter.IFollowFragmentPresenter;
 import cn.edu.mydotabuff.ui.service.PlayerInfoService;
 import cn.edu.mydotabuff.ui.view.IFollowFragmentView;
-import cn.edu.mydotabuff.util.ThreadUtils;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
@@ -81,9 +78,10 @@ public class FollowFragmentPresenterImpl implements IFollowFragmentPresenter {
         RxBus.get().unregister(this);
         mView = null;
     }
+
     @Subscribe
-    public void onItemClicked(BaseListClickEvent event){
-        if(event.tag == ClickTag.CLICK_TO_DETAIL){
+    public void onItemClicked(BaseListClickEvent event) {
+        if (event.tag == ClickTag.CLICK_TO_DETAIL) {
 
         }
     }
@@ -96,6 +94,9 @@ public class FollowFragmentPresenterImpl implements IFollowFragmentPresenter {
         matches.addChangeListener(new RealmChangeListener<RealmResults<Match>>() {
             @Override
             public void onChange(RealmResults<Match> matches) {
+                if (mView == null) {
+                    return;
+                }
                 if (matches.size() > 0) {
                     mView.showSuccessLayout();
                     mView.setDataToRecycleView(matches);
@@ -135,7 +136,7 @@ public class FollowFragmentPresenterImpl implements IFollowFragmentPresenter {
                     .subscribe(new Action1<List<Match>>() {
                         @Override
                         public void call(List<Match> matches) {
-                            if(mView != null){
+                            if (mView != null) {
                                 mView.setRefreshCompleted();
                             }
                         }
