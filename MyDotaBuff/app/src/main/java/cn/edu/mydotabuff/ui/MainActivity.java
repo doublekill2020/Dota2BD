@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -36,30 +36,21 @@ import com.umeng.socialize.sso.UMSsoHandler;
 import com.umeng.socialize.weixin.controller.UMWXHandler;
 import com.umeng.update.UmengUpdateAgent;
 
-import org.json2.JSONArray;
-import org.json2.JSONException;
-import org.json2.JSONObject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseActivity;
 import cn.edu.mydotabuff.common.Common;
-import cn.edu.mydotabuff.model.PlayerInfoBean;
-import cn.edu.mydotabuff.common.http.IInfoReceive;
 import cn.edu.mydotabuff.ui.hero.FragHeroList;
-import cn.edu.mydotabuff.ui.mydetail.FragMyDetail;
-import cn.edu.mydotabuff.ui.recently.FragRecently;
-import cn.edu.mydotabuff.util.PersonalRequestImpl;
+import cn.edu.mydotabuff.ui.presenter.IMainPresenter;
+import cn.edu.mydotabuff.ui.view.IMainView;
 import cn.edu.mydotabuff.view.CircleImageView;
-import cn.edu.mydotabuff.view.TipsToast;
 
 /**
  * Created by tinker on 2017/6/27.
  */
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity<IMainPresenter> implements IMainView {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -71,6 +62,8 @@ public class MainActivity extends BaseActivity {
     NavigationView mNavigationView;
     @BindView(R.id.drawerLayout)
     DrawerLayout mDrawerLayout;
+    @BindView(R.id.cd)
+    CoordinatorLayout cd;
     private MainPageAdapter mPageAdapter;
 
     private String steamID;
@@ -110,6 +103,14 @@ public class MainActivity extends BaseActivity {
         if (!userID.equals("")) {
             steamID = Common.getSteamID(userID);
         }
+        Snackbar snackbar = Snackbar.make(cd, R.string.match_data_will_be_sync_in_background, Snackbar.LENGTH_LONG);
+        snackbar.setAction(getString(R.string.cancel), new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        snackbar.show();
     }
 
     private void initUMShare() {
