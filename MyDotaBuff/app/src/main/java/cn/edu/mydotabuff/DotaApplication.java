@@ -72,6 +72,13 @@ public class DotaApplication extends Application {
         //LocationSDKManager.getInstance().addAndUse(new DefaultLocationImpl());
 
         //RongIM.init(this, "25wehl3uw6q5w", R.drawable.ic_launcher);
+
+        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread t, Throwable e) {
+                Logger.e(e, "tag");
+            }
+        });
     }
 
     private void initImageLoader() {

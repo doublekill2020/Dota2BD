@@ -9,6 +9,7 @@
  */
 package cn.edu.mydotabuff.base;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -34,7 +35,7 @@ import cn.edu.mydotabuff.view.TipsToast.DialogType;
  */
 public abstract class BaseActivity<T extends IBasePresenter> extends AppCompatActivity implements
         BGASwipeBackHelper
-        .Delegate, IBaseView {
+                .Delegate, IBaseView {
 
     // 网络请求状态码
     public static final int OK = 1; // 成功
@@ -278,5 +279,10 @@ public abstract class BaseActivity<T extends IBasePresenter> extends AppCompatAc
         if (swipeRefreshLayout != null && swipeRefreshLayout.isRefreshing()) {
             swipeRefreshLayout.setRefreshing(false);
         }
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 }

@@ -10,6 +10,7 @@
 package cn.edu.mydotabuff.base;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -174,6 +175,11 @@ public abstract class BaseFragment<T extends IBasePresenter> extends Fragment im
             mRealm = Realm.getDefaultInstance();
         }
         return mRealm;
+    }
+
+    @Override
+    public Context getContext() {
+        return super.getContext();
     }
 
     @Override
