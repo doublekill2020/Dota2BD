@@ -435,4 +435,6 @@
     <string name="rank_level_n">(N)</string>
     <string name="rank_level_h">(H)</string>
     <string name="rank_level_vh">(VH)</string>
+    <string name="match_result_win">胜利</string>
+    <string name="match_result_lose">失败</string>
 </resources>

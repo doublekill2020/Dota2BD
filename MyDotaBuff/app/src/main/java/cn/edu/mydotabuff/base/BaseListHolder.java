@@ -12,6 +12,9 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.hwangjr.rxbus.RxBus;
 
+import cn.edu.mydotabuff.DotaApplication;
+import cn.edu.mydotabuff.R;
+
 /**
  * //                              _oo0oo_
  * //                             o8888888o
@@ -85,12 +88,7 @@ public class BaseListHolder extends RecyclerView.ViewHolder {
 
     public void setTextColor(int viewId, int color) {
         TextView view = findViewById(viewId);
-        view.setTextColor(color);
-    }
-
-    public void setTextColor(int viewId, ColorStateList color) {
-        TextView view = findViewById(viewId);
-        view.setTextColor(color);
+        view.setTextColor(DotaApplication.getApplication().getResources().getColor(color));
     }
 
     public void setTextSize(int viewId, int typeValue, int size) {

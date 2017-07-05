@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="@drawable/umeng_socialize_shareboard_item_background"
     android:padding="@dimen/dp_8">
 
     <com.facebook.drawee.view.SimpleDraweeView
@@ -41,6 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_player_name"
         android:layout_marginTop="@dimen/dp_8"
+        android:layout_marginLeft="@dimen/dp_8"
         android:layout_toRightOf="@id/sdv_user_icon"
         android:text="胜利" />
 
@@ -49,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/tv_game_status"
-        android:layout_marginLeft="@dimen/dp_4"
+        android:layout_marginLeft="@dimen/dp_8"
         android:layout_toRightOf="@id/tv_game_status"
         android:text="2小时前"
         android:textColor="@color/black" />

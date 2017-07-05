@@ -77,6 +77,13 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
                         (match.hero_id)));
                 holder.setText(R.id.tv_kda, match.kills + "/" + match.deaths + "/" + match.assists);
                 holder.setText(R.id.tv_time, TimeHelper.convertTimeToFormat(match.start_time));
+                if(Common.getMatchResult(match.player_slot,match.radiant_win)){
+                    holder.setText(R.id.tv_game_status,R.string.match_result_win);
+                    holder.setTextColor(R.id.tv_game_status,R.color.my_green);
+                }else {
+                    holder.setText(R.id.tv_game_status,R.string.match_result_lose);
+                    holder.setTextColor(R.id.tv_game_status,R.color.my_orange);
+                }
                 PlayerInfo playerInfo = PlayerInfoService.queryPlayerInfo(mRealm, match.account_id);
                 if (playerInfo != null) {
                     holder.setImageURI(R.id.sdv_user_icon, playerInfo.profile.avatar);
