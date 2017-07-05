@@ -1,5 +1,6 @@
 package cn.edu.mydotabuff.base;
 
+import android.content.Context;
 import android.content.Intent;
 
 
@@ -22,5 +23,7 @@ public interface IBaseView {
     void showToast(int stringResId);
 
     void toOtherActivityForResult(Intent intent, int requestCode);
+
+    Context getContext();
 
 }

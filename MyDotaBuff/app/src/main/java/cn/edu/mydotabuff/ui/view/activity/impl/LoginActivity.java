@@ -1,7 +1,6 @@
 package cn.edu.mydotabuff.ui.view.activity.impl;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
@@ -9,6 +8,7 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -31,7 +31,7 @@ import cn.edu.mydotabuff.ui.presenter.ILoginPresenter;
 import cn.edu.mydotabuff.ui.presenter.impl.LoginPresenterImpl;
 import cn.edu.mydotabuff.ui.view.activity.ILoginView;
 
-public class LoginActivity extends ActBase implements ILoginView {
+public class LoginActivity extends ActBase<ILoginPresenter> implements ILoginView {
 
     @BindView(R.id.player_search_spinner)
     Spinner mSpinner;
@@ -39,9 +39,6 @@ public class LoginActivity extends ActBase implements ILoginView {
     EditText mKeywordEdittext;
     @BindView(R.id.btn_search)
     Button mSearchBtn;
-
-
-    private ILoginPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,35 +49,40 @@ public class LoginActivity extends ActBase implements ILoginView {
 
     public void initView() {
         ButterKnife.setDebug(true);
-        setContentView(R.layout.act_login);
-        mKeywordEdittext.setText("172750452");
-        mKeywordEdittext.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    onSearchClicked();
-                    return true;
+        // FIXME: 2017/7/6 还要排除其他界面跳转过了的情况
+        if (mPresenter.hasFocusPlayer()) {
+            toActivity(MainActivity.class);
+        } else {
+            setContentView(R.layout.act_login);
+            mKeywordEdittext.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                        onSearchClicked();
+                        return true;
+                    }
+                    return false;
                 }
-                return false;
-            }
-        });
-        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-                    mKeywordEdittext.setInputType(InputType.TYPE_CLASS_NUMBER);
-                    mKeywordEdittext.setHint(R.string.please_input_steamId);
-                } else {
-                    mKeywordEdittext.setInputType(InputType.TYPE_CLASS_TEXT);
-                    mKeywordEdittext.setHint(R.string.please_input_steamId_or_name);
+            });
+            mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if (position == 0) {
+                        mKeywordEdittext.setInputType(InputType.TYPE_CLASS_NUMBER);
+                        mKeywordEdittext.setHint(R.string.please_input_steamId);
+                    } else {
+                        mKeywordEdittext.setInputType(InputType.TYPE_CLASS_TEXT);
+                        mKeywordEdittext.setHint(R.string.please_input_steamId_or_name);
+                    }
                 }
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-        });
+                }
+            });
+        }
+
     }
 
 
@@ -89,6 +91,9 @@ public class LoginActivity extends ActBase implements ILoginView {
         if (TextUtils.isEmpty(mKeywordEdittext.getText())) {
             showToast(getString(R.string.search_player_content_empty_hint));
         } else {
+            ((InputMethodManager) getSystemService(INPUT_METHOD_SERVICE))
+                    .hideSoftInputFromWindow(mKeywordEdittext.getWindowToken()
+                            , InputMethodManager.HIDE_NOT_ALWAYS);
             mPresenter.searchPlayer(mKeywordEdittext.getText().toString(),
                     mSpinner.getSelectedItemPosition() == 0);
         }
@@ -136,7 +141,7 @@ public class LoginActivity extends ActBase implements ILoginView {
                 info.follow = true;
                 mPresenter.bindPlayer(info);
                 dialog.dismiss();
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                toActivity(MainActivity.class);
                 finish();
             }
         });

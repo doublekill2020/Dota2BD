@@ -12,6 +12,7 @@ import cn.edu.mydotabuff.model.SearchPlayerResult;
 import cn.edu.mydotabuff.ui.presenter.ILoginPresenter;
 import cn.edu.mydotabuff.ui.view.activity.ILoginView;
 import io.realm.Realm;
+import io.realm.RealmResults;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
@@ -21,15 +22,22 @@ import rx.schedulers.Schedulers;
  * Created by sadhu on 2017/6/28.
  * 描述:
  */
-public class LoginPresenterImpl implements ILoginPresenter {
+public class LoginPresenterImpl extends BasePresenterImpl<ILoginView> implements ILoginPresenter {
     private static final String TAG = "LoginPresenterImpl";
-    private ILoginView mView;
+
     private List<PlayerInfo> mPlayerInfos = new ArrayList<>();
+    private Realm realm;
 
     public LoginPresenterImpl(ILoginView view) {
-        this.mView = view;
+        super(view);
+        realm = Realm.getDefaultInstance();
     }
 
+    @Override
+    public boolean hasFocusPlayer() {
+        RealmResults<PlayerInfo> players = realm.where(PlayerInfo.class).findAll();
+        return players != null && players.size() > 0;
+    }
 
     @Override
     public void searchPlayer(String key, boolean isExactSearch) {
@@ -109,7 +117,7 @@ public class LoginPresenterImpl implements ILoginPresenter {
 
     @Override
     public void bindPlayer(PlayerInfo info) {
-        Realm realm = Realm.getDefaultInstance();
+
         realm.beginTransaction();
         realm.copyToRealmOrUpdate(info);
         realm.commitTransaction();
@@ -117,6 +125,7 @@ public class LoginPresenterImpl implements ILoginPresenter {
 
     @Override
     public void onDestory() {
-
+        super.onDestory();
+        realm.close();
     }
 }

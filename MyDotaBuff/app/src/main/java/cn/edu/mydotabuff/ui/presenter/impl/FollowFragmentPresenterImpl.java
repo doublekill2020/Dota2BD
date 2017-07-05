@@ -15,7 +15,8 @@ import cn.edu.mydotabuff.model.Match;
 import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.ui.presenter.IFollowFragmentPresenter;
 import cn.edu.mydotabuff.ui.service.PlayerInfoService;
-import cn.edu.mydotabuff.ui.view.IFollowFragmentView;
+import cn.edu.mydotabuff.ui.view.activity.impl.MatchDetailActivity;
+import cn.edu.mydotabuff.ui.view.fragment.IFollowFragmentView;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
@@ -82,7 +83,7 @@ public class FollowFragmentPresenterImpl implements IFollowFragmentPresenter {
     @Subscribe
     public void onItemClicked(BaseListClickEvent event) {
         if (event.tag == ClickTag.CLICK_TO_DETAIL) {
-
+            MatchDetailActivity.start(mView.getContext(), matches.get(event.position).match_id);
         }
     }
 

@@ -25,7 +25,7 @@ import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.ui.presenter.IFollowFragmentPresenter;
 import cn.edu.mydotabuff.ui.presenter.impl.FollowFragmentPresenterImpl;
 import cn.edu.mydotabuff.ui.service.PlayerInfoService;
-import cn.edu.mydotabuff.ui.view.IFollowFragmentView;
+import cn.edu.mydotabuff.ui.view.fragment.IFollowFragmentView;
 import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.util.Utils;
 import cn.edu.mydotabuff.view.SwipeRefreshRecycleView;

@@ -11,4 +11,6 @@ public interface ILoginPresenter extends IBasePresenter {
     void searchPlayer(String key, boolean isExactSearch);
 
     void bindPlayer(PlayerInfo info);
+
+    boolean hasFocusPlayer();
 }
