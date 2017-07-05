@@ -4,7 +4,9 @@ import com.hwangjr.rxbus.RxBus;
 import com.hwangjr.rxbus.annotation.Subscribe;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseFragment;
@@ -37,6 +39,7 @@ public class FollowFragmentPresenterImpl implements IFollowFragmentPresenter {
     private boolean mHasLoaded = false;
     private List<String> mFolloers = new ArrayList<>();
     private RealmResults<Match> matches;
+    private Map<String, PlayerInfo> mPlayerInfoMap;
 
     public FollowFragmentPresenterImpl(IFollowFragmentView view) {
         mView = view;
@@ -46,6 +49,7 @@ public class FollowFragmentPresenterImpl implements IFollowFragmentPresenter {
             @Override
             public void onChange(RealmResults<PlayerInfo> playerInfos) {
                 if (playerInfos.size() > 0 && !mHasLoaded) {
+                    generatePlayerInfoMap();
                     mFolloers.clear();
                     for (PlayerInfo playerInfo : playerInfos) {
                         mFolloers.add(playerInfo.profile.account_id);
@@ -59,6 +63,18 @@ public class FollowFragmentPresenterImpl implements IFollowFragmentPresenter {
             }
         });
         RxBus.get().register(this);
+    }
+
+    @Override
+    public Map<String, PlayerInfo> getPlayerInfoMap() {
+        return mPlayerInfoMap;
+    }
+
+    private void generatePlayerInfoMap() {
+        mPlayerInfoMap = new HashMap<>();
+        for (PlayerInfo playerInfo : mRealm.copyFromRealm(mPlayerInfos)) {
+            mPlayerInfoMap.put(playerInfo.account_id, playerInfo);
+        }
     }
 
     @Override

@@ -3,6 +3,7 @@ package cn.edu.mydotabuff.ui;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +25,6 @@ import cn.edu.mydotabuff.model.Match;
 import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.ui.presenter.IFollowFragmentPresenter;
 import cn.edu.mydotabuff.ui.presenter.impl.FollowFragmentPresenterImpl;
-import cn.edu.mydotabuff.ui.service.PlayerInfoService;
 import cn.edu.mydotabuff.ui.view.IFollowFragmentView;
 import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.util.Utils;
@@ -77,14 +77,14 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
                         (match.hero_id)));
                 holder.setText(R.id.tv_kda, match.kills + "/" + match.deaths + "/" + match.assists);
                 holder.setText(R.id.tv_time, TimeHelper.convertTimeToFormat(match.start_time));
-                if(Common.getMatchResult(match.player_slot,match.radiant_win)){
-                    holder.setText(R.id.tv_game_status,R.string.match_result_win);
-                    holder.setTextColor(R.id.tv_game_status,R.color.my_green);
-                }else {
-                    holder.setText(R.id.tv_game_status,R.string.match_result_lose);
-                    holder.setTextColor(R.id.tv_game_status,R.color.my_orange);
+                if (Common.getMatchResult(match.player_slot, match.radiant_win)) {
+                    holder.setText(R.id.tv_game_status, R.string.match_result_win);
+                    holder.setTextColor(R.id.tv_game_status, R.color.my_green);
+                } else {
+                    holder.setText(R.id.tv_game_status, R.string.match_result_lose);
+                    holder.setTextColor(R.id.tv_game_status, R.color.my_orange);
                 }
-                PlayerInfo playerInfo = PlayerInfoService.queryPlayerInfo(mRealm, match.account_id);
+                PlayerInfo playerInfo = mPresenter.getPlayerInfoMap().get(match.account_id);
                 if (playerInfo != null) {
                     holder.setImageURI(R.id.sdv_user_icon, playerInfo.profile.avatar);
                     holder.setText(R.id.tv_player_name, playerInfo.profile.personaname);
@@ -95,6 +95,21 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
                                 .getMmrLevel(playerInfo.solo_competitive_rank));
                     }
                 }
+            }
+        });
+        mRvList.setOnScrolllistener(new SwipeRefreshRecycleView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                if(dy>0){
+                    mFab.hide();
+                }else {
+                    mFab.show();
+                }
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+
             }
         });
         mPresenter = new FollowFragmentPresenterImpl(this);
