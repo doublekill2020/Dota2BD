@@ -37,7 +37,7 @@ public class FollowFragmentPresenterImpl extends BasePresenterImpl<IFollowFragme
 
     private RealmResults<PlayerInfo> mPlayerInfos;
     private boolean mHasLoaded = false;
-    private List<String> mFolloers = new ArrayList<>();
+    private List<String> mPlayerIds = new ArrayList<>();
     private RealmResults<Match> matches;
     private Map<String, PlayerInfo> mPlayerInfoMap;
 
@@ -113,7 +113,7 @@ public class FollowFragmentPresenterImpl extends BasePresenterImpl<IFollowFragme
 
     @Subscribe
     public void onItemClicked(BaseListClickEvent event) {
-        if (event.tag == ClickTag.CLICK_TO_DETAIL) {
+        if (event.tag == EventTag.CLICK_TO_DETAIL) {
             MatchDetailActivity.start(mView.getContext(), matches.get(event.position).match_id);
         }
     }
