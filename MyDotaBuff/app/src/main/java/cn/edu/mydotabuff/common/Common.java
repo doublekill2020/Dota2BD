@@ -6,6 +6,7 @@ import java.math.BigInteger;
 
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.R;
+import cn.edu.mydotabuff.model.LobbyType;
 
 public class Common {
 
@@ -13,6 +14,7 @@ public class Common {
      * userID转SteamID
      *
      * @param userID
+     *
      * @return
      */
     public static String getSteamID(String userID) {
@@ -25,6 +27,7 @@ public class Common {
      * SteamID转userID
      *
      * @param steamID
+     *
      * @return
      */
     public static String getUserID(String steamID) {
@@ -2273,6 +2276,7 @@ public class Common {
      * 获取英雄英文名（获取keyName）
      *
      * @param ID 英雄ID
+     *
      * @return
      */
     public static String getHeroName(int ID) {
@@ -2505,6 +2509,7 @@ public class Common {
      * 获取英雄英文名（获取keyName）
      *
      * @param chineseName 英雄中文名
+     *
      * @return
      */
     public static String getHeroName(String chineseName) {
@@ -2747,10 +2752,45 @@ public class Common {
     }
 
     public static boolean getMatchResult(int playerSlot, boolean radiantWin) {
-        if (radiantWin && playerSlot <= 4) {
-            return true;
+        if (playerSlot <= 4) {
+            if (radiantWin) {
+                return true;
+            } else {
+                return false;
+            }
         } else {
-            return false;
+            if (radiantWin) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    public static String getLobbyTypeName(int lobbyType){
+        switch (lobbyType){
+            case LobbyType.LOBBY_TYPE_NORMAL:
+                return DotaApplication.getApplication().getString(R.string.lobby_type_normal);
+            case LobbyType.LOBBY_TYPE_PRACTICE:
+                return DotaApplication.getApplication().getString(R.string.lobby_type_practice);
+            case LobbyType.LOBBY_TYPE_TOURNAMENT:
+                return DotaApplication.getApplication().getString(R.string.lobby_type_tournament);
+            case LobbyType.LOBBY_TYPE_TUTORIAL:
+                return DotaApplication.getApplication().getString(R.string.lobby_type_tutorial);
+            case LobbyType.LOBBY_TYPE_COOP_BOTS:
+                return DotaApplication.getApplication().getString(R.string.lobby_type_coop_bots);
+            case LobbyType.LOBBY_TYPE_RANKED_TEAM_MM:
+                return DotaApplication.getApplication().getString(R.string.lobby_type_ranked_team_mm);
+            case LobbyType.LOBBY_TYPE_RANKED_SOLO_MM:
+                return DotaApplication.getApplication().getString(R.string.lobby_type_ranked_solo_mm);
+            case LobbyType.LOBBY_TYPE_RANKED:
+                return DotaApplication.getApplication().getString(R.string.lobby_type_ranked);
+            case LobbyType.LOBBY_TYPE_1V1_MID:
+                return DotaApplication.getApplication().getString(R.string.lobby_type_1v1_mid);
+            case LobbyType.LOBBY_TYPE_BATTLE_CUP:
+                return DotaApplication.getApplication().getString(R.string.lobby_type_battle_cup);
+                default:
+                    return DotaApplication.getApplication().getString(R.string.unknow);
         }
     }
 }

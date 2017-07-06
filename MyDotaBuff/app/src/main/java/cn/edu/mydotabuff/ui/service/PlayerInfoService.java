@@ -1,10 +1,14 @@
 package cn.edu.mydotabuff.ui.service;
 
-import android.util.Log;
+import com.hwangjr.rxbus.RxBus;
+
+import java.util.List;
 
 import cn.edu.mydotabuff.base.OpenDotaApi;
+import cn.edu.mydotabuff.base.RxCallBackEvent;
+import cn.edu.mydotabuff.common.EventTag;
 import cn.edu.mydotabuff.model.PlayerInfo;
-import cn.edu.mydotabuff.util.ThreadUtils;
+import cn.edu.mydotabuff.model.Rating;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import rx.android.schedulers.AndroidSchedulers;
@@ -18,6 +22,44 @@ import rx.schedulers.Schedulers;
 
 public class PlayerInfoService {
 
+    public static void getPlayerRating(final String accountId) {
+        final RxCallBackEvent event = new RxCallBackEvent();
+        event.tag = EventTag.GET_PLAYER_RATING;
+        OpenDotaApi.getService().getPlayerRating(accountId)
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(Schedulers.io())
+                .map(new Func1<List<Rating>, Boolean>() {
+                    @Override
+                    public Boolean call(List<Rating> ratings) {
+                        Realm realm = Realm.getDefaultInstance();
+                        try {
+                            realm.beginTransaction();
+                            for (Rating rating : ratings) {
+                                rating.id = rating.account_id + rating.match_id;
+                            }
+                            realm.copyToRealmOrUpdate(ratings);
+                            realm.commitTransaction();
+                        } catch (Exception e) {
+                            return false;
+                        } finally {
+                            realm.close();
+                        }
+                        return true;
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                        event.success = aBoolean;
+                        event.data = accountId;
+                        RxBus.get().post(event);
+                    }
+                });
+    }
+
+
     public static void getPlayerInfo(final String accountId) {
         OpenDotaApi.getService().getPlayerInfo(accountId)
                 .subscribeOn(AndroidSchedulers.mainThread())
@@ -25,7 +67,6 @@ public class PlayerInfoService {
                 .map(new Func1<PlayerInfo, Boolean>() {
                     @Override
                     public Boolean call(PlayerInfo playerInfo) {
-                        Log.d("hao", ThreadUtils.isMainThread()+"bbb");
                         Realm realm = Realm.getDefaultInstance();
                         try {
                             PlayerInfo old = realm.where(PlayerInfo.class).equalTo("account_id", accountId).findFirst();

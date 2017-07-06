@@ -12,7 +12,8 @@ import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseFragment;
 import cn.edu.mydotabuff.base.BaseListClickEvent;
 import cn.edu.mydotabuff.base.OpenDotaApi;
-import cn.edu.mydotabuff.common.ClickTag;
+import cn.edu.mydotabuff.base.RxCallBackEvent;
+import cn.edu.mydotabuff.common.EventTag;
 import cn.edu.mydotabuff.model.Match;
 import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.ui.presenter.IFollowFragmentPresenter;
@@ -51,13 +52,14 @@ public class FollowFragmentPresenterImpl implements IFollowFragmentPresenter {
             public void onChange(RealmResults<PlayerInfo> playerInfos) {
                 if (playerInfos.size() > 0 && !mHasLoaded) {
                     generatePlayerInfoMap();
-                    mFolloers.clear();
+                    mPlayerIds.clear();
                     for (PlayerInfo playerInfo : playerInfos) {
-                        mFolloers.add(playerInfo.profile.account_id);
+                        mPlayerIds.add(playerInfo.profile.account_id);
                         syncPlayerData(playerInfo.profile.account_id);
                     }
-                    getDataFromDb(mFolloers);
-                    doSync(mFolloers);
+                    getDataFromDb(mPlayerIds);
+                    doSyncPlayersRating(mPlayerIds);
+                    doSync(mPlayerIds);
 
                     mHasLoaded = true;
                 }
@@ -71,10 +73,26 @@ public class FollowFragmentPresenterImpl implements IFollowFragmentPresenter {
         return mPlayerInfoMap;
     }
 
+    @Override
+    public void doSyncPlayersRating(List<String> playersAccountIds) {
+        for (String accountId : playersAccountIds) {
+            PlayerInfoService.getPlayerRating(accountId);
+        }
+    }
+
     private void generatePlayerInfoMap() {
         mPlayerInfoMap = new HashMap<>();
         for (PlayerInfo playerInfo : mRealm.copyFromRealm(mPlayerInfos)) {
             mPlayerInfoMap.put(playerInfo.account_id, playerInfo);
+        }
+    }
+
+    @Subscribe
+    public void onEvent(RxCallBackEvent event) {
+        if (event.tag == EventTag.GET_PLAYER_RATING) {
+            if (event.success) {
+                mView.notifyDataUpdate();
+            }
         }
     }
 
@@ -83,7 +101,7 @@ public class FollowFragmentPresenterImpl implements IFollowFragmentPresenter {
         if (!mHasLoaded) {
             mView.showToast(R.string.data_in_loading);
         }
-        return mFolloers;
+        return mPlayerIds;
     }
 
     private void syncPlayerData(String accountId) {
