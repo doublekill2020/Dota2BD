@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 
 import butterknife.BindView;
 import cn.edu.mydotabuff.R;
+import cn.edu.mydotabuff.base.BaseActivity;
 import cn.edu.mydotabuff.ui.presenter.IMatchDetaiPresenter;
 import cn.edu.mydotabuff.ui.presenter.impl.MatchDetailPresenterImpl;
 import cn.edu.mydotabuff.ui.view.activity.IMatchDetailView;
@@ -16,7 +17,7 @@ import cn.edu.mydotabuff.ui.view.activity.IMatchDetailView;
  * Created by sadhu on 2017/7/5.
  * 描述: 比赛详情
  */
-public class MatchDetailActivity extends ActBase<IMatchDetaiPresenter> implements IMatchDetailView {
+public class MatchDetailActivity extends BaseActivity<IMatchDetaiPresenter> implements IMatchDetailView {
 
     public static final String EXTRA_MATCH_ID = "match_id";
 

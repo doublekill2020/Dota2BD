@@ -12,6 +12,9 @@ package cn.edu.mydotabuff.base;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.CallSuper;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.StringRes;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ActionMenuView;
@@ -25,8 +28,10 @@ import android.widget.Toast;
 
 import com.umeng.analytics.MobclickAgent;
 
+import butterknife.ButterKnife;
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
 import cn.edu.mydotabuff.R;
+import cn.edu.mydotabuff.view.LoadingDialog;
 import cn.edu.mydotabuff.view.TipsToast;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;
 
@@ -45,6 +50,8 @@ public abstract class BaseActivity<T extends IBasePresenter> extends AppCompatAc
     public Toolbar mToolbar;
     protected BGASwipeBackHelper mSwipeBackHelper;
     protected T mPresenter;
+    private LoadingDialog dialog;
+
     protected ViewGroup mContainerView;
     protected View mEmptyView;
     protected View mSuccessView;
@@ -54,12 +61,14 @@ public abstract class BaseActivity<T extends IBasePresenter> extends AppCompatAc
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
+        ButterKnife.bind(this);
         initActionBar();
     }
 
     @Override
     public void setContentView(View view) {
         super.setContentView(view);
+        ButterKnife.bind(this);
         initActionBar();
     }
 
@@ -103,14 +112,25 @@ public abstract class BaseActivity<T extends IBasePresenter> extends AppCompatAc
         mSwipeBackHelper.setSwipeBackThreshold(0.3f);
     }
 
+    @Override
     protected void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
     }
 
+    @Override
     protected void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+    }
+
+    @CallSuper
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mPresenter != null) {
+            mPresenter.onDestroy();
+        }
     }
 
     /**
@@ -171,8 +191,49 @@ public abstract class BaseActivity<T extends IBasePresenter> extends AppCompatAc
     }
 
     @Override
+    public void showToast(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showToast(int stringResId) {
+        Toast.makeText(this, stringResId, Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    public void showLoadingDialog() {
+        if (dialog == null)
+            dialog = new LoadingDialog(this);
+        if (!dialog.isShowing())
+            dialog.show();
+    }
+
+    @Override
+    public void dismissLoadingDialog() {
+        if (dialog != null && dialog.isShowing())
+            dialog.dismiss();
+    }
+
+
+    @Override
+    public <C extends AppCompatActivity> void toOtherActivity(Class<C> c) {
+        startActivity(new Intent(this, c));
+    }
+
+    @Override
     public void toOtherActivity(Intent intent) {
         startActivity(intent);
+    }
+
+    @Override
+    public void toOtherActivityForResult(Intent intent, int requestCode) {
+        startActivityForResult(intent, requestCode);
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 
     @Override
@@ -200,20 +261,6 @@ public abstract class BaseActivity<T extends IBasePresenter> extends AppCompatAc
 
     }
 
-    @Override
-    public void showToast(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void showToast(int stringResId) {
-        Toast.makeText(this, stringResId, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void toOtherActivityForResult(Intent intent, int requestCode) {
-        startActivityForResult(intent, requestCode);
-    }
 
     protected void setSuccessView(View v) {
         mSuccessView = v;
@@ -249,7 +296,7 @@ public abstract class BaseActivity<T extends IBasePresenter> extends AppCompatAc
         showEmptyView(0, 0);
     }
 
-    protected View getEmptyView(int resourceId, int stringResId) {
+    protected View getEmptyView(@DrawableRes int resourceId, @StringRes int stringResId) {
         mEmptyView = LayoutInflater.from(BaseActivity.this).inflate(R.layout.layout_empty,
                 mContainerView, false);
         ImageView imageView = (ImageView) mEmptyView.findViewById(R.id.iv_empty);
@@ -281,8 +328,4 @@ public abstract class BaseActivity<T extends IBasePresenter> extends AppCompatAc
         }
     }
 
-    @Override
-    public Context getContext() {
-        return this;
-    }
 }

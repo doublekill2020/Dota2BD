@@ -1,5 +1,6 @@
 package cn.edu.mydotabuff.ui.presenter;
 
+import cn.edu.mydotabuff.base.IBasePresenter;
 import cn.edu.mydotabuff.model.PlayerInfo;
 
 /**

@@ -5,13 +5,13 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.edu.mydotabuff.base.BasePresenterImpl;
 import cn.edu.mydotabuff.base.OpenDotaApi;
 import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.model.Profile;
 import cn.edu.mydotabuff.model.SearchPlayerResult;
 import cn.edu.mydotabuff.ui.presenter.ILoginPresenter;
 import cn.edu.mydotabuff.ui.view.activity.ILoginView;
-import io.realm.Realm;
 import io.realm.RealmResults;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -26,16 +26,14 @@ public class LoginPresenterImpl extends BasePresenterImpl<ILoginView> implements
     private static final String TAG = "LoginPresenterImpl";
 
     private List<PlayerInfo> mPlayerInfos = new ArrayList<>();
-    private Realm realm;
 
     public LoginPresenterImpl(ILoginView view) {
-        super(view);
-        realm = Realm.getDefaultInstance();
+        super(view, true);
     }
 
     @Override
     public boolean hasFocusPlayer() {
-        RealmResults<PlayerInfo> players = realm.where(PlayerInfo.class).findAll();
+        RealmResults<PlayerInfo> players = mRealm.where(PlayerInfo.class).findAll();
         return players != null && players.size() > 0;
     }
 
@@ -117,15 +115,10 @@ public class LoginPresenterImpl extends BasePresenterImpl<ILoginView> implements
 
     @Override
     public void bindPlayer(PlayerInfo info) {
-
-        realm.beginTransaction();
-        realm.copyToRealmOrUpdate(info);
-        realm.commitTransaction();
+        mRealm.beginTransaction();
+        mRealm.copyToRealmOrUpdate(info);
+        mRealm.commitTransaction();
     }
 
-    @Override
-    public void onDestory() {
-        super.onDestory();
-        realm.close();
-    }
+
 }
