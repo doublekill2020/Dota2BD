@@ -16,6 +16,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -43,7 +44,9 @@ import cn.edu.mydotabuff.base.BaseActivity;
 import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.ui.hero.FragHeroList;
 import cn.edu.mydotabuff.ui.presenter.IMainPresenter;
+import cn.edu.mydotabuff.ui.service.PlayerInfoService;
 import cn.edu.mydotabuff.ui.view.IMainView;
+import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.view.CircleImageView;
 
 /**
@@ -104,7 +107,7 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements IMainV
             steamID = Common.getSteamID(userID);
         }
         Snackbar snackbar = Snackbar.make(cd, R.string.match_data_will_be_sync_in_background, Snackbar.LENGTH_LONG);
-        snackbar.setAction(getString(R.string.cancel), new View.OnClickListener() {
+        snackbar.setAction(getString(R.string.cancel_do_sync), new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

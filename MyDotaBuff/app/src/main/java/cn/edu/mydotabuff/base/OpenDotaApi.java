@@ -91,6 +91,6 @@ public class OpenDotaApi {
         Observable<PlayerInfo> getPlayerInfo(@Path("account_id") String accountId);
 
         @GET("players/{account_id}/ratings")
-        Observable<Rating> getPlayerRating(@Path("account_id") String accountId);
+        Observable<List<Rating>> getPlayerRating(@Path("account_id") String accountId);
     }
 }

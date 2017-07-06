@@ -1,14 +1,16 @@
 package cn.edu.mydotabuff.ui.service;
 
-import android.util.Log;
+import com.hwangjr.rxbus.RxBus;
+
+import java.util.List;
 
 import cn.edu.mydotabuff.base.OpenDotaApi;
+import cn.edu.mydotabuff.base.RxCallBackEvent;
+import cn.edu.mydotabuff.common.EventTag;
 import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.model.Rating;
-import cn.edu.mydotabuff.util.ThreadUtils;
 import io.realm.Realm;
 import io.realm.RealmResults;
-import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -20,22 +22,39 @@ import rx.schedulers.Schedulers;
 
 public class PlayerInfoService {
 
-    public static void getPlayerRating(String accountId){
+    public static void getPlayerRating(final String accountId) {
+        final RxCallBackEvent event = new RxCallBackEvent();
+        event.tag = EventTag.GET_PLAYER_RATING;
         OpenDotaApi.getService().getPlayerRating(accountId)
-                .subscribe(new Subscriber<Rating>() {
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(Schedulers.io())
+                .map(new Func1<List<Rating>, Boolean>() {
                     @Override
-                    public void onCompleted() {
-
+                    public Boolean call(List<Rating> ratings) {
+                        Realm realm = Realm.getDefaultInstance();
+                        try {
+                            realm.beginTransaction();
+                            for (Rating rating : ratings) {
+                                rating.id = rating.account_id + rating.match_id;
+                            }
+                            realm.copyToRealmOrUpdate(ratings);
+                            realm.commitTransaction();
+                        } catch (Exception e) {
+                            return false;
+                        } finally {
+                            realm.close();
+                        }
+                        return true;
                     }
-
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<Boolean>() {
                     @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(Rating rating) {
-
+                    public void call(Boolean aBoolean) {
+                        event.success = aBoolean;
+                        event.data = accountId;
+                        RxBus.get().post(event);
                     }
                 });
     }
@@ -48,7 +67,6 @@ public class PlayerInfoService {
                 .map(new Func1<PlayerInfo, Boolean>() {
                     @Override
                     public Boolean call(PlayerInfo playerInfo) {
-                        Log.d("hao", ThreadUtils.isMainThread()+"bbb");
                         Realm realm = Realm.getDefaultInstance();
                         try {
                             PlayerInfo old = realm.where(PlayerInfo.class).equalTo("account_id", accountId).findFirst();

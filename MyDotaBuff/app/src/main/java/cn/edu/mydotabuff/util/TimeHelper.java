@@ -769,9 +769,9 @@ public class TimeHelper {
 
     public static String formatDate(long timeStamp) {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSSS");
 
-        String date = sdf.format(timeStamp * 1000);
+        String date = sdf.format(timeStamp);
 
         return date;
 
@@ -791,7 +791,7 @@ public class TimeHelper {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        String date = sdf.format(timeStamp * 1000);
+        String date = sdf.format(timeStamp);
 
         String[] split = date.split("\\s");
 

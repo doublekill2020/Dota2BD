@@ -20,4 +20,5 @@ public interface IFollowFragmentPresenter extends IBasePresenter {
 
     Map<String, PlayerInfo> getPlayerInfoMap();
 
+    void doSyncPlayersRating(List<String> playersAccountIds);
 }
