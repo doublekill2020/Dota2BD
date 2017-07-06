@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.common.db.RealmManager;
+import cn.edu.mydotabuff.view.LoadingDialog;
 import io.realm.Realm;
 
 /**
@@ -44,8 +46,7 @@ public abstract class BaseFragment<T extends IBasePresenter> extends Fragment im
     private boolean mHasShowSuccessView = false;
     protected T mPresenter;
     private SwipeRefreshLayout swipeRefreshLayout;
-    protected Realm mRealm;
-    private boolean mIsGetRealm = false;
+    private LoadingDialog dialog;
 
     @Override
     public void onAttach(Activity activity) {
@@ -126,9 +127,35 @@ public abstract class BaseFragment<T extends IBasePresenter> extends Fragment im
         showEmptyView(0, 0);
     }
 
+
+    @Override
+    public void showLoadingDialog() {
+        if (dialog == null)
+            dialog = new LoadingDialog(getActivity());
+        if (!dialog.isShowing())
+            dialog.show();
+    }
+
+    @Override
+    public void dismissLoadingDialog() {
+        if (dialog != null && dialog.isShowing())
+            dialog.dismiss();
+    }
+
+
+    @Override
+    public <C extends AppCompatActivity> void toOtherActivity(Class<C> c) {
+        startActivity(new Intent(getContext(), c));
+    }
+
     @Override
     public void toOtherActivity(Intent intent) {
         startActivity(intent);
+    }
+
+    @Override
+    public void toOtherActivityForResult(Intent intent, int requestCode) {
+        startActivityForResult(intent, requestCode);
     }
 
     @Override
@@ -157,24 +184,12 @@ public abstract class BaseFragment<T extends IBasePresenter> extends Fragment im
     }
 
     @Override
-    public void toOtherActivityForResult(Intent intent, int requestCode) {
-        startActivityForResult(intent, requestCode);
-    }
-
-    @Override
     public void showErrorLayout(int errorCode) {
     }
 
     @Override
     public void showErrorLayout() {
 
-    }
-    public Realm getRealm() {
-        if (mRealm == null) {
-            mIsGetRealm = true;
-            mRealm = Realm.getDefaultInstance();
-        }
-        return mRealm;
     }
 
     @Override
@@ -185,10 +200,6 @@ public abstract class BaseFragment<T extends IBasePresenter> extends Fragment im
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mIsGetRealm) {
-            mRealm.removeAllChangeListeners();
-            RealmManager.closeRealm(mRealm);
-        }
         if (mPresenter != null) {
             mPresenter.onDestroy();
         }

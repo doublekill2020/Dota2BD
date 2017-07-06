@@ -2,6 +2,7 @@ package cn.edu.mydotabuff.ui.view.activity;
 
 import java.util.List;
 
+import cn.edu.mydotabuff.base.IBaseView;
 import cn.edu.mydotabuff.model.PlayerInfo;
 
 /**

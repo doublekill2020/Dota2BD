@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 import cn.edu.mydotabuff.R;
-import cn.edu.mydotabuff.base.BaseFragment;
 import cn.edu.mydotabuff.base.BaseListClickEvent;
+import cn.edu.mydotabuff.base.BasePresenterImpl;
 import cn.edu.mydotabuff.base.OpenDotaApi;
 import cn.edu.mydotabuff.base.RxCallBackEvent;
 import cn.edu.mydotabuff.common.EventTag;
@@ -33,19 +33,16 @@ import rx.schedulers.Schedulers;
  * Created by nevermore on 2017/6/28 0028.
  */
 
-public class FollowFragmentPresenterImpl implements IFollowFragmentPresenter {
+public class FollowFragmentPresenterImpl extends BasePresenterImpl<IFollowFragmentView> implements IFollowFragmentPresenter {
 
-    private IFollowFragmentView mView;
     private RealmResults<PlayerInfo> mPlayerInfos;
-    private Realm mRealm;
     private boolean mHasLoaded = false;
     private List<String> mFolloers = new ArrayList<>();
     private RealmResults<Match> matches;
     private Map<String, PlayerInfo> mPlayerInfoMap;
 
     public FollowFragmentPresenterImpl(IFollowFragmentView view) {
-        mView = view;
-        mRealm = ((BaseFragment) mView).getRealm();
+        super(view, true);
         mPlayerInfos = mRealm.where(PlayerInfo.class).equalTo("follow", true).findAllAsync();
         mPlayerInfos.addChangeListener(new RealmChangeListener<RealmResults<PlayerInfo>>() {
             @Override
@@ -110,8 +107,8 @@ public class FollowFragmentPresenterImpl implements IFollowFragmentPresenter {
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
         RxBus.get().unregister(this);
-        mView = null;
     }
 
     @Subscribe

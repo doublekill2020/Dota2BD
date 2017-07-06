@@ -23,6 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.edu.mydotabuff.R;
+import cn.edu.mydotabuff.base.BaseActivity;
 import cn.edu.mydotabuff.common.CommAdapter;
 import cn.edu.mydotabuff.common.CommViewHolder;
 import cn.edu.mydotabuff.model.PlayerInfo;
@@ -31,7 +32,7 @@ import cn.edu.mydotabuff.ui.presenter.ILoginPresenter;
 import cn.edu.mydotabuff.ui.presenter.impl.LoginPresenterImpl;
 import cn.edu.mydotabuff.ui.view.activity.ILoginView;
 
-public class LoginActivity extends ActBase<ILoginPresenter> implements ILoginView {
+public class LoginActivity extends BaseActivity<ILoginPresenter> implements ILoginView {
 
     @BindView(R.id.player_search_spinner)
     Spinner mSpinner;
@@ -51,7 +52,7 @@ public class LoginActivity extends ActBase<ILoginPresenter> implements ILoginVie
         ButterKnife.setDebug(true);
         // FIXME: 2017/7/6 还要排除其他界面跳转过了的情况
         if (mPresenter.hasFocusPlayer()) {
-            toActivity(MainActivity.class);
+            toOtherActivity(MainActivity.class);
         } else {
             setContentView(R.layout.act_login);
             mKeywordEdittext.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -141,7 +142,7 @@ public class LoginActivity extends ActBase<ILoginPresenter> implements ILoginVie
                 info.follow = true;
                 mPresenter.bindPlayer(info);
                 dialog.dismiss();
-                toActivity(MainActivity.class);
+                toOtherActivity(MainActivity.class);
                 finish();
             }
         });
