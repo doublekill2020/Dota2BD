@@ -4,9 +4,11 @@ import android.util.Log;
 
 import cn.edu.mydotabuff.base.OpenDotaApi;
 import cn.edu.mydotabuff.model.PlayerInfo;
+import cn.edu.mydotabuff.model.Rating;
 import cn.edu.mydotabuff.util.ThreadUtils;
 import io.realm.Realm;
 import io.realm.RealmResults;
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -17,6 +19,27 @@ import rx.schedulers.Schedulers;
  */
 
 public class PlayerInfoService {
+
+    public static void getPlayerRating(String accountId){
+        OpenDotaApi.getService().getPlayerRating(accountId)
+                .subscribe(new Subscriber<Rating>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(Rating rating) {
+
+                    }
+                });
+    }
+
 
     public static void getPlayerInfo(final String accountId) {
         OpenDotaApi.getService().getPlayerInfo(accountId)

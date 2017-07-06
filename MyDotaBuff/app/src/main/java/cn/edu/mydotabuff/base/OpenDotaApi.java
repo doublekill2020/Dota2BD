@@ -10,6 +10,7 @@ import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.common.http.APIConstants;
 import cn.edu.mydotabuff.model.Match;
 import cn.edu.mydotabuff.model.PlayerInfo;
+import cn.edu.mydotabuff.model.Rating;
 import cn.edu.mydotabuff.model.SearchPlayerResult;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
@@ -88,5 +89,8 @@ public class OpenDotaApi {
 
         @GET("players/{account_id}")
         Observable<PlayerInfo> getPlayerInfo(@Path("account_id") String accountId);
+
+        @GET("players/{account_id}/ratings")
+        Observable<Rating> getPlayerRating(@Path("account_id") String accountId);
     }
 }
