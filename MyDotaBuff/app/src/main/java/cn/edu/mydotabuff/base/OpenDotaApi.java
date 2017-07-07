@@ -1,17 +1,25 @@
 package cn.edu.mydotabuff.base;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
 import java.util.List;
 
 import cn.edu.mydotabuff.DotaApplication;
+import cn.edu.mydotabuff.base.realm.RealmInt;
+import cn.edu.mydotabuff.base.realm.RealmIntAdapter;
 import cn.edu.mydotabuff.common.http.APIConstants;
 import cn.edu.mydotabuff.model.Match;
+import cn.edu.mydotabuff.model.MatchDetail;
 import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.model.Rating;
 import cn.edu.mydotabuff.model.SearchPlayerResult;
+import io.realm.RealmList;
+import io.realm.RealmObject;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
@@ -52,7 +60,21 @@ public class OpenDotaApi {
     }
 
     private static Gson createGson() {
-        return new GsonBuilder().create();
+        return new GsonBuilder()
+                .setExclusionStrategies(new ExclusionStrategy() {
+                    @Override
+                    public boolean shouldSkipField(FieldAttributes f) {
+                        return f.getDeclaredClass().equals(RealmObject.class);
+                    }
+
+                    @Override
+                    public boolean shouldSkipClass(Class<?> clazz) {
+                        return false;
+                    }
+                })
+                .registerTypeAdapter(new TypeToken<RealmList<RealmInt>>() {
+                }.getType(), new RealmIntAdapter())
+                .create();
     }
 
     public static OpenDotaService getService() {
@@ -86,7 +108,7 @@ public class OpenDotaApi {
         Observable<List<SearchPlayerResult>> searchAccountId(@Query(value = "q", encoded = true)
                                                                      String nickName, @Query
                                                                      ("similarity") float
-                similarity);
+                                                                     similarity);
 
         @GET("players/{account_id}")
         Observable<PlayerInfo> getPlayerInfo(@Path("account_id") String accountId);
@@ -95,6 +117,6 @@ public class OpenDotaApi {
         Observable<List<Rating>> getPlayerRating(@Path("account_id") String accountId);
 
         @GET("matches/{match_id}")
-        Observable<ResponseBody> getMatchDetail(@Path("match_id") String accountId);
+        Observable<MatchDetail> getMatchDetail(@Path("match_id") String accountId);
     }
 }

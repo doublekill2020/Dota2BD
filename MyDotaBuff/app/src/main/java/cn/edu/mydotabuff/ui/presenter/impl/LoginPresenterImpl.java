@@ -45,10 +45,11 @@ public class LoginPresenterImpl extends BasePresenterImpl<ILoginView> implements
         if (!isExactSearch) {
             OpenDotaApi.getService().searchAccountId(key, 0.4f)
                     .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+                    .observeOn(Schedulers.io())
                     .map(new Func1<List<SearchPlayerResult>, List<PlayerInfo>>() {
                         @Override
                         public List<PlayerInfo> call(List<SearchPlayerResult> searchPlayerResults) {
+                            com.orhanobut.logger.Logger.d(Thread.currentThread());
                             List<PlayerInfo> mList = new ArrayList<>();
                             if (searchPlayerResults != null) {
                                 for (SearchPlayerResult result : searchPlayerResults) {
@@ -57,6 +58,7 @@ public class LoginPresenterImpl extends BasePresenterImpl<ILoginView> implements
                                     info.profile = new Profile();
                                     info.profile.account_id = info.account_id;
                                     info.profile.avatarfull = result.avatarfull;
+                                    info.profile.avatar = result.avatarfull;
                                     info.profile.personaname = result.personaName;
                                     mList.add(info);
                                 }
@@ -64,6 +66,7 @@ public class LoginPresenterImpl extends BasePresenterImpl<ILoginView> implements
                             return mList;
                         }
                     })
+                    .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Subscriber<List<PlayerInfo>>() {
                         @Override
                         public void onCompleted() {
