@@ -22,7 +22,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 
-import com.nhaarman.listviewanimations.appearance.simple.ScaleInAnimationAdapter;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.json2.JSONArray;
@@ -54,7 +53,6 @@ public class FragNewsItem extends BaseFragment {
     private int index;
     private XListView list;
     private CommAdapter<NewsBean> adapter;
-    private ScaleInAnimationAdapter animationAdapter;
     private Activity act;
     private ArrayList<NewsBean> beans = new ArrayList<NewsBean>();
     private View view;
@@ -137,9 +135,7 @@ public class FragNewsItem extends BaseFragment {
                                         item.getPic(), icon);
                             }
                         };
-                        animationAdapter = new ScaleInAnimationAdapter(adapter);
-                        animationAdapter.setAbsListView(list);
-                        list.setAdapter(animationAdapter);
+                        list.setAdapter(adapter);
                     } else {
                         adapter.notifyDataSetChanged();
                     }

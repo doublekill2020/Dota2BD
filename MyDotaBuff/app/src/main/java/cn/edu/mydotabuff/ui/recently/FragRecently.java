@@ -9,7 +9,6 @@ import org.json2.JSONArray;
 import org.json2.JSONException;
 import org.json2.JSONObject;
 
-import com.nhaarman.listviewanimations.appearance.simple.ScaleInAnimationAdapter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -51,7 +50,6 @@ public class FragRecently extends BaseFragment {
 	private String userID;
 	private Activity activity;
 	private FragItemAdapter mAdapter;
-	private ScaleInAnimationAdapter sAdapter;
 	private LoadingDialog dialog;
 	private ArrayList<String> matchIds;
 	private ArrayList<MatchBean> allMatchBeans;
@@ -296,14 +294,12 @@ public class FragRecently extends BaseFragment {
 				ArrayList<MatchBean> beans = (ArrayList<MatchBean>) msg.obj;
 				if (mAdapter == null) {
 					mAdapter = new FragItemAdapter(activity, beans);
-					sAdapter = new ScaleInAnimationAdapter(mAdapter);
-					sAdapter.setAbsListView(listView);
-					listView.setAdapter(sAdapter);
+					listView.setAdapter(mAdapter);
 					allMatchBeans.addAll(beans);
 				} else {
 					allMatchBeans.addAll(beans);
 					mAdapter.addMoreData(beans);
-					sAdapter.notifyDataSetChanged();
+                    mAdapter.notifyDataSetChanged();
 				}
 				break;
 			case FETCH_ONLINE_NUM:
