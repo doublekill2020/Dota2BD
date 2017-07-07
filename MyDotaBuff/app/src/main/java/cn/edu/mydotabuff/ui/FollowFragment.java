@@ -27,7 +27,6 @@ import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.model.Rating;
 import cn.edu.mydotabuff.ui.presenter.IFollowFragmentPresenter;
 import cn.edu.mydotabuff.ui.presenter.impl.FollowFragmentPresenterImpl;
-import cn.edu.mydotabuff.ui.service.PlayerInfoService;
 import cn.edu.mydotabuff.ui.view.fragment.IFollowFragmentView;
 import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.util.Utils;
@@ -94,7 +93,7 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
                     holder.setText(R.id.tv_player_name, playerInfo.profile.personaname);
                 }
                 if (match.lobby_type == LobbyType.LOBBY_TYPE_RANKED) {
-                    Rating rating = getRealm().where(Rating.class).equalTo("id", match.account_id + match.match_id).findFirst();
+                    Rating rating = mPresenter.getRealm().where(Rating.class).equalTo("id", match.account_id + match.match_id).findFirst();
                     if (rating != null && !TextUtils.isEmpty(rating.solo_competitive_rank)) {
                         String mmr = rating.solo_competitive_rank;
                         holder.setText(R.id.tv_mmr, mmr + Common.getMmrLevel(mmr));

@@ -24,6 +24,11 @@ public class BasePresenterImpl<V extends IBaseView> implements IBasePresenter {
     }
 
     @Override
+    public Realm getRealm() {
+        return mRealm;
+    }
+
+    @Override
     public final void initRealm() {
         if (mRealm == null) {
             mRealm = Realm.getDefaultInstance();
