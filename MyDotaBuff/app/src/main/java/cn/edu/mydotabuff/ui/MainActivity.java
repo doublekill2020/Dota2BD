@@ -11,12 +11,12 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -35,18 +35,14 @@ import com.umeng.socialize.sso.SinaSsoHandler;
 import com.umeng.socialize.sso.UMQQSsoHandler;
 import com.umeng.socialize.sso.UMSsoHandler;
 import com.umeng.socialize.weixin.controller.UMWXHandler;
-import com.umeng.update.UmengUpdateAgent;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseActivity;
 import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.ui.hero.FragHeroList;
 import cn.edu.mydotabuff.ui.presenter.IMainPresenter;
-import cn.edu.mydotabuff.ui.service.PlayerInfoService;
 import cn.edu.mydotabuff.ui.view.IMainView;
-import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.view.CircleImageView;
 
 /**
@@ -91,8 +87,6 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements IMainV
         mPageAdapter = new MainPageAdapter(getSupportFragmentManager());
         mVp.setAdapter(mPageAdapter);
         mTabLayout.setupWithViewPager(mVp);
-        UmengUpdateAgent.setUpdateOnlyWifi(false);
-        UmengUpdateAgent.update(this);
         initUMShare();
 
         configureToolbar();
@@ -104,7 +98,8 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements IMainV
         if (!userID.equals("")) {
             steamID = Common.getSteamID(userID);
         }
-        Snackbar snackbar = Snackbar.make(cd, R.string.match_data_will_be_sync_in_background, Snackbar.LENGTH_LONG);
+        Snackbar snackbar = Snackbar.make(cd, R.string.match_data_will_be_sync_in_background,
+                Snackbar.LENGTH_LONG);
         snackbar.setAction(getString(R.string.cancel_do_sync), new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -171,7 +166,7 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements IMainV
 
     private void configureToolbar() {
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("最近比赛");
+        getSupportActionBar().setTitle(getString(R.string.app_name));
 
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,9 +200,9 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements IMainV
         mDrawerLayout.addDrawerListener(mDrawerToggle);
     }
 
-    class MainPageAdapter extends FragmentStatePagerAdapter {
+    class MainPageAdapter extends FragmentPagerAdapter {
 
-        private String[] titles = new String[]{"关注", "英雄", "天梯", "发现"};
+        private String[] titles = new String[]{"关注", "英雄", "统计", "发现"};
 
         public MainPageAdapter(FragmentManager fm) {
             super(fm);
@@ -221,7 +216,7 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements IMainV
                 case 1:
                     return new FragHeroList();
                 case 2:
-                    return new RankFragment();
+                    return new StatisticsFragment();
                 case 3:
                     return new FragFound();
                 default:

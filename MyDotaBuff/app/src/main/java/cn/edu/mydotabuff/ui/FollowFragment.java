@@ -2,10 +2,11 @@ package cn.edu.mydotabuff.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -27,7 +28,7 @@ import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.model.Rating;
 import cn.edu.mydotabuff.ui.presenter.IFollowFragmentPresenter;
 import cn.edu.mydotabuff.ui.presenter.impl.FollowFragmentPresenterImpl;
-import cn.edu.mydotabuff.ui.view.fragment.IFollowFragmentView;
+import cn.edu.mydotabuff.ui.view.IFollowFragmentView;
 import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.util.Utils;
 import cn.edu.mydotabuff.view.SwipeRefreshRecycleView;
@@ -41,8 +42,6 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
 
     @BindView(R.id.rv_list)
     SwipeRefreshRecycleView mRvList;
-    @BindView(R.id.fab)
-    FloatingActionButton mFab;
     @BindView(R.id.fl_success)
     FrameLayout mFlSuccess;
     private BaseListAdapter<Match> mAdapter;
@@ -52,6 +51,7 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable
             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_follow_base, container, false);
+        setHasOptionsMenu(true);
         ButterKnife.bind(this, view);
 
         init();
@@ -74,7 +74,7 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
         mRvList.setAdapter(mAdapter = new BaseListAdapter<Match>(mMatches, R.layout
                 .fragment_follow_item, EventTag.CLICK_TO_DETAIL) {
             @Override
-            public void getView(BaseListHolder holder, Match match, int pos) {
+            public void getView(BaseListHolder holder, final Match match, int pos) {
                 holder.setImageURI(R.id.sdv_hero_icon, Utils.getHeroImageUriForFresco(Common.getHeroName
                         (match.hero_id)));
                 holder.setText(R.id.tv_kda, match.kills + "/" + match.deaths + "/" + match.assists);
@@ -101,22 +101,12 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
                         holder.setText(R.id.tv_mmr, R.string.rank_level_unknow);
                     }
                 }
-            }
-        });
-
-        mRvList.setOnScrolllistener(new SwipeRefreshRecycleView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if (dy > 0) {
-                    mFab.hide();
-                } else {
-                    mFab.show();
-                }
-            }
-
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-
+                holder.setOnClickListener(R.id.sdv_user_icon, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        PlayerDetailActivity.start(mActivity, match.account_id);
+                    }
+                });
             }
         });
         mPresenter = new FollowFragmentPresenterImpl(this);
@@ -137,5 +127,32 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
     @Override
     public void notifyDataUpdate() {
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.menu_follow_fragment, menu);
+        final SearchView searchView = (SearchView) menu.findItem(
+                R.id.action_search).getActionView();
+        searchView.setQueryHint(getString(R.string.follow_fragment_search_hint));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String arg0) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String arg0) {
+                // TODO Auto-generated method stub
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public void refresh() {
+        mRvList.refresh();
     }
 }

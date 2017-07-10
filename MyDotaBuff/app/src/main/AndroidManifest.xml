@@ -8,10 +8,9 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="18" />
 
-    <!-- 使用相机 -->
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="true" />
+    <!-- 使用相机 --><uses-feature
+    android:name="android.hardware.camera"
+    android:required="true" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -58,6 +57,7 @@
             android:theme="@style/DotaTheme"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
         <activity android:name=".ui.view.activity.impl.MatchDetailActivity" />
+        <activity android:name=".ui.PlayerDetailActivity"></activity>
         <activity android:name=".ui.recently.ActMatchDetail" />
         <activity android:name=".ui.ActPlayerDetail" />
         <activity android:name=".ui.ActFriendList" />
@@ -87,22 +87,6 @@
         <service
             android:name="com.octo.android.robospice.UncachedSpiceService"
             android:exported="false" />
-
-        <!-- 友盟更新组件 -->
-        <service
-            android:name="com.umeng.update.net.DownloadingService"
-            android:process=":DownloadingService" />
-
-        <activity
-            android:name="com.umeng.update.UpdateDialogActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <!-- 友盟反馈 -->
-        <activity
-            android:name="com.umeng.fb.ConversationActivity"
-            android:theme="@android:style/Theme.NoTitleBar" />
-        <activity
-            android:name="com.umeng.fb.ContactActivity"
-            android:theme="@android:style/Theme.NoTitleBar" />
 
         <meta-data
             android:name="UMENG_APPKEY"

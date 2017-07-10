@@ -1,4 +1,4 @@
-package cn.edu.mydotabuff.ui.view.fragment;
+package cn.edu.mydotabuff.ui.view;
 
 import java.util.List;
 
@@ -16,4 +16,6 @@ public interface IFollowFragmentView extends IBaseView {
     void setRefreshCompleted();
 
     void notifyDataUpdate();
+
+    void refresh();
 }
