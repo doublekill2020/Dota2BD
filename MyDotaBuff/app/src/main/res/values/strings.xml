@@ -451,5 +451,6 @@
     <string name="lobby_type_1v1_mid">solo模式</string>
     <string name="lobby_type_battle_cup">勇士联赛</string>
     <string name="unknow">未知</string>
+    <string name="follow_fragment_search_hint">搜索ID、昵称</string>
 
 </resources>

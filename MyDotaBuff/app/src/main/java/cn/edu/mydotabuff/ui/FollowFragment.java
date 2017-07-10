@@ -1,14 +1,20 @@
 package cn.edu.mydotabuff.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +33,7 @@ import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.model.Rating;
 import cn.edu.mydotabuff.ui.presenter.IFollowFragmentPresenter;
 import cn.edu.mydotabuff.ui.presenter.impl.FollowFragmentPresenterImpl;
+import cn.edu.mydotabuff.ui.recently.ActMatchDetail;
 import cn.edu.mydotabuff.ui.view.fragment.IFollowFragmentView;
 import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.util.Utils;
@@ -137,5 +144,27 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
     @Override
     public void notifyDataUpdate() {
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        inflater.inflate(R.menu.menu_follow_fragment, menu);
+        final SearchView searchView = (SearchView) menu.findItem(
+                R.id.action_search).getActionView();
+        searchView.setQueryHint(getString(R.string.follow_fragment_search_hint));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String arg0) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String arg0) {
+                // TODO Auto-generated method stub
+                return false;
+            }
+        });
     }
 }

@@ -49,7 +49,6 @@ import cn.edu.mydotabuff.view.XListView;
 
 public class FragHeroList extends BaseFragment implements OnWebDataGetListener {
 
-    private LoadingDialog dialog;
     private List<HerosSatistics> heroSatisticsList = new ArrayList<HerosSatistics>();
     private String userID = "";
     private XListView listView;
@@ -69,7 +68,6 @@ public class FragHeroList extends BaseFragment implements OnWebDataGetListener {
         SharedPreferences myPreferences = activity.getSharedPreferences(
                 "user_info", Activity.MODE_PRIVATE);
         userID = myPreferences.getString("userID", "");
-        dialog = new LoadingDialog(activity);
         if (myPreferences.getString("isNeedUpdate", "").equals("true")) {
             WebDataHelper helper = new WebDataHelper(activity);
             helper.setDataGetListener(this);
@@ -107,13 +105,11 @@ public class FragHeroList extends BaseFragment implements OnWebDataGetListener {
                         @Override
                         public void onStartGetData() {
                             // TODO Auto-generated method stub
-                            dialog.show();
                         }
 
                         @Override
                         public <T> void onGetFinished(T data) {
                             // TODO Auto-generated method stub
-                            dialog.dismiss();
                             final ArrayList<HeroMatchStatistics> beans =
                                     (ArrayList<HeroMatchStatistics>) data;
 
@@ -270,7 +266,6 @@ public class FragHeroList extends BaseFragment implements OnWebDataGetListener {
 
                         @Override
                         public void onGetFailed(String failMsg) {
-                            dialog.dismiss();
                             TipsToast
                                     .showToast(activity, "不如去看个片放松下再来重新尝试~~ ",
                                             Toast.LENGTH_SHORT,
@@ -291,13 +286,11 @@ public class FragHeroList extends BaseFragment implements OnWebDataGetListener {
     @Override
     public void onStartGetData() {
         // TODO Auto-generated method stub
-        dialog.show();
     }
 
     @Override
     public <T> void onGetFinished(T data) {
         // TODO Auto-generated method stub
-        dialog.dismiss();
         heroSatisticsList = (List<HerosSatistics>) data;
         DotaApplication.getApplication().saveData(data,
                 LocalDataType.HERO_USED_LIST);
@@ -307,7 +300,6 @@ public class FragHeroList extends BaseFragment implements OnWebDataGetListener {
 
     @Override
     public void onGetFailed(String failMsg) {
-        dialog.dismiss();
         TipsToast.showToast(activity, "不如去看个片放松下再来重新尝试~~ ", Toast.LENGTH_SHORT,
                 DialogType.LOAD_FAILURE);
     }

@@ -1,5 +1,8 @@
 package cn.edu.mydotabuff.ui;
 
+import android.view.Menu;
+import android.view.MenuInflater;
+
 import cn.edu.mydotabuff.base.BaseFragment;
 
 /**
@@ -7,4 +10,10 @@ import cn.edu.mydotabuff.base.BaseFragment;
  */
 
 public class StatisticsFragment extends BaseFragment {
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 }
