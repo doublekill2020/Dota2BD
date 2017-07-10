@@ -110,6 +110,12 @@ public class LoginActivity extends BaseActivity<ILoginPresenter> implements ILog
         }
     }
 
+    @Override
+    public void EnterMainImmediately() {
+        toOtherActivity(MainActivity.class);
+        finish();
+    }
+
     private void showResultDialog(final List<PlayerInfo> beans) {
         View dlgView = getLayoutInflater().inflate(R.layout.dlg_user_list,
                 null);

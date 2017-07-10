@@ -1,12 +1,15 @@
 package cn.edu.mydotabuff.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import io.realm.RealmObject;
 
 /**
  * Created by sadhu on 2017/7/7.
  * 描述
  */
-public class BenchmarksBean extends RealmObject {
+public class BenchmarksBean extends RealmObject implements Parcelable {
     /**
      * gold_per_min : {"raw":433,"pct":0.958967266021208}
      * xp_per_min : {"raw":571,"pct":0.9741816505301982}
@@ -24,4 +27,45 @@ public class BenchmarksBean extends RealmObject {
     public BenchmarksMinBean hero_damage_per_min;
     public BenchmarksMinBean hero_healing_per_min;
     public BenchmarksMinBean tower_damage;
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(this.gold_per_min, flags);
+        dest.writeParcelable(this.xp_per_min, flags);
+        dest.writeParcelable(this.kills_per_min, flags);
+        dest.writeParcelable(this.last_hits_per_min, flags);
+        dest.writeParcelable(this.hero_damage_per_min, flags);
+        dest.writeParcelable(this.hero_healing_per_min, flags);
+        dest.writeParcelable(this.tower_damage, flags);
+    }
+
+    public BenchmarksBean() {
+    }
+
+    protected BenchmarksBean(Parcel in) {
+        this.gold_per_min = in.readParcelable(BenchmarksMinBean.class.getClassLoader());
+        this.xp_per_min = in.readParcelable(BenchmarksMinBean.class.getClassLoader());
+        this.kills_per_min = in.readParcelable(BenchmarksMinBean.class.getClassLoader());
+        this.last_hits_per_min = in.readParcelable(BenchmarksMinBean.class.getClassLoader());
+        this.hero_damage_per_min = in.readParcelable(BenchmarksMinBean.class.getClassLoader());
+        this.hero_healing_per_min = in.readParcelable(BenchmarksMinBean.class.getClassLoader());
+        this.tower_damage = in.readParcelable(BenchmarksMinBean.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<BenchmarksBean> CREATOR = new Parcelable.Creator<BenchmarksBean>() {
+        @Override
+        public BenchmarksBean createFromParcel(Parcel source) {
+            return new BenchmarksBean(source);
+        }
+
+        @Override
+        public BenchmarksBean[] newArray(int size) {
+            return new BenchmarksBean[size];
+        }
+    };
 }

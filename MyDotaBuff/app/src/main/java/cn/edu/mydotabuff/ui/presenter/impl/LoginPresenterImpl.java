@@ -5,6 +5,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BasePresenterImpl;
 import cn.edu.mydotabuff.base.OpenDotaApi;
 import cn.edu.mydotabuff.model.PlayerInfo;
@@ -107,10 +108,13 @@ public class LoginPresenterImpl extends BasePresenterImpl<ILoginView> implements
                             mPlayerInfos.clear();
                             if (info != null && info.profile != null) {
                                 info.account_id = info.profile.account_id;
-                                mPlayerInfos.add(info);
+                                info.follow = true;
+                                bindPlayer(info);
+                                mView.dismissLoadingDialog();
+                                mView.EnterMainImmediately();
+                            } else {
+                                mView.showToast(R.string.please_enter_the_correct_id);
                             }
-                            mView.dismissLoadingDialog();
-                            mView.showResult(mPlayerInfos);
                         }
                     });
         }

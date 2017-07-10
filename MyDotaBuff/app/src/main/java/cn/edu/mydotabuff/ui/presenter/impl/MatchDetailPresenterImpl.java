@@ -29,29 +29,29 @@ public class MatchDetailPresenterImpl extends BasePresenterImpl<IMatchDetailView
     private long lastTime;
 
     @Override
-    public void getMatchDetail(final String matchId) {
-        mView.showLoadingDialog();
-        lastTime = SystemClock.elapsedRealtime();
-        RealmResults<MatchDetail> matchDetailRealmResults = mRealm
-                .where(MatchDetail.class)
-                .equalTo("match_id", matchId)
-                .findAllAsync();
-        matchDetailRealmResults.addChangeListener(new OrderedRealmCollectionChangeListener<RealmResults<MatchDetail>>() {
-            @Override
-            public void onChange(RealmResults<MatchDetail> matchDetails, OrderedCollectionChangeSet changeSet) {
-                if (changeSet == null) {
-                    // The first time async returns with an null changeSet.
-                    if (matchDetails.size() == 0) {
-                        getMatchDetailFromNet(matchId);
+        public void getMatchDetail(final String matchId) {
+            mView.showLoadingDialog();
+            lastTime = SystemClock.elapsedRealtime();
+            RealmResults<MatchDetail> matchDetailRealmResults = mRealm
+                    .where(MatchDetail.class)
+                    .equalTo("match_id", matchId)
+                    .findAllAsync();
+            matchDetailRealmResults.addChangeListener(new OrderedRealmCollectionChangeListener<RealmResults<MatchDetail>>() {
+                @Override
+                public void onChange(RealmResults<MatchDetail> matchDetails, OrderedCollectionChangeSet changeSet) {
+                    if (changeSet == null) {
+                        // The first time async returns with an null changeSet.
+                        if (matchDetails.size() == 0) {
+                            getMatchDetailFromNet(matchId);
+                        } else {
+                            mView.dismissLoadingDialog();
+                            Logger.d("db" + (SystemClock.elapsedRealtime() - lastTime) + ";duration:" + matchDetails.get(0).duration);
+                        }
                     } else {
-                        mView.dismissLoadingDialog();
-                        Logger.d("db" + (SystemClock.elapsedRealtime() - lastTime) + ";duration:" + matchDetails.get(0).duration);
+                        // Called on every update.
                     }
-                } else {
-                    // Called on every update.
                 }
-            }
-        });
+            });
 
     }
 

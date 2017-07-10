@@ -11,4 +11,5 @@ import cn.edu.mydotabuff.model.PlayerInfo;
  */
 public interface ILoginView extends IBaseView {
     void showResult(List<PlayerInfo> playerInfos);
+    void EnterMainImmediately();
 }
