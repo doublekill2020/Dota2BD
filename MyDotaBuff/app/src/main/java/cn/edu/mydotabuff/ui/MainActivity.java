@@ -165,7 +165,7 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements IMainV
 
     private void configureToolbar() {
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("最近比赛");
+        getSupportActionBar().setTitle(getString(R.string.app_name));
 
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -201,7 +201,7 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements IMainV
 
     class MainPageAdapter extends FragmentStatePagerAdapter {
 
-        private String[] titles = new String[]{"关注", "英雄", "天梯", "发现"};
+        private String[] titles = new String[]{"关注", "英雄", "统计", "发现"};
 
         public MainPageAdapter(FragmentManager fm) {
             super(fm);
@@ -215,7 +215,7 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements IMainV
                 case 1:
                     return new FragHeroList();
                 case 2:
-                    return new RankFragment();
+                    return new StatisticsFragment();
                 case 3:
                     return new FragFound();
                 default:
