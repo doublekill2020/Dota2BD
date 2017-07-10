@@ -16,4 +16,6 @@ public interface IFollowFragmentView extends IBaseView {
     void setRefreshCompleted();
 
     void notifyDataUpdate();
+
+    void refresh();
 }

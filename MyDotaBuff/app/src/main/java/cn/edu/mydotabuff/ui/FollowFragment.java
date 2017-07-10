@@ -48,8 +48,6 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
 
     @BindView(R.id.rv_list)
     SwipeRefreshRecycleView mRvList;
-    @BindView(R.id.fab)
-    FloatingActionButton mFab;
     @BindView(R.id.fl_success)
     FrameLayout mFlSuccess;
     private BaseListAdapter<Match> mAdapter;
@@ -59,6 +57,7 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable
             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_follow_base, container, false);
+        setHasOptionsMenu(true);
         ButterKnife.bind(this, view);
 
         init();
@@ -110,22 +109,6 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
                 }
             }
         });
-
-        mRvList.setOnScrolllistener(new SwipeRefreshRecycleView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if (dy > 0) {
-                    mFab.hide();
-                } else {
-                    mFab.show();
-                }
-            }
-
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-
-            }
-        });
         mPresenter = new FollowFragmentPresenterImpl(this);
     }
 
@@ -166,5 +149,10 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
                 return false;
             }
         });
+    }
+
+    @Override
+    public void refresh() {
+        mRvList.refresh();
     }
 }

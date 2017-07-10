@@ -55,8 +55,7 @@ public class FollowFragmentPresenterImpl extends BasePresenterImpl<IFollowFragme
                         syncPlayerData(playerInfo.profile.account_id);
                     }
                     getDataFromDb(mPlayerIds);
-                    doSyncPlayersRating(mPlayerIds);
-                    doSync(mPlayerIds);
+                    mView.refresh();
 
                     mHasLoaded = true;
                 }
@@ -139,6 +138,7 @@ public class FollowFragmentPresenterImpl extends BasePresenterImpl<IFollowFragme
 
     @Override
     public void doSync(final List<String> followers) {
+        doSyncPlayersRating(mPlayerIds);
         for (final String accountId : followers) {
             OpenDotaApi.getService().getRecentMatch(accountId)
                     .subscribeOn(AndroidSchedulers.mainThread())

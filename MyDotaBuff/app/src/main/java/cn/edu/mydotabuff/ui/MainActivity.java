@@ -11,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -199,7 +200,7 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements IMainV
         mDrawerLayout.addDrawerListener(mDrawerToggle);
     }
 
-    class MainPageAdapter extends FragmentStatePagerAdapter {
+    class MainPageAdapter extends FragmentPagerAdapter {
 
         private String[] titles = new String[]{"关注", "英雄", "统计", "发现"};
 
