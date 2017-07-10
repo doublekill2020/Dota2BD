@@ -19,7 +19,7 @@ import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.ui.presenter.IFollowFragmentPresenter;
 import cn.edu.mydotabuff.ui.service.PlayerInfoService;
 import cn.edu.mydotabuff.ui.view.activity.impl.MatchDetailActivity;
-import cn.edu.mydotabuff.ui.view.fragment.IFollowFragmentView;
+import cn.edu.mydotabuff.ui.view.IFollowFragmentView;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;

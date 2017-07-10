@@ -57,6 +57,7 @@
             android:theme="@style/DotaTheme"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
         <activity android:name=".ui.view.activity.impl.MatchDetailActivity" />
+        <activity android:name=".ui.PlayerDetailActivity"></activity>
         <activity android:name=".ui.recently.ActMatchDetail" />
         <activity android:name=".ui.ActPlayerDetail" />
         <activity android:name=".ui.ActFriendList" />

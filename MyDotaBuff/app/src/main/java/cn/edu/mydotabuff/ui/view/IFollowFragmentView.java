@@ -1,4 +1,4 @@
-package cn.edu.mydotabuff.ui.view.fragment;
+package cn.edu.mydotabuff.ui.view;
 
 import java.util.List;
 

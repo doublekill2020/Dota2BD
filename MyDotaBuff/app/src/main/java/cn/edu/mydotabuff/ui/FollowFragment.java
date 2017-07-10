@@ -1,12 +1,8 @@
 package cn.edu.mydotabuff.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,7 +10,6 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +28,7 @@ import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.model.Rating;
 import cn.edu.mydotabuff.ui.presenter.IFollowFragmentPresenter;
 import cn.edu.mydotabuff.ui.presenter.impl.FollowFragmentPresenterImpl;
-import cn.edu.mydotabuff.ui.recently.ActMatchDetail;
-import cn.edu.mydotabuff.ui.view.fragment.IFollowFragmentView;
+import cn.edu.mydotabuff.ui.view.IFollowFragmentView;
 import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.util.Utils;
 import cn.edu.mydotabuff.view.SwipeRefreshRecycleView;
@@ -80,7 +74,7 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
         mRvList.setAdapter(mAdapter = new BaseListAdapter<Match>(mMatches, R.layout
                 .fragment_follow_item, EventTag.CLICK_TO_DETAIL) {
             @Override
-            public void getView(BaseListHolder holder, Match match, int pos) {
+            public void getView(BaseListHolder holder, final Match match, int pos) {
                 holder.setImageURI(R.id.sdv_hero_icon, Utils.getHeroImageUriForFresco(Common.getHeroName
                         (match.hero_id)));
                 holder.setText(R.id.tv_kda, match.kills + "/" + match.deaths + "/" + match.assists);
@@ -107,6 +101,12 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
                         holder.setText(R.id.tv_mmr, R.string.rank_level_unknow);
                     }
                 }
+                holder.setOnClickListener(R.id.sdv_user_icon, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        PlayerDetailActivity.start(mActivity, match.account_id);
+                    }
+                });
             }
         });
         mPresenter = new FollowFragmentPresenterImpl(this);
