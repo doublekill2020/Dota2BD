@@ -8,5 +8,4 @@ import cn.edu.mydotabuff.model.MatchDetail;
  */
 public interface IMatchDetaiPresenter extends cn.edu.mydotabuff.base.IBasePresenter {
     void fetchMatchDetailInfo(String matchId);
-    MatchDetail getMatchDetail();
 }

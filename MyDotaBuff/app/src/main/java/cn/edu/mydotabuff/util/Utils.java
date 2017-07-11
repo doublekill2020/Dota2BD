@@ -43,6 +43,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
  */
 public final class Utils {
 	private final static String s_ItemsImage_Format = "assets://items_images/%s_lg.jpg";
+	private final static String s_ItemsImage_Format_Fresco = "asset:///items_images/%s_lg.jpg";
 	private final static String s_HeroImage_Format = "assets://heroes_images/%s_full.jpg";
 	private final static String s_HeroImage_Format_Fresco = "asset:///heroes_images/%s_full.jpg";
 	private final static String s_HeroImage_Format_MINI = "assets://heroes_images_mini/%s_mini.png";
@@ -135,7 +136,7 @@ public final class Utils {
 	 * @return
 	 */
 	public static String getItemsImageUri(String keyName) {
-		return String.format(s_ItemsImage_Format, keyName);
+		return String.format(s_ItemsImage_Format_Fresco, keyName);
 	}
 
 	/**

@@ -15,6 +15,7 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -27,7 +28,7 @@ public class MatchDetailPresenterImpl extends BasePresenterImpl<IMatchDetailView
     }
 
     private long lastTime;
-    private MatchDetail mMatchDetail;
+
 
     @Override
     public void fetchMatchDetailInfo(final String matchId) {
@@ -45,8 +46,7 @@ public class MatchDetailPresenterImpl extends BasePresenterImpl<IMatchDetailView
                     if (matchDetails.size() == 0) {
                         getMatchDetailFromNet(matchId);
                     } else {
-                        mView.dismissLoadingDialog();
-                        mMatchDetail = matchDetails.get(0);
+                        mView.fetchMatchDetailInfoSuccess(matchDetails.get(0));
                         Logger.d("db" + (SystemClock.elapsedRealtime() - lastTime));
                     }
                 } else {
@@ -57,16 +57,13 @@ public class MatchDetailPresenterImpl extends BasePresenterImpl<IMatchDetailView
 
     }
 
-    @Override
-    public MatchDetail getMatchDetail() {
-        return mMatchDetail;
-    }
 
     private void getMatchDetailFromNet(String matchId) {
 
         OpenDotaApi.getService().getMatchDetail(matchId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+
                 .subscribe(new Subscriber<MatchDetail>() {
                     @Override
                     public void onCompleted() {
@@ -80,10 +77,9 @@ public class MatchDetailPresenterImpl extends BasePresenterImpl<IMatchDetailView
 
                     @Override
                     public void onNext(MatchDetail detail) {
-                        mView.dismissLoadingDialog();
                         save2DB(detail);
+                        mView.fetchMatchDetailInfoSuccess(detail);
                         Logger.d("net:" + (SystemClock.elapsedRealtime() - lastTime));
-                        mMatchDetail = detail;
                     }
                 });
     }

@@ -3,8 +3,6 @@ package cn.edu.mydotabuff.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
-
 import cn.edu.mydotabuff.base.realm.RealmInt;
 import io.realm.RealmList;
 import io.realm.RealmObject;
@@ -17,6 +15,8 @@ public class MatchPlayInfo extends RealmObject implements Parcelable {
 
     public String match_id; // 比赛id
     public String account_id; // 用户id
+    public String personaname; // 昵称
+    public int hero_id;// 英雄id
     public int life_state_dead;// 死亡时间
     public int level; // 等级
     public int kills; // 击杀
@@ -27,12 +27,12 @@ public class MatchPlayInfo extends RealmObject implements Parcelable {
     public int total_xp; // 总经验
     public int denies; // 反补
     // 物品栏
-    private int item_0;
-    private int item_1;
-    private int item_2;
-    private int item_3;
-    private int item_4;
-    private int item_5;
+    public int item_0;
+    public int item_1;
+    public int item_2;
+    public int item_3;
+    public int item_4;
+    public int item_5;
     public float teamfight_participation; // 参战率
     public double stuns; // 晕眩英雄/控制时间
     public int camps_stacked; // 堆积野怪次数
@@ -56,6 +56,8 @@ public class MatchPlayInfo extends RealmObject implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.match_id);
         dest.writeString(this.account_id);
+        dest.writeString(this.personaname);
+        dest.writeInt(this.hero_id);
         dest.writeInt(this.life_state_dead);
         dest.writeInt(this.level);
         dest.writeInt(this.kills);
@@ -91,6 +93,8 @@ public class MatchPlayInfo extends RealmObject implements Parcelable {
     protected MatchPlayInfo(Parcel in) {
         this.match_id = in.readString();
         this.account_id = in.readString();
+        this.personaname = in.readString();
+        this.hero_id = in.readInt();
         this.life_state_dead = in.readInt();
         this.level = in.readInt();
         this.kills = in.readInt();

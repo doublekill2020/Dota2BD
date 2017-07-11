@@ -10,10 +10,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseActivity;
+import cn.edu.mydotabuff.model.MatchDetail;
 import cn.edu.mydotabuff.ui.MatchOverviewFragment;
 import cn.edu.mydotabuff.ui.presenter.IMatchDetaiPresenter;
 import cn.edu.mydotabuff.ui.presenter.impl.MatchDetailPresenterImpl;
@@ -26,29 +29,40 @@ import cn.edu.mydotabuff.ui.view.activity.IMatchDetailView;
 public class MatchDetailActivity extends BaseActivity<IMatchDetaiPresenter> implements IMatchDetailView {
 
     public static final String EXTRA_MATCH_ID = "match_id";
-    private FragmentPagerAdapter mPageAdapter;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.tv_title)
+    TextView mTvTitle;
     @BindView(R.id.tabLayout)
     TabLayout mTabLayout;
     @BindView(R.id.vp)
     ViewPager mVp;
+
+    private MatchDetail mMatchDetail;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_match_detail_new);
         setSupportActionBar(toolbar);
+        int contentInsetStartWithNavigation = toolbar.getContentInsetStartWithNavigation();
+        toolbar.setContentInsetsRelative(0, contentInsetStartWithNavigation);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         mPresenter = new MatchDetailPresenterImpl(this);
-        String stringExtra = getIntent().getStringExtra(EXTRA_MATCH_ID);
-        mPresenter.fetchMatchDetailInfo(stringExtra);
-        setUpAdapter();
+        String matchId = getIntent().getStringExtra(EXTRA_MATCH_ID);
+        mTvTitle.setText(String.format("比赛%s", matchId));
+        mPresenter.fetchMatchDetailInfo(matchId);
+        //setUpAdapter();
     }
 
-    private void setUpAdapter() {
-        mPageAdapter = new MatchDetailPageAdapter(getSupportFragmentManager());
-        mVp.setAdapter(mPageAdapter);
-        mTabLayout.setupWithViewPager(mVp);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public static void start(Context context, String matchId) {
@@ -57,10 +71,23 @@ public class MatchDetailActivity extends BaseActivity<IMatchDetaiPresenter> impl
         context.startActivity(intent);
     }
 
+    @Override
+    public void fetchMatchDetailInfoSuccess(MatchDetail matchDetail) {
+        this.mMatchDetail = matchDetail;
+        dismissLoadingDialog();
+        setUpAdapter();
+    }
+
+    private void setUpAdapter() {
+        FragmentPagerAdapter mPageAdapter = new MatchDetailPageAdapter(getSupportFragmentManager());
+        mVp.setAdapter(mPageAdapter);
+        mTabLayout.setupWithViewPager(mVp);
+    }
+
     class MatchDetailPageAdapter extends FragmentPagerAdapter {
         String[] titles = new String[]{"TAB1", "TAB2", "TAB3"};
 
-        public MatchDetailPageAdapter(FragmentManager fm) {
+        MatchDetailPageAdapter(FragmentManager fm) {
             super(fm);
         }
 
@@ -68,11 +95,11 @@ public class MatchDetailActivity extends BaseActivity<IMatchDetaiPresenter> impl
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return MatchOverviewFragment.newInstance(mPresenter.getMatchDetail());
+                    return MatchOverviewFragment.newInstance(mMatchDetail);
                 case 1:
-                    return new MatchOverviewFragment();
+                    return MatchOverviewFragment.newInstance(mMatchDetail);
                 case 2:
-                    return new MatchOverviewFragment();
+                    return MatchOverviewFragment.newInstance(mMatchDetail);
                 default:
                     return null;
             }

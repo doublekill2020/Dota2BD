@@ -1,10 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/umeng_socialize_shareboard_item_background"
+    android:padding="@dimen/dp_8">
+
 
     <com.facebook.drawee.view.SimpleDraweeView
-        android:layout_width="50dp"
-        android:layout_height="50dp"/>
-</LinearLayout>
+        android:id="@+id/sdv_hero_icon"
+        android:layout_width="68dp"
+        android:layout_height="38dp"
+        android:layout_marginRight="4dp"
+        app:placeholderImage="@color/blueviolet" />
+
+    <TextView
+        android:id="@+id/tv_level"
+        android:layout_width="68dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/sdv_hero_icon"
+        android:background="@color/black_alpha50"
+        android:gravity="end|center_vertical"
+        android:paddingRight="2dp"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        tools:text="23" />
+
+    <TextView
+        android:id="@+id/tv_person_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/sdv_hero_icon"
+        android:layout_toRightOf="@id/sdv_hero_icon"
+        android:maxLines="1"
+        android:textColor="@color/my_green"
+        android:textSize="13sp"
+        tools:text="匿名玩家" />
+
+
+    <LinearLayout
+        android:id="@+id/table_items"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/dp_4"
+        android:layout_marginRight="@dimen/dp_4"
+        android:divider="@drawable/diveder_vertical_1px"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:divider="@drawable/diveder_horizonta_1px"
+            android:orientation="horizontal"
+            android:showDividers="middle">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/item0"
+                android:layout_width="21dp"
+                android:layout_height="18dp" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/item1"
+                android:layout_width="21dp"
+                android:layout_height="18dp" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/item2"
+                android:layout_width="21dp"
+                android:layout_height="18dp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:divider="@drawable/diveder_horizonta_1px"
+            android:orientation="horizontal"
+            android:showDividers="middle">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/item3"
+                android:layout_width="21dp"
+                android:layout_height="18dp" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/item4"
+                android:layout_width="21dp"
+                android:layout_height="18dp" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/item5"
+                android:layout_width="21dp"
+                android:layout_height="18dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/tv_kda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/sdv_hero_icon"
+        android:layout_toLeftOf="@id/table_items"
+        android:textColor="@color/dota_gray"
+        android:textSize="10sp"
+        tools:ignore="RtlHardcoded,SmallSp"
+        tools:text="KDA: 11.0" />
+
+    <TextView
+        android:id="@+id/tv_KDA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tv_kda"
+        android:layout_toLeftOf="@id/table_items"
+        android:textColor="@color/dota_gray"
+        android:textSize="10sp"
+        tools:ignore="SmallSp"
+        tools:text="1/2/1" />
+</RelativeLayout>
