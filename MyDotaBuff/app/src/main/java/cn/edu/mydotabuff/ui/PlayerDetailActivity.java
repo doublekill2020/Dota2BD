@@ -59,6 +59,7 @@ public class PlayerDetailActivity extends BaseActivity<IPlayerDetailPresenter> i
         mPresenter = new PlayerDetailPresenterImpl(this);
         setSupportActionBar(toolbar);
         mToolbar.setTitle(R.string.player_detail_title);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mPageAdapter = new PlayerDetailPageAdapter(getSupportFragmentManager());
         vp.setAdapter(mPageAdapter);
         tabLayout.setupWithViewPager(vp);
