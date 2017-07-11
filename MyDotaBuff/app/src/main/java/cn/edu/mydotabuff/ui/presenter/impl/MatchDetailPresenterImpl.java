@@ -27,32 +27,39 @@ public class MatchDetailPresenterImpl extends BasePresenterImpl<IMatchDetailView
     }
 
     private long lastTime;
+    private MatchDetail mMatchDetail;
 
     @Override
-        public void getMatchDetail(final String matchId) {
-            mView.showLoadingDialog();
-            lastTime = SystemClock.elapsedRealtime();
-            RealmResults<MatchDetail> matchDetailRealmResults = mRealm
-                    .where(MatchDetail.class)
-                    .equalTo("match_id", matchId)
-                    .findAllAsync();
-            matchDetailRealmResults.addChangeListener(new OrderedRealmCollectionChangeListener<RealmResults<MatchDetail>>() {
-                @Override
-                public void onChange(RealmResults<MatchDetail> matchDetails, OrderedCollectionChangeSet changeSet) {
-                    if (changeSet == null) {
-                        // The first time async returns with an null changeSet.
-                        if (matchDetails.size() == 0) {
-                            getMatchDetailFromNet(matchId);
-                        } else {
-                            mView.dismissLoadingDialog();
-                            Logger.d("db" + (SystemClock.elapsedRealtime() - lastTime) + ";duration:" + matchDetails.get(0).duration);
-                        }
+    public void fetchMatchDetailInfo(final String matchId) {
+        mView.showLoadingDialog();
+        lastTime = SystemClock.elapsedRealtime();
+        RealmResults<MatchDetail> matchDetailRealmResults = mRealm
+                .where(MatchDetail.class)
+                .equalTo("match_id", matchId)
+                .findAllAsync();
+        matchDetailRealmResults.addChangeListener(new OrderedRealmCollectionChangeListener<RealmResults<MatchDetail>>() {
+            @Override
+            public void onChange(RealmResults<MatchDetail> matchDetails, OrderedCollectionChangeSet changeSet) {
+                if (changeSet == null) {
+                    // The first time async returns with an null changeSet.
+                    if (matchDetails.size() == 0) {
+                        getMatchDetailFromNet(matchId);
                     } else {
-                        // Called on every update.
+                        mView.dismissLoadingDialog();
+                        mMatchDetail = matchDetails.get(0);
+                        Logger.d("db" + (SystemClock.elapsedRealtime() - lastTime));
                     }
+                } else {
+                    // Called on every update.
                 }
-            });
+            }
+        });
 
+    }
+
+    @Override
+    public MatchDetail getMatchDetail() {
+        return mMatchDetail;
     }
 
     private void getMatchDetailFromNet(String matchId) {
@@ -76,6 +83,7 @@ public class MatchDetailPresenterImpl extends BasePresenterImpl<IMatchDetailView
                         mView.dismissLoadingDialog();
                         save2DB(detail);
                         Logger.d("net:" + (SystemClock.elapsedRealtime() - lastTime));
+                        mMatchDetail = detail;
                     }
                 });
     }

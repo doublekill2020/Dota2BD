@@ -41,7 +41,7 @@ public class MatchDetailActivity extends BaseActivity<IMatchDetaiPresenter> impl
         setSupportActionBar(toolbar);
         mPresenter = new MatchDetailPresenterImpl(this);
         String stringExtra = getIntent().getStringExtra(EXTRA_MATCH_ID);
-        mPresenter.getMatchDetail(stringExtra);
+        mPresenter.fetchMatchDetailInfo(stringExtra);
         setUpAdapter();
     }
 
@@ -68,7 +68,7 @@ public class MatchDetailActivity extends BaseActivity<IMatchDetaiPresenter> impl
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new MatchOverviewFragment();
+                    return MatchOverviewFragment.newInstance(mPresenter.getMatchDetail());
                 case 1:
                     return new MatchOverviewFragment();
                 case 2:

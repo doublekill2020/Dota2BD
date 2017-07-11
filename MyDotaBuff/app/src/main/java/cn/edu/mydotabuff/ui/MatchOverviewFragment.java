@@ -11,7 +11,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseFragment;
+import cn.edu.mydotabuff.base.BaseListAdapter;
+import cn.edu.mydotabuff.base.BaseListHolder;
 import cn.edu.mydotabuff.model.MatchDetail;
+import cn.edu.mydotabuff.model.MatchPlayInfo;
 import cn.edu.mydotabuff.ui.presenter.IMatchOverviewPresenter;
 import cn.edu.mydotabuff.ui.presenter.impl.MatchOverviewPresenterImpl;
 import cn.edu.mydotabuff.ui.view.IMatchOverviewView;
@@ -26,6 +29,8 @@ public class MatchOverviewFragment extends BaseFragment<IMatchOverviewPresenter>
     SwipeRefreshRecycleView mRvList;
     @BindView(R.id.fl_success)
     FrameLayout mFlSuccess;
+    private MatchDetail matchDetail;
+    private BaseListAdapter<MatchPlayInfo> mAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -37,10 +42,18 @@ public class MatchOverviewFragment extends BaseFragment<IMatchOverviewPresenter>
 
     private void init() {
         setSuccessView(mFlSuccess);
+        Bundle arguments = getArguments();
+        matchDetail = arguments.getParcelable("key");
         mPresenter = new MatchOverviewPresenterImpl(this);
+        mRvList.setAdapter(mAdapter = new BaseListAdapter<MatchPlayInfo>(matchDetail.players, R.layout.item_match_detail_over_view) {
+            @Override
+            public void getView(BaseListHolder holder, MatchPlayInfo bean, int pos) {
+
+            }
+        });
     }
 
-    public MatchOverviewFragment newInstance(MatchDetail matchDetail) {
+    public static MatchOverviewFragment newInstance(MatchDetail matchDetail) {
         MatchOverviewFragment matchOverviewFragment = new MatchOverviewFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelable("key", matchDetail);
