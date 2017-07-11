@@ -452,5 +452,6 @@
     <string name="lobby_type_battle_cup">勇士联赛</string>
     <string name="unknow">未知</string>
     <string name="follow_fragment_search_hint">搜索ID、昵称</string>
+    <string name="player_detail_title">个人资料</string>
 
 </resources>
