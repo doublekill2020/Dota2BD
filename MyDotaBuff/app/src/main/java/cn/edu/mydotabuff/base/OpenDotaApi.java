@@ -8,6 +8,7 @@ import java.util.List;
 
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.common.http.APIConstants;
+import cn.edu.mydotabuff.model.Hero;
 import cn.edu.mydotabuff.model.Match;
 import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.model.Rating;
@@ -86,7 +87,7 @@ public class OpenDotaApi {
         Observable<List<SearchPlayerResult>> searchAccountId(@Query(value = "q", encoded = true)
                                                                      String nickName, @Query
                                                                      ("similarity") float
-                similarity);
+                                                                     similarity);
 
         @GET("players/{account_id}")
         Observable<PlayerInfo> getPlayerInfo(@Path("account_id") String accountId);
@@ -96,5 +97,8 @@ public class OpenDotaApi {
 
         @GET("matches/{match_id}")
         Observable<ResponseBody> getMatchDetail(@Path("match_id") String accountId);
+
+        @GET("players/{account_id}/heroes")
+        Observable<List<Hero>> getHeroUsed(@Path("match_id") String accountId);
     }
 }

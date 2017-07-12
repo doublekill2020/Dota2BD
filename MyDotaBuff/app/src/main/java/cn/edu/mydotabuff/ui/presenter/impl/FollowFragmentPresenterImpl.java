@@ -112,7 +112,7 @@ public class FollowFragmentPresenterImpl extends BasePresenterImpl<IFollowFragme
 
     @Subscribe
     public void onItemClicked(BaseListClickEvent event) {
-        if (event.tag == EventTag.CLICK_TO_DETAIL) {
+        if (event.tag == EventTag.CLICK_TO_MATCH_DETAIL) {
             MatchDetailActivity.start(mView.getContext(), matches.get(event.position).match_id);
         }
     }

@@ -72,7 +72,7 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
             }
         });
         mRvList.setAdapter(mAdapter = new BaseListAdapter<Match>(mMatches, R.layout
-                .fragment_follow_item, EventTag.CLICK_TO_DETAIL) {
+                .fragment_follow_item, EventTag.CLICK_TO_MATCH_DETAIL) {
             @Override
             public void getView(BaseListHolder holder, final Match match, int pos) {
                 holder.setImageURI(R.id.sdv_hero_icon, Utils.getHeroImageUriForFresco(Common.getHeroName
