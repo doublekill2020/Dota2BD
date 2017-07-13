@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.orhanobut.logger.Logger;
+
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -64,6 +66,7 @@ public class MatchOverviewFragment extends BaseFragment<IMatchOverviewPresenter>
                 holder.setImageURI(R.id.item0, Utils.getItemsImageUri(Common.getItemName(bean.item_0)));
                 holder.setImageURI(R.id.item1, Utils.getItemsImageUri(Common.getItemName(bean.item_1)));
                 holder.setImageURI(R.id.item2, Utils.getItemsImageUri(Common.getItemName(bean.item_2)));
+                Logger.d(bean.item_3);
                 holder.setImageURI(R.id.item3, Utils.getItemsImageUri(Common.getItemName(bean.item_3)));
                 holder.setImageURI(R.id.item4, Utils.getItemsImageUri(Common.getItemName(bean.item_4)));
                 holder.setImageURI(R.id.item5, Utils.getItemsImageUri(Common.getItemName(bean.item_5)));
