@@ -44,7 +44,7 @@
                 style="@style/TableTextStyle_10_WHITE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="radiant"/>
+                android:text="Radiant"/>
 
             <TextView
                 style="@style/TableTextStyle_13"

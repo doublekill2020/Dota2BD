@@ -38,10 +38,22 @@ public class MatchOverviewFragment extends BaseFragment<IMatchOverviewPresenter>
 
     @BindView(R.id.ll_container)
     LinearLayout mLlContainer;
+    @BindView(R.id.tv_random_txt)
+    TextView mTvRandow;
+
     @BindView(R.id.iv_radiant_tag)
     ImageView mImgRadiantTag;
+    @BindView(R.id.tv_match_radiant)
+    TextView mTvRadiant;
+    @BindView(R.id.tv_match_radiant_sumkill)
+    TextView mTvRadiantKill;
+
     @BindView(R.id.iv_dire_tag)
     ImageView mImgRireTag;
+    @BindView(R.id.tv_match_dire)
+    TextView mTvDire;
+    @BindView(R.id.tv_match_dire_sumkill)
+    TextView mTvDireKill;
 
     private MatchDetail matchDetail;
 
@@ -67,16 +79,29 @@ public class MatchOverviewFragment extends BaseFragment<IMatchOverviewPresenter>
         Bundle arguments = getArguments();
         matchDetail = arguments.getParcelable("key");
         mPresenter = new MatchOverviewPresenterImpl(this);
+//"别紧张，你这样没事",
+//"英雄不见了！",
+//"英雄回来了！",
+//"相当精彩的比赛",
+//"技不如人，甘拜下风",
+//"走好, 不送",
+//"玩不了啦!",
+//"破两路更好打, 是吧?"
+//"Ай-ай-ай-ай-ай, что сейчас произошло!"
+        mTvRandow.setText("Ай-ай-ай-ай-ай, что сейчас произошло!");
         mImgRadiantTag.setImageDrawable(new DirectionDrawale(
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40f, getResources().getDisplayMetrics()),
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40f, getResources().getDisplayMetrics()),
                 ContextCompat.getColor(getContext(), R.color.radiantColor)));
+        mTvRadiantKill.setText("杀敌" + String.valueOf(matchDetail.radiant_score));
+        mTvRadiant.setText(String.valueOf(matchDetail.radiant_win ? "胜利" : "失败"));
 
         mImgRireTag.setImageDrawable(new DirectionDrawale(
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40f, getResources().getDisplayMetrics()),
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40f, getResources().getDisplayMetrics()),
                 ContextCompat.getColor(getContext(), R.color.direColor)));
-
+        mTvDireKill.setText("杀敌" +String.valueOf(matchDetail.dire_score));
+        mTvDire.setText(String.valueOf(matchDetail.radiant_win ? "失败" : "胜利"));
 
         for (int i = 0; i < 10; i++) {
             View view = LayoutInflater.from(getContext()).inflate(R.layout.item_match_detail_over_view, mLlContainer, false);

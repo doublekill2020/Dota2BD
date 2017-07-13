@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.R;
@@ -31,7 +32,6 @@ public class TimeHelper {
      * 得到校验后的正确时间 格式形如：yyyy-MM-dd HH:mm:ss
      *
      * @param timedifference 带符号位的long 值
-     *
      * @return
      */
     public static String getStringTime(long timedifference) {
@@ -46,7 +46,6 @@ public class TimeHelper {
      * 将long 的时间值转换为固定格式为:yyyy-MM-dd HH:mm:ss输出
      *
      * @param str
-     *
      * @return
      */
     public static String getLongtoString(long time) {
@@ -61,7 +60,6 @@ public class TimeHelper {
      * 得到当前服务器时间与系统时间差值
      *
      * @param serverTime
-     *
      * @return
      */
     public static long getTimeDifference(long serverTime) {
@@ -93,7 +91,6 @@ public class TimeHelper {
      * 将Timestamp 转换为字符串
      *
      * @param time
-     *
      * @return
      */
     public static String TimestampToStr(Timestamp time) {
@@ -107,7 +104,6 @@ public class TimeHelper {
      * 将字符串转换为Timestamp
      *
      * @param str
-     *
      * @return
      */
     public static Timestamp StrToTimestamp(String str) {
@@ -120,7 +116,6 @@ public class TimeHelper {
      * 字符串转换成日期
      *
      * @param stringdate 要转换的字符串(字符串格式 yyyy-MM-dd HH:mm:ss)
-     *
      * @return
      */
     public static Date getStringtoDate(String stringdate) {
@@ -151,7 +146,6 @@ public class TimeHelper {
      * 字符串转换成日期
      *
      * @param stringdate 要转换的字符串(字符串格式 yyyy-MM-dd HH:mm:ss)
-     *
      * @return
      */
     public static Date getStringtoDate2(String stringdate) {
@@ -168,7 +162,6 @@ public class TimeHelper {
      * 得到long类型时间值
      *
      * @param stringdate
-     *
      * @return
      */
     public static long getStringtoLong(String stringdate) {
@@ -254,7 +247,6 @@ public class TimeHelper {
      * 以友好的方式显示时间
      *
      * @param sdate
-     *
      * @return
      */
     public static String friendly_time(String sdate) {
@@ -337,7 +329,6 @@ public class TimeHelper {
      * 将字符串转位日期类型
      *
      * @param sdate
-     *
      * @return
      */
     public static Date toDate(String sdate) {
@@ -360,7 +351,6 @@ public class TimeHelper {
      * 将字符串转位日期类型
      *
      * @param sdate
-     *
      * @return
      */
     public static Date toDate2(String sdate) {
@@ -375,7 +365,6 @@ public class TimeHelper {
      * 将字符串转位日期类型
      *
      * @param sdate
-     *
      * @return
      */
     public static Date toDate4(String sdate) {
@@ -469,42 +458,42 @@ public class TimeHelper {
 
     private final static ThreadLocal<SimpleDateFormat> dateFormater = new
             ThreadLocal<SimpleDateFormat>() {
-        @Override
-        protected SimpleDateFormat initialValue() {
-            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        }
-    };
+                @Override
+                protected SimpleDateFormat initialValue() {
+                    return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                }
+            };
     private final static ThreadLocal<SimpleDateFormat> dateFormaterWithoutSecond = new
             ThreadLocal<SimpleDateFormat>() {
-        @Override
-        protected SimpleDateFormat initialValue() {
-            return new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        }
-    };
+                @Override
+                protected SimpleDateFormat initialValue() {
+                    return new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                }
+            };
 
     private final static ThreadLocal<SimpleDateFormat> dateFormater2 = new
             ThreadLocal<SimpleDateFormat>() {
-        @Override
-        protected SimpleDateFormat initialValue() {
-            return new SimpleDateFormat("yyyy-MM-dd");
-        }
-    };
+                @Override
+                protected SimpleDateFormat initialValue() {
+                    return new SimpleDateFormat("yyyy-MM-dd");
+                }
+            };
 
     private final static ThreadLocal<SimpleDateFormat> dateFormater3 = new
             ThreadLocal<SimpleDateFormat>() {
-        @Override
-        protected SimpleDateFormat initialValue() {
-            return new SimpleDateFormat("HH:mm");
-        }
-    };
+                @Override
+                protected SimpleDateFormat initialValue() {
+                    return new SimpleDateFormat("HH:mm");
+                }
+            };
 
     private final static ThreadLocal<SimpleDateFormat> dateFormater4 = new
             ThreadLocal<SimpleDateFormat>() {
-        @Override
-        protected SimpleDateFormat initialValue() {
-            return new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        }
-    };
+                @Override
+                protected SimpleDateFormat initialValue() {
+                    return new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                }
+            };
 
     // 将未指定格式的字符串转换成日期类型
     public static Date parseStringToDate(String date) throws ParseException {
@@ -745,7 +734,6 @@ public class TimeHelper {
      * 时间戳转化为时间格式
      *
      * @param timeStamp
-     *
      * @return
      */
 
@@ -763,7 +751,6 @@ public class TimeHelper {
      * 得到日期   yyyy-MM-dd
      *
      * @param timeStamp 时间戳
-     *
      * @return
      */
 
@@ -781,7 +768,6 @@ public class TimeHelper {
      * 得到时间  HH:mm:ss
      *
      * @param timeStamp 时间戳
-     *
      * @return
      */
 
@@ -809,13 +795,12 @@ public class TimeHelper {
      * 将一个时间戳转换成提示性时间字符串，如刚刚，1秒前
      *
      * @param timeStamp
-     *
      * @return
      */
 
     public static String convertTimeToFormat(long timeStamp) {
 
-        long curTime = System.currentTimeMillis() / (long) 1000;
+        long curTime = System.currentTimeMillis() / 1000L;
 
         long time = curTime - timeStamp;
 
@@ -855,7 +840,6 @@ public class TimeHelper {
      * 将一个时间戳转换成提示性时间字符串，(多少分钟)
      *
      * @param timeStamp
-     *
      * @return
      */
 
@@ -867,5 +851,15 @@ public class TimeHelper {
 
         return time / 60 + "";
 
+    }
+
+    /**
+     * 秒to分钟 带单位
+     *
+     * @param second
+     * @return
+     */
+    public static String secondToMinWithUnit(long second) {
+        return String.format(Locale.CHINA, "%d分钟", second / 60);
     }
 }

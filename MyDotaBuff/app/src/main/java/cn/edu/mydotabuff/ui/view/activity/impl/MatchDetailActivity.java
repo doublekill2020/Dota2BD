@@ -16,11 +16,13 @@ import android.widget.TextView;
 import butterknife.BindView;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseActivity;
+import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.model.MatchDetail;
 import cn.edu.mydotabuff.ui.MatchOverviewFragment;
 import cn.edu.mydotabuff.ui.presenter.IMatchDetaiPresenter;
 import cn.edu.mydotabuff.ui.presenter.impl.MatchDetailPresenterImpl;
 import cn.edu.mydotabuff.ui.view.activity.IMatchDetailView;
+import cn.edu.mydotabuff.util.TimeHelper;
 
 /**
  * Created by sadhu on 2017/7/5.
@@ -87,11 +89,15 @@ public class MatchDetailActivity extends BaseActivity<IMatchDetaiPresenter> impl
     public void fetchMatchDetailInfoSuccess(MatchDetail matchDetail) {
         this.mMatchDetail = matchDetail;
         dismissLoadingDialog();
+        setUpTopView();
         setUpAdapter();
     }
 
     private void setUpTopView() {
-
+        mTvStartTime.setText(TimeHelper.convertTimeToFormat(mMatchDetail.start_time));
+        mTvDuration.setText(TimeHelper.secondToMinWithUnit(mMatchDetail.duration));
+        mTvMatchLevel.setText(Common.getLobbyTypeName(mMatchDetail.lobby_type));
+        mTvGameMode.setText(Common.getGameMode(mMatchDetail.game_mode));
     }
 
     private void setUpAdapter() {

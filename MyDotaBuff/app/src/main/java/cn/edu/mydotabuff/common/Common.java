@@ -57,40 +57,80 @@ public class Common {
     }
 
     public static String getGameMode(int type) {
-        String str = "";
+        String str;
         switch (type) {
-            case -1:
-                str = "无效比赛";
-                break;
             case 0:
-                str = "公开匹配";
+                str = "未知";
                 break;
             case 1:
-                str = "练习赛";
+                str = "全英雄选择";
                 break;
             case 2:
-                str = "锦标赛";
+                str = "队长模式";
                 break;
             case 3:
-                str = "辅导赛";
+                str = "随机征召";
                 break;
             case 4:
-                str = "机器人对抗赛";
+                str = "单一征招";
                 break;
             case 5:
-                str = "战队比赛";
+                str = "全英雄随机";
                 break;
             case 6:
-                str = "单排天梯";
+                str = "开局";
                 break;
             case 7:
-                str = "天梯匹配";
+                str = "夜魇暗潮";
                 break;
             case 8:
-                str = "Solo模式";
+                str = "反队长模式";
+                break;
+            case 9:
+                str = "小贪魔节";
+                break;
+            case 10:
+                str = "教程";
+                break;
+            case 11:
+                str = "单中模式";
+                break;
+            case 12:
+                str = "生疏模式";
+                break;
+            case 13:
+                str = "英雄限定";
+                break;
+            case 14:
+                str = "勇士令状";
+                break;
+            case 15:
+                str = "自定义游戏";
+                break;
+            case 16:
+                str = "队长征召";
+                break;
+            case 17:
+                str = "平衡征召";
+                break;
+            case 18:
+                str = "技能征召";
                 break;
 
+            case 19:
+                str = "活动";
+                break;
+            case 20:
+                str = "全随机死亡竞赛";
+                break;
+            case 21:
+                str = "1V1中路Solo";
+                break;
+            case 22:
+                str = "全英雄选择（BP）";
+                break;
             default:
+                str = "未知";
                 break;
         }
         return str;

@@ -33,6 +33,9 @@ public class MatchPlayInfo extends RealmObject implements Parcelable {
     public int item_3;
     public int item_4;
     public int item_5;
+    public int backpack_0;
+    public int backpack_1;
+    public int backpack_2;
     public float teamfight_participation; // 参战率
     public double stuns; // 晕眩英雄/控制时间
     public int camps_stacked; // 堆积野怪次数
@@ -73,6 +76,9 @@ public class MatchPlayInfo extends RealmObject implements Parcelable {
         dest.writeInt(this.item_3);
         dest.writeInt(this.item_4);
         dest.writeInt(this.item_5);
+        dest.writeInt(this.backpack_0);
+        dest.writeInt(this.backpack_1);
+        dest.writeInt(this.backpack_2);
         dest.writeFloat(this.teamfight_participation);
         dest.writeDouble(this.stuns);
         dest.writeInt(this.camps_stacked);
@@ -110,6 +116,9 @@ public class MatchPlayInfo extends RealmObject implements Parcelable {
         this.item_3 = in.readInt();
         this.item_4 = in.readInt();
         this.item_5 = in.readInt();
+        this.backpack_0 = in.readInt();
+        this.backpack_1 = in.readInt();
+        this.backpack_2 = in.readInt();
         this.teamfight_participation = in.readFloat();
         this.stuns = in.readDouble();
         this.camps_stacked = in.readInt();

@@ -26,7 +26,9 @@ public class MatchDetail extends RealmObject implements Parcelable {
     public int duration; // 时长
     public long start_time; // 开始时间
     public int first_blood_time; // 一血时间
-    public int lobby_type; // 游戏类型
+    public int lobby_type; // 游戏level
+    public int game_mode; // 比赛模式
+    public boolean radiant_win; // 天辉获胜
 
     public RealmList<MatchPlayInfo> players;
     public RealmList<RealmInt> radiant_gold_adv;
@@ -52,6 +54,8 @@ public class MatchDetail extends RealmObject implements Parcelable {
         dest.writeLong(this.start_time);
         dest.writeInt(this.first_blood_time);
         dest.writeInt(this.lobby_type);
+        dest.writeInt(this.game_mode);
+        dest.writeByte((byte) (this.radiant_win ? 1 : 0));
         dest.writeList(this.players);
         dest.writeList(this.radiant_gold_adv);
         dest.writeList(this.radiant_xp_adv);
@@ -74,6 +78,8 @@ public class MatchDetail extends RealmObject implements Parcelable {
         this.start_time = in.readLong();
         this.first_blood_time = in.readInt();
         this.lobby_type = in.readInt();
+        this.game_mode = in.readInt();
+        this.radiant_win = in.readByte() == 1;
         this.players = new RealmList<>();
         this.players.addAll(in.createTypedArrayList(MatchPlayInfo.CREATOR));
         this.radiant_gold_adv = new RealmList<>();
