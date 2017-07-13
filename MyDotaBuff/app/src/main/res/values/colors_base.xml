@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_1">#ffe1e6eb</color>
+    <color name="direColor">#ff9c3627</color>
+    <color name="radiantColor">#ff3d9027</color>
+    <color name="color_base_green">#3D9027</color>
+    <color name="color_base_red">#9C3627</color>
+    <color name="text_secondary_color">#ff8c96a0</color>
+</resources>

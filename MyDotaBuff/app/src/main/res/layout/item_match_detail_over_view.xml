@@ -48,14 +48,14 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/dp_4"
         android:layout_marginRight="@dimen/dp_4"
-        android:divider="@drawable/diveder_vertical_1px"
+        android:divider="@drawable/divider_vertical_1px"
         android:orientation="vertical"
         android:showDividers="middle">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:divider="@drawable/diveder_horizonta_1px"
+            android:divider="@drawable/divider_horizontal_1px"
             android:orientation="horizontal"
             android:showDividers="middle">
 
@@ -79,7 +79,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:divider="@drawable/diveder_horizonta_1px"
+            android:divider="@drawable/divider_horizontal_1px"
             android:orientation="horizontal"
             android:showDividers="middle">
 

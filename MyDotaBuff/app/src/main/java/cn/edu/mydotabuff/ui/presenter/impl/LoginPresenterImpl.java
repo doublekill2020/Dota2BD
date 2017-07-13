@@ -113,6 +113,7 @@ public class LoginPresenterImpl extends BasePresenterImpl<ILoginView> implements
                                 mView.dismissLoadingDialog();
                                 mView.EnterMainImmediately();
                             } else {
+                                mView.dismissLoadingDialog();
                                 mView.showToast(R.string.please_enter_the_correct_id);
                             }
                         }

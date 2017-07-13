@@ -22,7 +22,7 @@ public class MatchPlayInfo extends RealmObject implements Parcelable {
     public int kills; // 击杀
     public int assists; // 助攻
     public int deaths; // 死亡
-    public int kda; // 死亡
+    public float kda; // KDA
     public int total_gold; // 总金钱
     public int total_xp; // 总经验
     public int denies; // 反补
@@ -63,7 +63,7 @@ public class MatchPlayInfo extends RealmObject implements Parcelable {
         dest.writeInt(this.kills);
         dest.writeInt(this.assists);
         dest.writeInt(this.deaths);
-        dest.writeInt(this.kda);
+        dest.writeFloat(this.kda);
         dest.writeInt(this.total_gold);
         dest.writeInt(this.total_xp);
         dest.writeInt(this.denies);
@@ -100,7 +100,7 @@ public class MatchPlayInfo extends RealmObject implements Parcelable {
         this.kills = in.readInt();
         this.assists = in.readInt();
         this.deaths = in.readInt();
-        this.kda = in.readInt();
+        this.kda = in.readFloat();
         this.total_gold = in.readInt();
         this.total_xp = in.readInt();
         this.denies = in.readInt();

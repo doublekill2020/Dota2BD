@@ -103,4 +103,6 @@
     <dimen name="dp_64">64dp</dimen>
     <dimen name="dp_74">74dp</dimen>
     <dimen name="dp_84">84dp</dimen>
+
+    <dimen name="text_size_9">9sp</dimen>
 </resources>

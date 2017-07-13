@@ -96,6 +96,9 @@ public class Common {
         return str;
     }
 
+    public static float calculateKDA(int k, int d, int a) {
+        return ((float) k + a) / d;
+    }
     // public static int getHeroDrawableId(int ID) {
     // switch (ID) {
     // case 1:

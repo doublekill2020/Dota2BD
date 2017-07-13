@@ -6,7 +6,9 @@ import com.orhanobut.logger.Logger;
 
 import cn.edu.mydotabuff.base.BasePresenterImpl;
 import cn.edu.mydotabuff.base.OpenDotaApi;
+import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.model.MatchDetail;
+import cn.edu.mydotabuff.model.MatchPlayInfo;
 import cn.edu.mydotabuff.ui.presenter.IMatchDetaiPresenter;
 import cn.edu.mydotabuff.ui.view.activity.IMatchDetailView;
 import io.realm.OrderedCollectionChangeSet;
@@ -15,7 +17,6 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -77,6 +78,9 @@ public class MatchDetailPresenterImpl extends BasePresenterImpl<IMatchDetailView
 
                     @Override
                     public void onNext(MatchDetail detail) {
+                        for (MatchPlayInfo player : detail.players) {
+                            player.kda = (Common.calculateKDA(player.kills, player.deaths, player.assists));
+                        }
                         save2DB(detail);
                         mView.fetchMatchDetailInfoSuccess(detail);
                         Logger.d("net:" + (SystemClock.elapsedRealtime() - lastTime));

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="60.0dip"
+              android:background="@color/main_color"
+              android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60.0dip"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="2.0"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TableTextStyle_12_MatchTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="结束时间"/>
+
+        <TextView
+            android:id="@+id/tv_match_finish_time"
+            style="@style/TableTextStyle_14_WHITE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60.0dip"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="2.0"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TableTextStyle_12_MatchTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="持续时间"/>
+
+        <TextView
+            android:id="@+id/tv_match_duration"
+            style="@style/TableTextStyle_14_WHITE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60.0dip"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="2.0"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TableTextStyle_12_MatchTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Level"/>
+
+        <TextView
+            android:id="@+id/tv_match_level"
+            style="@style/TableTextStyle_14_WHITE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60.0dip"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="2.0"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TableTextStyle_12_MatchTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="比赛模式"/>
+
+        <TextView
+            android:id="@+id/tv_game_mode"
+            style="@style/TableTextStyle_14_WHITE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"/>
+    </LinearLayout>
+</LinearLayout>

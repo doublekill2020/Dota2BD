@@ -31,8 +31,20 @@ public class MatchDetailActivity extends BaseActivity<IMatchDetaiPresenter> impl
     public static final String EXTRA_MATCH_ID = "match_id";
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+
+    @BindView(R.id.tv_match_finish_time)
+    TextView mTvStartTime;
+    @BindView(R.id.tv_match_duration)
+    TextView mTvDuration;
+    @BindView(R.id.tv_match_level)
+    TextView mTvMatchLevel;
+    @BindView(R.id.tv_game_mode)
+    TextView mTvGameMode;
+
     @BindView(R.id.tv_title)
     TextView mTvTitle;
+
+
     @BindView(R.id.tabLayout)
     TabLayout mTabLayout;
     @BindView(R.id.vp)
@@ -76,6 +88,10 @@ public class MatchDetailActivity extends BaseActivity<IMatchDetaiPresenter> impl
         this.mMatchDetail = matchDetail;
         dismissLoadingDialog();
         setUpAdapter();
+    }
+
+    private void setUpTopView() {
+
     }
 
     private void setUpAdapter() {

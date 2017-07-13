@@ -4,7 +4,9 @@ apply plugin: 'realm-android'
 android {
     //TODO 用okhttp后去掉
     useLibrary 'org.apache.http.legacy'
-
+    lintOptions {
+        disable 'PrivateResource'
+    }
     compileSdkVersion 26
     buildToolsVersion "26.0.0"
 
