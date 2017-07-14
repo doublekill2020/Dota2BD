@@ -13,14 +13,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseActivity;
 import cn.edu.mydotabuff.common.Common;
+import cn.edu.mydotabuff.model.LobbyType;
 import cn.edu.mydotabuff.model.MatchDetail;
+import cn.edu.mydotabuff.model.MatchPlayInfo;
 import cn.edu.mydotabuff.ui.MatchOverviewFragment;
 import cn.edu.mydotabuff.ui.presenter.IMatchDetaiPresenter;
 import cn.edu.mydotabuff.ui.presenter.impl.MatchDetailPresenterImpl;
+import cn.edu.mydotabuff.ui.view.MatchGrphsFragment;
 import cn.edu.mydotabuff.ui.view.activity.IMatchDetailView;
 import cn.edu.mydotabuff.util.TimeHelper;
 
@@ -67,7 +73,6 @@ public class MatchDetailActivity extends BaseActivity<IMatchDetaiPresenter> impl
         String matchId = getIntent().getStringExtra(EXTRA_MATCH_ID);
         mTvTitle.setText(String.format("比赛%s", matchId));
         mPresenter.fetchMatchDetailInfo(matchId);
-        //setUpAdapter();
     }
 
     @Override
@@ -96,8 +101,19 @@ public class MatchDetailActivity extends BaseActivity<IMatchDetaiPresenter> impl
     private void setUpTopView() {
         mTvStartTime.setText(TimeHelper.convertTimeToFormat(mMatchDetail.start_time));
         mTvDuration.setText(TimeHelper.secondToMinWithUnit(mMatchDetail.duration));
-        mTvMatchLevel.setText(Common.getLobbyTypeName(mMatchDetail.lobby_type));
-        mTvGameMode.setText(Common.getGameMode(mMatchDetail.game_mode));
+        // FIXME: 2017/7/14 这种方式有问题,尝试修复
+        if (mMatchDetail.lobby_type == LobbyType.LOBBY_TYPE_RANKED) {
+            List<String> rank = new ArrayList<>();
+            for (MatchPlayInfo player : mMatchDetail.players) {
+                rank.add(player.solo_competitive_rank);
+            }
+            mTvMatchLevel.setText(Common.getAverageMmrAverageLevel(rank.toArray(new String[0])));
+            mTvGameMode.setText(Common.getLobbyTypeName(mMatchDetail.lobby_type));
+        } else {
+            mTvMatchLevel.setText(Common.getLobbyTypeName(mMatchDetail.lobby_type));
+            mTvGameMode.setText(Common.getGameMode(mMatchDetail.game_mode));
+        }
+
     }
 
     private void setUpAdapter() {
@@ -119,7 +135,7 @@ public class MatchDetailActivity extends BaseActivity<IMatchDetaiPresenter> impl
                 case 0:
                     return MatchOverviewFragment.newInstance(mMatchDetail);
                 case 1:
-                    return MatchOverviewFragment.newInstance(mMatchDetail);
+                    return MatchGrphsFragment.newInstance(mMatchDetail);
                 case 2:
                     return MatchOverviewFragment.newInstance(mMatchDetail);
                 default:

@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/bg_1"
-    android:orientation="vertical">
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/bg_1"
+              android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_random_txt"
         style="@style/TableTextStyle_10"
         android:layout_width="fill_parent"
         android:layout_height="30.0dip"
-        android:gravity="center"
-        android:text="天火,你特么天火啊" />
+        android:gravity="center"/>
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -22,18 +21,18 @@
             android:layout_width="fill_parent"
             android:layout_height="2.0dip"
             android:layout_alignParentTop="true"
-            android:background="@color/direColor" />
+            android:background="@color/color_base_green"/>
 
         <ImageView
             android:layout_width="90.0dip"
             android:layout_height="35.0dip"
-            android:background="@color/direColor" />
+            android:background="@color/color_base_green"/>
 
         <ImageView
-            android:id="@+id/iv_dire_tag"
+            android:id="@+id/iv_match_color_tag"
             android:layout_width="40.0dip"
             android:layout_height="35.0dip"
-            android:layout_marginLeft="90.0dip" />
+            android:layout_marginLeft="90.0dip"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -46,25 +45,25 @@
                 style="@style/TableTextStyle_10_WHITE"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dire" />
+                android:text="Radiant"/>
 
             <TextView
                 style="@style/TableTextStyle_13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="夜魇"
-                android:textColor="@color/white" />
+                android:text="天辉"
+                android:textColor="@color/white"/>
         </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_match_dire"
+            android:id="@+id/tv_match_result"
             style="@style/TitleTextStyle_14"
             android:layout_width="80.0dip"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:gravity="right"
-            android:text="失败"
-            android:textColor="@color/white" />
+            android:text="胜利"
+            android:textColor="@color/white"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -73,44 +72,35 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_match_dire_sumkill"
+                android:id="@+id/tv_match_sumkill"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:paddingRight="10.0dip"
                 android:text="杀敌"
                 android:textColor="@color/text_secondary_color"
-                android:textSize="@dimen/text_size_9" />
+                android:textSize="9sp"/>
 
             <TextView
-                android:id="@+id/tv_match_dire_sumxp"
+                android:id="@+id/tv_match_sumxp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:paddingRight="10.0dip"
                 android:text="经验"
                 android:textColor="@color/text_secondary_color"
-                android:textSize="@dimen/text_size_9" />
+                android:textSize="9sp"/>
 
             <TextView
-                android:id="@+id/tv_match_dire_sumgold"
+                android:id="@+id/tv_match_sumgold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:paddingRight="10.0dip"
                 android:text="金钱"
                 android:textColor="@color/text_secondary_color"
-                android:textSize="@dimen/text_size_9" />
+                android:textSize="9sp"/>
 
-            <ImageView
-                android:id="@+id/iv_flag"
-                android:layout_width="27.0dip"
-                android:layout_height="fill_parent"
-                android:layout_marginBottom="5.0dip"
-                android:layout_marginRight="5.0dip"
-                android:layout_marginTop="5.0dip"
-                android:scaleType="fitCenter"
-                android:visibility="gone" />
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

@@ -26,6 +26,7 @@ public class MatchPlayInfo extends RealmObject implements Parcelable {
     public int total_gold; // 总金钱
     public int total_xp; // 总经验
     public int denies; // 反补
+    public String solo_competitive_rank; // 天梯积分
     // 物品栏
     public int item_0;
     public int item_1;
@@ -70,6 +71,7 @@ public class MatchPlayInfo extends RealmObject implements Parcelable {
         dest.writeInt(this.total_gold);
         dest.writeInt(this.total_xp);
         dest.writeInt(this.denies);
+        dest.writeString(this.solo_competitive_rank);
         dest.writeInt(this.item_0);
         dest.writeInt(this.item_1);
         dest.writeInt(this.item_2);
@@ -110,6 +112,7 @@ public class MatchPlayInfo extends RealmObject implements Parcelable {
         this.total_gold = in.readInt();
         this.total_xp = in.readInt();
         this.denies = in.readInt();
+        this.solo_competitive_rank = in.readString();
         this.item_0 = in.readInt();
         this.item_1 = in.readInt();
         this.item_2 = in.readInt();

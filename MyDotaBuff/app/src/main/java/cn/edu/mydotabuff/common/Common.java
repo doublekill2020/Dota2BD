@@ -2629,6 +2629,35 @@ public class Common {
         }
     }
 
+    /**
+     * 计算比赛的level
+     *
+     * @param mmr
+     * @return
+     */
+    public static String getAverageMmrAverageLevel(String... mmr) {
+        int count = 0;
+        float totalMmr = 0f;
+        for (int i = 0; i < mmr.length; i++) {
+            if (!TextUtils.isEmpty(mmr[i])) {
+                totalMmr += Float.valueOf(mmr[i]);
+                count++;
+            }
+        }
+        if (count > 0) {
+            float result = totalMmr / count;
+            if (result >= 0 && result <= 3200) {
+                return DotaApplication.getApplication().getString(R.string.Normal);
+            } else if (result > 3200 && result <= 3800) {
+                return DotaApplication.getApplication().getString(R.string.High);
+            } else {
+                return DotaApplication.getApplication().getString(R.string.VeryHigh);
+            }
+        } else {
+            return DotaApplication.getApplication().getString(R.string.unknow);
+        }
+    }
+
     public static boolean getMatchResult(int playerSlot, boolean radiantWin) {
         if (playerSlot <= 4) {
             if (radiantWin) {

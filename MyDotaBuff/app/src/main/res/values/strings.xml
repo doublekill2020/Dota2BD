@@ -435,6 +435,9 @@
     <string name="rank_level_n">(N)</string>
     <string name="rank_level_h">(H)</string>
     <string name="rank_level_vh">(VH)</string>
+    <string name="Normal">Normal</string>
+    <string name="High">High</string>
+    <string name="VeryHigh">Very High</string>
     <string name="match_result_win">胜利</string>
     <string name="match_result_lose">失败</string>
     <string name="match_data_will_be_sync_in_background">比赛数据将会在后台同步...</string>

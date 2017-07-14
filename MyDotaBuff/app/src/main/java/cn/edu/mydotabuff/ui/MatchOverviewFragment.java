@@ -3,32 +3,24 @@ package cn.edu.mydotabuff.ui;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.text.TextUtils;
-import android.util.TypedValue;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseFragment;
-import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.model.MatchDetail;
-import cn.edu.mydotabuff.model.MatchPlayInfo;
+import cn.edu.mydotabuff.ui.adapter.MathOverviewAdapter;
 import cn.edu.mydotabuff.ui.presenter.IMatchOverviewPresenter;
 import cn.edu.mydotabuff.ui.presenter.impl.MatchOverviewPresenterImpl;
 import cn.edu.mydotabuff.ui.view.IMatchOverviewView;
-import cn.edu.mydotabuff.util.Utils;
-import cn.edu.mydotabuff.view.drawable.DirectionDrawale;
 
 /**
  * Created by sadhu on 2017/7/10.
@@ -36,26 +28,12 @@ import cn.edu.mydotabuff.view.drawable.DirectionDrawale;
  */
 public class MatchOverviewFragment extends BaseFragment<IMatchOverviewPresenter> implements IMatchOverviewView {
 
-    @BindView(R.id.ll_container)
-    LinearLayout mLlContainer;
-    @BindView(R.id.tv_random_txt)
-    TextView mTvRandow;
-
-    @BindView(R.id.iv_radiant_tag)
-    ImageView mImgRadiantTag;
-    @BindView(R.id.tv_match_radiant)
-    TextView mTvRadiant;
-    @BindView(R.id.tv_match_radiant_sumkill)
-    TextView mTvRadiantKill;
-
-    @BindView(R.id.iv_dire_tag)
-    ImageView mImgRireTag;
-    @BindView(R.id.tv_match_dire)
-    TextView mTvDire;
-    @BindView(R.id.tv_match_dire_sumkill)
-    TextView mTvDireKill;
+    @BindView(R.id.rv_list)
+    RecyclerView mRvList;
 
     private MatchDetail matchDetail;
+    private MathOverviewAdapter mAdapter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -65,84 +43,12 @@ public class MatchOverviewFragment extends BaseFragment<IMatchOverviewPresenter>
         return view;
     }
 
-    public void setImageURI(View parent, int id, String url) {
-        SimpleDraweeView view = parent.findViewById(id);
-        view.setImageURI(Uri.parse(url));
-    }
-
-    public void setText(View parent, int id, String text) {
-        TextView view = parent.findViewById(id);
-        view.setText(text);
-    }
-
     private void init() {
         Bundle arguments = getArguments();
         matchDetail = arguments.getParcelable("key");
         mPresenter = new MatchOverviewPresenterImpl(this);
-//"别紧张，你这样没事",
-//"英雄不见了！",
-//"英雄回来了！",
-//"相当精彩的比赛",
-//"技不如人，甘拜下风",
-//"走好, 不送",
-//"玩不了啦!",
-//"破两路更好打, 是吧?"
-//"Ай-ай-ай-ай-ай, что сейчас произошло!"
-        mTvRandow.setText("Ай-ай-ай-ай-ай, что сейчас произошло!");
-        mImgRadiantTag.setImageDrawable(new DirectionDrawale(
-                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40f, getResources().getDisplayMetrics()),
-                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40f, getResources().getDisplayMetrics()),
-                ContextCompat.getColor(getContext(), R.color.radiantColor)));
-        mTvRadiantKill.setText("杀敌" + String.valueOf(matchDetail.radiant_score));
-        mTvRadiant.setText(String.valueOf(matchDetail.radiant_win ? "胜利" : "失败"));
-
-        mImgRireTag.setImageDrawable(new DirectionDrawale(
-                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40f, getResources().getDisplayMetrics()),
-                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 40f, getResources().getDisplayMetrics()),
-                ContextCompat.getColor(getContext(), R.color.direColor)));
-        mTvDireKill.setText("杀敌" +String.valueOf(matchDetail.dire_score));
-        mTvDire.setText(String.valueOf(matchDetail.radiant_win ? "失败" : "胜利"));
-
-        for (int i = 0; i < 10; i++) {
-            View view = LayoutInflater.from(getContext()).inflate(R.layout.item_match_detail_over_view, mLlContainer, false);
-            MatchPlayInfo bean = matchDetail.players.get(i);
-            setImageURI(view, R.id.sdv_hero_icon, Utils.getHeroImageUriForFresco(Common.getHeroName(bean.hero_id)));
-            setText(view, R.id.tv_level, String.valueOf(bean.level));
-            setText(view, R.id.tv_person_name, TextUtils.isEmpty(bean.personaname) ? getString(R.string.anonymous_player) : bean.personaname);
-            setText(view, R.id.tv_kda, String.format(Locale.CHINA, "KDA: %.2f", bean.kda));
-            setText(view, R.id.tv_KDA, String.format(Locale.CHINA, "%d/%d/%d", bean.kills, bean.deaths, bean.assists));
-
-            setImageURI(view, R.id.item0, Utils.getItemsImageUri(Common.getItemName(bean.item_0)));
-            setImageURI(view, R.id.item1, Utils.getItemsImageUri(Common.getItemName(bean.item_1)));
-            setImageURI(view, R.id.item2, Utils.getItemsImageUri(Common.getItemName(bean.item_2)));
-            setImageURI(view, R.id.item3, Utils.getItemsImageUri(Common.getItemName(bean.item_3)));
-            setImageURI(view, R.id.item4, Utils.getItemsImageUri(Common.getItemName(bean.item_4)));
-            setImageURI(view, R.id.item5, Utils.getItemsImageUri(Common.getItemName(bean.item_5)));
-            if (i > 4) {
-                mLlContainer.addView(view, 2 + i);
-            } else {
-                mLlContainer.addView(view, 1 + i);
-            }
-
-        }
-
-//        mRvList.setAdapter(mAdapter = new BaseListAdapter<MatchPlayInfo>(matchDetail.players, R.layout.item_match_detail_over_view) {
-//            @Override
-//            public void getView(BaseListHolder holder, MatchPlayInfo bean, int pos) {
-//                holder.setImageURI(R.id.sdv_hero_icon, Utils.getHeroImageUriForFresco(Common.getHeroName(bean.hero_id)));
-//                holder.setText(R.id.tv_level, String.valueOf(bean.level));
-//                holder.setText(R.id.tv_person_name, TextUtils.isEmpty(bean.personaname) ? getString(R.string.anonymous_player) : bean.personaname);
-//                holder.setText(R.id.tv_kda, String.format(Locale.CHINA, "KDA: %.2f", bean.kda));
-//                holder.setText(R.id.tv_KDA, String.format(Locale.CHINA, "%d/%d/%d", bean.kills, bean.deaths, bean.assists));
-//
-//                holder.setImageURI(R.id.item0, Utils.getItemsImageUri(Common.getItemName(bean.item_0)));
-//                holder.setImageURI(R.id.item1, Utils.getItemsImageUri(Common.getItemName(bean.item_1)));
-//                holder.setImageURI(R.id.item2, Utils.getItemsImageUri(Common.getItemName(bean.item_2)));
-//                holder.setImageURI(R.id.item3, Utils.getItemsImageUri(Common.getItemName(bean.item_3)));
-//                holder.setImageURI(R.id.item4, Utils.getItemsImageUri(Common.getItemName(bean.item_4)));
-//                holder.setImageURI(R.id.item5, Utils.getItemsImageUri(Common.getItemName(bean.item_5)));
-//            }
-//        });
+        mRvList.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRvList.setAdapter(mAdapter = new MathOverviewAdapter(matchDetail));
     }
 
     public static MatchOverviewFragment newInstance(MatchDetail matchDetail) {
