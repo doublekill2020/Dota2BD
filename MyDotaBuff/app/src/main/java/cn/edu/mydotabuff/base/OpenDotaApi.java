@@ -13,6 +13,7 @@ import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.base.realm.RealmInt;
 import cn.edu.mydotabuff.base.realm.RealmIntAdapter;
 import cn.edu.mydotabuff.common.http.APIConstants;
+import cn.edu.mydotabuff.model.Hero;
 import cn.edu.mydotabuff.model.Match;
 import cn.edu.mydotabuff.model.MatchDetail;
 import cn.edu.mydotabuff.model.PlayerInfo;
@@ -118,5 +119,9 @@ public class OpenDotaApi {
 
         @GET("matches/{match_id}")
         Observable<MatchDetail> getMatchDetail(@Path("match_id") String accountId);
+
+        @GET("players/{account_id}/heroes")
+        Observable<List<Hero>> getHeroUsed(@Path("match_id") String accountId);
+
     }
 }
