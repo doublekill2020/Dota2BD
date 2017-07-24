@@ -2,11 +2,10 @@ package cn.edu.mydotabuff.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.SearchView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -26,24 +25,20 @@ import cn.edu.mydotabuff.model.LobbyType;
 import cn.edu.mydotabuff.model.Match;
 import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.model.Rating;
-import cn.edu.mydotabuff.ui.presenter.IFollowFragmentPresenter;
 import cn.edu.mydotabuff.ui.presenter.IRecentMatchPresenter;
-import cn.edu.mydotabuff.ui.presenter.impl.FollowFragmentPresenterImpl;
 import cn.edu.mydotabuff.ui.presenter.impl.RecentMatchPresenterImpl;
-import cn.edu.mydotabuff.ui.view.IFollowFragmentView;
 import cn.edu.mydotabuff.ui.view.IRecentMatchView;
 import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.util.Utils;
-import cn.edu.mydotabuff.view.SwipeRefreshRecycleView;
 
 /**
  * Created by nevermore on 2017/7/11 0011.
  */
 
 public class RecentMatchFragment extends BaseFragment<IRecentMatchPresenter> implements
-        IRecentMatchView{
+        IRecentMatchView {
     @BindView(R.id.rv_list)
-    SwipeRefreshRecycleView mRvList;
+    RecyclerView mRvList;
     @BindView(R.id.fl_success)
     FrameLayout mFlSuccess;
     private BaseListAdapter<Match> mAdapter;
@@ -53,7 +48,6 @@ public class RecentMatchFragment extends BaseFragment<IRecentMatchPresenter> imp
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable
             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recent_match_base, container, false);
-        setHasOptionsMenu(true);
         ButterKnife.bind(this, view);
 
         init();
@@ -62,19 +56,10 @@ public class RecentMatchFragment extends BaseFragment<IRecentMatchPresenter> imp
 
     private void init() {
         setSuccessView(mFlSuccess);
-        mRvList.setRefreshLoadMoreListener(new SwipeRefreshRecycleView.RefreshLoadMoreListener() {
-            @Override
-            public void onRefresh() {
-                mPresenter.doSync(mPresenter.getAllFollowers());
-            }
-
-            @Override
-            public void onLoadMore() {
-
-            }
-        });
+        mRvList.setHasFixedSize(true);
+        mRvList.setLayoutManager(new LinearLayoutManager(mActivity));
         mRvList.setAdapter(mAdapter = new BaseListAdapter<Match>(mMatches, R.layout
-                .fragment_follow_item, EventTag.CLICK_TO_MATCH_DETAIL) {
+                .fragment_follow_item, EventTag.PLAYER_DETAIL_CLICK_TO_MATCH_DETAIL) {
             @Override
             public void getView(BaseListHolder holder, final Match match, int pos) {
                 holder.setImageURI(R.id.sdv_hero_icon, Utils.getHeroImageUriForFresco(Common.getHeroName
@@ -103,15 +88,10 @@ public class RecentMatchFragment extends BaseFragment<IRecentMatchPresenter> imp
                         holder.setText(R.id.tv_mmr, R.string.rank_level_unknow);
                     }
                 }
-                holder.setOnClickListener(R.id.sdv_user_icon, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        PlayerDetailActivity.start(mActivity, match.account_id);
-                    }
-                });
             }
         });
         mPresenter = new RecentMatchPresenterImpl(this);
+        mPresenter.doSync(mPresenter.getAllFollowers());
     }
 
     @Override
@@ -122,39 +102,15 @@ public class RecentMatchFragment extends BaseFragment<IRecentMatchPresenter> imp
     }
 
     @Override
-    public void setRefreshCompleted() {
-        mRvList.setRefreshCompleted();
-    }
-
-    @Override
     public void notifyDataUpdate() {
         mAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.clear();
-        inflater.inflate(R.menu.menu_follow_fragment, menu);
-        final SearchView searchView = (SearchView) menu.findItem(
-                R.id.action_search).getActionView();
-        searchView.setQueryHint(getString(R.string.follow_fragment_search_hint));
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
-            @Override
-            public boolean onQueryTextSubmit(String arg0) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String arg0) {
-                // TODO Auto-generated method stub
-                return false;
-            }
-        });
-    }
-
-    @Override
-    public void refresh() {
-        mRvList.refresh();
+    public static RecentMatchFragment newInstance(PlayerInfo playerInfo) {
+        Bundle args = new Bundle();
+        args.putSerializable(PlayerDetailActivity.PLAYER_INFO, playerInfo);
+        RecentMatchFragment fragment = new RecentMatchFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 }

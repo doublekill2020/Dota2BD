@@ -5,9 +5,10 @@ import com.hwangjr.rxbus.annotation.Subscribe;
 
 import cn.edu.mydotabuff.base.BaseListClickEvent;
 import cn.edu.mydotabuff.base.BasePresenterImpl;
+import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.ui.presenter.IPlayerDetailPresenter;
+import cn.edu.mydotabuff.ui.service.PlayerInfoService;
 import cn.edu.mydotabuff.ui.view.IPlayerDetailView;
-import io.realm.Realm;
 
 /**
  * Created by nevermore on 2017/7/10 0010.
@@ -15,7 +16,7 @@ import io.realm.Realm;
 
 public class PlayerDetailPresenterImpl extends BasePresenterImpl<IPlayerDetailView> implements IPlayerDetailPresenter {
     public PlayerDetailPresenterImpl(IPlayerDetailView view) {
-        super(view);
+        super(view,true);
         RxBus.get().register(this);
     }
 
@@ -23,8 +24,14 @@ public class PlayerDetailPresenterImpl extends BasePresenterImpl<IPlayerDetailVi
     public void follow() {
 
     }
+
+    @Override
+    public PlayerInfo queryPlayerInfo(String accountId) {
+        return PlayerInfoService.querySinglePlayerInfo(getRealm(), accountId);
+    }
+
     @Subscribe
-    public void onItemClicked(BaseListClickEvent event){
+    public void onItemClicked(BaseListClickEvent event) {
 
     }
 

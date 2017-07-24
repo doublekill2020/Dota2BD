@@ -12,10 +12,5 @@ import cn.edu.mydotabuff.model.Match;
 public interface IRecentMatchView extends IBaseView {
 
     void setDataToRecycleView(List<Match> matches);
-
-    void setRefreshCompleted();
-
     void notifyDataUpdate();
-
-    void refresh();
 }

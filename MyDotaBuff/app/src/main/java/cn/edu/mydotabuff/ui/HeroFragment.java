@@ -18,6 +18,7 @@ import cn.edu.mydotabuff.base.BaseListAdapter;
 import cn.edu.mydotabuff.base.BaseListHolder;
 import cn.edu.mydotabuff.common.EventTag;
 import cn.edu.mydotabuff.model.Hero;
+import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.ui.presenter.IHeroPresenter;
 import cn.edu.mydotabuff.ui.presenter.impl.HeroPresenterImpl;
 import cn.edu.mydotabuff.ui.view.IHeroView;
@@ -66,4 +67,12 @@ public class HeroFragment extends BaseFragment<IHeroPresenter> implements IHeroV
         mPresenter = new HeroPresenterImpl(this, true);
     }
 
+    public static HeroFragment newInstance(PlayerInfo playerInfo) {
+
+        Bundle args = new Bundle();
+        args.putSerializable(PlayerDetailActivity.PLAYER_INFO, playerInfo);
+        HeroFragment fragment = new HeroFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 }

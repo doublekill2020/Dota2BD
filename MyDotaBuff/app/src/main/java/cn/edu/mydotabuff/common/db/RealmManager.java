@@ -22,7 +22,7 @@ public class RealmManager {
     public static void initRealm(Context context) {
         Realm.init(context);
         RealmConfiguration config = new RealmConfiguration.Builder()
-                .name("ones.ai.realm")
+                .name("dota2.db")
                 .schemaVersion(VERSION)
                 .migration(getMigration())
                 .build();

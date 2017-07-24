@@ -57,8 +57,7 @@ public class RecentMatchPresenterImpl extends BasePresenterImpl<IRecentMatchView
                         syncPlayerData(playerInfo.profile.account_id);
                     }
                     getDataFromDb(mPlayerIds);
-                    mView.refresh();
-
+                    doSync(mPlayerIds);
                     mHasLoaded = true;
                 }
             }
@@ -114,7 +113,7 @@ public class RecentMatchPresenterImpl extends BasePresenterImpl<IRecentMatchView
 
     @Subscribe
     public void onItemClicked(BaseListClickEvent event) {
-        if (event.tag == EventTag.CLICK_TO_MATCH_DETAIL) {
+        if (event.tag == EventTag.PLAYER_DETAIL_CLICK_TO_MATCH_DETAIL) {
             MatchDetailActivity.start(mView.getContext(), matches.get(event.position).match_id);
         }
     }
@@ -170,9 +169,6 @@ public class RecentMatchPresenterImpl extends BasePresenterImpl<IRecentMatchView
                     .subscribe(new Action1<List<Match>>() {
                         @Override
                         public void call(List<Match> matches) {
-                            if (mView != null) {
-                                mView.setRefreshCompleted();
-                            }
                         }
                     });
         }

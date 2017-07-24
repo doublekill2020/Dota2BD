@@ -9,9 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <cn.edu.mydotabuff.view.SwipeRefreshRecycleView
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></cn.edu.mydotabuff.view.SwipeRefreshRecycleView>
+            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
     </FrameLayout>
 </LinearLayout>
