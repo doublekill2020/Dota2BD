@@ -25,16 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import cn.edu.mydotabuff.R;
-import cn.edu.mydotabuff.common.db.RealmManager;
 import cn.edu.mydotabuff.view.LoadingDialog;
-import io.realm.Realm;
 
-/**
- * @author 袁浩 1006401052yh@gmail.com
- * @ClassName: BaseFragment
- * @Description: TODO(这里用一句话描述这个类的作用)
- * @date 2015-2-2 下午12:03:38
- */
 public abstract class BaseFragment<T extends IBasePresenter> extends Fragment implements IBaseView {
 
     private View view;

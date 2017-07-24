@@ -28,11 +28,6 @@ public final class APIConstants {
             ".dota2.com/webapi/ILeaderboard/GetDivisionLeaderboard/v0001";
     public final static String GET_FRIEND_LIST = "http://api.steampowered" +
             ".com/ISteamUser/GetFriendList/v1";
-
-    // 聊天API
-    public final static String GET_USER_TOKEN = "http://dota2helper.jd-app" +
-            ".com/client/rongcloud_getToken.action";
-
     // dota2 news
     public final static String NEWS_URL = "http://www.dota2.com.cn/wapnews";
     public final static String INDEX1_URL = NEWS_URL + "/hotnewsList";

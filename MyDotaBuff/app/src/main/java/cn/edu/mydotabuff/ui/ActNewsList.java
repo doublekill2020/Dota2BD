@@ -1,12 +1,3 @@
-/**   
- * @Title: ActNews.java
- * @ProjectName MyDotaBuff 
- * @Package cn.edu.mydotabuff.ui 
- * @author 袁浩 1006401052yh@gmail.com
- * @date 2015-2-3 下午2:57:30 
- * @version V1.4  
- * Copyright 2013-2015 深圳市点滴互联科技有限公司  版权所有
- */
 package cn.edu.mydotabuff.ui;
 
 import android.os.Bundle;
@@ -21,13 +12,6 @@ import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseActivity;
 import cn.edu.mydotabuff.view.PagerSlidingTabStrip;
 
-/**
- * @ClassName: ActNews
- * @Description: TODO(这里用一句话描述这个类的作用)
- * @author 袁浩 1006401052yh@gmail.com
- * @date 2015-2-3 下午2:57:30
- * 
- */
 public class ActNewsList extends BaseActivity {
 	private static final String[] TITLE = new String[] { "全部", "刀塔新闻", "赛事资讯",
 			"版本公告" };

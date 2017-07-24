@@ -1,12 +1,3 @@
-/**
- * @Title: FragNewsItem.java
- * @ProjectName MyDotaBuff
- * @Package cn.edu.mydotabuff.ui
- * @author 袁浩 1006401052yh@gmail.com
- * @date 2015-2-3 下午3:06:46
- * @version V1.4
- * Copyright 2013-2015 深圳市点滴互联科技有限公司  版权所有
- */
 package cn.edu.mydotabuff.ui;
 
 import android.app.Activity;
@@ -41,13 +32,6 @@ import cn.edu.mydotabuff.view.TipsToast.DialogType;
 import cn.edu.mydotabuff.view.XListView;
 import cn.edu.mydotabuff.view.XListView.IXListViewListener;
 
-/**
- * @ClassName: FragNewsItem
- * @Description: TODO(这里用一句话描述这个类的作用)
- * @author 姚偲小鸡巴 1006401052yh@gmail.com
- * @date 2015-2-3 下午3:06:46
- *
- */
 public class FragNewsItem extends BaseFragment {
 
     private int index;

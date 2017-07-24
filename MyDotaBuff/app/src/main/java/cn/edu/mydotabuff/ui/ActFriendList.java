@@ -1,12 +1,3 @@
-/**
- * @Title: ActFriendList.java
- * @ProjectName MyDotaBuff
- * @Package cn.edu.mydotabuff.ui
- * @author 袁浩 1006401052yh@gmail.com
- * @date 2015-2-2 下午4:20:24
- * @version V1.4
- * Copyright 2013-2015 深圳市点滴互联科技有限公司  版权所有
- */
 package cn.edu.mydotabuff.ui;
 
 import android.os.Bundle;
@@ -42,13 +33,6 @@ import cn.edu.mydotabuff.view.TipsToast.DialogType;
 import cn.edu.mydotabuff.view.XListView;
 import cn.edu.mydotabuff.view.XListView.IXListViewListener;
 
-/**
- * @ClassName: ActFriendList
- * @Description: TODO(这里用一句话描述这个类的作用)
- * @author 袁浩 1006401052yh@gmail.com
- * @date 2015-2-2 下午4:20:24
- *
- */
 public class ActFriendList extends BaseActivity {
 
     private String steamid = "";
@@ -242,7 +226,8 @@ public class ActFriendList extends BaseActivity {
                                                 // 如果是电脑
                                                 if (bean.getSteamid().equals(
                                                         "76561197960265728")) {
-                                                    bean.setMediumIcon("http://media.steampowered.com/steamcommunity/public/images/avatars/fe/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_medium.jpg");
+                                                    bean.setMediumIcon("http://media.steampowered" +
+                                                            ".com/steamcommunity/public/images/avatars/fe/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_medium.jpg");
                                                     bean.setName("电脑");
                                                 }
                                                 infoBeans.add(bean);
