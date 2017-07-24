@@ -23,7 +23,6 @@ import io.realm.RealmList;
 import io.realm.RealmObject;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
-import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -122,6 +121,11 @@ public class OpenDotaApi {
 
         @GET("players/{account_id}/heroes")
         Observable<List<Hero>> getHeroUsed(@Path("match_id") String accountId);
+
+        @GET("players/{account_id}/matches")
+        Observable<List<Match>> getMatches(@Path("account_id") String accountId,
+                                          @Query("limit") int limit,
+                                          @Query("offset") int offset);
 
     }
 }
