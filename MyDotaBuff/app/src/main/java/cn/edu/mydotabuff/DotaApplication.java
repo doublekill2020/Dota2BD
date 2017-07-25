@@ -1,12 +1,12 @@
 package cn.edu.mydotabuff;
 
 import android.app.ActivityManager;
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.multidex.MultiDexApplication;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
@@ -39,7 +39,7 @@ import java.io.ObjectOutputStream;
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackManager;
 import cn.edu.mydotabuff.common.db.RealmManager;
 
-public class DotaApplication extends Application {
+public class DotaApplication extends MultiDexApplication {
     private static DotaApplication mInstance = null;
     private Context context;
 

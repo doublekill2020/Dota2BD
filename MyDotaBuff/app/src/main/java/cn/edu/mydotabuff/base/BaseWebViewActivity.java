@@ -13,7 +13,7 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v7.widget.Toolbar;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -21,10 +21,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
+import android.webkit.WebSettings.RenderPriority;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.webkit.WebSettings.RenderPriority;
 import android.widget.FrameLayout;
+
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.R;
 
@@ -50,11 +51,10 @@ public class BaseWebViewActivity extends BaseActivity {
 	private String url;
 
     @Override
-    public void setContentView(View view) {
-        super.setContentView(view);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         setContentView(R.layout.common_webview_base);
-        Toolbar mainToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mainToolbar);
         getSupportActionBar().setTitle("刀塔新闻");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -62,14 +62,23 @@ public class BaseWebViewActivity extends BaseActivity {
         initWebView();
         videoWebView.loadUrl(url);
     }
+/*
+    @Override
+    public void setContentView(View view) {
+        super.setContentView(view);
+        Toolbar mainToolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(mainToolbar);
+
+    }*/
 
 	/**
 	 * 初始化webview以及设置
 	 */
 	private void initWebView() {
 
-		fullVideoView = (FrameLayout) findViewById(R.id.video_fullView);
-		videoWebView = (WebView) findViewById(R.id.video_webView);
+		fullVideoView =  findViewById(R.id.video_fullView);
+		videoWebView = findViewById(R.id.video_webView);
+
 		WebSettings ws = videoWebView.getSettings();
 		/**
 		 * setAllowFileAccess 启用或禁止WebView访问文件数据 setBlockNetworkImage 是否显示网络图像

@@ -4,10 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <cn.edu.mydotabuff.view.XListView
-        android:id="@+id/list"
+    <cn.edu.mydotabuff.view.SwipeRefreshRecycleView
+        android:id="@+id/rvContent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </cn.edu.mydotabuff.view.XListView>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

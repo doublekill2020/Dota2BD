@@ -1,37 +1,43 @@
-/**   
+/**
  * @Title: ActNews.java
- * @ProjectName MyDotaBuff 
- * @Package cn.edu.mydotabuff.ui 
+ * @ProjectName MyDotaBuff
+ * @Package cn.edu.mydotabuff.ui
  * @author 袁浩 1006401052yh@gmail.com
- * @date 2015-2-3 下午2:57:30 
- * @version V1.4  
+ * @date 2015-2-3 下午2:57:30
+ * @version V1.4
  * Copyright 2013-2015 深圳市点滴互联科技有限公司  版权所有
  */
 package cn.edu.mydotabuff.ui;
 
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseActivity;
-import cn.edu.mydotabuff.view.PagerSlidingTabStrip;
 
 /**
  * @ClassName: ActNews
  * @Description: TODO(这里用一句话描述这个类的作用)
  * @author 袁浩 1006401052yh@gmail.com
  * @date 2015-2-3 下午2:57:30
- * 
+ *
  */
 public class ActNewsList extends BaseActivity {
-	private static final String[] TITLE = new String[] { "全部", "刀塔新闻", "赛事资讯",
-			"版本公告" };
-	private PagerSlidingTabStrip indicator;
+
+
+    TabLayout mTabLayout;
+    ViewPager mVp;
+
+    CoordinatorLayout cd;
+
+    private static final String[] TITLE = new String[]{"全部", "刀塔新闻", "赛事资讯",
+            "版本公告"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,16 +53,14 @@ public class ActNewsList extends BaseActivity {
 
         FragmentPagerAdapter adapter = new TabPageIndicatorAdapter(
                 getSupportFragmentManager());
-        ViewPager pager = (ViewPager) findViewById(R.id.pager);
+        ViewPager pager = (ViewPager) findViewById(R.id.vp);
         pager.setAdapter(adapter);
 
-        indicator = (PagerSlidingTabStrip) findViewById(R.id.indicator);
-        indicator.setViewPager(pager);
-        indicator.setOnPageChangeListener(new OnPageChangeListener() {
-
+        mTabLayout = findViewById(R.id.tabLayout);
+        mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onPageSelected(int arg0) {
-                switch (arg0) {
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()) {
                     case 0:
                         mToolbar.setTitle("全部");
                         break;
@@ -75,48 +79,50 @@ public class ActNewsList extends BaseActivity {
             }
 
             @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2) {
+            public void onTabUnselected(TabLayout.Tab tab) {
 
             }
 
             @Override
-            public void onPageScrollStateChanged(int arg0) {
+            public void onTabReselected(TabLayout.Tab tab) {
 
             }
         });
+        mTabLayout.setupWithViewPager(pager);
+        //mTabLayout.setTabMode(TabLayout.MODE_FIXED);
+
     }
 
-	class TabPageIndicatorAdapter extends FragmentPagerAdapter {
-		public TabPageIndicatorAdapter(FragmentManager fm) {
-			super(fm);
-		}
+    class TabPageIndicatorAdapter extends FragmentPagerAdapter {
+        public TabPageIndicatorAdapter(FragmentManager fm) {
+            super(fm);
+        }
 
-		@Override
-		public Fragment getItem(int position) {
-			return FragNewsItem.newInstance(position);
-		}
+        @Override
+        public Fragment getItem(int position) {
+            return FragNewsItem.newInstance(position);
+        }
 
-		@Override
-		public CharSequence getPageTitle(int position) {
-			return TITLE[position % TITLE.length];
-		}
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return TITLE[position % TITLE.length];
+        }
 
-		@Override
-		public int getCount() {
-			return TITLE.length;
-		}
-	}
+        @Override
+        public int getCount() {
+            return TITLE.length;
+        }
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			finish();
-			break;
-		default:
-			break;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
