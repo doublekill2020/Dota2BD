@@ -10,6 +10,7 @@ import java.io.File;
 import java.util.List;
 
 import cn.edu.mydotabuff.DotaApplication;
+import cn.edu.mydotabuff.api.NewsHttpRespone;
 import cn.edu.mydotabuff.base.realm.RealmInt;
 import cn.edu.mydotabuff.base.realm.RealmIntAdapter;
 import cn.edu.mydotabuff.common.http.APIConstants;
@@ -25,9 +26,7 @@ import io.realm.RealmObject;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.Result;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
@@ -43,8 +42,9 @@ import rx.schedulers.Schedulers;
 public class OpenDotaApi {
 
     private static OpenDotaApi mOpenDotaApi = new OpenDotaApi();
-    private static Retrofit mRetrofit;
+    private Retrofit mRetrofit;
     private static OpenDotaService mService;
+
     private static final long HTTP_DISK_CACHE_MAX_SIZE = 1024 * 1024 * 10; // 10 MB
 
     public static OpenDotaApi getInstance() {
@@ -82,6 +82,17 @@ public class OpenDotaApi {
 
     public static OpenDotaService getService() {
         return mService;
+    }
+
+    public Dota2NewsService getDota2NewsService() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://www.dota2.com.cn/")
+                .client(getOkHttpClient())
+                .addConverterFactory(GsonConverterFactory.create(createGson()))
+                .addCallAdapterFactory(RxJavaCallAdapterFactory
+                        .createWithScheduler(Schedulers.io()))
+                .build();
+        return retrofit.create(Dota2NewsService.class);
     }
 
     private static OkHttpClient getOkHttpClient() {
@@ -130,5 +141,19 @@ public class OpenDotaApi {
                                            @Query("limit") int limit,
                                            @Query("offset") int offset);
 
+    }
+
+    public interface Dota2NewsService {
+        @GET("wapnews/hotnewsList{page}.html")
+        Observable<NewsHttpRespone> getHotNews(@Path("page") int page);
+
+        @GET("wapnews/govnews/index{page}.html")
+        Observable<NewsHttpRespone> getGovNews(@Path("page") int page);
+
+        @GET("wapnews/matchnews/index{page}.html")
+        Observable<NewsHttpRespone> getMatchNews(@Path("page") int page);
+
+        @GET("wapnews/vernews/index{page}.html")
+        Observable<NewsHttpRespone> getVerNews(@Path("page") int page);
     }
 }

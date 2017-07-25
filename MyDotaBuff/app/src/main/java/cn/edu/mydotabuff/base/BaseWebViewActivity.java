@@ -53,23 +53,13 @@ public class BaseWebViewActivity extends BaseActivity {
         Toolbar mainToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mainToolbar);
 
-<<<<<<< .mine
-    }*/
-
-	/**
-	 * 初始化webview以及设置
-	 */
-	private void initWebView() {
-=======
     /**
      * 初始化webview以及设置
      */
     private void initWebView() {
 
 
->>>>>>> .theirs
 
-<<<<<<< .mine
 		fullVideoView =  findViewById(R.id.video_fullView);
 		videoWebView = findViewById(R.id.video_webView);
 
@@ -88,26 +78,7 @@ public class BaseWebViewActivity extends BaseActivity {
 		ws.setSavePassword(true);
 		ws.setSaveFormData(true);// 保存表单数据
 		ws.setJavaScriptEnabled(true);
-=======
-        fullVideoView = (FrameLayout) findViewById(R.id.video_fullView);
-        videoWebView = (WebView) findViewById(R.id.video_webView);
-        WebSettings ws = videoWebView.getSettings();
-        /**
-         * setAllowFileAccess 启用或禁止WebView访问文件数据 setBlockNetworkImage 是否显示网络图像
-         * setBuiltInZoomControls 设置是否支持缩放 setCacheMode 设置缓冲的模式
-         * setDefaultFontSize 设置默认的字体大小 setDefaultTextEncodingName 设置在解码时使用的默认编码
-         * setFixedFontFamily 设置固定使用的字体 setJavaSciptEnabled 设置是否支持Javascript
-         * setLayoutAlgorithm 设置布局方式 setLightTouchEnabled 设置用鼠标激活被选项
-         * setSupportZoom 设置是否支持变焦
-         * */
-        ws.setBuiltInZoomControls(true);// 隐藏缩放按钮
-        ws.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);// 排版适应屏幕
-        ws.setLoadWithOverviewMode(true);//
-        // setUseWideViewPort方法设置webview推荐使用的窗口。setLoadWithOverviewMode方法是设置webview加载的页面的模式。
-        ws.setSavePassword(true);
-        ws.setSaveFormData(true);// 保存表单数据
-        ws.setJavaScriptEnabled(true);
->>>>>>> .theirs
+
 
         ws.setRenderPriority(RenderPriority.HIGH);
         if (DotaApplication.getApplication().isNetworkAvailabe()) {

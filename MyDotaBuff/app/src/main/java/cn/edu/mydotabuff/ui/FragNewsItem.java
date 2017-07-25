@@ -3,29 +3,24 @@ package cn.edu.mydotabuff.ui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import org.json2.JSONArray;
-import org.json2.JSONException;
-import org.json2.JSONObject;
-
 import java.util.ArrayList;
 
 import cn.edu.mydotabuff.R;
+import cn.edu.mydotabuff.api.ApiManager;
+import cn.edu.mydotabuff.api.NewsHttpRespone;
 import cn.edu.mydotabuff.base.BaseActivity;
 import cn.edu.mydotabuff.base.BaseFragment;
 import cn.edu.mydotabuff.base.BaseListAdapter;
 import cn.edu.mydotabuff.base.BaseListHolder;
-import cn.edu.mydotabuff.common.http.IInfoReceive;
 import cn.edu.mydotabuff.model.NewsBean;
-import cn.edu.mydotabuff.util.PersonalRequestImpl;
 import cn.edu.mydotabuff.view.SwipeRefreshRecycleView;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;
+import rx.functions.Action1;
 
 
 public class FragNewsItem extends BaseFragment {
@@ -50,6 +45,7 @@ public class FragNewsItem extends BaseFragment {
             public void onRefresh() {
                 currentPage = 0;
                 fetchData(index, currentPage);
+                rvContent.setPullLoadMoreEnable(true);
             }
 
             @Override
@@ -64,7 +60,7 @@ public class FragNewsItem extends BaseFragment {
                 public void onClick(View view) {
 
                     Object tag = view.getTag();
-                    if (tag!=null && tag instanceof NewsBean){
+                    if (tag != null && tag instanceof NewsBean) {
                         NewsBean bean = (NewsBean) tag;
                         Intent i = new Intent();
                         i.setClass(act, ActNews.class);
@@ -74,14 +70,15 @@ public class FragNewsItem extends BaseFragment {
                     }
                 }
             };
+
             @Override
             public void getView(BaseListHolder holder, NewsBean item, int pos) {
                 holder.setImageURI(R.id.pic, item.getPic());
                 holder.setText(R.id.title, item.getTitle());
                 holder.setText(R.id.content, item.getContent());
                 holder.setText(R.id.time, item.getTime());
-                holder.setTag(R.id.cardview,item);
-                holder.setOnClickListener(R.id.cardview,onClickListener);
+                holder.setTag(R.id.cardview, item);
+                holder.setOnClickListener(R.id.cardview, onClickListener);
             }
         };
         rvContent.setAdapter(adapter);
@@ -100,73 +97,58 @@ public class FragNewsItem extends BaseFragment {
         return f;
     }
 
-    private Handler h = new Handler() {
-        public void handleMessage(android.os.Message msg) {
 
-            rvContent.setRefreshCompleted();
-            rvContent.setLoadMoreCompleted();
-            switch (msg.what) {
-                case BaseActivity.OK:
-                    if (currentPage == 0) {
-                        beans.clear();
-                    }
-                    beans.addAll((ArrayList<NewsBean>) msg.obj);
-
-                    adapter.notifyDataSetChanged();
-
-                    break;
-                case BaseActivity.FAILED:
-                    ((BaseActivity) act).showTip("网络超时~~", DialogType.LOAD_FAILURE);
-                    break;
-                case BaseActivity.JSON_ERROR:
-                    break;
-                default:
-                    break;
+    Action1<NewsHttpRespone> responeAction = new Action1<NewsHttpRespone>() {
+        @Override
+        public void call(NewsHttpRespone respone) {
+            dismissLoadingDialog();
+            if (respone != null && respone.getData() != null && !respone.getData().isEmpty()) {
+                int totalPage = respone.getTotalPages();
+                if (currentPage >= totalPage - 1) {
+                    rvContent.setPullLoadMoreEnable(false);
+                } else {
+                    rvContent.setPullLoadMoreEnable(true);
+                }
+                if (currentPage == 0) {
+                    beans.clear();
+                }
+                beans.addAll(respone.getData());
+                adapter.notifyDataSetChanged();
+            } else {
+                ((BaseActivity) act).showTip("新闻加载失败，请稍候再试", DialogType.LOAD_FAILURE);
             }
         }
-
-        ;
+    };
+    Action1<Throwable> throwableAction = new Action1<Throwable>() {
+        @Override
+        public void call(Throwable throwable) {
+            dismissLoadingDialog();
+            throwable.printStackTrace();
+            ((BaseActivity) act).showTip("新闻加载失败，请稍候再试", DialogType.LOAD_FAILURE);
+        }
     };
 
     private void fetchData(final int type, final int page) {
-        PersonalRequestImpl request = new PersonalRequestImpl(
-                new IInfoReceive() {
 
-                    @Override
-                    public void onMsgReceiver(ResponseObj receiveInfo) {
-                        Message msg = h.obtainMessage();
-                        try {
-                            JSONObject obj = new JSONObject(
-                                    receiveInfo.getJsonStr());
-                            ArrayList<NewsBean> beans = new ArrayList<NewsBean>();
-                            if (receiveInfo.getMsgType() == ReceiveMsgType.OK) {
-                                msg.what = BaseActivity.OK;
-                                JSONArray array = obj.getJSONArray("data");
-                                for (int i = 0; i < array.length(); i++) {
-                                    JSONObject info = array.getJSONObject(i);
-                                    NewsBean bean = new NewsBean(
-                                            info.getString("pic"),
-                                            info.getString("title"),
-                                            info.getString("desc"),
-                                            info.getString("date"),
-                                            info.getString("url"),
-                                            info.getString("isVideo"));
-                                    beans.add(bean);
-                                }
-                                msg.obj = beans;
-                            } else {
-                                msg.what = BaseActivity.FAILED;
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            msg.what = BaseActivity.JSON_ERROR;
-                        }
-                        h.sendMessage(msg);
-                    }
-                });
-        request.setActivity(getActivity());
-        request.setIsCancelAble(false);
-        request.getDota2News(type, page);
+        switch (type) {
+            case 0:
+                showLoadingDialog();
+                ApiManager.getManager().requestHotNews(page,responeAction,throwableAction);
+                break;
+            case 1:
+                showLoadingDialog();
+                ApiManager.getManager().requestGovNews(page,responeAction,throwableAction);
+                break;
+            case 2:
+                showLoadingDialog();
+                ApiManager.getManager().requestMatchNews(page,responeAction,throwableAction);
+                break;
+            case 3:
+                showLoadingDialog();
+                ApiManager.getManager().requestVerNews(page,responeAction,throwableAction);
+                break;
+        }
+
     }
 
     @Override
