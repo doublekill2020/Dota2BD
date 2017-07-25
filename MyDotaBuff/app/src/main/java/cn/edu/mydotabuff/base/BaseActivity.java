@@ -1,12 +1,3 @@
-/**
- * @Title: BaseActivity.java
- * @ProjectName MyDotaBuff
- * @Package cn.edu.mydotabuff.base
- * @author 袁浩 1006401052yh@gmail.com
- * @date 2015-1-22 下午6:05:10
- * @version V1.4
- * Copyright 2013-2015 深圳市点滴互联科技有限公司  版权所有
- */
 package cn.edu.mydotabuff.base;
 
 import android.content.Context;

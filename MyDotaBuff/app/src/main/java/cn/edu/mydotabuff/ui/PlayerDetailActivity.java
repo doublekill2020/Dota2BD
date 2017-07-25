@@ -2,6 +2,7 @@ package cn.edu.mydotabuff.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
@@ -10,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -20,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseActivity;
+import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.ui.presenter.IPlayerDetailPresenter;
 import cn.edu.mydotabuff.ui.presenter.impl.PlayerDetailPresenterImpl;
 import cn.edu.mydotabuff.ui.view.IPlayerDetailView;
@@ -35,6 +38,7 @@ public class PlayerDetailActivity extends BaseActivity<IPlayerDetailPresenter> i
     @BindView(R.id.cd)
     CoordinatorLayout cd;
     public static final String PLAYER_ID = "PLAYER_ID";
+    public static final String PLAYER_INFO = "PLAYER_INFO";
     @BindView(R.id.sdv_user_icon)
     SimpleDraweeView sdvUserIcon;
     @BindView(R.id.tv_player_name)
@@ -46,6 +50,8 @@ public class PlayerDetailActivity extends BaseActivity<IPlayerDetailPresenter> i
     @BindView(R.id.vp)
     ViewPager vp;
     private PlayerDetailPageAdapter mPageAdapter;
+    private String mPlayerId;
+    private PlayerInfo mPlayerInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +62,15 @@ public class PlayerDetailActivity extends BaseActivity<IPlayerDetailPresenter> i
     }
 
     private void init() {
+        mPlayerId = getIntent().getStringExtra(PLAYER_ID);
         mPresenter = new PlayerDetailPresenterImpl(this);
+        mPlayerInfo = mPresenter.queryPlayerInfo(mPlayerId);
+        sdvUserIcon.setImageURI(Uri.parse(mPlayerInfo.profile.avatar));
+        tvPlayerName.setText(mPlayerInfo.profile.personaname);
+        tvStatus.setText("mmr:" + (TextUtils.isEmpty(mPlayerInfo.solo_competitive_rank) ?
+                R.string.rank_level_unknow_ : mPlayerInfo.solo_competitive_rank) + "|" +
+                mPlayerInfo.playerWL.winRate + "%");
+
         setSupportActionBar(toolbar);
         mToolbar.setTitle(R.string.player_detail_title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -97,13 +111,13 @@ public class PlayerDetailActivity extends BaseActivity<IPlayerDetailPresenter> i
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new RecentMatchFragment();
+                    return RecentMatchFragment.newInstance(mPlayerInfo);
                 case 1:
-                    return new HeroFragment();
+                    return HeroFragment.newInstance(mPlayerInfo);
                 case 2:
-                    return new FriendFragment();
+                    return FriendFragment.newInstance(mPlayerInfo);
                 case 3:
-                    return new StatisticsFragment();
+                    return StatisticsFragment.newInstance(mPlayerInfo);
                 default:
                     return null;
             }

@@ -431,7 +431,8 @@
     <string name="please_input_steamId_or_name">请输入steamId或者昵称</string>
     <string name="please_input_steamId">请输入steamId</string>
     <string name="data_in_loading">数据正在加载,请稍候...</string>
-    <string name="rank_level_unknow">处理中...</string>
+    <string name="rank_level_unknow">未公开...</string>
+    <string name="rank_level_unknow_">未公开</string>
     <string name="rank_level_n">(N)</string>
     <string name="rank_level_h">(H)</string>
     <string name="rank_level_vh">(VH)</string>
@@ -442,6 +443,7 @@
     <string name="match_result_lose">失败</string>
     <string name="match_data_will_be_sync_in_background">比赛数据将会在后台同步...</string>
     <string name="cancel_do_sync">撤销</string>
+    <string name="player_detail_status">mmr:%s|胜率:%.1f%</string>
 
     <string name="lobby_type_normal">普通匹配</string>
     <string name="lobby_type_practice">练习赛</string>

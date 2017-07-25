@@ -8,9 +8,11 @@ import cn.edu.mydotabuff.base.OpenDotaApi;
 import cn.edu.mydotabuff.base.RxCallBackEvent;
 import cn.edu.mydotabuff.common.EventTag;
 import cn.edu.mydotabuff.model.PlayerInfo;
+import cn.edu.mydotabuff.model.PlayerWL;
 import cn.edu.mydotabuff.model.Rating;
 import io.realm.Realm;
 import io.realm.RealmResults;
+import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -64,9 +66,9 @@ public class PlayerInfoService {
         OpenDotaApi.getService().getPlayerInfo(accountId)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(Schedulers.io())
-                .map(new Func1<PlayerInfo, Boolean>() {
+                .flatMap(new Func1<PlayerInfo, Observable<PlayerWL>>() {
                     @Override
-                    public Boolean call(PlayerInfo playerInfo) {
+                    public Observable<PlayerWL> call(PlayerInfo playerInfo) {
                         Realm realm = Realm.getDefaultInstance();
                         try {
                             PlayerInfo old = realm.where(PlayerInfo.class).equalTo("account_id", accountId).findFirst();
@@ -78,11 +80,38 @@ public class PlayerInfoService {
                             realm.copyToRealmOrUpdate(playerInfo);
                             realm.commitTransaction();
                         } catch (Exception e) {
+                            return null;
+                        } finally {
+                            realm.close();
+                        }
+                        return OpenDotaApi.getService().getPlayerWL(accountId);
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(Schedulers.io())
+                .map(new Func1<PlayerWL, Boolean>() {
+                    @Override
+                    public Boolean call(PlayerWL playerWL) {
+                        Realm realm = Realm.getDefaultInstance();
+                        try {
+                            realm.beginTransaction();
+                            playerWL.accountId = accountId;
+                            playerWL.winRate = (playerWL.win * 1.0f / (playerWL.win + playerWL.lose)) * 100;
+                            realm.copyToRealmOrUpdate(playerWL);
+                            realm.commitTransaction();
+
+                            PlayerInfo playerInfo = realm.where(PlayerInfo.class).equalTo("account_id", accountId).findFirst();
+                            PlayerWL playerWLInDb = realm.where(PlayerWL.class).equalTo("accountId",accountId).findFirst();
+                            realm.beginTransaction();
+                            playerInfo.playerWL = playerWLInDb;
+                            realm.copyToRealmOrUpdate(playerInfo);
+                            realm.commitTransaction();
+                            return true;
+                        } catch (Exception e) {
                             return false;
                         } finally {
                             realm.close();
                         }
-                        return true;
                     }
                 })
                 .subscribeOn(Schedulers.io())
@@ -100,5 +129,9 @@ public class PlayerInfoService {
 
     public static RealmResults<PlayerInfo> queryPlayerInfoResults(Realm realm, String accountId) {
         return realm.where(PlayerInfo.class).equalTo("account_id", accountId).findAllAsync();
+    }
+
+    public static PlayerInfo querySinglePlayerInfo(Realm realm, String accountId) {
+        return realm.where(PlayerInfo.class).equalTo("account_id", accountId).findFirst();
     }
 }

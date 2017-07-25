@@ -17,15 +17,17 @@ import cn.edu.mydotabuff.model.Hero;
 import cn.edu.mydotabuff.model.Match;
 import cn.edu.mydotabuff.model.MatchDetail;
 import cn.edu.mydotabuff.model.PlayerInfo;
+import cn.edu.mydotabuff.model.PlayerWL;
 import cn.edu.mydotabuff.model.Rating;
 import cn.edu.mydotabuff.model.SearchPlayerResult;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
-import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.Result;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
@@ -99,8 +101,8 @@ public class OpenDotaApi {
 
     public interface OpenDotaService {
 
-        //        @GET("players/{account_id}/wl")
-        //        Observable<PlayerWL> getPlayerWL(@Path("account_id") String accountId);
+        @GET("players/{account_id}/wl")
+        Observable<PlayerWL> getPlayerWL(@Path("account_id") String accountId);
 
         @GET("players/{account_id}/recentMatches")
         Observable<List<Match>> getRecentMatch(@Path("account_id") String accountId);
@@ -122,6 +124,11 @@ public class OpenDotaApi {
 
         @GET("players/{account_id}/heroes")
         Observable<List<Hero>> getHeroUsed(@Path("match_id") String accountId);
+
+        @GET("players/{account_id}/matches")
+        Observable<List<Match>> getMatches(@Path("account_id") String accountId,
+                                           @Query("limit") int limit,
+                                           @Query("offset") int offset);
 
     }
 }

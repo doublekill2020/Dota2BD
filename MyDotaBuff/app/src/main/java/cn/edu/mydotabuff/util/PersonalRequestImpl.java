@@ -36,12 +36,6 @@ public class PersonalRequestImpl extends BaseRequestInterface {
 		request(APIConstants.GET_ONLINE_NUM, params, false);
 	}
 
-	// public void getMatchDetails(ArrayList<String> matchIDs) {
-	// // Map<String, String> params = new HashMap<String, String>();
-	// // params.put("key", APIConstants.API_KEY);
-	// // params.put("match_id", matchID);
-	// requestDetails(APIConstants.GET_MATCH_DETAILS, matchIDs, false);
-	// }
 	public void getMatchDetails(String matchID) {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("key", APIConstants.API_KEY);
@@ -62,15 +56,6 @@ public class PersonalRequestImpl extends BaseRequestInterface {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("division", division);
 		request(APIConstants.GET_BOARD, params, true);
-	}
-
-	public void getUserToken(String userId, String name, String portraitUri) {
-		// TODO Auto-generated method stub
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("userId", userId);
-		params.put("name", name);
-		params.put("portraitUri", portraitUri);
-		request(APIConstants.GET_USER_TOKEN, params, true);
 	}
 
 	public void getFriendList(String steamid) {

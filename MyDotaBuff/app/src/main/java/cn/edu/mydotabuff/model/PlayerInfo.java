@@ -1,5 +1,7 @@
 package cn.edu.mydotabuff.model;
 
+import java.io.Serializable;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -7,7 +9,7 @@ import io.realm.annotations.PrimaryKey;
  * Created by nevermore on 2017/6/28 0028.
  */
 
-public class PlayerInfo extends RealmObject {
+public class PlayerInfo extends RealmObject implements Serializable{
 
     @PrimaryKey
     public String account_id;
@@ -18,5 +20,7 @@ public class PlayerInfo extends RealmObject {
     public String competitive_rank;
 
     public Profile profile;
+
+    public PlayerWL playerWL;
 
 }
