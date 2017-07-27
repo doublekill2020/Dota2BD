@@ -1,6 +1,9 @@
 package cn.edu.mydotabuff.ui.service;
 
+import android.util.Log;
+
 import com.hwangjr.rxbus.RxBus;
+import com.orhanobut.logger.Logger;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -79,17 +82,22 @@ public class PlayerInfoService {
                             .lose)) * 100;
                     BigDecimal bd = new BigDecimal(playerWL.winRate);
                     playerWL.winRate = bd.setScale(1, BigDecimal.ROUND_HALF_UP).floatValue();
-                    PlayerWL playerWLManager = realm.copyToRealmOrUpdate(playerWL);
+                    realm.copyToRealmOrUpdate(playerWL);
+                    realm.commitTransaction();
 
 
                     PlayerInfo playerInfoInDb = realm.where(PlayerInfo.class).equalTo
                             ("account_id", accountId).findFirst();
-                    if(playerInfoInDb.follow){
-                        playerInfo.follow = true;
+                    if (playerInfoInDb != null) {
+                        realm.beginTransaction();
+                        if (playerInfoInDb.follow) {
+                            playerInfo.follow = true;
+                            playerInfo.playerWL = realm.where(PlayerWL.class).equalTo("accountId",accountId).findFirst();
+                            Log.i("hao",playerInfo.playerWL.toString());
+                        }
+                        realm.copyToRealmOrUpdate(playerInfo);
+                        realm.commitTransaction();
                     }
-                    playerInfo.playerWL = playerWLManager;
-                    realm.copyToRealmOrUpdate(playerInfo);
-                    realm.commitTransaction();
                     return true;
                 } catch (Exception e) {
                     return false;
