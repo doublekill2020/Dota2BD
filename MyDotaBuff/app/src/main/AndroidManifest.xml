@@ -4,10 +4,6 @@
     android:versionCode="15"
     android:versionName="1.7.2">
 
-    <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="18" />
-
     <!-- 使用相机 --><uses-feature
     android:name="android.hardware.camera"
     android:required="true" />
