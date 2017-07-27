@@ -460,5 +460,6 @@
     <string name="player_detail_title">个人资料</string>
     <string name="please_enter_the_correct_id">请输入正确的id</string>
     <string name="anonymous_player">匿名玩家</string>
+    <string name="load_loading">加载中,请稍后...</string>
 
 </resources>

@@ -37,12 +37,14 @@ import cn.edu.mydotabuff.util.Utils;
 
 public class RecentMatchFragment extends BaseFragment<IRecentMatchPresenter> implements
         IRecentMatchView {
+
     @BindView(R.id.rv_list)
     RecyclerView mRvList;
     @BindView(R.id.fl_success)
     FrameLayout mFlSuccess;
     private BaseListAdapter<Match> mAdapter;
     private List<Match> mMatches = new ArrayList<>();
+    private PlayerInfo mPlayerInfo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable
@@ -55,15 +57,18 @@ public class RecentMatchFragment extends BaseFragment<IRecentMatchPresenter> imp
     }
 
     private void init() {
+        mPlayerInfo = (PlayerInfo) getArguments().getSerializable(PlayerDetailActivity.PLAYER_INFO);
         setSuccessView(mFlSuccess);
+        showLoadingLayout();
         mRvList.setHasFixedSize(true);
         mRvList.setLayoutManager(new LinearLayoutManager(mActivity));
         mRvList.setAdapter(mAdapter = new BaseListAdapter<Match>(mMatches, R.layout
                 .fragment_follow_item, EventTag.PLAYER_DETAIL_CLICK_TO_MATCH_DETAIL) {
             @Override
             public void getView(BaseListHolder holder, final Match match, int pos) {
-                holder.setImageURI(R.id.sdv_hero_icon, Utils.getHeroImageUriForFresco(Common.getHeroName
-                        (match.hero_id)));
+                holder.setImageURI(R.id.sdv_hero_icon, Utils.getHeroImageUriForFresco(Common
+                        .getHeroName
+                                (match.hero_id)));
                 holder.setText(R.id.tv_kda, match.kills + "/" + match.deaths + "/" + match.assists);
                 holder.setText(R.id.tv_time, TimeHelper.convertTimeToFormat(match.start_time));
                 if (Common.getMatchResult(match.player_slot, match.radiant_win)) {
@@ -74,13 +79,11 @@ public class RecentMatchFragment extends BaseFragment<IRecentMatchPresenter> imp
                     holder.setTextColor(R.id.tv_game_status, R.color.my_orange);
                 }
                 holder.setText(R.id.tv_mmr, Common.getLobbyTypeName(match.lobby_type));
-                PlayerInfo playerInfo = mPresenter.getPlayerInfoMap().get(match.account_id);
-                if (playerInfo != null) {
-                    holder.setImageURI(R.id.sdv_user_icon, playerInfo.profile.avatar);
-                    holder.setText(R.id.tv_player_name, playerInfo.profile.personaname);
-                }
+                holder.setImageURI(R.id.sdv_user_icon, mPlayerInfo.profile.avatar);
+                holder.setText(R.id.tv_player_name, mPlayerInfo.profile.personaname);
                 if (match.lobby_type == LobbyType.LOBBY_TYPE_RANKED) {
-                    Rating rating = mPresenter.getRealm().where(Rating.class).equalTo("id", match.account_id + match.match_id).findFirst();
+                    Rating rating = mPresenter.getRealm().where(Rating.class).equalTo("id", match
+                            .account_id + match.match_id).findFirst();
                     if (rating != null && !TextUtils.isEmpty(rating.solo_competitive_rank)) {
                         String mmr = rating.solo_competitive_rank;
                         holder.setText(R.id.tv_mmr, mmr + Common.getMmrLevel(mmr));

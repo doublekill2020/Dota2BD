@@ -2,6 +2,8 @@ package cn.edu.mydotabuff.ui.service;
 
 import com.hwangjr.rxbus.RxBus;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import cn.edu.mydotabuff.base.OpenDotaApi;
@@ -64,14 +66,13 @@ public class PlayerInfoService {
 
     public static void getPlayerInfo(final String accountId) {
         OpenDotaApi.getService().getPlayerInfo(accountId)
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(Schedulers.io())
                 .flatMap(new Func1<PlayerInfo, Observable<PlayerWL>>() {
                     @Override
                     public Observable<PlayerWL> call(PlayerInfo playerInfo) {
                         Realm realm = Realm.getDefaultInstance();
                         try {
-                            PlayerInfo old = realm.where(PlayerInfo.class).equalTo("account_id", accountId).findFirst();
+                            PlayerInfo old = realm.where(PlayerInfo.class).equalTo("account_id",
+                                    accountId).findFirst();
                             realm.beginTransaction();
                             playerInfo.account_id = playerInfo.profile.account_id;
                             if (old.follow) {
@@ -87,8 +88,6 @@ public class PlayerInfoService {
                         return OpenDotaApi.getService().getPlayerWL(accountId);
                     }
                 })
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(Schedulers.io())
                 .map(new Func1<PlayerWL, Boolean>() {
                     @Override
                     public Boolean call(PlayerWL playerWL) {
@@ -96,12 +95,17 @@ public class PlayerInfoService {
                         try {
                             realm.beginTransaction();
                             playerWL.accountId = accountId;
-                            playerWL.winRate = (playerWL.win * 1.0f / (playerWL.win + playerWL.lose)) * 100;
+                            playerWL.winRate = (playerWL.win * 1.0f / (playerWL.win + playerWL
+                                    .lose)) * 100;
+                            BigDecimal bd = new BigDecimal(playerWL.winRate);
+                            playerWL.winRate = bd.setScale(1,BigDecimal.ROUND_HALF_UP).floatValue();
                             realm.copyToRealmOrUpdate(playerWL);
                             realm.commitTransaction();
 
-                            PlayerInfo playerInfo = realm.where(PlayerInfo.class).equalTo("account_id", accountId).findFirst();
-                            PlayerWL playerWLInDb = realm.where(PlayerWL.class).equalTo("accountId",accountId).findFirst();
+                            PlayerInfo playerInfo = realm.where(PlayerInfo.class).equalTo
+                                    ("account_id", accountId).findFirst();
+                            PlayerWL playerWLInDb = realm.where(PlayerWL.class).equalTo
+                                    ("accountId", accountId).findFirst();
                             realm.beginTransaction();
                             playerInfo.playerWL = playerWLInDb;
                             realm.copyToRealmOrUpdate(playerInfo);

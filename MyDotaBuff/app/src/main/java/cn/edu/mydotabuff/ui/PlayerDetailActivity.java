@@ -31,7 +31,8 @@ import cn.edu.mydotabuff.ui.view.IPlayerDetailView;
  * Created by nevermore on 2017/7/10 0010.
  */
 
-public class PlayerDetailActivity extends BaseActivity<IPlayerDetailPresenter> implements IPlayerDetailView {
+public class PlayerDetailActivity extends BaseActivity<IPlayerDetailPresenter> implements
+        IPlayerDetailView {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -67,8 +68,8 @@ public class PlayerDetailActivity extends BaseActivity<IPlayerDetailPresenter> i
         mPlayerInfo = mPresenter.queryPlayerInfo(mPlayerId);
         sdvUserIcon.setImageURI(Uri.parse(mPlayerInfo.profile.avatar));
         tvPlayerName.setText(mPlayerInfo.profile.personaname);
-        tvStatus.setText("mmr:" + (TextUtils.isEmpty(mPlayerInfo.solo_competitive_rank) ?
-                R.string.rank_level_unknow_ : mPlayerInfo.solo_competitive_rank) + "|" +
+        tvStatus.setText("MMR:" + (TextUtils.isEmpty(mPlayerInfo.solo_competitive_rank) ?
+                R.string.rank_level_unknow_ : mPlayerInfo.solo_competitive_rank) + " | " + "胜率" +
                 mPlayerInfo.playerWL.winRate + "%");
 
         setSupportActionBar(toolbar);

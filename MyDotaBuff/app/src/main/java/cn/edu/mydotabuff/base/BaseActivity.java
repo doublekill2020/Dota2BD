@@ -252,6 +252,9 @@ public abstract class BaseActivity<T extends IBasePresenter> extends AppCompatAc
 
     }
 
+    @Override
+    public void showLoadingLayout() {
+    }
 
     protected void setSuccessView(View v) {
         mSuccessView = v;

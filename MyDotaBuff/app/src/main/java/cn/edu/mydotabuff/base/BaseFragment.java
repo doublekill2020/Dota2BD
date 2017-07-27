@@ -33,6 +33,7 @@ public abstract class BaseFragment<T extends IBasePresenter> extends Fragment im
     protected ViewGroup mContainerView;
     protected View mEmptyView;
     protected View mSuccessView;
+    protected View loadingView;
     protected Activity mActivity;
     protected LayoutInflater mInflater;
     private boolean mHasShowSuccessView = false;
@@ -182,6 +183,25 @@ public abstract class BaseFragment<T extends IBasePresenter> extends Fragment im
     @Override
     public void showErrorLayout() {
 
+    }
+
+    @Override
+    public void showLoadingLayout() {
+        showLoadingView();
+    }
+
+    protected void showLoadingView() {
+        if (mContainerView != null) {
+            mContainerView.removeAllViews();
+            if (loadingView == null) {
+                loadingView = LayoutInflater.from(mActivity).inflate(R.layout.layout_loading,
+                        mContainerView, false);
+            }
+            mContainerView.addView(loadingView);
+            mHasShowSuccessView = false;
+        } else {
+            throw new RuntimeException("please invoke setSuccessView!");
+        }
     }
 
     @Override

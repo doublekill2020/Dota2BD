@@ -19,6 +19,8 @@ public interface IBaseView {
 
     void showErrorLayout();
 
+    void showLoadingLayout();
+
     void showToast(String msg);
 
     void showToast(@StringRes int stringRes);
