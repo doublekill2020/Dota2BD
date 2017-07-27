@@ -88,6 +88,7 @@ public class PlayerInfoService {
                         playerInfo.follow = true;
                     }
                     playerInfo.playerWL = playerWLManager;
+                    playerInfo.account_id = accountId;
                     realm.copyToRealmOrUpdate(playerInfo);
                     realm.commitTransaction();
                     return true;
