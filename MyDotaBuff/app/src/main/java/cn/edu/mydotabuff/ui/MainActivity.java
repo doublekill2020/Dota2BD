@@ -12,7 +12,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -44,9 +43,6 @@ import cn.edu.mydotabuff.ui.hero.FragHeroList;
 import cn.edu.mydotabuff.ui.presenter.IMainPresenter;
 import cn.edu.mydotabuff.ui.view.IMainView;
 import cn.edu.mydotabuff.view.CircleImageView;
-import de.jonasrottmann.realmbrowser.RealmBrowser;
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
 
 /**
  * Created by tinker on 2017/6/27.
@@ -111,13 +107,6 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements IMainV
             }
         });
         snackbar.show();
-    }
-
-    private void openRealmBrowser() {
-        Realm realm = Realm.getDefaultInstance();
-        RealmConfiguration configuration = realm.getConfiguration();
-        realm.close();
-        RealmBrowser.startRealmModelsActivity(this, configuration);
     }
 
     private void initUMShare() {
