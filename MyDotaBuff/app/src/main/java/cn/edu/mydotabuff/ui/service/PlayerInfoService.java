@@ -1,9 +1,6 @@
 package cn.edu.mydotabuff.ui.service;
 
-import android.util.Log;
-
 import com.hwangjr.rxbus.RxBus;
-import com.orhanobut.logger.Logger;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -76,28 +73,23 @@ public class PlayerInfoService {
             public Boolean call(PlayerWL playerWL, PlayerInfo playerInfo) {
                 Realm realm = Realm.getDefaultInstance();
                 try {
+                    PlayerInfo playerInfoInDb = realm.where(PlayerInfo.class).equalTo
+                            ("account_id", accountId).findFirst();
                     realm.beginTransaction();
                     playerWL.accountId = accountId;
                     playerWL.winRate = (playerWL.win * 1.0f / (playerWL.win + playerWL
                             .lose)) * 100;
                     BigDecimal bd = new BigDecimal(playerWL.winRate);
                     playerWL.winRate = bd.setScale(1, BigDecimal.ROUND_HALF_UP).floatValue();
-                    realm.copyToRealmOrUpdate(playerWL);
-                    realm.commitTransaction();
+                    PlayerWL playerWLManager = realm.copyToRealmOrUpdate(playerWL);
 
-
-                    PlayerInfo playerInfoInDb = realm.where(PlayerInfo.class).equalTo
-                            ("account_id", accountId).findFirst();
+                    playerInfo.account_id = accountId;
                     if (playerInfoInDb != null) {
-                        realm.beginTransaction();
-                        if (playerInfoInDb.follow) {
-                            playerInfo.follow = true;
-                            playerInfo.playerWL = realm.where(PlayerWL.class).equalTo("accountId",accountId).findFirst();
-                            Log.i("hao",playerInfo.playerWL.toString());
-                        }
-                        realm.copyToRealmOrUpdate(playerInfo);
-                        realm.commitTransaction();
+                        playerInfo.follow = playerInfoInDb.follow;
                     }
+                    playerInfo.playerWL = playerWLManager;
+                    realm.copyToRealmOrUpdate(playerInfo);
+                    realm.commitTransaction();
                     return true;
                 } catch (Exception e) {
                     return false;
@@ -112,62 +104,6 @@ public class PlayerInfoService {
                     public void call(Boolean aBoolean) {
                     }
                 });
-//        OpenDotaApi.getService().getPlayerInfo(accountId)
-//                .flatMap(new Func1<PlayerInfo, Observable<PlayerWL>>() {
-//                    @Override
-//                    public Observable<PlayerWL> call(PlayerInfo playerInfo) {
-//                        Realm realm = Realm.getDefaultInstance();
-//                        try {
-//                            PlayerInfo old = realm.where(PlayerInfo.class).equalTo("account_id",
-//                                    accountId).findFirst();
-//                            realm.beginTransaction();
-//                            playerInfo.account_id = playerInfo.profile.account_id;
-//                            if (old.follow) {
-//                                playerInfo.follow = true;
-//                            }
-//                            realm.copyToRealmOrUpdate(playerInfo);
-//                            realm.commitTransaction();
-//                        } catch (Exception e) {
-//                            return null;
-//                        } finally {
-//                            realm.close();
-//                        }
-//                        return OpenDotaApi.getService().getPlayerWL(accountId);
-//                    }
-//                })
-//                .map(new Func1<PlayerWL, Boolean>() {
-//                    @Override
-//                    public Boolean call(PlayerWL playerWL) {
-//                        Realm realm = Realm.getDefaultInstance();
-//                        try {
-//                            realm.beginTransaction();
-//                            playerWL.accountId = accountId;
-//                            playerWL.winRate = (playerWL.win * 1.0f / (playerWL.win + playerWL
-//                                    .lose)) * 100;
-//                            BigDecimal bd = new BigDecimal(playerWL.winRate);
-//                            playerWL.winRate = bd.setScale(1, BigDecimal.ROUND_HALF_UP).floatValue();
-//                            realm.copyToRealmOrUpdate(playerWL);
-//
-//                            PlayerInfo playerInfo = realm.where(PlayerInfo.class).equalTo
-//                                    ("account_id", accountId).findFirst();
-//                            playerInfo.playerWL = playerWL;
-//                            realm.copyToRealmOrUpdate(playerInfo);
-//                            realm.commitTransaction();
-//                            return true;
-//                        } catch (Exception e) {
-//                            return false;
-//                        } finally {
-//                            realm.close();
-//                        }
-//                    }
-//                })
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Action1<Boolean>() {
-//                    @Override
-//                    public void call(Boolean aBoolean) {
-//                    }
-//                });
     }
 
     public static PlayerInfo queryPlayerInfo(Realm realm, String accountId) {
