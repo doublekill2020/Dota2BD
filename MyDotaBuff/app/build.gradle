@@ -67,20 +67,22 @@ repositories {
 }
 dependencies {
     implementation fileTree(include: '*.jar', dir: 'libs')
-    ext.supportLibVersion = '26.0.0-beta2'
+    ext.supportLibVersion = '26.0.0'
     implementation "com.android.support:appcompat-v7:${supportLibVersion}"
     implementation "com.android.support:cardview-v7:${supportLibVersion}"
     implementation "com.android.support:support-v4:${supportLibVersion}"
     implementation "com.android.support:design:${supportLibVersion}"
-    implementation 'com.google.code.gson:gson:2.8.0'
+    implementation 'com.google.code.gson:gson:2.8.1'
 
     implementation 'com.nineoldandroids:library:2.4.0'
     implementation 'com.github.PhilJay:MPAndroidChart:v2.1.0'
-    implementation ('com.octo.android.robospice:robospice:1.4.14'){
+    implementation('com.octo.android.robospice:robospice:1.4.14') {
         exclude group: 'commons-io', module: 'commons-io'
     }
     implementation 'com.squareup.retrofit:retrofit:1.9.0'
-    implementation 'com.github.rey5137:material:1.1.1'
+    implementation('com.github.rey5137:material:1.2.4') {
+        exclude group: 'com.android.support'
+    }
     implementation 'de.greenrobot:eventbus:2.4.0'
 
     ext.butterKnifeVersion = '8.6.0'

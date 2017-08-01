@@ -10,6 +10,7 @@
 
         <cn.edu.mydotabuff.view.LineCharView
             android:id="@+id/lineChar"
+            android:layout_margin="12dp"
             android:layout_width="match_parent"
             android:layout_height="300dp"/>
 
