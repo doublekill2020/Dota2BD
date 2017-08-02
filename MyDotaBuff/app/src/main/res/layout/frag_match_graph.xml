@@ -6,13 +6,21 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <cn.edu.mydotabuff.view.LineCharView
+        <cn.edu.mydotabuff.view.linechar.LineCharView
             android:id="@+id/lineChar"
-            android:layout_margin="12dp"
             android:layout_width="match_parent"
-            android:layout_height="300dp"/>
+            android:layout_height="300dp"
+            android:layout_margin="12dp"/>
+
+        <cn.edu.mydotabuff.view.linechar.LineCharView
+            android:id="@+id/lineChar1"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_margin="12dp"/>
+
 
     </LinearLayout>
 

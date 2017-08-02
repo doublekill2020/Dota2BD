@@ -15,6 +15,7 @@ public class MatchPlayInfo extends RealmObject implements Parcelable {
 
     public String match_id; // 比赛id
     public String account_id; // 用户id
+    public String player_slot; // 标识player在队列中的位置
     public String personaname; // 昵称
     public int hero_id;// 英雄id
     public int life_state_dead;// 死亡时间
@@ -60,6 +61,7 @@ public class MatchPlayInfo extends RealmObject implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.match_id);
         dest.writeString(this.account_id);
+        dest.writeString(this.player_slot);
         dest.writeString(this.personaname);
         dest.writeInt(this.hero_id);
         dest.writeInt(this.life_state_dead);
@@ -101,6 +103,7 @@ public class MatchPlayInfo extends RealmObject implements Parcelable {
     protected MatchPlayInfo(Parcel in) {
         this.match_id = in.readString();
         this.account_id = in.readString();
+        this.player_slot = in.readString();
         this.personaname = in.readString();
         this.hero_id = in.readInt();
         this.life_state_dead = in.readInt();
