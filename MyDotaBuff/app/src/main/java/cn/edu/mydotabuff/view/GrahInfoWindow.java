@@ -9,6 +9,7 @@ import android.view.WindowManager;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import cn.edu.mydotabuff.R;
@@ -33,19 +34,20 @@ public class GrahInfoWindow extends PopupWindow {
 
     private int handMode;
 
-    public GrahInfoWindow(Context context, LineCharView.HitInfo info) {
+    public GrahInfoWindow(Context context) {
         this.ctx = context;
-        this.mHitInfo = info;
+        this.mHitInfo = new LineCharView.HitInfo();
+        this.mHitInfo.datas = new ArrayList<>();
         mBaseOffset = UIUtils.dp2px(context, 40);
         mPopupWindowWidth = UIUtils.dp2px(context, 110);
         mScreenWidth = UIUtils.getScreenWidht(context);
-        setWidth(mPopupWindowWidth);
+        setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
         setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
         setBackgroundDrawable(context.getResources().getDrawable(R.drawable.shape_solid_33_trans_corners_4));
         View view = LayoutInflater.from(context).inflate(R.layout.pop_grah_info, null);
         mTvTitle = view.findViewById(R.id.tv_title);
         mRvList = view.findViewById(R.id.rv_list);
-        mAdapter = new BaseListAdapter<LineCharView.GrahItemInfo>(info.datas, R.layout.item_pop_grah_info) {
+        mAdapter = new BaseListAdapter<LineCharView.GrahItemInfo>(mHitInfo.datas, R.layout.item_pop_grah_info) {
             @Override
             public void getView(BaseListHolder holder, LineCharView.GrahItemInfo bean, int pos) {
                 holder.setText(R.id.tv_name, bean.name);
@@ -54,7 +56,6 @@ public class GrahInfoWindow extends PopupWindow {
             }
         };
         mRvList.setAdapter(mAdapter);
-        mTvTitle.setText(String.format(Locale.CHINA, "%d:00", info.time));
         setContentView(view);
     }
 
@@ -73,5 +74,17 @@ public class GrahInfoWindow extends PopupWindow {
         } else {
             showAtLocation(mTvTitle, Gravity.LEFT | Gravity.TOP, (int) offsetX, (int) mHitInfo.touchY);
         }
+    }
+
+    public LineCharView.HitInfo getData() {
+        return mHitInfo;
+    }
+
+    public void setData(LineCharView.HitInfo info) {
+        mHitInfo.datas.clear();
+        mHitInfo.datas.addAll(info.datas);
+        mHitInfo.hitX = info.hitX;
+        mHitInfo.touchY = info.touchY;
+        mHitInfo.time = info.time;
     }
 }

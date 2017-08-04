@@ -25,7 +25,7 @@ import cn.edu.mydotabuff.view.linechar.LineCharView;
  * Created by sadhu on 2017/7/14.
  * 描述
  */
-public class MatchGrphsFragment extends PageFragment {
+public class MatchGrphsFragment extends PageFragment implements LineCharView.OnPointHitListener {
     @BindView(R.id.lineChar)
     LineCharView mLineChar;
     @BindView(R.id.lineChar1)
@@ -37,32 +37,8 @@ public class MatchGrphsFragment extends PageFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_match_graph, container, false);
         ButterKnife.bind(this, view);
-        mLineChar.setOnPointHitListener(new LineCharView.OnPointHitListener() {
-            @Override
-            public void onHit(LineCharView.HitInfo info) {
-                showGrahPopupWindow(info);
-            }
-
-            @Override
-            public void onDismiss() {
-                if (mGrahInfoWindow != null && mGrahInfoWindow.isShowing()) {
-                    mGrahInfoWindow.dismiss();
-                }
-            }
-        });
-        lineChar1.setOnPointHitListener(new LineCharView.OnPointHitListener() {
-            @Override
-            public void onHit(LineCharView.HitInfo info) {
-                showGrahPopupWindow(info);
-            }
-
-            @Override
-            public void onDismiss() {
-                if (mGrahInfoWindow != null && mGrahInfoWindow.isShowing()) {
-                    mGrahInfoWindow.dismiss();
-                }
-            }
-        });
+        mLineChar.setOnPointHitListener(this);
+        lineChar1.setOnPointHitListener(this);
         return view;
     }
 
@@ -113,9 +89,21 @@ public class MatchGrphsFragment extends PageFragment {
 
     private void showGrahPopupWindow(LineCharView.HitInfo info) {
         if (mGrahInfoWindow == null) {
-            mGrahInfoWindow = new GrahInfoWindow(getContext(), info);
+            mGrahInfoWindow = new GrahInfoWindow(getContext());
         }
+        mGrahInfoWindow.setData(info);
         mGrahInfoWindow.update();
     }
 
+    @Override
+    public void onHit(LineCharView.HitInfo info) {
+        showGrahPopupWindow(info);
+    }
+
+    @Override
+    public void onDismiss() {
+        if (mGrahInfoWindow != null && mGrahInfoWindow.isShowing()) {
+            mGrahInfoWindow.dismiss();
+        }
+    }
 }

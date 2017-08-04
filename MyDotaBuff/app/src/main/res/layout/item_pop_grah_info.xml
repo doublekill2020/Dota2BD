@@ -16,7 +16,7 @@
 
     <TextView
         android:id="@+id/tv_name"
-        android:layout_width="36dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="left"
         android:textColor="@color/black"
@@ -26,12 +26,12 @@
 
     <TextView
         android:id="@+id/tv_value"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_weight="1"
-        android:gravity="left"
+        android:gravity="right"
         android:textColor="@color/black"
         android:textSize="@dimen/sp_10"
         tools:text="-23654"/>
