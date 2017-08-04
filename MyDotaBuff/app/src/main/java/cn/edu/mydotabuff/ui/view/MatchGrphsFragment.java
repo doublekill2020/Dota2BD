@@ -26,10 +26,12 @@ import cn.edu.mydotabuff.view.linechar.LineCharView;
  * 描述
  */
 public class MatchGrphsFragment extends PageFragment implements LineCharView.OnPointHitListener {
-    @BindView(R.id.lineChar)
-    LineCharView mLineChar;
-    @BindView(R.id.lineChar1)
-    LineCharView lineChar1;
+    @BindView(R.id.lineChar_team)
+    LineCharView mLineCharTeam;
+    @BindView(R.id.lineChar_gold)
+    LineCharView lineCharGold;
+    @BindView(R.id.lineChar_xp)
+    LineCharView lineCharXP;
     private MatchDetail matchDetail;
     private GrahInfoWindow mGrahInfoWindow;
 
@@ -37,8 +39,9 @@ public class MatchGrphsFragment extends PageFragment implements LineCharView.OnP
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_match_graph, container, false);
         ButterKnife.bind(this, view);
-        mLineChar.setOnPointHitListener(this);
-        lineChar1.setOnPointHitListener(this);
+        mLineCharTeam.setOnPointHitListener(this);
+        lineCharGold.setOnPointHitListener(this);
+        lineCharXP.setOnPointHitListener(this);
         return view;
     }
 
@@ -61,20 +64,27 @@ public class MatchGrphsFragment extends PageFragment implements LineCharView.OnP
         List<LineCharView.LineInfo> lineInfoList = new ArrayList<>();
         lineInfoList.add(goldLineInfo);
         lineInfoList.add(xpLineInfo);
-        mLineChar.putLinesData(lineInfoList);
+        mLineCharTeam.putLinesData(lineInfoList);
 
         if (matchDetail.players != null) {
             List<LineCharView.LineInfo> playerGoldLineInfoList = new ArrayList<>();
+            List<LineCharView.LineInfo> playerXPLineInfoList = new ArrayList<>();
             for (MatchPlayInfo player : matchDetail.players) {
-                LineCharView.LineInfo info = new LineCharView.LineInfo();
-                info.color = getContext().getResources().getColor(getResources().getIdentifier("player_color_" + player.player_slot, "color", getContext().getPackageName()));
-                info.name = Common.getHeroCHSNameById(player.hero_id);
-                info.values = player.gold_t.toArray(new RealmInt[0]);
-                playerGoldLineInfoList.add(info);
-            }
-            lineChar1.putLinesData(playerGoldLineInfoList);
-        }
+                LineCharView.LineInfo goldInfo = new LineCharView.LineInfo();
+                LineCharView.LineInfo XPInfo = new LineCharView.LineInfo();
+                goldInfo.color = getContext().getResources().getColor(getResources().getIdentifier("player_color_" + player.player_slot, "color", getContext().getPackageName()));
+                goldInfo.name = Common.getHeroCHSNameById(player.hero_id);
+                goldInfo.values = player.gold_t.toArray(new RealmInt[0]);
 
+                XPInfo.color = goldInfo.color;
+                XPInfo.name = goldInfo.name;
+                XPInfo.values = player.xp_t.toArray(new RealmInt[0]);
+                playerGoldLineInfoList.add(goldInfo);
+                playerXPLineInfoList.add(XPInfo);
+            }
+            lineCharGold.putLinesData(playerGoldLineInfoList);
+            lineCharXP.putLinesData(playerXPLineInfoList);
+        }
 
     }
 

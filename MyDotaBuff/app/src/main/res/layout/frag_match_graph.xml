@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,17 +10,42 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <cn.edu.mydotabuff.view.linechar.LineCharView
-            android:id="@+id/lineChar"
+
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_margin="12dp"/>
+            android:layout_height="wrap_content"
+            android:text="正向为天辉领先"/>
 
         <cn.edu.mydotabuff.view.linechar.LineCharView
-            android:id="@+id/lineChar1"
+            android:id="@+id/lineChar_team"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_margin="12dp"/>
+            android:layout_height="160dp"
+            android:padding="@dimen/dp_8"
+            app:descriptionY="diff"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="经济"/>
+
+        <cn.edu.mydotabuff.view.linechar.LineCharView
+            android:id="@+id/lineChar_gold"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_margin="12dp"
+            app:descriptionY="Gold"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="经验"/>
+
+        <cn.edu.mydotabuff.view.linechar.LineCharView
+            android:id="@+id/lineChar_xp"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_margin="12dp"
+            app:descriptionY="XP"/>
 
 
     </LinearLayout>

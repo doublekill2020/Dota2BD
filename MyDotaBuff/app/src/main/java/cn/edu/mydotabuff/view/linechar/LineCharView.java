@@ -2,6 +2,7 @@ package cn.edu.mydotabuff.view.linechar;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
@@ -9,6 +10,7 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
@@ -71,6 +73,8 @@ public class LineCharView extends View {
     float distanceX;
     float distanceY;
     private IDrawMethod mIDrawMethod;
+    private String mDescriptionX;
+    private String mDescriptionY;
 
     public LineCharView(Context context) {
         this(context, null);
@@ -78,6 +82,10 @@ public class LineCharView extends View {
 
     public LineCharView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.LineCharView);
+        mDescriptionX = typedArray.getString(R.styleable.LineCharView_descriptionX);
+        mDescriptionY = typedArray.getString(R.styleable.LineCharView_descriptionY);
+        typedArray.recycle();
         init();
     }
 
@@ -86,7 +94,7 @@ public class LineCharView extends View {
         mAxisPaint.setAntiAlias(true);
         mAxisPaint.setStrokeWidth(2);
         mAxisPaint.setColor(ContextCompat.getColor(getContext(), R.color.white));
-        mAxisPaint.setTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12, getContext().getResources().getDisplayMetrics()));
+        mAxisPaint.setTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10, getContext().getResources().getDisplayMetrics()));
 
         mTextHeight = (mAxisPaint.getFontMetrics().bottom - mAxisPaint.getFontMetrics().top);
         mAxisXTextWidth = mAxisPaint.measureText("60:00");
@@ -105,6 +113,10 @@ public class LineCharView extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int mode = MeasureSpec.getMode(widthMeasureSpec);
+        if (mode == MeasureSpec.AT_MOST) {
+
+        }
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
@@ -116,12 +128,12 @@ public class LineCharView extends View {
         canvas.drawLine(mAxisYTextWidth + mAxisIndexWidthOrHeight + getPaddingLeft(),
                 getPaddingTop(),
                 mAxisYTextWidth + mAxisIndexWidthOrHeight + getPaddingLeft(),
-                getHeight() - mTextHeight - mAxisIndexWidthOrHeight + getPaddingBottom(),
+                getHeight() - mTextHeight - mAxisIndexWidthOrHeight - getPaddingBottom(),
                 mAxisPaint);
         canvas.drawLine(mAxisYTextWidth + mAxisIndexWidthOrHeight + getPaddingLeft(),
-                getHeight() - mTextHeight - mAxisIndexWidthOrHeight + getPaddingBottom(),
+                getHeight() - mTextHeight - mAxisIndexWidthOrHeight - getPaddingBottom(),
                 getWidth() - getPaddingRight(),
-                getHeight() - mTextHeight - mAxisIndexWidthOrHeight + getPaddingBottom(),
+                getHeight() - mTextHeight - mAxisIndexWidthOrHeight - getPaddingBottom(),
                 mAxisPaint);
 
         if (lineInfoList != null && lineInfoList.size() > 0) {
@@ -170,7 +182,7 @@ public class LineCharView extends View {
         int min = calculateAxisXSize();
         int textHaftWidth = (int) (mAxisXTextWidth / 2);
         // 坐标轴X轴实际宽度
-        mAxistWitdh = getWidth() - mAxisYTextWidth - mAxisSpace - mAxisXTextWidth;
+        mAxistWitdh = getWidth() - mAxisYTextWidth - mAxisSpace - mAxisXTextWidth - getPaddingLeft() - getPaddingRight();
         // 间距
         mMarginX = (int) (mAxistWitdh / (min - 1));
         // 每隔多少个需要画文字
@@ -179,26 +191,33 @@ public class LineCharView extends View {
             divisor = mScaleX;
         }
         // 原点的X坐标
-        mStartPoint.x = mAxisYTextWidth + mAxisSpace;
+        mStartPoint.x = mAxisYTextWidth + mAxisSpace + getPaddingLeft();
         mCenterPoint.x = mStartPoint.x + textHaftWidth;
         float x;
         for (int i = 0; i < min; i++) {
             x = mCenterPoint.x + mMarginX * i;
             if (i % divisor == 0) {
                 canvas.drawLine(x,
-                        getHeight() - mAxisIndexWidthOrHeight - mTextHeight,
+                        getHeight() - mAxisIndexWidthOrHeight - mTextHeight - getPaddingBottom(),
                         x,
-                        getHeight() - mTextHeight,
+                        getHeight() - mTextHeight - getPaddingBottom(),
                         mAxisPaint);
                 drawXText(i, x, canvas);
             } else {
                 canvas.drawLine(x,
-                        getHeight() - mAxisIndexWidthOrHeight - mTextHeight,
+                        getHeight() - mAxisIndexWidthOrHeight - mTextHeight - getPaddingBottom(),
                         x,
-                        getHeight() - mTextHeight - mAxisIndexWidthOrHeight / 2,
+                        getHeight() - mTextHeight - mAxisIndexWidthOrHeight / 2 - getPaddingBottom(),
                         mAxisPaint);
             }
         }
+        String descriptionX = "Time";
+        if (!TextUtils.isEmpty(mDescriptionX)) {
+            descriptionX = mDescriptionX;
+        }
+        canvas.drawText(descriptionX,
+                mCenterPoint.x + mMarginX * (min - 1) - mAxisPaint.measureText(descriptionX) / 2,
+                getHeight() - mAxisIndexWidthOrHeight - mTextHeight - mAxisPaint.getFontMetrics().bottom - getPaddingBottom(), mAxisPaint);
     }
 
     /**
@@ -233,22 +252,32 @@ public class LineCharView extends View {
         int endValue = mScaleY * end;
         int size = (int) Math.ceil((double) (endValue - startValue) / mScaleY) + 1;
         // 纵坐标实际高度
-        mAxisHeight = getHeight() - mTextHeight - mAxisIndexWidthOrHeight - mAxisXTextWidth;
+        mAxisHeight = getHeight() - mTextHeight - mAxisIndexWidthOrHeight - mAxisXTextWidth - getPaddingBottom() - getPaddingTop();
         mMarginY = (int) (mAxisHeight / (size - 1));
         // 最小值y坐标的值
-        mStartPoint.y = mAxisHeight + mAxisXTextWidth / 2;
+        mStartPoint.y = mAxisHeight + mAxisXTextWidth / 2 + getPaddingTop();
         // float startY = getHeight() - mTextHeight - mAxisIndexWidthOrHeight - mAxisXTextWidth / 2;
         float y;
         for (int i = 0; i < size; i++) {
             y = mStartPoint.y - mMarginY * i;
             // +4 文字和横线之间留点间距
-            canvas.drawLine(mAxisYTextWidth + 4,
+            canvas.drawLine(mAxisYTextWidth + getPaddingLeft() + 4,
                     y,
-                    mAxisYTextWidth + mAxisIndexWidthOrHeight,
+                    mAxisYTextWidth + mAxisIndexWidthOrHeight + getPaddingLeft(),
                     y,
                     mAxisPaint);
             drawYText(startValue, mScaleY, i, y, canvas);
         }
+
+        if (!TextUtils.isEmpty(mDescriptionY)) {
+            float v = mAxisPaint.measureText(mDescriptionY);
+            Path path = new Path();
+            path.moveTo(mAxisYTextWidth + mAxisIndexWidthOrHeight + getPaddingLeft() + mTextHeight, v + getPaddingTop());
+            path.lineTo(mAxisYTextWidth + mAxisIndexWidthOrHeight + getPaddingLeft() + mTextHeight, getPaddingTop());
+            canvas.drawTextOnPath(mDescriptionY, path, 0, 0, mAxisPaint);
+        }
+
+
     }
 
     /**
@@ -258,21 +287,21 @@ public class LineCharView extends View {
         startValue += (scale * i);
         if (startValue == 0) {
             mCenterPoint.y = y;
-            // 画基线
-            mAxisPaint.setPathEffect(new DashPathEffect(new float[]{UIUtils.dp2px(getContext(), 8), UIUtils.dp2px(getContext(), 2)}, 0));
-            mAxisPaint.setStyle(Paint.Style.STROKE);
-            Path path = new Path();
-            path.moveTo(mAxisYTextWidth + mAxisIndexWidthOrHeight,
-                    mCenterPoint.y);
-            path.lineTo(getWidth(),
-                    mCenterPoint.y);
-            canvas.drawPath(path, mAxisPaint);
-            mAxisPaint.setStyle(Paint.Style.FILL);
-            mAxisPaint.setPathEffect(null);
+//            // 画基线
+//            mAxisPaint.setPathEffect(new DashPathEffect(new float[]{UIUtils.dp2px(getContext(), 8), UIUtils.dp2px(getContext(), 2)}, 0));
+//            mAxisPaint.setStyle(Paint.Style.STROKE);
+//            Path path = new Path();
+//            path.moveTo(mAxisYTextWidth + mAxisIndexWidthOrHeight,
+//                    mCenterPoint.y);
+//            path.lineTo(getWidth(),
+//                    mCenterPoint.y);
+//            canvas.drawPath(path, mAxisPaint);
+//            mAxisPaint.setStyle(Paint.Style.FILL);
+//            mAxisPaint.setPathEffect(null);
         }
         float top = mAxisPaint.getFontMetrics().top;
         float bottom = mAxisPaint.getFontMetrics().bottom;
-        canvas.drawText(String.valueOf(startValue), mAxisYTextWidth, y - top / 2 - bottom / 2, mAxisPaint);
+        canvas.drawText(String.valueOf(startValue), mAxisYTextWidth + getPaddingLeft(), y - top / 2 - bottom / 2, mAxisPaint);
     }
 
     /**
@@ -280,7 +309,7 @@ public class LineCharView extends View {
      */
     private void drawXText(int i, float startX, Canvas canvas) {
         Paint.FontMetrics fontMetrics = mAxisPaint.getFontMetrics();
-        float baseline = getHeight() - fontMetrics.bottom;
+        float baseline = getHeight() - fontMetrics.bottom - getPaddingBottom();
         String text = i + ":00";
         canvas.drawText(text, startX - mAxisPaint.measureText(text) / 2, baseline, mAxisPaint);
     }

@@ -37,9 +37,26 @@ public class MathOverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private static final int TYPE_NORMAL_RADIANT = 3;
     private static final int TYPE_NORMAL_DIRE = 4;
     private MatchDetail mDetail;
+    private float mRadiantDamage;
+    private int mRadianGPM;
+    private int mRadianXPM;
+    private float mDireDamage;
+    private int mDireGPM;
+    private int mDireXPM;
 
     public MathOverviewAdapter(MatchDetail detail) {
         this.mDetail = detail;
+        for (MatchPlayInfo player : mDetail.players) {
+            if (Integer.valueOf(player.player_slot) > 4) {
+                mDireDamage += player.hero_damage;
+                mRadianGPM += player.gold_per_min;
+                mRadianXPM += player.xp_per_min;
+            } else {
+                mRadiantDamage += player.hero_damage;
+                mDireGPM += player.gold_per_min;
+                mDireXPM += player.xp_per_min;
+            }
+        }
     }
 
     @Override
@@ -60,7 +77,12 @@ public class MathOverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         int viewType = getItemViewType(position);
         if (viewType == TYPE_SECTION_RADIANT) {
             ((SectionVH) holder).mImgColorTag.setImageDrawable(getDirectionDrawable(holder, R.color.radiantColor));
-            ((SectionVH) holder).mTvSumKill.setText("杀敌" + String.valueOf(mDetail.radiant_score));
+            // FIXME: 2017/8/4  放String里
+            ((SectionVH) holder).mTvSumKill.setText("杀敌 " + String.valueOf(mDetail.radiant_score));
+            ((SectionVH) holder).mTvGPM.setText("经验 " + mRadianGPM);
+            ((SectionVH) holder).mTvXPM.setText("金钱 " + mRadianXPM);
+
+
             ((SectionVH) holder).mTvMatchResult.setText(String.valueOf(mDetail.radiant_win ? "胜利" : "失败"));
         } else if (viewType == TYPE_SECTION_DIRE) {
             //"别紧张，你这样没事",
@@ -74,9 +96,11 @@ public class MathOverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             //"Ай-ай-ай-ай-ай, что сейчас произошло!"
             ((SectionVH) holder).mTvRandom.setText("Ай-ай-ай-ай-ай, что сейчас произошло!");
 
-
+            // FIXME: 2017/8/4  放String里
             ((SectionVH) holder).mImgColorTag.setImageDrawable(getDirectionDrawable(holder, R.color.direColor));
-            ((SectionVH) holder).mTvSumKill.setText("杀敌" + String.valueOf(mDetail.dire_score));
+            ((SectionVH) holder).mTvSumKill.setText("杀敌 " + String.valueOf(mDetail.dire_score));
+            ((SectionVH) holder).mTvGPM.setText("经验 " + mDireGPM);
+            ((SectionVH) holder).mTvXPM.setText("金钱 " + mDireXPM);
             ((SectionVH) holder).mTvMatchResult.setText(String.valueOf(mDetail.radiant_win ? "失败" : "胜利"));
         } else if (viewType == TYPE_NORMAL_RADIANT) {
             ((MatchItemVH) holder).bindData(mDetail.players.get(position - 1));
@@ -123,10 +147,10 @@ public class MathOverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         TextView mTvMatchResult;
         @BindView(R.id.tv_match_sumkill)
         TextView mTvSumKill;
-        @BindView(R.id.tv_match_sumxp)
-        TextView mTvSumXp;
-        @BindView(R.id.tv_match_sumgold)
-        TextView mTvSumGold;
+        @BindView(R.id.tv_match_xmp)
+        TextView mTvXPM;
+        @BindView(R.id.tv_match_gpm)
+        TextView mTvGPM;
 
         public SectionVH(View itemView) {
             super(itemView);
@@ -147,6 +171,10 @@ public class MathOverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         TextView mTvKDA;
         @BindView(R.id.tv_KDA)
         TextView mTvKDADetail;
+        @BindView(R.id.tv_fighting_participation)
+        TextView mTvFighting;
+        @BindView(R.id.tv_damaging)
+        TextView mTvDamaging;
         @BindView(R.id.item0)
         SimpleDraweeView mItem0;
         @BindView(R.id.item1)
@@ -172,6 +200,9 @@ public class MathOverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             mHeroLevel.setText(String.valueOf(bean.level));
             mPersonName.setText(TextUtils.isEmpty(bean.personaname) ? itemView.getContext().getString(R.string.anonymous_player) : bean.personaname);
             mTvKDA.setText(String.format(Locale.CHINA, "KDA: %.2f", bean.kda));
+            mTvFighting.setText(String.format(Locale.CHINA, "参战率: %.1f%%", bean.teamfight_participation * 100));
+            mTvDamaging.setText(String.format(Locale.CHINA, "伤害: %.1f%%",
+                    bean.hero_damage * 100 / (Integer.valueOf(bean.player_slot) > 4 ? mDireDamage : mRadiantDamage)));
             mTvKDADetail.setText(String.format(Locale.CHINA, "%d/%d/%d", bean.kills, bean.deaths, bean.assists));
             mItem0.setImageURI(Utils.getItemsImageUri(Common.getItemName(bean.item_0)));
             mItem1.setImageURI(Utils.getItemsImageUri(Common.getItemName(bean.item_1)));

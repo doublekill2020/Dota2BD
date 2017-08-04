@@ -123,7 +123,7 @@ public class MatchDetailActivity extends BaseActivity<IMatchDetaiPresenter> impl
     }
 
     class MatchDetailPageAdapter extends FragmentPagerAdapter {
-        String[] titles = new String[]{"TAB1", "TAB2", "TAB3"};
+        String[] titles = new String[]{"概述", "图表", "事件"};
 
         MatchDetailPageAdapter(FragmentManager fm) {
             super(fm);

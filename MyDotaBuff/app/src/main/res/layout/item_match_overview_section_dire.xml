@@ -83,7 +83,7 @@
                 android:textSize="@dimen/text_size_9"/>
 
             <TextView
-                android:id="@+id/tv_match_sumxp"
+                android:id="@+id/tv_match_xmp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -93,7 +93,7 @@
                 android:textSize="@dimen/text_size_9"/>
 
             <TextView
-                android:id="@+id/tv_match_sumgold"
+                android:id="@+id/tv_match_gpm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
