@@ -19,7 +19,7 @@ import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.DotaApplication.LocalDataType;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseFragment;
-import cn.edu.mydotabuff.common.bean.PlayerInfoBean;
+import cn.edu.mydotabuff.model.PlayerInfoBean;
 import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.common.http.OnWebDataGetListener;
 import cn.edu.mydotabuff.common.http.WebDataHelper;
@@ -45,9 +45,7 @@ public class FragMyDetail extends BaseFragment implements OnWebDataGetListener {
 	private SharedPreferences myPreferences;
 
 	@Override
-	protected View initViewAndData(LayoutInflater inflater,
-			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.frag_my_detail, container, false);
 		setHasOptionsMenu(true);
 		nameView = (TextView) view.findViewById(R.id.name);
@@ -82,12 +80,6 @@ public class FragMyDetail extends BaseFragment implements OnWebDataGetListener {
 			}
 		}
 		return view;
-	}
-
-	@Override
-	protected void initEvent() {
-		// TODO Auto-generated method stub
-
 	}
 
 	private void initView() {

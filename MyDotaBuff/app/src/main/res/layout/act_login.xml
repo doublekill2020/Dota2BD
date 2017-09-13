@@ -1,67 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    >
+    android:background="@drawable/background">
+
+
+    <TextView
+        android:id="@+id/tv_login_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="使用此app，必须在游戏中开启共享比赛历史。" />
 
     <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="wrap_content"
+        android:id="@+id/ll_input"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:gravity="center"
-        android:orientation="vertical" >
+        android:layout_below="@id/tv_login_hint"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/image"
+        <Spinner
+            android:id="@+id/player_search_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/linearLayout1"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="24dp"
-            android:visibility="gone" />
+            android:entries="@array/search_type_array" />
 
-        <TextView
-            android:id="@+id/tx1"
+        <EditText
+            android:id="@+id/et_search_word"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/please_input_steamId_or_name"
+            android:imeOptions="actionDone"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/btn_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="使用此app，必须在游戏中开启共享比赛历史。" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <EditText
-                android:id="@+id/editText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="请输入要查询的数字ID："
-                android:inputType="number"
-                android:singleLine="true" />
-
-            <com.rey.material.widget.Button
-                style="@style/FlatWaveButtonRippleStyle"
-                app:rd_enable="true"
-                android:layout_gravity="center"
-                android:id="@+id/submit"
-                android:text="提交"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
+            android:text="搜索" />
     </LinearLayout>
 
-    <com.rey.material.widget.Button
-        style="@style/FlatWaveButtonRippleStyle"
-        app:rd_enable="true"
-        android:id="@+id/btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout1"
-        android:layout_centerHorizontal="true"
-        android:text="按ID" />
 
 </RelativeLayout>

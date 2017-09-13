@@ -79,7 +79,10 @@
         <item>攻击范围</item>
         <item>弹道速度</item>
     </string-array>
-
+    <string-array name="search_type_array">
+        <item>精确</item>
+        <item>模糊</item>
+    </string-array>
 
     <!-- trackdota string-->
     <string name="language">english</string>
@@ -419,5 +422,44 @@
     <string name="search">Search</string>
     <string name="could_not_load_match">Could not load match</string>
     <string name="trackdota_match">Open Trackdota match</string>
+    <string name="search_player_content_empty_hint">昵称或者SteamId不能为空</string>
+
+    <string name="check_for_update">检测更新</string>
+    <string name="feedback">意见反馈</string>
+    <string name="switch_to_login">切换登录</string>
+    <string name="share_to_friends">分享给好友</string>
+    <string name="please_input_steamId_or_name">请输入steamId或者昵称</string>
+    <string name="please_input_steamId">请输入steamId</string>
+    <string name="data_in_loading">数据正在加载,请稍候...</string>
+    <string name="rank_level_unknow">未公开...</string>
+    <string name="rank_level_unknow_">未公开</string>
+    <string name="rank_level_n">(N)</string>
+    <string name="rank_level_h">(H)</string>
+    <string name="rank_level_vh">(VH)</string>
+    <string name="Normal">Normal</string>
+    <string name="High">High</string>
+    <string name="VeryHigh">Very High</string>
+    <string name="match_result_win">胜利</string>
+    <string name="match_result_lose">失败</string>
+    <string name="match_data_will_be_sync_in_background">比赛数据将会在后台同步...</string>
+    <string name="cancel_do_sync">撤销</string>
+    <string name="player_detail_status">mmr:%s|胜率:%.1f%</string>
+
+    <string name="lobby_type_normal">普通匹配</string>
+    <string name="lobby_type_practice">练习赛</string>
+    <string name="lobby_type_tournament">联赛</string>
+    <string name="lobby_type_tutorial">教程</string>
+    <string name="lobby_type_coop_bots">机器人练习赛</string>
+    <string name="lobby_type_ranked_team_mm">组队天梯</string>
+    <string name="lobby_type_ranked_solo_mm">单排天梯</string>
+    <string name="lobby_type_ranked">天梯比赛</string>
+    <string name="lobby_type_1v1_mid">solo模式</string>
+    <string name="lobby_type_battle_cup">勇士联赛</string>
+    <string name="unknow">未知</string>
+    <string name="follow_fragment_search_hint">搜索ID、昵称</string>
+    <string name="player_detail_title">个人资料</string>
+    <string name="please_enter_the_correct_id">请输入正确的id</string>
+    <string name="anonymous_player">匿名玩家</string>
+    <string name="load_loading">加载中,请稍后...</string>
 
 </resources>

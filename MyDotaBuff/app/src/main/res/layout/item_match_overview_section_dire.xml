@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/bg_1"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_random_txt"
+        style="@style/TableTextStyle_10"
+        android:layout_width="fill_parent"
+        android:layout_height="30.0dip"
+        android:gravity="center"
+        android:text="天火,你特么天火啊"/>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="35.0dip"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="2.0dip"
+            android:layout_alignParentTop="true"
+            android:background="@color/direColor"/>
+
+        <ImageView
+            android:layout_width="90.0dip"
+            android:layout_height="35.0dip"
+            android:background="@color/direColor"/>
+
+        <ImageView
+            android:id="@+id/iv_match_color_tag"
+            android:layout_width="40.0dip"
+            android:layout_height="35.0dip"
+            android:layout_marginLeft="90.0dip"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:paddingLeft="10.0dip">
+
+            <TextView
+                style="@style/TableTextStyle_10_WHITE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dire"/>
+
+            <TextView
+                style="@style/TableTextStyle_13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="夜魇"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_match_result"
+            style="@style/TitleTextStyle_14"
+            android:layout_width="80.0dip"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="right"
+            android:text="失败"
+            android:textColor="@color/white"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_match_sumkill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingRight="10.0dip"
+                android:text="杀敌"
+                android:textColor="@color/text_secondary_color"
+                android:textSize="@dimen/text_size_9"/>
+
+            <TextView
+                android:id="@+id/tv_match_sumxp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingRight="10.0dip"
+                android:text="经验"
+                android:textColor="@color/text_secondary_color"
+                android:textSize="@dimen/text_size_9"/>
+
+            <TextView
+                android:id="@+id/tv_match_sumgold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingRight="10.0dip"
+                android:text="金钱"
+                android:textColor="@color/text_secondary_color"
+                android:textSize="@dimen/text_size_9"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">@color/white</color>
+
 
     <!-- 所需的红色 -->
     <color name="act_bg">#ffffff</color>
@@ -297,11 +301,11 @@
     <color name="newred">#f22514</color>
     <!-- wdx -->
     <color name="new1">#b9bfc1</color>
-    <color name="ccc">#cccccc </color>
-    <color name="bbb">#bbbbbb </color>
-    <color name="my_blue">#657DBF </color>
-    <color name="my_orange">#F87B41 </color>
-    <color name="my_green">#0CA98C </color>
+    <color name="ccc">#cccccc</color>
+    <color name="bbb">#bbbbbb</color>
+    <color name="my_blue">#657DBF</color>
+    <color name="my_orange">#F87B41</color>
+    <color name="my_green">#0CA98C</color>
     <!--
  Copyright (C) 2008 ZXing authors
 
@@ -371,4 +375,17 @@
     <color name="color_set_4_primary">#ff8a65</color>
     <color name="color_set_4_accent">#d500f9</color>
 
+    <color name="black_alpha10">#16000000</color>
+    <color name="black_alpha15">#26000000</color>
+    <color name="black_alpha20">#33000000</color>
+    <color name="black_alpha25">#3c000000</color>
+    <color name="black_alpha30">#4c000000</color>
+    <color name="black_alpha35">#5a000000</color>
+    <color name="black_alpha40">#66000000</color>
+    <color name="black_alpha50">#7f000000</color>
+    <color name="black_alpha55">#8d000000</color>
+    <color name="black_alpha60">#99000000</color>
+    <color name="black_alpha70">#b4000000</color>
+    <color name="black_alpha75">#c0000000</color>
+    <color name="black_alpha80">#cc000000</color>
 </resources>

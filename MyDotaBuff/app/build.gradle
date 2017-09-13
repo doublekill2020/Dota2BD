@@ -1,50 +1,24 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'android'
-buildscript {
-    repositories {
-        mavenCentral()
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.0'
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
-    }
-}
-apt {
-    arguments {
-        androidManifestFile variant.outputs[0].processResources.manifestFile
-        // if you have multiple outputs (when using splits), you may want to have other index than 0
-
-        // you should set your package name here if you are using different application IDs
-        // resourcePackageName "your.package.name"
-
-        // You can set optional annotation processing options here, like these commented options:
-        // logLevel 'INFO'
-        // logFile '/var/log/aa.log'
-    }
-}
-allprojects {
-    repositories {
-        jcenter()
-    }
-}
+//apply plugin: 'kotlin-android'
+apply plugin: 'realm-android'
 android {
-    compileSdkVersion 22
-    buildToolsVersion "25.0.0"
+    //TODO 用okhttp后去掉
+    useLibrary 'org.apache.http.legacy'
+    lintOptions {
+        disable 'PrivateResource'
+    }
+    compileSdkVersion 26
+    buildToolsVersion "26.0.0"
 
     defaultConfig {
         applicationId "cn.edu.mydotabuff"
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 22
-        splits {
-            abi {
-                enable true
-                reset()
-                include 'x86', 'armeabi-v7a'
-                universalApk true
-            }
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'x86'
         }
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -57,6 +31,8 @@ android {
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/NOTICE.txt'
     }
+    flavorDimensions "channel"
+
     productFlavors {
         xiaomi {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "xiaomi"]
@@ -74,7 +50,7 @@ android {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "mumayi"]
         }
     }
-    lintOptions{
+    lintOptions {
         checkReleaseBuilds false
         abortOnError false
     }
@@ -85,18 +61,60 @@ repositories {
     maven {
         url "https://oss.sonatype.org/content/repositories/snapshots"
     }
+    maven {
+        url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo'
+    }
+    maven { url "https://jitpack.io" }
+    mavenCentral()
 }
 dependencies {
-    compile fileTree(include: '*.jar', dir: 'libs')
-    compile 'com.android.support:appcompat-v7:22.0.0'
-    compile 'com.android.support:cardview-v7:22.0.0'
-    compile 'com.google.code.gson:gson:2.2.4'
-    compile 'com.nineoldandroids:library:2.4.0'
-    compile 'com.github.PhilJay:MPAndroidChart:v2.1.0'
-    compile 'com.octo.android.robospice:robospice:1.4.14'
-    compile 'com.squareup.retrofit:retrofit:1.9.0'
-    compile 'com.github.rey5137:material:1.1.1'
-    compile 'de.greenrobot:eventbus:2.4.0'
-    apt "org.androidannotations:androidannotations:3.3.1"
-    compile 'org.androidannotations:androidannotations-api:3.3.1'
+    implementation fileTree(include: '*.jar', dir: 'libs')
+    ext.supportLibVersion = '26.0.0-beta2'
+    implementation "com.android.support:appcompat-v7:${supportLibVersion}"
+    implementation "com.android.support:cardview-v7:${supportLibVersion}"
+    implementation "com.android.support:support-v4:${supportLibVersion}"
+    implementation "com.android.support:design:${supportLibVersion}"
+    implementation 'com.google.code.gson:gson:2.8.0'
+
+    implementation 'com.nineoldandroids:library:2.4.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v2.1.0'
+    implementation('com.octo.android.robospice:robospice:1.4.14') {
+        exclude group: 'commons-io', module: 'commons-io'
+    }
+    implementation 'com.squareup.retrofit:retrofit:1.9.0'
+    implementation 'com.github.rey5137:material:1.1.1'
+    implementation 'de.greenrobot:eventbus:2.4.0'
+
+    ext.butterKnifeVersion = '8.6.0'
+    implementation("com.jakewharton:butterknife:${butterKnifeVersion}")
+    annotationProcessor "com.jakewharton:butterknife-compiler:${butterKnifeVersion}"
+
+    ext.retrofitVersion = '2.3.0'
+    implementation "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    implementation "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+    implementation "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}"
+
+    ext.okhttpVersion = '3.8.1'
+    implementation "com.squareup.okhttp3:okhttp:${okhttpVersion}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}"
+
+    ext.frescoVersion = '1.3.0'
+    implementation "com.facebook.fresco:fresco:${frescoVersion}"
+    implementation "com.facebook.fresco:animated-gif:${frescoVersion}"
+    implementation "com.facebook.fresco:animated-webp:${frescoVersion}"
+    implementation "com.facebook.fresco:webpsupport:${frescoVersion}"
+
+    implementation 'com.jaeger.statusbarutil:library:1.4.0'
+    implementation 'io.reactivex:rxjava:1.3.0'
+    implementation 'io.reactivex:rxandroid:1.2.1'
+    implementation 'cn.bingoogolapple:bga-swipebacklayout:1.0.8'
+    //compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation 'com.hwangjr.rxbus:rxbus:1.0.5'
+    implementation 'io.realm:android-adapters:1.2.1'
+
+    implementation 'com.orhanobut:logger:2.1.1'
+    implementation 'com.facebook.stetho:stetho:1.5.0'
+    implementation 'com.uphyca:stetho_realm:2.1.0'
+    implementation 'com.umeng.analytics:analytics:latest.integration'
+
 }

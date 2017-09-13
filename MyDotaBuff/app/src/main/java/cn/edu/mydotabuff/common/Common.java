@@ -1,8 +1,15 @@
 package cn.edu.mydotabuff.common;
 
+import android.text.TextUtils;
+
 import java.math.BigInteger;
 
+import cn.edu.mydotabuff.DotaApplication;
+import cn.edu.mydotabuff.R;
+import cn.edu.mydotabuff.model.LobbyType;
+
 public class Common {
+
     /**
      * userID转SteamID
      *
@@ -50,45 +57,88 @@ public class Common {
     }
 
     public static String getGameMode(int type) {
-        String str = "";
+        String str;
         switch (type) {
-            case -1:
-                str = "无效比赛";
-                break;
             case 0:
-                str = "公开匹配";
+                str = "未知";
                 break;
             case 1:
-                str = "练习赛";
+                str = "全英雄选择";
                 break;
             case 2:
-                str = "锦标赛";
+                str = "队长模式";
                 break;
             case 3:
-                str = "辅导赛";
+                str = "随机征召";
                 break;
             case 4:
-                str = "机器人对抗赛";
+                str = "单一征招";
                 break;
             case 5:
-                str = "战队比赛";
+                str = "全英雄随机";
                 break;
             case 6:
-                str = "单排天梯";
+                str = "开局";
                 break;
             case 7:
-                str = "天梯匹配";
+                str = "夜魇暗潮";
                 break;
             case 8:
-                str = "Solo模式";
+                str = "反队长模式";
+                break;
+            case 9:
+                str = "小贪魔节";
+                break;
+            case 10:
+                str = "教程";
+                break;
+            case 11:
+                str = "单中模式";
+                break;
+            case 12:
+                str = "生疏模式";
+                break;
+            case 13:
+                str = "英雄限定";
+                break;
+            case 14:
+                str = "勇士令状";
+                break;
+            case 15:
+                str = "自定义游戏";
+                break;
+            case 16:
+                str = "队长征召";
+                break;
+            case 17:
+                str = "平衡征召";
+                break;
+            case 18:
+                str = "技能征召";
                 break;
 
+            case 19:
+                str = "活动";
+                break;
+            case 20:
+                str = "全随机死亡竞赛";
+                break;
+            case 21:
+                str = "1V1中路Solo";
+                break;
+            case 22:
+                str = "全英雄选择（BP）";
+                break;
             default:
+                str = "未知";
                 break;
         }
         return str;
     }
 
+    public static float calculateKDA(int k, int d, int a) {
+        return ((float) k + a) / d;
+    }
     // public static int getHeroDrawableId(int ID) {
     // switch (ID) {
     // case 1:
@@ -1816,8 +1866,6 @@ public class Common {
                 return "cheese";
             case 34:
                 return "magic_stick";
-            case 35:
-                return "magic_wand";
             case 36:
                 return "magic_wand";
             case 37:
@@ -1840,12 +1888,8 @@ public class Common {
                 return "courier";
             case 46:
                 return "tpscroll";
-            case 47:
-                return "travel_boots";
             case 48:
                 return "travel_boots";
-            case 49:
-                return "phase_boots";
             case 50:
                 return "phase_boots";
             case 51:
@@ -1870,96 +1914,144 @@ public class Common {
                 return "point_booster";
             case 61:
                 return "vitality_booster";
-            case 62:
-                return "power_treads";
             case 63:
                 return "power_treads";
-            case 64:
-                return "hand_of_midas";
             case 65:
                 return "hand_of_midas";
-            case 66:
-                return "oblivion_staff";
             case 67:
                 return "oblivion_staff";
-            case 68:
-                return "pers";
             case 69:
                 return "pers";
-            case 70:
-                return "poor_mans_shield";
             case 71:
                 return "poor_mans_shield";
-            case 72:
-                return "bracer";
             case 73:
                 return "bracer";
-            case 74:
-                return "wraith_band";
             case 75:
                 return "wraith_band";
-            case 76:
-                return "null_talisman";
             case 77:
                 return "null_talisman";
-            case 78:
-                return "mekansm";
             case 79:
                 return "mekansm";
-            case 80:
-                return "vladmir";
             case 81:
                 return "vladmir";
             case 84:
                 return "flying_courier";
-            case 85:
-                return "buckler";
             case 86:
                 return "buckler";
-            case 87:
-                return "ring_of_basilius";
             case 88:
                 return "ring_of_basilius";
-            case 89:
-                return "pipe";
             case 90:
                 return "pipe";
-            case 91:
-                return "urn_of_shadows";
             case 92:
                 return "urn_of_shadows";
-            case 93:
-                return "headdress";
             case 94:
                 return "headdress";
-            case 95:
-                return "sheepstick";
             case 96:
                 return "sheepstick";
-            case 97:
-                return "orchid";
             case 98:
                 return "orchid";
-            case 99:
-                return "cyclone";
             case 100:
                 return "cyclone";
-            case 101:
-                return "force_staff";
             case 102:
                 return "force_staff";
-            case 103:
-                return "dagon";
-            case 197:
-                return "dagon_2";
-            case 198:
-                return "dagon_3";
-            case 199:
-                return "dagon_4";
-            case 200:
-                return "dagon_5";
             case 104:
                 return "dagon";
+            case 106:
+                return "necronomicon";
+            case 108:
+                return "ultimate_scepter";
+            case 110:
+                return "refresher";
+            case 112:
+                return "assault";
+            case 114:
+                return "heart";
+            case 116:
+                return "black_king_bar";
+            case 117:
+                return "aegis";
+            case 119:
+                return "shivas_guard";
+            case 121:
+                return "bloodstone";
+            case 123:
+                return "sphere";
+            case 125:
+                return "vanguard";
+            case 127:
+                return "blade_mail";
+            case 129:
+                return "soul_booster";
+            case 131:
+                return "hood_of_defiance";
+            case 133:
+                return "rapier";
+            case 135:
+                return "monkey_king_bar";
+            case 137:
+                return "radiance";
+            case 139:
+                return "butterfly";
+            case 141:
+                return "greater_crit";
+            case 143:
+                return "basher";
+            case 145:
+                return "bfury";
+            case 147:
+                return "manta";
+            case 149:
+                return "lesser_crit";
+            case 151:
+                return "armlet";
+            case 152:
+                return "invis_sword";
+            case 154:
+                return "sange_and_yasha";
+            case 156:
+                return "satanic";
+            case 158:
+                return "mjollnir";
+            case 160:
+                return "skadi";
+            case 162:
+                return "sange";
+            case 164:
+                return "helm_of_the_dominator";
+            case 166:
+                return "maelstrom";
+            case 168:
+                return "desolator";
+            case 170:
+                return "yasha";
+            case 172:
+                return "mask_of_madness";
+            case 174:
+                return "diffusal_blade";
+            case 176:
+                return "ethereal_blade";
+            case 178:
+                return "soul_ring";
+            case 180:
+                return "arcane_boots";
+            case 181:
+                return "orb_of_venom";
+            case 182:
+                return "stout_shield";
+            case 185:
+                return "ancient_janggo";
+            case 187:
+                return "medallion_of_courage";
+            case 188:
+                return "smoke_of_deceit";
+            case 190:
+                return "veil_of_discord";
+            case 193:
+                return "necronomicon_2";
+            case 194:
+                return "necronomicon_3";
+            case 196:
+                return "diffusal_blade_2";
             case 201:
                 return "dagon_2";
             case 202:
@@ -1968,296 +2060,78 @@ public class Common {
                 return "dagon_4";
             case 204:
                 return "dagon_5";
-            case 105:
-                return "necronomicon";
-            case 191:
-                return "necronomicon_2";
-            case 192:
-                return "necronomicon_3";
-            case 106:
-                return "necronomicon";
-            case 193:
-                return "necronomicon_2";
-            case 194:
-                return "necronomicon_3";
-            case 107:
-                return "ultimate_scepter";
-            case 108:
-                return "ultimate_scepter";
-            case 109:
-                return "refresher";
-            case 110:
-                return "refresher";
-            case 111:
-                return "assault";
-            case 112:
-                return "assault";
-            case 113:
-                return "heart";
-            case 114:
-                return "heart";
-            case 115:
-                return "black_king_bar";
-            case 116:
-                return "black_king_bar";
-            case 117:
-                return "aegis";
-            case 118:
-                return "shivas_guard";
-            case 119:
-                return "shivas_guard";
-            case 120:
-                return "bloodstone";
-            case 121:
-                return "bloodstone";
-            case 122:
-                return "sphere";
-            case 123:
-                return "sphere";
-            case 124:
-                return "vanguard";
-            case 125:
-                return "vanguard";
-            case 126:
-                return "blade_mail";
-            case 127:
-                return "blade_mail";
-            case 128:
-                return "soul_booster";
-            case 129:
-                return "soul_booster";
-            case 130:
-                return "hood_of_defiance";
-            case 131:
-                return "hood_of_defiance";
-            case 132:
-                return "rapier";
-            case 133:
-                return "rapier";
-            case 134:
-                return "monkey_king_bar";
-            case 135:
-                return "monkey_king_bar";
-            case 136:
-                return "radiance";
-            case 137:
-                return "radiance";
-            case 138:
-                return "butterfly";
-            case 139:
-                return "butterfly";
-            case 140:
-                return "greater_crit";
-            case 141:
-                return "greater_crit";
-            case 142:
-                return "basher";
-            case 143:
-                return "basher";
-            case 144:
-                return "bfury";
-            case 145:
-                return "bfury";
-            case 146:
-                return "manta";
-            case 147:
-                return "manta";
-            case 148:
-                return "lesser_crit";
-            case 149:
-                return "lesser_crit";
-            case 150:
-                return "armlet";
-            case 151:
-                return "armlet";
-            case 183:
-                return "invis_sword";
-            case 152:
-                return "invis_sword";
-            case 153:
-                return "sange_and_yasha";
-            case 154:
-                return "sange_and_yasha";
-            case 155:
-                return "satanic";
-            case 156:
-                return "satanic";
-            case 157:
-                return "mjollnir";
-            case 158:
-                return "mjollnir";
-            case 159:
-                return "skadi";
-            case 160:
-                return "skadi";
-            case 161:
-                return "sange";
-            case 162:
-                return "sange";
-            case 163:
-                return "helm_of_the_dominator";
-            case 164:
-                return "helm_of_the_dominator";
-            case 165:
-                return "maelstrom";
-            case 166:
-                return "maelstrom";
-            case 167:
-                return "desolator";
-            case 168:
-                return "desolator";
-            case 169:
-                return "yasha";
-            case 170:
-                return "yasha";
-            case 171:
-                return "mask_of_madness";
-            case 172:
-                return "mask_of_madness";
-            case 173:
-                return "diffusal_blade";
-            case 174:
-                return "diffusal_blade";
-            case 195:
-                return "diffusal_blade_2";
-            case 196:
-                return "diffusal_blade_2";
-            case 175:
-                return "ethereal_blade";
-            case 176:
-                return "ethereal_blade";
-            case 177:
-                return "soul_ring";
-            case 178:
-                return "soul_ring";
-            case 179:
-                return "arcane_boots";
-            case 180:
-                return "arcane_boots";
-            case 181:
-                return "orb_of_venom";
-            case 184:
-                return "ancient_janggo";
-            case 185:
-                return "ancient_janggo";
-            case 186:
-                return "medallion_of_courage";
-            case 187:
-                return "medallion_of_courage";
-            case 188:
-                return "smoke_of_deceit";
-            case 189:
-                return "veil_of_discord";
-            case 190:
-                return "veil_of_discord";
-            case 205:
-                return "rod_of_atos";
             case 206:
                 return "rod_of_atos";
-            case 207:
-                return "abyssal_blade";
             case 208:
                 return "abyssal_blade";
-            case 209:
-                return "heavens_halberd";
             case 210:
                 return "heavens_halberd";
-            case 211:
-                return "ring_of_aquila";
             case 212:
                 return "ring_of_aquila";
-            case 213:
-                return "tranquil_boots";
             case 214:
                 return "tranquil_boots";
             case 215:
                 return "shadow_amulet";
-//            case 216:
-//                return "halloween_candy_corn";
-//            case 217:
-//                return "mystery_hook";
-//            case 218:
-//                return "mystery_arrow";
-//            case 219:
-//                return "mystery_missile";
-//            case 220:
-//                return "mystery_toss";
-//            case 221:
-//                return "mystery_vacuum";
-//            case 226:
-//                return "halloween_rapier";
-//            case 228:
-//                return "greevil_whistle";
-//            case 235:
-//                return "greevil_whistle_toggle";
-//            case 227:
-//                return "present";
-//            case 229:
-//                return "winter_stocking";
-//            case 230:
-//                return "winter_skates";
-//            case 231:
-//                return "winter_cake";
-            case 232:
-                return "winter_cookie";
-            case 233:
-                return "winter_coco";
-            case 234:
-                return "winter_ham";
-            case 236:
-                return "winter_kringle";
-            case 237:
-                return "winter_mushroom";
-            case 238:
-                return "winter_greevil_treat";
-            case 239:
-                return "winter_greevil_garbage";
-            case 240:
-                return "winter_greevil_chewy";
-            case 182:
-                return "stout_shield";
-            case 0:
-                return "default_black";
-            case 242:
-                return "crimson_guard";
-            case 248:
-                return "silver_edge";
-            case 249:
-                return "silver_edge";
             case 216:
                 return "enchanted_mango";
-            case 253:
-                return "glimmer_cape";
-            case 254:
-                return "glimmer_cape";
-            case 230:
-                return "guardian_greaves";
-            case 231:
-                return "guardian_greaves";
-            case 221:
-                return "lotus_orb";
-            case 226:
-                return "lotus_orb";
-            case 246:
-                return "moon_shard";
-            case 247:
-                return "moon_shard";
-            case 235:
-                return "octarine_core";
-            case 228:
-                return "octarine_core";
-            case 227:
-                return "solar_crest";
-            case 229:
-                return "solar_crest";
-            case 219:
-                return "travel_boots_2";
-            case 220:
-                return "travel_boots_2";
-            case 217:
-                return "ward_dispenser";
             case 218:
                 return "ward_dispenser";
+            case 220:
+                return "travel_boots_2";
+            case 226:
+                return "lotus_orb";
+            case 229:
+                return "solar_crest";
+            case 231:
+                return "guardian_greaves";
+            case 232:
+                return "aether_lens";
+            case 235:
+                return "octarine_core";
+            case 236:
+                return "dragon_lance";
+            case 237:
+                return "faerie_fire";
+            case 239:
+                return "iron_talon";
+            case 240:
+                return "blight_stone";
+            case 241:
+                return "tango_single";
+            case 242:
+                return "crimson_guard";
+            case 244:
+                return "wind_lace";
+            case 247:
+                return "moon_shard";
+            case 249:
+                return "silver_edge";
+            case 250:
+                return "bloodthorn";
+            case 252:
+                return "echo_sabre";
+            case 254:
+                return "glimmer_cape";
+            case 257:
+                return "tome_of_knowledge";
+            case 263:
+                return "hurricane_pike";
+            case 265:
+                return "infused_raindrop";
+            case 1021:
+                return "river_painter";
+            case 1022:
+                return "river_painter2";
+            case 1023:
+                return "river_painter3";
+            case 1024:
+                return "river_painter4";
+            case 1025:
+                return "river_painter5";
+            case 1026:
+                return "river_painter6";
+            case 1027:
+                return "river_painter7";
             default:
                 return "default";
         }
@@ -2270,229 +2144,236 @@ public class Common {
      * @return
      */
     public static String getHeroName(int ID) {
-        String chineseName = ID + "";
-        if (chineseName.equals("1"))
-            return "antimage";
-        if (chineseName.equals("2"))
-            return "axe";
-        if (chineseName.equals("3"))
-            return "bane";
-        if (chineseName.equals("4"))
-            return "bloodseeker";
-        if (chineseName.equals("5"))
-            return "crystal_maiden";
-        if (chineseName.equals("6"))
-            return "drow_ranger";
-        if (chineseName.equals("7"))
-            return "earthshaker";
-        if (chineseName.equals("8"))
-            return "juggernaut";
-        if (chineseName.equals("9"))
-            return "mirana";
-        if (chineseName.equals("11"))
-            return "nevermore";
-        if (chineseName.equals("10"))
-            return "morphling";
-        if (chineseName.equals("12"))
-            return "phantom_lancer";
-        if (chineseName.equals("13"))
-            return "puck";
-        if (chineseName.equals("14"))
-            return "pudge";
-        if (chineseName.equals("15"))
-            return "razor";
-        if (chineseName.equals("16"))
-            return "sand_king";
-        if (chineseName.equals("17"))
-            return "storm_spirit";
-        if (chineseName.equals("18"))
-            return "sven";
-        if (chineseName.equals("19"))
-            return "tiny";
-        if (chineseName.equals("20"))
-            return "vengefulspirit";
-        if (chineseName.equals("21"))
-            return "windrunner";
-        if (chineseName.equals("22"))
-            return "zuus";
-        if (chineseName.equals("23"))
-            return "kunkka";
-        if (chineseName.equals("25"))
-            return "lina";
-        if (chineseName.equals("31"))
-            return "lich";
-        if (chineseName.equals("26"))
-            return "lion";
-        if (chineseName.equals("27"))
-            return "shadow_shaman";
-        if (chineseName.equals("28"))
-            return "slardar";
-        if (chineseName.equals("29"))
-            return "tidehunter";
-        if (chineseName.equals("30"))
-            return "witch_doctor";
-        if (chineseName.equals("32"))
-            return "riki";
-        if (chineseName.equals("33"))
-            return "enigma";
-        if (chineseName.equals("34"))
-            return "tinker";
-        if (chineseName.equals("35"))
-            return "sniper";
-        if (chineseName.equals("36"))
-            return "necrolyte";
-        if (chineseName.equals("37"))
-            return "warlock";
-        if (chineseName.equals("38"))
-            return "beastmaster";
-        if (chineseName.equals("39"))
-            return "queenofpain";
-        if (chineseName.equals("40"))
-            return "venomancer";
-        if (chineseName.equals("41"))
-            return "faceless_void";
-        if (chineseName.equals("42"))
-            return "skeleton_king";
-        if (chineseName.equals("43"))
-            return "death_prophet";
-        if (chineseName.equals("44"))
-            return "phantom_assassin";
-        if (chineseName.equals("45"))
-            return "pugna";
-        if (chineseName.equals("46"))
-            return "templar_assassin";
-        if (chineseName.equals("47"))
-            return "viper";
-        if (chineseName.equals("48"))
-            return "luna";
-        if (chineseName.equals("49"))
-            return "dragon_knight";
-        if (chineseName.equals("50"))
-            return "dazzle";
-        if (chineseName.equals("51"))
-            return "rattletrap";
-        if (chineseName.equals("52"))
-            return "leshrac";
-        if (chineseName.equals("53"))
-            return "furion";
-        if (chineseName.equals("54"))
-            return "life_stealer";
-        if (chineseName.equals("55"))
-            return "dark_seer";
-        if (chineseName.equals("56"))
-            return "clinkz";
-        if (chineseName.equals("57"))
-            return "omniknight";
-        if (chineseName.equals("58"))
-            return "enchantress";
-        if (chineseName.equals("59"))
-            return "huskar";
-        if (chineseName.equals("60"))
-            return "night_stalker";
-        if (chineseName.equals("61"))
-            return "broodmother";
-        if (chineseName.equals("62"))
-            return "bounty_hunter";
-        if (chineseName.equals("63"))
-            return "weaver";
-        if (chineseName.equals("64"))
-            return "jakiro";
-        if (chineseName.equals("65"))
-            return "batrider";
-        if (chineseName.equals("66"))
-            return "chen";
-        if (chineseName.equals("67"))
-            return "spectre";
-        if (chineseName.equals("69"))
-            return "doom_bringer";
-        if (chineseName.equals("68"))
-            return "ancient_apparition";
-        if (chineseName.equals("70"))
-            return "ursa";
-        if (chineseName.equals("71"))
-            return "spirit_breaker";
-        if (chineseName.equals("72"))
-            return "gyrocopter";
-        if (chineseName.equals("73"))
-            return "alchemist";
-        if (chineseName.equals("74"))
-            return "invoker";
-        if (chineseName.equals("75"))
-            return "silencer";
-        if (chineseName.equals("76"))
-            return "obsidian_destroyer";
-        if (chineseName.equals("77"))
-            return "lycan";
-        if (chineseName.equals("78"))
-            return "brewmaster";
-        if (chineseName.equals("79"))
-            return "shadow_demon";
-        if (chineseName.equals("80"))
-            return "lone_druid";
-        if (chineseName.equals("81"))
-            return "chaos_knight";
-        if (chineseName.equals("82"))
-            return "meepo";
-        if (chineseName.equals("83"))
-            return "treant";
-        if (chineseName.equals("84"))
-            return "ogre_magi";
-        if (chineseName.equals("85"))
-            return "undying";
-        if (chineseName.equals("86"))
-            return "rubick";
-        if (chineseName.equals("87"))
-            return "disruptor";
-        if (chineseName.equals("88"))
-            return "nyx_assassin";
-        if (chineseName.equals("89"))
-            return "naga_siren";
-        if (chineseName.equals("90"))
-            return "keeper_of_the_light";
-        if (chineseName.equals("91"))
-            return "wisp";
-        if (chineseName.equals("92"))
-            return "visage";
-        if (chineseName.equals("93"))
-            return "slark";
-        if (chineseName.equals("94"))
-            return "medusa";
-        if (chineseName.equals("95"))
-            return "troll_warlord";
-        if (chineseName.equals("96"))
-            return "centaur";
-        if (chineseName.equals("97"))
-            return "magnataur";
-        if (chineseName.equals("98"))
-            return "shredder";
-        if (chineseName.equals("99"))
-            return "bristleback";
-        if (chineseName.equals("100"))
-            return "tusk";
-        if (chineseName.equals("101"))
-            return "skywrath_mage";
-        if (chineseName.equals("102"))
-            return "abaddon";
-        if (chineseName.equals("103"))
-            return "elder_titan";
-        if (chineseName.equals("104"))
-            return "legion_commander";
-        if (chineseName.equals("106"))
-            return "ember_spirit";
-        if (chineseName.equals("107"))
-            return "earth_spirit";
-        if (chineseName.equals("109"))
-            return "terrorblade";
-        if (chineseName.equals("110"))
-            return "phoenix";
-        if (chineseName.equals("105"))
-            return "techies";
-        if (chineseName.equals("111"))
-            return "oracle";
-        if (chineseName.equals("112")) {
-            return "winter_wyvern";
+        switch (ID) {
+            case 1:
+                return "antimage";
+            case 2:
+                return "axe";
+            case 3:
+                return "bane";
+            case 4:
+                return "bloodseeker";
+            case 5:
+                return "crystal_maiden";
+            case 6:
+                return "drow_ranger";
+            case 7:
+                return "earthshaker";
+            case 8:
+                return "juggernaut";
+            case 9:
+                return "mirana";
+            case 10:
+                return "morphling";
+            case 11:
+                return "nevermore";
+            case 12:
+                return "phantom_lancer";
+            case 13:
+                return "puck";
+            case 14:
+                return "pudge";
+            case 15:
+                return "razor";
+            case 16:
+                return "sand_king";
+            case 17:
+                return "storm_spirit";
+            case 18:
+                return "sven";
+            case 19:
+                return "tiny";
+            case 20:
+                return "vengefulspirit";
+            case 21:
+                return "windrunner";
+            case 22:
+                return "zuus";
+            case 23:
+                return "kunkka";
+            case 25:
+                return "lina";
+            case 26:
+                return "lion";
+            case 27:
+                return "shadow_shaman";
+            case 28:
+                return "slardar";
+            case 29:
+                return "tidehunter";
+            case 30:
+                return "witch_doctor";
+            case 31:
+                return "lich";
+            case 32:
+                return "riki";
+            case 33:
+                return "enigma";
+            case 34:
+                return "tinker";
+            case 35:
+                return "sniper";
+            case 36:
+                return "necrolyte";
+            case 37:
+                return "warlock";
+            case 38:
+                return "beastmaster";
+            case 39:
+                return "queenofpain";
+            case 40:
+                return "venomancer";
+            case 41:
+                return "faceless_void";
+            case 42:
+                return "skeleton_king";
+            case 43:
+                return "death_prophet";
+            case 44:
+                return "phantom_assassin";
+            case 45:
+                return "pugna";
+            case 46:
+                return "templar_assassin";
+            case 47:
+                return "viper";
+            case 48:
+                return "luna";
+            case 49:
+                return "dragon_knight";
+            case 50:
+                return "dazzle";
+            case 51:
+                return "rattletrap";
+            case 52:
+                return "leshrac";
+            case 53:
+                return "furion";
+            case 54:
+                return "life_stealer";
+            case 55:
+                return "dark_seer";
+            case 56:
+                return "clinkz";
+            case 57:
+                return "omniknight";
+            case 58:
+                return "enchantress";
+            case 59:
+                return "huskar";
+            case 60:
+                return "night_stalker";
+            case 61:
+                return "broodmother";
+            case 62:
+                return "bounty_hunter";
+            case 63:
+                return "weaver";
+            case 64:
+                return "jakiro";
+            case 65:
+                return "batrider";
+            case 66:
+                return "chen";
+            case 67:
+                return "spectre";
+            case 68:
+                return "ancient_apparition";
+            case 69:
+                return "doom_bringer";
+            case 70:
+                return "ursa";
+            case 71:
+                return "spirit_breaker";
+            case 72:
+                return "gyrocopter";
+            case 73:
+                return "alchemist";
+            case 74:
+                return "invoker";
+            case 75:
+                return "silencer";
+            case 76:
+                return "obsidian_destroyer";
+            case 77:
+                return "lycan";
+            case 78:
+                return "brewmaster";
+            case 79:
+                return "shadow_demon";
+            case 80:
+                return "lone_druid";
+            case 81:
+                return "chaos_knight";
+            case 82:
+                return "meepo";
+            case 83:
+                return "treant";
+            case 84:
+                return "ogre_magi";
+            case 85:
+                return "undying";
+            case 86:
+                return "rubick";
+            case 87:
+                return "disruptor";
+            case 88:
+                return "nyx_assassin";
+            case 89:
+                return "naga_siren";
+            case 90:
+                return "keeper_of_the_light";
+            case 91:
+                return "wisp";
+            case 92:
+                return "visage";
+            case 93:
+                return "slark";
+            case 94:
+                return "medusa";
+            case 95:
+                return "troll_warlord";
+            case 96:
+                return "centaur";
+            case 97:
+                return "magnataur";
+            case 98:
+                return "shredder";
+            case 99:
+                return "bristleback";
+            case 100:
+                return "tusk";
+            case 101:
+                return "skywrath_mage";
+            case 102:
+                return "abaddon";
+            case 103:
+                return "elder_titan";
+            case 104:
+                return "legion_commander";
+            case 105:
+                return "techies";
+            case 106:
+                return "ember_spirit";
+            case 107:
+                return "earth_spirit";
+            case 108:
+                return "abyssal_underlord";
+            case 109:
+                return "terrorblade";
+            case 110:
+                return "phoenix";
+            case 111:
+                return "oracle";
+            case 112:
+                return "winter_wyvern";
+            case 113:
+                return "arc_warden";
+            case 114:
+                return "monkey_king";
+            default:
+                return "default";
         }
-        return "default";
     }
 
     /**
@@ -2502,227 +2383,321 @@ public class Common {
      * @return
      */
     public static String getHeroName(String chineseName) {
+        switch (chineseName) {
+            case "敌法师":
+                return "antimage";
+            case "斧王":
+                return "axe";
+            case "祸乱之源":
+                return "bane";
+            case "嗜血狂魔":
+                return "bloodseeker";
+            case "水晶室女":
+                return "crystal_maiden";
+            case "卓尔游侠":
+                return "drow_ranger";
+            case "撼地者":
+                return "earthshaker";
+            case "主宰":
+                return "juggernaut";
+            case "米拉娜":
+                return "mirana";
+            case "变体精灵":
+                return "morphling";
+            case "影魔":
+                return "nevermore";
+            case "幻影长矛手":
+                return "phantom_lancer";
+            case "帕克":
+                return "puck";
+            case "帕吉":
+                return "pudge";
+            case "剃刀":
+                return "razor";
+            case "沙王":
+                return "sand_king";
+            case "风暴之灵":
+                return "storm_spirit";
+            case "斯温":
+                return "sven";
+            case "小小":
+                return "tiny";
+            case "复仇之魂":
+                return "vengefulspirit";
+            case "风行者":
+                return "windrunner";
+            case "宙斯":
+                return "zuus";
+            case "昆卡":
+                return "kunkka";
+            case "莉娜":
+                return "lina";
+            case "莱恩":
+                return "lion";
+            case "暗影萨满":
+                return "shadow_shaman";
+            case "斯拉达":
+                return "slardar";
+            case "潮汐猎人":
+                return "tidehunter";
+            case "巫医":
+                return "witch_doctor";
+            case "巫妖":
+                return "lich";
+            case "力丸":
+                return "riki";
+            case "谜团":
+                return "enigma";
+            case "修补匠":
+                return "tinker";
+            case "狙击手":
+                return "sniper";
+            case "瘟疫法师":
+                return "necrolyte";
+            case "术士":
+                return "warlock";
+            case "兽王":
+                return "beastmaster";
+            case "痛苦女王":
+                return "queenofpain";
+            case "剧毒术士":
+                return "venomancer";
+            case "虚空假面":
+                return "faceless_void";
+            case "冥魂大帝":
+                return "skeleton_king";
+            case "死亡先知":
+                return "death_prophet";
+            case "幻影刺客":
+                return "phantom_assassin";
+            case "帕格纳":
+                return "pugna";
+            case "圣堂刺客":
+                return "templar_assassin";
+            case "冥界亚龙":
+                return "viper";
+            case "露娜":
+                return "luna";
+            case "龙骑士":
+                return "dragon_knight";
+            case "戴泽":
+                return "dazzle";
+            case "发条技师":
+                return "rattletrap";
+            case "拉席克":
+                return "leshrac";
+            case "先知":
+                return "furion";
+            case "噬魂鬼":
+                return "life_stealer";
+            case "黑暗贤者":
+                return "dark_seer";
+            case "克林克兹":
+                return "clinkz";
+            case "全能骑士":
+                return "omniknight";
+            case "魅惑魔女":
+                return "enchantress";
+            case "哈斯卡":
+                return "huskar";
+            case "暗夜魔王":
+                return "night_stalker";
+            case "育母蜘蛛":
+                return "broodmother";
+            case "赏金猎人":
+                return "bounty_hunter";
+            case "编织者":
+                return "weaver";
+            case "杰奇洛":
+                return "jakiro";
+            case "蝙蝠骑士":
+                return "batrider";
+            case "陈":
+                return "chen";
+            case "幽鬼":
+                return "spectre";
+            case "远古冰魄":
+                return "ancient_apparition";
+            case "末日使者":
+                return "doom_bringer";
+            case "熊战士":
+                return "ursa";
+            case "裂魂人":
+                return "spirit_breaker";
+            case "矮人直升机":
+                return "gyrocopter";
+            case "炼金术士":
+                return "alchemist";
+            case "祈求者":
+                return "invoker";
+            case "沉默术士":
+                return "silencer";
+            case "殁境神蚀者":
+                return "obsidian_destroyer";
+            case "狼人":
+                return "lycan";
+            case "酒仙":
+                return "brewmaster";
+            case "暗影恶魔":
+                return "shadow_demon";
+            case "德鲁伊":
+                return "lone_druid";
+            case "混沌骑士":
+                return "chaos_knight";
+            case "米波":
+                return "meepo";
+            case "树精卫士":
+                return "treant";
+            case "食人魔魔法师":
+                return "ogre_magi";
+            case "不朽尸王":
+                return "undying";
+            case "拉比克":
+                return "rubick";
+            case "干扰者":
+                return "disruptor";
+            case "司夜刺客":
+                return "nyx_assassin";
+            case "娜迦海妖":
+                return "naga_siren";
+            case "光之守卫":
+                return "keeper_of_the_light";
+            case "艾欧":
+                return "wisp";
+            case "维萨吉":
+                return "visage";
+            case "斯拉克":
+                return "slark";
+            case "美杜莎":
+                return "medusa";
+            case "巨魔战将":
+                return "troll_warlord";
+            case "半人马战行者":
+                return "centaur";
+            case "马格纳斯":
+                return "magnataur";
+            case "伐木机":
+                return "shredder";
+            case "钢背兽":
+                return "bristleback";
+            case "巨牙海民":
+                return "tusk";
+            case "天怒法师":
+                return "skywrath_mage";
+            case "亚巴顿":
+                return "abaddon";
+            case "上古巨神":
+                return "elder_titan";
+            case "军团指挥官":
+                return "legion_commander";
+            case "工程师":
+                return "techies";
+            case "灰烬之灵":
+                return "ember_spirit";
+            case "大地之灵":
+                return "earth_spirit";
+            case "孽主":
+                return "abyssal_underlord";
+            case "恐怖利刃":
+                return "terrorblade";
+            case "凤凰":
+                return "phoenix";
+            case "神谕者":
+                return "oracle";
+            case "寒冬飞龙":
+                return "winter_wyvern";
+            case "天穹守望者":
+                return "arc_warden";
+            case "齐天大圣":
+                return "monkey_king";
+            default:
+                return "default";
+        }
+    }
 
-        if (chineseName.equals("敌法师"))
-            return "antimage";
-        if (chineseName.equals("斧王"))
-            return "axe";
-        if (chineseName.equals("祸乱之源"))
-            return "bane";
-        if (chineseName.equals("嗜血狂魔"))
-            return "bloodseeker";
-        if (chineseName.equals("水晶室女"))
-            return "crystal_maiden";
-        if (chineseName.equals("卓尔游侠"))
-            return "drow_ranger";
-        if (chineseName.equals("撼地者"))
-            return "earthshaker";
-        if (chineseName.equals("主宰"))
-            return "juggernaut";
-        if (chineseName.equals("米拉娜"))
-            return "mirana";
-        if (chineseName.equals("影魔"))
-            return "nevermore";
-        if (chineseName.equals("变体精灵"))
-            return "morphling";
-        if (chineseName.equals("幻影长矛手"))
-            return "phantom_lancer";
-        if (chineseName.equals("帕克"))
-            return "puck";
-        if (chineseName.equals("帕吉"))
-            return "pudge";
-        if (chineseName.equals("剃刀"))
-            return "razor";
-        if (chineseName.equals("沙王"))
-            return "sand_king";
-        if (chineseName.equals("风暴之灵"))
-            return "storm_spirit";
-        if (chineseName.equals("斯温"))
-            return "sven";
-        if (chineseName.equals("小小"))
-            return "tiny";
-        if (chineseName.equals("复仇之魂"))
-            return "vengefulspirit";
-        if (chineseName.equals("风行者"))
-            return "windrunner";
-        if (chineseName.equals("宙斯"))
-            return "zuus";
-        if (chineseName.equals("昆卡"))
-            return "kunkka";
-        if (chineseName.equals("莉娜"))
-            return "lina";
-        if (chineseName.equals("巫妖"))
-            return "lich";
-        if (chineseName.equals("莱恩"))
-            return "lion";
-        if (chineseName.equals("暗影萨满"))
-            return "shadow_shaman";
-        if (chineseName.equals("斯拉达"))
-            return "slardar";
-        if (chineseName.equals("潮汐猎人"))
-            return "tidehunter";
-        if (chineseName.equals("巫医"))
-            return "witch_doctor";
-        if (chineseName.equals("力丸"))
-            return "riki";
-        if (chineseName.equals("谜团"))
-            return "enigma";
-        if (chineseName.equals("修补匠"))
-            return "tinker";
-        if (chineseName.equals("狙击手"))
-            return "sniper";
-        if (chineseName.equals("瘟疫法师"))
-            return "necrolyte";
-        if (chineseName.equals("术士"))
-            return "warlock";
-        if (chineseName.equals("兽王"))
-            return "beastmaster";
-        if (chineseName.equals("痛苦女王"))
-            return "queenofpain";
-        if (chineseName.equals("剧毒术士"))
-            return "venomancer";
-        if (chineseName.equals("虚空假面"))
-            return "faceless_void";
-        if (chineseName.equals("冥魂大帝"))
-            return "skeleton_king";
-        if (chineseName.equals("死亡先知"))
-            return "death_prophet";
-        if (chineseName.equals("幻影刺客"))
-            return "phantom_assassin";
-        if (chineseName.equals("帕格纳"))
-            return "pugna";
-        if (chineseName.equals("圣堂刺客"))
-            return "templar_assassin";
-        if (chineseName.equals("冥界亚龙"))
-            return "viper";
-        if (chineseName.equals("露娜"))
-            return "luna";
-        if (chineseName.equals("龙骑士"))
-            return "dragon_knight";
-        if (chineseName.equals("戴泽"))
-            return "dazzle";
-        if (chineseName.equals("发条技师"))
-            return "rattletrap";
-        if (chineseName.equals("拉席克"))
-            return "leshrac";
-        if (chineseName.equals("先知"))
-            return "furion";
-        if (chineseName.equals("噬魂鬼"))
-            return "life_stealer";
-        if (chineseName.equals("黑暗贤者"))
-            return "dark_seer";
-        if (chineseName.equals("克林克兹"))
-            return "clinkz";
-        if (chineseName.equals("全能骑士"))
-            return "omniknight";
-        if (chineseName.equals("魅惑魔女"))
-            return "enchantress";
-        if (chineseName.equals("哈斯卡"))
-            return "huskar";
-        if (chineseName.equals("暗夜魔王"))
-            return "night_stalker";
-        if (chineseName.equals("育母蜘蛛"))
-            return "broodmother";
-        if (chineseName.equals("赏金猎人"))
-            return "bounty_hunter";
-        if (chineseName.equals("编织者"))
-            return "weaver";
-        if (chineseName.equals("杰奇洛"))
-            return "jakiro";
-        if (chineseName.equals("蝙蝠骑士"))
-            return "batrider";
-        if (chineseName.equals("陈"))
-            return "chen";
-        if (chineseName.equals("幽鬼"))
-            return "spectre";
-        if (chineseName.equals("末日使者"))
-            return "doom_bringer";
-        if (chineseName.equals("远古冰魄"))
-            return "ancient_apparition";
-        if (chineseName.equals("熊战士"))
-            return "ursa";
-        if (chineseName.equals("裂魂人"))
-            return "spirit_breaker";
-        if (chineseName.equals("矮人直升机"))
-            return "gyrocopter";
-        if (chineseName.equals("炼金术士"))
-            return "alchemist";
-        if (chineseName.equals("祈求者"))
-            return "invoker";
-        if (chineseName.equals("沉默术士"))
-            return "silencer";
-        if (chineseName.equals("殁境神蚀者"))
-            return "obsidian_destroyer";
-        if (chineseName.equals("狼人"))
-            return "lycan";
-        if (chineseName.equals("酒仙"))
-            return "brewmaster";
-        if (chineseName.equals("暗影恶魔"))
-            return "shadow_demon";
-        if (chineseName.equals("德鲁伊"))
-            return "lone_druid";
-        if (chineseName.equals("混沌骑士"))
-            return "chaos_knight";
-        if (chineseName.equals("米波"))
-            return "meepo";
-        if (chineseName.equals("树精卫士"))
-            return "treant";
-        if (chineseName.equals("食人魔魔法师"))
-            return "ogre_magi";
-        if (chineseName.equals("不朽尸王"))
-            return "undying";
-        if (chineseName.equals("拉比克"))
-            return "rubick";
-        if (chineseName.equals("干扰者"))
-            return "disruptor";
-        if (chineseName.equals("司夜刺客"))
-            return "nyx_assassin";
-        if (chineseName.equals("娜迦海妖"))
-            return "naga_siren";
-        if (chineseName.equals("光之守卫"))
-            return "keeper_of_the_light";
-        if (chineseName.equals("艾欧"))
-            return "wisp";
-        if (chineseName.equals("维萨吉"))
-            return "visage";
-        if (chineseName.equals("斯拉克"))
-            return "slark";
-        if (chineseName.equals("美杜莎"))
-            return "medusa";
-        if (chineseName.equals("巨魔战将"))
-            return "troll_warlord";
-        if (chineseName.equals("半人马战行者"))
-            return "centaur";
-        if (chineseName.equals("马格纳斯"))
-            return "magnataur";
-        if (chineseName.equals("伐木机"))
-            return "shredder";
-        if (chineseName.equals("钢背兽"))
-            return "bristleback";
-        if (chineseName.equals("巨牙海民"))
-            return "tusk";
-        if (chineseName.equals("天怒法师"))
-            return "skywrath_mage";
-        if (chineseName.equals("亚巴顿"))
-            return "abaddon";
-        if (chineseName.equals("上古巨神"))
-            return "elder_titan";
-        if (chineseName.equals("军团指挥官"))
-            return "legion_commander";
-        if (chineseName.equals("灰烬之灵"))
-            return "ember_spirit";
-        if (chineseName.equals("大地之灵"))
-            return "earth_spirit";
-        if (chineseName.equals("恐怖利刃"))
-            return "terrorblade";
-        if (chineseName.equals("凤凰"))
-            return "phoenix";
-        if (chineseName.equals("工程师"))
-            return "techies";
-        if (chineseName.equals("神谕者"))
-            return "oracle";
-        if (chineseName.equals("寒冬飞龙"))
-            return "winter_wyvern";
-        return "default";
+    public static String getMmrLevel(String mmr) {
+        if (TextUtils.isEmpty(mmr)) {
+            return DotaApplication.getApplication().getString(R.string.rank_level_unknow);
+        }
+        int score = Integer.parseInt(mmr);
+        if (score >= 0 && score <= 3200) {
+            return DotaApplication.getApplication().getString(R.string.rank_level_n);
+        } else if (score > 3200 && score <= 3800) {
+            return DotaApplication.getApplication().getString(R.string.rank_level_h);
+        } else {
+            return DotaApplication.getApplication().getString(R.string.rank_level_vh);
+        }
+    }
+
+    /**
+     * 计算比赛的level
+     *
+     * @param mmr
+     * @return
+     */
+    public static String getAverageMmrAverageLevel(String... mmr) {
+        int count = 0;
+        float totalMmr = 0f;
+        for (int i = 0; i < mmr.length; i++) {
+            if (!TextUtils.isEmpty(mmr[i])) {
+                totalMmr += Float.valueOf(mmr[i]);
+                count++;
+            }
+        }
+        if (count > 0) {
+            float result = totalMmr / count;
+            if (result >= 0 && result <= 3200) {
+                return DotaApplication.getApplication().getString(R.string.Normal);
+            } else if (result > 3200 && result <= 3800) {
+                return DotaApplication.getApplication().getString(R.string.High);
+            } else {
+                return DotaApplication.getApplication().getString(R.string.VeryHigh);
+            }
+        } else {
+            return DotaApplication.getApplication().getString(R.string.unknow);
+        }
+    }
+
+    public static boolean getMatchResult(int playerSlot, boolean radiantWin) {
+        if (playerSlot <= 4) {
+            if (radiantWin) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if (radiantWin) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    }
+
+    public static String getLobbyTypeName(int lobbyType) {
+        switch (lobbyType) {
+            case LobbyType.LOBBY_TYPE_NORMAL:
+                return DotaApplication.getApplication().getString(R.string.lobby_type_normal);
+            case LobbyType.LOBBY_TYPE_PRACTICE:
+                return DotaApplication.getApplication().getString(R.string.lobby_type_practice);
+            case LobbyType.LOBBY_TYPE_TOURNAMENT:
+                return DotaApplication.getApplication().getString(R.string.lobby_type_tournament);
+            case LobbyType.LOBBY_TYPE_TUTORIAL:
+                return DotaApplication.getApplication().getString(R.string.lobby_type_tutorial);
+            case LobbyType.LOBBY_TYPE_COOP_BOTS:
+                return DotaApplication.getApplication().getString(R.string.lobby_type_coop_bots);
+            case LobbyType.LOBBY_TYPE_RANKED_TEAM_MM:
+                return DotaApplication.getApplication().getString(R.string.lobby_type_ranked_team_mm);
+            case LobbyType.LOBBY_TYPE_RANKED_SOLO_MM:
+                return DotaApplication.getApplication().getString(R.string.lobby_type_ranked_solo_mm);
+            case LobbyType.LOBBY_TYPE_RANKED:
+                return DotaApplication.getApplication().getString(R.string.lobby_type_ranked);
+            case LobbyType.LOBBY_TYPE_1V1_MID:
+                return DotaApplication.getApplication().getString(R.string.lobby_type_1v1_mid);
+            case LobbyType.LOBBY_TYPE_BATTLE_CUP:
+                return DotaApplication.getApplication().getString(R.string.lobby_type_battle_cup);
+            default:
+                return DotaApplication.getApplication().getString(R.string.unknow);
+        }
     }
 }

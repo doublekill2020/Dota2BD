@@ -2,6 +2,7 @@ build
 app.iml
 .idea
 local.properties
+gradle.properties
 .gradle/*
 .idea/*
 .idea/vcs.xml
@@ -12,3 +13,4 @@ captures/
 captures/*
 
 app.iml
+gradle.properties

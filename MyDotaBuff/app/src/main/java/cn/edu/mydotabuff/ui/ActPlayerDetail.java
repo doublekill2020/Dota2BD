@@ -1,16 +1,8 @@
-/**
- * @Title: ActPlayerDetail.java
- * @ProjectName MyDotaBuff
- * @Package cn.edu.mydotabuff.ui
- * @author 袁浩 1006401052yh@gmail.com
- * @date 2015-1-29 下午1:54:11
- * @version V1.4
- * Copyright 2013-2015 深圳市点滴互联科技有限公司  版权所有
- */
 package cn.edu.mydotabuff.ui;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -18,27 +10,18 @@ import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import cn.edu.mydotabuff.AppManager;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseActivity;
 import cn.edu.mydotabuff.common.Common;
-import cn.edu.mydotabuff.common.bean.PlayerInfoBean;
+import cn.edu.mydotabuff.model.PlayerInfoBean;
 import cn.edu.mydotabuff.common.http.OnWebDataGetListener;
 import cn.edu.mydotabuff.common.http.WebDataHelper;
-import cn.edu.mydotabuff.ui.mydetail.ActUserStatistics;
 import cn.edu.mydotabuff.util.TimeHelper;
 import cn.edu.mydotabuff.view.CircleImageView;
 import cn.edu.mydotabuff.view.LoadingDialog;
 import cn.edu.mydotabuff.view.TipsToast;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;
 
-/**
- * @ClassName: ActPlayerDetail
- * @Description: TODO(这里用一句话描述这个类的作用)
- * @author 袁浩 1006401052yh@gmail.com
- * @date 2015-1-29 下午1:54:11
- *
- */
 public class ActPlayerDetail extends BaseActivity implements
         OnWebDataGetListener {
     private TextView nameView, statusView, timeView, loginView;
@@ -50,20 +33,24 @@ public class ActPlayerDetail extends BaseActivity implements
     private CircleImageView iconView;
 
     @Override
-    protected void initViewAndData() {
-        // TODO Auto-generated method stub
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
+    }
+
+    protected void init() {
         setContentView(R.layout.act_player_detail_base);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("个人资料");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        nameView = getViewById(R.id.name);
-        statusView = getViewById(R.id.status);
-        timeView = getViewById(R.id.regist_time);
-        loginView = getViewById(R.id.last_login);
-        winNum = getViewById(R.id.most_win_num);
-        loseNum = getViewById(R.id.most_lose_num);
-        iconView = getViewById(R.id.myinfrom_up_img);
+        nameView = (TextView) findViewById(R.id.name);
+        statusView = (TextView) findViewById(R.id.status);
+        timeView = (TextView) findViewById(R.id.regist_time);
+        loginView = (TextView) findViewById(R.id.last_login);
+        winNum = (TextView) findViewById(R.id.most_win_num);
+        loseNum = (TextView) findViewById(R.id.most_lose_num);
+        iconView = (CircleImageView) findViewById(R.id.myinfrom_up_img);
         loader = ImageLoader.getInstance();
         dialog = new LoadingDialog(this);
         bean = (PlayerInfoBean) getIntent().getSerializableExtra("data");
@@ -71,12 +58,6 @@ public class ActPlayerDetail extends BaseActivity implements
         helper = new WebDataHelper(this);
         helper.setDataGetListener(this);
         helper.getWebData(bean);
-    }
-
-    @Override
-    protected void initEvent() {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
@@ -124,16 +105,6 @@ public class ActPlayerDetail extends BaseActivity implements
                 finish();
                 break;
             case R.id.more_detail:
-                if (bean == null) {
-                    TipsToast.showToast(ActPlayerDetail.this, "暂无数据",
-                            Toast.LENGTH_SHORT, DialogType.LOAD_FAILURE);
-                } else {
-                    Intent intent = new Intent(ActPlayerDetail.this,
-                            ActUserStatistics.class);
-                    intent.putExtra("type", "other");
-                    intent.putExtra("data", bean);
-                    startActivity(intent);
-                }
                 break;
             case R.id.friend_list:
                 if (bean == null) {
@@ -146,7 +117,6 @@ public class ActPlayerDetail extends BaseActivity implements
                 }
                 break;
             case R.id.back_to_main:
-                AppManager.getAppManager().finishAllActivity(ActMain.class);
                 finish();
                 break;
             case R.id.go_to_star:

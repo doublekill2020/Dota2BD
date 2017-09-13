@@ -1,5 +1,6 @@
 package com.badr.infodota.activity;
 
+import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -9,7 +10,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
-import android.support.v7.widget.ActionMenuPresenter;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,12 +37,13 @@ public class ListHolderActivity extends BaseActivity implements SearchView.OnQue
     int lastSelected = -1;
     private boolean doubleBackToExitPressedOnce = false;
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_fragment_holder);
 
-        mActionMenuView.setPresenter(new ActionMenuPresenter(this));
+        //mActionMenuView.setPresenter(new ActionMenuPresenter(this));
 
         ActionBar bar = getSupportActionBar();
         bar.setDisplayShowTitleEnabled(false);
@@ -57,16 +58,6 @@ public class ListHolderActivity extends BaseActivity implements SearchView.OnQue
         int selected = prefs.getInt("mainMenuLastSelected", 0);
         navSpinner.setOnItemSelectedListener(this);
         navSpinner.setSelection(Math.min(selected, adapter.getCount() - 1));
-
-    }
-
-    @Override
-    protected void initViewAndData() {
-
-    }
-
-    @Override
-    protected void initEvent() {
 
     }
 

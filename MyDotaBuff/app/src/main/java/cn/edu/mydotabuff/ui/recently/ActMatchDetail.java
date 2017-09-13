@@ -8,6 +8,7 @@ import org.json2.JSONObject;
 
 import com.umeng.analytics.MobclickAgent;
 
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.Toolbar;
@@ -18,9 +19,9 @@ import android.widget.Toast;
 
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseActivity;
-import cn.edu.mydotabuff.common.bean.AbilityBean;
-import cn.edu.mydotabuff.common.bean.PlayerDetailBean;
-import cn.edu.mydotabuff.common.bean.PlayerInfoBean;
+import cn.edu.mydotabuff.model.AbilityBean;
+import cn.edu.mydotabuff.model.PlayerDetailBean;
+import cn.edu.mydotabuff.model.PlayerInfoBean;
 import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.common.http.IInfoReceive;
 import cn.edu.mydotabuff.util.Debug;
@@ -52,8 +53,11 @@ public class ActMatchDetail extends BaseActivity {
     private LoadingDialog dialog;
 
     @Override
-    protected void initViewAndData() {
-        // TODO Auto-generated method stub
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        init();
+    }
+    protected void init() {
         setContentView(R.layout.act_match_detail);
         myHandler = new MyHandler();
         matchId = getIntent().getStringExtra("matchId");
@@ -72,12 +76,6 @@ public class ActMatchDetail extends BaseActivity {
         durationView = (TextView) findViewById(R.id.duration);
         matchTypeView = (TextView) findViewById(R.id.match_type);
         list = (ListView) findViewById(R.id.list);
-    }
-
-    @Override
-    protected void initEvent() {
-        // TODO Auto-generated method stub
-
     }
 
     void fetchData(final int type) {

@@ -9,7 +9,6 @@ import org.json2.JSONArray;
 import org.json2.JSONException;
 import org.json2.JSONObject;
 
-import com.nhaarman.listviewanimations.appearance.simple.ScaleInAnimationAdapter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -34,11 +33,10 @@ import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.DotaApplication.LocalDataType;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseFragment;
-import cn.edu.mydotabuff.common.bean.MatchBean;
-import cn.edu.mydotabuff.common.bean.PlayerBean;
+import cn.edu.mydotabuff.model.MatchBean;
+import cn.edu.mydotabuff.model.PlayerBean;
 import cn.edu.mydotabuff.common.http.IInfoReceive;
-import cn.edu.mydotabuff.ui.ActMain.OnMainEventListener;
-import cn.edu.mydotabuff.util.Debug;
+import cn.edu.mydotabuff.ui.MainActivity;
 import cn.edu.mydotabuff.util.PersonalRequestImpl;
 import cn.edu.mydotabuff.view.LoadingDialog;
 import cn.edu.mydotabuff.view.TipsToast;
@@ -46,13 +44,12 @@ import cn.edu.mydotabuff.view.XListView;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;
 import cn.edu.mydotabuff.view.XListView.IXListViewListener;
 
-public class FragRecently extends BaseFragment implements OnMainEventListener {
+public class FragRecently extends BaseFragment {
 	private XListView listView;
 	private View recentLayout;
 	private String userID;
 	private Activity activity;
 	private FragItemAdapter mAdapter;
-	private ScaleInAnimationAdapter sAdapter;
 	private LoadingDialog dialog;
 	private ArrayList<String> matchIds;
 	private ArrayList<MatchBean> allMatchBeans;
@@ -68,10 +65,7 @@ public class FragRecently extends BaseFragment implements OnMainEventListener {
 	private boolean flag = false;// 当拿本地数据时 会导致加载更多的第一天与本地最后一条重复，此变量用来标识
 
 	@Override
-	protected View initViewAndData(LayoutInflater inflater,
-			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		System.out.print("");
+	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		recentLayout = inflater.inflate(R.layout.frag_recently, container,
 				false);
 		setHasOptionsMenu(true);
@@ -87,12 +81,6 @@ public class FragRecently extends BaseFragment implements OnMainEventListener {
 		allMatchBeans = new ArrayList<MatchBean>();
 		initView();
 		fetchData(FETCH_ONLINE_NUM, "");
-		return recentLayout;
-	}
-
-	@Override
-	protected void initEvent() {
-		// TODO Auto-generated method stub
 		listView.setXListViewListener(new IXListViewListener() {
 
 			@Override
@@ -115,7 +103,7 @@ public class FragRecently extends BaseFragment implements OnMainEventListener {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
+									int position, long id) {
 				// TODO Auto-generated method stub
 				if (allMatchBeans.size() > 0) {
 					Intent intent = new Intent(activity, ActMatchDetail.class);
@@ -135,6 +123,7 @@ public class FragRecently extends BaseFragment implements OnMainEventListener {
 				}
 			}
 		});
+		return recentLayout;
 	}
 
 	public void initView() {
@@ -305,14 +294,12 @@ public class FragRecently extends BaseFragment implements OnMainEventListener {
 				ArrayList<MatchBean> beans = (ArrayList<MatchBean>) msg.obj;
 				if (mAdapter == null) {
 					mAdapter = new FragItemAdapter(activity, beans);
-					sAdapter = new ScaleInAnimationAdapter(mAdapter);
-					sAdapter.setAbsListView(listView);
-					listView.setAdapter(sAdapter);
+					listView.setAdapter(mAdapter);
 					allMatchBeans.addAll(beans);
 				} else {
 					allMatchBeans.addAll(beans);
 					mAdapter.addMoreData(beans);
-					sAdapter.notifyDataSetChanged();
+                    mAdapter.notifyDataSetChanged();
 				}
 				break;
 			case FETCH_ONLINE_NUM:
@@ -348,34 +335,6 @@ public class FragRecently extends BaseFragment implements OnMainEventListener {
 		super.onDestroy();
 		DotaApplication.getApplication().saveData(allMatchBeans,
 				LocalDataType.MATCHES);
-	}
-
-	@Override
-	public void onFinishGetPlayerInfo() {
-		// TODO Auto-generated method stub
-		String isNeedUpdate = myPreferences.getString("isNeedUpdate", "");
-		if (isNeedUpdate.equals("true") || isNeedUpdate.equals("")) {
-			fetchData(FETCH_MATCH, lastId);
-		} else {
-			flag = true;
-			ArrayList<MatchBean> beans = DotaApplication.getApplication()
-					.getData(LocalDataType.MATCHES);
-			if (beans == null) {
-				fetchData(FETCH_MATCH, lastId);
-			} else {
-				allMatchBeans.addAll(beans);
-				if (mAdapter == null) {
-					mAdapter = new FragItemAdapter(activity, allMatchBeans);
-					sAdapter = new ScaleInAnimationAdapter(mAdapter);
-					sAdapter.setAbsListView(listView);
-					listView.setAdapter(sAdapter);
-					if (allMatchBeans.size() > 0) {
-						lastId = allMatchBeans.get(allMatchBeans.size() - 1)
-								.getMatchId();
-					}
-				}
-			}
-		}
 	}
 
 	@Override

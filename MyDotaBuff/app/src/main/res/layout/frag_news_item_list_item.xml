@@ -1,69 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/tools"
+    android:id="@+id/cardview"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="4dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="@dimen/common_cardview_radius_normal">
 
-    <android.support.v7.widget.CardView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/cardview"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="4dp"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="@dimen/common_cardview_radius_normal" >
+        android:orientation="horizontal">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/pic"
+            android:layout_width="120dp"
+            android:layout_height="88dp"
+            android:src="@drawable/default_pic"
+            fresco:roundBottomRight="false"
+            fresco:roundTopRight="false"
+            fresco:roundedCornerRadius="@dimen/common_cardview_radius_normal" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/umeng_socialize_shareboard_item_background"
-            android:orientation="horizontal" >
+            android:layout_height="match_parent"
+            android:layout_marginLeft="4dp"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
-
-                <ImageView
-                    android:id="@+id/pic"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:layout_margin="4dp"
-                    android:src="@drawable/default_pic" />
-            </LinearLayout>
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/title"
+                style="@style/CommonTextView.Middle"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical" >
+                android:layout_height="wrap_content"
+                android:lines="2"
+                android:singleLine="false" />
 
-                <TextView
-                    android:id="@+id/title"
-                    style="@style/CommonTextView.Middle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/content"
+                style="@style/CommonTextView.Small"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginTop="2dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:lines="3"
+                android:singleLine="false"
+                android:textColor="@color/gray" />
 
-                <TextView
-                    android:id="@+id/content"
-                    style="@style/CommonTextView.Small"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginBottom="4dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_weight="1"
-                    android:ellipsize="end"
-                    android:singleLine="false"
-                    android:textColor="@color/gray" />
-
-                <TextView
-                    android:id="@+id/time"
-                    style="@style/CommonTextView.Small"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="right" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/time"
+                style="@style/CommonTextView.Small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:visibility="gone" />
         </LinearLayout>
-    </android.support.v7.widget.CardView>
-
-</LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
