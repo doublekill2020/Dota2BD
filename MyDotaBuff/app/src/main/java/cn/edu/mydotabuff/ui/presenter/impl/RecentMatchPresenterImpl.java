@@ -142,8 +142,6 @@ public class RecentMatchPresenterImpl extends BasePresenterImpl<IRecentMatchView
         doSyncPlayersRating(mPlayerIds);
         for (final String accountId : followers) {
             OpenDotaApi.getService().getRecentMatch(accountId)
-                    .subscribeOn(AndroidSchedulers.mainThread())
-                    .observeOn(Schedulers.io())
                     .map(new Func1<List<Match>, List<Match>>() {
                         @Override
                         public List<Match> call(List<Match> matches) {

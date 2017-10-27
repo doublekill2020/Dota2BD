@@ -1,5 +1,7 @@
 package cn.edu.mydotabuff.ui.service;
 
+import android.util.Log;
+
 import com.hwangjr.rxbus.RxBus;
 
 import java.math.BigDecimal;
@@ -11,6 +13,7 @@ import cn.edu.mydotabuff.common.EventTag;
 import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.model.PlayerWL;
 import cn.edu.mydotabuff.model.Rating;
+import cn.edu.mydotabuff.util.ThreadUtils;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import rx.Observable;
@@ -30,11 +33,10 @@ public class PlayerInfoService {
         final RxCallBackEvent event = new RxCallBackEvent();
         event.tag = EventTag.GET_PLAYER_RATING;
         OpenDotaApi.getService().getPlayerRating(accountId)
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(Schedulers.io())
                 .map(new Func1<List<Rating>, Boolean>() {
                     @Override
                     public Boolean call(List<Rating> ratings) {
+                        Log.i("getPlayerRating", ThreadUtils.isMainThread()+"");
                         Realm realm = Realm.getDefaultInstance();
                         try {
                             realm.beginTransaction();
