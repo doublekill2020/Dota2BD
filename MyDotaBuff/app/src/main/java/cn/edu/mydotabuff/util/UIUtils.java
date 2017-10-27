@@ -11,4 +11,8 @@ public class UIUtils {
     public static int dp2px(Context c, float dp) {
         return (int) (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, c.getResources().getDisplayMetrics()) + 0.5f);
     }
+
+    public static int getScreenWidht(Context c ) {
+        return c.getResources().getDisplayMetrics().widthPixels;
+    }
 }

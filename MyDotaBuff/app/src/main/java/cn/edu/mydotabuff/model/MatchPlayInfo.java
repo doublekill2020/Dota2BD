@@ -15,6 +15,7 @@ public class MatchPlayInfo extends RealmObject implements Parcelable {
 
     public String match_id; // 比赛id
     public String account_id; // 用户id
+    public String player_slot; // 标识player在队列中的位置
     public String personaname; // 昵称
     public int hero_id;// 英雄id
     public int life_state_dead;// 死亡时间
@@ -45,6 +46,9 @@ public class MatchPlayInfo extends RealmObject implements Parcelable {
     public int neutral_kills; // 中立生物击杀
     public int courier_kills; // 信使击杀
     public int lane_kills; // 小兵击杀
+    public int hero_damage; // 对地方英雄造成的伤害
+    public int gold_per_min; // 每分钟金钱
+    public int xp_per_min; // 每分钟经验
 
     public RealmList<RealmInt> xp_t; // 经验曲线
     public RealmList<RealmInt> lh_t; // 正补曲线
@@ -60,6 +64,7 @@ public class MatchPlayInfo extends RealmObject implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.match_id);
         dest.writeString(this.account_id);
+        dest.writeString(this.player_slot);
         dest.writeString(this.personaname);
         dest.writeInt(this.hero_id);
         dest.writeInt(this.life_state_dead);
@@ -89,6 +94,10 @@ public class MatchPlayInfo extends RealmObject implements Parcelable {
         dest.writeInt(this.neutral_kills);
         dest.writeInt(this.courier_kills);
         dest.writeInt(this.lane_kills);
+        dest.writeInt(this.hero_damage);
+        dest.writeInt(this.gold_per_min);
+        dest.writeInt(this.xp_per_min);
+
         dest.writeList(this.xp_t);
         dest.writeList(this.lh_t);
         dest.writeList(this.gold_t);
@@ -101,6 +110,7 @@ public class MatchPlayInfo extends RealmObject implements Parcelable {
     protected MatchPlayInfo(Parcel in) {
         this.match_id = in.readString();
         this.account_id = in.readString();
+        this.player_slot = in.readString();
         this.personaname = in.readString();
         this.hero_id = in.readInt();
         this.life_state_dead = in.readInt();
@@ -130,6 +140,9 @@ public class MatchPlayInfo extends RealmObject implements Parcelable {
         this.neutral_kills = in.readInt();
         this.courier_kills = in.readInt();
         this.lane_kills = in.readInt();
+        this.hero_damage = in.readInt();
+        this.gold_per_min = in.readInt();
+        this.xp_per_min = in.readInt();
 
         this.xp_t = new RealmList<>();
         this.xp_t.addAll(in.createTypedArrayList(RealmInt.CREATOR));
