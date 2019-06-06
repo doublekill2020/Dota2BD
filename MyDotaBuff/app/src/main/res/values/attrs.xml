@@ -5,83 +5,83 @@
         <attr name="right_width" format="dimension"></attr>
     </declare-styleable>
     <declare-styleable name="CircleImageView">
-        <attr name="border_width" format="dimension" />
-        <attr name="border_color" format="color" />
+        <attr name="border_width" format="dimension"/>
+        <attr name="border_color" format="color"/>
     </declare-styleable>
 
     <!-- BasicLoading -->
     <declare-styleable name="BasicLoading">
-        <attr name="duration" format="integer" />
-        <attr name="loadtitle" format="string" />
+        <attr name="duration" format="integer"/>
+        <attr name="loadtitle" format="string"/>
     </declare-styleable>
 
     <!-- CycleLoading -->
     <declare-styleable name="CycleLoading">
-        <attr name="startBg" format="reference" />
-        <attr name="endBg" format="reference" />
+        <attr name="startBg" format="reference"/>
+        <attr name="endBg" format="reference"/>
     </declare-styleable>
 
     <!-- FlowLayout -->
     <declare-styleable name="FlowLayout">
-        <attr name="horizontalSpacing" format="dimension" />
-        <attr name="verticalSpacing" format="dimension" />
+        <attr name="horizontalSpacing" format="dimension"/>
+        <attr name="verticalSpacing" format="dimension"/>
         <attr name="orientation" format="enum">
-            <enum name="horizontal" value="0" />
-            <enum name="vertical" value="1" />
+            <enum name="horizontal" value="0"/>
+            <enum name="vertical" value="1"/>
         </attr>
-        <attr name="debugDraw" format="boolean" />
+        <attr name="debugDraw" format="boolean"/>
     </declare-styleable>
     <declare-styleable name="FlowLayout_LayoutParams">
-        <attr name="layout_newLine" format="boolean" />
-        <attr name="layout_horizontalSpacing" format="dimension" />
-        <attr name="layout_verticalSpacing" format="dimension" />
+        <attr name="layout_newLine" format="boolean"/>
+        <attr name="layout_horizontalSpacing" format="dimension"/>
+        <attr name="layout_verticalSpacing" format="dimension"/>
     </declare-styleable>
 
     <!-- <attr name="dividerHorizontal" format="reference" /> -->
     <declare-styleable name="Divider">
-        <attr name="android:orientation" />
-        <attr name="marginTop" format="dimension" />
-        <attr name="marginBottom" format="dimension" />
+        <attr name="android:orientation"/>
+        <attr name="marginTop" format="dimension"/>
+        <attr name="marginBottom" format="dimension"/>
     </declare-styleable>
 
     <!-- ProgressWheel -->
     <declare-styleable name="ProgressWheel">
-        <attr name="progressIndeterminate" format="boolean" />
-        <attr name="barColor" format="color" />
-        <attr name="rimColor" format="color" />
-        <attr name="rimWidth" format="dimension" />
-        <attr name="spinSpeed" format="float" />
-        <attr name="barSpinCycleTime" format="integer" />
-        <attr name="cRadius" format="dimension" />
-        <attr name="fillRadius" format="boolean" />
-        <attr name="barWidth" format="dimension" />
-        <attr name="linearProgress" format="boolean" />
+        <attr name="progressIndeterminate" format="boolean"/>
+        <attr name="barColor" format="color"/>
+        <attr name="rimColor" format="color"/>
+        <attr name="rimWidth" format="dimension"/>
+        <attr name="spinSpeed" format="float"/>
+        <attr name="barSpinCycleTime" format="integer"/>
+        <attr name="cRadius" format="dimension"/>
+        <attr name="fillRadius" format="boolean"/>
+        <attr name="barWidth" format="dimension"/>
+        <attr name="linearProgress" format="boolean"/>
     </declare-styleable>
     <declare-styleable name="RoundAngleImageView">
-        <attr name="roundWidth" format="dimension" />
-        <attr name="roundHeight" format="dimension" />
+        <attr name="roundWidth" format="dimension"/>
+        <attr name="roundHeight" format="dimension"/>
     </declare-styleable>
     <declare-styleable name="PagerSlidingTabStrip">
-        <attr name="pstsIndicatorColor" format="color" />
-        <attr name="pstsUnderlineColor" format="color" />
-        <attr name="pstsDividerColor" format="color" />
-        <attr name="pstsIndicatorHeight" format="dimension" />
-        <attr name="pstsUnderlineHeight" format="dimension" />
-        <attr name="pstsDividerPadding" format="dimension" />
-        <attr name="pstsTabPaddingLeftRight" format="dimension" />
-        <attr name="pstsScrollOffset" format="dimension" />
-        <attr name="pstsTabBackground" format="reference" />
-        <attr name="pstsShouldExpand" format="boolean" />
-        <attr name="pstsTextAllCaps" format="boolean" />
+        <attr name="pstsIndicatorColor" format="color"/>
+        <attr name="pstsUnderlineColor" format="color"/>
+        <attr name="pstsDividerColor" format="color"/>
+        <attr name="pstsIndicatorHeight" format="dimension"/>
+        <attr name="pstsUnderlineHeight" format="dimension"/>
+        <attr name="pstsDividerPadding" format="dimension"/>
+        <attr name="pstsTabPaddingLeftRight" format="dimension"/>
+        <attr name="pstsScrollOffset" format="dimension"/>
+        <attr name="pstsTabBackground" format="reference"/>
+        <attr name="pstsShouldExpand" format="boolean"/>
+        <attr name="pstsTextAllCaps" format="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="SwipeBackLayout">
         <attr name="edge_size" format="dimension"/>
         <attr name="edge_flag">
-            <enum name="left" value="0" />
-            <enum name="right" value="1" />
-            <enum name="bottom" value="2" />
-            <enum name="all" value="3" />
+            <enum name="left" value="0"/>
+            <enum name="right" value="1"/>
+            <enum name="bottom" value="2"/>
+            <enum name="all" value="3"/>
         </attr>
         <attr name="shadow_left" format="reference"/>
         <attr name="shadow_right" format="reference"/>
@@ -89,4 +89,9 @@
     </declare-styleable>
 
     <attr name="SwipeBackLayoutStyle" format="reference"/>
+
+    <declare-styleable name="LineCharView">
+        <attr name="descriptionX" format="string"/>
+        <attr name="descriptionY" format="string"/>
+    </declare-styleable>
 </resources>

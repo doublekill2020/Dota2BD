@@ -6,4 +6,17 @@
     <color name="color_base_green">#3D9027</color>
     <color name="color_base_red">#9C3627</color>
     <color name="text_secondary_color">#ff8c96a0</color>
+
+
+    <color name="player_color_0">#2E6AE6</color>
+    <color name="player_color_1">#5DE6AD</color>
+    <color name="player_color_2">#AD00AD</color>
+    <color name="player_color_3">#DCD90A</color>
+    <color name="player_color_4">#E66200</color>
+    <color name="player_color_128">#E67AB0</color>
+    <color name="player_color_129">#92A440</color>
+    <color name="player_color_130">#5CC5E0</color>
+    <color name="player_color_131">#00771F</color>
+    <color name="player_color_132">#956000</color>
+
 </resources>

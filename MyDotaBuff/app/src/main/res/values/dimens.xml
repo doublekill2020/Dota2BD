@@ -105,7 +105,10 @@
     <dimen name="dp_74">74dp</dimen>
     <dimen name="dp_84">84dp</dimen>
 
+    <dimen name="sp_10">10sp</dimen>
     <dimen name="sp_12">12sp</dimen>
+    <dimen name="sp_14">12sp</dimen>
+    <dimen name="sp_16">12sp</dimen>
     <dimen name="sp_18">18sp</dimen>
 
     <dimen name="text_size_9">9sp</dimen>
