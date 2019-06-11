@@ -65,11 +65,7 @@ public class ActBoard extends BaseActivity {
                     // TODO Auto-generated method stub
                     helper.setText(R.id.name, item.getName());
                     helper.setText(R.id.rank, item.getRank() + "");
-                    if(item.getSolo_mmr() ==0){
-                        helper.setText(R.id.solo_mmr,DotaApplication.getApplication().getString(R.string.unknow));
-                    }else {
-                        helper.setText(R.id.solo_mmr, item.getSolo_mmr() + "");
-                    }
+                    helper.setText(R.id.solo_mmr, item.getSolo_mmr() + "");
                 }
             });
             if (beans.size() > 0) {
@@ -104,10 +100,7 @@ public class ActBoard extends BaseActivity {
                                             name = obj.getString("team_tag") + ".";
                                         }
                                         name += obj.getString("name");
-                                        int solo_mmr = 0;
-                                        if(obj.has("solo_mmr")){
-                                            solo_mmr = obj.getInt("solo_mmr");
-                                        }
+                                        int solo_mmr = obj.getInt("solo_mmr");
                                         beans.add(new BoardBean(time, rank, name,
                                                 solo_mmr));
                                     }
