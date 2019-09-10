@@ -8,12 +8,12 @@ android {
         disable 'PrivateResource'
     }
     compileSdkVersion 26
-    buildToolsVersion "26.0.0"
+    buildToolsVersion "27.0.3"
 
     defaultConfig {
         applicationId "cn.edu.mydotabuff"
         minSdkVersion 15
-        targetSdkVersion 22
+        targetSdkVersion 26
         ndk {
             //选择要添加的对应cpu类型的.so库。
             abiFilters 'armeabi', 'armeabi-v7a', 'x86'
