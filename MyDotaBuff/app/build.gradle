@@ -7,8 +7,8 @@ android {
     lintOptions {
         disable 'PrivateResource'
     }
-    compileSdkVersion 26
-    buildToolsVersion "27.0.3"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
 
     defaultConfig {
         applicationId "cn.edu.mydotabuff"
@@ -99,7 +99,7 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:${okhttpVersion}"
     implementation "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}"
 
-    ext.frescoVersion = '1.3.0'
+    ext.frescoVersion = '1.13.0'
     implementation "com.facebook.fresco:fresco:${frescoVersion}"
     implementation "com.facebook.fresco:animated-gif:${frescoVersion}"
     implementation "com.facebook.fresco:animated-webp:${frescoVersion}"
@@ -110,7 +110,7 @@ dependencies {
     implementation 'io.reactivex:rxandroid:1.2.1'
     implementation 'cn.bingoogolapple:bga-swipebacklayout:1.0.8'
     //compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.hwangjr.rxbus:rxbus:1.0.5'
+    implementation 'com.hwangjr.rxbus:rxbus:1.0.6'
     implementation 'io.realm:android-adapters:1.2.1'
 
     implementation 'com.orhanobut:logger:2.1.1'

@@ -125,13 +125,6 @@ public class FollowFragmentPresenterImpl extends BasePresenterImpl<IFollowFragme
         matches.addChangeListener(new RealmChangeListener<RealmResults<Match>>() {
             @Override
             public void onChange(RealmResults<Match> matches) {
-                if (mView == null) {
-                    return;
-                }
-                if (matches.size() > 0) {
-                    mView.showSuccessLayout();
-                    mView.setDataToRecycleView(matches);
-                }
             }
         });
     }
@@ -144,19 +137,8 @@ public class FollowFragmentPresenterImpl extends BasePresenterImpl<IFollowFragme
                     .map(new Func1<List<Match>, List<Match>>() {
                         @Override
                         public List<Match> call(List<Match> matches) {
-                            Realm realm = Realm.getDefaultInstance();
-                            try {
-                                realm.beginTransaction();
-                                for (Match match : matches) {
-                                    match.account_id = accountId;
-                                    match.id = accountId + match.match_id;
-                                }
-                                realm.copyToRealmOrUpdate(matches);
-                                realm.commitTransaction();
-                            } catch (Exception e) {
-                                return null;
-                            } finally {
-                                realm.close();
+                            for(Match match:matches){
+                                match.account_id = accountId;
                             }
                             return matches;
                         }
@@ -168,6 +150,10 @@ public class FollowFragmentPresenterImpl extends BasePresenterImpl<IFollowFragme
                         public void call(List<Match> matches) {
                             if (mView != null) {
                                 mView.setRefreshCompleted();
+                                if (matches.size() > 0) {
+                                    mView.showSuccessLayout();
+                                    mView.setDataToRecycleView(matches);
+                                }
                             }
                         }
                     });

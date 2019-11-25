@@ -1,5 +1,6 @@
 package cn.edu.mydotabuff.ui.adapter;
 
+import android.content.Context;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -43,6 +44,7 @@ public class MathOverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private float mDireDamage;
     private int mDireGPM;
     private int mDireXPM;
+    private Context mContext;
 
     public MathOverviewAdapter(MatchDetail detail) {
         this.mDetail = detail;
@@ -61,6 +63,7 @@ public class MathOverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        mContext = parent.getContext();
         RecyclerView.ViewHolder holder = null;
         if (viewType == TYPE_SECTION_RADIANT) {
             holder = new SectionVH(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_match_overview_section_radiant, parent, false));
@@ -195,7 +198,7 @@ public class MathOverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
 
 
-        void bindData(MatchPlayInfo bean) {
+        void bindData(final MatchPlayInfo bean) {
             mHeroIcon.setImageURI(Utils.getHeroImageUriForFresco(Common.getHeroName(bean.hero_id)));
             mHeroLevel.setText(String.valueOf(bean.level));
             mPersonName.setText(TextUtils.isEmpty(bean.personaname) ? itemView.getContext().getString(R.string.anonymous_player) : bean.personaname);
@@ -210,6 +213,13 @@ public class MathOverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             mItem3.setImageURI(Utils.getItemsImageUri(Common.getItemName(bean.item_3)));
             mItem4.setImageURI(Utils.getItemsImageUri(Common.getItemName(bean.item_4)));
             mItem5.setImageURI(Utils.getItemsImageUri(Common.getItemName(bean.item_5)));
+            mHeroIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Utils.startHeroDetailActivity(mContext, Common.getHeroName(bean.hero_id));
+                }
+            });
+
         }
     }
 

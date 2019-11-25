@@ -26,6 +26,7 @@ import cn.edu.mydotabuff.model.LobbyType;
 import cn.edu.mydotabuff.model.Match;
 import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.model.Rating;
+import cn.edu.mydotabuff.ui.hero.HeroDetailActivityAppCompat;
 import cn.edu.mydotabuff.ui.presenter.IFollowFragmentPresenter;
 import cn.edu.mydotabuff.ui.presenter.impl.FollowFragmentPresenterImpl;
 import cn.edu.mydotabuff.ui.view.IFollowFragmentView;
@@ -92,19 +93,26 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
                     holder.setImageURI(R.id.sdv_user_icon, playerInfo.profile.avatar);
                     holder.setText(R.id.tv_player_name, playerInfo.profile.personaname);
                 }
-                if (match.lobby_type == LobbyType.LOBBY_TYPE_RANKED) {
-                    Rating rating = mPresenter.getRealm().where(Rating.class).equalTo("id", match.account_id + match.match_id).findFirst();
-                    if (rating != null && !TextUtils.isEmpty(rating.solo_competitive_rank)) {
-                        String mmr = rating.solo_competitive_rank;
-                        holder.setText(R.id.tv_mmr, mmr + Common.getMmrLevel(mmr));
-                    } else {
-                        holder.setText(R.id.tv_mmr, R.string.rank_level_unknow);
-                    }
-                }
+                //TODO 天梯分增减暂时看不到了
+//                if (match.lobby_type == LobbyType.LOBBY_TYPE_RANKED) {
+//                    Rating rating = mPresenter.getRealm().where(Rating.class).equalTo("id", match.account_id + match.match_id).findFirst();
+//                    if (rating != null && !TextUtils.isEmpty(rating.solo_competitive_rank)) {
+//                        String mmr = rating.solo_competitive_rank;
+//                        holder.setText(R.id.tv_mmr, mmr + Common.getMmrLevel(mmr));
+//                    } else {
+//                        holder.setText(R.id.tv_mmr, R.string.lobby_type_ranked);
+//                    }
+//                }
                 holder.setOnClickListener(R.id.sdv_user_icon, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         PlayerDetailActivity.start(mActivity, match.account_id);
+                    }
+                });
+                holder.setOnClickListener(R.id.sdv_hero_icon, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Utils.startHeroDetailActivity(mActivity, Common.getHeroName(match.hero_id));
                     }
                 });
             }
