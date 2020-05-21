@@ -17,5 +17,7 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
+    - name: chmod permission
+      run: chmod +x ./MyDotaBuff/gradlew
     - name: Build with Gradle
       run: ./MyDotaBuff/gradlew build
