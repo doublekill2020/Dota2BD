@@ -25,4 +25,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: app
-        path: ./MyDotaBuff/app/build/outputs/apk/debug/MyDotaBuff.apk
+        path: /home/runner/work/Dota2BD/MyDotaBuff/app/build/outputs/apk/baidu/debug/app-baidu-debug.apk
