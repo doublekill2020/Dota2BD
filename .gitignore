@@ -1,0 +1,6 @@
+build
+app.iml
+.idea
+.gradle/*
+.idea/*
+.idea/vcs.xml
