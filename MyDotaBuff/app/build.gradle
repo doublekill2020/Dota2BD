@@ -7,8 +7,8 @@ android {
     lintOptions {
         disable 'PrivateResource'
     }
-    compileSdkVersion 26
-    buildToolsVersion "27.0.3"
+    compileSdkVersion 29
+    buildToolsVersion "30-rc4"
 
     defaultConfig {
         applicationId "cn.edu.mydotabuff"
@@ -37,18 +37,18 @@ android {
         xiaomi {
             manifestPlaceholders = [UMENG_CHANNEL_VALUE: "xiaomi"]
         }
-        baidu {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "baidu"]
-        }
-        wandoujia {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "wandoujia"]
-        }
-        tencent {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "tencent"]
-        }
-        mumayi {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "mumayi"]
-        }
+//        baidu {
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "baidu"]
+//        }
+//        wandoujia {
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "wandoujia"]
+//        }
+//        tencent {
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "tencent"]
+//        }
+//        mumayi {
+//            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "mumayi"]
+//        }
     }
     lintOptions {
         checkReleaseBuilds false
@@ -62,7 +62,7 @@ repositories {
         url "https://oss.sonatype.org/content/repositories/snapshots"
     }
     maven {
-        url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo'
+        url 'https://github.com/WickeDev/stetho-realm/raw/master/maven-repo'
     }
     maven { url "https://jitpack.io" }
     mavenCentral()
@@ -114,7 +114,7 @@ dependencies {
 
     implementation 'com.orhanobut:logger:2.1.1'
     implementation 'com.facebook.stetho:stetho:1.5.0'
-    implementation 'com.uphyca:stetho_realm:2.1.0'
+    //implementation 'com.uphyca:stetho_realm:2.3.0'
     implementation 'com.umeng.analytics:analytics:latest.integration'
 
 }

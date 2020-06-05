@@ -25,7 +25,6 @@ import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
-import com.uphyca.stetho_realm.RealmInspectorModulesProvider;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -64,11 +63,11 @@ public class DotaApplication extends MultiDexApplication {
                 return BuildConfig.DEBUG;
             }
         });
-        Stetho.initialize(
-                Stetho.newInitializerBuilder(this)
-                        .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
-                        .enableWebKitInspector(RealmInspectorModulesProvider.builder(this).build())
-                        .build());
+//        Stetho.initialize(
+//                Stetho.newInitializerBuilder(this)
+//                        .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+//                        .enableWebKitInspector(RealmInspectorModulesProvider.builder(this).build())
+//                        .build());
         //LocationSDKManager.getInstance().addAndUse(new DefaultLocationImpl());
 
         //RongIM.init(this, "25wehl3uw6q5w", R.drawable.ic_launcher);
