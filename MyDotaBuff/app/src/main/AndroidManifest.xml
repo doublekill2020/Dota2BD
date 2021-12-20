@@ -88,9 +88,6 @@
             android:name="UMENG_APPKEY"
             android:value="52d4a57b56240b3518080289" />
         <meta-data
-            android:name="UMENG_CHANNEL"
-            android:value="${UMENG_CHANNEL_VALUE}" />
-        <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="2e137cae707b5e9b90c5d4c76356236e" />
 
