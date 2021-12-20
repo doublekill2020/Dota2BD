@@ -1,6 +1,8 @@
 package cn.edu.mydotabuff.ui.view.activity.impl;
 
+import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.InputType;
@@ -148,6 +150,9 @@ public class LoginActivity extends BaseActivity<ILoginPresenter> implements ILog
                 info.follow = true;
                 mPresenter.bindPlayer(info);
                 dialog.dismiss();
+                SharedPreferences myPreferences = getSharedPreferences(
+                        "user_info", Activity.MODE_PRIVATE);
+                myPreferences.edit().putString("userID",info.account_id).commit();
                 toOtherActivity(MainActivity.class);
                 finish();
             }

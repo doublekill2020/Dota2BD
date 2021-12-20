@@ -1,5 +1,8 @@
 package cn.edu.mydotabuff.ui.presenter.impl;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -111,6 +114,9 @@ public class LoginPresenterImpl extends BasePresenterImpl<ILoginView> implements
                                 info.follow = true;
                                 bindPlayer(info);
                                 mView.dismissLoadingDialog();
+                                SharedPreferences myPreferences = ((Context)mView).getSharedPreferences(
+                                        "user_info", Activity.MODE_PRIVATE);
+                                myPreferences.edit().putString("userID",info.account_id).commit();
                                 mView.EnterMainImmediately();
                             } else {
                                 mView.dismissLoadingDialog();

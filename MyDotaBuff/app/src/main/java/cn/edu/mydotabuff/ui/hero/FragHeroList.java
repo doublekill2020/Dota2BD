@@ -75,7 +75,7 @@ public class FragHeroList extends BaseFragment implements OnWebDataGetListener {
         } else {
             heroSatisticsList = (List<HerosSatistics>) DotaApplication
                     .getApplication().getData(LocalDataType.HERO_USED_LIST);
-            if (heroSatisticsList == null) {
+            if (heroSatisticsList == null || heroSatisticsList.size() == 0) {
                 WebDataHelper helper = new WebDataHelper(activity);
                 helper.setDataGetListener(this);
                 helper.getWebData(DataType.HERO, userID);
