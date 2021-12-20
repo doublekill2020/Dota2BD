@@ -20,6 +20,7 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -203,6 +204,10 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements IMainV
     class MainPageAdapter extends FragmentPagerAdapter {
 
         private String[] titles = new String[]{"关注", "英雄", "统计", "发现"};
+        private FollowFragment followFragment;
+        private FragHeroList fragHeroList;
+        private StatisticsFragment statisticsFragment;
+        private FragFound fragFound;
 
         public MainPageAdapter(FragmentManager fm) {
             super(fm);
@@ -212,13 +217,25 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements IMainV
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new FollowFragment();
+                    if(followFragment == null){
+                        followFragment = new FollowFragment();
+                    }
+                    return followFragment;
                 case 1:
-                    return new FragHeroList();
+                    if(fragHeroList == null){
+                        fragHeroList = new FragHeroList();
+                    }
+                    return fragHeroList;
                 case 2:
-                    return new StatisticsFragment();
+                    if(statisticsFragment == null){
+                        statisticsFragment = new StatisticsFragment();
+                    }
+                    return statisticsFragment;
                 case 3:
-                    return new FragFound();
+                    if (fragFound == null){
+                        fragFound = new FragFound();
+                    }
+                    return fragFound;
                 default:
                     return null;
             }
@@ -227,6 +244,11 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements IMainV
         @Override
         public int getCount() {
             return titles.length;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            super.destroyItem(container, position, object);
         }
 
         @Override

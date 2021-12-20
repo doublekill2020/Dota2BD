@@ -19,8 +19,6 @@ public class MatchService {
 
     public static void getMatches(final String accountId, int offset) {
         OpenDotaApi.getService().getMatches(accountId, DotaDefaultConfig.DEFAULT_PAGE_LIMIT, offset)
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(Schedulers.io())
                 .map(new Func1<List<Match>, List<Match>>() {
                     @Override
                     public List<Match> call(List<Match> matches) {

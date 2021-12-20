@@ -87,6 +87,9 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
                     holder.setTextColor(R.id.tv_game_status, R.color.my_orange);
                 }
                 holder.setText(R.id.tv_mmr, Common.getLobbyTypeName(match.lobby_type));
+                if(mPresenter.getPlayerInfoMap() == null){
+                    return;
+                }
                 PlayerInfo playerInfo = mPresenter.getPlayerInfoMap().get(match.account_id);
                 if (playerInfo != null) {
                     holder.setImageURI(R.id.sdv_user_icon, playerInfo.profile.avatar);
