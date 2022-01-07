@@ -10,6 +10,7 @@ import java.util.List;
 import cn.edu.mydotabuff.base.OpenDotaApi;
 import cn.edu.mydotabuff.base.RxCallBackEvent;
 import cn.edu.mydotabuff.common.EventTag;
+import cn.edu.mydotabuff.model.PlayedWithWrapper;
 import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.model.PlayerWL;
 import cn.edu.mydotabuff.model.Rating;
@@ -36,7 +37,7 @@ public class PlayerInfoService {
                 .map(new Func1<List<Rating>, Boolean>() {
                     @Override
                     public Boolean call(List<Rating> ratings) {
-                        Log.i("getPlayerRating", ThreadUtils.isMainThread()+"");
+                        Log.i("getPlayerRating", ThreadUtils.isMainThread() + "");
                         Realm realm = Realm.getDefaultInstance();
                         try {
                             realm.beginTransaction();
@@ -118,5 +119,30 @@ public class PlayerInfoService {
 
     public static PlayerInfo querySinglePlayerInfo(Realm realm, String accountId) {
         return realm.where(PlayerInfo.class).equalTo("account_id", accountId).findFirst();
+    }
+
+    public static void getPlayedWithInfo(final String accountId) {
+        final RxCallBackEvent event = new RxCallBackEvent();
+        event.tag = EventTag.GET_PLAYED_WITH_INFO;
+        OpenDotaApi.getService().getPlayedWithInfo(accountId, 3000)
+                .map(new Func1<List<PlayedWithWrapper>, Boolean>() {
+                    @Override
+                    public Boolean call(List<PlayedWithWrapper> infos) {
+                        if (infos != null && infos.size() > 0) {
+                            event.data = infos;
+                            return true;
+                        }
+                        return false;
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<Boolean>() {
+                    @Override
+                    public void call(Boolean aBoolean) {
+                        event.success = aBoolean;
+                        RxBus.get().post(event);
+                    }
+                });
     }
 }

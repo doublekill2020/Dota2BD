@@ -112,4 +112,5 @@
     <dimen name="sp_18">18sp</dimen>
 
     <dimen name="text_size_9">9sp</dimen>
+    <dimen name="divider_height">1px</dimen>
 </resources>

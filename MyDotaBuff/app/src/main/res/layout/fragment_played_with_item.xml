@@ -3,6 +3,7 @@
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@drawable/umeng_socialize_shareboard_item_background"
     android:padding="@dimen/dp_8">
@@ -15,12 +16,27 @@
         android:layout_centerVertical="true"
         fresco:roundAsCircle="true" />
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/sdv_hero_icon"
-        android:layout_width="@dimen/dp_74"
-        android:layout_height="@dimen/dp_42"
+    <TextView
+        android:id="@+id/tvNick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true" />
+        android:textColor="@color/red"
+        android:textSize="28sp"
+        tools:text="caiji" />
+
+    <TextView
+        android:id="@+id/tvMMR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvNick"
+        android:layout_alignLeft="@id/tvNick"
+        android:layout_alignRight="@id/tvNick"
+        android:gravity="center"
+        android:lines="1"
+        android:textSize="@dimen/sp_12"
+        tools:text="+30"
+        tools:textColor="@color/black"></TextView>
 
     <TextView
         android:id="@+id/tv_player_name"
@@ -29,51 +45,71 @@
         android:layout_alignTop="@id/sdv_user_icon"
         android:layout_marginLeft="@dimen/dp_8"
         android:layout_marginTop="@dimen/dp_4"
-        android:layout_toEndOf="@+id/sdv_user_icon"
-        android:layout_toLeftOf="@+id/tv1"
-        android:layout_toRightOf="@+id/sdv_user_icon"
         android:layout_toStartOf="@+id/tv1"
+        android:layout_toLeftOf="@+id/tv1"
+        android:layout_toEndOf="@+id/sdv_user_icon"
+        android:layout_toRightOf="@+id/sdv_user_icon"
+        android:lines="1"
         android:text="user_name"
         android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/tv_game_status"
-        android:layout_width="wrap_content"
+        android:layout_width="1dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_player_name"
-        android:layout_marginTop="@dimen/dp_8"
         android:layout_marginLeft="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_8"
         android:layout_toRightOf="@id/sdv_user_icon"
         android:text="胜利" />
+
+    <TextView
+        android:id="@+id/tvSteamID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tv_game_status"
+        android:layout_toRightOf="@id/tv_game_status"
+        android:text="172750452"
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/tv_game_status"
-        android:layout_marginLeft="@dimen/dp_8"
-        android:layout_toRightOf="@id/tv_game_status"
+        android:layout_below="@id/tvSteamID"
+        android:layout_alignLeft="@id/tvSteamID"
+        android:layout_toRightOf="@id/sdv_user_icon"
         android:text="2小时前"
         android:textColor="@color/black" />
 
+    <TextView
+        android:layout_below="@id/tv2"
+        android:gravity="right"
+        android:layout_alignRight="@id/tv2"
+        android:id="@+id/tvTips"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_time"
+        tools:text="建议拉黑"
+        tools:textColor="@color/black"></TextView>
     <TextView
         android:id="@+id/tv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/tv_player_name"
         android:layout_marginRight="@dimen/dp_8"
-        android:layout_toLeftOf="@id/sdv_hero_icon"
+        android:layout_toLeftOf="@id/tvNick"
         android:text="4000(VH)"
         android:textColor="@color/black" />
 
     <TextView
-        android:id="@+id/tv_kda"
+        android:id="@+id/tv2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv1"
-        android:layout_marginRight="@dimen/dp_8"
         android:layout_marginTop="@dimen/dp_8"
-        android:layout_toLeftOf="@id/sdv_hero_icon"
+        android:layout_marginRight="@dimen/dp_8"
+        android:layout_toLeftOf="@id/tvNick"
         android:text="4/4/4"
         android:textColor="@color/black" />
 </RelativeLayout>

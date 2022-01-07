@@ -78,7 +78,7 @@ public class RecentMatchFragment extends BaseFragment<IRecentMatchPresenter> imp
                     holder.setText(R.id.tv_game_status, R.string.match_result_lose);
                     holder.setTextColor(R.id.tv_game_status, R.color.my_orange);
                 }
-                holder.setText(R.id.tv_mmr, Common.getLobbyTypeName(match.lobby_type));
+                holder.setText(R.id.tv1, Common.getLobbyTypeName(match.lobby_type));
                 holder.setImageURI(R.id.sdv_user_icon, mPlayerInfo.profile.avatar);
                 holder.setText(R.id.tv_player_name, mPlayerInfo.profile.personaname);
                 if (match.lobby_type == LobbyType.LOBBY_TYPE_RANKED) {
@@ -86,9 +86,9 @@ public class RecentMatchFragment extends BaseFragment<IRecentMatchPresenter> imp
                             .account_id + match.match_id).findFirst();
                     if (rating != null && !TextUtils.isEmpty(rating.solo_competitive_rank)) {
                         String mmr = rating.solo_competitive_rank;
-                        holder.setText(R.id.tv_mmr, mmr + Common.getMmrLevel(mmr));
+                        holder.setText(R.id.tv1, mmr + Common.getMmrLevel(mmr));
                     } else {
-                        holder.setText(R.id.tv_mmr, R.string.rank_level_unknow);
+                        holder.setText(R.id.tv1, R.string.rank_level_unknow);
                     }
                 }
             }

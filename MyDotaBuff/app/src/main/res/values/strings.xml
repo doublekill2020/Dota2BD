@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Dota2数据通</string>
+    <string name="app_name">Dota2谁最菜</string>
     <string name="dlg_content">使用此app，必须在游戏中共享比赛历史。\n第一次使用，请输入数字id：</string>
-    <string name="share_content">【Dota2数据通】全方位的dota2战绩查询分析app，你也来体验一下吧~</string>
+    <string name="share_content">【Dota2谁最菜】全方位的dota2战绩查询分析app，你也来体验一下吧~</string>
     <string name="last_login_time">上次在线： %1$s</string>
     <string name="action_bar_search">搜索</string>
 
@@ -462,4 +462,14 @@
     <string name="anonymous_player">匿名玩家</string>
     <string name="load_loading">加载中,请稍后...</string>
 
+    <string name="played_with_tips">队友:胜%1$d负%2$d，胜率%3$s</string>
+    <string name="played_with_tips2">对手:胜%1$d负%2$d，胜率%3$s</string>
+    <string name="played_with_god">大神</string>
+    <string name="played_with_sb">菜鸡</string>
+    <string name="played_with_none">白打</string>
+    <string name="no_more_data">没有数据</string>
+    <string name="mmr">天梯</string>
+    <string name="tips_add_friend">建议加波好友</string>
+    <string name="tips_delete">建议PLUS拉黑</string>
+    <string name="function_in_progress">正在开发，别着急呀</string>
 </resources>

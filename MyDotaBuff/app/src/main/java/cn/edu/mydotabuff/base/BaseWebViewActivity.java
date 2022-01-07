@@ -33,16 +33,21 @@ public class BaseWebViewActivity extends BaseActivity {
     private WebChromeClient.CustomViewCallback xCustomViewCallback;
     private static final String APP_CACAHE_DIRNAME = "/webcache";
     private String url;
+    private static final String LOAD_FROM_ASSERTS = "LOAD_FROM_ASSERTS";
+    private boolean isLoadFromAsserts = false;
+    private static final String WEB_TITLE = "WEB_TITLE";
+    private String title = DotaApplication.getApplication().getString(R.string.app_name);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.common_webview_base);
-        getSupportActionBar().setTitle("刀塔新闻");
+        getSupportActionBar().setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         url = getIntent().getStringExtra("url");
+        isLoadFromAsserts = getIntent().getBooleanExtra(LOAD_FROM_ASSERTS,false);
         initWebView();
         videoWebView.loadUrl(url);
     }

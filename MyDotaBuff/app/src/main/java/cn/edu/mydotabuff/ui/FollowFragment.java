@@ -86,7 +86,7 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
                     holder.setText(R.id.tv_game_status, R.string.match_result_lose);
                     holder.setTextColor(R.id.tv_game_status, R.color.my_orange);
                 }
-                holder.setText(R.id.tv_mmr, Common.getLobbyTypeName(match.lobby_type));
+                holder.setText(R.id.tv1, Common.getLobbyTypeName(match.lobby_type));
                 if(mPresenter.getPlayerInfoMap() == null){
                     return;
                 }
@@ -99,9 +99,9 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
                     Rating rating = mPresenter.getRealm().where(Rating.class).equalTo("id", match.account_id + match.match_id).findFirst();
                     if (rating != null && !TextUtils.isEmpty(rating.solo_competitive_rank)) {
                         String mmr = rating.solo_competitive_rank;
-                        holder.setText(R.id.tv_mmr, mmr + Common.getMmrLevel(mmr));
+                        holder.setText(R.id.tv1, mmr + Common.getMmrLevel(mmr));
                     } else {
-                        holder.setText(R.id.tv_mmr, R.string.rank_level_unknow);
+                        holder.setText(R.id.tv1, R.string.rank_level_unknow);
                     }
                 }
                 holder.setOnClickListener(R.id.sdv_user_icon, new View.OnClickListener() {

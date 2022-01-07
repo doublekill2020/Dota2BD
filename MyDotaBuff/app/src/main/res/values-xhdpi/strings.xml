@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Dota2数据通</string>
+    <string name="app_name">Dota2谁最菜</string>
 
     <!-- 主界面 -->
     <string name="tab1">关注</string>

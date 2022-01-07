@@ -9,4 +9,7 @@ public class EventTag {
     public static final int GET_PLAYER_RATING = 2;
     public static final int CLICK_TO_HERO_DETAIL = 3;
     public static final int PLAYER_DETAIL_CLICK_TO_MATCH_DETAIL = 4;
+    public static final int GET_PLAYED_WITH_INFO = 5;
+    public static final int GET_PLAYER_INFO_FROM_PLAYED = 6;
+    public static final int GET_PLAYER_INFO_SUCCESS = 7;
 }

@@ -102,7 +102,8 @@ public class PlayerDetailActivity extends BaseActivity<IPlayerDetailPresenter> i
 
     class PlayerDetailPageAdapter extends FragmentPagerAdapter {
 
-        private String[] titles = new String[]{"战绩", "英雄", "好友", "统计"};
+        private String[] titles = new String[]{"战绩", "好友"};
+        //private String[] titles = new String[]{"战绩", "英雄", "好友", "统计"};
 
         public PlayerDetailPageAdapter(FragmentManager fm) {
             super(fm);
@@ -114,11 +115,7 @@ public class PlayerDetailActivity extends BaseActivity<IPlayerDetailPresenter> i
                 case 0:
                     return RecentMatchFragment.newInstance(mPlayerInfo);
                 case 1:
-                    return HeroFragment.newInstance(mPlayerInfo);
-                case 2:
                     return FriendFragment.newInstance(mPlayerInfo);
-                case 3:
-                    return StatisticsFragment.newInstance(mPlayerInfo);
                 default:
                     return null;
             }

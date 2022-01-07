@@ -17,6 +17,7 @@ import cn.edu.mydotabuff.common.http.APIConstants;
 import cn.edu.mydotabuff.model.Hero;
 import cn.edu.mydotabuff.model.Match;
 import cn.edu.mydotabuff.model.MatchDetail;
+import cn.edu.mydotabuff.model.PlayedWithWrapper;
 import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.model.PlayerWL;
 import cn.edu.mydotabuff.model.Rating;
@@ -141,6 +142,9 @@ public class OpenDotaApi {
                                            @Query("limit") int limit,
                                            @Query("offset") int offset);
 
+        @GET("players/{account_id}/peers")
+        Observable<List<PlayedWithWrapper>> getPlayedWithInfo(@Path("account_id") String accountId,
+                                                              @Query("limit") int limit);
     }
 
     public interface Dota2NewsService {

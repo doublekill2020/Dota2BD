@@ -1,6 +1,5 @@
 package cn.edu.mydotabuff.base;
 
-import android.content.res.ColorStateList;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,7 +12,6 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.hwangjr.rxbus.RxBus;
 
 import cn.edu.mydotabuff.DotaApplication;
-import cn.edu.mydotabuff.R;
 
 /**
  * //                              _oo0oo_
@@ -81,7 +79,8 @@ public class BaseListHolder extends RecyclerView.ViewHolder {
         TextView view = findViewById(viewId);
         view.setText(text);
     }
-    public void setText(int viewId,int resId){
+
+    public void setText(int viewId, int resId) {
         TextView view = findViewById(viewId);
         view.setText(resId);
     }
@@ -155,5 +154,11 @@ public class BaseListHolder extends RecyclerView.ViewHolder {
     public void setClickable(int viewId, boolean clickable) {
         View v = findViewById(viewId);
         v.setClickable(false);
+    }
+
+    public void setRootOnClickerListener(View.OnClickListener listener) {
+        if (listener != null) {
+            itemView.setOnClickListener(listener);
+        }
     }
 }

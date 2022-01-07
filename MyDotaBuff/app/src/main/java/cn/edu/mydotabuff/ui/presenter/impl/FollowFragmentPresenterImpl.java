@@ -81,6 +81,10 @@ public class FollowFragmentPresenterImpl extends BasePresenterImpl<IFollowFragme
         for (PlayerInfo playerInfo : mRealm.copyFromRealm(mPlayerInfos)) {
             mPlayerInfoMap.put(playerInfo.account_id, playerInfo);
         }
+        RxCallBackEvent<Map<String,PlayerInfo>> event = new RxCallBackEvent();
+        event.tag = EventTag.GET_PLAYER_INFO_SUCCESS;
+        event.data = mPlayerInfoMap;
+        RxBus.get().post(event);
     }
 
     @Subscribe

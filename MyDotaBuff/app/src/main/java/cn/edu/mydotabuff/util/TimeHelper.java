@@ -791,6 +791,9 @@ public class TimeHelper {
 
     }
 
+    public static String convertTimeToFormat(Date date){
+        return convertTimeToFormat(date.getTime());
+    }
     /**
      * 将一个时间戳转换成提示性时间字符串，如刚刚，1秒前
      *
