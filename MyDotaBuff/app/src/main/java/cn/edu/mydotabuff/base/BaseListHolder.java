@@ -167,17 +167,17 @@ public class BaseListHolder extends RecyclerView.ViewHolder {
 
     public void loadImageWithGlide(Context context,int viewId, String url) {
         ImageView view = findViewById(viewId);
-        view.setImageURI(Uri.parse(url));
+        //view.setImageURI(Uri.parse(url));
         Glide.with(context)
-                .load(url)
+                .load(Uri.parse(url))
                 .into(view);
     }
 
     public void loadImageWithGlideCenterCrop(Context context,int viewId, String url) {
         ImageView view = findViewById(viewId);
-        view.setImageURI(Uri.parse(url));
+        //view.setImageURI(Uri.parse(url));
         Glide.with(context)
-                .load(url)
+                .load(Uri.parse(url))
                 .centerCrop()
                 .transform(new GlideCircleTransform(context))
                 .into(view);

@@ -84,8 +84,6 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
                         R.id.sdv_hero_icon,
                         Utils.getHeroImageUriForGlide(Common.getHeroName
                                 (match.hero_id)));
-                Log.i("hao","index="+pos+Utils.getHeroImageUriForFresco(Common.getHeroName
-                        (match.hero_id)));
                 holder.setText(R.id.tv_kda, match.kills + "/" + match.deaths + "/" + match.assists);
                 holder.setText(R.id.tv_time, TimeHelper.convertTimeToFormat(match.start_time));
                 if (Common.getMatchResult(match.player_slot, match.radiant_win)) {
