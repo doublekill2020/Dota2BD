@@ -13,8 +13,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.bumptech.glide.Glide;
+
 
 /**
  * 推荐使用英雄 Adapter
@@ -27,16 +27,15 @@ public final class HeroImagesAdapter extends BaseAdapter {
         public ImageView image;
     }
 
-    private final DisplayImageOptions mImageLoadOptions;
     private final LayoutInflater mInflater;
     private final List<HeroItem> mComponents;
+    private Context context;
 
-    public HeroImagesAdapter(Context context, DisplayImageOptions imageLoadOptions,
-            List<HeroItem> items) {
+    public HeroImagesAdapter(Context context, List<HeroItem> items) {
         super();
 
+        this.context = context;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mImageLoadOptions = imageLoadOptions;
         mComponents = items;
     }
 
@@ -73,8 +72,7 @@ public final class HeroImagesAdapter extends BaseAdapter {
         }
 
         final HeroItem item = (HeroItem) getItem(position);
-        ImageLoader.getInstance().displayImage(Utils.getHeroImageUri(item.keyName),
-                holder.image, mImageLoadOptions);
+        Glide.with(context).load(Utils.getHeroImageUriForGlide(item.keyName)).into(holder.image);
         holder.text.setText(item.name_l);
 
         return view;

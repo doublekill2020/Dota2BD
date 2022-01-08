@@ -8,9 +8,9 @@ import org.json2.JSONException;
 
 import cn.edu.mydotabuff.util.Utils;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,6 +21,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+
 import cn.edu.mydotabuff.DataManager;
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.model.PlayerDetailBean;
@@ -32,8 +35,8 @@ import cn.edu.mydotabuff.view.TipsToast.DialogType;
 public class ActMatchDetailItemAdapter extends BaseAdapter {
 	private Activity _caller;
 	private final ArrayList<PlayerDetailBean> _beans;
-	private ImageLoader loader;
 	private int num[] = new int[8];
+	private Context context;
 
 	private ArrayList<String> moreList = new ArrayList<String>();
 
@@ -41,7 +44,6 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 			ArrayList<PlayerDetailBean> beans, int num[]) {
 		_caller = caller;
 		_beans = beans;
-		loader = ImageLoader.getInstance();
 		this.num = num;
 	}
 
@@ -66,6 +68,7 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
+		context = parent.getContext();
 		final ViewHolder holder;
 		if (convertView == null) {
 			convertView = _caller.getLayoutInflater().inflate(
@@ -121,24 +124,24 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 		holder.kill.setText(" " + bean.getKills());
 		holder.death.setText(" " + bean.getDeaths());
 		holder.assist.setText(" " + bean.getAssists());
-		loader.displayImage(
-				Utils.getItemsImageUri(Common.getItemName(bean.getItem_0())),
-				holder.h[1]);
-		loader.displayImage(
-				Utils.getItemsImageUri(Common.getItemName(bean.getItem_1())),
-				holder.h[2]);
-		loader.displayImage(
-				Utils.getItemsImageUri(Common.getItemName(bean.getItem_2())),
-				holder.h[3]);
-		loader.displayImage(
-				Utils.getItemsImageUri(Common.getItemName(bean.getItem_3())),
-				holder.h[4]);
-		loader.displayImage(
-				Utils.getItemsImageUri(Common.getItemName(bean.getItem_4())),
-				holder.h[5]);
-		loader.displayImage(
-				Utils.getItemsImageUri(Common.getItemName(bean.getItem_5())),
-				holder.h[6]);
+		Glide.with(convertView.getContext())
+				.load(Utils.getItemsImageUriGlide(Common.getItemName(bean.getItem_0())))
+				.into(holder.h[1]);
+		Glide.with(convertView.getContext())
+				.load(Utils.getItemsImageUriGlide(Common.getItemName(bean.getItem_0())))
+				.into(holder.h[2]);
+		Glide.with(convertView.getContext())
+				.load(Utils.getItemsImageUriGlide(Common.getItemName(bean.getItem_0())))
+				.into(holder.h[3]);
+		Glide.with(convertView.getContext())
+				.load(Utils.getItemsImageUriGlide(Common.getItemName(bean.getItem_0())))
+				.into(holder.h[4]);
+		Glide.with(convertView.getContext())
+				.load(Utils.getItemsImageUriGlide(Common.getItemName(bean.getItem_0())))
+				.into(holder.h[5]);
+		Glide.with(convertView.getContext())
+				.load(Utils.getItemsImageUriGlide(Common.getItemName(bean.getItem_0())))
+				.into(holder.h[6]);
 		// Common.setItemIcon(convertView.getContext(), bean.getItem_0(),
 		// holder.h[1]);
 		// Common.setItemIcon(convertView.getContext(), bean.getItem_1(),
@@ -287,8 +290,8 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 				}
 			}
 		});
-		loader.displayImage(bean.getPlayerInfoBeans().getMediumIcon(),
-				holder.icon);
+		Glide.with(convertView.getContext()).load(bean.getPlayerInfoBeans().getMediumIcon())
+				.into(holder.icon);
 		if (position == 0) {
 			holder.tipView.setVisibility(View.VISIBLE);
 			holder.label.setBackgroundDrawable(_caller.getResources()
@@ -382,9 +385,9 @@ public class ActMatchDetailItemAdapter extends BaseAdapter {
 		holder.txView[3].setText("英雄治疗:" + bean.getHero_healing());
 		holder.txView[4].setText("对建筑伤害:" + bean.getTower_damage());
 		holder.txView[5].setText("xp/min:" + bean.getXp_per_min());
-		loader.displayImage(
-				Utils.getHeroImageUri(Common.getHeroName(bean.getHero_id())),
-				holder.heroIcon);
+		Glide.with(context)
+				.load(Utils.getHeroImageUriForGlide(Common.getHeroName(bean.getHero_id())))
+				.into(holder.heroIcon);
 		if (isShowAnimation) {
 			Animation animation = AnimationUtils.loadAnimation(_caller,
 					R.anim.listview_moreview_show);

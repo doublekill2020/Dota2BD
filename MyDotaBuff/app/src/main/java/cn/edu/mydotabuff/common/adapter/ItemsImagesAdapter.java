@@ -13,8 +13,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.bumptech.glide.Glide;
+
 
 /**
  * 物品 Adapter
@@ -28,16 +28,13 @@ public final class ItemsImagesAdapter extends BaseAdapter {
         public ImageView image;
     }
 
-    private final DisplayImageOptions mImageLoadOptions;
     private final LayoutInflater mInflater;
     private final List<ItemsItem> mComponents;
 
-    public ItemsImagesAdapter(Context context, DisplayImageOptions imageLoadOptions,
-            List<ItemsItem> items) {
+    public ItemsImagesAdapter(Context context,List<ItemsItem> items) {
         super();
 
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mImageLoadOptions = imageLoadOptions;
         mComponents = items;
     }
 
@@ -76,8 +73,9 @@ public final class ItemsImagesAdapter extends BaseAdapter {
 
         if (holder != null) {
             final ItemsItem item = (ItemsItem) getItem(position);
-            ImageLoader.getInstance().displayImage(Utils.getItemsImageUri(item.keyName),
-                    holder.image, mImageLoadOptions);
+            Glide.with(convertView.getContext())
+                    .load(Utils.getItemsImageUriGlide(item.keyName))
+                    .into(holder.image);
             holder.name.setText(item.dname_l);
             holder.cost.setText(String.valueOf(item.cost));
         }

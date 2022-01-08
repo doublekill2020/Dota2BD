@@ -15,8 +15,7 @@ import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
+import com.bumptech.glide.Glide;
 
 import org.json2.JSONException;
 
@@ -80,7 +79,6 @@ public class ItemsDetailActivityAppCompat extends AppCompatFragmentActivity {
     public static class ItemsDetailFragment extends Fragment implements
             SimpleGridView.OnItemClickListener {
 
-        private DisplayImageOptions mImageLoadOptions;
         private ItemsItem mItemsItem;
         private MenuItem mMenuCheckAddCollection;
 
@@ -112,7 +110,6 @@ public class ItemsDetailActivityAppCompat extends AppCompatFragmentActivity {
             super.onCreate(savedInstanceState);
 
             setHasOptionsMenu(true);
-            mImageLoadOptions = Utils.createDisplayImageOptions();
 
             final Bundle arg = this.getArguments();
             final String items_keyName = arg
@@ -195,7 +192,7 @@ public class ItemsDetailActivityAppCompat extends AppCompatFragmentActivity {
             }
             cContext.setTitle(cItem.dname_l);
             final View v = this.getView();
-            bindItemsItemSimpleView(v, cItem, mImageLoadOptions);
+            bindItemsItemSimpleView(v, cItem);
 
             // 合成卷轴处理
             if (cItem.isrecipe) {
@@ -236,7 +233,7 @@ public class ItemsDetailActivityAppCompat extends AppCompatFragmentActivity {
             // components
             if (cItem.components != null && cItem.components.length > 0) {
                 final ItemsImagesAdapter adapter = new ItemsImagesAdapter(
-                        cContext, mImageLoadOptions, cItem.components_i);
+                        cContext, cItem.components_i);
 
                 final SimpleGridView grid = (SimpleGridView) v
                         .findViewById(R.id.grid_items_components);
@@ -249,7 +246,7 @@ public class ItemsDetailActivityAppCompat extends AppCompatFragmentActivity {
             // tocomponents
             if (cItem.tocomponents != null && cItem.tocomponents.length > 0) {
                 final ItemsImagesAdapter adapter = new ItemsImagesAdapter(
-                        cContext, mImageLoadOptions, cItem.tocomponents_i);
+                        cContext, cItem.tocomponents_i);
 
                 final SimpleGridView grid = (SimpleGridView) v
                         .findViewById(R.id.grid_items_tocomponents);
@@ -262,7 +259,7 @@ public class ItemsDetailActivityAppCompat extends AppCompatFragmentActivity {
             // toheros
             if (cItem.toheros != null && cItem.toheros.length > 0) {
                 final HeroImagesAdapter adapter = new HeroImagesAdapter(
-                        cContext, mImageLoadOptions, cItem.toheros_i);
+                        cContext, cItem.toheros_i);
                 final SimpleGridView grid = (SimpleGridView) v
                         .findViewById(R.id.grid_items_toheros);
                 grid.setAdapter(adapter);
@@ -280,17 +277,15 @@ public class ItemsDetailActivityAppCompat extends AppCompatFragmentActivity {
          * @param cItem
          * @param cImageLoadOptions
          */
-        public static void bindItemsItemSimpleView(final View v,
-                                                   final ItemsItem cItem,
-                                                   final DisplayImageOptions cImageLoadOptions) {
-            if (v == null || cItem == null || cImageLoadOptions == null) {
+        public void bindItemsItemSimpleView(final View v,
+                                            final ItemsItem cItem) {
+            if (v == null || cItem == null) {
                 return;
             }
 
-            ImageLoader.getInstance().displayImage(
-                    Utils.getItemsImageUri(cItem.keyName),
-                    ((ImageView) v.findViewById(R.id.image_items)),
-                    cImageLoadOptions);
+            Glide.with(ItemsDetailFragment.this)
+                    .load(Utils.getItemsImageUriGlide(cItem.keyName))
+                    .into((ImageView) v.findViewById(R.id.image_items));
 
             ((TextView) v.findViewById(R.id.text_items_dname))
                     .setText(cItem.dname);

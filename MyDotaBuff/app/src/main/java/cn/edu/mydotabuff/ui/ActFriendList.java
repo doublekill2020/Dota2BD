@@ -9,7 +9,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
+
+import com.bumptech.glide.Glide;
 
 import org.json2.JSONArray;
 import org.json2.JSONException;
@@ -142,8 +143,9 @@ public class ActFriendList extends BaseActivity {
                                                     R.color.my_orange));
                                 }
                                 CircleImageView icon = helper.getView(R.id.icon);
-                                ImageLoader.getInstance().displayImage(
-                                        item.getMediumIcon(), icon);
+                                Glide.with(ActFriendList.this)
+                                        .load(item.getMediumIcon())
+                                        .into(icon);
                             }
                         };
                         list.setAdapter(adapter);

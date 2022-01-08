@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.WeakHashMap;
 
@@ -20,11 +19,9 @@ public class CommViewHolder {
     private WeakHashMap<Integer, View> mViews;
     private int mPosition;
     private View mConvertView;
-    private ImageLoader loader;
 
     private CommViewHolder(Context context, ViewGroup parent, int layoutId,
                            int position) {
-        loader = ImageLoader.getInstance();
         this.mPosition = position;
         this.mViews = new WeakHashMap<Integer, View>();
         mConvertView = LayoutInflater.from(context).inflate(layoutId, parent,
@@ -120,7 +117,6 @@ public class CommViewHolder {
      * 为ImageView设置图片
      *
      * @param viewId
-     * @param drawableId
      * @return
      */
     public CommViewHolder setImageBitmap(int viewId, Bitmap bm) {
@@ -144,22 +140,6 @@ public class CommViewHolder {
         // TODO Auto-generated method stub
         TextView view = getView(viewId);
         view.setBackgroundColor(color);
-        return this;
-    }
-
-    /**
-     * 为ImageView设置网络图片
-     *
-     * @param type 1为RoundAngleImageView 2为CircleImageView
-     */
-    public CommViewHolder setImageFromWeb(int viewId, String url, int type) {
-        if (type == 1) {
-            RoundAngleImageView view = getView(viewId);
-            loader.displayImage(url, view);
-        } else if (type == 2) {
-            CircleImageView view = getView(viewId);
-            loader.displayImage(url, view);
-        }
         return this;
     }
 

@@ -33,7 +33,6 @@ import cn.edu.mydotabuff.model.ItemsItem;
 import cn.edu.mydotabuff.ui.hero.HeroDetailActivityAppCompat;
 import cn.edu.mydotabuff.ui.item.ItemsDetailActivityAppCompat;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
 /**
  * TrackUtils
@@ -51,7 +50,8 @@ public final class Utils {
 	// "assets://heroes_icons/%s_icon.jpg";
 	private final static String s_AbilitiesImage_Format = "assets://abilities_images/%s_hp1.jpg";
 	private final static String s_HeroImage_Format_Glide = "file:///android_asset/heroes_images/%s_full.jpg";
-
+	private final static String s_ItemsImage_Format_Glide = "file:///android_asset/items_images/%s_lg.jpg";
+	private final static String s_AbilitiesImage_Format_Glide = "file:///android_asset/abilities_images/%s_hp1.jpg";
 	/**
 	 * get Hero image url
 	 * 
@@ -144,6 +144,10 @@ public final class Utils {
 		return String.format(s_ItemsImage_Format_Fresco, keyName);
 	}
 
+	public static String getItemsImageUriGlide(String keyName) {
+		return String.format(s_ItemsImage_Format_Glide, keyName);
+	}
+
 	/**
 	 * 
 	 * @param keyName
@@ -153,6 +157,9 @@ public final class Utils {
 		return String.format(s_AbilitiesImage_Format, keyName);
 	}
 
+	public static String getAbilitiesImageUriGlide(String keyName) {
+		return String.format(s_AbilitiesImage_Format, keyName);
+	}
 	/**
 	 * 
 	 * @param menu
@@ -275,17 +282,6 @@ public final class Utils {
 		if (fm.findFragmentById(android.R.id.content) == null) {
 			fm.beginTransaction().add(R.id.content, cFragment).commit();
 		}
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public static DisplayImageOptions createDisplayImageOptions() {
-		return new DisplayImageOptions.Builder()
-				.showStubImage(R.drawable.abs__progress_medium_holo)
-				.showImageForEmptyUri(R.drawable.hero_for_empty_url)
-				.cacheInMemory().build();
 	}
 
 	/**

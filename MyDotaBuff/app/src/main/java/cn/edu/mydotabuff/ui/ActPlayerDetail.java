@@ -8,7 +8,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
+
+import com.bumptech.glide.Glide;
 
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseActivity;
@@ -25,7 +26,6 @@ import cn.edu.mydotabuff.view.TipsToast.DialogType;
 public class ActPlayerDetail extends BaseActivity implements
         OnWebDataGetListener {
     private TextView nameView, statusView, timeView, loginView;
-    private ImageLoader loader;
     private PlayerInfoBean bean;
     private WebDataHelper helper;
     private LoadingDialog dialog;
@@ -51,7 +51,6 @@ public class ActPlayerDetail extends BaseActivity implements
         winNum = (TextView) findViewById(R.id.most_win_num);
         loseNum = (TextView) findViewById(R.id.most_lose_num);
         iconView = (CircleImageView) findViewById(R.id.myinfrom_up_img);
-        loader = ImageLoader.getInstance();
         dialog = new LoadingDialog(this);
         bean = (PlayerInfoBean) getIntent().getSerializableExtra("data");
 
@@ -77,7 +76,7 @@ public class ActPlayerDetail extends BaseActivity implements
                 "yyyy-MM-dd HH:mm"));
         loginView.setText(TimeHelper.TimeStamp2Date(bean.getLastlogooff(),
                 "yyyy-MM-dd HH:mm"));
-        loader.displayImage(bean.getMediumIcon(), iconView);
+        Glide.with(this).load(bean.getMediumIcon()).into(iconView);
         winNum.setText(bean.getWinStreak() + "场");
         loseNum.setText(bean.getLoseStreak() + "场");
         dialog.dismiss();

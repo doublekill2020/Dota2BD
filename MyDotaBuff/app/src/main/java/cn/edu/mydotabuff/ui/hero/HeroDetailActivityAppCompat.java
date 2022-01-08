@@ -24,8 +24,8 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
+
+import com.bumptech.glide.Glide;
 
 import org.json2.JSONException;
 
@@ -87,7 +87,6 @@ public class HeroDetailActivityAppCompat extends AppCompatFragmentActivity {
     public static class HeroDetailFragment extends Fragment
             implements SimpleGridView.OnItemClickListener {
 
-        private DisplayImageOptions mImageLoadOptions;
         private HeroDetailItem mHeroDetailItem;
         private MenuItem mMenuCheckAddCollection;
 
@@ -109,7 +108,6 @@ public class HeroDetailActivityAppCompat extends AppCompatFragmentActivity {
             super.onCreate(savedInstanceState);
 
             setHasOptionsMenu(true);
-            mImageLoadOptions = Utils.createDisplayImageOptions();
 
             final String hero_keyName = this.getArguments()
                     .getString(KEY_HERO_DETAIL_KEY_NAME);
@@ -199,7 +197,7 @@ public class HeroDetailActivityAppCompat extends AppCompatFragmentActivity {
             cContext.setTitle(cItem.name_l);
 
             final View v = this.getView();
-            bindHeroItemSimpleView(v, cItem, mImageLoadOptions);
+            bindHeroItemSimpleView(v, cItem);
 
             // cItem.stats
             bindStatsView(v, cItem);
@@ -250,19 +248,16 @@ public class HeroDetailActivityAppCompat extends AppCompatFragmentActivity {
          *
          * @param v
          * @param cItem
-         * @param cImageLoadOptions
          */
-        public static void bindHeroItemSimpleView(final View v, final HeroItem cItem,
-                                                  final DisplayImageOptions cImageLoadOptions) {
-            if (v == null || cItem == null || cImageLoadOptions == null) {
+        public void bindHeroItemSimpleView(final View v, final HeroItem cItem) {
+            if (v == null || cItem == null) {
                 return;
             }
 
             final Resources cRes = v.getResources();
-            ImageLoader.getInstance().displayImage(
-                    Utils.getHeroImageUri(cItem.keyName),
-                    ((ImageView) v.findViewById(R.id.image_hero)),
-                    cImageLoadOptions);
+            Glide.with(HeroDetailFragment.this)
+                    .load(Utils.getHeroImageUriForGlide(cItem.keyName))
+                    .into((ImageView) v.findViewById(R.id.image_hero));
 
             /*
              * ImageLoader.getInstance().displayImage(
@@ -438,7 +433,7 @@ public class HeroDetailActivityAppCompat extends AppCompatFragmentActivity {
 
             final SimpleGridView grid = Utils.findById(cView, itemsGridResId);
             final ItemsImagesAdapter adapter = new ItemsImagesAdapter(
-                    this.getActivity(), mImageLoadOptions, cItembuilds);
+                    this.getActivity(), cItembuilds);
             grid.setAdapter(adapter);
             grid.setOnItemClickListener(this);
 
@@ -589,9 +584,8 @@ public class HeroDetailActivityAppCompat extends AppCompatFragmentActivity {
                     holder = (ViewHolder) view.getTag();
 
                 final AbilityItem item = (AbilityItem) getItem(position);
-                ImageLoader.getInstance().displayImage(
-                        Utils.getAbilitiesImageUri(item.keyName),
-                        holder.image, mImageLoadOptions);
+                Glide.with(HeroDetailFragment.this)
+                        .load(Utils.getAbilitiesImageUriGlide(item.keyName));
 
                 holder.dname.setText(item.dname);
                 Utils.bindHtmlTextView(holder.affects, item.affects);
@@ -729,9 +723,9 @@ public class HeroDetailActivityAppCompat extends AppCompatFragmentActivity {
                 } else
                     holder = (ViewHolder) view.getTag();
 
-                ImageLoader.getInstance().displayImage(
-                        Utils.getAbilitiesImageUri((String) getItem(position)),
-                        holder.image, mImageLoadOptions);
+                Glide.with(HeroDetailFragment.this)
+                        .load(Utils.getAbilitiesImageUriGlide((String) getItem(position)))
+                        .into(holder.image);
                 return view;
             }
         }

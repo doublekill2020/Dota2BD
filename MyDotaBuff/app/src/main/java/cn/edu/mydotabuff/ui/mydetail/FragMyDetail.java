@@ -15,6 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+
 import cn.edu.mydotabuff.DotaApplication;
 import cn.edu.mydotabuff.DotaApplication.LocalDataType;
 import cn.edu.mydotabuff.R;
@@ -31,12 +34,10 @@ import cn.edu.mydotabuff.view.LoadingDialog;
 import cn.edu.mydotabuff.view.TipsToast;
 import cn.edu.mydotabuff.view.TipsToast.DialogType;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class FragMyDetail extends BaseFragment implements OnWebDataGetListener {
 	private CircleImageView iconView;
 	private TextView nameView, statusView, timeView, loginView;
-	private ImageLoader loader;
 	private PlayerInfoBean bean;
 	private WebDataHelper helper;
 	private Activity activity;
@@ -55,7 +56,6 @@ public class FragMyDetail extends BaseFragment implements OnWebDataGetListener {
 		winNum = (TextView) view.findViewById(R.id.most_win_num);
 		loseNum = (TextView) view.findViewById(R.id.most_lose_num);
 		iconView = (CircleImageView) view.findViewById(R.id.myinfrom_up_img);
-		loader = ImageLoader.getInstance();
 		activity = getActivity();
 		dialog = new LoadingDialog(activity);
 		myPreferences = activity.getSharedPreferences("user_info",
@@ -91,7 +91,7 @@ public class FragMyDetail extends BaseFragment implements OnWebDataGetListener {
 					"yyyy-MM-dd HH:mm"));
 			loginView.setText(TimeHelper.TimeStamp2Date(bean.getLastlogooff(),
 					"yyyy-MM-dd HH:mm"));
-			loader.displayImage(bean.getMediumIcon(), iconView);
+			Glide.with(this).load(bean.getMediumIcon()).into(iconView);
 			if (bean.isLoadWebData()) {
 				bindDataFromWeb();
 			} else {

@@ -22,7 +22,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -307,12 +308,10 @@ public class FragHeroList extends BaseFragment implements OnWebDataGetListener {
 
         private List<HerosSatistics> beans; // 数据
         private Activity context;
-        private ImageLoader loader;
 
         public HeroListAdapter(Activity context, List<HerosSatistics> beans) {
             this.context = context;
             this.beans = beans;
-            loader = ImageLoader.getInstance();
         }
 
         @Override
@@ -376,9 +375,9 @@ public class FragHeroList extends BaseFragment implements OnWebDataGetListener {
             holder.tv_perXp.setText("xp/min:  " + bean.getXp_PerMin() + "");
             holder.pb_winRate.setProgress((int) bean.getWinning());
             holder.tv_wining.setText(bean.getWinning() + "%");
-            loader.displayImage(
-                    Utils.getHeroImageUri(Common.getHeroName(bean.getHeroID())),
-                    holder.icon);
+            Glide.with(FragHeroList.this)
+                    .load(Utils.getHeroImageUriForGlide(Common.getHeroName(bean.getHeroID())))
+                    .into(holder.icon);
             return convertView;
         }
     }
