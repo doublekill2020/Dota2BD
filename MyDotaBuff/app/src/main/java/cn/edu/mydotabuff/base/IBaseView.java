@@ -2,8 +2,8 @@ package cn.edu.mydotabuff.base;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.StringRes;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatActivity;
 
 
 public interface IBaseView {

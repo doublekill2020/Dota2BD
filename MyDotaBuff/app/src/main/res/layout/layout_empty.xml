@@ -1,4 +1,4 @@
-<android.support.v4.widget.SwipeRefreshLayout
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/swipe_layout"
     android:layout_width="match_parent"
@@ -27,4 +27,4 @@
             android:textSize="18sp" />
     </LinearLayout>
 
-</android.support.v4.widget.SwipeRefreshLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

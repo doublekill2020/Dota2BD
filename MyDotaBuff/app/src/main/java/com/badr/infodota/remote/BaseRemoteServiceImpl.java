@@ -9,7 +9,6 @@ import android.util.Pair;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
-import com.tencent.utils.HttpUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -59,9 +58,9 @@ public abstract class BaseRemoteServiceImpl implements BaseRemoteService {
     }
 
     protected <T> Pair<T, String> basicRequestSend(Context context, String url, Type resultType) throws Exception {
-        if (!isNetworkAvailable(context)) {
-            throw new HttpUtils.NetworkUnavailableException(context.getString(R.string.network_unavailable));
-        }
+//        if (!isNetworkAvailable(context)) {
+//            throw new HttpUtils.NetworkUnavailableException(context.getString(R.string.network_unavailable));
+//        }
         T result;
         String message;
         HttpURLConnection urlConnection;
@@ -88,9 +87,9 @@ public abstract class BaseRemoteServiceImpl implements BaseRemoteService {
     }
 
     protected Pair<String, String> basicRequestSend(Context context, String url) throws Exception {
-        if (!isNetworkAvailable(context)) {
-            throw new HttpUtils.NetworkUnavailableException(context.getString(R.string.network_unavailable));
-        }
+//        if (!isNetworkAvailable(context)) {
+//            throw new HttpUtils.NetworkUnavailableException(context.getString(R.string.network_unavailable));
+//        }
         String result;
         String message;
         HttpURLConnection urlConnection;

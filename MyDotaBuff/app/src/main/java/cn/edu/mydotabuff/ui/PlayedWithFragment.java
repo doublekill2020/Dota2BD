@@ -3,8 +3,8 @@ package cn.edu.mydotabuff.ui;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.text.TextUtils;
+import androidx.annotation.Nullable;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +15,6 @@ import org.apache.commons.lang3.StringUtils;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -24,19 +23,12 @@ import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.base.BaseFragment;
 import cn.edu.mydotabuff.base.BaseListAdapter;
 import cn.edu.mydotabuff.base.BaseListHolder;
-import cn.edu.mydotabuff.common.Common;
-import cn.edu.mydotabuff.common.EventTag;
-import cn.edu.mydotabuff.model.LobbyType;
-import cn.edu.mydotabuff.model.Match;
 import cn.edu.mydotabuff.model.PlayedWithWrapper;
-import cn.edu.mydotabuff.model.PlayerInfo;
-import cn.edu.mydotabuff.model.Rating;
 import cn.edu.mydotabuff.ui.adapter.SimplePaddingDecoration;
 import cn.edu.mydotabuff.ui.presenter.IPlayedWithFragmentPresenter;
 import cn.edu.mydotabuff.ui.presenter.impl.PlayedWithFragmentPresenterImpl;
 import cn.edu.mydotabuff.ui.view.IPlayedWithFragmentView;
 import cn.edu.mydotabuff.util.TimeHelper;
-import cn.edu.mydotabuff.util.Utils;
 import cn.edu.mydotabuff.view.SwipeRefreshRecycleView;
 
 public class PlayedWithFragment extends BaseFragment<IPlayedWithFragmentPresenter> implements IPlayedWithFragmentView {

@@ -1,17 +1,20 @@
 package cn.edu.mydotabuff.base;
 
+import android.content.Context;
 import android.net.Uri;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.hwangjr.rxbus.RxBus;
 
 import cn.edu.mydotabuff.DotaApplication;
+import cn.edu.mydotabuff.view.GlideCircleTransform;
 
 /**
  * //                              _oo0oo_
@@ -160,5 +163,23 @@ public class BaseListHolder extends RecyclerView.ViewHolder {
         if (listener != null) {
             itemView.setOnClickListener(listener);
         }
+    }
+
+    public void loadImageWithGlide(Context context,int viewId, String url) {
+        ImageView view = findViewById(viewId);
+        view.setImageURI(Uri.parse(url));
+        Glide.with(context)
+                .load(url)
+                .into(view);
+    }
+
+    public void loadImageWithGlideCenterCrop(Context context,int viewId, String url) {
+        ImageView view = findViewById(viewId);
+        view.setImageURI(Uri.parse(url));
+        Glide.with(context)
+                .load(url)
+                .centerCrop()
+                .transform(new GlideCircleTransform(context))
+                .into(view);
     }
 }

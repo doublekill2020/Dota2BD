@@ -3,13 +3,13 @@ package cn.edu.mydotabuff.base;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.CallSuper;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.StringRes;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ActionMenuView;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.CallSuper;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.StringRes;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ActionMenuView;
+import androidx.appcompat.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.umeng.analytics.MobclickAgent;
 
 import butterknife.ButterKnife;
 import cn.bingoogolapple.swipebacklayout.BGASwipeBackHelper;
@@ -106,13 +105,11 @@ public abstract class BaseActivity<T extends IBasePresenter> extends AppCompatAc
     @Override
     protected void onResume() {
         super.onResume();
-        MobclickAgent.onResume(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
     }
 
     @CallSuper

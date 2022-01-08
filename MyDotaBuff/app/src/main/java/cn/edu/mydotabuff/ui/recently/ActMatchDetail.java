@@ -6,12 +6,11 @@ import org.json2.JSONArray;
 import org.json2.JSONException;
 import org.json2.JSONObject;
 
-import com.umeng.analytics.MobclickAgent;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -359,12 +358,10 @@ public class ActMatchDetail extends BaseActivity {
 
     public void onResume() {
         super.onResume();
-        MobclickAgent.onResume(this);
     }
 
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
     }
 
     @Override

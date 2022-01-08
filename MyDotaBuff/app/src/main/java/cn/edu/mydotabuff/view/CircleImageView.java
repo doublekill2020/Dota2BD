@@ -18,7 +18,7 @@ import android.widget.ImageView;
 
 import cn.edu.mydotabuff.R;
 
-public class CircleImageView extends ImageView {
+public class CircleImageView extends androidx.appcompat.widget.AppCompatImageView {
 
 	private static final ScaleType SCALE_TYPE = ScaleType.CENTER_CROP;
 

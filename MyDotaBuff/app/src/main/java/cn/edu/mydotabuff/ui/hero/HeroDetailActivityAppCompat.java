@@ -6,8 +6,8 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import android.text.Html.ImageGetter;
 import android.text.TextUtils;
 import android.util.Log;
@@ -26,7 +26,6 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json2.JSONException;
 
@@ -753,11 +752,9 @@ public class HeroDetailActivityAppCompat extends AppCompatFragmentActivity {
 
     public void onResume() {
         super.onResume();
-        MobclickAgent.onResume(this);
     }
 
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
     }
 }

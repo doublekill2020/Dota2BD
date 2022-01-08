@@ -30,7 +30,7 @@ import cn.edu.mydotabuff.model.HeroStatsItem;
 import cn.edu.mydotabuff.model.ItemsItem;
 import cn.edu.mydotabuff.model.StatsallBaseComparator;
 import android.content.Context;
-import android.support.v4.util.LruCache;
+import androidx.collection.LruCache;
 import android.text.TextUtils;
 import android.util.Log;
 

@@ -5,6 +5,6 @@
         android:id="@+id/action_search"
         android:title="@android:string/search_go"
         app:showAsAction="always|collapseActionView"
-        app:actionViewClass="android.support.v7.widget.SearchView" />
+        app:actionViewClass="androidx.appcompat.widget.SearchView" />
 
 </menu>

@@ -6,13 +6,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
+import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.text.TextUtils;
 import android.util.Pair;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.badr.infodota.api.heroes.Hero;
 import com.badr.infodota.api.trackdota.GameManager;
 import com.badr.infodota.api.trackdota.TrackdotaUtils;
 import com.badr.infodota.api.trackdota.core.BanPick;
@@ -28,10 +25,8 @@ import com.badr.infodota.api.trackdota.core.CoreResult;
 import com.badr.infodota.api.trackdota.game.League;
 import com.badr.infodota.api.trackdota.game.Team;
 import com.badr.infodota.api.trackdota.live.LiveGame;
-import com.badr.infodota.util.GrayImageLoadingListener;
 import com.badr.infodota.util.Refresher;
 import com.badr.infodota.util.Updatable;
-import com.badr.infodota.util.TrackUtils;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -41,8 +36,6 @@ import java.util.Date;
 
 import cn.edu.mydotabuff.R;
 import cn.edu.mydotabuff.common.Common;
-import cn.edu.mydotabuff.ui.recently.ActMatchDetail;
-import cn.edu.mydotabuff.util.Debug;
 import cn.edu.mydotabuff.util.Utils;
 
 /**

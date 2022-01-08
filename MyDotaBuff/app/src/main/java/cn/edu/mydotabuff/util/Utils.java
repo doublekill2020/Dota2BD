@@ -18,9 +18,9 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import android.text.Html;
 import android.text.Html.ImageGetter;
 import android.text.TextUtils;
@@ -50,6 +50,7 @@ public final class Utils {
 	// private final static String s_HeroIcon_Format =
 	// "assets://heroes_icons/%s_icon.jpg";
 	private final static String s_AbilitiesImage_Format = "assets://abilities_images/%s_hp1.jpg";
+	private final static String s_HeroImage_Format_Glide = "file:///android_asset/heroes_images/%s_full.jpg";
 
 	/**
 	 * get Hero image url
@@ -65,6 +66,10 @@ public final class Utils {
     }
 	public static String getHeroImageMINIUri(String keyName) {
 		return String.format(s_HeroImage_Format_MINI, keyName);
+	}
+
+	public static String getHeroImageUriForGlide(String keyName){
+		return String.format(s_HeroImage_Format_Glide, keyName);
 	}
 	/**
 	 * 得到英雄头像 sh1tge

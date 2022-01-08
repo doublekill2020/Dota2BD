@@ -1,6 +1,6 @@
 package cn.edu.mydotabuff.base;
 
-import android.support.annotation.CallSuper;
+import androidx.annotation.CallSuper;
 
 import io.realm.Realm;
 

@@ -2,9 +2,9 @@ package com.badr.infodota.fragment.trackdota.game;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;

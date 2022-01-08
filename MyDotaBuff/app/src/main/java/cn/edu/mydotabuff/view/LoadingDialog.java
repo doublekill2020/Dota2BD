@@ -16,7 +16,7 @@ import cn.edu.mydotabuff.util.UIUtils;
  * @Description: TODO 请求网络弹出的加载Dialog
  * @date 2014-10-31 下午12:11:27
  */
-public class LoadingDialog extends android.support.v7.app.AlertDialog {
+public class LoadingDialog extends androidx.appcompat.app.AlertDialog {
     private TextView tvDialogLoading;
     private ImageView ivDialogLoading;
     private String message = null;

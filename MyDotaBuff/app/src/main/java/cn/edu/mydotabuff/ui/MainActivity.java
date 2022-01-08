@@ -6,21 +6,20 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.core.view.GravityCompat;
+import androidx.viewpager.widget.ViewPager;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,18 +29,6 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.hwangjr.rxbus.RxBus;
 import com.hwangjr.rxbus.annotation.Subscribe;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.controller.UMServiceFactory;
-import com.umeng.socialize.controller.UMSocialService;
-import com.umeng.socialize.media.QQShareContent;
-import com.umeng.socialize.media.QZoneShareContent;
-import com.umeng.socialize.media.UMImage;
-import com.umeng.socialize.sso.QZoneSsoHandler;
-import com.umeng.socialize.sso.SinaSsoHandler;
-import com.umeng.socialize.sso.UMQQSsoHandler;
-import com.umeng.socialize.sso.UMSsoHandler;
-import com.umeng.socialize.weixin.controller.UMWXHandler;
 
 import java.util.Map;
 
@@ -56,7 +43,6 @@ import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.ui.presenter.IMainPresenter;
 import cn.edu.mydotabuff.ui.view.IMainView;
 import cn.edu.mydotabuff.ui.view.activity.impl.LoginActivity;
-import cn.edu.mydotabuff.view.CircleImageView;
 import io.realm.Realm;
 
 /**
@@ -82,9 +68,6 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements IMainV
     private String steamID;
     private String userID;
     private SharedPreferences myPreferences;
-    // 首先在您的Activity中添加如下成员变量
-    final UMSocialService mController = UMServiceFactory
-            .getUMSocialService("com.umeng.share");
     private ActionBarDrawerToggle mDrawerToggle;
     SimpleDraweeView sdvUserIcon;
     TextView tvPlayerName;
@@ -103,7 +86,6 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements IMainV
         mPageAdapter = new MainPageAdapter(getSupportFragmentManager());
         mVp.setAdapter(mPageAdapter);
         mTabLayout.setupWithViewPager(mVp);
-        initUMShare();
 
         configureToolbar();
         configureDrawer();
@@ -123,61 +105,6 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements IMainV
             }
         });
         snackbar.show();
-    }
-
-    private void initUMShare() {
-
-        mController.getConfig().removePlatform(SHARE_MEDIA.TENCENT);
-        mController.getConfig().removePlatform(SHARE_MEDIA.SINA);
-        String targetUrl = "http://4evercai.aliapp.com/";
-        mController.setShareContent(getString(R.string.share_content));
-        // 设置分享图片, 参数2为图片的url地址
-        mController.setShareMedia(new UMImage(this, R.drawable.ic_launcher));
-        String appID = "wx1aa7275fa99e880f";
-        String appSecret = "09811403cd21959cc384dea048c01aba";
-        // 添加微信平台
-        UMWXHandler wxHandler = new UMWXHandler(this, appID, appSecret);
-        wxHandler.setTargetUrl(targetUrl);
-        wxHandler.addToSocialSDK();
-
-        // 添加微信朋友圈
-        UMWXHandler wxCircleHandler = new UMWXHandler(this, appID, appSecret);
-        wxCircleHandler.setToCircle(true);
-        wxCircleHandler.setTargetUrl(targetUrl);
-        wxCircleHandler.addToSocialSDK();
-
-        String QQappID = "1103458121";
-        String QQappSecret = "PtcezFKwEHmAF0t9";
-        UMQQSsoHandler qqSsoHandler = new UMQQSsoHandler(this, QQappID,
-                QQappSecret);
-        qqSsoHandler.setTargetUrl(targetUrl);
-        QQShareContent qqShareContent = new QQShareContent();
-        // 设置分享文字
-        qqShareContent.setShareContent(getString(R.string.share_content));
-        // 设置分享title
-        qqShareContent.setTitle(getString(R.string.app_name));
-        // 设置点击分享内容的跳转链接
-        qqShareContent.setTargetUrl(targetUrl);
-        qqShareContent.setShareImage(new UMImage(this, R.drawable.ic_launcher));
-        mController.setShareMedia(qqShareContent);
-        qqSsoHandler.addToSocialSDK();
-
-        QZoneSsoHandler qZoneSsoHandler = new QZoneSsoHandler(this, QQappID,
-                QQappSecret);
-        qZoneSsoHandler.setTargetUrl(targetUrl);
-        QZoneShareContent qzone = new QZoneShareContent();
-        // 设置分享文字
-        qzone.setShareContent(getString(R.string.share_content));
-        // 设置点击消息的跳转URL
-        qzone.setTargetUrl(targetUrl);
-        qzone.setShareImage(new UMImage(this, R.drawable.ic_launcher));
-        // 设置分享内容的标题
-        qzone.setTitle(getString(R.string.app_name));
-        mController.setShareMedia(qzone);
-        qZoneSsoHandler.addToSocialSDK();
-        SinaSsoHandler sinaHandler = new SinaSsoHandler();
-        sinaHandler.setTargetUrl("http://www.baidu.com");
-        mController.getConfig().setSsoHandler(sinaHandler);
     }
 
     private void configureToolbar() {
@@ -332,12 +259,6 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements IMainV
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        /** 使用SSO授权必须添加如下代码 */
-        UMSsoHandler ssoHandler = mController.getConfig().getSsoHandler(
-                requestCode);
-        if (ssoHandler != null) {
-            ssoHandler.authorizeCallBack(requestCode, resultCode, data);
-        }
     }
 
     @Override

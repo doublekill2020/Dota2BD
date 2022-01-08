@@ -3,8 +3,8 @@ package cn.edu.mydotabuff.ui.item;
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.umeng.analytics.MobclickAgent;
 
 import org.json2.JSONException;
 
@@ -389,11 +388,9 @@ public class ItemsDetailActivityAppCompat extends AppCompatFragmentActivity {
 
     public void onResume() {
         super.onResume();
-        MobclickAgent.onResume(this);
     }
 
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
     }
 }

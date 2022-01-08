@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,7 +34,6 @@ import cn.edu.mydotabuff.base.BaseActivity;
 import cn.edu.mydotabuff.ui.recently.ActMatchDetail;
 import cn.edu.mydotabuff.util.Debug;
 import cn.edu.mydotabuff.view.PagerSlidingTabStrip;
-import cn.edu.mydotabuff.view.SlidingTabLayout;
 import cn.edu.mydotabuff.view.TipsToast;
 
 /**

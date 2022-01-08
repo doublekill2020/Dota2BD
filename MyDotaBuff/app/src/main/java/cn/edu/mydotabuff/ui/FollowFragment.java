@@ -1,15 +1,18 @@
 package cn.edu.mydotabuff.ui;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.SearchView;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +78,13 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
                 .fragment_follow_item, EventTag.CLICK_TO_MATCH_DETAIL) {
             @Override
             public void getView(BaseListHolder holder, final Match match, int pos) {
-                holder.setImageURI(R.id.sdv_hero_icon, Utils.getHeroImageUriForFresco(Common.getHeroName
+//                holder.setImageURI(R.id.sdv_hero_icon, Utils.getHeroImageUriForFresco(Common.getHeroName
+//                        (match.hero_id)));
+                holder.loadImageWithGlide(FollowFragment.this.getContext(),
+                        R.id.sdv_hero_icon,
+                        Utils.getHeroImageUriForGlide(Common.getHeroName
+                                (match.hero_id)));
+                Log.i("hao","index="+pos+Utils.getHeroImageUriForFresco(Common.getHeroName
                         (match.hero_id)));
                 holder.setText(R.id.tv_kda, match.kills + "/" + match.deaths + "/" + match.assists);
                 holder.setText(R.id.tv_time, TimeHelper.convertTimeToFormat(match.start_time));
@@ -92,7 +101,8 @@ public class FollowFragment extends BaseFragment<IFollowFragmentPresenter> imple
                 }
                 PlayerInfo playerInfo = mPresenter.getPlayerInfoMap().get(match.account_id);
                 if (playerInfo != null) {
-                    holder.setImageURI(R.id.sdv_user_icon, playerInfo.profile.avatar);
+                    holder.loadImageWithGlideCenterCrop(FollowFragment.this.getContext(),
+                            R.id.sdv_user_icon,playerInfo.profile.avatar);
                     holder.setText(R.id.tv_player_name, playerInfo.profile.personaname);
                 }
                 if (match.lobby_type == LobbyType.LOBBY_TYPE_RANKED) {

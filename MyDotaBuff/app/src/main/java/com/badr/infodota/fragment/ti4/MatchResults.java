@@ -1,7 +1,7 @@
 package com.badr.infodota.fragment.ti4;
 
 import android.os.AsyncTask;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import com.badr.infodota.BeanContainer;
 import com.badr.infodota.service.match.MatchService;

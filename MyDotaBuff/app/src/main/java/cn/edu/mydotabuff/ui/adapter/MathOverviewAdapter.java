@@ -1,9 +1,9 @@
 package cn.edu.mydotabuff.ui.adapter;
 
-import android.support.annotation.ColorRes;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.ColorRes;
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;

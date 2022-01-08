@@ -1,30 +1,18 @@
 package com.badr.infodota.fragment.trackdota;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.SearchView;
-import android.text.InputType;
-import android.text.TextUtils;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.widget.SearchView;
+
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.badr.infodota.BeanContainer;
-import com.badr.infodota.activity.ListHolderActivity;
-import com.badr.infodota.activity.TrackdotaGameInfoActivity;
 import com.badr.infodota.adapter.pager.TrackdotaPagerAdapter;
 import com.badr.infodota.api.trackdota.game.GamesResult;
 import com.badr.infodota.service.trackdota.TrackdotaService;
@@ -36,9 +24,7 @@ import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
 import cn.edu.mydotabuff.R;
-import cn.edu.mydotabuff.ui.recently.ActMatchDetail;
 import cn.edu.mydotabuff.view.PagerSlidingTabStrip;
-import cn.edu.mydotabuff.view.SlidingTabLayout;
 
 /**
  * Created by ABadretdinov

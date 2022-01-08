@@ -6,10 +6,9 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.multidex.MultiDexApplication;
+import androidx.multidex.MultiDexApplication;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.stetho.Stetho;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;

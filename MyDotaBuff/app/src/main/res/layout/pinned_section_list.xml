@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/listContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge" />
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <cn.edu.mydotabuff.view.ProgressWheel xmlns:wheel="http://schemas.android.com/apk/res-auto"
         android:id="@+id/progressBar"
