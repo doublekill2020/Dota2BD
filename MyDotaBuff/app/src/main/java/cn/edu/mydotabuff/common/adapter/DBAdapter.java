@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json2.JSONException;
 
 import cn.edu.mydotabuff.DataManager;
 import cn.edu.mydotabuff.DotaApplication;
@@ -19,6 +18,8 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.TextUtils;
 import android.util.Log;
+
+import org.json.JSONException;
 
 /**
  * DBAdapter

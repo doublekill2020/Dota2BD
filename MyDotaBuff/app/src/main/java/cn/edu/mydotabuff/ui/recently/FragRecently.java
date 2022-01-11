@@ -5,9 +5,9 @@ package cn.edu.mydotabuff.ui.recently;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.json2.JSONArray;
-import org.json2.JSONException;
-import org.json2.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 import android.app.Activity;

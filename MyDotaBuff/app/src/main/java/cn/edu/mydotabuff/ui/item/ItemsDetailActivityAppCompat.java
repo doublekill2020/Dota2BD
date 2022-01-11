@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import org.json2.JSONException;
+import org.json.JSONException;
 
 import java.io.IOException;
 

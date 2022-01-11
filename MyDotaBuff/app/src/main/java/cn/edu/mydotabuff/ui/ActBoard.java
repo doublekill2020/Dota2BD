@@ -8,9 +8,9 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import org.json2.JSONArray;
-import org.json2.JSONException;
-import org.json2.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 

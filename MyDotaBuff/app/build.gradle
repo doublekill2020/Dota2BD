@@ -2,8 +2,6 @@ apply plugin: 'com.android.application'
 //apply plugin: 'kotlin-android'
 apply plugin: 'realm-android'
 android {
-    //TODO 用okhttp后去掉
-    useLibrary 'org.apache.http.legacy'
     lintOptions {
         disable 'PrivateResource'
     }
@@ -32,23 +30,6 @@ android {
     }
     flavorDimensions "channel"
 
-    productFlavors {
-        xiaomi {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "xiaomi"]
-        }
-        baidu {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "baidu"]
-        }
-        wandoujia {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "wandoujia"]
-        }
-        tencent {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "tencent"]
-        }
-        mumayi {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "mumayi"]
-        }
-    }
     lintOptions {
         checkReleaseBuilds false
         abortOnError false

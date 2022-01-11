@@ -9,14 +9,15 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.json2.JSONException;
-import org.json2.JSONObject;
 
 import cn.edu.mydotabuff.common.http.IInfoReceive.ReceiveMsgType;
 import cn.edu.mydotabuff.common.http.IInfoReceive.ResponseObj;
 import cn.edu.mydotabuff.view.LoadingDialog;
 
 import android.app.Activity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class HttpRequestTool {
 	String tag = getClass().getSimpleName();
@@ -430,7 +431,7 @@ public class HttpRequestTool {
 			} else {
 				status = "1";
 			}
-		} catch (org.json2.JSONException e) {
+		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

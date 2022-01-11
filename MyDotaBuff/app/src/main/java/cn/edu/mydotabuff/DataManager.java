@@ -16,11 +16,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.Predicate;
-import org.json2.JSONArray;
-import org.json2.JSONException;
-import org.json2.JSONObject;
 
 import cn.edu.mydotabuff.model.AbilityItem;
 import cn.edu.mydotabuff.model.HeroDetailItem;
@@ -33,6 +28,10 @@ import android.content.Context;
 import androidx.collection.LruCache;
 import android.text.TextUtils;
 import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * 英雄物品数据访问类
@@ -174,8 +173,7 @@ public final class DataManager {
      * 获取英雄列表数据
      * 
      * @param cContext
-     * @param comparatorType
-     * 
+     *
      * @return
      * @throws JSONException
      * @throws IOException
@@ -201,26 +199,6 @@ public final class DataManager {
             cComparator = mHeroItemDefaultNameComparator;
         }
         Collections.sort(heroList, cComparator);
-    }
-
-    /**
-     * 获取物品列表数据
-     * 
-     * @param cContext
-     * @return
-     * @throws JSONException
-     * @throws IOException
-     */
-    public synchronized static List<ItemsItem> getItemsList(Context cContext)
-            throws JSONException, IOException {
-        tryLoadItemsData(cContext);
-        return (List<ItemsItem>) CollectionUtils.select(mItemsList,
-                new Predicate<ItemsItem>() {
-                    @Override
-                    public boolean evaluate(ItemsItem cObject) {
-                        return cObject.ispublic;
-                    }
-                });
     }
 
     /**
