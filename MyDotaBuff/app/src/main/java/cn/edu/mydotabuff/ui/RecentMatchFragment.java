@@ -66,7 +66,7 @@ public class RecentMatchFragment extends BaseFragment<IRecentMatchPresenter> imp
                 .fragment_follow_item, EventTag.PLAYER_DETAIL_CLICK_TO_MATCH_DETAIL) {
             @Override
             public void getView(BaseListHolder holder, final Match match, int pos) {
-                holder.setImageURI(R.id.sdv_hero_icon, Utils.getHeroImageUriForFresco(Common
+                holder.loadImageWithGlide(RecentMatchFragment.this.getContext(),R.id.sdv_hero_icon,Utils.getHeroImageUriForGlide(Common
                         .getHeroName
                                 (match.hero_id)));
                 holder.setText(R.id.tv_kda, match.kills + "/" + match.deaths + "/" + match.assists);
@@ -79,7 +79,7 @@ public class RecentMatchFragment extends BaseFragment<IRecentMatchPresenter> imp
                     holder.setTextColor(R.id.tv_game_status, R.color.my_orange);
                 }
                 holder.setText(R.id.tv1, Common.getLobbyTypeName(match.lobby_type));
-                holder.setImageURI(R.id.sdv_user_icon, mPlayerInfo.profile.avatar);
+                holder.loadImageWithGlideCenterCrop(RecentMatchFragment.this.getContext(),R.id.sdv_hero_icon,mPlayerInfo.profile.avatar);
                 holder.setText(R.id.tv_player_name, mPlayerInfo.profile.personaname);
                 if (match.lobby_type == LobbyType.LOBBY_TYPE_RANKED) {
                     Rating rating = mPresenter.getRealm().where(Rating.class).equalTo("id", match

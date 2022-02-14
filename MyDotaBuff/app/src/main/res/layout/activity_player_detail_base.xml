@@ -23,14 +23,12 @@
             android:background="@color/main_color"
             app:layout_scrollFlags="scroll|enterAlways">
 
-            <com.facebook.drawee.view.SimpleDraweeView
+            <ImageView
                 android:id="@+id/sdv_user_icon"
                 android:layout_width="@dimen/dp_64"
                 android:layout_height="@dimen/dp_64"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/dp_12"
-                app:placeholderImage="@drawable/default_pic"
-                app:roundAsCircle="true" />
+                android:layout_marginTop="@dimen/dp_12" />
 
             <TextView
                 android:id="@+id/tv_player_name"

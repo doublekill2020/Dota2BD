@@ -75,7 +75,7 @@ public class PlayedWithFragment extends BaseFragment<IPlayedWithFragmentPresente
             @Override
             public void getView(BaseListHolder holder, final PlayedWithWrapper info, int pos) {
                 if (!StringUtils.isEmpty(info.avatar)) {
-                    holder.setImageURI(R.id.sdv_user_icon, info.avatar);
+                    holder.loadImageWithGlideCenterCrop(PlayedWithFragment.this.getContext(),R.id.sdv_user_icon,info.avatar);
                 }
                 if (!StringUtils.isEmpty(info.personaname)) {
                     holder.setText(R.id.tv_player_name, info.personaname);

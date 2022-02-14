@@ -4,6 +4,9 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Context;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -12,7 +15,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.Locale;
 
@@ -23,6 +27,7 @@ import cn.edu.mydotabuff.common.Common;
 import cn.edu.mydotabuff.model.MatchDetail;
 import cn.edu.mydotabuff.model.MatchPlayInfo;
 import cn.edu.mydotabuff.util.Utils;
+import cn.edu.mydotabuff.view.GlideCircleTransform;
 import cn.edu.mydotabuff.view.drawable.DirectionDrawale;
 
 /**
@@ -162,7 +167,7 @@ public class MathOverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     class MatchItemVH extends RecyclerView.ViewHolder {
 
         @BindView(R.id.sdv_hero_icon)
-        SimpleDraweeView mHeroIcon;
+        ImageView mHeroIcon;
         @BindView(R.id.tv_level)
         TextView mHeroLevel;
         @BindView(R.id.tv_person_name)
@@ -176,27 +181,31 @@ public class MathOverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         @BindView(R.id.tv_damaging)
         TextView mTvDamaging;
         @BindView(R.id.item0)
-        SimpleDraweeView mItem0;
+        ImageView mItem0;
         @BindView(R.id.item1)
-        SimpleDraweeView mItem1;
+        ImageView mItem1;
         @BindView(R.id.item2)
-        SimpleDraweeView mItem2;
+        ImageView mItem2;
         @BindView(R.id.item3)
-        SimpleDraweeView mItem3;
+        ImageView mItem3;
         @BindView(R.id.item4)
-        SimpleDraweeView mItem4;
+        ImageView mItem4;
         @BindView(R.id.item5)
-        SimpleDraweeView mItem5;
+        ImageView mItem5;
+        Context ctx;
 
 
         public MatchItemVH(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            ctx = itemView.getContext();
         }
 
 
         void bindData(MatchPlayInfo bean) {
-            mHeroIcon.setImageURI(Utils.getHeroImageUriForFresco(Common.getHeroName(bean.hero_id)));
+            Glide.with(ctx)
+                    .load(Uri.parse(Utils.getHeroImageUriForGlide(Common.getHeroName(bean.hero_id))))
+                    .into(mHeroIcon);
             mHeroLevel.setText(String.valueOf(bean.level));
             mPersonName.setText(TextUtils.isEmpty(bean.personaname) ? itemView.getContext().getString(R.string.anonymous_player) : bean.personaname);
             mTvKDA.setText(String.format(Locale.CHINA, "KDA: %.2f", bean.kda));
@@ -204,12 +213,24 @@ public class MathOverviewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             mTvDamaging.setText(String.format(Locale.CHINA, "伤害: %.1f%%",
                     bean.hero_damage * 100 / (Integer.valueOf(bean.player_slot) > 4 ? mDireDamage : mRadiantDamage)));
             mTvKDADetail.setText(String.format(Locale.CHINA, "%d/%d/%d", bean.kills, bean.deaths, bean.assists));
-            mItem0.setImageURI(Utils.getItemsImageUri(Common.getItemName(bean.item_0)));
-            mItem1.setImageURI(Utils.getItemsImageUri(Common.getItemName(bean.item_1)));
-            mItem2.setImageURI(Utils.getItemsImageUri(Common.getItemName(bean.item_2)));
-            mItem3.setImageURI(Utils.getItemsImageUri(Common.getItemName(bean.item_3)));
-            mItem4.setImageURI(Utils.getItemsImageUri(Common.getItemName(bean.item_4)));
-            mItem5.setImageURI(Utils.getItemsImageUri(Common.getItemName(bean.item_5)));
+            Glide.with(ctx)
+                    .load(Uri.parse(Utils.getItemsImageUriGlide(Common.getItemName(bean.item_0))))
+                    .into(mItem0);
+            Glide.with(ctx)
+                    .load(Uri.parse(Utils.getItemsImageUriGlide(Common.getItemName(bean.item_1))))
+                    .into(mItem1);
+            Glide.with(ctx)
+                    .load(Uri.parse(Utils.getItemsImageUriGlide(Common.getItemName(bean.item_2))))
+                    .into(mItem2);
+            Glide.with(ctx)
+                    .load(Uri.parse(Utils.getItemsImageUriGlide(Common.getItemName(bean.item_3))))
+                    .into(mItem3);
+            Glide.with(ctx)
+                    .load(Uri.parse(Utils.getItemsImageUriGlide(Common.getItemName(bean.item_4))))
+                    .into(mItem4);
+            Glide.with(ctx)
+                    .load(Uri.parse(Utils.getItemsImageUriGlide(Common.getItemName(bean.item_5))))
+                    .into(mItem5);
         }
     }
 

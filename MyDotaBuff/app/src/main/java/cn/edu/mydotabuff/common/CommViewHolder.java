@@ -2,17 +2,20 @@ package cn.edu.mydotabuff.common;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.WeakHashMap;
 
 import cn.edu.mydotabuff.view.CircleImageView;
+import cn.edu.mydotabuff.view.GlideCircleTransform;
 import cn.edu.mydotabuff.view.RoundAngleImageView;
 
 public class CommViewHolder {
@@ -143,9 +146,14 @@ public class CommViewHolder {
         return this;
     }
 
-    public CommViewHolder setImagUri(int viewId, String url) {
-        SimpleDraweeView view = getView(viewId);
-        view.setImageURI(url);
+    public CommViewHolder loadImageWithGlideCenterCrop(Context context,int viewId, String url) {
+        ImageView view = getView(viewId);
+        //view.setImageURI(Uri.parse(url));
+        Glide.with(context)
+                .load(Uri.parse(url))
+                .centerCrop()
+                .transform(new GlideCircleTransform(context))
+                .into(view);
         return this;
     }
 }

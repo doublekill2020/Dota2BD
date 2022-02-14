@@ -8,7 +8,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import androidx.multidex.MultiDexApplication;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
@@ -36,7 +35,6 @@ public class DotaApplication extends MultiDexApplication {
         mInstance = DotaApplication.this;
         context = mInstance.getApplicationContext();
         BGASwipeBackManager.getInstance().init(this);
-        Fresco.initialize(this);
         RealmManager.initRealm(this);
         FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
                 .showThreadInfo(false)  // (Optional) Whether to show thread info or not. Default true

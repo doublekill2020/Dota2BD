@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
+import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -24,9 +26,9 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.hwangjr.rxbus.RxBus;
 import com.hwangjr.rxbus.annotation.Subscribe;
 
@@ -43,6 +45,7 @@ import cn.edu.mydotabuff.model.PlayerInfo;
 import cn.edu.mydotabuff.ui.presenter.IMainPresenter;
 import cn.edu.mydotabuff.ui.view.IMainView;
 import cn.edu.mydotabuff.ui.view.activity.impl.LoginActivity;
+import cn.edu.mydotabuff.view.GlideCircleTransform;
 import io.realm.Realm;
 
 /**
@@ -69,7 +72,7 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements IMainV
     private String userID;
     private SharedPreferences myPreferences;
     private ActionBarDrawerToggle mDrawerToggle;
-    SimpleDraweeView sdvUserIcon;
+    ImageView sdvUserIcon;
     TextView tvPlayerName;
     TextView tvStatus;
 
@@ -282,7 +285,11 @@ public class MainActivity extends BaseActivity<IMainPresenter> implements IMainV
             tvPlayerName = mNavigationView.findViewById(R.id.tv_player_name);
         if (tvStatus == null)
             tvStatus = mNavigationView.findViewById(R.id.tv_status);
-        sdvUserIcon.setImageURI(Uri.parse(playerInfo.profile.avatar));
+        Glide.with(this)
+                .load(Uri.parse(playerInfo.profile.avatar))
+                .centerCrop()
+                .transform(new GlideCircleTransform(this))
+                .into(sdvUserIcon);
         tvPlayerName.setText(playerInfo.profile.personaname);
         tvStatus.setText("MMR:" + (TextUtils.isEmpty(playerInfo.solo_competitive_rank) ?
                 R.string.rank_level_unknow_ : playerInfo.solo_competitive_rank) + " | " + "胜率" +

@@ -14,9 +14,9 @@ import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.facebook.drawee.view.SimpleDraweeView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,7 +41,7 @@ public class PlayerDetailActivity extends BaseActivity<IPlayerDetailPresenter> i
     public static final String PLAYER_ID = "PLAYER_ID";
     public static final String PLAYER_INFO = "PLAYER_INFO";
     @BindView(R.id.sdv_user_icon)
-    SimpleDraweeView sdvUserIcon;
+    ImageView sdvUserIcon;
     @BindView(R.id.tv_player_name)
     TextView tvPlayerName;
     @BindView(R.id.tv_status)

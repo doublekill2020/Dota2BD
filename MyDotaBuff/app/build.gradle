@@ -79,12 +79,6 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:${okhttpVersion}"
     implementation "com.squareup.okhttp3:logging-interceptor:${okhttpVersion}"
 
-    ext.frescoVersion = '1.3.0'
-    implementation "com.facebook.fresco:fresco:${frescoVersion}"
-    implementation "com.facebook.fresco:animated-gif:${frescoVersion}"
-    implementation "com.facebook.fresco:animated-webp:${frescoVersion}"
-    implementation "com.facebook.fresco:webpsupport:${frescoVersion}"
-
     implementation 'com.jaeger.statusbarutil:library:1.4.0'
     implementation 'io.reactivex:rxjava:1.3.0'
     implementation 'io.reactivex:rxandroid:1.2.1'

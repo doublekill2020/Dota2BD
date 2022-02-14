@@ -10,7 +10,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.hwangjr.rxbus.RxBus;
 
 import cn.edu.mydotabuff.DotaApplication;
@@ -116,11 +115,6 @@ public class BaseListHolder extends RecyclerView.ViewHolder {
     public void setVisibility(int viewId, int status) {
         View view = findViewById(viewId);
         view.setVisibility(status);
-    }
-
-    public void setImageURI(int viewId, String url) {
-        SimpleDraweeView view = findViewById(viewId);
-        view.setImageURI(Uri.parse(url));
     }
 
     public void setOnClickListener(int viewId, View.OnClickListener listener) {

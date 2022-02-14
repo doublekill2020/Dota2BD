@@ -10,12 +10,11 @@
     android:paddingRight="20dp"
     android:paddingTop="8dp">
 
-    <com.facebook.drawee.view.SimpleDraweeView
+    <ImageView
         android:id="@+id/icon"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        app:placeholderImage="@drawable/default_pic"
-        app:roundAsCircle="true" />
+         />
 
     <TextView
         android:id="@+id/name"

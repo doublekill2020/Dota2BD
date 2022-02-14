@@ -139,7 +139,7 @@ public class LoginActivity extends BaseActivity<ILoginPresenter> implements ILog
             public void convert(CommViewHolder helper, PlayerInfo item) {
                 helper.setText(R.id.name, item.profile.personaname);
                 helper.setText(R.id.id, item.profile.account_id);
-                helper.setImagUri(R.id.icon, item.profile.avatarfull);
+                helper.loadImageWithGlideCenterCrop(LoginActivity.this,R.id.icon,item.profile.avatarfull);
             }
         });
         list.setOnItemClickListener(new OnItemClickListener() {

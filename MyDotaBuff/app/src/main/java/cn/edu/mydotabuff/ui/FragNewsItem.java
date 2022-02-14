@@ -73,7 +73,7 @@ public class FragNewsItem extends BaseFragment {
 
             @Override
             public void getView(BaseListHolder holder, NewsBean item, int pos) {
-                holder.setImageURI(R.id.pic, item.getPic());
+                holder.loadImageWithGlide(FragNewsItem.this.getContext(),R.id.pic,item.getPic());
                 holder.setText(R.id.title, item.getTitle());
                 holder.setText(R.id.content, item.getContent());
                 holder.setText(R.id.time, item.getTime());
